@@ -1,4 +1,4 @@
-# My Monograph's GitHub Page - ROOT/FILES/TIMETABLING/README.MD
+# My Monograph's GitHub Page - ROOT/FILES/README.MD
 
 ## Links
 
