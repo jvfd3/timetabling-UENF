@@ -1,0 +1,37 @@
+{
+  "Turmas": [
+    {
+      "ano": 2019,
+      "semestre": 1,
+      "codigo_disciplina": "",
+      "nome_disciplina": "Física Geral 1",
+      "professor": "Marcelo Gomes da Silva",
+      "horarios": [
+        {
+          "sala": "P3-104",
+          "dia": "Segunda",
+          "hora_inicio": "10",
+          "duracao": "2"
+        },
+        {
+          "sala": "P3-105",
+          "dia": "Quarta",
+          "hora_inicio": "10",
+          "duracao": "2"
+        }
+      ],
+      "alunos": {
+        "estimativa": 20,
+        "demandando": [
+          "00112233445",
+          "00112233446",
+          "00112233447"
+        ],
+        "inscritos": [
+          "00112233445",
+          "00112233446"
+        ]
+      }
+    }
+  ]
+}
