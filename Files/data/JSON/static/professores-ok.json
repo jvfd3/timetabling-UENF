@@ -25,12 +25,12 @@
     {"laboratorio": "LEPROD",  "curso": "Outras matérias",        "nome": "José Ramón Arica Chavez"},
     {"laboratorio": "LEPROD",  "curso": "Outras matérias",        "nome": "Manuel Antonio Molina Palma"},
     {"laboratorio": "CCH",     "curso": "Outras matérias",        "nome": "Edson Terra Azevedo Filho"},
-    {"laboratorio": "CCH",     "curso": "Outras matérias",        "nome": "Pedro Paulo Pinto Maia Filho"}
+    {"laboratorio": "CCH",     "curso": "Outras matérias",        "nome": "Pedro Paulo Pinto Maia Filho"},
     {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "Átila Carvalho Junior"},
     {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "Fábio Machado de Oliveira"},
     {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "João Luiz de Almeida Filho"},
     {"laboratorio": "CCH",     "curso": "Bolsistas",              "nome": "Carlos Alberto Manso Lopez"},
     {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "Sânya Carvalho dos Santos Caldeira"},
-    {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "Luiz Mauricio de Oliveira Monteiro"},
+    {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "Luiz Mauricio de Oliveira Monteiro"}
   ]
 }
