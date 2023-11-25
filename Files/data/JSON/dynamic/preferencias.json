@@ -1,6 +1,6 @@
 {
-  "preferencias": {
-    "professor": {
+  "template": {
+    "Template A": {
       "seg": {
         "7": 0,
         "8": 0,
@@ -86,6 +86,25 @@
         "20": 0,
         "21": 0
       }
+    },
+    "Template B": {
+      "7":  {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+      "8":  {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+      "9":  {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+      "10": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+      "11": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+      "12": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+      "13": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+      "14": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+      "15": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+      "16": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+      "17": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+      "18": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+      "19": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+      "20": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+      "21": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0}
     }
+  },
+  "preferencias": {
   }
 }
