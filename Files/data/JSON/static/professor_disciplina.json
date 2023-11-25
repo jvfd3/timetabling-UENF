@@ -26,7 +26,7 @@
         },
         {
             "nome": "Elba Orocia Bravo Asenjo",
-            "disciplinas": ["MAT01117", "MAT01212"]
+            "disciplinas": ["MAT01204", "MAT01212", "MAT01117"]
         },
         {
             "nome": "Oscar Alfredo Paz La Torre",
@@ -34,11 +34,27 @@
         },
         {
             "nome": "Rigoberto Gregorio Sanabria Castro",
-            "disciplinas": ["MAT01101", "MAT01105", "MAT01203"]
+            "disciplinas": ["MAT01101", "MAT01203", "MAT01105", "MAT01106", "MAT01212", "MAT01204"]
         },
         {
             "nome": "Luis Humberto Guillermo Felipe",
-            "disciplinas": ["MAT01107"]
+            "disciplinas": ["MAT01107", "INF01207"]
+        },
+        {
+            "nome": "Nelson Machado Barbosa",
+            "disciplinas": ["MAT01201"]
+        },
+        {
+            "nome": "Wilma Dora Huacasi Mamani",
+            "disciplinas": ["MAT01208", "MAT01212", "MAT01204"]
+        },
+        {
+            "nome": "Paulo Cesar Beggio",
+            "disciplinas": ["MAT01203", "MAT01106", "MAT01481", "MAT01225"]
+        },
+        {
+            "nome": "Paulo Dias",
+            "disciplinas": ["MAT01203", "MAT01212", "MAT01204"]
         },
         {
             "nome": "Max Erik Soffner",
