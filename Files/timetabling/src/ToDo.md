@@ -15,3 +15,8 @@
 - [ ] Limar disciplinas precisando de salas
 - [ ] Usar Schema de Daniel Brito
 - [ ] Na visualização de alunos, mostrar a listagem exata de disciplinas demandadas
+- [ ] Na página de alunos, ao adicionar uma disciplina em uma das listas, atualizar as outras listas.
+  - Exemplos:
+    - Se adiciono disciplina como cursando e ela antes estava como não feita, remover ela dessa lista.
+    - Se eu remover ela de cursando, adicionar a não feita.
+    - Se eu adicionar como feita, remover de cursando e não feita.
