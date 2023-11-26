@@ -385,7 +385,7 @@
     {
       "periodo": 6,
       "codigo": "INF01212",
-      "nome": "compiladores",
+      "nome": "Compiladores",
       "requisitos": [
         "Linguagens formais e teoria da computação"
       ],
@@ -396,7 +396,7 @@
     {
       "periodo": 6,
       "codigo": "INF01206",
-      "nome": "banco de dados II",
+      "nome": "Banco de Dados II",
       "requisitos": [
         "Banco de Dados I"
       ],
@@ -485,8 +485,8 @@
         "Empreendedorismo",
         "Introdução à computação gráfica",
         "Sistemas Distribuídos",
-        "compiladores",
-        "banco de dados II",
+        "Compiladores",
+        "Banco de Dados II",
         "Interface Homem-Máquina",
         "Teste de Software",
         "171 creditos"
@@ -522,6 +522,12 @@
       "codigo_requisitos": [
         "INF01127"
       ]
-    }
+    },
+    {"periodo": 7, "codigo": "INF0OPT1", "nome": "Eletiva Optativa 1", "requisitos": [], "codigo_requisitos": []},
+    {"periodo": 8, "codigo": "INF0OPT2", "nome": "Eletiva Optativa 2", "requisitos": [], "codigo_requisitos": []},
+    {"periodo": 8, "codigo": "INF0OPT3", "nome": "Eletiva Optativa 3", "requisitos": [], "codigo_requisitos": []},
+    {"periodo": 8, "codigo": "INF0OPT4", "nome": "Eletiva Optativa 4", "requisitos": [], "codigo_requisitos": []},
+    {"periodo": 9, "codigo": "INF0OPT5", "nome": "Eletiva Optativa 5", "requisitos": [], "codigo_requisitos": []},
+    {"periodo": 9, "codigo": "INF0OPT6", "nome": "Eletiva Optativa 6", "requisitos": [], "codigo_requisitos": []}
   ]
 }
