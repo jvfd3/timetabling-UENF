@@ -13,7 +13,6 @@ import alunosProgressao_DB from "../../DB/JSON/dynamic/andamento_alunos-ok.json"
 import disciplinasInfo_DB from "../../DB/JSON/static/disciplinas-cc-ok.json";
 
 function getNomeDisciplina(codigoDisciplina) {
-  // console.log(codigoDisciplina)
   let disciplina = disciplinasInfo_DB.ementa_cc.find(
     (disciplina) => disciplina.codigo === codigoDisciplina
   );
@@ -24,9 +23,9 @@ function getNomesDasDisciplinas(listaDeCodigos) {
   let listaDeCodigosNomes = [];
   for (let i = 0; i < listaDeCodigos.length; i++) {
     let codigo = listaDeCodigos[i];
-    // console.log(codigo);
     let nome = getNomeDisciplina(codigo);
-    listaDeCodigosNomes.push({ [codigo]: nome });
+    // listaDeCodigosNomes.push({ [codigo]: nome });
+    listaDeCodigosNomes.push({ value: codigo, label: nome });
   }
   return listaDeCodigosNomes;
 }
@@ -58,17 +57,25 @@ function juntarTodasAsInformacoes() {
   return geral;
 }
 
+function getCodigoNomeDisciplinas() {
+  let disciplinas = disciplinasInfo_DB.ementa_cc;
+  let disciplinas_RS = disciplinas.map((disciplina) => ({
+    value: disciplina.codigo,
+    label: disciplina.nome,
+  }));
+  return disciplinas_RS;
+}
+
 const dados_agrupados = juntarTodasAsInformacoes();
+const disciplinas_RS = getCodigoNomeDisciplinas();
 
 function StudentSelection(props) {
   return (
     <div>
-      {/* {console.log(dados_agrupados)} */}
       <Select
         className="StudentSelection"
         defaultValue={props.default_student}
-        // onChange={ }
-
+        onChange={props.change_student}
         placeholder={"Nome do aluno"}
         isClearable={false}
         isSearchable={true}
@@ -79,8 +86,97 @@ function StudentSelection(props) {
   );
 }
 
-function StudentCard() {
-  return <div></div>;
+function SelectDisciplinas(props) {
+  const { myPlaceHolder, myOptions, current_student, update_student } = props;
+  return (
+    <div>
+      <Select
+        placeholder={myPlaceHolder}
+        options={disciplinas_RS}
+        value={myOptions}
+        onChange={(option) => {
+          let myStudent = { ...current_student };
+          myStudent[myPlaceHolder] = option;
+          update_student(myStudent);
+        }}
+        isMulti={true}
+        className="SelectDisciplinas"
+        isClearable={false}
+        isSearchable={true}
+        getOptionLabel={(option) => `${option.value}: ${option.label}`}
+      />
+    </div>
+  );
+}
+
+function StudentCard(props) {
+  const { student, change_student } = props;
+  return (
+    <div className="card">
+      <div className="card-header">
+        <h3>Informações do Aluno</h3>
+      </div>
+      <div className="card-body">
+        <table className="table">
+          <tbody>
+            <tr>
+              <td>ANO:</td>
+              <td>{student.ano_entrada}</td>
+            </tr>
+            <tr>
+              <td>CURSO:</td>
+              <td>{student.curso}</td>
+            </tr>
+            <tr>
+              <td>NOME:</td>
+              <td>{student.label}</td>
+            </tr>
+            <tr>
+              <td>MATRÍCULA:</td>
+              <td>{student.value}</td>
+            </tr>
+          </tbody>
+        </table>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Cursando</th>
+              <th>Não Feitas</th>
+              <th>Aprovadas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <SelectDisciplinas
+                  myPlaceHolder="cursando"
+                  myOptions={student.cursando}
+                  current_student={student}
+                  update_student={change_student}
+                />
+              </td>
+              <td>
+                <SelectDisciplinas
+                  myPlaceHolder="naofeitas"
+                  myOptions={student.naofeitas}
+                  current_student={student}
+                  update_student={change_student}
+                />
+              </td>
+              <td>
+                <SelectDisciplinas
+                  myPlaceHolder="aprovadas"
+                  myOptions={student.aprovadas}
+                  current_student={student}
+                  update_student={change_student}
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
 }
 
 function CRUDstudents() {
@@ -92,8 +188,11 @@ function CRUDstudents() {
         <CRUDPageSelection defaultValue={options.CRUD.crud_alunos} />
         <div className="CRUD-outro">
           <div className="CRUD-properties">
-            <StudentSelection default_student={aluno} />
-            <StudentCard />
+            <StudentSelection
+              default_student={aluno}
+              change_student={setAluno}
+            />
+            <StudentCard student={aluno} change_student={setAluno} />
           </div>
         </div>
       </div>
