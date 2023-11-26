@@ -60,12 +60,13 @@ function juntarTodasAsInformacoes() {
 
 const dados_agrupados = juntarTodasAsInformacoes();
 
-function StudentSelection() {
+function StudentSelection(props) {
   return (
     <div>
       {/* {console.log(dados_agrupados)} */}
       <Select
         className="StudentSelection"
+        defaultValue={props.default_student}
         // onChange={ }
 
         placeholder={"Nome do aluno"}
@@ -83,13 +84,15 @@ function StudentCard() {
 }
 
 function CRUDstudents() {
+  const [aluno, setAluno] = useState(dados_agrupados[38]);
+
   return (
     <div className="background">
       <div className="CRUD-contain-components">
         <CRUDPageSelection defaultValue={options.CRUD.crud_alunos} />
         <div className="CRUD-outro">
           <div className="CRUD-properties">
-            <StudentSelection />
+            <StudentSelection default_student={aluno} />
             <StudentCard />
           </div>
         </div>
