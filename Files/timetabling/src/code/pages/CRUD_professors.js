@@ -7,10 +7,11 @@ import CRUDPageSelection from "../components/PageSelect";
 import Select from "react-select";
 import {
   getNomesDasDisciplinas,
-  disciplinas_RS,
+  getCodigoNomeDisciplinas,
 } from "../functions/getListaDisciplinas";
-import { readData } from "../functions/CRUD_JSONBIN";
+import { readData, updateData } from "../functions/CRUD_JSONBIN";
 
+let disciplinas_RS = getCodigoNomeDisciplinas();
 let DBprofessores = await readData(options.JBVars.bins.infoProfessores);
 
 function SelectDisciplinas(props) {
@@ -54,10 +55,15 @@ function convertToRS(recebeProfessor) {
 
 let RSprofessor = DBprofessores.professores.map(convertToRS);
 
+
 function CRUDprofessors() {
   const [professores, setProfessores] = useState(RSprofessor);
-  const [professor, setProfessor] = useState(professores[2]);
-
+  // const [professor, setProfessor] = useState(professores[2]); //Tang
+  const [professor, setProfessor] = useState(professores[16]); //Marcenilda
+  // console.log(professor)
+  // console.log(professoresLimpos)
+  // console.log("BORA ATUALIZAR ANTES DE DAR PROBLEMA")
+  // updateData()
   return (
     <div className="background">
       <div className="CRUD-contain-components">

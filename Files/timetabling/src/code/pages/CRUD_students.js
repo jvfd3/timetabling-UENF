@@ -8,12 +8,14 @@ import CRUDPageSelection from "../components/PageSelect";
 import Select from "react-select";
 import "../components/componentStyles.css";
 
-import alunos_DB from "../../DB/JSON/static/infoAlunos.json";
-import alunosProgressao_DB from "../../DB/JSON/dynamic/andamentoAlunos.json";
-import disciplinasInfo_DB from "../../DB/JSON/static/infoDisciplinasCC.json";
+import {allLocalJsonData} from "../../DB/dataFromJSON";
+
+let infoAlunosJsonData = allLocalJsonData.static.infoAlunos;
+let andamentoAlunosJsonData = allLocalJsonData.dynamic.andamentoAlunos;
+let infoDisciplinasJsonData = allLocalJsonData.static.infoDisciplinasCC;
 
 function getNomeDisciplina(codigoDisciplina) {
-  let disciplina = disciplinasInfo_DB.ementa_cc.find(
+  let disciplina = infoDisciplinasJsonData.find(
     (disciplina) => disciplina.codigo === codigoDisciplina
   );
   return disciplina.nome;
@@ -31,14 +33,13 @@ function getNomesDasDisciplinas(listaDeCodigos) {
 }
 
 function juntarTodasAsInformacoes() {
-  let alunos = alunos_DB.alunos;
-  let alunos_RS = alunos.map((aluno) => ({
+  let alunos_RS = infoAlunosJsonData.map((aluno) => ({
     value: aluno.matricula,
     label: aluno.nome,
     ano_entrada: aluno.ano_entrada,
     curso: aluno.curso,
   }));
-  let alunosProgressao = alunosProgressao_DB.andamento_alunos;
+  let alunosProgressao = andamentoAlunosJsonData;
 
   let geral = [];
 
@@ -58,8 +59,7 @@ function juntarTodasAsInformacoes() {
 }
 
 function getCodigoNomeDisciplinas() {
-  let disciplinas = disciplinasInfo_DB.ementa_cc;
-  let disciplinas_RS = disciplinas.map((disciplina) => ({
+  let disciplinas_RS = infoDisciplinasJsonData.map((disciplina) => ({
     value: disciplina.codigo,
     label: disciplina.nome,
   }));
