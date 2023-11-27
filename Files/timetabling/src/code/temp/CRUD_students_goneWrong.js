@@ -12,7 +12,7 @@ import alunos_DB from "../../DB/JSON/static/alunos-ok.json";
 import alunosProgressao_DB from "../../DB/JSON/dynamic/andamento_alunos-ok.json";
 import disciplinasInfo_DB from "../../DB/JSON/static/disciplinas-cc-ok.json";
 
-const disciplinas_RS = disciplinasInfo_DB.ementa_cc.map(
+const disciplinas_RS = disciplinasInfo_DB.map(
   (cada_objeto) => ({
     value: cada_objeto.codigo,
     label: cada_objeto.nome,
@@ -22,7 +22,7 @@ const disciplinas_RS = disciplinasInfo_DB.ementa_cc.map(
   })
 );
 
-const alunos_RS = alunos_DB.alunos.map((aluno) => ({
+const alunos_RS = alunos_DB.map((aluno) => ({
   ano: aluno.ano_entrada,
   curso: aluno.curso,
   label: aluno.nome,
@@ -131,14 +131,14 @@ function StudentCard(props) {
               <td>
                 {/* <DisciplinasSelectList
                   lista_aluno={info_disciplinas_card.naofeitas}
-                  lista_base={disciplinasInfo_DB.ementa_cc}
+                  lista_base={disciplinasInfo_DB}
                   placeholder={"Não Feitas"}
                 /> */}
               </td>
               <td>
                 {/* <DisciplinasSelectList
                   lista_aluno={info_disciplinas_card.aprovadas}
-                  lista_base={disciplinasInfo_DB.ementa_cc}
+                  lista_base={disciplinasInfo_DB}
                   placeholder={"Aprovadas"}
                 /> */}
               </td>
