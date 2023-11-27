@@ -9,7 +9,8 @@ import {
   getNomesDasDisciplinas,
   getCodigoNomeDisciplinas,
 } from "../functions/getListaDisciplinas";
-import { readData, updateData } from "../functions/CRUD_JSONBIN";
+import { readData } from "../functions/CRUD_JSONBIN";
+import { allLocalJsonData } from "../../DB/dataFromJSON";
 
 let disciplinas_RS = getCodigoNomeDisciplinas();
 let DBprofessores = await readData(options.JBVars.bins.infoProfessores);
@@ -53,17 +54,16 @@ function convertToRS(recebeProfessor) {
   };
 }
 
-let RSprofessor = DBprofessores.professores.map(convertToRS);
+let RSprofessor = DBprofessores.map(convertToRS);
 
 
 function CRUDprofessors() {
   const [professores, setProfessores] = useState(RSprofessor);
   // const [professor, setProfessor] = useState(professores[2]); //Tang
   const [professor, setProfessor] = useState(professores[16]); //Marcenilda
-  // console.log(professor)
-  // console.log(professoresLimpos)
-  // console.log("BORA ATUALIZAR ANTES DE DAR PROBLEMA")
-  // updateData()
+  // console.log("professoresRS:", professores)
+  // console.log("professoresJSON:", allLocalJsonData.static.infoProfessores)
+  // console.log("professor:", professor)
   return (
     <div className="background">
       <div className="CRUD-contain-components">

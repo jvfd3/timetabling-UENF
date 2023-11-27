@@ -9,7 +9,7 @@ import {readData} from "../functions/CRUD_JSONBIN";
 let DBdisciplinas = await readData(options.JBVars.bins.infoDisciplinasCC);
 
 function getNomeDisciplina(codigoDisciplina) {
-    let disciplina = DBdisciplinas.ementa_cc.find(
+    let disciplina = DBdisciplinas.find(
       (disciplina) => disciplina.codigo === codigoDisciplina
     );
     return disciplina.nome;
@@ -26,7 +26,7 @@ return listaDeCodigosNomes;
 }
 
 function getCodigoNomeDisciplinas() {
-  let disciplinas_RS = DBdisciplinas.ementa_cc.map((disciplina) => ({
+  let disciplinas_RS = DBdisciplinas.map((disciplina) => ({
     value: disciplina.codigo,
     label: disciplina.nome,
 }));
