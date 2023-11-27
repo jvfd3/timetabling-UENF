@@ -9,8 +9,8 @@ import {
   getNomesDasDisciplinas,
   getCodigoNomeDisciplinas,
 } from "../functions/getListaDisciplinas";
-import { readData } from "../functions/CRUD_JSONBIN";
-import { allLocalJsonData } from "../../DB/dataFromJSON";
+import { readData, updateData } from "../functions/CRUD_JSONBIN";
+// import { allLocalJsonData } from "../../DB/dataFromJSON";
 
 let disciplinas_RS = getCodigoNomeDisciplinas();
 let DBprofessores = await readData(options.JBVars.bins.infoProfessores);
@@ -22,7 +22,19 @@ function SelectDisciplinas(props) {
     myOptions,
     currentItem,
     updateStudent,
+    atualizandoProfessores,
+    professoresPraAtualizar
   } = props;
+  function atualizarProfessores(professoresPraAtualizar, atualizandoProfessores, professorAtual) {
+    // console.log("OLD Professores: ", professoresPraAtualizar)
+    let myProfessores = [...professoresPraAtualizar];
+    let myProfessor = { ...professorAtual };
+    let myIndex = myProfessores.findIndex((professor) => professor.value === myProfessor.value);
+    myProfessores[myIndex] = myProfessor;
+    atualizandoProfessores(myProfessores);
+    let convertedProfessores = myProfessores.map(convertBackFromRS)
+    updateData(convertedProfessores, options.JBVars.bins.infoProfessores);
+  }
   return (
     <div>
       <Select
@@ -33,6 +45,7 @@ function SelectDisciplinas(props) {
           let myItem = { ...currentItem };
           myItem["disciplinas"] = option;
           updateStudent(myItem);
+          atualizarProfessores(professoresPraAtualizar, atualizandoProfessores, myItem);
         }}
         isMulti={true}
         className="DisciplinasProfessor"
@@ -44,14 +57,24 @@ function SelectDisciplinas(props) {
   );
 }
 
+function convertBackFromRS(recebeProfessorRS) {
+  let formattedProfessor = {
+    laboratorio: recebeProfessorRS.label,
+    curso: recebeProfessorRS.curso,
+    nome: recebeProfessorRS.value,
+    disciplinas: recebeProfessorRS.disciplinas.map(disciplina => disciplina.value),
+  }
+  return formattedProfessor;
+}
+
 function convertToRS(recebeProfessor) {
-  let codigoNome = getNomesDasDisciplinas(recebeProfessor.disciplinas);
-  return {
+  let formattedProfessor = {
     label: recebeProfessor.laboratorio,
     curso: recebeProfessor.curso,
     value: recebeProfessor.nome,
-    disciplinas: codigoNome,
-  };
+    disciplinas: getNomesDasDisciplinas(recebeProfessor.disciplinas),
+  }
+  return formattedProfessor;
 }
 
 let RSprofessor = DBprofessores.map(convertToRS);
@@ -93,6 +116,9 @@ function CRUDprofessors() {
               myOptions={disciplinas_RS}
               currentItem={professor}
               updateStudent={setProfessor}
+
+              atualizandoProfessores={setProfessores}
+              professoresPraAtualizar={professores}
             />
           </div>
           <img
