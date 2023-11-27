@@ -55,12 +55,11 @@ async function readData(binToRead = JB.bins.testing) {
   });
 }
 
-// import { readData, updateData } from "../functions/CRUD_JSONBIN";
-//
-// let dataReceived = await readData();
-// console.log("valor que eu quero receber:", dataReceived);
-//
-// function MainPage() {
-// const [testDict, setTestDict] = useState(dataReceived);
-
+/*
+  import { readData, updateData } from "../functions/CRUD_JSONBIN";
+  let dataReceived = await readData();
+  console.log("valor que eu quero receber:", dataReceived);
+  function MainPage() {
+  const [testDict, setTestDict] = useState(dataReceived);
+ */
 export { readData, updateData };
