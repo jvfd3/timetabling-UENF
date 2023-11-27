@@ -1,4 +1,29 @@
 const options = {
+  JBVars: {
+    //Json Bin Variables
+    BaseLink: "https://api.jsonbin.io/v3/b/",
+    headerKey: {
+      contentType: "Content-Type",
+      masterKey: "X-Master-Key",
+      accessKey: "X-Access-Key",
+      binVersioning: "X-Bin-Versioning",
+    },
+    headerVal: {
+      contentType: "application/json",
+      masterKey: "$2a$10$ZRJif54XslBOlG.SvdaIVevb21oEDFsnyH0LjnovkwFK7vy.RvIt6",
+      accessKey: "$2a$10$vQ0860DgxubMR6AngRg3AOLE5mXONyBc0BFmo.wLkIIBr8m/YTgTO",
+      binVersioning: false, // "<true / false>"
+    },
+    bins: {
+      testing: "6563a5660574da7622cc69f6",
+      infoSalas: "6563f31512a5d376599f5c09",
+      infoProfessores: "6563f2ff54105e766fd5e2fe",
+      infoDisciplinasCC: "6563ef690574da7622cc82d0",
+      infoAlunos: "6563ed5a54105e766fd5e0e8",
+      preferenciasProfessores: "6563ed1654105e766fd5e0d4",
+      andamentoAlunos: "6563ece40574da7622cc821e",
+    },
+  },
   category: [
     { value: "Obrigatória", label: "Obrigatória" },
     { value: "Eletiva optativa", label: "Eletiva optativa" },
