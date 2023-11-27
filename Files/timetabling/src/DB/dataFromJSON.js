@@ -12,7 +12,7 @@ import infoDisciplinasCCData from "./JSON/static/infoDisciplinasCC.json";
 import infoProfessoresData from "./JSON/static/infoProfessores.json";
 import infoSalasData from "./JSON/static/infoSalas.json";
 
-const allData = {
+const allLocalJsonData = {
     dynamic: {
         andamentoAlunos: andamentoAlunosData,
         preferenciasProfessores: preferenciasProfessoresData,
@@ -34,4 +34,6 @@ const allData = {
     }
 }
 
-export {allData};
+console.log("Am I exporting all data from JSON?");
+
+export {allLocalJsonData};
