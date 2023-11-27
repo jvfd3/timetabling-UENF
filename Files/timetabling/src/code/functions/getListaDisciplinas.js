@@ -10,7 +10,6 @@ DBdisciplinas = DBdisciplinas.ementa_cc;
 
 
 function getNomeDisciplina(codigoDisciplina) {
-  // console.log(codigoDisciplina)
     let disciplina = DBdisciplinas.find(
       (disciplina) => disciplina.codigo === codigoDisciplina
     );
@@ -22,7 +21,6 @@ let listaDeCodigosNomes = [];
 for (let i = 0; i < listaDeCodigos.length; i++) {
     let codigo = listaDeCodigos[i];
     let nome = getNomeDisciplina(codigo);
-    // listaDeCodigosNomes.push({ [codigo]: nome });
     listaDeCodigosNomes.push({ value: codigo, label: nome });
 }
 return listaDeCodigosNomes;
