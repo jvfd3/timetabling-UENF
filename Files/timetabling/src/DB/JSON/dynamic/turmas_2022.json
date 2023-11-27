@@ -1,52 +1,14 @@
-{
-  "templates": {
-    "explicativo": {
-      "ano": 1234,
-      "semestre": 1,
-      "codigo_disciplina": "Código da disciplina",
-      "nome_disciplina": "Nome da Disciplina",
-      "professor": "Nome do professor",
-      "horarios": [
-        {
-          "sala": "Nome da sala do primeiro horário (BLOCO-NÚMERO)",
-          "dia": "dia da semana",
-          "hora_inicio": 19,
-          "duracao": 2
-        },
-        {
-          "sala": "Nome da sala do segundo horário (BLOCO-NÚMERO)",
-          "dia": "dia da semana",
-          "hora_inicio": 15,
-          "duracao": 3
-        }
-      ],
-      "alunos": {
-        "estimativa": 123,
-        "demandando": ["Lista com as matrículas dos alunos que demandam essa disciplina"],
-        "inscritos": ["Lista com as matrículas dos alunos que se inscreveram nessa disciplina"]
-      }
-    },
-    "vazio": {
-      "ano": 0, "semestre": 0, "codigo_disciplina": "", "nome_disciplina": "", "professor": "",
-      "horarios": [
-        {"sala": "", "dia": "", "hora_inicio": 0, "duracao": 0},
-        {"sala": "", "dia": "", "hora_inicio": 0, "duracao": 0}
-      ],
-      "alunos": {"estimativa": 0, "demandando": [], "inscritos": []}
-    }
-  },
-  "Turmas": [
-    {
-      "ano": 2019, "semestre": 1, "professor": "",
-      "codigo_disciplina": "", "nome_disciplina": "",
-      "horarios": [
-        {"sala": "P3-104", "dia": "Segunda", "hora_inicio": 10, "duracao": 2},
-        {"sala": "P3-104", "dia": "Segunda", "hora_inicio": 10, "duracao": 2}
-      ],
-      "alunos": {"estimativa": 0, "demandando": [], "inscritos": []}
-    }
-  ]
-}
+[
+  {
+    "ano": 2019, "semestre": 1, "professor": "",
+    "codigo_disciplina": "", "nome_disciplina": "",
+    "horarios": [
+      {"sala": "P3-104", "dia": "Segunda", "hora_inicio": 10, "duracao": 2},
+      {"sala": "P3-104", "dia": "Segunda", "hora_inicio": 10, "duracao": 2}
+    ],
+    "alunos": {"estimativa": 0, "demandando": [], "inscritos": []}
+  }
+]
 
 
 

@@ -1,0 +1,270 @@
+{
+  "andamentoAlunos": {
+    "numero_de_matricula": {
+      "cursando": [
+        "Códigos das disciplinas"
+      ],
+      "naofeitas": [
+        "Códigos das disciplinas"
+      ],
+      "aprovadas": [
+        "Códigos das disciplinas"
+      ]
+    }
+  },
+  "preferenciasProfessores": {
+   "Templates Dicionário": {
+    "Cada dia tem suas horas": {
+     "seg": {"7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0},
+     "ter": {"7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0},
+     "qua": {"7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0},
+     "qui": {"7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0},
+     "sex": {"7": 0, "8": 0, "9": 0, "10": 0, "11": 0, "12": 0, "13": 0, "14": 0, "15": 0, "16": 0, "17": 0, "18": 0, "19": 0, "20": 0, "21": 0}
+    },
+    "Cada hora tem seus dias": {
+     "7": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+     "8": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+     "9": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+     "10": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+     "11": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+     "12": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+     "13": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+     "14": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+     "15": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+     "16": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+     "17": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+     "18": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+     "19": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+     "20": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0},
+     "21": {"seg": 0, "ter": 0, "qua": 0, "qui": 0, "sex": 0}
+    },
+    "DiaHora": {
+     "seg7": 0,
+     "seg8": 0,
+     "seg9": 0,
+     "seg10": 0,
+     "seg11": 0,
+     "seg12": 0,
+     "seg13": 0,
+     "seg14": 0,
+     "seg15": 0,
+     "seg16": 0,
+     "seg17": 0,
+     "seg18": 0,
+     "seg19": 0,
+     "seg20": 0,
+     "seg21": 0,
+     "ter7": 0,
+     "ter8": 0,
+     "ter9": 0,
+     "ter10": 0,
+     "ter11": 0,
+     "ter12": 0,
+     "ter13": 0,
+     "ter14": 0,
+     "ter15": 0,
+     "ter16": 0,
+     "ter17": 0,
+     "ter18": 0,
+     "ter19": 0,
+     "ter20": 0,
+     "ter21": 0,
+     "qua7": 0,
+     "qua8": 0,
+     "qua9": 0,
+     "qua10": 0,
+     "qua11": 0,
+     "qua12": 0,
+     "qua13": 0,
+     "qua14": 0,
+     "qua15": 0,
+     "qua16": 0,
+     "qua17": 0,
+     "qua18": 0,
+     "qua19": 0,
+     "qua20": 0,
+     "qua21": 0,
+     "qui7": 0,
+     "qui8": 0,
+     "qui9": 0,
+     "qui10": 0,
+     "qui11": 0,
+     "qui12": 0,
+     "qui13": 0,
+     "qui14": 0,
+     "qui15": 0,
+     "qui16": 0,
+     "qui17": 0,
+     "qui18": 0,
+     "qui19": 0,
+     "qui20": 0,
+     "qui21": 0,
+     "sex7": 0,
+     "sex8": 0,
+     "sex9": 0,
+     "sex10": 0,
+     "sex11": 0,
+     "sex12": 0,
+     "sex13": 0,
+     "sex14": 0,
+     "sex15": 0,
+     "sex16": 0,
+     "sex17": 0,
+     "sex18": 0,
+     "sex19": 0,
+     "sex20": 0,
+     "sex21": 0
+    }
+   },
+   "Templates Listas": {
+    "Lista de Listas horas X Dias": [
+     [0, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0]
+    ],
+    "Lista de Listas Dias X Horas": [
+     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ],
+    "Lista com todas as preferências indo a cada hora os cinco dias": [
+     0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0
+    ],
+    "Lista com todas as preferências indo a cada dia todas as horas": [
+     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    ]
+   }
+  },
+  "turmas_2022": {
+    "explicativo": {
+     "ano": 1234,
+     "semestre": 1,
+     "codigo_disciplina": "Código da disciplina",
+     "nome_disciplina": "Nome da Disciplina",
+     "professor": "Nome do professor",
+     "horarios": [
+      {
+       "sala": "Nome da sala do primeiro horário (BLOCO-NÚMERO)",
+       "dia": "dia da semana",
+       "hora_inicio": 19,
+       "duracao": 2
+      },
+      {
+       "sala": "Nome da sala do segundo horário (BLOCO-NÚMERO)",
+       "dia": "dia da semana",
+       "hora_inicio": 15,
+       "duracao": 3
+      }
+     ],
+     "alunos": {
+      "estimativa": 123,
+      "demandando": ["Lista com as matrículas dos alunos que demandam essa disciplina"],
+      "inscritos": ["Lista com as matrículas dos alunos que se inscreveram nessa disciplina"]
+     }
+    },
+    "vazio": {
+     "ano": 0, "semestre": 0, "codigo_disciplina": "", "nome_disciplina": "", "professor": "",
+     "horarios": [
+      {"sala": "", "dia": "", "hora_inicio": 0, "duracao": 0},
+      {"sala": "", "dia": "", "hora_inicio": 0, "duracao": 0}
+     ],
+     "alunos": {"estimativa": 0, "demandando": [], "inscritos": []}
+    }
+   },
+  "turmas_passado": {
+    "explicativo": {
+      "ano": 1234,
+      "semestre": 1,
+      "codigo_disciplina": "Código da disciplina",
+      "nome_disciplina": "Nome da Disciplina",
+      "professor": "Nome do professor",
+      "horarios": [
+      {
+        "sala": "Nome da sala do primeiro horário (BLOCO-NÚMERO)",
+        "dia": "dia da semana",
+        "hora_inicio": 19,
+        "duracao": 2
+      },
+      {
+        "sala": "Nome da sala do segundo horário (BLOCO-NÚMERO)",
+        "dia": "dia da semana",
+        "hora_inicio": 15,
+        "duracao": 3
+      }
+      ],
+      "alunos": {
+      "estimativa": 123,
+      "demandando": ["Lista com as matrículas dos alunos que demandam essa disciplina"],
+      "inscritos": ["Lista com as matrículas dos alunos que se inscreveram nessa disciplina"]
+      }
+    },
+    "vazio": {
+      "ano": 0, "semestre": 0, "codigo_disciplina": "", "nome_disciplina": "", "professor": "",
+      "horarios": [
+      {"sala": "", "dia": "", "hora_inicio": 0, "duracao": 0},
+      {"sala": "", "dia": "", "hora_inicio": 0, "duracao": 0}
+      ],
+      "alunos": {"estimativa": 0, "demandando": [], "inscritos": []}
+    }
+  },
+  "turmas": [
+    {
+      "ano": 1234,
+      "semestre": 1,
+      "codigo_disciplina": "Código da disciplina",
+      "nome_disciplina": "Nome da Disciplina",
+      "professor": "Nome do professor",
+      "horarios": [
+        {
+          "sala": "Nome da sala do primeiro horário (BLOCO-NÚMERO)",
+          "dia": "dia da semana",
+          "hora_inicio": 19,
+          "duracao": 2
+        },
+        {
+          "sala": "Nome da sala do segundo horário (BLOCO-NÚMERO)",
+          "dia": "dia da semana",
+          "hora_inicio": 15,
+          "duracao": 3
+        }
+      ],
+      "alunos": {
+        "estimativa": 123,
+        "demandando": ["Lista com as matrículas dos alunos que demandam essa disciplina"],
+        "inscritos": ["Lista com as matrículas dos alunos que se inscreveram nessa disciplina"]
+      }
+    }
+  ],
+}
