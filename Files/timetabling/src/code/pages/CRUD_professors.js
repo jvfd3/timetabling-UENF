@@ -5,13 +5,22 @@ import options from "../temp/options";
 import assets from "../../assets/imagesImport";
 import CRUDPageSelection from "../components/PageSelect";
 import Select from "react-select";
-import { getNomesDasDisciplinas, disciplinas_RS } from "../functions/getListaDisciplinas";
-import {readData} from "../functions/CRUD_JSONBIN";
+import {
+  getNomesDasDisciplinas,
+  disciplinas_RS,
+} from "../functions/getListaDisciplinas";
+import { readData } from "../functions/CRUD_JSONBIN";
 
 let DBprofessores = await readData(options.JBVars.bins.infoProfessores);
 
 function SelectDisciplinas(props) {
-  const { myPlaceHolder, myCurrentOptions, myOptions, currentItem, updateStudent } = props;
+  const {
+    myPlaceHolder,
+    myCurrentOptions,
+    myOptions,
+    currentItem,
+    updateStudent,
+  } = props;
   return (
     <div>
       <Select
@@ -19,7 +28,6 @@ function SelectDisciplinas(props) {
         options={myOptions}
         value={myCurrentOptions}
         onChange={(option) => {
-          
           let myItem = { ...currentItem };
           myItem["disciplinas"] = option;
           updateStudent(myItem);
@@ -41,7 +49,7 @@ function convertToRS(recebeProfessor) {
     curso: recebeProfessor.curso,
     value: recebeProfessor.nome,
     disciplinas: codigoNome,
-  }
+  };
 }
 
 let RSprofessor = DBprofessores.professores.map(convertToRS);
@@ -72,14 +80,14 @@ function CRUDprofessors() {
               LAB: {professor.label}
               <br />
               DISCIPLINAS:
-              </p>
-              <SelectDisciplinas
-                  myPlaceHolder="Disciplinas ministradas"
-                  myCurrentOptions={professor.disciplinas}
-                  myOptions={disciplinas_RS}
-                  currentItem={professor}
-                  updateStudent={setProfessor}
-                />
+            </p>
+            <SelectDisciplinas
+              myPlaceHolder="Disciplinas ministradas"
+              myCurrentOptions={professor.disciplinas}
+              myOptions={disciplinas_RS}
+              currentItem={professor}
+              updateStudent={setProfessor}
+            />
           </div>
           <img
             className="CRUD-docentes-placeholderimg"
