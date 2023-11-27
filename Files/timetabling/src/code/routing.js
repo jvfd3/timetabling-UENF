@@ -17,6 +17,7 @@ const MyRouting = () => {
       {/* <Navigation /> */}
       <Routes>
         <Route index element={<MainPage />} />
+        <Route path={options.CRUD.main.url_path} element={<MainPage />} />
         <Route path={options.CRUD.crud.url_path} element={<MainCRUD />} />
         <Route
           path={options.CRUD.crud_salas.url_path}
