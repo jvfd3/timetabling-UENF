@@ -8,9 +8,9 @@ import CRUDPageSelection from "../components/PageSelect";
 import Select from "react-select";
 import "../components/componentStyles.css";
 
-import alunos_DB from "../../DB/JSON/static/alunos-ok.json";
-import alunosProgressao_DB from "../../DB/JSON/dynamic/andamento_alunos-ok.json";
-import disciplinasInfo_DB from "../../DB/JSON/static/disciplinas-cc-ok.json";
+import alunos_DB from "../../DB/JSON/static/infoAlunos.json";
+import alunosProgressao_DB from "../../DB/JSON/dynamic/andamentoAlunos.json";
+import disciplinasInfo_DB from "../../DB/JSON/static/infoDisciplinasCC.json";
 
 function getNomeDisciplina(codigoDisciplina) {
   let disciplina = disciplinasInfo_DB.ementa_cc.find(
