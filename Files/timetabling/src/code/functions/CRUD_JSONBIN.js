@@ -9,6 +9,7 @@ function updateData(objectToPut, binToPut = JB.bins.testing) {
   req.open("PUT", JB.BaseLink + binToPut, true);
   req.setRequestHeader(JB.headerKey.contentType, JB.headerVal.contentType);
   req.setRequestHeader(JB.headerKey.masterKey, JB.headerVal.masterKey);
+  req.setRequestHeader(JB.headerKey.accessKey, JB.headerVal.accessKey);
   req.send(stringifyedObject);
 
   req.onreadystatechange = () => {
@@ -31,6 +32,7 @@ async function readData(binToRead = JB.bins.testing) {
     let req = new XMLHttpRequest();
     req.open("GET", JB.BaseLink + binToRead, true);
     req.setRequestHeader(JB.headerKey.masterKey, JB.headerVal.masterKey);
+    req.setRequestHeader(JB.headerKey.accessKey, JB.headerVal.accessKey);
     req.send();
 
     // O que fazer após concluir a requisição
