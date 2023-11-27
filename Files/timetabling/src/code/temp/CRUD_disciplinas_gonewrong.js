@@ -17,47 +17,71 @@
   - esse valor deve estar definido como value no Select de Docentes
 - ao alterar cada um dos selects, a alteração deve ser enviada ao JSONBIN. - DO LATER
 */
+
 import React, { useState } from "react";
 import "../CSS/CRUD_disciplinas.css";
 import "../CSS/defaultStyle.css";
-import options from "../temp/options";
-import CRUDPageSelection from "../components/PageSelect";
+import options from "./options";
+import Select from "react-select";
 import MySelectList from "../components/MySelectList";
-// import data from "../temp/dataFromDB";
-// import {
-//   getNomesDasDisciplinas,
-//   disciplinas_RS,
-// } from "../functions/getListaDisciplinas";
-// import { readData } from "../functions/CRUD_JSONBIN";
+import CRUDPageSelection from "../components/PageSelect";
+import {
+  getNomesDasDisciplinas,
+  disciplinas_RS,
+} from "../functions/getListaDisciplinas";
+import { readData } from "../functions/CRUD_JSONBIN";
 
-// let DBdisciplinas = await readData(options.JBVars.bins.infoDisciplinasCC);
+let DBdisciplinas = await readData(options.JBVars.bins.infoDisciplinasCC);
+
+function convertDisciplinasToRS(recebeDisciplina) {
+  let codigoNome = getNomesDasDisciplinas(recebeDisciplina.codigo_requisitos);
+  return {
+    value: recebeDisciplina.codigo,
+    label: recebeDisciplina.nome,
+    periodo: recebeDisciplina.periodo,
+    requisitos: codigoNome,
+  };
+}
+
+let RSdisciplinas = DBdisciplinas.map(convertDisciplinasToRS);
+
+const periodos = options.CRUD_list.expectedSemester;
 
 function DisciplinaCard() {
-  // const [disciplinas, setDisciplinas] = useState(RSdisciplinas);
-  // const [disciplina, setDisciplina] = useState(disciplinas[2]);
-
+  const [disciplinas, setDisciplinas] = useState(RSdisciplinas);
+  const [disciplina, setDisciplina] = useState(disciplinas[2]);
   return (
-    <div className="CRUD-subjects">
-      <MySelectList
-        isLabeled={true}
-        newPlaceHolder="Disciplina"
+    <div>
+      <Select
+        value={disciplina}
         options={options.subjectCodeName}
+        // getOptionLabel={(option) => `${option.value}: ${option.label}`}
+
         isMulti={false}
+        isClearable={false}
+        isSearchable={true}
+        placeholder="Disciplina"
+        className="SelectList-base"
       />
-      {/* <MySelectList
-        newPlaceHolder="Período Esperado"
-        options={options.expectedSemester}
+      <Select
+        value={disciplina.periodo}
+        options={periodos}
+        className="SelectList-base"
+        placeholder="Período Esperado"
       />
-      <MySelectList
-        isLabeled={true}
-        newPlaceHolder="Requisitos de Disciplina"
-        options={options.subjectCodeName}
+      <Select
+        value={disciplina.requisitos}
+        options={disciplinas_RS}
         isMulti={true}
+        placeholder="Requisitos de Disciplina"
+        className="SelectList-base"
       />
-      <MySelectList
-        newPlaceHolder="YYY"
+      {/* <Select
+        value={}
         options={options.professors}
         isMulti={true}
+        placeholder="Docentes"
+        className="SelectList-base"
       /> */}
     </div>
   );
@@ -68,7 +92,6 @@ function CRUDDisciplinas() {
     <div className="background">
       <div className="CRUD-contain-components">
         <CRUDPageSelection defaultValue={options.CRUD.crud_disciplinas} />
-        <DisciplinaCard />
       </div>
     </div>
   );
