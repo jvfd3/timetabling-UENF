@@ -24,6 +24,7 @@ async function readData(binToRead = JB.bins.testing) {
     let clean = JSON.parse(dirty).record;
     return clean;
   }
+  console.log("reading...", JB.bins.testing);
 
   return new Promise((resolve, reject) => {
     // Preparando a requisição
@@ -37,6 +38,7 @@ async function readData(binToRead = JB.bins.testing) {
       if (req.readyState === XMLHttpRequest.DONE) {
         if (req.status === 200) {
           let answer = cleanResponse(req.responseText);
+          console.log("Finally read the data:", answer);
           resolve(answer);
         } else {
           reject(new Error(req.statusText));
