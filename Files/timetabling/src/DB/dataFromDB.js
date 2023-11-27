@@ -1,9 +1,9 @@
 import options from "../code/temp/options";
-import { readData, updateData } from "../code/functions/CRUD_JSONBIN";
+import { readData } from "../code/functions/CRUD_JSONBIN";
 
 let JB = options.JBVars;
 
-const DBData = {
+const allDBData = {
   disciplinas: await readData(JB.bins.infoDisciplinasCC),
   professores: await readData(JB.bins.infoProfessores),
   alunos: await readData(JB.bins.infoAlunos),
@@ -20,4 +20,4 @@ console.log("Am I exporting all data from DB?");
 // function MainPage() {
 // const [testDict, setTestDict] = useState(dataReceived);
 
-export { DBData };
+export { allDBData };
