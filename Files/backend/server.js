@@ -12,7 +12,7 @@ const corsOptions = {
 
 // const requestEndpoint = "https://xkcd.com/327/info.0.json";
 const requestEndpoint =
-  "https://raw.githubusercontent.com/jvfd3/timetabling-UENF/main/Files/timetabling/src/DB/JSON/static/alunos-ok.json";
+  "https://raw.githubusercontent.com/jvfd3/timetabling-UENF/main/Files/timetabling/src/DB/JSON/static/infoAlunos.json";
 
 // This function runs if the http://localhost:5000/getData endpoint
 // is requested with a GET request
