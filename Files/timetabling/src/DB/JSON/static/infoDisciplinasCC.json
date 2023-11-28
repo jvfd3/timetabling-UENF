@@ -57,6 +57,6 @@
   {"periodo": 0,  "codigo": "INF01240", "nome": "Tópicos Especiais em Sistemas Operacionais",                             "requisitos": [], "codigo_requisitos": []},
   {"periodo": 9,  "codigo": "INF01130", "nome": "Projeto de Monografia",                          "requisitos": ["Empreendedorismo", "Introdução à computação gráfica", "Sistemas Distribuídos", "Compiladores", "Banco de Dados II", "Interface Homem-Máquina", "Teste de Software", "171 creditos"], "codigo_requisitos": ["PRO01540", "INF01124", "INF01122", "INF01212", "INF01206", "INF01123", "INF01121"]},
   {"periodo": 8,  "codigo": "PRO01540", "nome": "Empreendedorismo",                               "requisitos": ["Pesquisa Operacional"], "codigo_requisitos": ["INF01211"]},
-  {"periodo": 10, "codigo": "INF01127", "nome": "Estágio Supervisionado",                         "requisitos": ["Projeto de Monografia"], "codigo_requisitos": ["INF01127"]},
-  {"periodo": 10, "codigo": "INF01131", "nome": "Monografia",                                     "requisitos": ["Projeto de Monografia"], "codigo_requisitos": ["INF01127"]}
+  {"periodo": 10, "codigo": "INF01127", "nome": "Estágio Supervisionado",                         "requisitos": ["Projeto de Monografia"], "codigo_requisitos": ["INF01130"]},
+  {"periodo": 10, "codigo": "INF01131", "nome": "Monografia",                                     "requisitos": ["Projeto de Monografia"], "codigo_requisitos": ["INF01130"]}
 ]
