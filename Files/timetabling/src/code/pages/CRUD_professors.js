@@ -5,15 +5,14 @@ import options from "../temp/options";
 import assets from "../../assets/imagesImport";
 import CRUDPageSelection from "../components/PageSelect";
 import Select from "react-select";
-import {
-  getNomesDasDisciplinas,
-  getCodigoNomeDisciplinas,
-} from "../functions/getListaDisciplinas";
+import {getCodigoNomeDisciplinas} from "../functions/getListaDisciplinas";
 import { readData, updateData } from "../functions/CRUD_JSONBIN";
+import { professorRStoDB, professorDBtoRS } from "../functions/convertingBetweenDBandRS";
 // import { allLocalJsonData } from "../../DB/dataFromJSON";
 
 let disciplinas_RS = getCodigoNomeDisciplinas();
 let DBprofessores = await readData(options.JBVars.bins.infoProfessores);
+let RSprofessor = DBprofessores.map(professorDBtoRS);
 
 function SelectDisciplinas(props) {
   const {
@@ -32,7 +31,7 @@ function SelectDisciplinas(props) {
     let myIndex = myProfessores.findIndex((professor) => professor.value === myProfessor.value);
     myProfessores[myIndex] = myProfessor;
     atualizandoProfessores(myProfessores);
-    let convertedProfessores = myProfessores.map(convertBackFromRS)
+    let convertedProfessores = myProfessores.map(professorRStoDB)
     updateData(convertedProfessores, options.JBVars.bins.infoProfessores);
   }
   return (
@@ -59,29 +58,6 @@ function SelectDisciplinas(props) {
     </div>
   );
 }
-
-function convertBackFromRS(recebeProfessorRS) {
-  let formattedProfessor = {
-    laboratorio: recebeProfessorRS.label,
-    curso: recebeProfessorRS.curso,
-    nome: recebeProfessorRS.value,
-    disciplinas: recebeProfessorRS.disciplinas.map(disciplina => disciplina.value),
-  }
-  return formattedProfessor;
-}
-
-function convertToRS(recebeProfessor) {
-  let formattedProfessor = {
-    label: recebeProfessor.laboratorio,
-    curso: recebeProfessor.curso,
-    value: recebeProfessor.nome,
-    disciplinas: getNomesDasDisciplinas(recebeProfessor.disciplinas),
-  }
-  return formattedProfessor;
-}
-
-let RSprofessor = DBprofessores.map(convertToRS);
-
 
 function CRUDprofessors() {
   const [professores, setProfessores] = useState(RSprofessor);
