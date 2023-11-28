@@ -8,9 +8,9 @@ O que quero fazer hoje?
 
 - [ ] Disciplinas
   - [ ] Visualização
-  - [ ] Fazer alterações serem enviadas pro banco de dados
+  - [x] Fazer alterações serem enviadas pro banco de dados
 - [ ] Entender o que tá rolando no roteamento do GitHub Pages
-- [ ] Fazer funções para resetar o DB?
+- [x] Fazer funções para resetar o DB?
 - [ ] Salas
   - [ ] Visualização
 
