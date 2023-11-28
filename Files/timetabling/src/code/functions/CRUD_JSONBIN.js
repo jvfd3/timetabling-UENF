@@ -40,7 +40,8 @@ async function readData(binToRead = JB.bins.testing) {
       if (req.readyState === XMLHttpRequest.DONE) {
         if (req.status === 200) {
           let answer = cleanResponse(req.responseText);
-          console.log("Finally read the data:", answer);
+          console.log("Finally read the data:", binToRead);
+          // console.log("Finally read the data:", answer);
           resolve(answer);
         } else {
           reject(new Error(req.statusText));
