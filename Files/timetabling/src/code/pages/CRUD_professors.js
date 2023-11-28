@@ -82,8 +82,8 @@ let RSprofessor = DBprofessores.map(convertToRS);
 
 function CRUDprofessors() {
   const [professores, setProfessores] = useState(RSprofessor);
-  // const [professor, setProfessor] = useState(professores[2]); //Tang
-  const [professor, setProfessor] = useState(professores[16]); //Marcenilda
+  const [professor, setProfessor] = useState(professores[2]); //Tang
+  // const [professor, setProfessor] = useState(professores[16]); //Marcenilda
   // console.log("professoresRS:", professores)
   // console.log("professoresJSON:", allLocalJsonData.static.infoProfessores)
   // console.log("professor:", professor)
