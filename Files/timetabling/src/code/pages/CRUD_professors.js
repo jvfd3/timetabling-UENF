@@ -52,6 +52,9 @@ function SelectDisciplinas(props) {
         isClearable={false}
         isSearchable={true}
         getOptionLabel={(option) => `${option.value}`}
+        formatOptionLabel={({ value, label }, { context }) => {
+          return context === 'value' ? `${value}` : `${value}: ${label}`;
+        }}
       />
     </div>
   );
