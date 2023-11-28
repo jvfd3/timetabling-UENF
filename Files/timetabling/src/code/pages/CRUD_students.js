@@ -8,29 +8,31 @@ import CRUDPageSelection from "../components/PageSelect";
 import Select from "react-select";
 import "../components/componentStyles.css";
 
-import {allLocalJsonData} from "../../DB/dataFromJSON";
+import { allLocalJsonData } from "../../DB/dataFromJSON";
+
+import { getNomesDasDisciplinas } from "../functions/getListaDisciplinas";
 
 let infoAlunosJsonData = allLocalJsonData.static.infoAlunos;
 let andamentoAlunosJsonData = allLocalJsonData.dynamic.andamentoAlunos;
 let infoDisciplinasJsonData = allLocalJsonData.static.infoDisciplinasCC;
 
-function getNomeDisciplina(codigoDisciplina) {
-  let disciplina = infoDisciplinasJsonData.find(
-    (disciplina) => disciplina.codigo === codigoDisciplina
-  );
-  return disciplina.nome;
-}
+// function getNomeDisciplina(codigoDisciplina) {
+//   let disciplina = infoDisciplinasJsonData.find(
+//     (disciplina) => disciplina.codigo === codigoDisciplina
+//   );
+//   return disciplina.nome;
+// }
 
-function getNomesDasDisciplinas(listaDeCodigos) {
-  let listaDeCodigosNomes = [];
-  for (let i = 0; i < listaDeCodigos.length; i++) {
-    let codigo = listaDeCodigos[i];
-    let nome = getNomeDisciplina(codigo);
-    // listaDeCodigosNomes.push({ [codigo]: nome });
-    listaDeCodigosNomes.push({ value: codigo, label: nome });
-  }
-  return listaDeCodigosNomes;
-}
+// function getNomesDasDisciplinas(listaDeCodigos) {
+//   let listaDeCodigosNomes = [];
+//   for (let i = 0; i < listaDeCodigos.length; i++) {
+//     let codigo = listaDeCodigos[i];
+//     let nome = getNomeDisciplina(codigo);
+//     // listaDeCodigosNomes.push({ [codigo]: nome });
+//     listaDeCodigosNomes.push({ value: codigo, label: nome });
+//   }
+//   return listaDeCodigosNomes;
+// }
 
 function juntarTodasAsInformacoes() {
   let alunos_RS = infoAlunosJsonData.map((aluno) => ({
