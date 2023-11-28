@@ -6,3 +6,8 @@
   padding: 20px;
   align-content: space-evenly;
 }
+
+.SelectList-disciplinas {
+  width: 400px;
+  padding: 10px;
+}
