@@ -221,7 +221,8 @@ function SelecaoDeTurma() {
 }
 
 function DadosTurma(props) {
-  const { localTurma } = props;
+  const { turma2, setTurma2 } = props;
+  let infoProfessores = allLocalJsonData.static.infoProfessores;
   return (
     <div>
       <h2>Dados</h2>
@@ -230,23 +231,68 @@ function DadosTurma(props) {
         <tbody>
           <tr>
             <td>
-              <strong>Ano.Semestre</strong>
+              <strong>Ano/Semestre</strong>
             </td>
             <td>
-              {localTurma.ano}.{localTurma.semestre}
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                <Select
+                  placeholder="Ano"
+                  options={options.years}
+                  value={{ value: turma2.ano, label: turma2.ano }}
+                  onChange={(newValue) => {
+                    setTurma2({ ...turma2, ano: newValue.value });
+                  }}
+                />
+                <Select
+                  placeholder="Semestre"
+                  options={options.semesters}
+                  value={{ value: turma2.semestre, label: turma2.semestre }}
+                  onChange={(newValue) => {
+                    setTurma2({ ...turma2, semestre: newValue.value });
+                  }}
+                />
+              </div>
             </td>
           </tr>
           <tr>
             <td>
               <strong>Disciplina</strong>
             </td>
-            <td>{`${localTurma.disciplina.codigo}: ${localTurma.disciplina.nome}`}</td>
+            <td>
+              <Select
+                placeholder="Disciplinas"
+                options={DBdisciplinas}
+                value={turma2.disciplina}
+                onChange={(newValue) => {
+                  setTurma2({ ...turma2, disciplina: newValue });
+                }}
+                getOptionLabel={(option) => option.nome}
+                getOptionValue={(option) => option.codigo}
+                formatOptionLabel={({ codigo, nome }) => `${codigo}: ${nome}`}
+              />
+            </td>
           </tr>
           <tr>
             <td>
               <strong>Professor</strong>
             </td>
-            <td>{localTurma.professor}</td>
+            <td>
+              <Select
+                placeholder="Professor"
+                options={infoProfessores}
+                value={infoProfessores.find(
+                  (professor) => professor.nome === turma2.professor
+                )}
+                getOptionValue={(option) => option.nome}
+                getOptionLabel={(option) => option.laboratorio}
+                onChange={(newValue) => {
+                  setTurma2({ ...turma2, professor: newValue.nome });
+                }}
+                formatOptionLabel={({ nome, laboratorio }) =>
+                  `(${laboratorio}) ${nome}`
+                }
+              />
+            </td>
           </tr>
         </tbody>
       </table>
@@ -255,7 +301,7 @@ function DadosTurma(props) {
 }
 
 function HorariosTurma(props) {
-  const { turmas1, setTurmas1, turma1, setTurma1 } = props;
+  const { turma1, setTurma1 } = props;
 
   function removerHorario(id) {
     let newTurma = { ...turma1 };
@@ -276,6 +322,19 @@ function HorariosTurma(props) {
     });
     newTurma.horarios = newHorarios;
     setTurma1(newTurma);
+    // Denser: (that is actually less dense) Faster? Well, I don't care for it now.
+    /* setTurma1({
+      ...turma1,
+      horarios: [
+        ...turma1.horarios,
+        {
+          sala: "XXX",
+          dia: "XXX",
+          horaInicio: 123,
+          duracao: 123,
+        },
+      ],
+    }); */
   }
 
   return (
@@ -328,9 +387,8 @@ function Turmas() {
   }
 
   useEffect(() => {
-    console.log(
-      "It seems that 'turma' have changed, so I will update everything for ya 🫡"
-    );
+    // let message = "It seems that 'turma' have changed, so I will update everything for ya 🫡"
+    // console.log(message);
     updateTurmas(turma);
   }, [turma]);
 
@@ -347,13 +405,8 @@ function Turmas() {
           `(id${turma.id}) ${turma.ano}.${turma.semestre} - ${turma.disciplina.codigo} - ${turma.professor}`
         }
       />
-      <DadosTurma localTurma={turma} />
-      <HorariosTurma
-        turmas1={turmas}
-        setTurmas1={setTurmas}
-        turma1={turma}
-        setTurma1={setTurma}
-      />
+      <DadosTurma turma2={turma} setTurma2={setTurma} />
+      <HorariosTurma turma1={turma} setTurma1={setTurma} />
     </div>
   );
 }
