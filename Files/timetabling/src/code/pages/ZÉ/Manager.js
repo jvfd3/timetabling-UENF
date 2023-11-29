@@ -43,11 +43,11 @@ function Manager() {
     let lTurmaSelecionada = turmaSelecionada;
 
     let horariosFiltrados = lTurmaSelecionada.horarios.filter(
-      (horario, i) => i != id
+      (horario, i) => i !== id
     );
     lTurmaSelecionada.horarios = horariosFiltrados;
 
-    let lTurmas = turmas.filter((turma) => turma.id != lTurmaSelecionada.id);
+    let lTurmas = turmas.filter((turma) => turma.id !== lTurmaSelecionada.id);
 
     lTurmas.push(lTurmaSelecionada);
 
@@ -97,5 +97,8 @@ function Manager() {
     </div>
   );
 }
+
+// import Manager from "./ZÉ/Manager";
+// <Manager />
 
 export default Manager;
