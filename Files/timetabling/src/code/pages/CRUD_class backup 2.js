@@ -215,23 +215,18 @@ function SelecaoDeTurma() {
   );
 }
 
-function NewTurmas () {
-  return (
-    <div style={{color: "black"}}>
-      TEXTO
-    </div>
-  );
-}
-
 function CRUDclass() {
   return (
     <div className="background">
+      {/* <CRUDPageSelection defaultValue={options.CRUD.crud_turmas} /> */}
       <div className="CRUD-lateral">
         <div className="CRUD-contain-components">
           <div className="CRUD-Class-properties">
-            <NewTurmas />
+            <SelecaoDeTurma />
           </div>
+          {/* <img className="placeholder-image" src={assets.class} alt="Logo" /> */}
         </div>
+        {/* <CRUDParticipants /> */}
       </div>
     </div>
   );
