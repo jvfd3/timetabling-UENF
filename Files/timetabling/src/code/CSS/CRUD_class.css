@@ -22,7 +22,9 @@
 
 .CRUD-Class-properties {
   align-self: center;
+  padding: 2%;
   align-items: center;
+  background-color: blanchedalmond;
   padding-bottom: 2%;
 }
 
@@ -81,4 +83,8 @@
   font-weight: bolder;
   font-size: x-large;
   padding-left: 20px;
+}
+
+.SelectDisciplinas{
+  width: 400px;
 }
