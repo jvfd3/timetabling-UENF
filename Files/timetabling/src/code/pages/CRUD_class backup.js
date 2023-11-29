@@ -9,7 +9,6 @@ import Select from "react-select";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
 import AsyncSelect from "react-select/async";
 import { readData } from "../functions/CRUD_JSONBIN";
-import Manager from "./ZÉ/Manager";
 
 const CRUDParticipants = () => {
   return (
@@ -175,7 +174,7 @@ function SelecaoDeTurma() {
           }}
           getOptionLabel={(turma) => turma.disciplina.codigo}
           getOptionValue={(turma) => turma.professor}
-          formatOptionLabel={(turma) => `${turma.ano}.${turma.semestre} - ${turma.disciplina.codigo} - ${turma.professor}`}
+          formatOptionLabel={(turma, { context }) => `${turma.ano}.${turma.semestre} - ${turma.disciplina.codigo} - ${turma.professor}`}
         />
         <div style={{ display: "flex", color: "#000000" }}>
           <Select
@@ -215,8 +214,7 @@ function CRUDclass() {
       <div className="CRUD-lateral">
         <div className="CRUD-contain-components">
           <div className="CRUD-Class-properties">
-            {/* <SelecaoDeTurma /> */}
-            <Manager />
+            <SelecaoDeTurma />
           </div>
           {/* <img className="placeholder-image" src={assets.class} alt="Logo" /> */}
         </div>
@@ -226,4 +224,4 @@ function CRUDclass() {
   );
 }
 
-export default CRUDclass;
+// export default CRUDclass;
