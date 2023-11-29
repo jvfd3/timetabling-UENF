@@ -11,29 +11,31 @@ import infoAlunosData from "./JSON/static/infoAlunos.json";
 import infoDisciplinasCCData from "./JSON/static/infoDisciplinasCC.json";
 import infoProfessoresData from "./JSON/static/infoProfessores.json";
 import infoSalasData from "./JSON/static/infoSalas.json";
+import turmasTesteData from "./JSON/dynamic/turmasTeste.json";
 
 const allLocalJsonData = {
-    dynamic: {
-        andamentoAlunos: andamentoAlunosData,
-        preferenciasProfessores: preferenciasProfessoresData,
-        turmas_2022: turmas_2022Data,
-        turmas_passado: turmas_passadoData,
-        turmas: turmasData,
-    },
-    select: {
-        RSalunos: RSalunosData,
-        RSdisciplinas: RSdisciplinasData,
-        RSprofessores: RSprofessoresData,
-        RSsalas: RSsalasData,
-    },
-    static: {
-        infoAlunos: infoAlunosData,
-        infoDisciplinasCC: infoDisciplinasCCData,
-        infoProfessores: infoProfessoresData,
-        infoSalas: infoSalasData,
-    }
-}
+  dynamic: {
+    andamentoAlunos: andamentoAlunosData,
+    preferenciasProfessores: preferenciasProfessoresData,
+    turmas_2022: turmas_2022Data,
+    turmas_passado: turmas_passadoData,
+    turmas: turmasData,
+    turmasTeste: turmasTesteData,
+  },
+  select: {
+    RSalunos: RSalunosData,
+    RSdisciplinas: RSdisciplinasData,
+    RSprofessores: RSprofessoresData,
+    RSsalas: RSsalasData,
+  },
+  static: {
+    infoAlunos: infoAlunosData,
+    infoDisciplinasCC: infoDisciplinasCCData,
+    infoProfessores: infoProfessoresData,
+    infoSalas: infoSalasData,
+  },
+};
 
 console.log("Am I exporting all data from JSON?");
 
-export {allLocalJsonData};
+export { allLocalJsonData };
