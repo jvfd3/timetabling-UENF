@@ -44,7 +44,9 @@ const Timeperiod = (props) => {
   console.log("Timeperiod>horarioTP", horarioTP);
   const [horario, setHorario] = useState({ ...horarioTP });
 
-  const [horaInicio, setHoraInicio] = useState(options.hours.find((hour) => hour.value === horario.horaInicio));
+  const [horaInicio, setHoraInicio] = useState(
+    options.hours.find((hour) => hour.value === horario.horaInicio)
+  );
   // const [duracao, setDuracao] = useState(convertToValueLabel(horario.duracao));
   // const [dia, setDia] = useState(convertToValueLabel(horario.dia));
   // const [sala, setSala] = useState(convertToValueLabel(horario.dia));
@@ -100,7 +102,7 @@ function convertToValueLabel(newValue) {
   return { value: newValue, label: newValue };
 }
 
-let DBdisciplinas = await readData(options.JBVars.bins.infoDisciplinasCC);
+// let DBdisciplinas = await readData(options.JBVars.bins.infoDisciplinasCC);
 
 function SelectDisciplina(props) {
   const { disciplinaSD, setDisciplinaSD } = props;
@@ -171,7 +173,9 @@ function SelecaoDeTurma() {
           }}
           getOptionLabel={(turma) => turma.disciplina.codigo}
           getOptionValue={(turma) => turma.professor}
-          formatOptionLabel={(turma) => `${turma.ano}.${turma.semestre} - ${turma.disciplina.codigo} - ${turma.professor}`}
+          formatOptionLabel={(turma) =>
+            `${turma.ano}.${turma.semestre} - ${turma.disciplina.codigo} - ${turma.professor}`
+          }
         />
         <div style={{ display: "flex", color: "#000000" }}>
           <Select
