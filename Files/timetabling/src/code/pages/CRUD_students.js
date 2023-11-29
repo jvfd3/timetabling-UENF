@@ -12,9 +12,7 @@ import { allLocalJsonData } from "../../DB/dataFromJSON";
 
 import { getNomesDasDisciplinas } from "../functions/getListaDisciplinas";
 
-let infoAlunosJsonData = allLocalJsonData.static.infoAlunos;
 let andamentoAlunosJsonData = allLocalJsonData.dynamic.andamentoAlunos;
-let infoDisciplinasJsonData = allLocalJsonData.static.infoDisciplinasCC;
 
 // function getNomeDisciplina(codigoDisciplina) {
 //   let disciplina = infoDisciplinasJsonData.find(
@@ -35,20 +33,21 @@ let infoDisciplinasJsonData = allLocalJsonData.static.infoDisciplinasCC;
 // }
 
 function juntarTodasAsInformacoes() {
-  let alunos_RS = infoAlunosJsonData.map((aluno) => ({
-    value: aluno.matricula,
-    label: aluno.nome,
-    ano_entrada: aluno.ano_entrada,
-    curso: aluno.curso,
-  }));
+  let alunos_RS = allLocalJsonData.static.infoAlunos;
+
+  //   infoAlunosJsonData.map((aluno) => ({
+  //   value: aluno.matricula,
+  //   label: aluno.nome,
+  //   ano_entrada: aluno.ano_entrada,
+  //   curso: aluno.curso,
+  // }));
   let alunosProgressao = andamentoAlunosJsonData;
 
   let geral = [];
 
   for (let i = 0; i < alunos_RS.length; i++) {
     let filled_aluno = alunos_RS[i];
-    let matricula = filled_aluno.value;
-    let progressao_desse_aluno = alunosProgressao[matricula];
+    let progressao_desse_aluno = alunosProgressao[filled_aluno.matricula];
     let cursando = getNomesDasDisciplinas(progressao_desse_aluno.cursando);
     let naofeitas = getNomesDasDisciplinas(progressao_desse_aluno.naofeitas);
     let aprovadas = getNomesDasDisciplinas(progressao_desse_aluno.aprovadas);
@@ -60,29 +59,23 @@ function juntarTodasAsInformacoes() {
   return geral;
 }
 
-function getCodigoNomeDisciplinas() {
-  let disciplinas_RS = infoDisciplinasJsonData.map((disciplina) => ({
-    value: disciplina.codigo,
-    label: disciplina.nome,
-  }));
-  return disciplinas_RS;
-}
-
 const dados_agrupados = juntarTodasAsInformacoes();
-const disciplinas_RS = getCodigoNomeDisciplinas();
 
 function StudentSelection(props) {
   return (
     <div>
       <Select
         className="StudentSelection"
-        defaultValue={props.default_student}
+        // defaultValue={props.default_student}
+        value={props.student}
         onChange={props.change_student}
         placeholder={"Nome do aluno"}
         isClearable={false}
         isSearchable={true}
         options={dados_agrupados}
-        getOptionLabel={(option) => `${option.value}: ${option.label}`}
+        getOptionValue={(option) => option.matricula}
+        getOptionLabel={(option) => option.nome}
+        formatOptionLabel={(option) => `${option.matricula}: ${option.nome}`}
       />
     </div>
   );
@@ -94,7 +87,7 @@ function SelectDisciplinas(props) {
     <div>
       <Select
         placeholder={myPlaceHolder}
-        options={disciplinas_RS}
+        options={allLocalJsonData.static.infoDisciplinasCC}
         value={myOptions}
         onChange={(option) => {
           let myStudent = { ...current_student };
@@ -105,7 +98,12 @@ function SelectDisciplinas(props) {
         className="SelectDisciplinas"
         isClearable={false}
         isSearchable={true}
-        getOptionLabel={(option) => `${option.value}: ${option.label}`}
+        getOptionValue={(option) => option.codigo}
+        getOptionLabel={(option) => option.nome}
+        formatOptionLabel={({ codigo, nome }) => {
+          let text = `${codigo}: ${nome}`;
+          return text;
+        }}
       />
     </div>
   );
@@ -131,11 +129,11 @@ function StudentCard(props) {
             </tr>
             <tr>
               <td>NOME:</td>
-              <td>{student.label}</td>
+              <td>{student.nome}</td>
             </tr>
             <tr>
               <td>MATRÍCULA:</td>
-              <td>{student.value}</td>
+              <td>{student.matricula}</td>
             </tr>
           </tbody>
         </table>
@@ -190,10 +188,7 @@ function CRUDstudents() {
         <CRUDPageSelection defaultValue={options.CRUD.crud_alunos} />
         <div className="CRUD-outro">
           <div className="CRUD-properties">
-            <StudentSelection
-              default_student={aluno}
-              change_student={setAluno}
-            />
+            <StudentSelection student={aluno} change_student={setAluno} />
             <StudentCard student={aluno} change_student={setAluno} />
           </div>
         </div>

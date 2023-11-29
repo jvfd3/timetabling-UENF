@@ -1,11 +1,12 @@
 import options from "../temp/options";
 import { readData } from "../functions/CRUD_JSONBIN";
 
-// import {allLocalJsonData} from "../../DB/dataFromJSON";
+import { allLocalJsonData } from "../../DB/dataFromJSON";
 
 // let disciplinasInfoDB = allLocalJsonData.static.infoDisciplinasCC;
 
-let DBdisciplinas = await readData(options.JBVars.bins.infoDisciplinasCC);
+// let DBdisciplinas = await readData(options.JBVars.bins.infoDisciplinasCC);
+let DBdisciplinas = allLocalJsonData.static.infoDisciplinasCC;
 
 function getNomeDisciplina(codigoDisciplina) {
   let disciplina = DBdisciplinas.find(
@@ -17,9 +18,12 @@ function getNomeDisciplina(codigoDisciplina) {
 function getNomesDasDisciplinas(listaDeCodigos) {
   let listaDeCodigosNomes = [];
   for (let i = 0; i < listaDeCodigos.length; i++) {
-    let codigo = listaDeCodigos[i];
-    let nome = getNomeDisciplina(codigo);
-    listaDeCodigosNomes.push({ value: codigo, label: nome });
+    let codigoDisciplina = listaDeCodigos[i];
+    let nomeDisciplina = getNomeDisciplina(codigoDisciplina);
+    listaDeCodigosNomes.push({
+      codigo: codigoDisciplina,
+      nome: nomeDisciplina,
+    });
   }
   return listaDeCodigosNomes;
 }
