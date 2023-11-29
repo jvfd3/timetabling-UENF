@@ -44,7 +44,9 @@ const Timeperiod = (props) => {
   console.log("Timeperiod>horarioTP", horarioTP);
   const [horario, setHorario] = useState({ ...horarioTP });
 
-  const [horaInicio, setHoraInicio] = useState(options.hours.find((hour) => hour.value === horario.horaInicio));
+  const [horaInicio, setHoraInicio] = useState(
+    options.hours.find((hour) => hour.value === horario.horaInicio)
+  );
   // const [duracao, setDuracao] = useState(convertToValueLabel(horario.duracao));
   // const [dia, setDia] = useState(convertToValueLabel(horario.dia));
   // const [sala, setSala] = useState(convertToValueLabel(horario.dia));
@@ -171,7 +173,9 @@ function SelecaoDeTurma() {
           }}
           getOptionLabel={(turma) => turma.disciplina.codigo}
           getOptionValue={(turma) => turma.professor}
-          formatOptionLabel={(turma) => `${turma.ano}.${turma.semestre} - ${turma.disciplina.codigo} - ${turma.professor}`}
+          formatOptionLabel={(turma) =>
+            `${turma.ano}.${turma.semestre} - ${turma.disciplina.codigo} - ${turma.professor}`
+          }
         />
         <div style={{ display: "flex", color: "#000000" }}>
           <Select
@@ -215,10 +219,79 @@ function SelecaoDeTurma() {
   );
 }
 
-function NewTurmas () {
+function NewTurmas() {
+  let allTurmas = allLocalJsonData.dynamic.turmasTeste;
+  const [turmas, setTurmas] = useState(allTurmas);
+  const [turma, setTurma] = useState(turmas[0]);
+
+  useEffect(() => {
+    console.log(
+      "It seems that 'turma' have changed, so I will update everything for ya 🫡"
+    );
+  }, [turma]);
+
+  function Visualizacao(props) {
+    const { localTurma } = props;
+    return (
+      <div>
+        <h2>Dados</h2>
+        <table>
+          <tr>
+            <th>Ano</th>
+            <th>Semestre</th>
+            <th>Disciplina</th>
+            <th>Professor</th>
+          </tr>
+          <tr>
+            <td>{localTurma.ano}</td>
+            <td>{localTurma.semestre}</td>
+            <td>{`${localTurma.disciplina.codigo}: ${localTurma.disciplina.nome}`}</td>
+            <td>{localTurma.professor}</td>
+          </tr>
+        </table>
+        <table>
+          <tr>
+            <th>Hora de início</th>
+            <th>Duração</th>
+            <th>Dia</th>
+            <th>Sala</th>
+          </tr>
+          {localTurma.horarios.map((horario, i) => {
+            return (
+              <tr key={i}>
+                <td>{horario.horaInicio}</td>
+                <td>{horario.duracao}</td>
+                <td>{horario.dia}</td>
+                <td>{horario.sala}</td>
+                <td>
+                  <button key={i}>Remover</button>
+                </td>
+              </tr>
+            );
+          })}
+        </table>
+        <button>Adicionar</button>
+      </div>
+    );
+  }
+
   return (
-    <div style={{color: "black"}}>
-      TEXTO
+    <div style={{ color: "black" }}>
+      <div>
+        <Select
+          placeholder="Turma"
+          options={turmas}
+          value={turma}
+          onChange={setTurma}
+          getOptionLabel={(turma) => turma.disciplina.codigo}
+          getOptionValue={(turma) => turma.professor}
+          formatOptionLabel={(turma) =>
+            `(id${turma.id}) ${turma.ano}.${turma.semestre} - ${turma.disciplina.codigo} - ${turma.professor}`
+          }
+        />
+        <Visualizacao localTurma={turma} />
+        <div></div>
+      </div>
     </div>
   );
 }
@@ -226,6 +299,7 @@ function NewTurmas () {
 function CRUDclass() {
   return (
     <div className="background">
+      <CRUDPageSelection defaultValue={options.CRUD.crud_turmas} />
       <div className="CRUD-lateral">
         <div className="CRUD-contain-components">
           <div className="CRUD-Class-properties">
