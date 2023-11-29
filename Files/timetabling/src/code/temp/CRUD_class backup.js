@@ -1,7 +1,7 @@
 import "../CSS/CRUD_class.css";
 import "../CSS/defaultStyle.css";
 import "../CSS/participantList.css";
-import options from "../temp/options";
+import options from "./options";
 import assets from "../../assets/imagesImport";
 import CRUDPageSelection from "../components/PageSelect";
 import React, { useState, useEffect } from "react";
