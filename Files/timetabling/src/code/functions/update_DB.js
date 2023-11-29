@@ -33,4 +33,10 @@ function updateDB(bin) {
 
 console.log("atualizô?");
 
+/*
+import options from "../temp/options";
+import { updateDB } from "../functions/update_DB";
+updateDB(options.JBVars.bins.aBinQueTuTáQuerendoAtualizar);
+*/
+
 export {updateDB};
