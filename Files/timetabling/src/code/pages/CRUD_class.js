@@ -14,7 +14,7 @@ const CRUDParticipants = () => {
   return (
     <div className="participants-container">
       <div className="participants-title">
-        <div className="participants-number">{options.students.length}</div>
+        <div className="participants-number">{options.students}</div>
         <div className="participants-icon">
           {/* Something went wrong here */}
           <img
@@ -41,7 +41,7 @@ const CRUDParticipants = () => {
 
 const Timeperiod = (props) => {
   const { horarioTP, sethorariosTP } = props;
-  console.log("Timeperiod>horarioTP", horarioTP);
+  // console.log("Timeperiod>horarioTP", horarioTP);
   const [horario, setHorario] = useState({ ...horarioTP });
 
   const [horaInicio, setHoraInicio] = useState(
@@ -220,94 +220,140 @@ function SelecaoDeTurma() {
   );
 }
 
-function NewTurmas() {
+function DadosTurma(props) {
+  const { localTurma } = props;
+  return (
+    <div>
+      <h2>Dados</h2>
+      <table>
+        <thead></thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>Ano.Semestre</strong>
+            </td>
+            <td>
+              {localTurma.ano}.{localTurma.semestre}
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Disciplina</strong>
+            </td>
+            <td>{`${localTurma.disciplina.codigo}: ${localTurma.disciplina.nome}`}</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Professor</strong>
+            </td>
+            <td>{localTurma.professor}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function HorariosTurma(props) {
+  const { turmas1, setTurmas1, turma1, setTurma1 } = props;
+
+  function removerHorario(id) {
+    let newTurma = { ...turma1 };
+    let newHorarios = [...newTurma.horarios];
+    newHorarios.splice(id, 1);
+    newTurma.horarios = newHorarios;
+    setTurma1(newTurma);
+  }
+
+  function adicionarHorario() {
+    let newTurma = { ...turma1 };
+    let newHorarios = [...newTurma.horarios];
+    newHorarios.push({
+      sala: "XXX",
+      dia: "XXX",
+      horaInicio: 123,
+      duracao: 123,
+    });
+    newTurma.horarios = newHorarios;
+    setTurma1(newTurma);
+  }
+
+  return (
+    <div>
+      <h2>
+        Horários
+        <button onClick={() => adicionarHorario()}>Adicionar</button>
+      </h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Hora de início</th>
+            <th>Duração</th>
+            <th>Dia</th>
+            <th>Sala</th>
+          </tr>
+        </thead>
+        <tbody>
+          {turma1.horarios.map((horario, i) => {
+            return (
+              <tr key={i}>
+                <td>{horario.horaInicio}</td>
+                <td>{horario.duracao}</td>
+                <td>{horario.dia}</td>
+                <td>{horario.sala}</td>
+                <td>
+                  <button key={i} onClick={() => removerHorario(i)}>
+                    Remover
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function Turmas() {
   let allTurmas = allLocalJsonData.dynamic.turmasTeste;
   const [turmas, setTurmas] = useState(allTurmas);
   const [turma, setTurma] = useState(turmas[0]);
+
+  function updateTurmas(newTurmaValue) {
+    let newTurmas = turmas.map((turma, i) =>
+      turma.id === newTurmaValue.id ? newTurmaValue : turmas[i]
+    );
+    setTurmas(newTurmas);
+  }
 
   useEffect(() => {
     console.log(
       "It seems that 'turma' have changed, so I will update everything for ya 🫡"
     );
+    updateTurmas(turma);
   }, [turma]);
 
-  function Visualizacao(props) {
-    const { localTurma } = props;
-    return (
-      <div>
-        <h2>Dados</h2>
-        <table>
-          <thead></thead>
-          <tbody>
-            <tr>
-              <td>
-                <strong>Ano.Semestre</strong>
-              </td>
-              <td>
-                {localTurma.ano}.{localTurma.semestre}
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <strong>Disciplina</strong>
-              </td>
-              <td>{`${localTurma.disciplina.codigo}: ${localTurma.disciplina.nome}`}</td>
-            </tr>
-            <tr>
-              <td>
-                <strong>Professor</strong>
-              </td>
-              <td>{localTurma.professor}</td>
-            </tr>
-          </tbody>
-        </table>
-        <table>
-          <thead>
-            <tr>
-              <th>Hora de início</th>
-              <th>Duração</th>
-              <th>Dia</th>
-              <th>Sala</th>
-            </tr>
-          </thead>
-          <tbody>
-            {localTurma.horarios.map((horario, i) => {
-              return (
-                <tr key={i}>
-                  <td>{horario.horaInicio}</td>
-                  <td>{horario.duracao}</td>
-                  <td>{horario.dia}</td>
-                  <td>{horario.sala}</td>
-                  <td>
-                    <button key={i}>Remover</button>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        <button>Adicionar</button>
-      </div>
-    );
-  }
-
   return (
-    <div style={{ color: "black" }}>
-      <div>
-        <Select
-          placeholder="Turma"
-          options={turmas}
-          value={turma}
-          onChange={setTurma}
-          getOptionLabel={(turma) => turma.disciplina.codigo}
-          getOptionValue={(turma) => turma.professor}
-          formatOptionLabel={(turma) =>
-            `(id${turma.id}) ${turma.ano}.${turma.semestre} - ${turma.disciplina.codigo} - ${turma.professor}`
-          }
-        />
-        <Visualizacao localTurma={turma} />
-        <div></div>
-      </div>
+    <div className="CRUD-Class-properties" style={{ color: "black" }}>
+      <Select
+        placeholder="Turma"
+        options={turmas}
+        value={turma}
+        onChange={setTurma}
+        getOptionLabel={(turma) => turma.disciplina.codigo}
+        getOptionValue={(turma) => turma.professor}
+        formatOptionLabel={(turma) =>
+          `(id${turma.id}) ${turma.ano}.${turma.semestre} - ${turma.disciplina.codigo} - ${turma.professor}`
+        }
+      />
+      <DadosTurma localTurma={turma} />
+      <HorariosTurma
+        turmas1={turmas}
+        setTurmas1={setTurmas}
+        turma1={turma}
+        setTurma1={setTurma}
+      />
     </div>
   );
 }
@@ -318,9 +364,7 @@ function CRUDclass() {
       <CRUDPageSelection defaultValue={options.CRUD.crud_turmas} />
       <div className="CRUD-lateral">
         <div className="CRUD-contain-components">
-          <div className="CRUD-Class-properties">
-            <NewTurmas />
-          </div>
+          <Turmas />
         </div>
       </div>
     </div>
