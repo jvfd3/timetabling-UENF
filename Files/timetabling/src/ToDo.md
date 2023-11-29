@@ -20,3 +20,7 @@
     - Se adiciono disciplina como cursando e ela antes estava como não feita, remover ela dessa lista.
     - Se eu remover ela de cursando, adicionar a não feita.
     - Se eu adicionar como feita, remover de cursando e não feita.
+- [ ] Cada item em cada propriedade poderia ter seu próprio link
+  - Dessa forma, eu poderia fazer hiperlinks nas seleções, de disciplinas por exemplo, para que o usuário pudesse ir direto até a disciplina referida para alterar o que desejasse.
+- [ ] Retornar um JSON base em caso de falha de conexão
+- [ ] Usar o componente async para carregar mais fluidamente os dados
