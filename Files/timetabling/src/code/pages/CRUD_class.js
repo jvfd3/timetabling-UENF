@@ -174,7 +174,7 @@ function SelecaoDeTurma() {
           }}
           getOptionLabel={(turma) => turma.disciplina.codigo}
           getOptionValue={(turma) => turma.professor}
-          formatOptionLabel={(turma, { context }) => `${turma.ano}.${turma.semestre} - ${turma.disciplina.codigo} - ${turma.professor}`}
+          formatOptionLabel={(turma) => `${turma.ano}.${turma.semestre} - ${turma.disciplina.codigo} - ${turma.professor}`}
         />
         <div style={{ display: "flex", color: "#000000" }}>
           <Select
