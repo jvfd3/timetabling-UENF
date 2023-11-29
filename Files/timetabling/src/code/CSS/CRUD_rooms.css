@@ -10,6 +10,7 @@
 }
 
 .CRUD-room-placeholderimg {
-  height: 20%;
+  display: flex;
+  height: 300px;
   align-self: last baseline;
 }
