@@ -102,7 +102,8 @@ function convertToValueLabel(newValue) {
   return { value: newValue, label: newValue };
 }
 
-let DBdisciplinas = await readData(options.JBVars.bins.infoDisciplinasCC);
+// let DBdisciplinas = await readData(options.JBVars.bins.infoDisciplinasCC);
+let DBdisciplinas = allLocalJsonData.static.infoDisciplinasCC;
 
 function SelectDisciplina(props) {
   const { disciplinaSD, setDisciplinaSD } = props;
@@ -236,39 +237,54 @@ function NewTurmas() {
       <div>
         <h2>Dados</h2>
         <table>
-          <tr>
-            <th>Ano</th>
-            <th>Semestre</th>
-            <th>Disciplina</th>
-            <th>Professor</th>
-          </tr>
-          <tr>
-            <td>{localTurma.ano}</td>
-            <td>{localTurma.semestre}</td>
-            <td>{`${localTurma.disciplina.codigo}: ${localTurma.disciplina.nome}`}</td>
-            <td>{localTurma.professor}</td>
-          </tr>
+          <thead></thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Ano.Semestre</strong>
+              </td>
+              <td>
+                {localTurma.ano}.{localTurma.semestre}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Disciplina</strong>
+              </td>
+              <td>{`${localTurma.disciplina.codigo}: ${localTurma.disciplina.nome}`}</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Professor</strong>
+              </td>
+              <td>{localTurma.professor}</td>
+            </tr>
+          </tbody>
         </table>
         <table>
-          <tr>
-            <th>Hora de início</th>
-            <th>Duração</th>
-            <th>Dia</th>
-            <th>Sala</th>
-          </tr>
-          {localTurma.horarios.map((horario, i) => {
-            return (
-              <tr key={i}>
-                <td>{horario.horaInicio}</td>
-                <td>{horario.duracao}</td>
-                <td>{horario.dia}</td>
-                <td>{horario.sala}</td>
-                <td>
-                  <button key={i}>Remover</button>
-                </td>
-              </tr>
-            );
-          })}
+          <thead>
+            <tr>
+              <th>Hora de início</th>
+              <th>Duração</th>
+              <th>Dia</th>
+              <th>Sala</th>
+            </tr>
+          </thead>
+          <tbody>
+            {localTurma.horarios.map((horario, i) => {
+              return (
+                <tr key={i}>
+                  <td>{horario.horaInicio}</td>
+                  <td>{horario.duracao}</td>
+                  <td>{horario.dia}</td>
+                  <td>{horario.sala}</td>
+                  <td>
+                    <button key={i}>Remover</button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
         <button>Adicionar</button>
       </div>
