@@ -27,3 +27,9 @@
   - [ ] Retornar um JSON base em caso de falha de conexão
 - [ ] Reformular o Options para um JSON que não esteja restrito a Value e Label
   - [ ] Separar também o que é option fixa
+
+## Bugs to fix
+
+- Turmas
+  - [ ] Ao tentar remover o primeiro horário da disciplina, ele remove algum lá pra baixo, e os valores dos que estão em baixo parecem ser arrastados para cima.
+  - [ ] Ao colocar o mesmo professor para várias turmas, ao abrir a seleção de turmas, se a turma selecionada for ministrada pelo professor X, todas as outras turmas também ministradas pelo professor X ficam selecionadas
