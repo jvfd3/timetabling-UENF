@@ -27,6 +27,32 @@
   - [ ] Retornar um JSON base em caso de falha de conexão
 - [ ] Reformular o Options para um JSON que não esteja restrito a Value e Label
   - [ ] Separar também o que é option fixa
+- [ ] Ajustar o GitHub Pages
+
+## Other things to do
+
+### Conflitos
+
+- [ ] Quantidade de pessoas na disciplina por limite da sala.
+- [ ] Horários conflitando na mesma sala.
+- [ ] Fazer console.log() de todos os conflitos.
+- [ ] Professor em horário que não deseja
+- [ ] Professor ministrando matéria que não pode
+- [ ] Turma mostrando a quantidade de conflitos de cada nível
+- [ ] Aluno fazendo matéria que não tem requisito.
+- [ ] Alunos que estão em matérias no mesmo horário.
+
+### Visualizações
+
+- [ ] Falta fazer a adição e remoção de algumas informações.
+- [ ] Tabela que apresenta a preferência dos professores
+- [ ] Tabela de andamento das disciplinas dos alunos. Será que consigo botar ela por cima de uma imagem da grade?
+- [ ] Em cada disciplina, mostrar a lista dos professores que a ministram.
+
+### Reformulação do DB
+
+- [ ] Deveria fazer todas as turmas desde o aluno mais antigo para configurar que ele estava inscrito e foi aprovado. Mas seria um trampo enorme... Na verdade dá pra tentar algo assim com o código de python...
+- [ ] Ao invés de só dividir em 3 (feita, fazendo e não feita), dividir em mais. Pega pelo ano e vai pegando gradativo.
 
 ## Bugs to fix
 
