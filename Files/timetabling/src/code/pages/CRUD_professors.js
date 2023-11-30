@@ -12,11 +12,177 @@ import { readData, updateData } from "../functions/CRUD_JSONBIN";
 // import { updateDB } from "../functions/update_DB";
 // updateDB(options.JBVars.bins.infoProfessores);
 
+function PreferencesTable(props) {
+  const { nomeProfessor } = props;
+  let dias = options.days;
+
+  function getPreferenciasProfessor(localNomeProfessor) {
+    let localPreferences = allLocalJsonData.dynamic.preferenciasProfessores;
+    let preferencias = [];
+    let preferenciasDesseProfessor = localPreferences[localNomeProfessor];
+    if (preferenciasDesseProfessor === undefined) {
+      console.log(
+        "Amigão, o professor tá sem preferência, adiciona uma preferência vazia aí pra ele."
+      );
+    } else {
+      preferencias = preferenciasDesseProfessor;
+    }
+    return preferencias;
+  }
+  let preferencias = getPreferenciasProfessor(nomeProfessor);
+
+  function getColorPreference(nivelDePreferencia) {
+    let color = "white";
+    let colors = {
+      0: "#747474",
+      1: "#489B14",
+      2: "#EEDF58",
+      3: "#DC8324",
+      9: "#B70000",
+      10: "#000000",
+    };
+    color = colors[nivelDePreferencia];
+    if (color === undefined) {
+      color = "white";
+    }
+    return color;
+  }
+
+  function tabelaPreferenciasContent() {
+    return Object.entries(preferencias).map(([horario, dias], i) => (
+      <tr
+        key={i}
+        style={{
+          color: "#000000",
+          textAlign: "center",
+        }}
+      >
+        <td
+          style={{
+            backgroundColor: "#FFCB8E",
+            fontWeight: "bold",
+            fontSize: "1.0em",
+            paddingTop: 5,
+          }}
+        >
+          {horario} ~ {parseInt(horario) + 1}
+        </td>
+        <td
+          style={{
+            backgroundColor: getColorPreference(dias.seg),
+          }}
+        >
+          {dias.seg}
+        </td>
+        <td
+          style={{
+            backgroundColor: getColorPreference(dias.ter),
+          }}
+        >
+          {dias.ter}
+        </td>
+        <td
+          style={{
+            backgroundColor: getColorPreference(dias.qua),
+          }}
+        >
+          {dias.qua}
+        </td>
+        <td
+          style={{
+            backgroundColor: getColorPreference(dias.qui),
+          }}
+        >
+          {dias.qui}
+        </td>
+        <td
+          style={{
+            backgroundColor: getColorPreference(dias.sex),
+          }}
+        >
+          {dias.sex}
+        </td>
+      </tr>
+    ));
+  }
+
+  function getLegenda() {
+    // Contar as ocorrências de cada preferência
+    let counts = {};
+    Object.values(preferencias).forEach((dias) => {
+      Object.values(dias).forEach((preferencia) => {
+        counts[preferencia] = (counts[preferencia] || 0) + 1;
+      });
+    });
+
+    return (
+      <div>
+        <h3>Legenda</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Nível de preferência</th>
+              <th>Quantidade de ocorrências</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Object.entries(counts).map(([preferencia, count], i) => (
+              <tr
+                key={i}
+                style={{
+                  backgroundColor: getColorPreference(preferencia),
+                  textAlign: "center",
+                }}
+              >
+                <td>{preferencia}</td>
+                <td>{count}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        backgroundColor: "moccasin",
+        alignSelf: "center",
+        justifyContent: "center",
+        padding: 10,
+        flexDirection: "column",
+      }}
+    >
+      <h4>Preferências</h4>
+      <table style={{ borderCollapse: "collapse" }}>
+        <thead>
+          <tr>
+            <th style={{ backgroundColor: "#64584A", padding: 10 }}>
+              Horários
+            </th>
+            {dias.map((dia, i) => (
+              <th
+                key={i}
+                style={{ backgroundColor: "#FFBC58", paddingLeft: 10 }}
+              >
+                {dia.value}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>{tabelaPreferenciasContent()}</tbody>
+      </table>
+      {getLegenda()}
+    </div>
+  );
+}
+
 function SelectDisciplinas(props) {
   const {
-    myPlaceHolder,
     myCurrentOptions,
-    currentItem,
+    currentProfessor,
     updateStudent,
     atualizandoProfessores,
     professoresPraAtualizar,
@@ -41,11 +207,10 @@ function SelectDisciplinas(props) {
   return (
     <div>
       <Select
-        placeholder={myPlaceHolder}
         options={disciplinas}
         value={myNewCurrentOptions}
         onChange={(option) => {
-          let myItem = { ...currentItem };
+          let myItem = { ...currentProfessor };
           myItem["disciplinas"] = option;
           updateStudent(myItem);
           atualizarProfessores(
@@ -54,24 +219,24 @@ function SelectDisciplinas(props) {
             myItem
           );
         }}
-        isMulti={true}
+        placeholder={"Disciplinas ministradas"}
         className="DisciplinasProfessor"
+        isMulti={true}
         isClearable={false}
         isSearchable={true}
-        getOptionLabel={(option) => option.nome}
         getOptionValue={(option) => option.codigo}
-        formatOptionLabel={({ nome, codigo }, { context }) => {
-          return context === "nome" ? `${nome}` : `${nome}: ${codigo}`;
-        }}
+        getOptionLabel={(option) => option.nome}
+        formatOptionLabel={({ nome, codigo }) => `${codigo}: ${nome}`}
       />
     </div>
   );
 }
 
-function CRUDprofessors() {
+function Professores() {
   let localData = allLocalJsonData.static.infoProfessores;
   const [professores, setProfessores] = useState(localData);
-  const [professor, setProfessor] = useState(localData[2]); //Tang
+  // const [professor, setProfessor] = useState(localData[2]); //Tang
+  const [professor, setProfessor] = useState(professores[7]); //Oscar
   // const [professor, setProfessor] = useState(professores[16]); //Marcenilda
   // console.log("professoresRS:", professores)
   // console.log("professoresJSON:", allLocalJsonData.static.infoProfessores)
@@ -81,6 +246,7 @@ function CRUDprofessors() {
       // console.log(DBprofessores);
       setProfessores(DBprofessores);
     });
+    // setProfessor(allLocalJsonData.static.infoProfessores);
     /*     const fetchData = async () => {
       let DBprofessores = await readData(options.JBVars.bins.infoProfessores);
       let RSprofessor = DBprofessores.map(professorDBtoRS);
@@ -90,80 +256,79 @@ function CRUDprofessors() {
     fetchData(); */
   }, []);
   return (
+    <div className="CRUD-outro">
+      <div className="CRUD-docentes-properties">
+        <Select
+          options={professores}
+          value={professor}
+          onChange={setProfessor}
+          getOptionValue={(option) => option.nome}
+          getOptionLabel={(option) => option.laboratorio}
+          formatOptionLabel={({ nome, laboratorio }, { context }) => {
+            return context === "value" ? `${nome}` : `(${laboratorio}) ${nome}`;
+          }}
+          isMulti={false}
+          isSearchable={true}
+          isClearable={false}
+          placeholder="Selecione um professor"
+        />
+        <table
+          className="table"
+          style={{ color: "black", backgroundColor: "blanchedalmond" }}
+        >
+          <tbody>
+            <tr>
+              <th>Nome</th>
+              <td>{professor.nome}</td>
+            </tr>
+            <tr>
+              <th>Curso</th>
+              <td>{professor.curso}</td>
+            </tr>
+            <tr>
+              <th>laboratório</th>
+              <td>{professor.laboratorio}</td>
+            </tr>
+          </tbody>
+        </table>
+        <table
+          className="table"
+          style={{ backgroundColor: "powderblue", color: "black" }}
+        >
+          <tbody>
+            <tr>
+              <th>Disciplinas</th>
+            </tr>
+            <tr>
+              <td>
+                <SelectDisciplinas
+                  myCurrentOptions={professor.disciplinas}
+                  currentProfessor={professor}
+                  updateStudent={setProfessor}
+                  atualizandoProfessores={setProfessores}
+                  professoresPraAtualizar={professores}
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <PreferencesTable nomeProfessor={professor.nome} />
+      <img
+        className="CRUD-docentes-placeholderimg"
+        src={assets.professorMap}
+        alt=""
+      />
+    </div>
+  );
+}
+
+function CRUDprofessors() {
+  return (
     <div className="background">
       <div className="CRUD-contain-components">
         <CRUDPageSelection defaultValue={options.CRUD.crud_professores} />
-        <div className="CRUD-outro">
-          <div className="CRUD-docentes-properties">
-            <Select
-              options={professores}
-              value={professor}
-              onChange={setProfessor}
-              getOptionValue={(option) => option.nome}
-              getOptionLabel={(option) => option.laboratorio}
-              formatOptionLabel={({ nome, laboratorio }, { context }) => {
-                return context === "value"
-                  ? `${nome}`
-                  : `(${laboratorio}) ${nome}`;
-              }}
-              nome
-              isMulti={false}
-              isSearchable={true}
-              isClearable={false}
-              newPlaceHolder="Docente"
-            />
-            <div
-              style={{ backgroundColor: "blanchedalmond" }}
-              className="VisualizeData"
-            >
-              <table className="table" style={{ color: "black" }}>
-                <tbody>
-                  <tr>
-                    <td>Nome</td>
-                    <td>{professor.nome}</td>
-                  </tr>
-                  <tr>
-                    <td>Curso</td>
-                    <td>{professor.curso}</td>
-                  </tr>
-                  <tr>
-                    <td>laboratório:</td>
-                    <td>{professor.laboratorio}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <table
-              className="table"
-              style={{ backgroundColor: "powderblue", color: "black" }}
-            >
-              <tbody>
-                <tr>
-                  <td>
-                    <h4>Disciplinas</h4>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <SelectDisciplinas
-                      myPlaceHolder="Disciplinas ministradas"
-                      myCurrentOptions={professor.disciplinas}
-                      currentItem={professor}
-                      updateStudent={setProfessor}
-                      atualizandoProfessores={setProfessores}
-                      professoresPraAtualizar={professores}
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <img
-            className="CRUD-docentes-placeholderimg"
-            src={assets.professorMap}
-            alt=""
-          />
-        </div>
+        <Professores />
       </div>
     </div>
   );
