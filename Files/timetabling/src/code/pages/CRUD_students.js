@@ -1,6 +1,5 @@
 import "../CSS/CRUD_students.css";
 import "../CSS/defaultStyle.css";
-import "../components/studentCard/studentCard.css";
 import React, { useState } from "react";
 import options from "../temp/options";
 import CRUDPageSelection from "../components/PageSelect";
