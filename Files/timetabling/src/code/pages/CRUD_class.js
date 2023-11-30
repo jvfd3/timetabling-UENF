@@ -16,7 +16,6 @@ const CRUDParticipants = (props) => {
   // const [participants, setParticipants] = useState([]);
 
   let andamentoAlunos = allLocalJsonData.dynamic.andamentoAlunos;
-  console.log(andamentoAlunos);
 
   function getCurrentSubjectsPerStudent(alunos) {
     /*  Explicação dessa função
@@ -45,32 +44,77 @@ const CRUDParticipants = (props) => {
       },
       {}
     );
-    console.log(currentSubjectsPerStudent);
     return currentSubjectsPerStudent;
   }
 
-  let converted = getCurrentSubjectsPerStudent(andamentoAlunos);
-  console.log(converted);
+  function getStudentsFromSubject(subjectCode, disciplinasCursadasPorAlunos) {
+    let isUndefined = disciplinasCursadasPorAlunos[subjectCode] === undefined;
+    if (isUndefined) {
+      disciplinasCursadasPorAlunos[subjectCode] = [];
+    }
+    let alunosDessaDisciplina = disciplinasCursadasPorAlunos[subjectCode];
+    return alunosDessaDisciplina;
+  }
+
+  function getInfoAlunos() {
+    let infoAlunos = allLocalJsonData.static.infoAlunos;
+    return infoAlunos;
+  }
+
+  function mixStudentsAndInfo(students, info) {
+    let mixed = students.map((student) => {
+      let studentInfo = info.find((info) => info.matricula === student);
+      return studentInfo;
+    });
+    return mixed;
+  }
+
+  let alunosDessaDisciplina = getStudentsFromSubject(
+    turma3.disciplina.codigo,
+    getCurrentSubjectsPerStudent(andamentoAlunos)
+  );
+
+  let infoAlunos = getInfoAlunos();
+
+  let fullStudentsList = mixStudentsAndInfo(alunosDessaDisciplina, infoAlunos);
+  //Confirmando que a lista está ordenada por matrícula (veteranos primeiro)
+  fullStudentsList.sort((a, b) => a.matricula - b.matricula);
 
   return (
     <div className="participants-container">
       <div className="participants-title">
-        <div className="participants-number"></div>
-        <div className="participants-icon">
-          {/* Something went wrong here */}
-          {/* <img
-            className="participants-icon"
-            src={assets.icons.students}
-            alt=""
-          /> */}
-        </div>
+        <h3>Número de alunos {`(${alunosDessaDisciplina.length})`}</h3>
       </div>
       <div className="participants-list">
+        <table>
+          <thead>
+            <tr>
+              <th>Curso</th>
+              {/* <th>Ano</th> */}
+              <th>Matrícula</th>
+              <th>Nome</th>
+            </tr>
+          </thead>
+          <tbody>
+            {fullStudentsList.map((student) => (
+              <tr key={student.matricula}>
+                <td>
+                  {student.curso === "Ciência da Computação"
+                    ? "CC"
+                    : student.curso}
+                </td>
+                {/* <td>{student.anoEntrada}</td> */}
+                <td>{student.matricula}</td>
+                <td>{student.nome}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
         <ul>
-          {/* {options.students.map((student) => (
-            <li key={student.value}>
+          {/* {fullStudentsList.map((student) => (
+            <li key={student.matricula}>
               <p className="participants-participant">
-                {student.value}: {student.label}
+                {student.ano}: {student.label}
               </p>
             </li>
           ))} */}
