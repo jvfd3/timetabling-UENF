@@ -16,6 +16,7 @@ function PreferencesTable(props) {
 
   let infoPreferencias = options.constantValues.niveisDePreferencia;
   let dias = options.days;
+  let hasNumbers = false;
 
   function tabelaPreferenciasContent() {
     function ClickableCell(nivelDePreferencia, rowIndex, columnIndex) {
@@ -58,7 +59,7 @@ function PreferencesTable(props) {
           }}
           onClick={handleClick}
         >
-          {thisPreferenceValue}
+          {hasNumbers && thisPreferenceValue}
         </td>
       );
     }
