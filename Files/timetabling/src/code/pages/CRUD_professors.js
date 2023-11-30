@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "../CSS/CRUD_professors.css";
 import "../CSS/defaultStyle.css";
 import options from "../temp/options";
-import assets from "../../assets/imagesImport";
 import CRUDPageSelection from "../components/PageSelect";
 import Select from "react-select";
 import { getNomesDasDisciplinas } from "../functions/getListaDisciplinas";
@@ -13,18 +12,7 @@ import { readData, updateData } from "../functions/CRUD_JSONBIN";
 // updateDB(options.JBVars.bins.infoProfessores);
 
 function PreferencesTable(props) {
-  const { professor1, setProfessor1 } = props;
-
-  const [preferencias, setPreferencias] = useState(
-    allLocalJsonData.dynamic.preferenciasProfessores
-  );
-  const [preferencia, setPreferencia] = useState(
-    getPreferenciasProfessor(professor1.nome)
-  );
-
-  useEffect(() => {
-    setPreferencia(getPreferenciasProfessor(professor1.nome));
-  }, [professor1]);
+  const { preferencia1, setPreferencia1, preferencias1 } = props;
 
   let infoPreferencias = options.constantValues.niveisDePreferencia;
   let dias = options.days;
@@ -32,7 +20,7 @@ function PreferencesTable(props) {
   function tabelaPreferenciasContent() {
     function ClickableCell(nivelDePreferencia, rowIndex, columnIndex) {
       let horaInicial = rowIndex + 7;
-      let thisPreferenceRow = preferencia[horaInicial];
+      let thisPreferenceRow = preferencia1[horaInicial];
       let thisPreferenceDay = dias[columnIndex].value.toLowerCase();
       let thisPreferenceValue = thisPreferenceRow[thisPreferenceDay];
       const preferenceColor = getColorPreference(thisPreferenceValue);
@@ -42,17 +30,18 @@ function PreferencesTable(props) {
 
       const handleClick = (e) => {
         let ctrlOrAltPressed = e.ctrlKey || e.altKey;
-        let newValue = (nivelDePreferencia + (ctrlOrAltPressed?-1:1)) % dias.length;
+        let newValue =
+          (nivelDePreferencia + (ctrlOrAltPressed ? -1 : 1)) % dias.length;
         if (newValue < 0) newValue = dias.length - 1;
         let newPreference = {
-          ...preferencia,
+          ...preferencia1,
           [horaInicial]: {
             ...thisPreferenceRow,
             [thisPreferenceDay]: newValue,
           },
         };
         // console.log(newPreference);
-        setPreferencia(newPreference);
+        setPreferencia1(newPreference);
         // console.log(newPreference[7]["seg"]);
         // setPreferenceIndex(
         //   (prevIndex) => (prevIndex + 1) % preferenceValues.length
@@ -74,7 +63,7 @@ function PreferencesTable(props) {
       );
     }
 
-    return Object.entries(preferencia).map(([horario, dias], rowIndex) => (
+    return Object.entries(preferencia1).map(([horario, dias], rowIndex) => (
       <tr
         key={rowIndex}
         style={{
@@ -99,17 +88,6 @@ function PreferencesTable(props) {
     ));
   }
 
-  function getPreferenciasProfessor(localNomeProfessor) {
-    let preferenciasDesseProfessor = preferencias[localNomeProfessor];
-    if (preferenciasDesseProfessor === undefined) {
-      preferenciasDesseProfessor =
-        allLocalJsonData.templates.preferenciasProfessores.preferenciaDict
-          .diasNasHoras;
-    }
-    // console.log(preferenciasDesseProfessor);
-    return preferenciasDesseProfessor;
-  }
-
   function getColorPreference(nivelDePreferencia) {
     const infoPreferencia = infoPreferencias.find(
       (item) => item.nivel === nivelDePreferencia
@@ -124,7 +102,7 @@ function PreferencesTable(props) {
     infoPreferencias.forEach((info) => {
       const preferencia = info.nivel;
       let count = 0;
-      Object.values(preferencias).forEach((dias) => {
+      Object.values(preferencias1).forEach((dias) => {
         Object.values(dias).forEach((pref) => {
           if (pref === preferencia) {
             count++;
@@ -274,11 +252,48 @@ function Professores() {
   let localData = allLocalJsonData.static.infoProfessores;
   const [professores, setProfessores] = useState(localData);
   // const [professor, setProfessor] = useState(localData[2]); //Tang
-  const [professor, setProfessor] = useState(professores[7]); //Oscar
+  const [professor, setProfessor] = useState(professores[0]); //Rivera
+  // const [professor, setProfessor] = useState(professores[7]); //Oscar
   // const [professor, setProfessor] = useState(professores[16]); //Marcenilda
   // console.log("professoresRS:", professores)
   // console.log("professoresJSON:", allLocalJsonData.static.infoProfessores)
   // console.log("professor:", professor)
+
+  const [preferencias, setPreferencias] = useState(
+    allLocalJsonData.dynamic.preferenciasProfessores
+  );
+  const [preferencia, setPreferencia] = useState(
+    getPreferenciasProfessor(professor.nome)
+  );
+
+  useEffect(() => {
+    setPreferencia(getPreferenciasProfessor(professor.nome));
+  }, [professor]);
+
+  function updatePreferencias(newPreferenciaValue) {
+    console.log("Updating preferencias...");
+    let newPreferencias = { ...preferencias };
+    newPreferencias[professor.nome] = newPreferenciaValue;
+    setPreferencias(newPreferencias);
+    // updateData(newPreferencias, options.JBVars.bins.preferenciasProfessores);
+  }
+
+  useEffect(() => {
+    // let message = "It seems that 'professor' have changed, so I will update everything for ya 🫡"
+    // console.log(message);
+    updatePreferencias(preferencia);
+  }, [preferencia]);
+
+  function getPreferenciasProfessor(localNomeProfessor) {
+    let preferenciasDesseProfessor = preferencias[localNomeProfessor];
+    if (preferenciasDesseProfessor === undefined) {
+      preferenciasDesseProfessor =
+        allLocalJsonData.templates.preferenciasProfessores.preferenciaDict
+          .diasNasHoras;
+    }
+    // console.log(preferenciasDesseProfessor);
+    return preferenciasDesseProfessor;
+  }
 
   useEffect(() => {
     // readData(options.JBVars.bins.infoProfessores).then((DBprofessores) => {
@@ -294,20 +309,6 @@ function Professores() {
 
     fetchData(); */
   }, []);
-  /* 
-  function updateProfessores(newProfessorValue) {
-    let newProfessores = professores.map((professor, i) =>
-      professor.id === newProfessorValue.id ? newProfessorValue : professores[i]
-    );
-    setProfessores(newProfessores);
-  }
-
-  useEffect(() => {
-    // let message = "It seems that 'professor' have changed, so I will update everything for ya 🫡"
-    // console.log(message);
-    updateProfessores(professor);
-  }, [professor]);
- */
   return (
     <div className="CRUD-outro">
       <div className="CRUD-docentes-properties">
@@ -344,7 +345,13 @@ function Professores() {
             </tr>
           </tbody>
         </table>
-        <PreferencesTable professor1={professor} setProfessor1={setProfessor} />
+        <PreferencesTable
+          professor1={professor}
+          setProfessor1={setProfessor}
+          preferencia1={preferencia}
+          setPreferencia1={setPreferencia}
+          preferencias1={preferencias}
+        />
         <table
           className="table"
           style={{ backgroundColor: "powderblue", color: "black" }}
