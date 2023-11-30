@@ -12,6 +12,7 @@ import infoDisciplinasCCData from "./JSON/static/infoDisciplinasCC.json";
 import infoProfessoresData from "./JSON/static/infoProfessores.json";
 import infoSalasData from "./JSON/static/infoSalas.json";
 import turmasTesteData from "./JSON/dynamic/turmasTeste.json";
+import templatesData from "./JSON/templates/templates.json";
 
 const allLocalJsonData = {
   dynamic: {
@@ -34,6 +35,7 @@ const allLocalJsonData = {
     infoProfessores: infoProfessoresData,
     infoSalas: infoSalasData,
   },
+  templates: templatesData,
 };
 
 console.log("Am I exporting all data from JSON?");
