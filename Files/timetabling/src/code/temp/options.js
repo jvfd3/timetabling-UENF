@@ -1,4 +1,14 @@
 const options = {
+  constantValues: {
+    niveisDePreferencia: [
+      { nivel: 0, cor: "#747474", descricao: "A preferência não foi coletada" },
+      { nivel: 1, cor: "#489B14", descricao: "Prefere dar aula nesse horário" },
+      { nivel: 2, cor: "#EEDF58", descricao: "Não se importa" },
+      { nivel: 3, cor: "#DC8324", descricao: "Prefere não dar aula neste horário" },
+      { nivel: 4, cor: "#B70000", descricao: "Não pode dar aula neste horário" },
+    ],
+  },
+  defaultValues: {},
   JBVars: {
     //Json Bin Variables
     BaseLink: "https://api.jsonbin.io/v3/b/",
