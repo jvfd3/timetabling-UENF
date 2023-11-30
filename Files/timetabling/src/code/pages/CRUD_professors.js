@@ -13,45 +13,70 @@ import { readData, updateData } from "../functions/CRUD_JSONBIN";
 // updateDB(options.JBVars.bins.infoProfessores);
 
 function PreferencesTable(props) {
-  const { nomeProfessor } = props;
+  const { professor1, setProfessor1 } = props;
+
+  const [preferencias, setPreferencias] = useState(
+    allLocalJsonData.dynamic.preferenciasProfessores
+  );
+  const [preferencia, setPreferencia] = useState(
+    getPreferenciasProfessor(professor1.nome)
+  );
+
+  useEffect(() => {
+    setPreferencia(getPreferenciasProfessor(professor1.nome));
+  }, [professor1]);
+
+  let infoPreferencias = options.constantValues.niveisDePreferencia;
   let dias = options.days;
 
-  function getPreferenciasProfessor(localNomeProfessor) {
-    let localPreferences = allLocalJsonData.dynamic.preferenciasProfessores;
-    let preferencias = [];
-    let preferenciasDesseProfessor = localPreferences[localNomeProfessor];
-    if (preferenciasDesseProfessor === undefined) {
-      console.log(
-        "Amigão, o professor tá sem preferência, adiciona uma preferência vazia aí pra ele."
-      );
-    } else {
-      preferencias = preferenciasDesseProfessor;
-    }
-    return preferencias;
-  }
-  let preferencias = getPreferenciasProfessor(nomeProfessor);
-
-  function getColorPreference(nivelDePreferencia) {
-    let color = "white";
-    let colors = {
-      0: "#747474",
-      1: "#489B14",
-      2: "#EEDF58",
-      3: "#DC8324",
-      9: "#B70000",
-      10: "#000000",
-    };
-    color = colors[nivelDePreferencia];
-    if (color === undefined) {
-      color = "white";
-    }
-    return color;
-  }
-
   function tabelaPreferenciasContent() {
-    return Object.entries(preferencias).map(([horario, dias], i) => (
+    function ClickableCell(nivelDePreferencia, rowIndex, columnIndex) {
+      let horaInicial = rowIndex + 7;
+      let thisPreferenceRow = preferencia[horaInicial];
+      let thisPreferenceDay = dias[columnIndex].value.toLowerCase();
+      let thisPreferenceValue = thisPreferenceRow[thisPreferenceDay];
+      const preferenceColor = getColorPreference(thisPreferenceValue);
+
+      // console.log(`(${rowIndex}, ${columnIndex})`);
+      // console.log(nivelDePreferencia);
+
+      const handleClick = (e) => {
+        let ctrlOrAltPressed = e.ctrlKey || e.altKey;
+        let newValue = (nivelDePreferencia + (ctrlOrAltPressed?-1:1)) % dias.length;
+        if (newValue < 0) newValue = dias.length - 1;
+        let newPreference = {
+          ...preferencia,
+          [horaInicial]: {
+            ...thisPreferenceRow,
+            [thisPreferenceDay]: newValue,
+          },
+        };
+        // console.log(newPreference);
+        setPreferencia(newPreference);
+        // console.log(newPreference[7]["seg"]);
+        // setPreferenceIndex(
+        //   (prevIndex) => (prevIndex + 1) % preferenceValues.length
+        // );
+      };
+
+      return (
+        <td
+          key={100 * columnIndex + 1 * rowIndex}
+          style={{
+            backgroundColor: preferenceColor,
+            textAlign: "center",
+            cursor: "pointer",
+          }}
+          onClick={handleClick}
+        >
+          {thisPreferenceValue}
+        </td>
+      );
+    }
+
+    return Object.entries(preferencia).map(([horario, dias], rowIndex) => (
       <tr
-        key={i}
+        key={rowIndex}
         style={{
           color: "#000000",
           textAlign: "center",
@@ -67,51 +92,50 @@ function PreferencesTable(props) {
         >
           {horario} ~ {parseInt(horario) + 1}
         </td>
-        <td
-          style={{
-            backgroundColor: getColorPreference(dias.seg),
-          }}
-        >
-          {dias.seg}
-        </td>
-        <td
-          style={{
-            backgroundColor: getColorPreference(dias.ter),
-          }}
-        >
-          {dias.ter}
-        </td>
-        <td
-          style={{
-            backgroundColor: getColorPreference(dias.qua),
-          }}
-        >
-          {dias.qua}
-        </td>
-        <td
-          style={{
-            backgroundColor: getColorPreference(dias.qui),
-          }}
-        >
-          {dias.qui}
-        </td>
-        <td
-          style={{
-            backgroundColor: getColorPreference(dias.sex),
-          }}
-        >
-          {dias.sex}
-        </td>
+        {Object.entries(dias).map(([dia, preferencia], columnIndex) => {
+          return ClickableCell(preferencia, rowIndex, columnIndex);
+        })}
       </tr>
     ));
   }
 
+  function getPreferenciasProfessor(localNomeProfessor) {
+    let preferenciasDesseProfessor = preferencias[localNomeProfessor];
+    if (preferenciasDesseProfessor === undefined) {
+      preferenciasDesseProfessor =
+        allLocalJsonData.templates.preferenciasProfessores.preferenciaDict
+          .diasNasHoras;
+    }
+    // console.log(preferenciasDesseProfessor);
+    return preferenciasDesseProfessor;
+  }
+
+  function getColorPreference(nivelDePreferencia) {
+    const infoPreferencia = infoPreferencias.find(
+      (item) => item.nivel === nivelDePreferencia
+    );
+    let color = infoPreferencia ? infoPreferencia.cor : "white";
+    return color;
+  }
+
   function getLegenda() {
     // Contar as ocorrências de cada preferência
-    let counts = {};
-    Object.values(preferencias).forEach((dias) => {
-      Object.values(dias).forEach((preferencia) => {
-        counts[preferencia] = (counts[preferencia] || 0) + 1;
+    let counts = [];
+    infoPreferencias.forEach((info) => {
+      const preferencia = info.nivel;
+      let count = 0;
+      Object.values(preferencias).forEach((dias) => {
+        Object.values(dias).forEach((pref) => {
+          if (pref === preferencia) {
+            count++;
+          }
+        });
+      });
+      counts.push({
+        preferencia,
+        count,
+        description: info.descricao,
+        color: info.cor,
       });
     });
 
@@ -123,21 +147,35 @@ function PreferencesTable(props) {
             <tr>
               <th>Nível de preferência</th>
               <th>Quantidade de ocorrências</th>
+              <th>Descrição</th>
             </tr>
           </thead>
           <tbody>
-            {Object.entries(counts).map(([preferencia, count], i) => (
-              <tr
-                key={i}
-                style={{
-                  backgroundColor: getColorPreference(preferencia),
-                  textAlign: "center",
-                }}
-              >
-                <td>{preferencia}</td>
-                <td>{count}</td>
-              </tr>
-            ))}
+            {counts.map(({ preferencia, count, description, color }, i) => {
+              return (
+                <tr
+                  key={i}
+                  style={{
+                    backgroundColor: color,
+                    textAlign: "center",
+                  }}
+                >
+                  <td>{preferencia}</td>
+                  <td>{count}</td>
+                  <td
+                    style={{
+                      textAlign: "left",
+                      paddingLeft: 10,
+                      paddingRight: 10,
+                      paddingBottom: 5,
+                      paddingTop: 5,
+                    }}
+                  >
+                    {description}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
@@ -241,12 +279,13 @@ function Professores() {
   // console.log("professoresRS:", professores)
   // console.log("professoresJSON:", allLocalJsonData.static.infoProfessores)
   // console.log("professor:", professor)
+
   useEffect(() => {
-    readData(options.JBVars.bins.infoProfessores).then((DBprofessores) => {
-      // console.log(DBprofessores);
-      setProfessores(DBprofessores);
-    });
-    // setProfessor(allLocalJsonData.static.infoProfessores);
+    // readData(options.JBVars.bins.infoProfessores).then((DBprofessores) => {
+    //   // console.log(DBprofessores);
+    //   setProfessores(DBprofessores);
+    // });
+    setProfessores(allLocalJsonData.static.infoProfessores);
     /*     const fetchData = async () => {
       let DBprofessores = await readData(options.JBVars.bins.infoProfessores);
       let RSprofessor = DBprofessores.map(professorDBtoRS);
@@ -255,6 +294,20 @@ function Professores() {
 
     fetchData(); */
   }, []);
+  /* 
+  function updateProfessores(newProfessorValue) {
+    let newProfessores = professores.map((professor, i) =>
+      professor.id === newProfessorValue.id ? newProfessorValue : professores[i]
+    );
+    setProfessores(newProfessores);
+  }
+
+  useEffect(() => {
+    // let message = "It seems that 'professor' have changed, so I will update everything for ya 🫡"
+    // console.log(message);
+    updateProfessores(professor);
+  }, [professor]);
+ */
   return (
     <div className="CRUD-outro">
       <div className="CRUD-docentes-properties">
@@ -291,6 +344,7 @@ function Professores() {
             </tr>
           </tbody>
         </table>
+        <PreferencesTable professor1={professor} setProfessor1={setProfessor} />
         <table
           className="table"
           style={{ backgroundColor: "powderblue", color: "black" }}
@@ -313,12 +367,6 @@ function Professores() {
           </tbody>
         </table>
       </div>
-      <PreferencesTable nomeProfessor={professor.nome} />
-      <img
-        className="CRUD-docentes-placeholderimg"
-        src={assets.professorMap}
-        alt=""
-      />
     </div>
   );
 }
