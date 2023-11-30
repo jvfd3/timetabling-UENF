@@ -10,10 +10,47 @@ import { allLocalJsonData } from "../../DB/dataFromJSON";
 import AsyncSelect from "react-select/async";
 import { readData } from "../functions/CRUD_JSONBIN";
 
-const CRUDParticipants = () => {
+const CRUDParticipants = (props) => {
+  const { turma3 } = props;
+
   // const [participants, setParticipants] = useState([]);
 
-  let participants = allLocalJsonData.dynamic.andamentoAlunos;
+  let andamentoAlunos = allLocalJsonData.dynamic.andamentoAlunos;
+  console.log(andamentoAlunos);
+
+  function getCurrentSubjectsPerStudent(alunos) {
+    /*  Explicação dessa função
+    Essa função é muito confusa, o copilot que fez então vou explicar
+    Essa vai ser a variável final retornada. Primeiro ele pega todas as chaves/matrículas dos alunos e faz um reduce
+    O reduce vai iterar por todas as matrículas usando um acumulados (acc)
+    primeiro ele pega a lista de disciplinas que o aluno está cursando
+    depois ele itera por todas essas disciplinas
+    se a disciplina não for uma chave no acc, significa que ela ainda não foi processada, então ele cria uma chave para ela
+    depois ele adiciona a matrícula do aluno na lista da disciplina da iteração atual
+    Ele faz isso para todas as disciplinas do aluno atual (forEach) depois ele vai volta pra iteração anterior (reduce)
+    e faz isso para todos os alunos
+    no final ele retorna o acc que é um objeto com as disciplinas como chave e uma lista de matrículas como valor
+    O "{}" no final é o valor inicial do acc, que é um objeto vazio. Ele faz parte do reduce.
+    */
+    let currentSubjectsPerStudent = Object.keys(alunos).reduce(
+      (acc, studentId) => {
+        let currentSubjects = alunos[studentId].cursando;
+        currentSubjects.forEach((subject) => {
+          if (!acc[subject]) {
+            acc[subject] = [];
+          }
+          acc[subject].push(studentId);
+        });
+        return acc;
+      },
+      {}
+    );
+    console.log(currentSubjectsPerStudent);
+    return currentSubjectsPerStudent;
+  }
+
+  let converted = getCurrentSubjectsPerStudent(andamentoAlunos);
+  console.log(converted);
 
   return (
     <div className="participants-container">
@@ -330,6 +367,7 @@ function Turmas() {
         <DadosTurma turma2={turma} setTurma2={setTurma} />
         <HorariosTurma turma1={turma} setTurma1={setTurma} />
       </div>
+      <CRUDParticipants turma3={turma} />
     </div>
   );
 }
