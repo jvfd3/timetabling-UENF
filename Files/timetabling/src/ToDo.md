@@ -22,5 +22,8 @@
     - Se eu adicionar como feita, remover de cursando e não feita.
 - [ ] Cada item em cada propriedade poderia ter seu próprio link
   - Dessa forma, eu poderia fazer hiperlinks nas seleções, de disciplinas por exemplo, para que o usuário pudesse ir direto até a disciplina referida para alterar o que desejasse.
-- [ ] Retornar um JSON base em caso de falha de conexão
 - [ ] Usar o componente async para carregar mais fluidamente os dados
+  - [ ] Usar o JSON base como opções temporárias enquanto não carregam os dados async
+  - [ ] Retornar um JSON base em caso de falha de conexão
+- [ ] Reformular o Options para um JSON que não esteja restrito a Value e Label
+  - [ ] Separar também o que é option fixa
