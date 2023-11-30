@@ -41,6 +41,7 @@ function TurmasNaSala({ blocoSala }) {
             <th>Ano.Semestre</th>
             <th>Disciplina</th>
             <th>Professor</th>
+            <th>Dia</th>
             <th>Hora Início</th>
             <th>Duração</th>
           </tr>
@@ -56,6 +57,7 @@ function TurmasNaSala({ blocoSala }) {
                   {turma.disciplina.codigo} {turma.disciplina.nome}
                 </td>
                 <td>{turma.professor}</td>
+                <td>{turma.horarios.dia}</td>
                 <td>{turma.horarios.horaInicio}</td>
                 <td>{turma.horarios.duracao}</td>
                 <td>
