@@ -12,7 +12,7 @@ import { readData, updateData } from "../functions/CRUD_JSONBIN";
 // updateDB(options.JBVars.bins.infoProfessores);
 
 function PreferencesTable(props) {
-  const { preferencia1, setPreferencia1, preferencias1 } = props;
+  const { preferencia1, setPreferencia1 } = props;
 
   let infoPreferencias = options.constantValues.niveisDePreferencia;
   let dias = options.days;
@@ -100,23 +100,19 @@ function PreferencesTable(props) {
   function getLegenda() {
     // Contar as ocorrências de cada preferência
     let counts = [];
-    infoPreferencias.forEach((info) => {
-      const preferencia = info.nivel;
-      let count = 0;
-      Object.values(preferencias1).forEach((dias) => {
-        Object.values(dias).forEach((pref) => {
-          if (pref === preferencia) {
-            count++;
-          }
-        });
-      });
+    for (const info of infoPreferencias) {
       counts.push({
-        preferencia,
-        count,
-        description: info.descricao,
-        color: info.cor,
+        ...info,
+        count: 0,
       });
-    });
+    }
+
+    for (const [horario, dias] of Object.entries(preferencia1)) {
+      for (const [dia, preferencia] of Object.entries(dias)) {
+        counts[preferencia].count += 1;
+      }
+    }
+    console.log(counts);
 
     return (
       <div>
@@ -130,16 +126,16 @@ function PreferencesTable(props) {
             </tr>
           </thead>
           <tbody>
-            {counts.map(({ preferencia, count, description, color }, i) => {
+            {counts.map(({ cor, nivel, count, descricao }, i) => {
               return (
                 <tr
                   key={i}
                   style={{
-                    backgroundColor: color,
+                    backgroundColor: cor,
                     textAlign: "center",
                   }}
                 >
-                  <td>{preferencia}</td>
+                  <td>{nivel}</td>
                   <td>{count}</td>
                   <td
                     style={{
@@ -150,7 +146,7 @@ function PreferencesTable(props) {
                       paddingTop: 5,
                     }}
                   >
-                    {description}
+                    {descricao}
                   </td>
                 </tr>
               );
@@ -347,11 +343,8 @@ function Professores() {
           </tbody>
         </table>
         <PreferencesTable
-          professor1={professor}
-          setProfessor1={setProfessor}
           preferencia1={preferencia}
           setPreferencia1={setPreferencia}
-          preferencias1={preferencias}
         />
         <table
           className="table"
