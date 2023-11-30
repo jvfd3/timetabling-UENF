@@ -11,218 +11,43 @@ import AsyncSelect from "react-select/async";
 import { readData } from "../functions/CRUD_JSONBIN";
 
 const CRUDParticipants = () => {
+  // const [participants, setParticipants] = useState([]);
+
+  let participants = allLocalJsonData.dynamic.andamentoAlunos;
+
   return (
     <div className="participants-container">
       <div className="participants-title">
-        <div className="participants-number">{options.students}</div>
+        <div className="participants-number"></div>
         <div className="participants-icon">
           {/* Something went wrong here */}
-          <img
+          {/* <img
             className="participants-icon"
             src={assets.icons.students}
             alt=""
-          />
+          /> */}
         </div>
       </div>
       <div className="participants-list">
         <ul>
-          {options.students.map((student) => (
+          {/* {options.students.map((student) => (
             <li key={student.value}>
               <p className="participants-participant">
                 {student.value}: {student.label}
               </p>
             </li>
-          ))}
+          ))} */}
         </ul>
       </div>
     </div>
   );
 };
 
-const Timeperiod = (props) => {
-  const { horarioTP, sethorariosTP } = props;
-  // console.log("Timeperiod>horarioTP", horarioTP);
-  const [horario, setHorario] = useState({ ...horarioTP });
-
-  const [horaInicio, setHoraInicio] = useState(
-    options.hours.find((hour) => hour.value === horario.horaInicio)
-  );
-  // const [duracao, setDuracao] = useState(convertToValueLabel(horario.duracao));
-  // const [dia, setDia] = useState(convertToValueLabel(horario.dia));
-  // const [sala, setSala] = useState(convertToValueLabel(horario.dia));
-  // console.log(horaInicio);
-  return (
-    <div className="CRUD-timeperiod-properties">
-      <div className="CRUD-timeperiod-property">
-        Hora de início
-        <Select
-          placeholder="Hora início"
-          options={options.hours}
-          value={horaInicio}
-          onChange={setHoraInicio}
-          formatOptionLabel={({ value, label }) => `${value} (${label})`}
-        />
-      </div>
-      {/*       <div className="CRUD-timeperiod-property">
-        Tempo de duração
-        <Select placeholder="Duração" options={options.durations} />
-      </div>
-      <div className="CRUD-timeperiod-property">
-        Dia
-        <Select placeholder="Dia" options={options.days} />
-      </div>
-      <div className="CRUD-timeperiod-property">
-        Sala
-        <Select placeholder="Sala" options={options.rooms} />
-      </div> */}
-    </div>
-  );
-};
-
-function TimePeriods(props) {
-  const { horariosTPs, setHorariosTPs } = props;
-  console.log("TimePeriods>horariosTPs", horariosTPs[0]);
-  return (
-    <div className="CRUD-Class-properties-timeperiods">
-      <p className="CRUD-Class-properties-timeperiods-title">
-        Períodos de horários
-      </p>
-      <Timeperiod horarioTP={horariosTPs[0]} sethorariosTP={setHorariosTPs} />
-      <Timeperiod horarioTP={horariosTPs[1]} sethorariosTP={setHorariosTPs} />
-      <img
-        className="CRUD-Class-properties-NewTimePeriod-icon"
-        src={assets.icons.add}
-        alt=""
-      />
-    </div>
-  );
-}
-
-function convertToValueLabel(newValue) {
-  return { value: newValue, label: newValue };
-}
-
-// let DBdisciplinas = await readData(options.JBVars.bins.infoDisciplinasCC);
-let DBdisciplinas = allLocalJsonData.static.infoDisciplinasCC;
-
-function SelectDisciplina(props) {
-  const { disciplinaSD, setDisciplinaSD } = props;
-  // const [disciplina, setDisciplina] = useState(DBdisciplinas);
-  return (
-    <div>
-      <Select
-        isMulti={false}
-        isClearable={false}
-        isSearchable={true}
-        options={disciplinaSD}
-        value={disciplinaSD}
-        onChange={setDisciplinaSD}
-        placeholder="Disciplinas"
-        className="SelectDisciplinas"
-        getOptionLabel={(option) => option.nome}
-        getOptionValue={(option) => option.codigo}
-        formatOptionLabel={({ codigo, nome }) => `${codigo}: ${nome}`}
-      />
-    </div>
-  );
-}
-
-function SelecaoDeTurma() {
-  /* 2. Select de Ano
-   1. State de ano
-   2. Filtra todas as turmas para apenas mostrar as turmas daquele ano */
-
-  const [turmas, setTurmas] = useState(allLocalJsonData.dynamic.turmasTeste);
-  const [turma, setTurma] = useState(turmas[0]);
-  const [ano, setAno] = useState(convertToValueLabel(turma.ano));
-  const [semestre, setSemestre] = useState(convertToValueLabel(turma.semestre));
-  const [professor, setProfessor] = useState(
-    convertToValueLabel(turma.professor)
-  );
-  const [disciplina, setDisciplina] = useState(turma.disciplina);
-
-  const [horarios, setHorarios] = useState(turma.horarios);
-
-  function updateTurma(newTurmaValue) {
-    setTurma(newTurmaValue);
-    setAno(convertToValueLabel(newTurmaValue.ano));
-    setSemestre(convertToValueLabel(newTurmaValue.semestre));
-    setDisciplina({
-      codigo: newTurmaValue.disciplina.codigo,
-      nome: newTurmaValue.disciplina.nome,
-    });
-    setProfessor(convertToValueLabel(newTurmaValue.professor));
-    setHorarios(newTurmaValue.horarios);
-    console.log("SelecaoTurma>updateTurma>turma.horarios", turma.horarios[0]);
-    console.log("SelecaoTurma>updateTurma>horarios", horarios[0]);
-    console.log(
-      "SelecaoTurma>updateTurma>newTurmaValue.horarios",
-      newTurmaValue.horarios[0]
-    );
-  }
-
-  // console.log(turma);
-  return (
-    <div style={{ color: "#000000" }}>
-      <div>
-        <Select
-          placeholder="Turma"
-          options={turmas}
-          value={turma}
-          onChange={(newTurma) => {
-            updateTurma(newTurma);
-          }}
-          getOptionLabel={(turma) => turma.disciplina.codigo}
-          getOptionValue={(turma) => turma.professor}
-          formatOptionLabel={(turma) =>
-            `${turma.ano}.${turma.semestre} - ${turma.disciplina.codigo} - ${turma.professor}`
-          }
-        />
-        <div style={{ display: "flex", color: "#000000" }}>
-          <Select
-            placeholder="Ano"
-            options={options.years}
-            value={ano}
-            onChange={(newValue) => setAno(newValue)}
-          />
-          <Select
-            placeholder="Semestre"
-            options={options.semesters}
-            value={semestre}
-            onChange={(newValue) => setSemestre(newValue)}
-          />
-        </div>
-        <SelectDisciplina
-          disciplinaSD={disciplina}
-          setDisciplinaSd={setDisciplina}
-        />
-        {/* <Select placeholder="Disciplinas" /> */}
-        <Select
-          placeholder="Professor"
-          value={professor}
-          onChange={(newValue) => setProfessor(newValue)}
-          options={options.professors}
-        />
-      </div>
-      <div className="CRUD-Class-properties-timeperiods">
-        <p className="CRUD-Class-properties-timeperiods-title">
-          Períodos de horários
-        </p>
-        <Timeperiod horarioTP={horarios[0]} sethorariosTP={setHorarios} />
-        <Timeperiod horarioTP={horarios[1]} sethorariosTP={setHorarios} />
-        <img
-          className="CRUD-Class-properties-NewTimePeriod-icon"
-          src={assets.icons.add}
-          alt=""
-        />
-      </div>
-    </div>
-  );
-}
-
 function DadosTurma(props) {
   const { turma2, setTurma2 } = props;
   let infoProfessores = allLocalJsonData.static.infoProfessores;
+  // let DBdisciplinas = await readData(options.JBVars.bins.infoDisciplinasCC);
+  let DBdisciplinas = allLocalJsonData.static.infoDisciplinasCC;
   return (
     <div>
       <h2>Dados</h2>
@@ -266,8 +91,8 @@ function DadosTurma(props) {
                 onChange={(newValue) => {
                   setTurma2({ ...turma2, disciplina: newValue });
                 }}
-                getOptionLabel={(option) => option.nome}
-                getOptionValue={(option) => option.codigo}
+                getOptionLabel={(optionDiscip) => optionDiscip.nome}
+                getOptionValue={(optionDiscip) => optionDiscip.codigo}
                 formatOptionLabel={({ codigo, nome }) => `${codigo}: ${nome}`}
               />
             </td>
@@ -283,8 +108,8 @@ function DadosTurma(props) {
                 value={infoProfessores.find(
                   (professor) => professor.nome === turma2.professor
                 )}
-                getOptionValue={(option) => option.nome}
-                getOptionLabel={(option) => option.laboratorio}
+                getOptionValue={(optionProf) => optionProf.nome}
+                getOptionLabel={(optionProf) => optionProf.laboratorio}
                 onChange={(newValue) => {
                   setTurma2({ ...turma2, professor: newValue.nome });
                 }}
@@ -302,6 +127,7 @@ function DadosTurma(props) {
 
 function HorariosTurma(props) {
   const { turma1, setTurma1 } = props;
+  let infoSalas = allLocalJsonData.static.infoSalas;
 
   function removerHorario(id) {
     let newTurma = { ...turma1 };
@@ -315,11 +141,12 @@ function HorariosTurma(props) {
     let newTurma = { ...turma1 };
     let newHorarios = [...newTurma.horarios];
     newHorarios.push({
-      sala: "XXX",
-      dia: "XXX",
-      horaInicio: 123,
-      duracao: 123,
+      sala: null,
+      dia: null,
+      horaInicio: null,
+      duracao: null,
     });
+
     newTurma.horarios = newHorarios;
     setTurma1(newTurma);
     // Denser: (that is actually less dense) Faster? Well, I don't care for it now.
@@ -335,6 +162,17 @@ function HorariosTurma(props) {
         },
       ],
     }); */
+  }
+
+  function changeThisHorario(id, newHorarioInicio) {
+    let newTurma = { ...turma1 };
+    let newHorarios = [...newTurma.horarios];
+    newHorarios[id] = {
+      ...newHorarios[id],
+      horaInicio: newHorarioInicio.value,
+    };
+    newTurma.horarios = newHorarios;
+    setTurma1(newTurma);
   }
 
   return (
@@ -353,15 +191,98 @@ function HorariosTurma(props) {
           </tr>
         </thead>
         <tbody>
-          {turma1.horarios.map((horario, i) => {
+          {turma1.horarios.map((horario, id) => {
             return (
-              <tr key={i}>
-                <td>{horario.horaInicio}</td>
-                <td>{horario.duracao}</td>
-                <td>{horario.dia}</td>
-                <td>{horario.sala}</td>
+              <tr key={id}>
                 <td>
-                  <button key={i} onClick={() => removerHorario(i)}>
+                  <Select
+                    placeholder="Hora início"
+                    options={options.hours}
+                    value={options.hours.find(
+                      (hour) => hour.value === horario.horaInicio
+                    )}
+                    onChange={(newValue) => {
+                      changeThisHorario(id, newValue);
+                    }}
+                    formatOptionLabel={({ value, label }, { context }) => {
+                      return context === "value"
+                        ? `${value}`
+                        : `(${label}) ${value}`;
+                    }}
+                  />
+                </td>
+                <td>
+                  <Select
+                    placeholder="Duração"
+                    options={options.durations}
+                    value={options.durations.find(
+                      (duration) => duration.value === horario.duracao
+                    )}
+                    onChange={(newDuracao) => {
+                      let newTurma = { ...turma1 };
+                      let newHorarios = [...newTurma.horarios];
+                      newHorarios[id] = {
+                        ...newHorarios[id],
+                        duracao: newDuracao.value,
+                      };
+                      newTurma.horarios = newHorarios;
+                      setTurma1(newTurma);
+                    }}
+                    formatOptionLabel={({ value, label }, { context }) => {
+                      return context === "value"
+                        ? `${value}`
+                        : `(${label}) ${value}`;
+                    }}
+                  />
+                </td>
+                <td>
+                  <Select
+                    placeholder="Dia"
+                    options={options.days}
+                    value={options.days.find(
+                      (day) => day.value === horario.dia
+                    )}
+                    onChange={(newDia) => {
+                      let newTurma = { ...turma1 };
+                      let newHorarios = [...newTurma.horarios];
+                      newHorarios[id] = {
+                        ...newHorarios[id],
+                        dia: newDia.value,
+                      };
+                      newTurma.horarios = newHorarios;
+                      setTurma1(newTurma);
+                    }}
+                    formatOptionLabel={({ value, label }, { context }) => {
+                      return context === "value" ? `${value}` : `${label}`;
+                    }}
+                  />
+                </td>
+                <td>
+                  <Select
+                    placeholder="Sala"
+                    options={infoSalas}
+                    value={infoSalas.find(
+                      (sala) => sala.blocoSala === horario.sala
+                    )}
+                    onChange={(newSala) => {
+                      let newTurma = { ...turma1 };
+                      let newHorarios = [...newTurma.horarios];
+                      newHorarios[id] = {
+                        ...newHorarios[id],
+                        sala: newSala.blocoSala,
+                      };
+                      newTurma.horarios = newHorarios;
+                      setTurma1(newTurma);
+                    }}
+                    getOptionValue={(optionSala) => optionSala.blocoSala}
+                    getOptionLabel={(optionSala) => optionSala.capacidade}
+                    formatOptionLabel={({ blocoSala, capacidade }) =>
+                      `(${capacidade}) ${blocoSala}`
+                    }
+                  />
+                </td>
+                <td>
+                  <button key={id} onClick={() => removerHorario(id)}>
                     Remover
                   </button>
                 </td>
@@ -393,20 +314,22 @@ function Turmas() {
   }, [turma]);
 
   return (
-    <div className="CRUD-Class-properties" style={{ color: "black" }}>
-      <Select
-        placeholder="Turma"
-        options={turmas}
-        value={turma}
-        onChange={setTurma}
-        getOptionLabel={(turma) => turma.disciplina.codigo}
-        getOptionValue={(turma) => turma.professor}
-        formatOptionLabel={(turma) =>
-          `(id${turma.id}) ${turma.ano}.${turma.semestre} - ${turma.disciplina.codigo} - ${turma.professor}`
-        }
-      />
-      <DadosTurma turma2={turma} setTurma2={setTurma} />
-      <HorariosTurma turma1={turma} setTurma1={setTurma} />
+    <div className="CRUD-Class-TurmaPeriodo">
+      <div className="CRUD-Class-properties" style={{ color: "black" }}>
+        <Select
+          placeholder="Turma"
+          options={turmas}
+          value={turma}
+          onChange={setTurma}
+          getOptionLabel={(turma) => turma.disciplina.codigo}
+          getOptionValue={(turma) => turma.professor}
+          formatOptionLabel={(turma) =>
+            `(id${turma.id}) ${turma.ano}.${turma.semestre} - ${turma.disciplina.codigo} - ${turma.professor}`
+          }
+        />
+        <DadosTurma turma2={turma} setTurma2={setTurma} />
+        <HorariosTurma turma1={turma} setTurma1={setTurma} />
+      </div>
     </div>
   );
 }
@@ -416,9 +339,7 @@ function CRUDclass() {
     <div className="background">
       <CRUDPageSelection defaultValue={options.CRUD.crud_turmas} />
       <div className="CRUD-lateral">
-        <div className="CRUD-contain-components">
-          <Turmas />
-        </div>
+        <Turmas />
       </div>
     </div>
   );
