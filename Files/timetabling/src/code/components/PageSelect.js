@@ -14,11 +14,16 @@ const CRUDPageSelection = (props) => {
     navigate(selectedOption.url_path);
   };
 
+  // Filtrar as opções para remover Not Found e Main CRUD
+  const filteredOptions = options.CRUD_list.filter(
+    (option) => option.label !== "Not Found" && option.label !== "Main CRUD"
+  );
+
   return (
     <div className="CRUD-page-selection">
       <Select
         placeholder={"Selecionar CRUD"}
-        options={options.CRUD_list}
+        options={filteredOptions} // Use as opções filtradas aqui
         className="SelectList-base"
         defaultValue={props.defaultValue}
         formatOptionLabel={formatOptionLabel}
