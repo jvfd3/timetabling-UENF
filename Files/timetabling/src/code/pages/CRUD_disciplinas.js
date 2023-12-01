@@ -147,13 +147,6 @@ function DisciplinaCard() {
       </table>
       <div></div>
       <div></div>
-
-      {/*
-      <MySelectList
-        newPlaceHolder="YYY"
-        options={options.professors}
-        isMulti={true}
-      /> */}
     </div>
   );
 }
