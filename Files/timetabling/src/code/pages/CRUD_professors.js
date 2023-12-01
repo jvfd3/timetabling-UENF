@@ -248,8 +248,8 @@ function SelectDisciplinas(props) {
 function Professores() {
   let localData = allLocalJsonData.static.infoProfessores;
   const [professores, setProfessores] = useState(localData);
-  // const [professor, setProfessor] = useState(localData[2]); //Tang
   const [professor, setProfessor] = useState(professores[0]); //Rivera
+  // const [professor, setProfessor] = useState(localData[2]); //Tang
   // const [professor, setProfessor] = useState(professores[7]); //Oscar
   // const [professor, setProfessor] = useState(professores[16]); //Marcenilda
   // console.log("professoresRS:", professores)
@@ -306,6 +306,7 @@ function Professores() {
 
     fetchData(); */
   }, []);
+
   return (
     <div className="CRUD-outro">
       <div className="CRUD-docentes-properties">
