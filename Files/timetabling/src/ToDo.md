@@ -1,7 +1,7 @@
 # Things that I'd like to do
 
 - [ ] Criar uma página com uma tabela que ordene as disciplinas por nome, código, professor, conflitos, demanda e demanda estimada
-- [ ] Usar um banco de dados simples para armazenar as informações das disciplinas
+- [x] Usar um banco de dados simples para armazenar as informações das disciplinas
 - [ ] Definir paletas de cores
   - [ ] Definir os códigos de cores como:
     - [ ] Verde: sem conflitos
@@ -28,6 +28,8 @@
 - [ ] Reformular o Options para um JSON que não esteja restrito a Value e Label
   - [ ] Separar também o que é option fixa
 - [ ] Ajustar o GitHub Pages
+  - [ ] Refatorar todo o sistema de rotas para encaminhamento de rotas individuais para todos os itens
+- [ ] Padronizar o visual do código
 
 ## Other things to do
 
@@ -45,7 +47,7 @@
 ### Visualizações
 
 - [ ] Falta fazer a adição e remoção de algumas informações.
-- [ ] Tabela que apresenta a preferência dos professores
+- [X] Tabela que apresenta a preferência dos professores
 - [ ] Tabela de andamento das disciplinas dos alunos. Será que consigo botar ela por cima de uma imagem da grade?
 - [ ] Em cada disciplina, mostrar a lista dos professores que a ministram.
 
