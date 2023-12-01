@@ -124,5 +124,33 @@
     "horarios": [ { "sala": "P3-105", "dia": "TER", "horaInicio": 12, "duracao": 2 },
                   { "sala": "P3-106", "dia": "QUI", "horaInicio": 13, "duracao": 2 }],
     "alunos": { "estimativa": 12, "demandando": ["00114110001", "00115110002", "00115110003"], "inscritos": ["00116110007", "00116110008"]}
+  },
+  {
+    "id": 18, "ano": 2010, "semestre": 2, "professor": "Fermín Alfredo Tang Montané",
+    "disciplina": {"codigo": "INF01104", "nome": "Lógica Digital"},
+    "horarios": [ { "sala": "P3-105", "dia": "TER", "horaInicio": 12, "duracao": 2 },
+                  { "sala": "P3-106", "dia": "QUI", "horaInicio": 13, "duracao": 2 }],
+    "alunos": { "estimativa": 12, "demandando": ["00114110001", "00115110002", "00115110003"], "inscritos": ["00116110007", "00116110008"]}
+  },
+  {
+    "id": 19, "ano": 2010, "semestre": 2, "professor": "Fermín Alfredo Tang Montané",
+    "disciplina": {"codigo": "MAT01203", "nome": "Cálculo Diferencial e Integral II"},
+    "horarios": [ { "sala": "P3-105", "dia": "TER", "horaInicio": 12, "duracao": 2 },
+                  { "sala": "P3-105", "dia": "TER", "horaInicio": 13, "duracao": 2 }],
+    "alunos": { "estimativa": 12, "demandando": ["00114110001", "00115110002", "00115110003"], "inscritos": ["00116110007", "00116110008"]}
+  },
+  {
+    "id": 20, "ano": 2010, "semestre": 2, "professor": "Fermín Alfredo Tang Montané",
+    "disciplina": {"codigo": "INF01104", "nome": "Lógica Digital"},
+    "horarios": [ { "sala": "P3-105", "dia": "TER", "horaInicio": 13, "duracao": 2 },
+                  { "sala": "P3-105", "dia": "TER", "horaInicio": 13, "duracao": 2 }],
+    "alunos": { "estimativa": 12, "demandando": ["00114110001", "00115110002", "00115110003"], "inscritos": ["00116110007", "00116110008"]}
+  },
+  {
+    "id": 21, "ano": 2010, "semestre": 2, "professor": "Fermín Alfredo Tang Montané",
+    "disciplina": {"codigo": "INF01104", "nome": "Lógica Digital"},
+    "horarios": [ { "sala": "P3-105", "dia": "TER", "horaInicio": 12, "duracao": 2 },
+                  { "sala": "P3-105", "dia": "TER", "horaInicio": 13, "duracao": 2 }],
+    "alunos": { "estimativa": 12, "demandando": ["00114110001", "00115110002", "00115110003"], "inscritos": ["00116110007", "00116110008"]}
   }
 ]
