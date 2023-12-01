@@ -16,6 +16,11 @@ const CRUDParticipants = (props) => {
   // const [participants, setParticipants] = useState([]);
 
   let andamentoAlunos = allLocalJsonData.dynamic.andamentoAlunos;
+  const [numero, setNumero] = useState(0);
+
+  const handleInputChange = (event) => {
+    setNumero(Number(event.target.value));
+  };
 
   function getCurrentSubjectsPerStudent(alunos) {
     /*  Explicação dessa função
@@ -82,9 +87,35 @@ const CRUDParticipants = (props) => {
 
   return (
     <div className="participants-container">
-      <div className="participants-title">
-        <h3>Número de alunos {`(${alunosDessaDisciplina.length})`}</h3>
-      </div>
+      <table>
+        <thead></thead>
+        <tbody style={{}}>
+          <tr>
+            <th style={{ textAlign: "left" }}>Demanda de aprovados</th>
+            <td>123</td>
+          </tr>
+          <tr>
+            <th style={{ textAlign: "left" }}>Demanda de reprovados</th>
+            <td>321</td>
+          </tr>
+          <tr>
+            <th style={{ textAlign: "left" }}>Demanda estimada</th>
+            <td>
+              <input
+                style={{ width: 40 }}
+                type="number"
+                value={numero}
+                onChange={handleInputChange}
+                maxLength="3"
+              />
+            </td>
+          </tr>
+          <tr>
+            <th style={{ textAlign: "left" }}>Inscritos</th>
+            <td>{alunosDessaDisciplina.length}</td>
+          </tr>
+        </tbody>
+      </table>
       <div className="participants-list">
         <table>
           <thead>
@@ -265,9 +296,9 @@ function HorariosTurma(props) {
       <table>
         <thead>
           <tr>
+            <th>Dia</th>
             <th>Hora de início</th>
             <th>Duração</th>
-            <th>Dia</th>
             <th>Sala</th>
           </tr>
         </thead>
@@ -275,6 +306,28 @@ function HorariosTurma(props) {
           {turma1.horarios.map((horario, id) => {
             return (
               <tr key={id}>
+                <td>
+                  <Select
+                    placeholder="Dia"
+                    options={options.days}
+                    value={options.days.find(
+                      (day) => day.value === horario.dia
+                    )}
+                    onChange={(newDia) => {
+                      let newTurma = { ...turma1 };
+                      let newHorarios = [...newTurma.horarios];
+                      newHorarios[id] = {
+                        ...newHorarios[id],
+                        dia: newDia.value,
+                      };
+                      newTurma.horarios = newHorarios;
+                      setTurma1(newTurma);
+                    }}
+                    formatOptionLabel={({ value, label }, { context }) => {
+                      return context === "value" ? `${value}` : `${label}`;
+                    }}
+                  />
+                </td>
                 <td>
                   <Select
                     placeholder="Hora início"
@@ -313,28 +366,6 @@ function HorariosTurma(props) {
                       return context === "value"
                         ? `${value}`
                         : `(${label}) ${value}`;
-                    }}
-                  />
-                </td>
-                <td>
-                  <Select
-                    placeholder="Dia"
-                    options={options.days}
-                    value={options.days.find(
-                      (day) => day.value === horario.dia
-                    )}
-                    onChange={(newDia) => {
-                      let newTurma = { ...turma1 };
-                      let newHorarios = [...newTurma.horarios];
-                      newHorarios[id] = {
-                        ...newHorarios[id],
-                        dia: newDia.value,
-                      };
-                      newTurma.horarios = newHorarios;
-                      setTurma1(newTurma);
-                    }}
-                    formatOptionLabel={({ value, label }, { context }) => {
-                      return context === "value" ? `${value}` : `${label}`;
                     }}
                   />
                 </td>
