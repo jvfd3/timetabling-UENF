@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../CSS/CRUD_professors.css";
+import "../CSS/CRUD_professores.css";
 import "../CSS/defaultStyle.css";
 import options from "../temp/options";
 import CRUDPageSelection from "../components/PageSelect";

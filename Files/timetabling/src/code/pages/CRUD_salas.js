@@ -1,4 +1,4 @@
-import "../CSS/CRUD_rooms.css";
+import "../CSS/CRUD_salas.css";
 import "../CSS/defaultStyle.css";
 import assets from "../../assets/imagesImport";
 import options from "../temp/options";
@@ -113,10 +113,7 @@ function Salas() {
 
   return (
     <div className="CRUD-outro">
-      <div
-        style={{ backgroundColor: "#996633", padding: 20 }}
-        className="CRUD-properties"
-      >
+      <div style={{ padding: 20 }} className="CRUD-properties">
         <Select
           className="CRUD-room-select"
           options={salas}
@@ -137,8 +134,8 @@ function Salas() {
 function CRUDrooms() {
   return (
     <div className="background">
+      <CRUDPageSelection defaultValue={options.CRUD.crud_salas} />
       <div className="CRUD-contain-components">
-        <CRUDPageSelection defaultValue={options.CRUD.crud_salas} />
         <Salas />
       </div>
     </div>

@@ -1,4 +1,4 @@
-import "../CSS/CRUD_class.css";
+import "../CSS/CRUD_turmas.css";
 import "../CSS/defaultStyle.css";
 import "../CSS/participantList.css";
 import options from "../temp/options";

@@ -3,10 +3,10 @@ import options from "./temp/options";
 
 // Page imports
 import CRUDdisciplinas from "./pages/CRUD_disciplinas";
-import CRUDprofessors from "./pages/CRUD_professors";
-import CRUDstudents from "./pages/CRUD_students";
-import CRUDrooms from "./pages/CRUD_rooms";
-import CRUDclass from "./pages/CRUD_class";
+import CRUDprofessors from "./pages/CRUD_professores";
+import CRUDstudents from "./pages/CRUD_alunos";
+import CRUDrooms from "./pages/CRUD_salas";
+import CRUDclass from "./pages/CRUD_turmas";
 import MainCRUD from "./pages/CRUD_main";
 import MainPage from "./pages/mainpage";
 import NoMatch from "./pages/NoPage";

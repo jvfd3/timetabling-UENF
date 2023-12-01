@@ -1,4 +1,4 @@
-import "../CSS/CRUD_students.css";
+import "../CSS/CRUD_alunos.css";
 import "../CSS/defaultStyle.css";
 import React, { useState } from "react";
 import options from "../temp/options";
