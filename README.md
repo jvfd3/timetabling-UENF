@@ -96,8 +96,8 @@
 
 ### 01/12/2023 - O que quero fazer hoje?
 
-- [ ] Remover Main CRUD e Not found da lista de páginas
-- [ ] Scroll na seleção de página
+- [X] Remover Main CRUD e Not found da lista de páginas
+- [X] Scroll na seleção de página
 - [ ] Mínima padronização de páginas
   - [ ] Salas
     - [ ] Mesma cor de fundo
