@@ -96,6 +96,20 @@
 
 ### 01/12/2023 - O que quero fazer hoje?
 
+- [ ] Remover Main CRUD e Not found da lista de páginas
+- [ ] Scroll na seleção de página
+- [ ] Mínima padronização de páginas
+  - [ ] Salas
+    - [ ] Mesma cor de fundo
+    - [ ] TH centralizado na esquerda
+  - [ ] Turmas
+    - [ ] Nova cor do card
+  - [ ] Alunos
+    - [ ] Mesma cor dos outros
+    - [ ] Remover dois pontos
+  - [ ] Disciplinas
+    - [ ] Mesmo padrão dos outros
+    - [ ] Período esperado no lado direito de código nome
 - [ ] Trabalhar com conflitos
   - [ ] Converter a página padrão em uma página de testes
   - [ ] Adicionar variáveis globais de ano e semestre
