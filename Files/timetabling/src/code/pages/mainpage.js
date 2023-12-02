@@ -2,11 +2,13 @@ import React from "react";
 import options from "../temp/options";
 import CRUDPageSelection from "../components/PageSelect";
 import "../CSS/defaultStyle.css";
+import TabelaDeConflitos from "../components/TabelaDeConflitos";
 
 function Main() {
   return (
     <div className="CRUDContainComponents">
       <h1>Welcome to my monograph's website!</h1>
+      <TabelaDeConflitos />
       <p>This is the main page.</p>
       <h4>Atalhos</h4>
       <ul>
