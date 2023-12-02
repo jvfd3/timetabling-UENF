@@ -121,6 +121,59 @@
 | Aluno     | Alocação      | 2: Resolver é opcional | Matrícula, salas, por sala (dia, hora, duracao)                    | 1. Cor do texto do aluno, dia, hora, duracao                                       | Aluno ainda não pode fazer essa disciplina                    |
 | Aluno     | Demanda       | 3: dá para contornar?  | (é para checar se o aluno tem os pré-requisitos)                   | 1. Cor do texto do aluno, label disciplina                                         | Aluno tá inscrito em outra turma nesse mesmo período de tempo |
 
+### 02/12/2023
+
+- [X] Ajuste do CSS e padronização do Código
+- [ ] Conflitos
+
+#### 1. Um professor em duas aulas ao mesmo tempo
+
+1. Aquisição dos dados
+   1. Lista de professores
+   2. Lista de aulas
+2. Seleção dos valores base
+   1. Selecionar um ano
+   2. Selecionar um semestre
+   3. Selecionar um professor
+      1. Criar uma lista com os nomes de todos professores
+      2. Selecionar o nome do primeiro professor
+3. Filtragem dos dados
+   1. Filtrar as aulas do ano e semestre selecionados
+   2. Filtrar as aulas do professor selecionado
+4. Checar o conflito
+   1. Para cada turma, que o professor ministra
+      1. Obter dia, início e duração
+      2. Preencher tabela de ocupação
+         1. Para cada dia
+            1. ir na hora de início e marcar como ocupado
+            2. Fazer o mesmo para os {duração - 1} próximos horários
+         2. Se o horário já estiver ocupado, marcar ambos como conflito
+            1. Adiciona a uma lista o conjunto de horários que estão em conflito
+5. Mostrar os conflitos
+   1. console.log(lista de conflitos)
+
+Observações:
+
+- A lista de professores está presente em `allLocalJsonData.static.infoProfessores`, que é uma lista de objetos.
+ - Cada objeto representa um professor com os seguintes valores:
+  - `laboratorio`: string
+  - `curso`: string
+  - `nome`: string
+  - `disciplinas`: lista de string
+- A lista de aulas está presente em `allLocalJsonData.dynamic.turmasTeste`.
+  - Cada objeto representa uma turma com os seguintes valores:
+    - `id`: string
+    - `ano`: string
+    - `semestre`: string
+    - `professor`: string
+    - `disciplina`: string
+    - `horarios`: lista de objetos
+      - Cada objeto representa um horário com os seguintes valores:
+        - `sala`: string
+        - `dia`: string
+        - `horaInicio`: string
+        - `duracao`: string
+
 ## Links
 
 - [Root][base-link]
