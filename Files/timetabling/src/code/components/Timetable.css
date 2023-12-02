@@ -1,0 +1,27 @@
+.HorariosHeader {
+    background-color: "#64584A";
+    padding: 10px;
+}
+
+.HeaderDias {
+    background-color: "#FFBC58";
+    padding-left: 10px;
+}
+
+.HorariosSideHeader {
+    background-color: "#FFBC58";
+    font-weight: "bold";
+    font-size: "1.0em";
+    padding-top: 5px;
+}
+
+.TimetableRow {
+    color: "#000000";
+    text-align: "center";
+}
+
+.TimetableCell {
+    background-color: antiquewhite;
+    text-align: center;
+    cursor: pointer;
+}
