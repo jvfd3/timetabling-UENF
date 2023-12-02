@@ -68,6 +68,38 @@ function Disciplinas() {
     return correctPeriodo;
   }
 
+  function DisciplinasSelection() {
+    function scrollThroughDisciplinas(event) {
+      let diretion = event.deltaY > 0 ? "down" : "up";
+      let index = disciplinas.findIndex(
+        (oneOfDisciplinas) => oneOfDisciplinas.codigo === disciplina.codigo
+      );
+      index += diretion === "up" ? -1 : 1;
+      index = index < 0 ? disciplinas.length - 1 : index;
+      index = index >= disciplinas.length ? 0 : index;
+      let newOption = disciplinas[index];
+      setDisciplina(newOption);
+    }
+    return (
+      <div className="itemSelectionBar" onWheel={scrollThroughDisciplinas}>
+        <Select
+          placeholder={"Disciplina"}
+          value={disciplina}
+          options={disciplinas}
+          onChange={setDisciplina}
+          // formatOptionLabel={props.formatOptionLabel}
+          isMulti={false}
+          className="SelectList-disciplinas"
+          getOptionValue={(option) => option.codigo}
+          getOptionLabel={(option) => option.nome}
+          formatOptionLabel={({ periodo, codigo, nome }) =>
+            `(${periodo}) ${codigo}: ${nome}`
+          }
+        />
+      </div>
+    );
+  }
+
   function InformacoesBaseDaDisciplina() {
     return (
       <div className="showBasicDataCard">
@@ -108,23 +140,9 @@ function Disciplinas() {
     );
   }
 
-  // console.log("Disciplina: ", disciplina);
   return (
-    <div>
-      <Select
-        placeholder={"Disciplina"}
-        value={disciplina}
-        options={disciplinas}
-        onChange={setDisciplina}
-        // formatOptionLabel={props.formatOptionLabel}
-        isMulti={false}
-        className="SelectList-disciplinas"
-        getOptionValue={(option) => option.codigo}
-        getOptionLabel={(option) => option.nome}
-        formatOptionLabel={({ periodo, codigo, nome }) =>
-          `(${periodo}) ${codigo}: ${nome}`
-        }
-      />
+    <div className="CRUDContainComponents">
+      <DisciplinasSelection />
       <InformacoesBaseDaDisciplina />
 
       <table>
@@ -165,9 +183,7 @@ function CRUDDisciplinas() {
   return (
     <div className="background">
       <CRUDPageSelection defaultValue={options.CRUD.crud_disciplinas} />
-      <div className="CRUDContainComponents">
-        <Disciplinas />
-      </div>
+      <Disciplinas />
     </div>
   );
 }

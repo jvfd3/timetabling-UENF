@@ -74,8 +74,19 @@ function Professores() {
   }, []);
 
   function ProfessorSelection() {
+    function scrollThroughProfessores(event) {
+      let diretion = event.deltaY > 0 ? "down" : "up";
+      let index = professores.findIndex(
+        (oneOfProfessores) => oneOfProfessores.nome === professor.nome
+      );
+      index += diretion === "up" ? -1 : 1;
+      index = index < 0 ? professores.length - 1 : index;
+      index = index >= professores.length ? 0 : index;
+      let newOption = professores[index];
+      setProfessor(newOption);
+    }
     return (
-      <div className="itemSelectionBar">
+      <div className="itemSelectionBar" onWheel={scrollThroughProfessores}>
         <Select
           className="professorSelect"
           options={professores}

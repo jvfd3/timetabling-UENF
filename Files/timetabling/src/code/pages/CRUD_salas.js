@@ -14,6 +14,35 @@ function Salas() {
   const [salas, setSalas] = useState(salasFromJson);
   const [sala, setSala] = useState(salas[0]);
 
+  function SalaSelection() {
+    function scrollThroughSalas(event) {
+      let diretion = event.deltaY > 0 ? "down" : "up";
+      let index = salas.findIndex(
+        (oneOfSalas) => oneOfSalas.blocoSala === sala.blocoSala
+      );
+      index += diretion === "up" ? -1 : 1;
+      index = index < 0 ? salas.length - 1 : index;
+      index = index >= salas.length ? 0 : index;
+      let newOption = salas[index];
+      setSala(newOption);
+    }
+    return (
+      <div className="itemSelectionBar" onWheel={scrollThroughSalas}>
+        <Select
+          className="itemSelectionBar"
+          options={salas}
+          value={sala}
+          onChange={setSala}
+          getOptionValue={(option) => option.blocoSala}
+          getOptionLabel={(option) => option.capacidade}
+          formatOptionLabel={(sala) =>
+            `(${sala.capacidade}) ${sala.bloco}-${sala.codigo}`
+          }
+        />
+      </div>
+    );
+  }
+
   function SalaCard(props) {
     let { currentSala } = props;
 
@@ -122,17 +151,7 @@ function Salas() {
 
   return (
     <div className="CRUDContainComponents">
-      <Select
-        className="itemSelectionBar"
-        options={salas}
-        value={sala}
-        onChange={setSala}
-        getOptionValue={(option) => option.blocoSala}
-        getOptionLabel={(option) => option.capacidade}
-        formatOptionLabel={(sala) =>
-          `(${sala.capacidade}) ${sala.bloco}-${sala.codigo}`
-        }
-      />
+      <SalaSelection />
       <SalaCard currentSala={sala} />
     </div>
   );

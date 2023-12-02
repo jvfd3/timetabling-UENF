@@ -27,18 +27,31 @@ function Turmas() {
   }, [turma]);
 
   function TurmaSelection() {
+    function scrollThroughAlunos(event) {
+      let diretion = event.deltaY > 0 ? "down" : "up";
+      let index = turmas.findIndex(
+        (oneOfTurmas) => oneOfTurmas.id === turma.id
+      );
+      index += diretion === "up" ? -1 : 1;
+      index = index < 0 ? turmas.length - 1 : index;
+      index = index >= turmas.length ? 0 : index;
+      let newOption = turmas[index];
+      setTurma(newOption);
+    }
     return (
-      <Select
-        className="itemSelectionBar"
-        options={turmas}
-        value={turma}
-        onChange={setTurma}
-        getOptionLabel={(turma) => turma.disciplina.codigo}
-        getOptionValue={(turma) => turma.professor}
-        formatOptionLabel={(turma) =>
-          `(id${turma.id}) ${turma.ano}.${turma.semestre} - ${turma.disciplina.codigo} - ${turma.professor}`
-        }
-      />
+      <div className="itemSelectionBar" onWheel={scrollThroughAlunos}>
+        <Select
+          className="itemSelectionBar"
+          options={turmas}
+          value={turma}
+          onChange={setTurma}
+          getOptionLabel={(turma) => turma.disciplina.codigo}
+          getOptionValue={(turma) => turma.professor}
+          formatOptionLabel={(turma) =>
+            `(id${turma.id}) ${turma.ano}.${turma.semestre} - ${turma.disciplina.codigo} - ${turma.professor}`
+          }
+        />
+      </div>
     );
   }
 

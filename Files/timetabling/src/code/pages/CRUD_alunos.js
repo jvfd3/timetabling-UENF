@@ -1,6 +1,6 @@
 import "../CSS/defaultStyle.css";
 import "../CSS/CRUD_alunos.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import options from "../temp/options";
 import CRUDPageSelection from "../components/PageSelect";
 import Select from "react-select";
@@ -33,8 +33,19 @@ function Alunos() {
   const [aluno, setAluno] = useState(dados_agrupados[38]); // JVFD
 
   function StudentSelection(props) {
+    function scrollThroughAlunos(event) {
+      let diretion = event.deltaY > 0 ? "down" : "up";
+      let index = dados_agrupados.findIndex(
+        (oneOfAlunos) => oneOfAlunos.matricula === aluno.matricula
+      );
+      index += diretion === "up" ? -1 : 1;
+      index = index < 0 ? dados_agrupados.length - 1 : index;
+      index = index >= dados_agrupados.length ? 0 : index;
+      let newOption = dados_agrupados[index];
+      setAluno(newOption);
+    }
     return (
-      <div className="itemSelectionBar">
+      <div className="itemSelectionBar" onWheel={scrollThroughAlunos}>
         <Select
           className="StudentSelection"
           // defaultValue={props.default_student}

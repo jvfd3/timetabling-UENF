@@ -20,7 +20,7 @@ const CRUDPageSelection = (props) => {
     (option) => option.label !== "Not Found" && option.label !== "Main CRUD"
   );
 
-  function chagePageByScrolling(event) {
+  function changePageByScrolling(event) {
     let diretion = event.deltaY > 0 ? "down" : "up";
     // console.log("Scrolling ", diretion);
     let index = filteredOptions.findIndex(
@@ -60,7 +60,7 @@ const CRUDPageSelection = (props) => {
   }, []);
 
   return (
-    <div className="CRUDPageSelection" onWheel={chagePageByScrolling}>
+    <div className="CRUDPageSelection" onWheel={changePageByScrolling}>
       <Select
         className="SelectList"
         placeholder={"Selecionar CRUD"}
