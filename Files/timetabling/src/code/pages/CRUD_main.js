@@ -7,8 +7,8 @@ import CRUDPageSelection from "../components/PageSelect";
 function MainCRUD() {
   return (
     <div className="background">
-      <div className="CRUD-contain-components">
-        <CRUDPageSelection defaultValue={options.CRUD.crud} />
+      <CRUDPageSelection defaultValue={options.CRUD.crud} />
+      <div className="CRUDContainComponents">
         <img className="CS-grid-image" src={assets.gridCS} alt="Logo" />
       </div>
     </div>

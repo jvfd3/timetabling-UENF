@@ -30,6 +30,16 @@
 - [ ] Ajustar o GitHub Pages
   - [ ] Refatorar todo o sistema de rotas para encaminhamento de rotas individuais para todos os itens
 - [ ] Padronizar o visual do código
+- [ ] Estou tentando deixar tudo com o seguinte Layout, então provavelmente o CRUDPageSelection poderá ser externalizado.
+
+```javascript
+    <div className="background">
+      <CRUDPageSelection defaultValue={options.CRUD.crud_disciplinas} />
+      <div className="CRUDContainComponents">
+        <Disciplinas />
+      </div>
+    </div>
+```
 
 ## Other things to do
 

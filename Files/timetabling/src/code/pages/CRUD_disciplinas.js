@@ -57,7 +57,7 @@ function updatingSelect(
   console.log("individual: ", individual);
 }
 
-function DisciplinaCard() {
+function Disciplinas() {
   const [disciplinas, setDisciplinas] = useState(disciplinas_RS);
   const [disciplina, setDisciplina] = useState(disciplinas[36]);
 
@@ -67,9 +67,50 @@ function DisciplinaCard() {
     );
     return correctPeriodo;
   }
-  console.log("Disciplina: ", disciplina);
+
+  function InformacoesBaseDaDisciplina() {
+    return (
+      <div className="showBasicDataCard">
+        <h3>Informações da disciplina</h3>
+        <table className="showBasicDataTable">
+          <thead></thead>
+          <tbody>
+            <tr>
+              <th>Código</th>
+              <td>{disciplina.codigo}</td>
+            </tr>
+            <tr>
+              <th>Nome</th>
+              <td>{disciplina.nome}</td>
+            </tr>
+            <tr>
+              <th>Período Esperado</th>
+              <td>
+                <Select
+                  newPlaceHolder="Período Esperado"
+                  value={getCorrectPeriodo(disciplina.periodo)}
+                  options={options.expectedSemester}
+                  onChange={(newValue) => {
+                    updatingSelect(
+                      newValue,
+                      disciplinas,
+                      setDisciplinas,
+                      disciplina,
+                      setDisciplina
+                    );
+                  }}
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+
+  // console.log("Disciplina: ", disciplina);
   return (
-    <div className="CRUD-subjects">
+    <div>
       <Select
         placeholder={"Disciplina"}
         value={disciplina}
@@ -84,24 +125,11 @@ function DisciplinaCard() {
           `(${periodo}) ${codigo}: ${nome}`
         }
       />
+      <InformacoesBaseDaDisciplina />
+
       <table>
         <thead>
           <tr>
-            <th>Código: Nome</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              {disciplina.codigo}: {disciplina.nome}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <table>
-        <thead>
-          <tr>
-            <th>Período Esperado</th>
             <th>Requisitos</th>
           </tr>
         </thead>
@@ -109,23 +137,7 @@ function DisciplinaCard() {
           <tr>
             <td>
               <Select
-                newPlaceHolder="Período Esperado"
-                value={getCorrectPeriodo(disciplina.periodo)}
-                options={options.expectedSemester}
-                onChange={(newValue) => {
-                  updatingSelect(
-                    newValue,
-                    disciplinas,
-                    setDisciplinas,
-                    disciplina,
-                    setDisciplina
-                  );
-                }}
-              />
-            </td>
-            <td>
-              <Select
-                placeholder={"REQUISITOS"}
+                placeholder={"Requisitos"}
                 options={disciplinas} // deveriam ser todas as disciplinas
                 value={disciplina.requisitos}
                 onChange={(option) => {
@@ -145,8 +157,6 @@ function DisciplinaCard() {
           </tr>
         </tbody>
       </table>
-      <div></div>
-      <div></div>
     </div>
   );
 }
@@ -154,9 +164,9 @@ function DisciplinaCard() {
 function CRUDDisciplinas() {
   return (
     <div className="background">
-      <div className="CRUD-contain-components">
-        <CRUDPageSelection defaultValue={options.CRUD.crud_disciplinas} />
-        <DisciplinaCard />
+      <CRUDPageSelection defaultValue={options.CRUD.crud_disciplinas} />
+      <div className="CRUDContainComponents">
+        <Disciplinas />
       </div>
     </div>
   );

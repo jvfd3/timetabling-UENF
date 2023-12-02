@@ -1,411 +1,12 @@
 import "../CSS/CRUD_turmas.css";
 import "../CSS/defaultStyle.css";
-import "../CSS/participantList.css";
 import options from "../temp/options";
-import assets from "../../assets/imagesImport";
 import CRUDPageSelection from "../components/PageSelect";
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
 import AsyncSelect from "react-select/async";
 import { readData } from "../functions/CRUD_JSONBIN";
-
-const CRUDParticipants = (props) => {
-  const { turma3 } = props;
-
-  // const [participants, setParticipants] = useState([]);
-
-  let andamentoAlunos = allLocalJsonData.dynamic.andamentoAlunos;
-  const [numero, setNumero] = useState(0);
-
-  const handleInputChange = (event) => {
-    setNumero(Number(event.target.value));
-  };
-
-  function getCurrentSubjectsPerStudent(alunos) {
-    /*  Explicação dessa função
-    Essa função é muito confusa, o copilot que fez então vou explicar
-    Essa vai ser a variável final retornada. Primeiro ele pega todas as chaves/matrículas dos alunos e faz um reduce
-    O reduce vai iterar por todas as matrículas usando um acumulados (acc)
-    primeiro ele pega a lista de disciplinas que o aluno está cursando
-    depois ele itera por todas essas disciplinas
-    se a disciplina não for uma chave no acc, significa que ela ainda não foi processada, então ele cria uma chave para ela
-    depois ele adiciona a matrícula do aluno na lista da disciplina da iteração atual
-    Ele faz isso para todas as disciplinas do aluno atual (forEach) depois ele vai volta pra iteração anterior (reduce)
-    e faz isso para todos os alunos
-    no final ele retorna o acc que é um objeto com as disciplinas como chave e uma lista de matrículas como valor
-    O "{}" no final é o valor inicial do acc, que é um objeto vazio. Ele faz parte do reduce.
-    */
-    let currentSubjectsPerStudent = Object.keys(alunos).reduce(
-      (acc, studentId) => {
-        let currentSubjects = alunos[studentId].cursando;
-        currentSubjects.forEach((subject) => {
-          if (!acc[subject]) {
-            acc[subject] = [];
-          }
-          acc[subject].push(studentId);
-        });
-        return acc;
-      },
-      {}
-    );
-    return currentSubjectsPerStudent;
-  }
-
-  function getStudentsFromSubject(subjectCode, disciplinasCursadasPorAlunos) {
-    let isUndefined = disciplinasCursadasPorAlunos[subjectCode] === undefined;
-    if (isUndefined) {
-      disciplinasCursadasPorAlunos[subjectCode] = [];
-    }
-    let alunosDessaDisciplina = disciplinasCursadasPorAlunos[subjectCode];
-    return alunosDessaDisciplina;
-  }
-
-  function getInfoAlunos() {
-    let infoAlunos = allLocalJsonData.static.infoAlunos;
-    return infoAlunos;
-  }
-
-  function mixStudentsAndInfo(students, info) {
-    let mixed = students.map((student) => {
-      let studentInfo = info.find((info) => info.matricula === student);
-      return studentInfo;
-    });
-    return mixed;
-  }
-
-  let alunosDessaDisciplina = getStudentsFromSubject(
-    turma3.disciplina.codigo,
-    getCurrentSubjectsPerStudent(andamentoAlunos)
-  );
-
-  let infoAlunos = getInfoAlunos();
-
-  let fullStudentsList = mixStudentsAndInfo(alunosDessaDisciplina, infoAlunos);
-  //Confirmando que a lista está ordenada por matrícula (veteranos primeiro)
-  fullStudentsList.sort((a, b) => a.matricula - b.matricula);
-
-  return (
-    <div className="participants-container">
-      <table>
-        <thead></thead>
-        <tbody style={{}}>
-          <tr>
-            <th style={{ textAlign: "left" }}>Demanda de aprovados</th>
-            <td>123</td>
-          </tr>
-          <tr>
-            <th style={{ textAlign: "left" }}>Demanda de reprovados</th>
-            <td>321</td>
-          </tr>
-          <tr>
-            <th style={{ textAlign: "left" }}>Demanda estimada</th>
-            <td>
-              <input
-                style={{ width: 40 }}
-                type="number"
-                value={numero}
-                onChange={handleInputChange}
-                maxLength="3"
-              />
-            </td>
-          </tr>
-          <tr>
-            <th style={{ textAlign: "left" }}>Inscritos</th>
-            <td>{alunosDessaDisciplina.length}</td>
-          </tr>
-        </tbody>
-      </table>
-      <div className="participants-list">
-        <table>
-          <thead>
-            <tr>
-              <th>Curso</th>
-              {/* <th>Ano</th> */}
-              <th>Matrícula</th>
-              <th>Nome</th>
-            </tr>
-          </thead>
-          <tbody>
-            {fullStudentsList.map((student) => (
-              <tr key={student.matricula}>
-                <td>
-                  {student.curso === "Ciência da Computação"
-                    ? "CC"
-                    : student.curso}
-                </td>
-                {/* <td>{student.anoEntrada}</td> */}
-                <td>{student.matricula}</td>
-                <td>{student.nome}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <ul>
-          {/* {fullStudentsList.map((student) => (
-            <li key={student.matricula}>
-              <p className="participants-participant">
-                {student.ano}: {student.label}
-              </p>
-            </li>
-          ))} */}
-        </ul>
-      </div>
-    </div>
-  );
-};
-
-function DadosTurma(props) {
-  const { turma2, setTurma2 } = props;
-  let infoProfessores = allLocalJsonData.static.infoProfessores;
-  // let DBdisciplinas = await readData(options.JBVars.bins.infoDisciplinasCC);
-  let DBdisciplinas = allLocalJsonData.static.infoDisciplinasCC;
-  return (
-    <div>
-      <h2>Dados</h2>
-      <table>
-        <thead></thead>
-        <tbody>
-          <tr>
-            <td>
-              <strong>Ano/Semestre</strong>
-            </td>
-            <td>
-              <div style={{ display: "flex", flexDirection: "row" }}>
-                <Select
-                  placeholder="Ano"
-                  options={options.years}
-                  value={{ value: turma2.ano, label: turma2.ano }}
-                  onChange={(newValue) => {
-                    setTurma2({ ...turma2, ano: newValue.value });
-                  }}
-                />
-                <Select
-                  placeholder="Semestre"
-                  options={options.semesters}
-                  value={{ value: turma2.semestre, label: turma2.semestre }}
-                  onChange={(newValue) => {
-                    setTurma2({ ...turma2, semestre: newValue.value });
-                  }}
-                />
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Disciplina</strong>
-            </td>
-            <td>
-              <Select
-                placeholder="Disciplinas"
-                options={DBdisciplinas}
-                value={turma2.disciplina}
-                onChange={(newValue) => {
-                  setTurma2({ ...turma2, disciplina: newValue });
-                }}
-                getOptionLabel={(optionDiscip) => optionDiscip.nome}
-                getOptionValue={(optionDiscip) => optionDiscip.codigo}
-                formatOptionLabel={({ codigo, nome }) => `${codigo}: ${nome}`}
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <strong>Professor</strong>
-            </td>
-            <td>
-              <Select
-                placeholder="Professor"
-                options={infoProfessores}
-                value={infoProfessores.find(
-                  (professor) => professor.nome === turma2.professor
-                )}
-                getOptionValue={(optionProf) => optionProf.nome}
-                getOptionLabel={(optionProf) => optionProf.laboratorio}
-                onChange={(newValue) => {
-                  setTurma2({ ...turma2, professor: newValue.nome });
-                }}
-                formatOptionLabel={({ nome, laboratorio }) =>
-                  `(${laboratorio}) ${nome}`
-                }
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-function HorariosTurma(props) {
-  const { turma1, setTurma1 } = props;
-  let infoSalas = allLocalJsonData.static.infoSalas;
-
-  function removerHorario(id) {
-    let newTurma = { ...turma1 };
-    let newHorarios = [...newTurma.horarios];
-    newHorarios.splice(id, 1);
-    newTurma.horarios = newHorarios;
-    setTurma1(newTurma);
-  }
-
-  function adicionarHorario() {
-    let newTurma = { ...turma1 };
-    let newHorarios = [...newTurma.horarios];
-    newHorarios.push({
-      sala: null,
-      dia: null,
-      horaInicio: null,
-      duracao: null,
-    });
-
-    newTurma.horarios = newHorarios;
-    setTurma1(newTurma);
-    // Denser: (that is actually less dense) Faster? Well, I don't care for it now.
-    /* setTurma1({
-      ...turma1,
-      horarios: [
-        ...turma1.horarios,
-        {
-          sala: "XXX",
-          dia: "XXX",
-          horaInicio: 123,
-          duracao: 123,
-        },
-      ],
-    }); */
-  }
-
-  function changeThisHorario(id, newHorarioInicio) {
-    let newTurma = { ...turma1 };
-    let newHorarios = [...newTurma.horarios];
-    newHorarios[id] = {
-      ...newHorarios[id],
-      horaInicio: newHorarioInicio.value,
-    };
-    newTurma.horarios = newHorarios;
-    setTurma1(newTurma);
-  }
-
-  return (
-    <div>
-      <h2>
-        Horários
-        <button onClick={() => adicionarHorario()}>Adicionar</button>
-      </h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Dia</th>
-            <th>Hora de início</th>
-            <th>Duração</th>
-            <th>Sala</th>
-          </tr>
-        </thead>
-        <tbody>
-          {turma1.horarios.map((horario, id) => {
-            return (
-              <tr key={id}>
-                <td>
-                  <Select
-                    placeholder="Dia"
-                    options={options.days}
-                    value={options.days.find(
-                      (day) => day.value === horario.dia
-                    )}
-                    onChange={(newDia) => {
-                      let newTurma = { ...turma1 };
-                      let newHorarios = [...newTurma.horarios];
-                      newHorarios[id] = {
-                        ...newHorarios[id],
-                        dia: newDia.value,
-                      };
-                      newTurma.horarios = newHorarios;
-                      setTurma1(newTurma);
-                    }}
-                    formatOptionLabel={({ value, label }, { context }) => {
-                      return context === "value" ? `${value}` : `${label}`;
-                    }}
-                  />
-                </td>
-                <td>
-                  <Select
-                    placeholder="Hora início"
-                    options={options.hours}
-                    value={options.hours.find(
-                      (hour) => hour.value === horario.horaInicio
-                    )}
-                    onChange={(newValue) => {
-                      changeThisHorario(id, newValue);
-                    }}
-                    formatOptionLabel={({ value, label }, { context }) => {
-                      return context === "value"
-                        ? `${value}`
-                        : `(${label}) ${value}`;
-                    }}
-                  />
-                </td>
-                <td>
-                  <Select
-                    placeholder="Duração"
-                    options={options.durations}
-                    value={options.durations.find(
-                      (duration) => duration.value === horario.duracao
-                    )}
-                    onChange={(newDuracao) => {
-                      let newTurma = { ...turma1 };
-                      let newHorarios = [...newTurma.horarios];
-                      newHorarios[id] = {
-                        ...newHorarios[id],
-                        duracao: newDuracao.value,
-                      };
-                      newTurma.horarios = newHorarios;
-                      setTurma1(newTurma);
-                    }}
-                    formatOptionLabel={({ value, label }, { context }) => {
-                      return context === "value"
-                        ? `${value}`
-                        : `(${label}) ${value}`;
-                    }}
-                  />
-                </td>
-                <td>
-                  <Select
-                    placeholder="Sala"
-                    options={infoSalas}
-                    value={infoSalas.find(
-                      (sala) => sala.blocoSala === horario.sala
-                    )}
-                    onChange={(newSala) => {
-                      let newTurma = { ...turma1 };
-                      let newHorarios = [...newTurma.horarios];
-                      newHorarios[id] = {
-                        ...newHorarios[id],
-                        sala: newSala.blocoSala,
-                      };
-                      newTurma.horarios = newHorarios;
-                      setTurma1(newTurma);
-                    }}
-                    getOptionValue={(optionSala) => optionSala.blocoSala}
-                    getOptionLabel={(optionSala) => optionSala.capacidade}
-                    formatOptionLabel={({ blocoSala, capacidade }) =>
-                      `(${capacidade}) ${blocoSala}`
-                    }
-                  />
-                </td>
-                <td>
-                  <button key={id} onClick={() => removerHorario(id)}>
-                    Remover
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
-  );
-}
 
 function Turmas() {
   let allTurmas = allLocalJsonData.dynamic.turmasTeste;
@@ -425,24 +26,441 @@ function Turmas() {
     updateTurmas(turma);
   }, [turma]);
 
-  return (
-    <div className="CRUD-Class-TurmaPeriodo">
-      <div className="CRUD-Class-properties" style={{ color: "black" }}>
-        <Select
-          placeholder="Turma"
-          options={turmas}
-          value={turma}
-          onChange={setTurma}
-          getOptionLabel={(turma) => turma.disciplina.codigo}
-          getOptionValue={(turma) => turma.professor}
-          formatOptionLabel={(turma) =>
-            `(id${turma.id}) ${turma.ano}.${turma.semestre} - ${turma.disciplina.codigo} - ${turma.professor}`
-          }
-        />
+  function TurmaSelection() {
+    return (
+      <Select
+        className="itemSelectionBar"
+        options={turmas}
+        value={turma}
+        onChange={setTurma}
+        getOptionLabel={(turma) => turma.disciplina.codigo}
+        getOptionValue={(turma) => turma.professor}
+        formatOptionLabel={(turma) =>
+          `(id${turma.id}) ${turma.ano}.${turma.semestre} - ${turma.disciplina.codigo} - ${turma.professor}`
+        }
+      />
+    );
+  }
+
+  function TurmaCard(props) {
+    const { turma, setTurma } = props;
+
+    function DadosTurma(props) {
+      const { turma2, setTurma2 } = props;
+      let infoProfessores = allLocalJsonData.static.infoProfessores;
+      // let DBdisciplinas = await readData(options.JBVars.bins.infoDisciplinasCC);
+      let DBdisciplinas = allLocalJsonData.static.infoDisciplinasCC;
+
+      return (
+        <div className="showBasicDataCard">
+          <h3>Dados</h3>
+          <table className="showBasicDataTable">
+            <thead></thead>
+            <tbody>
+              <tr>
+                <td>
+                  <strong>Ano/Semestre</strong>
+                </td>
+                <td>
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+                    <Select
+                      placeholder="Ano"
+                      options={options.years}
+                      value={{ value: turma2.ano, label: turma2.ano }}
+                      onChange={(newValue) => {
+                        setTurma2({ ...turma2, ano: newValue.value });
+                      }}
+                    />
+                    <Select
+                      placeholder="Semestre"
+                      options={options.semesters}
+                      value={{ value: turma2.semestre, label: turma2.semestre }}
+                      onChange={(newValue) => {
+                        setTurma2({ ...turma2, semestre: newValue.value });
+                      }}
+                    />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Disciplina</strong>
+                </td>
+                <td>
+                  <Select
+                    placeholder="Disciplinas"
+                    options={DBdisciplinas}
+                    value={turma2.disciplina}
+                    onChange={(newValue) => {
+                      setTurma2({ ...turma2, disciplina: newValue });
+                    }}
+                    getOptionLabel={(optionDiscip) => optionDiscip.nome}
+                    getOptionValue={(optionDiscip) => optionDiscip.codigo}
+                    formatOptionLabel={({ codigo, nome }) =>
+                      `${codigo}: ${nome}`
+                    }
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Professor</strong>
+                </td>
+                <td>
+                  <Select
+                    placeholder="Professor"
+                    options={infoProfessores}
+                    value={infoProfessores.find(
+                      (professor) => professor.nome === turma2.professor
+                    )}
+                    getOptionValue={(optionProf) => optionProf.nome}
+                    getOptionLabel={(optionProf) => optionProf.laboratorio}
+                    onChange={(newValue) => {
+                      setTurma2({ ...turma2, professor: newValue.nome });
+                    }}
+                    formatOptionLabel={({ nome, laboratorio }) =>
+                      `(${laboratorio}) ${nome}`
+                    }
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+
+    function HorariosTurma(props) {
+      const { turma1, setTurma1 } = props;
+      let infoSalas = allLocalJsonData.static.infoSalas;
+
+      function removerHorario(id) {
+        let newTurma = { ...turma1 };
+        let newHorarios = [...newTurma.horarios];
+        newHorarios.splice(id, 1);
+        newTurma.horarios = newHorarios;
+        setTurma1(newTurma);
+      }
+
+      function adicionarHorario() {
+        let newTurma = { ...turma1 };
+        let newHorarios = [...newTurma.horarios];
+        newHorarios.push({
+          sala: null,
+          dia: null,
+          horaInicio: null,
+          duracao: null,
+        });
+
+        newTurma.horarios = newHorarios;
+        setTurma1(newTurma);
+        // Denser: (that is actually less dense) Faster? Well, I don't care for it now.
+        /* setTurma1({
+      ...turma1,
+      horarios: [
+        ...turma1.horarios,
+        {
+          sala: "XXX",
+          dia: "XXX",
+          horaInicio: 123,
+          duracao: 123,
+        },
+      ],
+    }); */
+      }
+
+      function changeThisHorario(id, newHorarioInicio) {
+        let newTurma = { ...turma1 };
+        let newHorarios = [...newTurma.horarios];
+        newHorarios[id] = {
+          ...newHorarios[id],
+          horaInicio: newHorarioInicio.value,
+        };
+        newTurma.horarios = newHorarios;
+        setTurma1(newTurma);
+      }
+
+      return (
+        <div className="showBasicDataCard">
+          <div className="TurmaHorariosTitleButton">
+            <h3>Horários</h3>
+            <button onClick={() => adicionarHorario()}>Adicionar</button>
+          </div>
+          <table className="showBasicDataTable">
+            <thead>
+              <tr>
+                <th>Dia</th>
+                <th>Hora de início</th>
+                <th>Duração</th>
+                <th>Sala</th>
+              </tr>
+            </thead>
+            <tbody>
+              {turma1.horarios.map((horario, id) => {
+                return (
+                  <tr key={id}>
+                    <td>
+                      <Select
+                        placeholder="Dia"
+                        className="TurmaHorariosColunaDias"
+                        options={options.days}
+                        value={options.days.find(
+                          (day) => day.value === horario.dia
+                        )}
+                        onChange={(newDia) => {
+                          let newTurma = { ...turma1 };
+                          let newHorarios = [...newTurma.horarios];
+                          newHorarios[id] = {
+                            ...newHorarios[id],
+                            dia: newDia.value,
+                          };
+                          newTurma.horarios = newHorarios;
+                          setTurma1(newTurma);
+                        }}
+                        formatOptionLabel={({ value, label }, { context }) => {
+                          return context === "value" ? `${value}` : `${label}`;
+                        }}
+                      />
+                    </td>
+                    <td>
+                      <Select
+                        placeholder="Hora início"
+                        className="TurmaHorariosColunaHoraInicio"
+                        options={options.hours}
+                        value={options.hours.find(
+                          (hour) => hour.value === horario.horaInicio
+                        )}
+                        onChange={(newValue) => {
+                          changeThisHorario(id, newValue);
+                        }}
+                        formatOptionLabel={({ value, label }, { context }) => {
+                          return context === "value"
+                            ? `${value}`
+                            : `(${label}) ${value}`;
+                        }}
+                      />
+                    </td>
+                    <td>
+                      <Select
+                        placeholder="Duração"
+                        className="TurmaHorariosColunaDuracao"
+                        options={options.durations}
+                        value={options.durations.find(
+                          (duration) => duration.value === horario.duracao
+                        )}
+                        onChange={(newDuracao) => {
+                          let newTurma = { ...turma1 };
+                          let newHorarios = [...newTurma.horarios];
+                          newHorarios[id] = {
+                            ...newHorarios[id],
+                            duracao: newDuracao.value,
+                          };
+                          newTurma.horarios = newHorarios;
+                          setTurma1(newTurma);
+                        }}
+                        formatOptionLabel={({ value, label }, { context }) => {
+                          return context === "value"
+                            ? `${value}`
+                            : `(${label}) ${value}`;
+                        }}
+                      />
+                    </td>
+                    <td>
+                      <Select
+                        className="TurmaHorariosColunaSala"
+                        placeholder="Sala"
+                        options={infoSalas}
+                        value={infoSalas.find(
+                          (sala) => sala.blocoSala === horario.sala
+                        )}
+                        onChange={(newSala) => {
+                          let newTurma = { ...turma1 };
+                          let newHorarios = [...newTurma.horarios];
+                          newHorarios[id] = {
+                            ...newHorarios[id],
+                            sala: newSala.blocoSala,
+                          };
+                          newTurma.horarios = newHorarios;
+                          setTurma1(newTurma);
+                        }}
+                        getOptionValue={(optionSala) => optionSala.blocoSala}
+                        getOptionLabel={(optionSala) => optionSala.capacidade}
+                        formatOptionLabel={({ blocoSala, capacidade }) =>
+                          `(${capacidade}) ${blocoSala}`
+                        }
+                      />
+                    </td>
+                    <td>
+                      <button key={id} onClick={() => removerHorario(id)}>
+                        Remover
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+
+    function CRUDParticipants(props) {
+      const { turma3 } = props;
+
+      // const [participants, setParticipants] = useState([]);
+
+      let andamentoAlunos = allLocalJsonData.dynamic.andamentoAlunos;
+      const [numero, setNumero] = useState(0);
+
+      const handleInputChange = (event) => {
+        setNumero(Number(event.target.value));
+      };
+
+      function getCurrentSubjectsPerStudent(alunos) {
+        /*  Explicação dessa função
+    Essa função é muito confusa, o copilot que fez então vou explicar
+    Essa vai ser a variável final retornada. Primeiro ele pega todas as chaves/matrículas dos alunos e faz um reduce
+    O reduce vai iterar por todas as matrículas usando um acumulados (acc)
+    primeiro ele pega a lista de disciplinas que o aluno está cursando
+    depois ele itera por todas essas disciplinas
+    se a disciplina não for uma chave no acc, significa que ela ainda não foi processada, então ele cria uma chave para ela
+    depois ele adiciona a matrícula do aluno na lista da disciplina da iteração atual
+    Ele faz isso para todas as disciplinas do aluno atual (forEach) depois ele vai volta pra iteração anterior (reduce)
+    e faz isso para todos os alunos
+    no final ele retorna o acc que é um objeto com as disciplinas como chave e uma lista de matrículas como valor
+    O "{}" no final é o valor inicial do acc, que é um objeto vazio. Ele faz parte do reduce.
+    */
+        let currentSubjectsPerStudent = Object.keys(alunos).reduce(
+          (acc, studentId) => {
+            let currentSubjects = alunos[studentId].cursando;
+            currentSubjects.forEach((subject) => {
+              if (!acc[subject]) {
+                acc[subject] = [];
+              }
+              acc[subject].push(studentId);
+            });
+            return acc;
+          },
+          {}
+        );
+        return currentSubjectsPerStudent;
+      }
+
+      function getStudentsFromSubject(
+        subjectCode,
+        disciplinasCursadasPorAlunos
+      ) {
+        let isUndefined =
+          disciplinasCursadasPorAlunos[subjectCode] === undefined;
+        if (isUndefined) {
+          disciplinasCursadasPorAlunos[subjectCode] = [];
+        }
+        let alunosDessaDisciplina = disciplinasCursadasPorAlunos[subjectCode];
+        return alunosDessaDisciplina;
+      }
+
+      function getInfoAlunos() {
+        let infoAlunos = allLocalJsonData.static.infoAlunos;
+        return infoAlunos;
+      }
+
+      function mixStudentsAndInfo(students, info) {
+        let mixed = students.map((student) => {
+          let studentInfo = info.find((info) => info.matricula === student);
+          return studentInfo;
+        });
+        return mixed;
+      }
+
+      let alunosDessaDisciplina = getStudentsFromSubject(
+        turma3.disciplina.codigo,
+        getCurrentSubjectsPerStudent(andamentoAlunos)
+      );
+
+      let infoAlunos = getInfoAlunos();
+
+      let fullStudentsList = mixStudentsAndInfo(
+        alunosDessaDisciplina,
+        infoAlunos
+      );
+      //Confirmando que a lista está ordenada por matrícula (veteranos primeiro)
+      fullStudentsList.sort((a, b) => a.matricula - b.matricula);
+
+      return (
+        <div className="showBasicDataCard">
+          <h2>Número de participantes</h2>
+          <h3>Número de participantes</h3>
+          <table className="showBasicDataTable">
+            <thead></thead>
+            <tbody style={{}}>
+              <tr>
+                <th style={{ textAlign: "left" }}>Demanda de aprovados</th>
+                <td>123</td>
+              </tr>
+              <tr>
+                <th style={{ textAlign: "left" }}>Demanda de reprovados</th>
+                <td>321</td>
+              </tr>
+              <tr>
+                <th style={{ textAlign: "left" }}>Demanda estimada</th>
+                <td>
+                  <input
+                    style={{ width: 40 }}
+                    type="number"
+                    value={numero}
+                    onChange={handleInputChange}
+                    maxLength="3"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <th style={{ textAlign: "left" }}>Inscritos</th>
+                <td>{alunosDessaDisciplina.length}</td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>Lista de participantes</h3>
+          <table className="showBasicDataTable">
+            <thead>
+              <tr>
+                <th>Curso</th>
+                {/* <th>Ano</th> */}
+                <th>Matrícula</th>
+                <th>Nome</th>
+              </tr>
+            </thead>
+            <tbody>
+              {fullStudentsList.map((student) => (
+                <tr key={student.matricula}>
+                  <td>
+                    {student.curso === "Ciência da Computação"
+                      ? "CC"
+                      : student.curso}
+                  </td>
+                  {/* <td>{student.anoEntrada}</td> */}
+                  <td>{student.matricula}</td>
+                  <td>{student.nome}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+
+    return (
+      <div className="infoCard">
         <DadosTurma turma2={turma} setTurma2={setTurma} />
         <HorariosTurma turma1={turma} setTurma1={setTurma} />
+        <CRUDParticipants turma3={turma} />
       </div>
-      <CRUDParticipants turma3={turma} />
+    );
+  }
+
+  return (
+    <div className="CRUDContainComponents">
+      <TurmaSelection />
+      <TurmaCard turma={turma} setTurma={setTurma} />
     </div>
   );
 }
@@ -451,9 +469,7 @@ function CRUDclass() {
   return (
     <div className="background">
       <CRUDPageSelection defaultValue={options.CRUD.crud_turmas} />
-      <div className="CRUD-lateral">
-        <Turmas />
-      </div>
+      <Turmas />
     </div>
   );
 }

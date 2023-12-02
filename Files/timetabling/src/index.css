@@ -1,7 +1,13 @@
 body {
   margin: 0;
-  background-color: #111;
+
+
+  /* Silent agent 🕵️ */
+  background-color: #000;
+  /* Locating index background */
+  /* background-color: #00FFFF; */
   display: flex;
+  /* width: 100%; */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;

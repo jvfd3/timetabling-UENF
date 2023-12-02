@@ -7,7 +7,7 @@ import CRUDPageSelection from "../components/PageSelect";
 function NoPage() {
   return (
     <div className="background">
-      <div className="CRUD-contain-components">
+      <div className="CRUDContainComponents">
         <CRUDPageSelection defaultValue={options.CRUD.not_found} />
         <h1 className="whiteColor">Is this a 404 page?</h1>
         <p className="whiteColor">I guess not.</p>

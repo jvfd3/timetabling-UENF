@@ -1,22 +1,109 @@
-.background {
-    display: flex;
-    flex-direction: column;
-    background-color: black;
-    width: 100vw;
-    height: 100vh;
-}
+/*
+Explanation:
 
-.CRUD-contain-components {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: blanchedalmond;
-    /* justify-content: center; */
-    /* align-items: center; */
-}
+- background is where everything is located, so it's the first thing to be set. Inside it are two divs: CRUD-page-selection and CRUDContainComponents.
+- CRUD-page-selection is the div that contains the buttons for the CRUD pages. It's aligned to the left and top of the screen.
+- CRUDContainComponents is the div that contains the components for the CRUD pages. It's aligned to the bottom-center of the screen. It contains a top select with itemSelectionBar and a div with infoCard.
+- itemSelectionBar is the div that contains the select for the items.
+- infoCard is the div that contains all the information about the selected item.
+- showBasicDataCard is the div that contains the basic information about the selected items.
+- showBasicDataTable is the table that contains the information about the selected item.
+- whiteColor and blackColor are classes that change the color of the text.
+*/
 
 .whiteColor {
     color: white;
+}
+
+.blackColor {
+    color: black;
+}
+
+.background {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    align-items: center;
+    background-color: black;
+    width: 95vw;
+    height: 100vh;
+}
+
+.CRUDContainComponents {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: blanchedalmond;
+    align-self: first baseline;
+
+    border-radius: 10px;
+    padding: 3%;
+    margin-left: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.itemSelectionBar {
+    display: flex;
+    width: 100%;
+    /* background-color: aquamarine; */
+}
+
+.infoCard {
+    /* Discorver why it's not working properly */
+    display: flex;
+    flex-direction: column;
+    /* height: fit-content; */
+    /* width: 450px; */
+    /* width: 500px; */
+    /* width: auto; */
+    /* width: fit-content; */
+    /* width: max-content; */
+    /* width: min-content; */
+    /* padding: 1%; */
+    /* background-color: aquamarine; */
+}
+
+.showBasicDataCard {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    justify-content: center;
+    background-color: rgb(183, 171, 142);
+    border-radius: 20px;
+    padding: 3%;
+    margin: 10px;
+    /* align-items: center; */
+}
+
+.showBasicDataTable {
+    border-collapse: collapse;
+}
+
+.showBasicDataTable th,
+.showBasicDataTable td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.manyDisciplinasMultiSelect {
+    /* Para multiselects que tenham muitas disciplinas para mostrar */
+    width: 400px;
+}
+
+
+.CRUDPageSelection {
+    padding-top: 2%;
+    padding-left: 2%;
+    align-self: baseline;
+    background-color: aqua;
+}
+
+.SelectList {
+    display: flex;
+    padding-left: 2%;
+    min-width: 150px;
 }

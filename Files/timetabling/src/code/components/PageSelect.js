@@ -1,7 +1,8 @@
-import "./componentStyles.css";
+import "../CSS/defaultStyle.css";
 import Select from "react-select";
 import options from "../temp/options";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const formatOptionLabel = ({ label }) => (
   <div style={{ display: "flex" }}>{label}</div>
@@ -36,12 +37,34 @@ const CRUDPageSelection = (props) => {
     handleChange(newOption);
   }
 
+  useEffect(() => {
+    const keydownHandler = (event) => {
+      if (event.key === "s") {
+        document.body.style.overflow = "hidden";
+      }
+    };
+
+    const keyupHandler = (event) => {
+      if (event.key === "s") {
+        document.body.style.overflow = "auto";
+      }
+    };
+
+    window.addEventListener("keydown", keydownHandler);
+    window.addEventListener("keyup", keyupHandler);
+
+    return () => {
+      window.removeEventListener("keydown", keydownHandler);
+      window.removeEventListener("keyup", keyupHandler);
+    };
+  }, []);
+
   return (
-    <div className="CRUD-page-selection" onWheel={chagePageByScrolling}>
+    <div className="CRUDPageSelection" onWheel={chagePageByScrolling}>
       <Select
+        className="SelectList"
         placeholder={"Selecionar CRUD"}
         options={filteredOptions} // Use as opções filtradas aqui
-        className="SelectList-base"
         defaultValue={props.defaultValue}
         formatOptionLabel={formatOptionLabel}
         onChange={handleChange}

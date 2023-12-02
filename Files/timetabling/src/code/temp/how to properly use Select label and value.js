@@ -28,7 +28,7 @@ function MainPage() {
   const [data3, setData3] = useState(newNewData[0]);
   return (
     <div className="background">
-      <div className="CRUD-contain-components">
+      <div className="CRUDContainComponents">
         <CRUDPageSelection defaultValue={options.CRUD.main} />
         <Select
           placeholder="OLD"
