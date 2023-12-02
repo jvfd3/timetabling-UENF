@@ -13,6 +13,7 @@ import infoProfessoresData from "./JSON/static/infoProfessores.json";
 import infoSalasData from "./JSON/static/infoSalas.json";
 import turmasTesteData from "./JSON/dynamic/turmasTeste.json";
 import templatesData from "./JSON/templates/templates.json";
+import turmasTesteConflitosData from "./JSON/dynamic/turmasTesteConflitos.json";
 
 const allLocalJsonData = {
   dynamic: {
@@ -34,6 +35,9 @@ const allLocalJsonData = {
     infoDisciplinasCC: infoDisciplinasCCData,
     infoProfessores: infoProfessoresData,
     infoSalas: infoSalasData,
+  },
+  tests: {
+    turmasTesteConflitos: turmasTesteConflitosData,
   },
   templates: templatesData,
 };
