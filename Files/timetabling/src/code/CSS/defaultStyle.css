@@ -99,7 +99,7 @@ Explanation:
     padding-top: 2%;
     padding-left: 2%;
     align-self: baseline;
-    background-color: aqua;
+    /* background-color: aqua; */
 }
 
 .SelectList {
