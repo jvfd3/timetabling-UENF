@@ -139,77 +139,6 @@ function Professores() {
       let dias = options.days;
       let hasNumbers = false;
 
-      function tabelaPreferenciasContent() {
-        function ClickableCell(nivelDePreferencia, rowIndex, columnIndex) {
-          let horaInicial = rowIndex + 7;
-          let thisPreferenceRow = preferencia1[horaInicial];
-          let thisPreferenceDay = dias[columnIndex].value.toLowerCase();
-          let thisPreferenceValue = thisPreferenceRow[thisPreferenceDay];
-          const preferenceColor = getColorPreference(thisPreferenceValue);
-
-          // console.log(`(${rowIndex}, ${columnIndex})`);
-          // console.log(nivelDePreferencia);
-
-          const handleClick = (e) => {
-            let ctrlOrAltPressed = e.ctrlKey || e.altKey;
-            let newValue =
-              (nivelDePreferencia + (ctrlOrAltPressed ? -1 : 1)) % dias.length;
-            if (newValue < 0) newValue = dias.length - 1;
-            let newPreference = {
-              ...preferencia1,
-              [horaInicial]: {
-                ...thisPreferenceRow,
-                [thisPreferenceDay]: newValue,
-              },
-            };
-            // console.log(newPreference);
-            setPreferencia1(newPreference);
-            // console.log(newPreference[7]["seg"]);
-            // setPreferenceIndex(
-            //   (prevIndex) => (prevIndex + 1) % preferenceValues.length
-            // );
-          };
-
-          return (
-            <td
-              key={100 * columnIndex + 1 * rowIndex}
-              style={{
-                backgroundColor: preferenceColor,
-                textAlign: "center",
-                cursor: "pointer",
-              }}
-              onClick={handleClick}
-            >
-              {hasNumbers && thisPreferenceValue}
-            </td>
-          );
-        }
-
-        return Object.entries(preferencia1).map(([horario, dias], rowIndex) => (
-          <tr
-            key={rowIndex}
-            style={{
-              color: "#000000",
-              textAlign: "center",
-            }}
-          >
-            <td
-              style={{
-                backgroundColor: "#FFCB8E",
-                fontWeight: "bold",
-                fontSize: "1.0em",
-                paddingTop: 5,
-              }}
-            >
-              {horario} ~ {parseInt(horario) + 1}
-            </td>
-            {Object.entries(dias).map(([dia, preferencia], columnIndex) => {
-              return ClickableCell(preferencia, rowIndex, columnIndex);
-            })}
-          </tr>
-        ));
-      }
-
       function getColorPreference(nivelDePreferencia) {
         const infoPreferencia = infoPreferencias.find(
           (item) => item.nivel === nivelDePreferencia
@@ -278,9 +207,81 @@ function Professores() {
         );
       }
 
-      return (
-        <div className="showBasicDataCard">
-          <h3>Preferências</h3>
+      function Preferencias() {
+        function TabelaPreferenciasContent() {
+          function ClickableCell(nivelDePreferencia, rowIndex, columnIndex) {
+            let horaInicial = rowIndex + 7;
+            let thisPreferenceRow = preferencia1[horaInicial];
+            let thisPreferenceDay = dias[columnIndex].value.toLowerCase();
+            let thisPreferenceValue = thisPreferenceRow[thisPreferenceDay];
+            const preferenceColor = getColorPreference(thisPreferenceValue);
+
+            // console.log(`(${rowIndex}, ${columnIndex})`);
+            // console.log(nivelDePreferencia);
+
+            const handleClick = (e) => {
+              let ctrlOrAltPressed = e.ctrlKey || e.altKey;
+              let newValue =
+                (nivelDePreferencia + (ctrlOrAltPressed ? -1 : 1)) %
+                dias.length;
+              if (newValue < 0) newValue = dias.length - 1;
+              let newPreference = {
+                ...preferencia1,
+                [horaInicial]: {
+                  ...thisPreferenceRow,
+                  [thisPreferenceDay]: newValue,
+                },
+              };
+              // console.log(newPreference);
+              setPreferencia1(newPreference);
+              // console.log(newPreference[7]["seg"]);
+              // setPreferenceIndex(
+              //   (prevIndex) => (prevIndex + 1) % preferenceValues.length
+              // );
+            };
+
+            return (
+              <td
+                key={100 * columnIndex + 1 * rowIndex}
+                style={{
+                  backgroundColor: preferenceColor,
+                  textAlign: "center",
+                  cursor: "pointer",
+                }}
+                onClick={handleClick}
+              >
+                {hasNumbers && thisPreferenceValue}
+              </td>
+            );
+          }
+
+          return Object.entries(preferencia1).map(
+            ([horario, dias], rowIndex) => (
+              <tr
+                key={rowIndex}
+                style={{
+                  color: "#000000",
+                  textAlign: "center",
+                }}
+              >
+                <td
+                  style={{
+                    backgroundColor: "#FFCB8E",
+                    fontWeight: "bold",
+                    fontSize: "1.0em",
+                    paddingTop: 5,
+                  }}
+                >
+                  {horario} ~ {parseInt(horario) + 1}
+                </td>
+                {Object.entries(dias).map(([dia, preferencia], columnIndex) => {
+                  return ClickableCell(preferencia, rowIndex, columnIndex);
+                })}
+              </tr>
+            )
+          );
+        }
+        return (
           <table className="preferencesTable">
             <thead>
               <tr>
@@ -297,8 +298,17 @@ function Professores() {
                 ))}
               </tr>
             </thead>
-            <tbody>{tabelaPreferenciasContent()}</tbody>
+            <tbody>
+              <TabelaPreferenciasContent />
+            </tbody>
           </table>
+        );
+      }
+
+      return (
+        <div className="showBasicDataCard">
+          <h3>Preferências</h3>
+          <Preferencias />
           <Legenda />
         </div>
       );
