@@ -1,7 +1,7 @@
 import "../CSS/CRUD_main.css";
 import "../CSS/defaultStyle.css";
 import assets from "../../assets/imagesImport";
-import options from "../temp/options";
+import options from "./options";
 import CRUDPageSelection from "../components/PageSelect";
 
 function MainCRUD() {

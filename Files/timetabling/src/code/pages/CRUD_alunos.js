@@ -45,9 +45,9 @@ function Alunos() {
       setAluno(newOption);
     }
     return (
-      <div className="itemSelectionBar" onWheel={scrollThroughAlunos}>
+      <div className="SelectionBar" onWheel={scrollThroughAlunos}>
         <Select
-          className="StudentSelection"
+          className="itemSelectionBar"
           // defaultValue={props.default_student}
           value={props.student}
           onChange={props.change_student}
@@ -69,24 +69,24 @@ function Alunos() {
     function InformacoesBaseDoAluno() {
       return (
         <div className="showBasicDataCard">
-          <h3>Informações do aluno</h3>
+          <h3>INFORMAÇÕES DO ALUNO</h3>
           <table className="showBasicDataTable">
             <thead></thead>
             <tbody>
               <tr>
-                <th>ANO</th>
+                <th>Ano</th>
                 <td>{student.anoEntrada}</td>
               </tr>
               <tr>
-                <th>CURSO</th>
+                <th>Curso</th>
                 <td>{student.curso}</td>
               </tr>
               <tr>
-                <th>NOME</th>
+                <th>Nome</th>
                 <td>{student.nome}</td>
               </tr>
               <tr>
-                <th>MATRÍCULA</th>
+                <th>Matrícula</th>
                 <td>{student.matricula}</td>
               </tr>
             </tbody>
@@ -126,7 +126,7 @@ function Alunos() {
       return (
         <div className="showBasicDataCard">
           <h3>Andamento do Aluno</h3>
-          <div className="table-container">
+          <div>
             <table>
               <thead>
                 <tr>

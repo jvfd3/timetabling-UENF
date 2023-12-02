@@ -86,9 +86,9 @@ function Professores() {
       setProfessor(newOption);
     }
     return (
-      <div className="itemSelectionBar" onWheel={scrollThroughProfessores}>
+      <div className="SelectionBar" onWheel={scrollThroughProfessores}>
         <Select
-          className="professorSelect"
+          className="itemSelectionBar"
           options={professores}
           value={professor}
           onChange={setProfessor}
@@ -110,7 +110,7 @@ function Professores() {
     function InformacoesBaseDoProfessor() {
       return (
         <div className="showBasicDataCard">
-          <h3>Informações do professor</h3>
+          <h3>INFORMAÇÕES DO PROFESSOR</h3>
           <table className="showBasicDataTable">
             <thead></thead>
             <tbody>
@@ -279,19 +279,9 @@ function Professores() {
       }
 
       return (
-        <div
-          className="PreferenciasProfessor"
-          style={{
-            display: "flex",
-            backgroundColor: "moccasin",
-            alignSelf: "center",
-            justifyContent: "center",
-            padding: 10,
-            flexDirection: "column",
-          }}
-        >
-          <h4>Preferências</h4>
-          <table style={{ borderCollapse: "collapse" }}>
+        <div className="showBasicDataCard">
+          <h3>Preferências</h3>
+          <table className="preferencesTable">
             <thead>
               <tr>
                 <th style={{ backgroundColor: "#64584A", padding: 10 }}>
@@ -341,52 +331,52 @@ function Professores() {
         let disciplinas = allLocalJsonData.static.infoDisciplinasCC;
         let myNewCurrentOptions = getNomesDasDisciplinas(myCurrentOptions);
         return (
-          <div>
-            <Select
-              options={disciplinas}
-              value={myNewCurrentOptions}
-              onChange={(option) => {
-                let myItem = { ...currentProfessor };
-                myItem["disciplinas"] = option;
-                updateStudent(myItem);
-                atualizarProfessores(
-                  professoresPraAtualizar,
-                  atualizandoProfessores,
-                  myItem
-                );
-              }}
-              placeholder={"Disciplinas ministradas"}
-              className="manyDisciplinasMultiSelect"
-              isMulti={true}
-              isClearable={false}
-              isSearchable={true}
-              getOptionValue={(option) => option.codigo}
-              getOptionLabel={(option) => option.nome}
-              formatOptionLabel={({ nome, codigo }) => `${codigo}: ${nome}`}
-            />
-          </div>
+          <Select
+            className="manyDisciplinasMultiSelect"
+            options={disciplinas}
+            value={myNewCurrentOptions}
+            onChange={(option) => {
+              let myItem = { ...currentProfessor };
+              myItem["disciplinas"] = option;
+              updateStudent(myItem);
+              atualizarProfessores(
+                professoresPraAtualizar,
+                atualizandoProfessores,
+                myItem
+              );
+            }}
+            placeholder={"Disciplinas ministradas"}
+            isMulti={true}
+            isClearable={false}
+            isSearchable={true}
+            getOptionValue={(option) => option.codigo}
+            getOptionLabel={(option) => option.nome}
+            formatOptionLabel={({ nome, codigo }) => `${codigo}: ${nome}`}
+          />
         );
       }
 
       return (
-        <table>
-          <tbody>
-            <tr>
-              <th>Disciplinas</th>
-            </tr>
-            <tr>
-              <td>
-                <SelectDisciplinas
-                  myCurrentOptions={professor.disciplinas}
-                  currentProfessor={professor}
-                  updateStudent={setProfessor}
-                  atualizandoProfessores={setProfessores}
-                  professoresPraAtualizar={professores}
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="showBasicDataCard">
+          <table className="showBasicDataTable">
+            <tbody>
+              <tr>
+                <th>Disciplinas</th>
+              </tr>
+              <tr>
+                <td>
+                  <SelectDisciplinas
+                    myCurrentOptions={professor.disciplinas}
+                    currentProfessor={professor}
+                    updateStudent={setProfessor}
+                    atualizandoProfessores={setProfessores}
+                    professoresPraAtualizar={professores}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       );
     }
 

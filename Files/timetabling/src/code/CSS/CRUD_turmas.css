@@ -1,22 +1,61 @@
-.TurmaHorariosTitleButton {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-
 .TurmaHorariosColunaDias {
-    width: 100px;
+    /* width: max-content; */
 }
 
 .TurmaHorariosColunaHoraInicio {
-    width: 140px;
+    /* width: 140px; */
+    /* width: max-content; */
 }
 
 .TurmaHorariosColunaDuracao {
-    width: 120px;
+    /* width: 120px; */
+    /* width: max-content; */
 }
 
 .TurmaHorariosColunaSala {
-    width: 200px;
+    /* width: max-content; */
+}
+
+.SelectAnoSemestre {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    /* Ajuste este valor para o espaço desejado */
+}
+
+.TurmaHorariosTitleButton {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    gap: 50px;
+}
+
+.AdicionarHorario {
+    background-color: #4CAF50;
+    /* Um verde mais suave */
+    color: white;
+    /* Cor do texto */
+    padding: 14px 20px;
+    /* Preenchimento */
+    border: none;
+    /* Remove a borda padrão */
+    border-radius: 4px;
+    /* Bordas arredondadas */
+    cursor: pointer;
+    /* Muda o cursor para indicar que é clicável */
+    transition: background-color 0.3s;
+    /* Transição suave da cor de fundo */
+}
+
+.AdicionarHorario:hover {
+    background-color: #358039;
+    /* Cor de fundo ao passar o mouse */
+}
+
+.TurmaHorarioRemove {
+    display: flex;
+}
+
+.inputNumeroParticipantes {
+    width: 40px;
 }

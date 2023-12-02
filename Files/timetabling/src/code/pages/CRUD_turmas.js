@@ -39,7 +39,7 @@ function Turmas() {
       setTurma(newOption);
     }
     return (
-      <div className="itemSelectionBar" onWheel={scrollThroughAlunos}>
+      <div className="SelectionBar" onWheel={scrollThroughAlunos}>
         <Select
           className="itemSelectionBar"
           options={turmas}
@@ -66,7 +66,7 @@ function Turmas() {
 
       return (
         <div className="showBasicDataCard">
-          <h3>Dados</h3>
+          <h3>INFORMAÇÕES DA TURMA</h3>
           <table className="showBasicDataTable">
             <thead></thead>
             <tbody>
@@ -75,8 +75,9 @@ function Turmas() {
                   <strong>Ano/Semestre</strong>
                 </td>
                 <td>
-                  <div style={{ display: "flex", flexDirection: "row" }}>
+                  <div className="SelectAnoSemestre">
                     <Select
+                      className="SelectList"
                       placeholder="Ano"
                       options={options.years}
                       value={{ value: turma2.ano, label: turma2.ano }}
@@ -85,6 +86,7 @@ function Turmas() {
                       }}
                     />
                     <Select
+                      className="SelectList"
                       placeholder="Semestre"
                       options={options.semesters}
                       value={{ value: turma2.semestre, label: turma2.semestre }}
@@ -101,6 +103,7 @@ function Turmas() {
                 </td>
                 <td>
                   <Select
+                    className="SelectList"
                     placeholder="Disciplinas"
                     options={DBdisciplinas}
                     value={turma2.disciplina}
@@ -121,6 +124,7 @@ function Turmas() {
                 </td>
                 <td>
                   <Select
+                    className="SelectList"
                     placeholder="Professor"
                     options={infoProfessores}
                     value={infoProfessores.find(
@@ -197,7 +201,12 @@ function Turmas() {
         <div className="showBasicDataCard">
           <div className="TurmaHorariosTitleButton">
             <h3>Horários</h3>
-            <button onClick={() => adicionarHorario()}>Adicionar</button>
+            <button
+              className="AdicionarHorario"
+              onClick={() => adicionarHorario()}
+            >
+              Adicionar
+            </button>
           </div>
           <table className="showBasicDataTable">
             <thead>
@@ -215,7 +224,7 @@ function Turmas() {
                     <td>
                       <Select
                         placeholder="Dia"
-                        className="TurmaHorariosColunaDias"
+                        className="SelectList"
                         options={options.days}
                         value={options.days.find(
                           (day) => day.value === horario.dia
@@ -237,8 +246,8 @@ function Turmas() {
                     </td>
                     <td>
                       <Select
+                        className="SelectList"
                         placeholder="Hora início"
-                        className="TurmaHorariosColunaHoraInicio"
                         options={options.hours}
                         value={options.hours.find(
                           (hour) => hour.value === horario.horaInicio
@@ -255,8 +264,8 @@ function Turmas() {
                     </td>
                     <td>
                       <Select
+                        className="SelectList TurmaHorariosColunaDuracao"
                         placeholder="Duração"
-                        className="TurmaHorariosColunaDuracao"
                         options={options.durations}
                         value={options.durations.find(
                           (duration) => duration.value === horario.duracao
@@ -274,13 +283,13 @@ function Turmas() {
                         formatOptionLabel={({ value, label }, { context }) => {
                           return context === "value"
                             ? `${value}`
-                            : `(${label}) ${value}`;
+                            : `${label}${value > 1 ? "s" : ""}`;
                         }}
                       />
                     </td>
-                    <td>
+                    <td className="">
                       <Select
-                        className="TurmaHorariosColunaSala"
+                        className="SelectList"
                         placeholder="Sala"
                         options={infoSalas}
                         value={infoSalas.find(
@@ -304,7 +313,11 @@ function Turmas() {
                       />
                     </td>
                     <td>
-                      <button key={id} onClick={() => removerHorario(id)}>
+                      <button
+                        className="TurmaHorarioRemove"
+                        key={id}
+                        onClick={() => removerHorario(id)}
+                      >
                         Remover
                       </button>
                     </td>
@@ -317,7 +330,7 @@ function Turmas() {
       );
     }
 
-    function CRUDParticipants(props) {
+    function Participants(props) {
       const { turma3 } = props;
 
       // const [participants, setParticipants] = useState([]);
@@ -405,20 +418,20 @@ function Turmas() {
           <h3>Número de participantes</h3>
           <table className="showBasicDataTable">
             <thead></thead>
-            <tbody style={{}}>
+            <tbody>
               <tr>
-                <th style={{ textAlign: "left" }}>Demanda de aprovados</th>
+                <th>Demanda de aprovados</th>
                 <td>123</td>
               </tr>
               <tr>
-                <th style={{ textAlign: "left" }}>Demanda de reprovados</th>
+                <th>Demanda de reprovados</th>
                 <td>321</td>
               </tr>
               <tr>
-                <th style={{ textAlign: "left" }}>Demanda estimada</th>
+                <th>Demanda estimada</th>
                 <td>
                   <input
-                    style={{ width: 40 }}
+                    className="inputNumeroParticipantes"
                     type="number"
                     value={numero}
                     onChange={handleInputChange}
@@ -427,7 +440,7 @@ function Turmas() {
                 </td>
               </tr>
               <tr>
-                <th style={{ textAlign: "left" }}>Inscritos</th>
+                <th>Inscritos</th>
                 <td>{alunosDessaDisciplina.length}</td>
               </tr>
             </tbody>
@@ -465,7 +478,7 @@ function Turmas() {
       <div className="infoCard">
         <DadosTurma turma2={turma} setTurma2={setTurma} />
         <HorariosTurma turma1={turma} setTurma1={setTurma} />
-        <CRUDParticipants turma3={turma} />
+        <Participants turma3={turma} />
       </div>
     );
   }

@@ -27,7 +27,7 @@ function Salas() {
       setSala(newOption);
     }
     return (
-      <div className="itemSelectionBar" onWheel={scrollThroughSalas}>
+      <div className="SelectionBar" onWheel={scrollThroughSalas}>
         <Select
           className="itemSelectionBar"
           options={salas}
@@ -49,7 +49,7 @@ function Salas() {
     function InformacoesBaseDaSala() {
       return (
         <div className="showBasicDataCard">
-          <h3>Informações da Sala</h3>
+          <h3>INFORMAÇÕES DA SALA</h3>
           <table className="showBasicDataTable">
             <tbody>
               <tr>
@@ -96,7 +96,7 @@ function Salas() {
       // console.log(turmasNestaSala);
       return (
         <div className="showBasicDataCard">
-          <h4>Informações de Turmas nesta sala</h4>
+          <h4>TURMAS NESTA SALA</h4>
           <table className="showBasicDataTable">
             <thead>
               <tr>
@@ -136,7 +136,9 @@ function Salas() {
 
     function OcupacaoNaSala() {
       return (
-        <img className="CRUD-room-placeholderimg" src={assets.room} alt="" />
+        <div className="showBasicDataCard">
+          <img className="CRUD-room-placeholderimg" src={assets.room} alt="" />
+        </div>
       );
     }
 

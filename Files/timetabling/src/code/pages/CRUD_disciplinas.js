@@ -39,34 +39,9 @@ let disciplinas_RS = DBdisciplinas.map((disciplina) => {
   };
 });
 
-function updatingSelect(
-  newValue,
-  coletivo,
-  setColetivo,
-  individual,
-  setIndividual
-) {
-  console.log("Updating Select");
-  console.log("individual: ", individual);
-
-  let myIndividual = { ...individual };
-  myIndividual["periodo"] = newValue.value;
-  setIndividual(myIndividual);
-
-  console.log("newValue: ", newValue);
-  console.log("individual: ", individual);
-}
-
 function Disciplinas() {
   const [disciplinas, setDisciplinas] = useState(disciplinas_RS);
   const [disciplina, setDisciplina] = useState(disciplinas[36]);
-
-  function getCorrectPeriodo(periodo) {
-    let correctPeriodo = options.expectedSemester.find(
-      (option) => option.value === periodo
-    );
-    return correctPeriodo;
-  }
 
   function DisciplinasSelection() {
     function scrollThroughDisciplinas(event) {
@@ -81,15 +56,15 @@ function Disciplinas() {
       setDisciplina(newOption);
     }
     return (
-      <div className="itemSelectionBar" onWheel={scrollThroughDisciplinas}>
+      <div className="SelectionBar" onWheel={scrollThroughDisciplinas}>
         <Select
+          className="itemSelectionBar"
           placeholder={"Disciplina"}
           value={disciplina}
           options={disciplinas}
           onChange={setDisciplina}
           // formatOptionLabel={props.formatOptionLabel}
           isMulti={false}
-          className="SelectList-disciplinas"
           getOptionValue={(option) => option.codigo}
           getOptionLabel={(option) => option.nome}
           formatOptionLabel={({ periodo, codigo, nome }) =>
@@ -100,42 +75,110 @@ function Disciplinas() {
     );
   }
 
-  function InformacoesBaseDaDisciplina() {
+  function DisciplinasCard() {
+    function InformacoesBaseDaDisciplina() {
+      function getCorrectPeriodo(periodo) {
+        let correctPeriodo = options.expectedSemester.find(
+          (option) => option.value === periodo
+        );
+        return correctPeriodo;
+      }
+
+      function updatingSelect(
+        newValue,
+        coletivo,
+        setColetivo,
+        individual,
+        setIndividual
+      ) {
+        console.log("Updating Select");
+        console.log("individual: ", individual);
+
+        let myIndividual = { ...individual };
+        myIndividual["periodo"] = newValue.value;
+        setIndividual(myIndividual);
+
+        console.log("newValue: ", newValue);
+        console.log("individual: ", individual);
+      }
+
+      return (
+        <div className="showBasicDataCard">
+          <h3>INFORMAÇÕES DA DISCIPLINA</h3>
+          <table className="showBasicDataTable">
+            <thead></thead>
+            <tbody>
+              <tr>
+                <th>Código</th>
+                <td>{disciplina.codigo}</td>
+              </tr>
+              <tr>
+                <th>Nome</th>
+                <td>{disciplina.nome}</td>
+              </tr>
+              <tr>
+                <th>Período Esperado</th>
+                <td>
+                  <Select
+                    className="SelectList"
+                    newPlaceHolder="Período Esperado"
+                    value={getCorrectPeriodo(disciplina.periodo)}
+                    options={options.expectedSemester}
+                    onChange={(newValue) => {
+                      updatingSelect(
+                        newValue,
+                        disciplinas,
+                        setDisciplinas,
+                        disciplina,
+                        setDisciplina
+                      );
+                    }}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+
     return (
-      <div className="showBasicDataCard">
-        <h3>Informações da disciplina</h3>
-        <table className="showBasicDataTable">
-          <thead></thead>
-          <tbody>
-            <tr>
-              <th>Código</th>
-              <td>{disciplina.codigo}</td>
-            </tr>
-            <tr>
-              <th>Nome</th>
-              <td>{disciplina.nome}</td>
-            </tr>
-            <tr>
-              <th>Período Esperado</th>
-              <td>
-                <Select
-                  newPlaceHolder="Período Esperado"
-                  value={getCorrectPeriodo(disciplina.periodo)}
-                  options={options.expectedSemester}
-                  onChange={(newValue) => {
-                    updatingSelect(
-                      newValue,
-                      disciplinas,
-                      setDisciplinas,
-                      disciplina,
-                      setDisciplina
-                    );
-                  }}
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div className="infoCard">
+        <InformacoesBaseDaDisciplina />
+        <div className="showBasicDataCard">
+          <table className="showBasicDataTable">
+            <thead>
+              <tr>
+                <th>Requisitos</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <Select
+                    className="manyDisciplinasMultiSelect"
+                    placeholder={"Requisitos da disciplina"}
+                    options={disciplinas} // deveriam ser todas as disciplinas
+                    value={disciplina.requisitos}
+                    onChange={(option) => {
+                      let myNewValue = { ...disciplina };
+                      myNewValue["requisitos"] = option;
+                      setDisciplina(myNewValue);
+                    }}
+                    isMulti={true}
+                    isClearable={true}
+                    isSearchable={true}
+                    getOptionValue={(option) => option.codigo}
+                    getOptionLabel={(option) => option.nome}
+                    formatOptionLabel={({ codigo, nome }) =>
+                      `${codigo}: ${nome}`
+                    }
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   }
@@ -143,38 +186,7 @@ function Disciplinas() {
   return (
     <div className="CRUDContainComponents">
       <DisciplinasSelection />
-      <InformacoesBaseDaDisciplina />
-
-      <table>
-        <thead>
-          <tr>
-            <th>Requisitos</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <Select
-                placeholder={"Requisitos"}
-                options={disciplinas} // deveriam ser todas as disciplinas
-                value={disciplina.requisitos}
-                onChange={(option) => {
-                  let myNewValue = { ...disciplina };
-                  myNewValue["requisitos"] = option;
-                  setDisciplina(myNewValue);
-                }}
-                className="SelectDisciplinas"
-                isMulti={true}
-                isClearable={true}
-                isSearchable={true}
-                getOptionValue={(option) => option.codigo}
-                getOptionLabel={(option) => option.nome}
-                formatOptionLabel={({ codigo, nome }) => `${codigo}: ${nome}`}
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <DisciplinasCard />
     </div>
   );
 }

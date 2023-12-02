@@ -7,7 +7,7 @@ import CRUDprofessors from "./pages/CRUD_professores";
 import CRUDstudents from "./pages/CRUD_alunos";
 import CRUDrooms from "./pages/CRUD_salas";
 import CRUDclass from "./pages/CRUD_turmas";
-import MainCRUD from "./pages/CRUD_main";
+// import MainCRUD from "./pages/CRUD_main";
 import MainPage from "./pages/mainpage";
 import NoMatch from "./pages/NoPage";
 
@@ -18,7 +18,7 @@ const MyRouting = () => {
       <Routes>
         <Route index element={<MainPage />} />
         <Route path={options.CRUD.main.url_path} element={<MainPage />} />
-        <Route path={options.CRUD.crud.url_path} element={<MainCRUD />} />
+        {/* <Route path={options.CRUD.crud.url_path} element={<MainCRUD />} /> */}
         <Route
           path={options.CRUD.crud_salas.url_path}
           element={<CRUDrooms />}

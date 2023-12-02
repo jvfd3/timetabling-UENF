@@ -41,6 +41,9 @@
     </div>
 ```
 
+- [ ] Make all multiselect only display one item per line: Professores
+- [ ] Fazer com que o hover da seleção de itens se apresente exatamente quando a possíbilidade de scroll for ativada
+
 ## Other things to do
 
 ### Conflitos
