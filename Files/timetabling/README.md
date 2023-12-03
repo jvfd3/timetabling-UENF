@@ -2,7 +2,7 @@
 
 ## Diário
 
-### 27/11/2023 - O que quero fazer hoje?
+### 27/11/2023
 
 - [X] Disciplinas
   - [x] Visualização
@@ -22,7 +22,7 @@
   - [ ] Salas
 - [ ] Entender o que tá rolando no roteamento do GitHub Pages
 
-### 28/11/2023 - O que quero fazer hoje?
+### 28/11/2023
 
 - [X] Visualização de turmas
   - [X] Informações
@@ -94,7 +94,7 @@
       3. Professor
       4. Número alunos
 
-### 01/12/2023 - O que quero fazer hoje?
+### 01/12/2023
 
 - [ ] Trabalhar com conflitos
   - [ ] Converter a página padrão em uma página de testes
