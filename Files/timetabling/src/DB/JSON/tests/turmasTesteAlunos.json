@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1, "ano": 2022, "semestre": 1, "professor": "",
+    "disciplina": {"codigo": "INF01101", "nome": ""},
+    "horarios": [ { "dia": "SEG", "horaInicio": 7, "duracao": 2 },
+                  { "dia": "QUA", "horaInicio": 7, "duracao": 2 }]
+  },
+  {
+    "id": 2, "ano": 2022, "semestre": 1, "professor": "",
+    "disciplina": {"codigo": "INF01104", "nome": ""},
+    "horarios": [ { "dia": "TER", "horaInicio": 8, "duracao": 2 },
+                  { "dia": "QUI", "horaInicio": 8, "duracao": 2 }]
+  },
+  {
+    "id": 3, "ano": 2022, "semestre": 1, "professor": "",
+    "disciplina": {"codigo": "INF01106", "nome": ""},
+    "horarios": [ { "dia": "QUA", "horaInicio": 9, "duracao": 2 },
+                  { "dia": "SEX", "horaInicio": 9, "duracao": 2 }]
+  },
+  {
+    "id": 4, "ano": 2022, "semestre": 1, "professor": "",
+    "disciplina": {"codigo": "MAT01104", "nome": ""},
+    "horarios": [ { "dia": "SEG", "horaInicio": 8, "duracao": 2 },
+                  { "dia": "QUA", "horaInicio": 8, "duracao": 2 }]
+  },
+  {
+    "id": 5, "ano": 2022, "semestre": 1, "professor": "",
+    "disciplina": {"codigo": "MAT01203", "nome": ""},
+    "horarios": [ { "dia": "SEG", "horaInicio": 10, "duracao": 2 },
+                  { "dia": "QUA", "horaInicio": 10, "duracao": 2 }]
+  },
+  {
+    "id": 6, "ano": 2022, "semestre": 1, "professor": "",
+    "disciplina": {"codigo": "MAT01212", "nome": ""},
+    "horarios": [ { "dia": "SEG", "horaInicio": 9, "duracao": 2 },
+                  { "dia": "QUA", "horaInicio": 9, "duracao": 2 }]
+  }
+]

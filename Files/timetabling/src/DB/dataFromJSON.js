@@ -1,7 +1,5 @@
 import andamentoAlunosData from "./JSON/dynamic/andamentoAlunos.json";
 import preferenciasProfessoresData from "./JSON/dynamic/preferenciasProfessores.json";
-import turmas_2022Data from "./JSON/dynamic/turmas_2022.json";
-import turmas_passadoData from "./JSON/dynamic/turmas_passado.json";
 import turmasData from "./JSON/dynamic/turmas.json";
 import RSalunosData from "./JSON/select/RSalunos.json";
 import RSdisciplinasData from "./JSON/select/RSdisciplinas.json";
@@ -11,18 +9,17 @@ import infoAlunosData from "./JSON/static/infoAlunos.json";
 import infoDisciplinasCCData from "./JSON/static/infoDisciplinasCC.json";
 import infoProfessoresData from "./JSON/static/infoProfessores.json";
 import infoSalasData from "./JSON/static/infoSalas.json";
-import turmasTesteData from "./JSON/dynamic/turmasTeste.json";
 import templatesData from "./JSON/templates/templates.json";
-import turmasTesteConflitosData from "./JSON/dynamic/turmasTesteConflitos.json";
+import turmasTesteData from "./JSON/tests/turmasTeste.json";
+import turmaTesteAlunosData from "./JSON/tests/turmasTesteAlunos.json";
+import turmasTesteConflitosProfessorData from "./JSON/tests/turmasTesteConflitosProfessor.json";
+import turmasTesteConflitosSalaData from "./JSON/tests/turmasTesteConflitosSala";
 
 const allLocalJsonData = {
   dynamic: {
     andamentoAlunos: andamentoAlunosData,
     preferenciasProfessores: preferenciasProfessoresData,
-    turmas_2022: turmas_2022Data,
-    turmas_passado: turmas_passadoData,
     turmas: turmasData,
-    turmasTeste: turmasTesteData,
   },
   select: {
     RSalunos: RSalunosData,
@@ -37,7 +34,10 @@ const allLocalJsonData = {
     infoSalas: infoSalasData,
   },
   tests: {
-    turmasTesteConflitos: turmasTesteConflitosData,
+    turmasTesteConflitosProfessor: turmasTesteConflitosProfessorData,
+    turmasTesteConflitosSala: turmasTesteConflitosSalaData,
+    turmasTesteAlunos: turmaTesteAlunosData,
+    turmasTeste: turmasTesteData,
   },
   templates: templatesData,
 };
