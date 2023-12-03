@@ -1,9 +1,9 @@
 import "./botaoRemover.css";
 
 function BotaoRemover(props) {
-  const { key, placeholder } = props;
+  const { placeholder } = props;
   return (
-    <button key={key} className="">
+    <button className="">
       {placeholder}
     </button>
   );

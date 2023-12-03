@@ -123,8 +123,8 @@ function Salas() {
                     <td>{turma.horarios.horaInicio}</td>
                     <td>{turma.horarios.duracao}</td>
                     <td>
-                      <BotaoRemover key={i} placeholder="Remover" />
                     </td>
+                      <BotaoRemover placeholder="Remover" />
                   </tr>
                 );
               })}
