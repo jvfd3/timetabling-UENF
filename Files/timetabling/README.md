@@ -204,31 +204,48 @@ Observações:
 #### 3. Um aluno com duas aulas ao mesmo tempo
 
 1. Padrão
-   1. Lista de aulas
-   2. Selecionar um ano
-   3. Selecionar um semestre
-   4. Filtrar as aulas do ano e semestre selecionados
+   1. Selecionar um ano
+   2. Selecionar um semestre
+   3. Lista de turmas
+   4. Filtrar as turmas do ano e semestre selecionados
 2. Aquisição dos dados
    1. Lista de alunos
-   1. Selecionar um aluno
+   2. Selecionar um aluno
       1. Criar uma lista com as matrículas de todos alunos
       2. Selecionar uma das matrículas
-3. Filtrar as aulas referentes à matrícula
+3. Filtrar as turmas referentes à matrícula
    1. Atualmente tem duas formas:
       1. tem a lista de disciplinas que o aluno tá cursando
       2. E também tem a lista de alunos que estão na turma
    2. Usarei a primeira
-4. Checar o conflito
-   1. Para cada turma, que terá aula nessa sala
-      1. Obter dia, início e duração
-      2. Preencher tabela de ocupação
-         1. Para cada dia
-            1. ir na hora de início e marcar como ocupado
-            2. Fazer o mesmo para os {duração - 1} próximos horários
-         2. Se o horário já estiver ocupado, marcar ambos como conflito
+   3. Retorna a lista de códigos de disciplinas que o aluno deseja cursar
+4. Preencher tabela de ocupação
+   1. Para cada disciplina que o aluno deseja cursar
+      1. Procurar se há turma disponível para essa disciplina
+      2. Se não houver, adicionar à lista `Demandado mas não ofertado`
+      3. Se houver, obter dia, início e duração
+         1. Adicionar à matriz de ocupação
+5. Checar o conflito
+   1. Para cada um dos dias da matriz de ocupação
+      1. para cada um dos horários
+         1. Se a lista for maior de 1,
             1. Adiciona a uma lista o conjunto de horários que estão em conflito
-5. Mostrar os conflitos
+6. Mostrar os conflitos
    1. console.log(lista de conflitos)
+
+#### Generalização
+
+nos 3 casos:
+
+1. Manda a chave do item selecionado
+   1. Professor: Nome
+   2. Sala: blocoSala
+   3. Aluno: listaDeMaterias
+2. compara com a chave respectiva da lista de turmas
+   1. Professor: turma.professor
+   2. Sala: turma.sala
+   3. Aluno: turma.disciplina.codigo
+3. adiciona o horario da turma na tabela de ocupacao
 
 ## Links
 
