@@ -44,7 +44,7 @@ import {
 
 */
 
-function TabelaDeConflitos() {
+function ConflictsWorkbench() {
   let turmas = testingTurmas2022_1();
 
   console.log(turmas);
@@ -130,4 +130,4 @@ function TabelaDeConflitos() {
   );
 }
 
-export default TabelaDeConflitos;
+export default ConflictsWorkbench;
