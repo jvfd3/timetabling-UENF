@@ -122,9 +122,9 @@ function Salas() {
                     <td>{turma.horarios.dia}</td>
                     <td>{turma.horarios.horaInicio}</td>
                     <td>{turma.horarios.duracao}</td>
-                    <td>
-                    </td>
+                    {/* <td>
                       <BotaoRemover placeholder="Remover" />
+                    </td> */}
                   </tr>
                 );
               })}
