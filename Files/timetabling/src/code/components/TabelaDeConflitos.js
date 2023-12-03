@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import options from "../temp/options";
 import "../CSS/defaultStyle.css";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
-import Tabela from "./Timetable";
+// import Tabela from "./Timetable";
 import {
-  getTurmasPorAnoESemestre,
+  testingTurmas2022_1,
+  splitTurmas,
+  getSplittedTurmasPorAnoESemestre,
+  searchListForKeyWithValue,
   getNumeroDeConflitos,
 } from "../functions/conflicts/auxiliarConflictsFunctions";
 
@@ -42,34 +45,29 @@ import {
 */
 
 function TabelaDeConflitos() {
-  let anos = options.constantValues.years;
-  let ano = anos[8].value;
+  let turmas = testingTurmas2022_1();
 
-  let semestres = options.constantValues.semesters;
-  let semestre = semestres[0].value;
+  console.log(turmas);
 
-  let turmas = allLocalJsonData.tests.turmasTesteAlunos;
-  let turmasDesseSemestre = getTurmasPorAnoESemestre(turmas, ano, semestre);
-
-  let alunos = allLocalJsonData.dynamic.andamentoAlunos;
-  let matriculasDeAlunos = getMatriculasAlunos(alunos);
-  let matricula = matriculasDeAlunos[93];
-  
-  let disciplinasDoAluno = alunos[matricula].cursando;
-  let turmasDoAluno = getTurmasDoAluno(turmasDesseSemestre, disciplinasDoAluno);
-  let tabelaDeOcupacao = getTabelaDeOcupacao(turmasDoAluno);
-  let conflitosEncontrados = getConflitos(tabelaDeOcupacao);
-  let numeroDeConflitos = getNumeroDeConflitos(conflitosEncontrados);
-  
-  console.log("Checando conflitos de:", ano, semestre, matricula);
+  // let alunos = allLocalJsonData.dynamic.andamentoAlunos;
+  // let matriculasDeAlunos = getMatriculasAlunos(alunos);
+  // let matricula = matriculasDeAlunos[93];
+  //
+  // let disciplinasDoAluno = alunos[matricula].cursando;
+  // let turmasDoAluno = getTurmasDoAluno(turmasDesseSemestre, disciplinasDoAluno);
+  // let tabelaDeOcupacao = getTabelaDeOcupacao(turmasDoAluno);
+  // let conflitosEncontrados = getConflitos(tabelaDeOcupacao);
+  // let numeroDeConflitos = getNumeroDeConflitos(conflitosEncontrados);
+  //
+  // console.log("Checando conflitos de:", ano, semestre, matricula);
   // console.log("Turmas desse semestre: ", turmasDesseSemestre);
   // console.log("disciplinas do aluno: ", disciplinasDoAluno)
   // console.log("turmas do aluno", turmasDoAluno)
   // console.log("Procurando conflitos de:", ano, semestre, sala);
   // console.log("turmas do sala: ", turmasDoAluno);
-  console.log("tabela de ocupação: ", tabelaDeOcupacao);
-  console.log("conflitos encontrados: ", conflitosEncontrados);
-  console.log("numero de conflitos: ", numeroDeConflitos);
+  // console.log("tabela de ocupação: ", tabelaDeOcupacao);
+  // console.log("conflitos encontrados: ", conflitosEncontrados);
+  // console.log("numero de conflitos: ", numeroDeConflitos);
 
   function getMatriculasAlunos(listaDeAlunos) {
     return Object.keys(listaDeAlunos);
@@ -84,7 +82,6 @@ function TabelaDeConflitos() {
     });
     return turmasDoAluno;
   }
-
 
   function getTabelaDeOcupacao(turmas) {
     let tabelaDeOcupacao = {};
@@ -128,7 +125,7 @@ function TabelaDeConflitos() {
 
   return (
     <div>
-      <div>TABELONA</div>
+      <div>Testing Conflicts</div>
     </div>
   );
 }
