@@ -5,8 +5,8 @@ import CRUDPageSelection from "../components/PageSelect";
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
-import AsyncSelect from "react-select/async";
-import { readData } from "../functions/CRUD_JSONBIN";
+// import AsyncSelect from "react-select/async";
+// import { readData } from "../functions/CRUD_JSONBIN";
 
 function Turmas() {
   let allTurmas = allLocalJsonData.dynamic.turmasTeste;
@@ -415,7 +415,6 @@ function Turmas() {
       return (
         <div className="showBasicDataCard">
           <h2>Número de participantes</h2>
-          <h3>Número de participantes</h3>
           <table className="showBasicDataTable">
             <thead></thead>
             <tbody>
