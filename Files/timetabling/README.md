@@ -247,6 +247,82 @@ nos 3 casos:
    3. Aluno: turma.disciplina.codigo
 3. adiciona o horario da turma na tabela de ocupacao
 
+### 03/12/2023
+
+- [ ] Conflitos (um arquivo pra cada)
+  - [ ] Demanda do aluno
+  - [ ] Capacidade da sala
+  - [ ] Disciplina do professor
+  - [ ] Preferência do professor
+- [ ] Fazer a visualização de cada conflito
+  - [ ] Tabela de conflitos
+  - [ ] Representação visual
+- [ ] Juntar o que for igual em um arquivo só e depois só usar os módulos
+
+#### Demandas dos alunos
+
+1. Padrão
+   1. Selecionar um ano
+   2. Selecionar um semestre
+   3. Lista de turmas
+   4. Filtrar as turmas do ano e semestre selecionados
+2. Aquisição dos dados
+   3. Lista de andamento dos alunos
+       1. Converter a lista de disciplinas "cursando" em um objeto de listas de demandas por matérias
+          1. `codigoDisciplina`
+             1. `listaDeAlunos`
+   4. Lista de turmas
+       1. Criar uma lista com todas as disciplinas que têm turmas
+3. Preparação dos dados
+   1. Para cada disciplina demandada
+      1. procurar quantas turmas dessa disciplina existem
+      2. Aloca o valor à `codigoDisciplina`.numeroDeTurmas
+   2. Quero por fim ter um objeto de objetos com os seguintes valores
+      1. `codigoDisciplina`
+         1. `listaDeAlunos`
+         2. `numeroDeTurmas`
+4. Mostrar os resultados
+   1. Para cada disciplina demandada
+      1. Adicionar uma linha na tabela
+         1. `codigoDisciplina`
+         2. `numeroDeTurmas`
+         3. `numeroDeAlunos`
+
+#### Capacidade da sala
+
+1. Padrão
+   1. Selecionar um ano
+   2. Selecionar um semestre
+   3. Lista de turmas
+   4. Filtrar as turmas do ano e semestre selecionados
+2. Aquisição dos dados
+   1. Lista de informações da sala
+   2. Selecionar uma sala
+      1. Criar uma lista com os nomes de todas salas
+      2. Selecionar o nome da primeira sala
+   3. Selecionar um aluno
+      1. Criar uma lista com as matrículas de todos alunos
+      2. Selecionar uma das matrículas
+3. Filtrar as turmas referentes à matrícula
+   1. Atualmente tem duas formas:
+      1. tem a lista de disciplinas que o aluno tá cursando
+      2. E também tem a lista de alunos que estão na turma
+   2. Usarei a primeira
+   3. Retorna a lista de códigos de disciplinas que o aluno deseja cursar
+4. Preencher tabela de ocupação
+   1. Para cada disciplina que o aluno deseja cursar
+      1. Procurar se há turma disponível para essa disciplina
+      2. Se não houver, adicionar à lista `Demandado mas não ofertado`
+      3. Se houver, obter dia, início e duração
+         1. Adicionar à matriz de ocupação
+5. Checar o conflito
+   1. Para cada um dos dias da matriz de ocupação
+      1. para cada um dos horários
+         1. Se a lista for maior de 1,
+            1. Adiciona a uma lista o conjunto de horários que estão em conflito
+6. Mostrar os conflitos
+   1. console.log(lista de conflitos)
+
 ## Links
 
 - [Root][base-link]
