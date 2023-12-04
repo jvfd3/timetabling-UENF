@@ -1,26 +1,18 @@
 [
   {
-    "id": 1, "ano": 2022, "semestre": 1, "professor": "",
-    "disciplina": {"codigo": "INF01112", "nome": ""},
-    "horarios": [ { "sala": "A" },
-                  { "sala": "B" }]
+    "id": 1, "ano": 2022, "semestre": 1, "disciplina": {"codigo": "INF01112"},
+    "horarios": [ { "sala": "A" }, { "sala": "A" }]
   },
   {
-    "id": 2, "ano": 2022, "semestre": 1, "professor": "",
-    "disciplina": {"codigo": "INF01113", "nome": ""},
-    "horarios": [ { "sala": "C" },
-                  { "sala": "D" }]
+    "id": 2, "ano": 2022, "semestre": 1, "disciplina": {"codigo": "INF01113"},
+    "horarios": [ { "sala": "B" }, { "sala": "A" }]
   },
   {
-    "id": 3, "ano": 2022, "semestre": 1, "professor": "",
-    "disciplina": {"codigo": "INF01114", "nome": ""},
-    "horarios": [ { "sala": "G" },
-                  { "sala": "H" }]
+    "id": 3, "ano": 2022, "semestre": 1, "disciplina": {"codigo": "INF01114"},
+    "horarios": [ { "sala": "C" }, { "sala": "A" }]
   },
   {
-    "id": 4, "ano": 2022, "semestre": 1, "professor": "",
-    "disciplina": {"codigo": "INF01113", "nome": ""},
-    "horarios": [ { "sala": "E" },
-                  { "sala": "F" }]
+    "id": 4, "ano": 2022, "semestre": 1, "disciplina": {"codigo": "INF01113"},
+    "horarios": [ { "sala": "C" }, { "sala": "A" }]
   }
 ]
