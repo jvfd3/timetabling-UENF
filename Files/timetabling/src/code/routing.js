@@ -13,7 +13,7 @@ import NoMatch from "./pages/NoPage";
 
 const MyRouting = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/timetabling-UENF">
       {/* <Navigation /> */}
       <Routes>
         <Route index element={<MainPage />} />
