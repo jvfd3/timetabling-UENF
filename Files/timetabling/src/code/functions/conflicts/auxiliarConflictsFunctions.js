@@ -56,7 +56,12 @@ function getTurmasPorAnoESemestre(turmas, ano, semestre, splitted = false) {
   return splittedTurmas;
 }
 
-function searchListForKeyWithValue(lista, chavesDaLista, valorAComparar) {
+function searchListForKeyWithValue(
+  lista,
+  chavesDaLista,
+  valorAComparar,
+  verbose = false
+) {
   /*
   O primeiro valor é uma lista de objetos
   O segundo valor é uma string que representa uma chave de cada um dos objetos da lista
@@ -67,10 +72,14 @@ function searchListForKeyWithValue(lista, chavesDaLista, valorAComparar) {
   lista.forEach((elemento) => {
     // Obter valor da lista
     let valorDoElemento = elemento;
+    if (verbose) console.log("valorDoElemento", valorDoElemento);
+    // console.log("chavesDaLista", elemento[chavesDaLista[0]])
     for (let indexChave in chavesDaLista) {
       let chave = chavesDaLista[indexChave];
       valorDoElemento = valorDoElemento[chave];
+      if (verbose) console.log("valorDoElemento", valorDoElemento);
     }
+    if (verbose) console.log("valorAComparar", valorAComparar);
     if (valorDoElemento === valorAComparar) {
       listaFiltrada.push(elemento);
     }
@@ -84,10 +93,75 @@ function getNumeroDeConflitos(conflitos) {
   return numeroDeConflitos;
 }
 
+function andamentoToDemanda(andamentos) {
+  let disciplinasSendoCursadas = {};
+
+  for (let matricula in andamentos) {
+    let disciplinas = andamentos[matricula].cursando;
+    disciplinas.forEach((disciplina) => {
+      if (!disciplinasSendoCursadas[disciplina]) {
+        disciplinasSendoCursadas[disciplina] = {
+          alunosDemandando: [matricula],
+        };
+      } else {
+        disciplinasSendoCursadas[disciplina].alunosDemandando.push(matricula);
+      }
+    });
+  }
+  return disciplinasSendoCursadas;
+}
+
+function getTurmasDaSalaPorValorDoHorario(turmas, chaves, valorAComparar) {
+  let newTurmasDaSala = [];
+  // console.log("a", turmas);
+  turmas.forEach((turma) => {
+    for (let indexHorario in turma[chaves[0]]) {
+      let valorDoElemento = turma[chaves[0]][indexHorario][chaves[1]];
+      // console.log("valorDoElemento", valorDoElemento);
+      // console.log("valorAComparar", valorAComparar);
+      if (valorDoElemento === valorAComparar) {
+        newTurmasDaSala.push({ ...turma });
+      }
+    }
+  });
+
+  return newTurmasDaSala;
+}
+
+function getAtendimentoDeDemandas(turmas, disciplinasDemandadas) {
+  /* Essa função deve percorrer a lista de disciplinas demandadas e verificar quantas turmas existem para cada uma delas
+    Depois vai preencher o objeto de disciplinas demandadas com o número de turmas
+    Com o seguinte formato:
+    disciplinasDemandadas = {
+      codigoDisciplina: {
+        alunosDemandando: [matricula],
+        numeroDeTurmas: 0
+      }
+    }
+  */
+  let atendimentoDeDisciplinas = { ...disciplinasDemandadas };
+  for (let codigoDisciplina in disciplinasDemandadas) {
+    // console.log("codigoDisciplina", codigoDisciplina);
+    let turmasDessaDisciplina = searchListForKeyWithValue(
+      turmas,
+      ["disciplina", "codigo"],
+      codigoDisciplina
+    );
+    // console.log("turmasDessaDisciplina", turmasDessaDisciplina);
+    atendimentoDeDisciplinas[codigoDisciplina].turmas = turmasDessaDisciplina;
+    atendimentoDeDisciplinas[codigoDisciplina].numeroDeTurmas =
+      turmasDessaDisciplina.length;
+  }
+  return atendimentoDeDisciplinas;
+}
+
 export {
+  andamentoToDemanda,
   testingTurmas2022_1,
   splitTurmas,
+  getTurmasDaSalaPorValorDoHorario,
   getTurmasPorAnoESemestre,
   searchListForKeyWithValue,
   getNumeroDeConflitos,
+  getAtendimentoDeDemandas,
 };

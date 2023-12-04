@@ -1,15 +1,17 @@
 import React from "react";
-// import options from "../temp/options"; 
+// import options from "../temp/options";
 import "../CSS/defaultStyle.css";
-// import { allLocalJsonData } from "../../DB/dataFromJSON";
+import { allLocalJsonData } from "../../DB/dataFromJSON";
 // import Tabela from "./Timetable";
-// import {
-//   testingTurmas2022_1,
-//   splitTurmas,
-//   getSplittedTurmasPorAnoESemestre,
-//   searchListForKeyWithValue,
-//   getNumeroDeConflitos,
-// } from "../functions/conflicts/auxiliarConflictsFunctions";
+import {
+  testingTurmas2022_1,
+  splitTurmas,
+  andamentoToDemanda,
+  //   getSplittedTurmasPorAnoESemestre,
+  getTurmasDaSalaPorValorDoHorario,
+  searchListForKeyWithValue,
+  getAtendimentoDeDemandas,
+} from "../functions/conflicts/auxiliarConflictsFunctions";
 
 /* #### Capacidade da sala
 
@@ -48,9 +50,15 @@ import "../CSS/defaultStyle.css";
 4. Mostrar os conflitos
 */
 
-function CalculoDemandasAtendidas() {
-//   let turmas = allLocalJsonData.tests.demandaTurmas;
-//   turmas = testingTurmas2022_1(turmas);
+function ConflitosDeCapacidadesDeSala() {
+  let infoSalas = allLocalJsonData.tests.capacidadeSalas;
+  let salaEscolhida = infoSalas[2]; /* 0: A, 1: B, 2: C */
+
+  let andamentos = allLocalJsonData.tests.demandaAndamentoAlunos;
+  let demandaPorDisciplina = andamentoToDemanda(andamentos);
+
+  let turmas = allLocalJsonData.tests.demandaTurmas;
+  let turmasAtuais = testingTurmas2022_1(turmas);
 
   function TabelaDemandasAtendidas() {
     return <div></div>;
@@ -63,4 +71,4 @@ function CalculoDemandasAtendidas() {
   );
 }
 
-export default CalculoDemandasAtendidas;
+export default ConflitosDeCapacidadesDeSala;

@@ -1,14 +1,14 @@
 import React from "react";
-import options from "../temp/options";
+// import options from "../temp/options";
 import "../CSS/defaultStyle.css";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
 // import Tabela from "./Timetable";
 import {
   testingTurmas2022_1,
-  splitTurmas,
-  getSplittedTurmasPorAnoESemestre,
+  // splitTurmas,
+  // getSplittedTurmasPorAnoESemestre,
   searchListForKeyWithValue,
-  getNumeroDeConflitos,
+  // getNumeroDeConflitos,
 } from "../functions/conflicts/auxiliarConflictsFunctions";
 
 /*  #### Demandas dos alunos
@@ -74,7 +74,11 @@ function CalculoDemandasAtendidas() {
     return disciplinasSendoCursadas;
   }
 
-  function getAtendimentoDeDemandas(turmas, disciplinasDemandadas) {
+  function getAtendimentoDeDemandas(
+    turmas,
+    disciplinasDemandadas,
+    verbose = false
+  ) {
     /* Essa função deve percorrer a lista de disciplinas demandadas e verificar quantas turmas existem para cada uma delas
     Depois vai preencher o objeto de disciplinas demandadas com o número de turmas
     Com o seguinte formato:
@@ -90,7 +94,8 @@ function CalculoDemandasAtendidas() {
       let turmasDessaDisciplina = searchListForKeyWithValue(
         turmas,
         ["disciplina", "codigo"],
-        codigoDisciplina
+        codigoDisciplina,
+        verbose
       );
       atendimentoDeDisciplinas[codigoDisciplina].turmas = turmasDessaDisciplina;
       atendimentoDeDisciplinas[codigoDisciplina].numeroDeTurmas =
@@ -103,7 +108,7 @@ function CalculoDemandasAtendidas() {
     let linhasDaTabela = [];
     for (let codigoDisciplina in atendimentoDeDemandas) {
       let disciplina = disciplinasDemandadas[codigoDisciplina];
-      console.log(disciplina)
+      console.log(disciplina);
       let linhaDaTabela = (
         <tr key={codigoDisciplina}>
           <td>{codigoDisciplina}</td>
