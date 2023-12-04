@@ -1,15 +1,15 @@
 import React from "react";
-import options from "../temp/options";
+// import options from "../temp/options"; 
 import "../CSS/defaultStyle.css";
-import { allLocalJsonData } from "../../DB/dataFromJSON";
+// import { allLocalJsonData } from "../../DB/dataFromJSON";
 // import Tabela from "./Timetable";
-import {
-  testingTurmas2022_1,
-  splitTurmas,
-  getSplittedTurmasPorAnoESemestre,
-  searchListForKeyWithValue,
-  getNumeroDeConflitos,
-} from "../functions/conflicts/auxiliarConflictsFunctions";
+// import {
+//   testingTurmas2022_1,
+//   splitTurmas,
+//   getSplittedTurmasPorAnoESemestre,
+//   searchListForKeyWithValue,
+//   getNumeroDeConflitos,
+// } from "../functions/conflicts/auxiliarConflictsFunctions";
 
 /* #### Capacidade da sala
 
@@ -49,8 +49,8 @@ import {
 */
 
 function CalculoDemandasAtendidas() {
-  let turmas = allLocalJsonData.tests.demandaTurmas;
-  turmas = testingTurmas2022_1(turmas);
+//   let turmas = allLocalJsonData.tests.demandaTurmas;
+//   turmas = testingTurmas2022_1(turmas);
 
   function TabelaDemandasAtendidas() {
     return <div></div>;
