@@ -1,14 +1,13 @@
 import options from "../../temp/options";
-import { allLocalJsonData } from "../../../DB/dataFromJSON";
+// import { allLocalJsonData } from "../../../DB/dataFromJSON";
 
-function testingTurmas2022_1() {
+function testingTurmas2022_1(turmas) {
   let anos = options.constantValues.years;
   let ano = anos[8].value;
 
   let semestres = options.constantValues.semesters;
   let semestre = semestres[0].value;
 
-  let turmas = allLocalJsonData.tests.turmasTesteAlunos;
   let turmas2022_1 = getTurmasPorAnoESemestre(turmas, ano, semestre);
   return turmas2022_1;
 }
@@ -42,10 +41,10 @@ function getTurmasPorAnoESemestre(turmas, ano, semestre, splitted = false) {
     }
   });
   */
-  let turmasDoAno = searchListForKeyWithValue(turmas, "ano", ano);
+  let turmasDoAno = searchListForKeyWithValue(turmas, ["ano"], ano);
   let turmasDoSemestre = searchListForKeyWithValue(
     turmasDoAno,
-    "semestre",
+    ["semestre"],
     semestre
   );
 
@@ -57,15 +56,22 @@ function getTurmasPorAnoESemestre(turmas, ano, semestre, splitted = false) {
   return splittedTurmas;
 }
 
-function searchListForKeyWithValue(lista, chaveDaLista, valorAComparar) {
+function searchListForKeyWithValue(lista, chavesDaLista, valorAComparar) {
   /*
   O primeiro valor é uma lista de objetos
   O segundo valor é uma string que representa uma chave de cada um dos objetos da lista
   O terceiro valor é o valor que a chave deve ter para que o objeto seja retornado
   */
   let listaFiltrada = [];
+
   lista.forEach((elemento) => {
-    if (elemento[chaveDaLista] === valorAComparar) {
+    // Obter valor da lista
+    let valorDoElemento = elemento;
+    for (let indexChave in chavesDaLista) {
+      let chave = chavesDaLista[indexChave];
+      valorDoElemento = valorDoElemento[chave];
+    }
+    if (valorDoElemento === valorAComparar) {
       listaFiltrada.push(elemento);
     }
   });
