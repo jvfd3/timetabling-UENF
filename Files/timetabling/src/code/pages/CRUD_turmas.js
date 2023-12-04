@@ -9,7 +9,7 @@ import { allLocalJsonData } from "../../DB/dataFromJSON";
 // import { readData } from "../functions/CRUD_JSONBIN";
 
 function Turmas() {
-  let allTurmas = allLocalJsonData.dynamic.turmasTeste;
+  let allTurmas = allLocalJsonData.tests.turmasTeste;
   const [turmas, setTurmas] = useState(allTurmas);
   const [turma, setTurma] = useState(turmas[0]);
 
