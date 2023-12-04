@@ -77,22 +77,22 @@
 8. Select de dias da semana
    1. No options, os values são SEG, TER, etc. e os labels são  Segunda, Terça, etc.
    2. Fazer o dia alterar
-9.  Select Sala
+9. Select Sala
    1. Coletar os dados das salas
    2. atribuir às opções
    3. Alterar o select
    4. Mudar a cor caso a quantidade de alunos seja superior (Later, probably)
 10. Card horários
-   1. Fazer State de horários
-   2. Fazer com que as horas atualizem os horários
+    1. Fazer State de horários
+    2. Fazer com que as horas atualizem os horários
 11. Card de alunos
-   1. Vasculhar a listagem dos alunos e ver quais estão cursando a disciplina escolhida
+    1. Vasculhar a listagem dos alunos e ver quais estão cursando a disciplina escolhida
 12. Card turma
-   1. Fazer um card bonitinho que tenha:
-      1. Ano.Periodo
-      2. Disciplina
-      3. Professor
-      4. Número alunos
+    1. Fazer um card bonitinho que tenha:
+       1. Ano.Periodo
+       2. Disciplina
+       3. Professor
+       4. Número alunos
 
 ### 01/12/2023
 
