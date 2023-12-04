@@ -1,0 +1,10 @@
+[
+  {"blocoSala": "A",  "capacidade": 9},
+  {"blocoSala": "B",  "capacidade": 9},
+  {"blocoSala": "C",  "capacidade": 9},
+  {"blocoSala": "D",  "capacidade": 7},
+  {"blocoSala": "E",  "capacidade": 4},
+  {"blocoSala": "F", "capacidade": 3},
+  {"blocoSala": "G", "capacidade": 20},
+  {"blocoSala": "H", "capacidade": 20}
+]

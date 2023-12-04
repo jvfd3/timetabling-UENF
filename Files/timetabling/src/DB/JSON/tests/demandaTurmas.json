@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1, "ano": 2022, "semestre": 1, "professor": "",
+    "disciplina": {"codigo": "INF01112", "nome": ""},
+    "horarios": [ { "sala": "A" },
+                  { "sala": "B" }]
+  },
+  {
+    "id": 2, "ano": 2022, "semestre": 1, "professor": "",
+    "disciplina": {"codigo": "INF01113", "nome": ""},
+    "horarios": [ { "sala": "C" },
+                  { "sala": "D" }]
+  },
+  {
+    "id": 3, "ano": 2022, "semestre": 1, "professor": "",
+    "disciplina": {"codigo": "INF01114", "nome": ""},
+    "horarios": [ { "sala": "G" },
+                  { "sala": "H" }]
+  },
+  {
+    "id": 4, "ano": 2022, "semestre": 1, "professor": "",
+    "disciplina": {"codigo": "INF01113", "nome": ""},
+    "horarios": [ { "sala": "E" },
+                  { "sala": "F" }]
+  }
+]
