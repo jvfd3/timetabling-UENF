@@ -21,7 +21,7 @@ function Main() {
           seleção de itens e usar o scroll do mouse
         </li>
         <li>
-          <strong>Obs.:</strong>: quando a página é longa e tem scroll,
+          <strong>Obs.</strong>: quando a página é longa e tem scroll,
           pressione a letra "s" para impedir a rolagem da página e poder usar o
           scroll do mouse para selecionar itens.
         </li>
