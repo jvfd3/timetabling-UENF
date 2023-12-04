@@ -3,7 +3,6 @@ const assets = {
   class: require("./images/Class.png"),
   gridCS: require("./images/Grid_CS.png"),
   gridJV: require("./images/Grid_mine.png"),
-  professorMap: require("./images/ProfessorPreferenceMap.png"),
   icons: {
     students: "./icons/Students.svg",
     add: "./icons/Add Circle.svg",
