@@ -42,7 +42,13 @@
 ```
 
 - [ ] Make all multiselect only display one item per line: Professores
-- [ ] Fazer com que o hover da seleção de itens se apresente exatamente quando a possíbilidade de scroll for ativada
+- [ ] Fazer com que o hover da seleção de itens se apresente exatamente quando a possibilidade de scroll for ativada
+- [ ] O que preciso fazer para finalizar o estágio com Annabell?
+- [ ] Conferir com Tang qual é a sequência das ações
+- [ ] Entrar na disciplina de verão
+- [ ] O que é o mínimo que eu preciso pra poder apresentar?
+- [ ] Cores pastéis
+- [ ] Ver sobre BD com tia fabiane
 
 ## Other things to do
 
