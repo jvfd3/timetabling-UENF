@@ -92,7 +92,7 @@ const options = {
     ],
     routing: {
       filePath: "/pages/",
-      urlPath: "/timetabling-uenf/",
+      urlPath: "/timetabling-UENF/",
     },
     pageSelection: {
       main: { label: "Main", value: "main" },
