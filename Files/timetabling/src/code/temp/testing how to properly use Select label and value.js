@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import options from "../temp/options";
+import options from "./options";
 import CRUDPageSelection from "../components/PageSelect";
 import "../CSS/defaultStyle.css";
 import Select from "react-select";

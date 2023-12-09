@@ -22,5 +22,5 @@
   {"blocoSala": "P10-1",   "capacidade": 40, "bloco": "P10", "codigo": "1",    "descricaoBloco": "P10"},
   {"blocoSala": "P10-2",   "capacidade": 40, "bloco": "P10", "codigo": "2",    "descricaoBloco": "P10"},
   {"blocoSala": "P10-3",   "capacidade": 35, "bloco": "P10", "codigo": "3",    "descricaoBloco": "P10"},
-  {"blocoSala": "OutroCentro", "capacidade": 99, "bloco": "Outro centro", "codigo": "99",    "descricaoBloco": "Uma sala de outro centro"}
+  {"blocoSala": "OutroCentro", "capacidade": 99, "bloco": "Outro centro", "codigo": "123",    "descricaoBloco": "Uma sala de outro centro"}
 ]

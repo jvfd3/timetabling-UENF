@@ -8,13 +8,13 @@ const CRUDPageSelection = (props) => {
   const navigate = useNavigate();
 
   const handleChange = (selectedOption) => {
-    navigate(options.constantValues.routing.urlPath+selectedOption.value);
+    navigate(options.constantValues.routing.urlPath + selectedOption.value);
   };
 
   // Filtrar as opções para remover Not Found e Main CRUD
-  const filteredOptions = Object.values(options.constantValues.pageSelection).filter(
-    (option) => option.label !== "Not Found"
-  );
+  const filteredOptions = Object.values(
+    options.constantValues.pageSelection
+  ).filter((option) => option.label !== "Not Found");
 
   useEffect(() => {
     const keydownHandler = (event) => {

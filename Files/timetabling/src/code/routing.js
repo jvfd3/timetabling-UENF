@@ -7,6 +7,7 @@ import options from "./temp/options";
 
 import Main from "./pages/main";
 import Turmas from "./pages/turmas";
+import MultiTurmas from "./pages/multiTurmas";
 import Alunos from "./pages/alunos";
 import Professores from "./pages/professores";
 import Disciplinas from "./pages/disciplinas";
@@ -17,6 +18,7 @@ function MyRouting() {
 
   let basePath = options.constantValues.routing.urlPath; //"/timetabling-uenf/";
   let mainPath = basePath+options.constantValues.pageSelection.main.value;
+  let multiTurmasPath = basePath+options.constantValues.pageSelection.multiTurmas.value;
   let turmasPath = basePath+options.constantValues.pageSelection.turmas.value;
   let alunosPath = basePath+options.constantValues.pageSelection.alunos.value;
   let professoresPath = basePath+options.constantValues.pageSelection.professores.value;
@@ -32,6 +34,7 @@ function MyRouting() {
         <Route element={<Main/>} index />
         <Route element={<Main/>} path={basePath} />
         <Route element={<Main/>} path={mainPath} />
+        <Route element={<MultiTurmas/>} path={multiTurmasPath}/>
         <Route element={<Turmas/>} path={turmasPath}/>
         <Route element={<Alunos/>} path={alunosPath}/>
         <Route element={<Professores/>} path={professoresPath}/>

@@ -4,8 +4,16 @@ const options = {
       { nivel: 0, cor: "#747474", descricao: "A preferência não foi coletada" },
       { nivel: 1, cor: "#489B14", descricao: "Prefere dar aula nesse horário" },
       { nivel: 2, cor: "#EEDF58", descricao: "Não se importa" },
-      { nivel: 3, cor: "#DC8324", descricao: "Prefere não dar aula neste horário", },
-      { nivel: 4, cor: "#B70000", descricao: "Não pode dar aula neste horário", },
+      {
+        nivel: 3,
+        cor: "#DC8324",
+        descricao: "Prefere não dar aula neste horário",
+      },
+      {
+        nivel: 4,
+        cor: "#B70000",
+        descricao: "Não pode dar aula neste horário",
+      },
     ],
     years: [
       { value: 2014, label: 2014 },
@@ -54,6 +62,12 @@ const options = {
       { hora: 20, turno: "Noite" },
       { hora: 21, turno: "Noite" },
     ],
+    hoursTang: [
+      { hora: 8, turno: "Manhã" },
+      { hora: 10, turno: "Manhã" },
+      { hora: 14, turno: "Tarde" },
+      { hora: 16, turno: "Tarde" },
+    ],
     expectedSemester: [
       { label: 0, value: 0 },
       { label: 1, value: 1 },
@@ -70,10 +84,10 @@ const options = {
     durations: [
       { value: 0, label: "sem aula" },
       { value: 1, label: "1 hora" },
-      { value: 2, label: "2 hora" },
-      { value: 3, label: "3 hora" },
-      { value: 4, label: "4 hora" },
-      { value: 5, label: "5 hora" },
+      { value: 2, label: "2 horas" },
+      { value: 3, label: "3 horas" },
+      { value: 4, label: "4 horas" },
+      { value: 5, label: "5 horas" },
       // { value: 6, label: "6 hora" },
     ],
     routing: {
@@ -82,13 +96,14 @@ const options = {
     },
     pageSelection: {
       main: { label: "Main", value: "main" },
+      multiTurmas: { label: "MultiTurmas", value: "multiturmas" },
       turmas: { label: "Turmas", value: "turmas" },
       alunos: { label: "Alunos", value: "alunos" },
       professores: { label: "Professores", value: "professores" },
       disciplinas: { label: "Disciplinas", value: "disciplinas" },
       salas: { label: "Salas", value: "salas" },
-      notFound: { label: "Not Found" , value: "notFound" },
-    }
+      notFound: { label: "Not Found", value: "notFound" },
+    },
   },
   defaultValues: {},
   yetUnusedValues: {
@@ -98,7 +113,10 @@ const options = {
       { value: "Engenharia de Produção", label: "Eng. Prod." },
       { value: "Engenharia Meteorológica", label: "Eng. Met." },
       { value: "Engenharia Metalúrgica e de Materiais", label: "Eng. Mat." },
-      { value: "Engenharia de Exploração e Produção de Petróleo", label: "Eng. Petr." },
+      {
+        value: "Engenharia de Exploração e Produção de Petróleo",
+        label: "Eng. Petr.",
+      },
       { value: "Licenciatura em Física", label: "LcFis" },
       { value: "Licenciatura em Química", label: "LcQui" },
       { value: "Licenciatura em Matemática", label: "LcMat " },

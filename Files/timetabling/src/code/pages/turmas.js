@@ -493,7 +493,9 @@ function Turmas() {
 function CRUDclass() {
   return (
     <div className="background">
-      <CRUDPageSelection defaultValue={options.constantValues.pageSelection.turmas} />
+      <CRUDPageSelection
+        defaultValue={options.constantValues.pageSelection.turmas}
+      />
       <Turmas />
     </div>
   );

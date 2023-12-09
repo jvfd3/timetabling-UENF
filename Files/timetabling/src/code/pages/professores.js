@@ -34,7 +34,7 @@ function Professores() {
   }, [professor]);
 
   function updatePreferencias(newPreferenciaValue) {
-    console.log("Updating preferencias...");
+    // console.log("Updating preferencias...");
     let newPreferencias = { ...preferencias };
     newPreferencias[professor.nome] = newPreferenciaValue;
     setPreferencias(newPreferencias);
@@ -413,7 +413,9 @@ function Professores() {
 function CRUDprofessors() {
   return (
     <div className="background">
-      <CRUDPageSelection defaultValue={options.constantValues.pageSelection.professores} />
+      <CRUDPageSelection
+        defaultValue={options.constantValues.pageSelection.professores}
+      />
       <Professores />
     </div>
   );
