@@ -5,25 +5,7 @@ import "../CSS/defaultStyle.css";
 import ConflictsWorkbench from "../components/ConflictsWorkbench";
 
 function MainPage() {
-
   function Main() {
-    function whereAmI() {
-      let hostName = window.location.hostname;
-      let isLocalCoding = hostName === "localhost" || hostName === "127.0.0.1"
-      let isGitHubPages = hostName.includes("github.io");
-      let msg = "; Está rodando ";
-      if (isLocalCoding) {
-        msg += "no Localhost";
-      } else if (isGitHubPages) {
-        msg += "no GitHub Pages";
-      } else {
-        msg += "em algum outro lugar";
-      }
-      console.log("Host: " + hostName + msg);
-    }
-  
-    // whereAmI();
-
     return (
       <div className="CRUDContainComponents">
         <h1>Welcome to my monograph's website!</h1>
@@ -41,8 +23,8 @@ function MainPage() {
           </li>
           <li>
             <strong>Obs.</strong>: quando a página é longa e tem scroll,
-            pressione a letra "s" para impedir a rolagem da página e poder usar o
-            scroll do mouse para selecionar itens.
+            pressione a letra "s" para impedir a rolagem da página e poder usar
+            o scroll do mouse para selecionar itens.
           </li>
         </ul>
       </div>
@@ -51,7 +33,9 @@ function MainPage() {
 
   return (
     <div className="background">
-      <CRUDPageSelection defaultValue={options.constantValues.pageSelection.main} />
+      <CRUDPageSelection
+        defaultValue={options.constantValues.pageSelection.main}
+      />
       <Main />
     </div>
   );
