@@ -162,7 +162,7 @@ function Salas() {
 function CRUDrooms() {
   return (
     <div className="background">
-      <CRUDPageSelection defaultValue={options.CRUD.crud_salas} />
+      <CRUDPageSelection defaultValue={options.constantValues.pageSelection.salas} />
       <Salas />
     </div>
   );

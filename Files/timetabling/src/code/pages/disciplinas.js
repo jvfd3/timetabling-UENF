@@ -78,7 +78,7 @@ function Disciplinas() {
   function DisciplinasCard() {
     function InformacoesBaseDaDisciplina() {
       function getCorrectPeriodo(periodo) {
-        let correctPeriodo = options.expectedSemester.find(
+        let correctPeriodo = options.constantValues.expectedSemester.find(
           (option) => option.value === periodo
         );
         return correctPeriodo;
@@ -123,7 +123,7 @@ function Disciplinas() {
                     className="SelectList"
                     newPlaceHolder="Período Esperado"
                     value={getCorrectPeriodo(disciplina.periodo)}
-                    options={options.expectedSemester}
+                    options={options.constantValues.expectedSemester}
                     onChange={(newValue) => {
                       updatingSelect(
                         newValue,
@@ -194,7 +194,7 @@ function Disciplinas() {
 function CRUDDisciplinas() {
   return (
     <div className="background">
-      <CRUDPageSelection defaultValue={options.CRUD.crud_disciplinas} />
+      <CRUDPageSelection defaultValue={options.constantValues.pageSelection.disciplinas} />
       <Disciplinas />
     </div>
   );

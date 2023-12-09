@@ -135,8 +135,8 @@ function Professores() {
     function PreferencesTable(props) {
       const { preferencia1, setPreferencia1 } = props;
 
-      let infoPreferencias = options.constantValues.niveisDePreferencia;
-      let dias = options.days;
+      let infoPreferencias = options.constantValues.preferenceLevels;
+      let dias = options.constantValues.days;
       let hasNumbers = false;
 
       function getColorPreference(nivelDePreferencia) {
@@ -413,7 +413,7 @@ function Professores() {
 function CRUDprofessors() {
   return (
     <div className="background">
-      <CRUDPageSelection defaultValue={options.CRUD.crud_professores} />
+      <CRUDPageSelection defaultValue={options.constantValues.pageSelection.professores} />
       <Professores />
     </div>
   );

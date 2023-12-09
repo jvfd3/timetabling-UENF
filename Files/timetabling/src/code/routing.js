@@ -1,46 +1,43 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import options from "./temp/options";
+// import PageSelection from "./components/PageSelect";
 
 // Page imports
-import CRUDdisciplinas from "./pages/CRUD_disciplinas";
-import CRUDprofessors from "./pages/CRUD_professores";
-import CRUDstudents from "./pages/CRUD_alunos";
-import CRUDrooms from "./pages/CRUD_salas";
-import CRUDclass from "./pages/CRUD_turmas";
-// import MainCRUD from "./pages/CRUD_main";
-import MainPage from "./pages/mainpage";
-import NoMatch from "./pages/NoPage";
+/* Isso poderia ser trocado pro valor do options */
 
-const MyRouting = () => {
+import CRUDdisciplinas from "./pages/disciplinas";
+import CRUDprofessors from "./pages/professores";
+import CRUDstudents from "./pages/alunos";
+import CRUDrooms from "./pages/salas";
+import CRUDclass from "./pages/turmas";
+import MainPage from "./pages/mainpage";
+import NoMatch from "./pages/notFound";
+
+function MyRouting() {
+
+  let basePath = options.constantValues.routing.urlPath;
+  let mainPath = basePath+options.constantValues.pageSelection.mainPage.value;
+  let turmasPath = basePath+options.constantValues.pageSelection.turmas.value;
+  let salasPath = basePath+options.constantValues.pageSelection.salas.value;
+  let alunosPath = basePath+options.constantValues.pageSelection.alunos.value;
+  let professoresPath = basePath+options.constantValues.pageSelection.professores.value;
+  let disciplinasPath = basePath+options.constantValues.pageSelection.disciplinas.value;
+  let notFoundPath = basePath+options.constantValues.pageSelection.notFound.value;
+
   return (
-    <BrowserRouter basename="/timetabling-UENF">
+    <BrowserRouter basename="/">
+      {/* <PageSelection /> */}
       {/* <Navigation /> */}
       <Routes>
-        <Route index element={<MainPage />} />
-        <Route path={options.CRUD.main.url_path} element={<MainPage />} />
-        {/* <Route path={options.CRUD.crud.url_path} element={<MainCRUD />} /> */}
-        <Route
-          path={options.CRUD.crud_salas.url_path}
-          element={<CRUDrooms />}
-        />
-        <Route
-          path={options.CRUD.crud_turmas.url_path}
-          element={<CRUDclass />}
-        />
-        <Route
-          path={options.CRUD.crud_alunos.url_path}
-          element={<CRUDstudents />}
-        />
-        <Route
-          path={options.CRUD.crud_professores.url_path}
-          element={<CRUDprofessors />}
-        />
-        <Route
-          path={options.CRUD.crud_disciplinas.url_path}
-          element={<CRUDdisciplinas />}
-        />
-        <Route path={options.CRUD.not_found.url_path} element={<NoMatch />} />
-        <Route path="*" element={<NoMatch />} />
+        <Route index element={<MainPage/>} />
+        <Route element={<MainPage/>} path={mainPath} />
+        <Route element={<CRUDrooms/>} path={turmasPath}/>
+        <Route element={<CRUDclass/>} path={salasPath}/>
+        <Route element={<CRUDstudents/>} path={alunosPath}/>
+        <Route element={<CRUDprofessors/>} path={professoresPath}/>
+        <Route element={<CRUDdisciplinas/>} path={disciplinasPath}/>
+        <Route path={notFoundPath} element={<NoMatch/>}/>
+        <Route path="*" element={<NoMatch/>}/>
       </Routes>
     </BrowserRouter>
   );

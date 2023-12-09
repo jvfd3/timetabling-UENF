@@ -10,6 +10,7 @@
   {"blocoSala": "P3-206",  "capacidade": 40, "bloco": "P3",  "codigo": "206",  "descricaoBloco": "Prédio do CCT"},
   {"blocoSala": "P3-207",  "capacidade": 40, "bloco": "P3",  "codigo": "207",  "descricaoBloco": "Prédio do CCT"},
   {"blocoSala": "P3-208",  "capacidade": 35, "bloco": "P3",  "codigo": "208",  "descricaoBloco": "Prédio do CCT"},
+  {"blocoSala": "Banc-1",  "capacidade": 30, "bloco": "P3",  "codigo": "1",    "descricaoBloco": "Bancada do CCT"},
   {"blocoSala": "E1-205",  "capacidade": 35, "bloco": "E1",  "codigo": "205",  "descricaoBloco": "E1 (LCMAT) Prédio da REITORIA"},
   {"blocoSala": "E1-206",  "capacidade": 35, "bloco": "E1",  "codigo": "206",  "descricaoBloco": "E1 Prédio da REITORIA"},
   {"blocoSala": "E1-211",  "capacidade": 35, "bloco": "E1",  "codigo": "211",  "descricaoBloco": "E1 Prédio da REITORIA"},
@@ -20,5 +21,6 @@
   {"blocoSala": "P5-112",  "capacidade": 24, "bloco": "P5",  "codigo": "112",  "descricaoBloco": "P5"},
   {"blocoSala": "P10-1",   "capacidade": 40, "bloco": "P10", "codigo": "1",    "descricaoBloco": "P10"},
   {"blocoSala": "P10-2",   "capacidade": 40, "bloco": "P10", "codigo": "2",    "descricaoBloco": "P10"},
-  {"blocoSala": "P10-3",   "capacidade": 35, "bloco": "P10", "codigo": "3",    "descricaoBloco": "P10"}
+  {"blocoSala": "P10-3",   "capacidade": 35, "bloco": "P10", "codigo": "3",    "descricaoBloco": "P10"},
+  {"blocoSala": "OutroCentro", "capacidade": 99, "bloco": "Outro centro", "codigo": "99",    "descricaoBloco": "Uma sala de outro centro"}
 ]

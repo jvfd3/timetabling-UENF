@@ -58,5 +58,7 @@
   {"periodo": 0,  "codigo": "INF01240", "nome": "Tópicos Especiais em Sistemas Operacionais",                             "requisitos": [], "codigo_requisitos": []},
   {"periodo": 8,  "codigo": "PRO01540", "nome": "Empreendedorismo",                               "requisitos": ["Pesquisa Operacional"], "codigo_requisitos": ["INF01211"]},
   {"periodo": 10, "codigo": "INF01127", "nome": "Estágio Supervisionado",                         "requisitos": ["Projeto de Monografia"], "codigo_requisitos": ["INF01130"]},
-  {"periodo": 10, "codigo": "INF01131", "nome": "Monografia",                                     "requisitos": ["Projeto de Monografia"], "codigo_requisitos": ["INF01130"]}
+  {"periodo": 10, "codigo": "INF01131", "nome": "Monografia",                                     "requisitos": ["Projeto de Monografia"], "codigo_requisitos": ["INF01130"]},
+  {"periodo": 1,  "codigo": "INF00001", "nome": "FCC 1 - Ímpar",                                  "requisitos": [], "codigo_requisitos": []},
+  {"periodo": 2,  "codigo": "INF00002", "nome": "FCC 2 - Par",                                    "requisitos": [], "codigo_requisitos": []}
 ]

@@ -79,7 +79,7 @@ function Turmas() {
                     <Select
                       className="SelectList"
                       placeholder="Ano"
-                      options={options.years}
+                      options={options.constantValues.years}
                       value={{ value: turma2.ano, label: turma2.ano }}
                       onChange={(newValue) => {
                         setTurma2({ ...turma2, ano: newValue.value });
@@ -88,7 +88,7 @@ function Turmas() {
                     <Select
                       className="SelectList"
                       placeholder="Semestre"
-                      options={options.semesters}
+                      options={options.constantValues.semesters}
                       value={{ value: turma2.semestre, label: turma2.semestre }}
                       onChange={(newValue) => {
                         setTurma2({ ...turma2, semestre: newValue.value });
@@ -225,8 +225,8 @@ function Turmas() {
                       <Select
                         placeholder="Dia"
                         className="SelectList"
-                        options={options.days}
-                        value={options.days.find(
+                        options={options.constantValues.days}
+                        value={options.constantValues.days.find(
                           (day) => day.value === horario.dia
                         )}
                         onChange={(newDia) => {
@@ -248,8 +248,8 @@ function Turmas() {
                       <Select
                         className="SelectList"
                         placeholder="Hora início"
-                        options={options.hours}
-                        value={options.hours.find(
+                        options={options.constantValues.hours}
+                        value={options.constantValues.hours.find(
                           (hour) => hour.value === horario.horaInicio
                         )}
                         onChange={(newValue) => {
@@ -266,8 +266,8 @@ function Turmas() {
                       <Select
                         className="SelectList TurmaHorariosColunaDuracao"
                         placeholder="Duração"
-                        options={options.durations}
-                        value={options.durations.find(
+                        options={options.constantValues.durations}
+                        value={options.constantValues.durations.find(
                           (duration) => duration.value === horario.duracao
                         )}
                         onChange={(newDuracao) => {
@@ -493,7 +493,7 @@ function Turmas() {
 function CRUDclass() {
   return (
     <div className="background">
-      <CRUDPageSelection defaultValue={options.CRUD.crud_turmas} />
+      <CRUDPageSelection defaultValue={options.constantValues.pageSelection.turmas} />
       <Turmas />
     </div>
   );
