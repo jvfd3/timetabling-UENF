@@ -52,6 +52,4 @@ const allLocalJsonData = {
   templates: templatesData,
 };
 
-console.log("Am I exporting all data from JSON?");
-
 export { allLocalJsonData };
