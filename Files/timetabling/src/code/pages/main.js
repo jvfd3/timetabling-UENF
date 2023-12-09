@@ -33,7 +33,7 @@ function Main() {
 function MainPage() {
   return (
     <div className="background">
-      <CRUDPageSelection defaultValue={options.constantValues.pageSelection.mainPage} />
+      <CRUDPageSelection defaultValue={options.constantValues.pageSelection.main} />
       <Main />
     </div>
   );

@@ -78,16 +78,16 @@ const options = {
     ],
     routing: {
       filePath: "/pages/",
-      urlPath: "/",
+      urlPath: "/timetabling-uenf/",
     },
     pageSelection: {
-      salas: { label: "Salas", value: "salas" },
-      alunos: { label: "Alunos", value: "alunos" },
+      main: { label: "Main", value: "main" },
       turmas: { label: "Turmas", value: "turmas" },
-      mainPage: { label: "Main", value: "main" },
-      notFound: { label: "Not Found" , value: "notFound" },
-      disciplinas: { label: "Disciplinas", value: "disciplinas" },
+      alunos: { label: "Alunos", value: "alunos" },
       professores: { label: "Professores", value: "professores" },
+      disciplinas: { label: "Disciplinas", value: "disciplinas" },
+      salas: { label: "Salas", value: "salas" },
+      notFound: { label: "Not Found" , value: "notFound" },
     }
   },
   defaultValues: {},

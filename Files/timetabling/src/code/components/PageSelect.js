@@ -8,7 +8,7 @@ const CRUDPageSelection = (props) => {
   const navigate = useNavigate();
 
   const handleChange = (selectedOption) => {
-    navigate("/"+selectedOption.value);
+    navigate(options.constantValues.routing.urlPath+selectedOption.value);
   };
 
   // Filtrar as opções para remover Not Found e Main CRUD
