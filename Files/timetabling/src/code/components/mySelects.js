@@ -33,11 +33,11 @@ function SelectSemestre() {
 }
 
 function SelectDisciplina(props) {
-  const { dTurma, setDTurma } = props;
+  const { lTurma, setLTurma } = props;
 
   let disciplinas = allLocalJsonData.static.infoDisciplinasCC;
   let disciplinaSelecionada = disciplinas.find(
-    (disciplina) => disciplina.codigo === dTurma.disciplina.codigo
+    (disciplina) => disciplina.codigo === lTurma.disciplina.codigo
   );
 
   const [disciplina, setDisciplina] = useState(disciplinaSelecionada);
@@ -48,13 +48,13 @@ function SelectDisciplina(props) {
     }
     setDisciplina(novaDisciplina);
     let novaTurma = {
-      ...dTurma,
+      ...lTurma,
       disciplina: {
         codigo: novaDisciplina.codigo,
         nome: novaDisciplina.nome,
       },
     };
-    setDTurma(novaTurma);
+    setLTurma(novaTurma);
   }
 
   return (
@@ -72,11 +72,11 @@ function SelectDisciplina(props) {
 }
 
 function SelectProfessor(props) {
-  const { pTurma, setPTurma } = props;
+  const { lTurma, setLTurma } = props;
 
   let professores = allLocalJsonData.static.infoProfessores;
   let professorSelecionado = professores.find(
-    (professor) => professor.nome === pTurma.professor
+    (professor) => professor.nome === lTurma.professor
   );
   const [professor, setProfessor] = useState(professorSelecionado);
 
@@ -86,10 +86,10 @@ function SelectProfessor(props) {
     }
     setProfessor(novoProfessor);
     let novaTurma = {
-      ...pTurma,
+      ...lTurma,
       professor: novoProfessor.nome,
     };
-    setPTurma(novaTurma);
+    setLTurma(novaTurma);
   }
 
   return (
@@ -115,11 +115,11 @@ function SelectProfessor(props) {
 }
 
 function SelectSala(props) {
-  const { sTurma, setSTurma, indexHorario } = props;
+  const { lTurma, setLTurma, indexHorario } = props;
 
   let salas = allLocalJsonData.static.infoSalas;
-  let horarios = sTurma.horarios;
-  let selectedSala = horarios[indexHorario - 1].sala;
+  let horarios = lTurma.horarios;
+  let selectedSala = horarios[indexHorario].sala;
   let salaSelecionada = salas.find((sala) => sala.blocoSala === selectedSala);
 
   const [sala, setSala] = useState(salaSelecionada);
@@ -130,13 +130,13 @@ function SelectSala(props) {
     }
     setSala(novaSala);
     let novaTurma = {
-      ...sTurma,
+      ...lTurma,
       horarios: [
         ...horarios,
-        (horarios[indexHorario - 1].sala = novaSala.blocoSala),
+        (horarios[indexHorario].sala = novaSala.blocoSala),
       ],
     };
-    setSTurma(novaTurma);
+    setLTurma(novaTurma);
   }
 
   return (
@@ -161,7 +161,7 @@ function SelectDia(props) {
   let dias = options.constantValues.days;
 
   let horarios = lTurma.horarios;
-  let horario = horarios[indexHorario - 1];
+  let horario = horarios[indexHorario];
   let selectedDia = horario.dia;
 
   let diaSelecionado = dias.find((dia) => dia.value === selectedDia);
@@ -174,7 +174,7 @@ function SelectDia(props) {
     setDia(novoDia);
     let novaTurma = {
       ...lTurma,
-      horarios: [...horarios, (horarios[indexHorario - 1].dia = novoDia.value)],
+      horarios: [...horarios, (horarios[indexHorario].dia = novoDia.value)],
     };
     setLTurma(novaTurma);
   }
@@ -199,7 +199,7 @@ function SelectDia(props) {
 function SelectHoraTang(props) {
   const { lTurma, setLTurma, indexHorario } = props;
   let horarios = lTurma.horarios;
-  let horario = horarios[indexHorario - 1];
+  let horario = horarios[indexHorario];
 
   let selectedHora = horario.horaInicio;
   let horasTang = options.constantValues.hoursTang;
@@ -217,7 +217,7 @@ function SelectHoraTang(props) {
       ...lTurma,
       horarios: [
         ...horarios,
-        (horarios[indexHorario - 1].horaInicio = novaHoraTang.hora),
+        (horarios[indexHorario].horaInicio = novaHoraTang.hora),
       ],
     };
     setLTurma(novaTurma);
@@ -243,7 +243,7 @@ function SelectHoraTang(props) {
 function SelectDuracao(props) {
   const { lTurma, setLTurma, indexHorario } = props;
   let horarios = lTurma.horarios;
-  let horario = horarios[indexHorario - 1];
+  let horario = horarios[indexHorario];
 
   let selectedDuracao = horario.duracao;
   let duracoes = options.constantValues.durations;
@@ -261,7 +261,7 @@ function SelectDuracao(props) {
       ...lTurma,
       horarios: [
         ...horarios,
-        (horarios[indexHorario - 1].duracao = novaDuracao.value),
+        (horarios[indexHorario].duracao = novaDuracao.value),
       ],
     };
     setLTurma(novaTurma);

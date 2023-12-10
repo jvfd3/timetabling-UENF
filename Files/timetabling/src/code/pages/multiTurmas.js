@@ -18,6 +18,7 @@ import {
 
 function Turmas() {
   let allTurmas = allLocalJsonData.dynamic.turmas;
+
   const [turmas, setTurmas] = useState(allTurmas);
   const [turma, setTurma] = useState(turmas[0]);
   const [currentId, setCurrentId] = useState(turmas.length + 1);
@@ -68,7 +69,7 @@ function Turmas() {
 
     /* Percorra cada turma em lTurmas e preencha uma lista dos códigos das disciplinas oferecidas pelas turmas */
     let disciplinasOferecidas = lTurmas.map((turma) => turma.disciplina.codigo);
-    console.log(disciplinasOferecidas);
+    // console.log(disciplinasOferecidas);
 
     let TodasDisciplinas = allLocalJsonData.static.infoDisciplinasCC;
 
@@ -106,23 +107,44 @@ function Turmas() {
       </tr>
     ));
 
+    function TabelaDeDisciplinasASereOferecidas() {
+      return (
+        <div>
+          <h1>Disciplinas do período ímpar ainda não oferecidas</h1>
+          <table className="showBasicDataTable">
+            <thead>
+              <tr>
+                <th>Período esperado</th>
+                <th>Código - Nome</th>
+              </tr>
+            </thead>
+            <tbody>{visualizacaoDisciplinas}</tbody>
+          </table>
+        </div>
+      );
+    }
+
+    function DisciplinasMínimasForamOferecidas() {
+      return (
+        <div>
+          <h1>Todas as disciplinas do período ímpar foram oferecidas</h1>
+        </div>
+      );
+    }
+
     return (
       <div>
-        <h1>Disciplinas do período ímpar ainda não oferecidas</h1>
-        <table className="showBasicDataTable">
-          <thead>
-            <tr>
-              <th>Período esperado</th>
-              <th>Código - Nome</th>
-            </tr>
-          </thead>
-          <tbody>{visualizacaoDisciplinas}</tbody>
-        </table>
+        {EssasDisciplinas.length === 0 ? (
+          <DisciplinasMínimasForamOferecidas />
+        ) : (
+          <TabelaDeDisciplinasASereOferecidas />
+        )}
       </div>
     );
   }
 
   function TurmasCard(props) {
+    const { lTurmas, setLTurma } = props;
     function TurmasTable() {
       function removerTurma(id) {
         let newTurmas = turmas.filter((turma) => turma.id !== id);
@@ -140,10 +162,9 @@ function Turmas() {
             </tr>
           </thead>
           <tbody>
-            {turmas.map((turma) => {
+            {lTurmas.map((turma) => {
               let id = turma.id;
-              let horario1 = turma.horarios[0];
-              let horario2 = turma.horarios[1];
+              let horarios = turma.horarios;
               return (
                 <tr key={`${id}-${turma.disciplina.codigo}-${turma.professor}`}>
                   <td>
@@ -156,10 +177,10 @@ function Turmas() {
                     </button>
                   </td>
                   <td>
-                    <SelectDisciplina dTurma={turma} setDTurma={setTurma} />
+                    <SelectDisciplina lTurma={turma} setLTurma={setLTurma} />
                   </td>
                   <td>
-                    <SelectProfessor pTurma={turma} setPTurma={setTurma} />
+                    <SelectProfessor lTurma={turma} setLTurma={setLTurma} />
                   </td>
                   <td>
                     <input
@@ -184,34 +205,68 @@ function Turmas() {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr
+                        {horarios.map((horario, index) => (
+                          <tr
+                            key={`${id}-${horario.sala}-${horario.dia}-${horario.horaInicio}-${index}`}
+                          >
+                            <td>
+                              <SelectSala
+                                lTurma={turma}
+                                setLTurma={setLTurma}
+                                indexHorario={index}
+                              />
+                            </td>
+                            <td>
+                              <SelectDia
+                                lTurma={turma}
+                                setLTurma={setLTurma}
+                                indexHorario={index}
+                              />
+                            </td>
+                            <td>
+                              <SelectHoraTang
+                                lTurma={turma}
+                                setLTurma={setLTurma}
+                                indexHorario={index}
+                              />
+                            </td>
+                            <td>
+                              <SelectDuracao
+                                lTurma={turma}
+                                setLTurma={setLTurma}
+                                indexHorario={index}
+                              />
+                            </td>
+                          </tr>
+                        ))}
+                        {/* <tr
                           key={`${id}-${horario1.sala}-${horario1.dia}-${horario1.horaInicio}-1`}
                         >
                           <td>
                             <SelectSala
-                              sTurma={turma}
-                              setSTurma={setTurma}
+                              lTurma={turma}
+                              setLTurma={setLTurma}
                               indexHorario={1}
                             />
                           </td>
                           <td>
                             <SelectDia
                               lTurma={turma}
-                              setLTurma={setTurma}
+                              setLTurma={setLTurma}
                               indexHorario={1}
                             />
                           </td>
                           <td>
                             <SelectHoraTang
                               lTurma={turma}
-                              setLTurma={setTurma}
+                              setLTurma={setLTurma}
                               indexHorario={1}
                             />
                           </td>
                           <td>
                             <SelectDuracao
                               lTurma={turma}
-                              setLTurma={setTurma}
+                              setLTurma={setLTurma}
                               indexHorario={1}
                             />
                           </td>
@@ -221,33 +276,33 @@ function Turmas() {
                         >
                           <td>
                             <SelectSala
-                              sTurma={turma}
-                              setSTurma={setTurma}
+                              lTurma={turma}
+                              setLTurma={setLTurma}
                               indexHorario={2}
                             />
                           </td>
                           <td>
                             <SelectDia
                               lTurma={turma}
-                              setLTurma={setTurma}
+                              setLTurma={setLTurma}
                               indexHorario={2}
                             />
                           </td>
                           <td>
                             <SelectHoraTang
                               lTurma={turma}
-                              setLTurma={setTurma}
+                              setLTurma={setLTurma}
                               indexHorario={2}
                             />
                           </td>
                           <td>
                             <SelectDuracao
                               lTurma={turma}
-                              setLTurma={setTurma}
+                              setLTurma={setLTurma}
                               indexHorario={2}
                             />
                           </td>
-                        </tr>
+                        </tr> */}
                       </tbody>
                     </table>
                   </td>
@@ -286,7 +341,7 @@ function Turmas() {
   return (
     <div className="CRUDContainComponents">
       <DisciplinasNaoOferecidas lTurmas={turmas} />
-      <TurmasCard turma={turma} setTurma={setTurma} />
+      <TurmasCard lTurmas={turmas} setLTurma={setTurma} />
     </div>
   );
 }

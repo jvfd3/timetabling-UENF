@@ -19,6 +19,7 @@
   {"laboratorio": "LCFIS",   "curso": "Física",                 "nome": "José Augusto Pedro Lima",               "disciplinas": ["FIS01103", "FIS01109", "FIS01202", "FIS01204"]},
   {"laboratorio": "LCFIS",   "curso": "Física",                 "nome": "Leonardo Mota de Oliveira",             "disciplinas": ["FIS01103", "FIS01109", "FIS01202", "FIS01204"]},
   {"laboratorio": "LCFIS",   "curso": "Física",                 "nome": "Roberto Weider de Assis Franco",        "disciplinas": ["FIS01103", "FIS01109", "FIS01202", "FIS01204"]},
+  {"laboratorio": "LCFIS",   "curso": "Física",                 "nome": "Delson Ubiratan da Silva Schramm",      "disciplinas": ["FIS01103", "FIS01109", "FIS01202", "FIS01204"]},
   {"laboratorio": "LCFIS",   "curso": "Física",                 "nome": "Marcelo Shoey de Oliveira Massunaga",   "disciplinas": ["FIS01103", "FIS01109", "FIS01202", "FIS01204"]},
   {"laboratorio": "CCH",     "curso": "Bolsistas",              "nome": "Carlos Alberto Manso Lopez",            "disciplinas": ["LEL04102", "LEL04206"]},
   {"laboratorio": "LEPROD",  "curso": "Outras matérias",        "nome": "José Ramón Arica Chavez",               "disciplinas": ["MAT01201"]},
@@ -30,5 +31,6 @@
   {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "Fábio Machado de Oliveira",             "disciplinas": []},
   {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "João Luiz de Almeida Filho",            "disciplinas": []},
   {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "Sânya Carvalho dos Santos Caldeira",    "disciplinas": []},
-  {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "Luiz Mauricio de Oliveira Monteiro",    "disciplinas": []}
+  {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "Luiz Mauricio de Oliveira Monteiro",    "disciplinas": []},
+  {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "bolsista ",    "disciplinas": []}
 ]
