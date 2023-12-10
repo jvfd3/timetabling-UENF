@@ -1,4 +1,4 @@
-import "../CSS/CRUD_turmas.css";
+import "../CSS/multiturmas.css";
 import "../CSS/defaultStyle.css";
 import options from "../temp/options";
 import CRUDPageSelection from "../components/PageSelect";
@@ -61,6 +61,65 @@ function Turmas() {
     };
     setCurrentId(currentId + 1);
     setTurmas([...turmas, newTurma]);
+  }
+
+  function DisciplinasNaoOferecidas(props) {
+    const { lTurmas } = props;
+
+    /* Percorra cada turma em lTurmas e preencha uma lista dos códigos das disciplinas oferecidas pelas turmas */
+    let disciplinasOferecidas = lTurmas.map((turma) => turma.disciplina.codigo);
+    console.log(disciplinasOferecidas);
+
+    let TodasDisciplinas = allLocalJsonData.static.infoDisciplinasCC;
+
+    /*
+      Listar todas os código-nomes de disciplinas que são de semestre ímpar
+        Filtrar todas que são de periodoEsperado%2 == 1
+    */
+    let DisciplinasImpares = TodasDisciplinas.filter(
+      (disciplina) => disciplina.periodo % 2 === 1
+    );
+
+    /*
+      Percorrer cada disciplina em DisciplinasImpares e, caso o código da disciplina esteja na lista de disciplinas oferecidas, remover da lista.
+    */
+    let DisciplinasImparesAindaNaoOferecidas = DisciplinasImpares.filter(
+      (disciplina) => {
+        return !disciplinasOferecidas.includes(disciplina.codigo);
+      }
+    );
+
+    let EssasDisciplinas = DisciplinasImparesAindaNaoOferecidas;
+
+    /* Percorra cada disciplina em EssasDisciplinas e as disponha em uma Tabela no formato
+      | Período esperado | Código - Nome |
+    */
+    let visualizacaoDisciplinas = EssasDisciplinas.map((disciplina) => (
+      <tr key={disciplina.codigo}>
+        {/* Se o período da disciplina for 1, aplicar o className EnfasePrimeiroPeriodo */}
+        <td className={disciplina.periodo === 1 ? "EnfasePrimeiroPeriodo" : ""}>
+          {disciplina.periodo}
+        </td>
+        <td className={disciplina.periodo === 1 ? "EnfasePrimeiroPeriodo" : ""}>
+          {disciplina.codigo} - {disciplina.nome}
+        </td>
+      </tr>
+    ));
+
+    return (
+      <div>
+        <h1>Disciplinas do período ímpar ainda não oferecidas</h1>
+        <table className="showBasicDataTable">
+          <thead>
+            <tr>
+              <th>Período esperado</th>
+              <th>Código - Nome</th>
+            </tr>
+          </thead>
+          <tbody>{visualizacaoDisciplinas}</tbody>
+        </table>
+      </div>
+    );
   }
 
   function TurmasCard(props) {
@@ -213,12 +272,12 @@ function Turmas() {
         <h2>Turmas</h2>
 
         <button className="AdicionarHorario" onClick={addTurma}>
-          Novo Horário
+          Nova Turma
         </button>
 
         {turmas.length === 0 ? <SemTurmas /> : <TurmasTable turmas={turmas} />}
         <button className="AdicionarHorario" onClick={addTurma}>
-          Novo Horário
+          Nova Turma
         </button>
       </div>
     );
@@ -226,6 +285,7 @@ function Turmas() {
 
   return (
     <div className="CRUDContainComponents">
+      <DisciplinasNaoOferecidas lTurmas={turmas} />
       <TurmasCard turma={turma} setTurma={setTurma} />
     </div>
   );
