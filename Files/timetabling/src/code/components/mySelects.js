@@ -43,6 +43,9 @@ function SelectDisciplina(props) {
   const [disciplina, setDisciplina] = useState(disciplinaSelecionada);
 
   function updateOuterTurma(novaDisciplina) {
+    if (novaDisciplina === null) {
+      novaDisciplina = { codigo: "", nome: "" };
+    }
     setDisciplina(novaDisciplina);
     let novaTurma = {
       ...dTurma,
@@ -60,6 +63,7 @@ function SelectDisciplina(props) {
       placeholder="Disciplina"
       options={disciplinas}
       value={disciplina}
+      isClearable={true}
       getOptionValue={(option) => option.codigo}
       getOptionLabel={(option) => `${option.codigo} - ${option.nome}`}
       onChange={updateOuterTurma}
@@ -77,6 +81,9 @@ function SelectProfessor(props) {
   const [professor, setProfessor] = useState(professorSelecionado);
 
   function updateOuterTurma(novoProfessor) {
+    if (novoProfessor === null) {
+      novoProfessor = { nome: "" };
+    }
     setProfessor(novoProfessor);
     let novaTurma = {
       ...pTurma,
@@ -91,6 +98,7 @@ function SelectProfessor(props) {
       placeholder="Professor"
       options={professores}
       value={professor}
+      isClearable={true}
       getOptionValue={(option) => option.nome}
       getOptionLabel={(option) => option.nome}
       onChange={updateOuterTurma}
@@ -110,30 +118,31 @@ function SelectSala(props) {
   const { sTurma, setSTurma, indexHorario } = props;
 
   let salas = allLocalJsonData.static.infoSalas;
-  let horarios = sTurma.horarios
+  let horarios = sTurma.horarios;
   let selectedSala = horarios[indexHorario - 1].sala;
   let salaSelecionada = salas.find((sala) => sala.blocoSala === selectedSala);
 
   const [sala, setSala] = useState(salaSelecionada);
 
   function updateOuterTurma(novaSala) {
-    console.log("sala", sala)
-    console.log("novaSala", novaSala)
+    if (novaSala === null) {
+      novaSala = { blocoSala: "" };
+    }
     setSala(novaSala);
     let novaTurma = {
       ...sTurma,
       horarios: [
         ...horarios,
-        horarios[indexHorario - 1].sala = novaSala.blocoSala,
+        (horarios[indexHorario - 1].sala = novaSala.blocoSala),
       ],
     };
     setSTurma(novaTurma);
   }
 
-
   return (
     <Select
       className="SelectList"
+      isClearable={true}
       placeholder="Sala"
       options={salas}
       value={sala}
@@ -151,21 +160,21 @@ function SelectDia(props) {
 
   let dias = options.constantValues.days;
 
-  let horarios = lTurma.horarios
-  let horario = horarios[indexHorario - 1]
+  let horarios = lTurma.horarios;
+  let horario = horarios[indexHorario - 1];
   let selectedDia = horario.dia;
 
   let diaSelecionado = dias.find((dia) => dia.value === selectedDia);
   const [dia, setDia] = useState(diaSelecionado);
 
   function updateOuterTurma(novoDia) {
+    if (novoDia === null) {
+      novoDia = { value: "" };
+    }
     setDia(novoDia);
     let novaTurma = {
       ...lTurma,
-      horarios: [
-        ...horarios,
-        horarios[indexHorario - 1].dia = novoDia.value,
-      ],
+      horarios: [...horarios, (horarios[indexHorario - 1].dia = novoDia.value)],
     };
     setLTurma(novaTurma);
   }
@@ -174,6 +183,7 @@ function SelectDia(props) {
     <Select
       className="SelectList"
       placeholder="Dia"
+      isClearable={true}
       options={dias}
       value={dia}
       // getOptionLabel={(option) => option.value}
@@ -188,8 +198,8 @@ function SelectDia(props) {
 
 function SelectHoraTang(props) {
   const { lTurma, setLTurma, indexHorario } = props;
-  let horarios = lTurma.horarios
-  let horario = horarios[indexHorario - 1]
+  let horarios = lTurma.horarios;
+  let horario = horarios[indexHorario - 1];
 
   let selectedHora = horario.horaInicio;
   let horasTang = options.constantValues.hoursTang;
@@ -199,14 +209,15 @@ function SelectHoraTang(props) {
   const [hora, setHora] = useState(horaSelecionada);
 
   function updateOuterTurma(novaHoraTang) {
-    console.log("hora", hora)
-    console.log("novaHoraTang", novaHoraTang)
+    if (novaHoraTang === null) {
+      novaHoraTang = { hora: "" };
+    }
     setHora(novaHoraTang);
     let novaTurma = {
       ...lTurma,
       horarios: [
         ...horarios,
-        horarios[indexHorario - 1].horaInicio = novaHoraTang.hora,
+        (horarios[indexHorario - 1].horaInicio = novaHoraTang.hora),
       ],
     };
     setLTurma(novaTurma);
@@ -218,6 +229,7 @@ function SelectHoraTang(props) {
       placeholder="Hora"
       options={horasTang}
       value={hora}
+      isClearable={true}
       getOptionValue={(option) => option.hora}
       getOptionLabel={(option) => `${option.hora} (${option.turno})`}
       formatOptionLabel={({ hora, turno }, { context }) => {
@@ -230,9 +242,9 @@ function SelectHoraTang(props) {
 
 function SelectDuracao(props) {
   const { lTurma, setLTurma, indexHorario } = props;
-  let horarios = lTurma.horarios
-  let horario = horarios[indexHorario - 1]
-  
+  let horarios = lTurma.horarios;
+  let horario = horarios[indexHorario - 1];
+
   let selectedDuracao = horario.duracao;
   let duracoes = options.constantValues.durations;
   let duracaoSelecionada = duracoes.find(
@@ -241,12 +253,15 @@ function SelectDuracao(props) {
   const [duracao, setDuracao] = useState(duracaoSelecionada);
 
   function updateOuterTurma(novaDuracao) {
+    if (novaDuracao === null) {
+      novaDuracao = { value: "" };
+    }
     setDuracao(novaDuracao);
     let novaTurma = {
       ...lTurma,
       horarios: [
         ...horarios,
-        horarios[indexHorario - 1].duracao = novaDuracao.value,
+        (horarios[indexHorario - 1].duracao = novaDuracao.value),
       ],
     };
     setLTurma(novaTurma);
@@ -256,6 +271,7 @@ function SelectDuracao(props) {
     <Select
       className="SelectList"
       placeholder="Duração"
+      isClearable={true}
       options={duracoes}
       value={duracao}
       getOptionValue={(option) => option.value}

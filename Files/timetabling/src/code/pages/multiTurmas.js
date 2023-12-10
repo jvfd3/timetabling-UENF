@@ -20,6 +20,7 @@ function Turmas() {
   let allTurmas = allLocalJsonData.dynamic.turmas;
   const [turmas, setTurmas] = useState(allTurmas);
   const [turma, setTurma] = useState(turmas[0]);
+  const [currentId, setCurrentId] = useState(turmas.length + 1);
 
   function updateTurmas(newTurmaValue) {
     let newTurmas = turmas.map((turma, i) =>
@@ -34,12 +35,45 @@ function Turmas() {
     updateTurmas(turma);
   }, [turma]);
 
+  function addTurma() {
+    let newTurma = {
+      id: currentId,
+      disciplina: {
+        codigo: null,
+        nome: null,
+      },
+      professor: null,
+      demandaEstimada: 0,
+      horarios: [
+        {
+          sala: null,
+          dia: null,
+          horaInicio: null,
+          duracao: 2,
+        },
+        {
+          sala: null,
+          dia: null,
+          horaInicio: null,
+          duracao: 2,
+        },
+      ],
+    };
+    setCurrentId(currentId + 1);
+    setTurmas([...turmas, newTurma]);
+  }
+
   function TurmasCard(props) {
     function TurmasTable() {
+      function removerTurma(id) {
+        let newTurmas = turmas.filter((turma) => turma.id !== id);
+        setTurmas(newTurmas);
+      }
       return (
         <table className="showBasicDataTable">
           <thead>
             <tr>
+              <th>Remover</th>
               <th>Código - Nome</th>
               <th>Professor</th>
               <th>Demanda Estimada</th>
@@ -48,12 +82,20 @@ function Turmas() {
           </thead>
           <tbody>
             {turmas.map((turma) => {
+              let id = turma.id;
               let horario1 = turma.horarios[0];
               let horario2 = turma.horarios[1];
               return (
-                <tr
-                  key={`${turma.id}-${turma.disciplina.codigo}-${turma.professor}`}
-                >
+                <tr key={`${id}-${turma.disciplina.codigo}-${turma.professor}`}>
+                  <td>
+                    <button
+                      className="TurmaHorarioRemove"
+                      key={`${id}-${turma.disciplina.codigo}-${turma.professor}`}
+                      onClick={() => removerTurma(id)}
+                    >
+                      Remover
+                    </button>
+                  </td>
                   <td>
                     <SelectDisciplina dTurma={turma} setDTurma={setTurma} />
                   </td>
@@ -62,7 +104,7 @@ function Turmas() {
                   </td>
                   <td>
                     <input
-                      id="quantity"
+                      id={`${id}-${turma.disciplina.codigo}-${turma.professor}`}
                       name="quantity"
                       type="number"
                       min="0"
@@ -75,7 +117,7 @@ function Turmas() {
                   <td>
                     <table>
                       <thead>
-                        <tr key={turma.id * 100}>
+                        <tr key={id * 100}>
                           <th>Sala</th>
                           <th>Dia</th>
                           <th>Hora Início</th>
@@ -84,7 +126,7 @@ function Turmas() {
                       </thead>
                       <tbody>
                         <tr
-                          key={`${turma.id}-${horario1.sala}-${horario1.dia}-${horario1.horaInicio}`}
+                          key={`${id}-${horario1.sala}-${horario1.dia}-${horario1.horaInicio}-1`}
                         >
                           <td>
                             <SelectSala
@@ -116,7 +158,7 @@ function Turmas() {
                           </td>
                         </tr>
                         <tr
-                          key={`${turma.id}-${horario2.sala}-${horario2.dia}-${horario2.horaInicio}`}
+                          key={`${id}-${horario2.sala}-${horario2.dia}-${horario2.horaInicio}-2`}
                         >
                           <td>
                             <SelectSala
@@ -157,9 +199,27 @@ function Turmas() {
         </table>
       );
     }
+
+    function SemTurmas() {
+      return (
+        <div className="infoCard">
+          <p>Ainda não há turmas cadastradas</p>
+        </div>
+      );
+    }
+
     return (
       <div className="infoCard">
-        <TurmasTable turmas={turmas} />
+        <h2>Turmas</h2>
+
+        <button className="AdicionarHorario" onClick={addTurma}>
+          Novo Horário
+        </button>
+
+        {turmas.length === 0 ? <SemTurmas /> : <TurmasTable turmas={turmas} />}
+        <button className="AdicionarHorario" onClick={addTurma}>
+          Novo Horário
+        </button>
       </div>
     );
   }
