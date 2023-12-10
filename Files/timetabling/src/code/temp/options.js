@@ -67,6 +67,8 @@ const options = {
       { hora: 10, turno: "Manhã" },
       { hora: 14, turno: "Tarde" },
       { hora: 16, turno: "Tarde" },
+      { hora: 18, turno: "Noite" },
+      { hora: 20, turno: "Noite" },
     ],
     expectedSemester: [
       { label: 0, value: 0 },
