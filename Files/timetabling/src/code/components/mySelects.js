@@ -30,6 +30,68 @@ function SelectAno(props) {
   );
 }
 
+function SelectAnoTurma(props) {
+  const { lTurma, setLTurma } = props;
+  let anos = options.constantValues.years;
+  let anoSelecionado = anos.find(
+    (ano) => ano.value === parseInt(lTurma.ano)
+  );
+  const [ano, setAno] = useState(anoSelecionado);
+  function updateOuterValue(novoAno) {
+    if (novoAno === null) {
+      novoAno = { value: "", label: "" };
+    }
+    setAno(novoAno);
+    let novaTurma = {
+      ...lTurma,
+      ano: novoAno.value,
+    };
+    setLTurma(novaTurma);
+  }
+  return (
+    <Select
+      className="SelectList"
+      placeholder="Ano"
+      options={anos}
+      value={ano}
+      onChange={updateOuterValue}
+    />
+  );
+}
+
+function SelectSemestreTurma(props) {
+  const { lTurma, setLTurma } = props;
+  let semestres = options.constantValues.semesters;
+
+  let semestreSelecionado = semestres.find(
+    (semestre) => semestre.value === parseInt(lTurma.semestre)
+  );
+
+  const [semestre, setSemestre] = useState(semestreSelecionado);
+
+  function updateOuterValue(novoSemestre) {
+    if (novoSemestre === null) {
+      novoSemestre = { value: "", label: "" };
+    }
+    setSemestre(novoSemestre);
+    let novaTurma = {
+      ...lTurma,
+      semestre: novoSemestre.value,
+    };
+    setLTurma(novaTurma);
+  }
+
+  return (
+    <Select
+      className="SelectList"
+      placeholder="Semestre"
+      options={semestres}
+      value={semestre}
+      onChange={updateOuterValue}
+    />
+  );
+}
+
 function SelectSemestre(props) {
   const { outerSemestre, setOuterSemestre } = props;
   let semestres = options.constantValues.semesters;
@@ -127,12 +189,12 @@ function SelectProfessor(props) {
       getOptionLabel={(option) => option.nome}
       onChange={updateOuterTurma}
       formatOptionLabel={(option) => {
-        let denseName = false;
+        let completeName = false;
         let nomeSeparado = option.nome.split(" ");
         let nomeDenso =
           nomeSeparado[0] + " " + nomeSeparado[nomeSeparado.length - 1];
-        let name = denseName ? option.nome : nomeDenso;
-        return name;
+        let name = completeName ? option.nome : nomeDenso;
+        return `(${option.laboratorio}) ${name}`;
       }}
     />
   );
@@ -331,4 +393,6 @@ export {
   SelectDia,
   SelectHoraTang,
   SelectDuracao,
+  SelectAnoTurma,
+  SelectSemestreTurma,
 };

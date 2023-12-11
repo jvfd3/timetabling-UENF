@@ -5,6 +5,16 @@ import CRUDPageSelection from "../components/PageSelect";
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
+import {
+  SelectDia,
+  SelectDisciplina,
+  SelectDuracao,
+  SelectHoraTang,
+  SelectProfessor,
+  SelectSala,
+  SelectAnoTurma,
+  SelectSemestreTurma,
+} from "../components/mySelects";
 // import AsyncSelect from "react-select/async";
 // import { readData } from "../functions/CRUD_JSONBIN";
 
@@ -60,9 +70,6 @@ function Turmas() {
 
     function DadosTurma(props) {
       const { turma2, setTurma2 } = props;
-      let infoProfessores = allLocalJsonData.static.infoProfessores;
-      // let DBdisciplinas = await readData(options.JBVars.bins.infoDisciplinasCC);
-      let DBdisciplinas = allLocalJsonData.static.infoDisciplinasCC;
 
       return (
         <div className="showBasicDataCard">
@@ -76,23 +83,10 @@ function Turmas() {
                 </td>
                 <td>
                   <div className="SelectAnoSemestre">
-                    <Select
-                      className="SelectList"
-                      placeholder="Ano"
-                      options={options.constantValues.years}
-                      value={{ value: turma2.ano, label: turma2.ano }}
-                      onChange={(newValue) => {
-                        setTurma2({ ...turma2, ano: newValue.value });
-                      }}
-                    />
-                    <Select
-                      className="SelectList"
-                      placeholder="Semestre"
-                      options={options.constantValues.semesters}
-                      value={{ value: turma2.semestre, label: turma2.semestre }}
-                      onChange={(newValue) => {
-                        setTurma2({ ...turma2, semestre: newValue.value });
-                      }}
+                    <SelectAnoTurma lTurma={turma2} setLTurma={setTurma2} />
+                    <SelectSemestreTurma
+                      lTurma={turma2}
+                      setLTurma={setTurma2}
                     />
                   </div>
                 </td>
@@ -102,20 +96,7 @@ function Turmas() {
                   <strong>Disciplina</strong>
                 </td>
                 <td>
-                  <Select
-                    className="SelectList"
-                    placeholder="Disciplinas"
-                    options={DBdisciplinas}
-                    value={turma2.disciplina}
-                    onChange={(newValue) => {
-                      setTurma2({ ...turma2, disciplina: newValue });
-                    }}
-                    getOptionLabel={(optionDiscip) => optionDiscip.nome}
-                    getOptionValue={(optionDiscip) => optionDiscip.codigo}
-                    formatOptionLabel={({ codigo, nome }) =>
-                      `${codigo}: ${nome}`
-                    }
-                  />
+                  <SelectDisciplina lTurma={turma2} setLTurma={setTurma2} />
                 </td>
               </tr>
               <tr>
@@ -123,22 +104,7 @@ function Turmas() {
                   <strong>Professor</strong>
                 </td>
                 <td>
-                  <Select
-                    className="SelectList"
-                    placeholder="Professor"
-                    options={infoProfessores}
-                    value={infoProfessores.find(
-                      (professor) => professor.nome === turma2.professor
-                    )}
-                    getOptionValue={(optionProf) => optionProf.nome}
-                    getOptionLabel={(optionProf) => optionProf.laboratorio}
-                    onChange={(newValue) => {
-                      setTurma2({ ...turma2, professor: newValue.nome });
-                    }}
-                    formatOptionLabel={({ nome, laboratorio }) =>
-                      `(${laboratorio}) ${nome}`
-                    }
-                  />
+                  <SelectProfessor lTurma={turma2} setLTurma={setTurma2} />
                 </td>
               </tr>
             </tbody>
@@ -149,7 +115,6 @@ function Turmas() {
 
     function HorariosTurma(props) {
       const { turma1, setTurma1 } = props;
-      let infoSalas = allLocalJsonData.static.infoSalas;
 
       function removerHorario(id) {
         let newTurma = { ...turma1 };
@@ -166,51 +131,27 @@ function Turmas() {
           sala: null,
           dia: null,
           horaInicio: null,
-          duracao: null,
+          duracao: 2,
         });
 
-        newTurma.horarios = newHorarios;
-        setTurma1(newTurma);
-        // Denser: (that is actually less dense) Faster? Well, I don't care for it now.
-        /* setTurma1({
-      ...turma1,
-      horarios: [
-        ...turma1.horarios,
-        {
-          sala: "XXX",
-          dia: "XXX",
-          horaInicio: 123,
-          duracao: 123,
-        },
-      ],
-    }); */
-      }
-
-      function changeThisHorario(id, newHorarioInicio) {
-        let newTurma = { ...turma1 };
-        let newHorarios = [...newTurma.horarios];
-        newHorarios[id] = {
-          ...newHorarios[id],
-          horaInicio: newHorarioInicio.value,
-        };
         newTurma.horarios = newHorarios;
         setTurma1(newTurma);
       }
 
       return (
         <div className="showBasicDataCard">
-          <div className="TurmaHorariosTitleButton">
-            <h3>Horários</h3>
-            <button
-              className="AdicionarHorario"
-              onClick={() => adicionarHorario()}
-            >
-              Adicionar
-            </button>
-          </div>
+          <h3>Horários</h3>
           <table className="showBasicDataTable">
             <thead>
               <tr>
+                <th>
+                  <button
+                    className="AdicionarHorario"
+                    onClick={() => adicionarHorario()}
+                  >
+                    Adicionar
+                  </button>
+                </th>
                 <th>Dia</th>
                 <th>Hora de início</th>
                 <th>Duração</th>
@@ -218,108 +159,45 @@ function Turmas() {
               </tr>
             </thead>
             <tbody>
-              {turma1.horarios.map((horario, id) => {
+              {turma1.horarios.map((horario, index) => {
                 return (
-                  <tr key={id}>
-                    <td>
-                      <Select
-                        placeholder="Dia"
-                        className="SelectList"
-                        options={options.constantValues.days}
-                        value={options.constantValues.days.find(
-                          (day) => day.value === horario.dia
-                        )}
-                        onChange={(newDia) => {
-                          let newTurma = { ...turma1 };
-                          let newHorarios = [...newTurma.horarios];
-                          newHorarios[id] = {
-                            ...newHorarios[id],
-                            dia: newDia.value,
-                          };
-                          newTurma.horarios = newHorarios;
-                          setTurma1(newTurma);
-                        }}
-                        formatOptionLabel={({ value, label }, { context }) => {
-                          return context === "value" ? `${value}` : `${label}`;
-                        }}
-                      />
-                    </td>
-                    <td>
-                      <Select
-                        className="SelectList"
-                        placeholder="Hora início"
-                        options={options.constantValues.hours}
-                        value={options.constantValues.hours.find(
-                          (hour) => hour.value === horario.horaInicio
-                        )}
-                        onChange={(newValue) => {
-                          changeThisHorario(id, newValue);
-                        }}
-                        formatOptionLabel={({ value, label }, { context }) => {
-                          return context === "value"
-                            ? `${value}`
-                            : `(${label}) ${value}`;
-                        }}
-                      />
-                    </td>
-                    <td>
-                      <Select
-                        className="SelectList TurmaHorariosColunaDuracao"
-                        placeholder="Duração"
-                        options={options.constantValues.durations}
-                        value={options.constantValues.durations.find(
-                          (duration) => duration.value === horario.duracao
-                        )}
-                        onChange={(newDuracao) => {
-                          let newTurma = { ...turma1 };
-                          let newHorarios = [...newTurma.horarios];
-                          newHorarios[id] = {
-                            ...newHorarios[id],
-                            duracao: newDuracao.value,
-                          };
-                          newTurma.horarios = newHorarios;
-                          setTurma1(newTurma);
-                        }}
-                        formatOptionLabel={({ value, label }, { context }) => {
-                          return context === "value"
-                            ? `${value}`
-                            : `${label}${value > 1 ? "s" : ""}`;
-                        }}
-                      />
-                    </td>
-                    <td className="">
-                      <Select
-                        className="SelectList"
-                        placeholder="Sala"
-                        options={infoSalas}
-                        value={infoSalas.find(
-                          (sala) => sala.blocoSala === horario.sala
-                        )}
-                        onChange={(newSala) => {
-                          let newTurma = { ...turma1 };
-                          let newHorarios = [...newTurma.horarios];
-                          newHorarios[id] = {
-                            ...newHorarios[id],
-                            sala: newSala.blocoSala,
-                          };
-                          newTurma.horarios = newHorarios;
-                          setTurma1(newTurma);
-                        }}
-                        getOptionValue={(optionSala) => optionSala.blocoSala}
-                        getOptionLabel={(optionSala) => optionSala.capacidade}
-                        formatOptionLabel={({ blocoSala, capacidade }) =>
-                          `(${capacidade}) ${blocoSala}`
-                        }
-                      />
-                    </td>
+                  <tr key={index}>
                     <td>
                       <button
                         className="TurmaHorarioRemove"
-                        key={id}
-                        onClick={() => removerHorario(id)}
+                        key={index}
+                        onClick={() => removerHorario(index)}
                       >
                         Remover
                       </button>
+                    </td>
+                    <td>
+                      <SelectDia
+                        lTurma={turma1}
+                        setLTurma={setTurma1}
+                        indexHorario={index}
+                      />
+                    </td>
+                    <td>
+                      <SelectHoraTang
+                        lTurma={turma1}
+                        setLTurma={setTurma1}
+                        indexHorario={index}
+                      />
+                    </td>
+                    <td>
+                      <SelectDuracao
+                        lTurma={turma1}
+                        setLTurma={setTurma1}
+                        indexHorario={index}
+                      />
+                    </td>
+                    <td className="">
+                      <SelectSala
+                        lTurma={turma1}
+                        setLTurma={setTurma1}
+                        indexHorario={index}
+                      />
                     </td>
                   </tr>
                 );
