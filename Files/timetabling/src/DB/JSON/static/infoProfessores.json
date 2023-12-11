@@ -22,15 +22,9 @@
   {"laboratorio": "LCFIS",   "curso": "Física",                 "nome": "Delson Ubiratan da Silva Schramm",      "disciplinas": ["FIS01103", "FIS01109", "FIS01202", "FIS01204"]},
   {"laboratorio": "LCFIS",   "curso": "Física",                 "nome": "Marcelo Shoey de Oliveira Massunaga",   "disciplinas": ["FIS01103", "FIS01109", "FIS01202", "FIS01204"]},
   {"laboratorio": "CCH",     "curso": "Bolsistas",              "nome": "Carlos Alberto Manso Lopez",            "disciplinas": ["LEL04102", "LEL04206"]},
-  {"laboratorio": "LEPROD",  "curso": "Outras matérias",        "nome": "José Ramón Arica Chavez",               "disciplinas": ["MAT01201"]},
   {"laboratorio": "CCH",     "curso": "Outras matérias",        "nome": "Edson Terra Azevedo Filho",             "disciplinas": ["PRO01540"]},
-  {"laboratorio": "LEPROD",  "curso": "Outras matérias",        "nome": "Manuel Antonio Molina Palma",           "disciplinas": ["PRO01122"]},
   {"laboratorio": "CCH",     "curso": "Outras matérias",        "nome": "Pedro Paulo Pinto Maia Filho",          "disciplinas": []},
-  {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "Átila Carvalho Junior",                 "disciplinas": []},
-  {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "Mylane dos Santos Barreto",             "disciplinas": []},
-  {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "Fábio Machado de Oliveira",             "disciplinas": []},
-  {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "João Luiz de Almeida Filho",            "disciplinas": []},
-  {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "Sânya Carvalho dos Santos Caldeira",    "disciplinas": []},
-  {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "Luiz Mauricio de Oliveira Monteiro",    "disciplinas": []},
+  {"laboratorio": "LEPROD",  "curso": "Outras matérias",        "nome": "José Ramón Arica Chavez",               "disciplinas": ["MAT01201"]},
+  {"laboratorio": "LEPROD",  "curso": "Outras matérias",        "nome": "Manuel Antonio Molina Palma",           "disciplinas": ["PRO01122"]},
   {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "bolsista",                              "disciplinas": []}
 ]
