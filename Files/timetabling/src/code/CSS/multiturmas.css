@@ -1,3 +1,16 @@
 .EnfasePrimeiroPeriodo {
     background-color: rgba(255, 115, 0, 0.224);
 }
+
+.MultiTurmasTitle {
+    display: flex;
+    /* I want it to space around */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.GlobalSelects {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}

@@ -4,30 +4,54 @@ import "../CSS/defaultStyle.css";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
 import Select from "react-select";
 
-function SelectAno() {
+function SelectAno(props) {
+  const { outerAno, setOuterAno } = props;
   let anos = options.constantValues.years;
-  const [ano, setAno] = useState(anos[0]);
+
+  let anoSelecionado = anos.find(
+    (ano) => ano.value === parseInt(outerAno.value)
+  );
+
+  const [ano, setAno] = useState(anoSelecionado);
+
+  function updateOuterValue(novoAno) {
+    setOuterAno(novoAno);
+    setAno(novoAno);
+  }
+
   return (
     <Select
       className="SelectList"
       placeholder="Ano"
       options={anos}
       value={ano}
-      onChange={setAno}
+      onChange={updateOuterValue}
     />
   );
 }
 
-function SelectSemestre() {
+function SelectSemestre(props) {
+  const { outerSemestre, setOuterSemestre } = props;
   let semestres = options.constantValues.semesters;
-  const [semestre, setSemestre] = useState(semestres[0]);
+
+  let semestreSelecionado = semestres.find(
+    (semestre) => semestre.value === parseInt(outerSemestre.value)
+  );
+
+  const [semestre, setSemestre] = useState(semestreSelecionado);
+
+  function updateOuterValue(novoSemestre) {
+    setOuterSemestre(novoSemestre);
+    setSemestre(novoSemestre);
+  }
+
   return (
     <Select
       className="SelectList"
       placeholder="Semestre"
       options={semestres}
       value={semestre}
-      onChange={setSemestre}
+      onChange={updateOuterValue}
     />
   );
 }

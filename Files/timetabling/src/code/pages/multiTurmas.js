@@ -12,6 +12,8 @@ import {
   SelectDia,
   SelectHoraTang,
   SelectDuracao,
+  SelectSemestre,
+  SelectAno,
 } from "../components/mySelects";
 // import AsyncSelect from "react-select/async";
 // import { readData } from "../functions/CRUD_JSONBIN";
@@ -19,9 +21,23 @@ import {
 function Turmas() {
   let allTurmas = allLocalJsonData.dynamic.turmas;
 
-  const [turmas, setTurmas] = useState(allTurmas);
+  const [ano, setAno] = useState(options.constantValues.years[10]);
+  const [semestre, setSemestre] = useState(options.constantValues.semesters[1]);
+
+  let turmasFiltradas = allTurmas.filter(
+    (turma) => turma.ano === ano.value && turma.semestre === semestre.value
+  );
+
+  const [turmas, setTurmas] = useState(turmasFiltradas);
   const [turma, setTurma] = useState(turmas[0]);
   const [currentId, setCurrentId] = useState(turmas.length + 1);
+
+  useEffect(() => {
+    let turmasFiltradas = allTurmas.filter(
+      (turma) => turma.ano === ano.value && turma.semestre === semestre.value
+    );
+    setTurmas(turmasFiltradas);
+  }, [ano, semestre]);
 
   function updateTurmas(newTurmaValue) {
     let newTurmas = turmas.map((turma, i) =>
@@ -77,20 +93,23 @@ function Turmas() {
       Listar todas os código-nomes de disciplinas que são de semestre ímpar
         Filtrar todas que são de periodoEsperado%2 == 1
     */
-    let DisciplinasImpares = TodasDisciplinas.filter(
-      (disciplina) => disciplina.periodo % 2 === 1
-    );
+    let DisciplinasDoSemestre = TodasDisciplinas;
+    if (semestre.value !== 3) {
+      DisciplinasDoSemestre = TodasDisciplinas.filter(
+        (disciplina) => disciplina.periodo % 2 === semestre.value % 2
+      );
+    }
 
     /*
-      Percorrer cada disciplina em DisciplinasImpares e, caso o código da disciplina esteja na lista de disciplinas oferecidas, remover da lista.
+      Percorrer cada disciplina em DisciplinasDoSemestre e, caso o código da disciplina esteja na lista de disciplinas oferecidas, remover da lista.
     */
-    let DisciplinasImparesAindaNaoOferecidas = DisciplinasImpares.filter(
+    let DisciplinasAindaNaoOferecidas = DisciplinasDoSemestre.filter(
       (disciplina) => {
         return !disciplinasOferecidas.includes(disciplina.codigo);
       }
     );
 
-    let EssasDisciplinas = DisciplinasImparesAindaNaoOferecidas;
+    let EssasDisciplinas = DisciplinasAindaNaoOferecidas;
 
     /* Percorra cada disciplina em EssasDisciplinas e as disponha em uma Tabela no formato
       | Período esperado | Código - Nome |
@@ -110,7 +129,10 @@ function Turmas() {
     function TabelaDeDisciplinasASereOferecidas() {
       return (
         <div>
-          <h1>Disciplinas do período ímpar ainda não oferecidas</h1>
+          <h1>
+            Disciplinas do período {semestre.value === 1 ? "ím" : ""}par ainda
+            não oferecidas
+          </h1>
           <table className="showBasicDataTable">
             <thead>
               <tr>
@@ -145,6 +167,7 @@ function Turmas() {
 
   function TurmasCard(props) {
     const { lTurmas, setLTurma } = props;
+
     function TurmasTable() {
       function removerTurma(id) {
         let newTurmas = turmas.filter((turma) => turma.id !== id);
@@ -154,7 +177,11 @@ function Turmas() {
         <table className="showBasicDataTable">
           <thead>
             <tr>
-              <th>Remover</th>
+              <th>
+                <button className="AdicionarHorario" onClick={addTurma}>
+                  Nova Turma
+                </button>
+              </th>
               <th>Código - Nome</th>
               <th>Professor</th>
               <th>Demanda Estimada</th>
@@ -324,12 +351,18 @@ function Turmas() {
 
     return (
       <div className="infoCard">
-        <h2>Turmas</h2>
-
-        <button className="AdicionarHorario" onClick={addTurma}>
-          Nova Turma
-        </button>
-
+        <div className="MultiTurmasTitle">
+          <h2>MultiTurmas</h2>
+          <div className="GlobalSelects">
+            Ano:
+            <SelectAno outerAno={ano} setOuterAno={setAno} />
+            Semestre:
+            <SelectSemestre
+              outerSemestre={semestre}
+              setOuterSemestre={setSemestre}
+            />
+          </div>
+        </div>
         {turmas.length === 0 ? <SemTurmas /> : <TurmasTable turmas={turmas} />}
         <button className="AdicionarHorario" onClick={addTurma}>
           Nova Turma
@@ -340,8 +373,8 @@ function Turmas() {
 
   return (
     <div className="CRUDContainComponents">
-      <DisciplinasNaoOferecidas lTurmas={turmas} />
       <TurmasCard lTurmas={turmas} setLTurma={setTurma} />
+      <DisciplinasNaoOferecidas lTurmas={turmas} />
     </div>
   );
 }
