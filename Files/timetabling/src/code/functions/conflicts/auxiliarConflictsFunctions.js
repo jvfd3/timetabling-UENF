@@ -12,12 +12,25 @@ function testingTurmas2022_1(turmas) {
   return turmas2022_1;
 }
 
+function flattenTurma(turma, horarioIndex) {
+  let turmaHorario = turma.horarios[horarioIndex];
+  let newTurma = { ...turmaHorario, ...turma };
+  newTurma.horaInicio = turmaHorario.horaInicio;
+  newTurma.duracao = turmaHorario.duracao;
+  newTurma.idHorario = turmaHorario.id;
+  newTurma.sala = turmaHorario.sala;
+  newTurma.dia = turmaHorario.dia;
+  delete newTurma.horarios;
+  // console.log("turma", turma);
+  // console.log("newTurma", newTurma);
+  return newTurma;
+}
+
 function splitTurmas(turmas) {
   let newSplittedTurmas = [];
   turmas.forEach((turma) => {
-    turma.horarios.forEach((horario) => {
-      let newTurma = { ...turma, ...horario };
-      delete newTurma.horarios;
+    turma.horarios.forEach((horario, idxHorario) => {
+      let newTurma = flattenTurma(turma, idxHorario);
       newSplittedTurmas.push(newTurma);
     });
   });
@@ -163,5 +176,6 @@ export {
   getTurmasPorAnoESemestre,
   searchListForKeyWithValue,
   getNumeroDeConflitos,
+  flattenTurma,
   getAtendimentoDeDemandas,
 };

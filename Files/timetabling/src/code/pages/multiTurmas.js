@@ -15,6 +15,11 @@ import {
   SelectSemestre,
   SelectAno,
 } from "../components/mySelects";
+import {
+  centralConflicts,
+  coloredConflicts,
+} from "../functions/conflicts/centralConflicts";
+import { flattenTurma } from "../functions/conflicts/auxiliarConflictsFunctions";
 // import AsyncSelect from "react-select/async";
 // import { readData } from "../functions/CRUD_JSONBIN";
 
@@ -29,7 +34,7 @@ function Turmas() {
   );
 
   const [turmas, setTurmas] = useState(turmasFiltradas);
-  const [turma, setTurma] = useState(turmas[0]);
+  const [turma, setTurma] = useState(turmas.length > 0 ? turmas[0] : null);
   const [currentId, setCurrentId] = useState(allTurmas.length + 1);
 
   useEffect(() => {
@@ -40,10 +45,20 @@ function Turmas() {
   }, [ano, semestre]);
 
   function updateTurmas(newTurmaValue) {
-    let newTurmas = turmas.map((turma, i) =>
-      parseInt(turma.id) === parseInt(newTurmaValue.id) ? newTurmaValue : turmas[i]
-    );
-    setTurmas(newTurmas);
+    /* 
+      // ERROR
+        // Cannot read properties of undefined (reading 'id')
+        // TypeError: Cannot read properties of undefined (reading 'id')
+        // at Array.map
+    */
+    if (newTurmaValue && turma) {
+      let newTurmas = turmas.map((turma, i) =>
+        turma && newTurmaValue && parseInt(turma.id) === parseInt(newTurmaValue.id)
+          ? newTurmaValue
+          : turmas[i]
+      );
+      setTurmas(newTurmas);
+    }
   }
 
   useEffect(() => {
@@ -53,8 +68,9 @@ function Turmas() {
   }, [turma]);
 
   function addTurma() {
+    let newId = currentId.toString();
     let newTurma = {
-      id: currentId.toString(),
+      id: newId,
       ano: ano.value,
       semestre: semestre.value,
       disciplina: {
@@ -65,12 +81,14 @@ function Turmas() {
       demandaEstimada: 0,
       horarios: [
         {
+          id: newId + "_1",
           sala: null,
           dia: null,
           horaInicio: null,
           duracao: 2,
         },
         {
+          id: newId + "_2",
           sala: null,
           dia: null,
           horaInicio: null,
@@ -169,7 +187,6 @@ function Turmas() {
 
   function TurmasCard(props) {
     const { lTurmas, setLTurma } = props;
-    console.log(turmas)
     function TurmasTable() {
       function removerTurma(id) {
         let newTurmas = turmas.filter((turma) => turma.id !== id);
@@ -184,12 +201,28 @@ function Turmas() {
             className="AdicionarHorario"
             onClick={() => {
               let novosHorarios = [...lTurma.horarios];
-              novosHorarios.push({
+              let newId = lTurma.id +"_";
+              if (novosHorarios.length === 0) {
+                newId += "1";
+              } else {
+                let ultimoHorario = novosHorarios[novosHorarios.length-1];
+                let lastId = ultimoHorario.id;
+                let partes = lastId.split("_");
+                let ultimaParte = parseInt(partes[partes.length - 1]);
+                let resultado = ultimaParte + 1;
+                // console.log("novosHorarios", novosHorarios[novosHorarios.length-1])
+                newId += resultado;
+
+              }
+              // console.log("newId", newId)
+              let newHorario = {
+                id: newId,
                 sala: null,
                 dia: null,
                 horaInicio: null,
                 duracao: 2,
-              });
+              }
+              novosHorarios.push(newHorario);
               let novaTurma = {
                 ...lTurma,
                 horarios: novosHorarios,
@@ -254,6 +287,7 @@ function Turmas() {
           <tbody>
             {lTurmas.map((currentTurma) => {
               let id = currentTurma.id;
+              
               let horarios = currentTurma.horarios;
               return (
                 <tr
@@ -315,47 +349,80 @@ function Turmas() {
                           </tr>
                         </thead>
                         <tbody>
-                          {horarios.map((horario, index) => (
-                            <tr
-                              key={`${id}-${horario.sala}-${horario.dia}-${horario.horaInicio}-${index}`}
-                            >
-                              <td>
-                                <SelectSala
-                                  lTurma={currentTurma}
-                                  setLTurma={setLTurma}
-                                  indexHorario={index}
-                                />
-                              </td>
-                              <td>
-                                <SelectDia
-                                  lTurma={currentTurma}
-                                  setLTurma={setLTurma}
-                                  indexHorario={index}
-                                />
-                              </td>
-                              <td>
-                                <SelectHoraTang
-                                  lTurma={currentTurma}
-                                  setLTurma={setLTurma}
-                                  indexHorario={index}
-                                />
-                              </td>
-                              <td>
-                                <SelectDuracao
-                                  lTurma={currentTurma}
-                                  setLTurma={setLTurma}
-                                  indexHorario={index}
-                                />
-                              </td>
-                              <td>
-                                <RemoveHorario
-                                  lTurma={currentTurma}
-                                  setLTurma={setLTurma}
-                                  indexHorario={index}
-                                />
-                              </td>
-                            </tr>
-                          ))}
+                          {horarios.map((horario, index) => {
+                            let tempLineTurma = flattenTurma(
+                              currentTurma,
+                              index
+                            );
+                            let conflicts = centralConflicts(
+                              lTurmas,
+                              tempLineTurma
+                            );
+
+                            /* console.log(
+                              "Turma",
+                              currentId,
+                              "Horario",
+                              index,
+                              "Dia:",
+                              conflicts.professor.dia,
+                              "Hora:",
+                              conflicts.professor.hora
+                            ); */
+                            return (
+                              <tr
+                                key={`${id}-${horario.sala}-${horario.dia}-${horario.horaInicio}-${index}`}
+                              >
+                                <td>
+                                  <SelectSala
+                                    lTurma={currentTurma}
+                                    setLTurma={setLTurma}
+                                    indexHorario={index}
+                                  />
+                                </td>
+                                <td
+                                  style={{
+                                    backgroundColor: coloredConflicts(
+                                      conflicts.professor.dia
+                                    ),
+                                  }}
+                                >
+                                  <SelectDia
+                                    lTurma={currentTurma}
+                                    setLTurma={setLTurma}
+                                    indexHorario={index}
+                                  />
+                                </td>
+                                <td
+                                  style={{
+                                    backgroundColor: coloredConflicts(
+                                      conflicts.professor.hora
+                                    ),
+                                  }}
+                                >
+                                  <SelectHoraTang
+                                    lTurma={currentTurma}
+                                    setLTurma={setLTurma}
+                                    indexHorario={index}
+                                  />
+                                </td>
+                                <td>
+                                  <SelectDuracao
+                                    lTurma={currentTurma}
+                                    setLTurma={setLTurma}
+                                    indexHorario={index}
+                                  />
+                                </td>
+                                <td>
+                                  <RemoveHorario
+                                    lTurma={currentTurma}
+                                    setLTurma={setLTurma}
+                                    indexHorario={index}
+                                  />
+                                </td>
+                              </tr>
+                            );
+                          })}
                         </tbody>
                       </table>
                     )}
