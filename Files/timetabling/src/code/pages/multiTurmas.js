@@ -30,7 +30,7 @@ function Turmas() {
 
   const [turmas, setTurmas] = useState(turmasFiltradas);
   const [turma, setTurma] = useState(turmas[0]);
-  const [currentId, setCurrentId] = useState(turmas.length + 1);
+  const [currentId, setCurrentId] = useState(allTurmas.length + 1);
 
   useEffect(() => {
     let turmasFiltradas = allTurmas.filter(
@@ -41,7 +41,7 @@ function Turmas() {
 
   function updateTurmas(newTurmaValue) {
     let newTurmas = turmas.map((turma, i) =>
-      turma.id === newTurmaValue.id ? newTurmaValue : turmas[i]
+      parseInt(turma.id) === parseInt(newTurmaValue.id) ? newTurmaValue : turmas[i]
     );
     setTurmas(newTurmas);
   }
@@ -54,7 +54,9 @@ function Turmas() {
 
   function addTurma() {
     let newTurma = {
-      id: currentId,
+      id: currentId.toString(),
+      ano: ano.value,
+      semestre: semestre.value,
       disciplina: {
         codigo: null,
         nome: null,
@@ -167,7 +169,7 @@ function Turmas() {
 
   function TurmasCard(props) {
     const { lTurmas, setLTurma } = props;
-
+    console.log(turmas)
     function TurmasTable() {
       function removerTurma(id) {
         let newTurmas = turmas.filter((turma) => turma.id !== id);
