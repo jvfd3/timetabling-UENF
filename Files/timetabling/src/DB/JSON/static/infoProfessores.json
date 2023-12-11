@@ -32,5 +32,5 @@
   {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "João Luiz de Almeida Filho",            "disciplinas": []},
   {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "Sânya Carvalho dos Santos Caldeira",    "disciplinas": []},
   {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "Luiz Mauricio de Oliveira Monteiro",    "disciplinas": []},
-  {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "bolsista ",    "disciplinas": []}
+  {"laboratorio": "LCMAT",   "curso": "Bolsistas",              "nome": "bolsista",                              "disciplinas": []}
 ]
