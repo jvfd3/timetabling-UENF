@@ -1,6 +1,6 @@
+import "../CSS/defaultStyle.css";
 import React, { useState } from "react";
 import options from "../temp/options";
-import "../CSS/defaultStyle.css";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
 import Select from "react-select";
 
@@ -150,15 +150,16 @@ function SelectSala(props) {
 
   function updateOuterTurma(novaSala) {
     if (novaSala === null) {
-      novaSala = { blocoSala: "" };
+      novaSala = {blocoSala: ""};
     }
     setSala(novaSala);
+    
+    let novosHorarios = [...horarios];
+    novosHorarios[indexHorario].sala = novaSala.blocoSala;
+
     let novaTurma = {
-      ...lTurma,
-      horarios: [
-        ...horarios,
-        (horarios[indexHorario].sala = novaSala.blocoSala),
-      ],
+        ...lTurma,
+        horarios: novosHorarios,
     };
     setLTurma(novaTurma);
   }
@@ -196,12 +197,25 @@ function SelectDia(props) {
       novoDia = { value: "" };
     }
     setDia(novoDia);
+    let novosHorarios = [...horarios];
+    novosHorarios[indexHorario].dia = novoDia.value;
+
     let novaTurma = {
-      ...lTurma,
-      horarios: [...horarios, (horarios[indexHorario].dia = novoDia.value)],
+        ...lTurma,
+        horarios: novosHorarios,
     };
     setLTurma(novaTurma);
   }
+
+  /*
+    let novosHorarios = [...horarios];
+    novosHorarios[indexHorario].dia = novoDia.value;
+
+    let novaTurma = {
+        ...lTurma,
+        horarios: novosHorarios,
+    };
+  */
 
   return (
     <Select
@@ -237,13 +251,15 @@ function SelectHoraTang(props) {
       novaHoraTang = { hora: "" };
     }
     setHora(novaHoraTang);
+
+    let novosHorarios = [...horarios];
+    novosHorarios[indexHorario].horaInicio = novaHoraTang.hora;
+
     let novaTurma = {
-      ...lTurma,
-      horarios: [
-        ...horarios,
-        (horarios[indexHorario].horaInicio = novaHoraTang.hora),
-      ],
+        ...lTurma,
+        horarios: novosHorarios,
     };
+
     setLTurma(novaTurma);
   }
 
@@ -281,13 +297,15 @@ function SelectDuracao(props) {
       novaDuracao = { value: "" };
     }
     setDuracao(novaDuracao);
+
+    let novosHorarios = [...horarios];
+    novosHorarios[indexHorario].duracao = novaDuracao.value;
+
     let novaTurma = {
-      ...lTurma,
-      horarios: [
-        ...horarios,
-        (horarios[indexHorario].duracao = novaDuracao.value),
-      ],
+        ...lTurma,
+        horarios: novosHorarios,
     };
+
     setLTurma(novaTurma);
   }
 

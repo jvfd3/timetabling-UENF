@@ -179,5 +179,6 @@ Explanation:
 .SelectList {
     display: flex;
     /* padding-left: 2%; */
+    font-weight: bolder;
     min-width: max-content;
 }
