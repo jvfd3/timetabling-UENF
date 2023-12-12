@@ -18,6 +18,7 @@ import {
 import {
   centralConflicts,
   coloredConflicts,
+  conflictsDisciplinaPeriodo,
 } from "../functions/conflicts/centralConflicts";
 import { flattenTurma } from "../functions/conflicts/auxiliarConflictsFunctions";
 // import AsyncSelect from "react-select/async";
@@ -26,8 +27,9 @@ import { flattenTurma } from "../functions/conflicts/auxiliarConflictsFunctions"
 function Turmas() {
   let allTurmas = allLocalJsonData.dynamic.turmas;
 
-  const [ano, setAno] = useState(options.constantValues.years[10]);
-  const [semestre, setSemestre] = useState(options.constantValues.semesters[1]);
+  // const [ano, setAno] = useState(options.constantValues.years[10]);
+  const [ano, setAno] = useState(options.constantValues.years[15]);
+  const [semestre, setSemestre] = useState(options.constantValues.semesters[2]);
 
   let turmasFiltradas = allTurmas.filter(
     (turma) => turma.ano === ano.value && turma.semestre === semestre.value
@@ -268,7 +270,9 @@ function Turmas() {
           </button>
         );
       }
-
+      function max (array) {
+        return Math.max.apply(null, array);
+      }
       return (
         <table className="showBasicDataTable">
           <thead>
@@ -286,8 +290,8 @@ function Turmas() {
           </thead>
           <tbody>
             {lTurmas.map((currentTurma) => {
+              let conflitosDisciplina = conflictsDisciplinaPeriodo(lTurmas, currentTurma)
               let id = currentTurma.id;
-              
               let horarios = currentTurma.horarios;
               return (
                 <tr
@@ -302,7 +306,13 @@ function Turmas() {
                       Remover Turma
                     </button>
                   </td>
-                  <td>
+                  <td
+                    style={{
+                      backgroundColor: coloredConflicts(
+                        conflitosDisciplina.maxConflito
+                      ),
+                    }}
+                  >
                     <SelectDisciplina
                       lTurma={currentTurma}
                       setLTurma={setLTurma}
@@ -383,7 +393,12 @@ function Turmas() {
                                 <td
                                   style={{
                                     backgroundColor: coloredConflicts(
-                                      conflicts.professor.dia
+                                      max(
+                                        [
+                                          conflicts.professor.dia,
+                                          conflitosDisciplina.disciplinaPeriodo[index].nivelConflitoDia
+                                        ]
+                                      )
                                     ),
                                   }}
                                 >
@@ -396,7 +411,12 @@ function Turmas() {
                                 <td
                                   style={{
                                     backgroundColor: coloredConflicts(
-                                      conflicts.professor.hora
+                                      max(
+                                        [
+                                          conflicts.professor.hora,
+                                          conflitosDisciplina.disciplinaPeriodo[index].nivelConflitoHora
+                                        ]
+                                      )
                                     ),
                                   }}
                                 >
