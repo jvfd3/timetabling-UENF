@@ -446,10 +446,84 @@ function SelectDuracao(props) {
   );
 }
 
+function SelectCurso(props) {
+  const { professorAtual, setNewProfessor } = props;
+  let cursos = options.constantValues.courses;
+  let foundCurso = cursos.find(
+    (curso) => curso.value === professorAtual.curso
+  );
+
+  const [curso, setCurso] = useState(foundCurso);
+
+  
+  function updateOuterProfessor(newCurso) {
+    newCurso = newCurso || { value: "" };
+    setCurso(newCurso)
+
+    let novoProfessor = {
+      ...professorAtual,
+      curso: newCurso.value,
+    };
+
+    setNewProfessor(novoProfessor);
+  }
+
+  return (
+    <Select
+      className="SelectList"
+      placeholder="Curso"
+      isClearable
+      options={cursos}
+      onChange={updateOuterProfessor}
+      value={curso}
+      formatOptionLabel={({ value, label }, { context }) => {
+        return context === "value" ? `(${value}) ${label}` : `(${value}) ${label}`;
+      }}
+    />
+  );
+}
+
+function SelectLaboratorio(props) {
+  const { professorAtual, setNewProfessor } = props;
+  let laboratorios = options.constantValues.laboratorios;
+  
+  let foundLab = laboratorios.find(
+    (lab) => lab.value === professorAtual.laboratorio
+  );
+  const [laboratorio, setLaboratorio] = useState(foundLab);
+
+  function updateOuterProfessor(newLab) {
+    newLab = newLab || { value: "" };
+    setLaboratorio(newLab)
+
+    let novoProfessor = {
+      ...professorAtual,
+      laboratorio: newLab.value,
+    };
+
+    setNewProfessor(novoProfessor);
+  }
+
+  return (
+    <Select
+      className="SelectList"
+      placeholder="Laboratório"
+      isClearable
+      options={laboratorios}
+      onChange={updateOuterProfessor}
+      value={laboratorio}
+      formatOptionLabel={({ value, label }, { context }) => {
+        return context === "value" ? `(${value}) ${label}` : `(${value}) ${label}`;
+      }}
+    />
+  );
+}
+
 export {
   SelectDia,
-  SelectSala,
   SelectAno,
+  SelectSala,
+  SelectCurso,
   SelectDuracao,
   SelectSemestre,
   SelectHoraTang,
@@ -457,5 +531,6 @@ export {
   SelectProfessor,
   SelectProfessorC,
   SelectDisciplina,
+  SelectLaboratorio,
   SelectSemestreTurma,
 };

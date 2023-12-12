@@ -7,7 +7,11 @@ import Select from "react-select";
 import { getNomesDasDisciplinas } from "../functions/getListaDisciplinas";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
 import { readData, updateData } from "../functions/CRUD_JSONBIN";
-import { SelectProfessorC } from "../components/mySelects";
+import {
+  SelectCurso,
+  SelectLaboratorio,
+  SelectProfessorC,
+} from "../components/mySelects";
 
 // import { allLocalJsonData } from "../../DB/dataFromJSON";
 // import { updateDB } from "../functions/update_DB";
@@ -31,8 +35,20 @@ function Professores() {
     getPreferenciasProfessor(professor.nome)
   );
 
+  function updateProfessores(newProfessor){
+      let newProfessores = professores.map((professor) =>
+        professor.nome === newProfessor.nome ? newProfessor : professor
+      );
+      console.log("professores", professores[0]);
+      console.log("newProfessor", newProfessor);
+      console.log("newProfessores", newProfessores[0]);
+      setProfessores(newProfessores);
+  }
+
   useEffect(() => {
-    setPreferencia(getPreferenciasProfessor(professor.nome));
+    // setPreferencia(getPreferenciasProfessor(professor.nome));
+    /* Get all professores, find the  */
+    updateProfessores(professor);
   }, [professor]);
 
   function updatePreferencias(newPreferenciaValue) {
@@ -97,7 +113,7 @@ function Professores() {
           getOptionValue={(option) => option.nome}
           getOptionLabel={(option) => option.laboratorio}
           formatOptionLabel={({ nome, laboratorio }, { context }) => {
-            return context === "value" ? `${nome}` : `(${laboratorio}) ${nome}`;
+            return context === "value" ? `(${laboratorio}) ${nome}` : `(${laboratorio}) ${nome}`;
           }}
           isMulti={false}
           isSearchable={true}
@@ -129,11 +145,21 @@ function Professores() {
               </tr>
               <tr>
                 <th>Curso</th>
-                <td>{professor.curso}</td>
+                <td>
+                  <SelectCurso
+                    professorAtual={professor}
+                    setNewProfessor={setProfessor}
+                  />
+                </td>
               </tr>
               <tr>
                 <th>laboratório</th>
-                <td>{professor.laboratorio}</td>
+                <td>
+                  <SelectLaboratorio
+                    professorAtual={professor}
+                    setNewProfessor={setProfessor}
+                  />
+                </td>
               </tr>
             </tbody>
           </table>
