@@ -17,7 +17,7 @@
   - esse valor deve estar definido como value no Select de Docentes
 - ao alterar cada um dos selects, a alteração deve ser enviada ao JSONBIN. - DO LATER
 */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../CSS/CRUD_disciplinas.css";
 import "../CSS/defaultStyle.css";
 import options from "../temp/options";
@@ -26,20 +26,24 @@ import Select from "react-select";
 import { readData } from "../functions/CRUD_JSONBIN";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
 import { getNomesDasDisciplinas } from "../functions/getListaDisciplinas";
-
-// let disciplinasFromJB = await readData(options.JBVars.bins.infoDisciplinasCC);
-// let disciplinas_RS = disciplinasFromJB.map(disciplinaDBtoRS);
-let DBdisciplinas = allLocalJsonData.static.infoDisciplinasCC;
-let disciplinas_RS = DBdisciplinas.map((disciplina) => {
-  return {
-    codigo: disciplina.codigo,
-    nome: disciplina.nome,
-    periodo: disciplina.periodo,
-    requisitos: getNomesDasDisciplinas(disciplina.codigo_requisitos),
-  };
-});
-
+/* import {
+  SelectDisciplinasCodigoC,
+  SelectDisciplinasDisciplinaC,
+} from "../components/mySelects";
+ */
 function Disciplinas() {
+  // let disciplinasFromJB = await readData(options.JBVars.bins.infoDisciplinasCC);
+  // let disciplinas_RS = disciplinasFromJB.map(disciplinaDBtoRS);
+  let DBdisciplinas = allLocalJsonData.static.infoDisciplinasCC;
+  let disciplinas_RS = DBdisciplinas.map((disciplina) => {
+    return {
+      codigo: disciplina.codigo,
+      nome: disciplina.nome,
+      periodo: disciplina.periodo,
+      requisitos: getNomesDasDisciplinas(disciplina.codigo_requisitos),
+    };
+  });
+
   const [disciplinas, setDisciplinas] = useState(disciplinas_RS);
   const [disciplina, setDisciplina] = useState(disciplinas[36]);
 
@@ -84,13 +88,7 @@ function Disciplinas() {
         return correctPeriodo;
       }
 
-      function updatingSelect(
-        newValue,
-        coletivo,
-        setColetivo,
-        individual,
-        setIndividual
-      ) {
+      function updatingSelect(newValue, individual, setIndividual) {
         console.log("Updating Select");
         console.log("individual: ", individual);
 
@@ -110,11 +108,27 @@ function Disciplinas() {
             <tbody>
               <tr>
                 <th>Código</th>
-                <td>{disciplina.codigo}</td>
+                <td>
+                  {disciplina.codigo}
+                  {/* <SelectDisciplinasCodigoC
+                    disciplina={disciplina}
+                    disciplinas={disciplinas}
+                    setDisciplina={setDisciplina}
+                    setDisciplinas={setDisciplinas}
+                  /> */}
+                </td>
               </tr>
               <tr>
                 <th>Nome</th>
-                <td>{disciplina.nome}</td>
+                <td>
+                  {disciplina.nome}
+                  {/* <SelectDisciplinasDisciplinaC
+                    disciplina={disciplina}
+                    disciplinas={disciplinas}
+                    setDisciplina={setDisciplina}
+                    setDisciplinas={setDisciplinas}
+                  /> */}
+                </td>
               </tr>
               <tr>
                 <th>Período Esperado</th>
@@ -145,7 +159,7 @@ function Disciplinas() {
     return (
       <div className="infoCard">
         <InformacoesBaseDaDisciplina />
-        <div className="showBasicDataCard">
+        {/* <div className="showBasicDataCard">
           <table className="showBasicDataTable">
             <thead>
               <tr>
@@ -178,7 +192,7 @@ function Disciplinas() {
               </tr>
             </tbody>
           </table>
-        </div>
+        </div> */}
       </div>
     );
   }
@@ -194,7 +208,9 @@ function Disciplinas() {
 function CRUDDisciplinas() {
   return (
     <div className="background">
-      <CRUDPageSelection defaultValue={options.constantValues.pageSelection.disciplinas} />
+      <CRUDPageSelection
+        defaultValue={options.constantValues.pageSelection.disciplinas}
+      />
       <Disciplinas />
     </div>
   );

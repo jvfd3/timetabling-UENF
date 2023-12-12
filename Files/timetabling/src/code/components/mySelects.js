@@ -449,16 +449,13 @@ function SelectDuracao(props) {
 function SelectCurso(props) {
   const { professorAtual, setNewProfessor } = props;
   let cursos = options.constantValues.courses;
-  let foundCurso = cursos.find(
-    (curso) => curso.value === professorAtual.curso
-  );
+  let foundCurso = cursos.find((curso) => curso.value === professorAtual.curso);
 
   const [curso, setCurso] = useState(foundCurso);
 
-  
   function updateOuterProfessor(newCurso) {
     newCurso = newCurso || { value: "" };
-    setCurso(newCurso)
+    setCurso(newCurso);
 
     let novoProfessor = {
       ...professorAtual,
@@ -477,7 +474,9 @@ function SelectCurso(props) {
       onChange={updateOuterProfessor}
       value={curso}
       formatOptionLabel={({ value, label }, { context }) => {
-        return context === "value" ? `(${value}) ${label}` : `(${value}) ${label}`;
+        return context === "value"
+          ? `(${value}) ${label}`
+          : `(${value}) ${label}`;
       }}
     />
   );
@@ -486,7 +485,7 @@ function SelectCurso(props) {
 function SelectLaboratorio(props) {
   const { professorAtual, setNewProfessor } = props;
   let laboratorios = options.constantValues.laboratorios;
-  
+
   let foundLab = laboratorios.find(
     (lab) => lab.value === professorAtual.laboratorio
   );
@@ -494,7 +493,7 @@ function SelectLaboratorio(props) {
 
   function updateOuterProfessor(newLab) {
     newLab = newLab || { value: "" };
-    setLaboratorio(newLab)
+    setLaboratorio(newLab);
 
     let novoProfessor = {
       ...professorAtual,
@@ -513,7 +512,9 @@ function SelectLaboratorio(props) {
       onChange={updateOuterProfessor}
       value={laboratorio}
       formatOptionLabel={({ value, label }, { context }) => {
-        return context === "value" ? `(${value}) ${label}` : `(${value}) ${label}`;
+        return context === "value"
+          ? `(${value}) ${label}`
+          : `(${value}) ${label}`;
       }}
     />
   );
