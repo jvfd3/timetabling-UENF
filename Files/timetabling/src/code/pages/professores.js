@@ -7,12 +7,14 @@ import Select from "react-select";
 import { getNomesDasDisciplinas } from "../functions/getListaDisciplinas";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
 import { readData, updateData } from "../functions/CRUD_JSONBIN";
+import { SelectProfessorC } from "../components/mySelects";
+
 // import { allLocalJsonData } from "../../DB/dataFromJSON";
 // import { updateDB } from "../functions/update_DB";
 // updateDB(options.JBVars.bins.infoProfessores);
 
 function Professores() {
-  let localData = allLocalJsonData.static.infoProfessores;
+  let localData = allLocalJsonData.static.infoProfessores; //Tá repetido com o useEffect
   const [professores, setProfessores] = useState(localData);
   const [professor, setProfessor] = useState(professores[0]); //Rivera
   // const [professor, setProfessor] = useState(localData[2]); //Tang
@@ -116,7 +118,14 @@ function Professores() {
             <tbody>
               <tr>
                 <th>Nome</th>
-                <td>{professor.nome}</td>
+                <td>
+                  <SelectProfessorC
+                    professorAtual={professor}
+                    setNewProfessor={setProfessor}
+                    professoresAtuais={professores}
+                    setNewProfessores={setProfessores}
+                  />
+                </td>
               </tr>
               <tr>
                 <th>Curso</th>
@@ -375,6 +384,7 @@ function Professores() {
               </tr>
               <tr>
                 <td>
+                  {/* Depois checar para externalizar e relacionar com o BD */}
                   <SelectDisciplinas
                     myCurrentOptions={professor.disciplinas}
                     currentProfessor={professor}

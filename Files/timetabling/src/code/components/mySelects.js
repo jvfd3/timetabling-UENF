@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import options from "../temp/options";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
 import Select from "react-select";
+import CreatableSelect from "react-select/creatable";
 
 function SelectAno(props) {
   const { outerAno, setOuterAno } = props;
@@ -33,9 +34,7 @@ function SelectAno(props) {
 function SelectAnoTurma(props) {
   const { lTurma, setLTurma } = props;
   let anos = options.constantValues.years;
-  let anoSelecionado = anos.find(
-    (ano) => ano.value === parseInt(lTurma.ano)
-  );
+  let anoSelecionado = anos.find((ano) => ano.value === parseInt(lTurma.ano));
   const [ano, setAno] = useState(anoSelecionado);
   function updateOuterValue(novoAno) {
     if (novoAno === null) {
@@ -200,6 +199,69 @@ function SelectProfessor(props) {
   );
 }
 
+function SelectProfessorC(props) {
+  const {
+    professorAtual,
+    setNewProfessor,
+    professoresAtuais,
+    setNewProfessores,
+  } = props;
+
+  const [professores, setProfessores] = useState(professoresAtuais);
+  let professorSelecionado = professorAtual;
+  // let professorSelecionado = professores.find(
+  //   (professor) => professor.nome === lTurma.professor
+  // );
+  const [professor, setProfessor] = useState(professorSelecionado);
+  const [isLoading, setIsLoading] = useState(false);
+
+  function updateOuterTurma(novoProfessor) {
+    if (novoProfessor === null) {
+      novoProfessor = { nome: "" };
+    }
+    setProfessor(novoProfessor);
+    setNewProfessor(novoProfessor);
+  }
+
+  function createOption(newValue) {
+    let newOption = {
+      laboratorio: null,
+      curso: null,
+      nome: newValue,
+      disciplinas: [],
+    };
+    return newOption;
+  }
+  function handleCreate(newValue) {
+    setIsLoading(true);
+    setTimeout(() => {
+      const newOption = createOption(newValue);
+      setIsLoading(false);
+      setNewProfessores((prev) => [...prev, newOption]);
+      setProfessores((prev) => [...prev, newOption]);
+      setProfessor(newOption);
+      setNewProfessor(newOption);
+    }, 1000);
+  }
+
+  return (
+    <CreatableSelect
+      onCreateOption={handleCreate}
+      isDisabled={isLoading}
+      isLoading={isLoading}
+      isSearchable
+      isClearable={false}
+      options={professores}
+      value={professor}
+      onChange={updateOuterTurma}
+      getOptionValue={(option) => option.nome}
+      getOptionLabel={(option) => option.nome}
+      className="SelectList"
+      placeholder="Professor"
+    />
+  );
+}
+
 function SelectSala(props) {
   const { lTurma, setLTurma, indexHorario } = props;
 
@@ -212,16 +274,16 @@ function SelectSala(props) {
 
   function updateOuterTurma(novaSala) {
     if (novaSala === null) {
-      novaSala = {blocoSala: ""};
+      novaSala = { blocoSala: "" };
     }
     setSala(novaSala);
-    
+
     let novosHorarios = [...horarios];
     novosHorarios[indexHorario].sala = novaSala.blocoSala;
 
     let novaTurma = {
-        ...lTurma,
-        horarios: novosHorarios,
+      ...lTurma,
+      horarios: novosHorarios,
     };
     setLTurma(novaTurma);
   }
@@ -263,8 +325,8 @@ function SelectDia(props) {
     novosHorarios[indexHorario].dia = novoDia.value;
 
     let novaTurma = {
-        ...lTurma,
-        horarios: novosHorarios,
+      ...lTurma,
+      horarios: novosHorarios,
     };
     setLTurma(novaTurma);
   }
@@ -318,8 +380,8 @@ function SelectHoraTang(props) {
     novosHorarios[indexHorario].horaInicio = novaHoraTang.hora;
 
     let novaTurma = {
-        ...lTurma,
-        horarios: novosHorarios,
+      ...lTurma,
+      horarios: novosHorarios,
     };
 
     setLTurma(novaTurma);
@@ -364,8 +426,8 @@ function SelectDuracao(props) {
     novosHorarios[indexHorario].duracao = novaDuracao.value;
 
     let novaTurma = {
-        ...lTurma,
-        horarios: novosHorarios,
+      ...lTurma,
+      horarios: novosHorarios,
     };
 
     setLTurma(novaTurma);
@@ -385,14 +447,15 @@ function SelectDuracao(props) {
 }
 
 export {
-  SelectAno,
-  SelectSemestre,
-  SelectProfessor,
-  SelectDisciplina,
-  SelectSala,
   SelectDia,
-  SelectHoraTang,
+  SelectSala,
+  SelectAno,
   SelectDuracao,
+  SelectSemestre,
+  SelectHoraTang,
   SelectAnoTurma,
+  SelectProfessor,
+  SelectProfessorC,
+  SelectDisciplina,
   SelectSemestreTurma,
 };
