@@ -72,7 +72,7 @@ function Salas() {
 
     function TurmasNaSala({ blocoSala }) {
       function getTurmas() {
-        let turmasTeste = allLocalJsonData.dynamic.turmasTeste;
+        let turmasTeste = allLocalJsonData.dynamic.turmas;
         // console.log(turmasTeste);
         let horariosNestaSala = [];
         for (const chaveTurma in turmasTeste) {
