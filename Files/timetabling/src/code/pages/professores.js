@@ -393,11 +393,11 @@ function Professores() {
     return (
       <div className="infoCard">
         <InformacoesBaseDoProfessor />
-        <PreferencesTable
+        {/* <PreferencesTable
           preferencia1={preferencia}
           setPreferencia1={setPreferencia}
-        />
-        <DisciplinasMinistradasPeloProfessor />
+        /> */}
+        {/* <DisciplinasMinistradasPeloProfessor /> */}
       </div>
     );
   }
