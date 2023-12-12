@@ -22,5 +22,3 @@ O que eu realmente quero é conseguir adicionar um novo professor porque os bols
   - [ ] Fazer um mini exemplo na página de professores
 - [ ] Caso não funcione como desejado
   - [ ] Fazer botão de adicionar professor
-
-### Tarefas Detalhas
