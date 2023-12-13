@@ -5,6 +5,18 @@ import { allLocalJsonData } from "../../DB/dataFromJSON";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 
+function SelectAnoSemestre(props) {
+  let { ano, setAno, semestre, setSemestre } = props;
+  return (
+    <div className="GlobalSelects">
+      Ano:
+      <SelectAno outerAno={ano} setOuterAno={setAno} />
+      Semestre:
+      <SelectSemestre outerSemestre={semestre} setOuterSemestre={setSemestre} />
+    </div>
+  );
+}
+
 function SelectAno(props) {
   const { outerAno, setOuterAno } = props;
   let anos = options.constantValues.years;
@@ -532,6 +544,7 @@ export {
   SelectProfessor,
   SelectProfessorC,
   SelectDisciplina,
+  SelectAnoSemestre,
   SelectLaboratorio,
   SelectSemestreTurma,
 };

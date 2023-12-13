@@ -13,17 +13,24 @@ import Professores from "./pages/professores";
 import Disciplinas from "./pages/disciplinas";
 import Salas from "./pages/salas";
 import NoMatch from "./pages/notFound";
+import CCTable from "./pages/ccTable";
 
 function MyRouting() {
   let basePath = options.constantValues.routing.urlPath; //"/timetabling-uenf/";
   let mainPath = basePath + options.constantValues.pageSelection.main.value;
-  let multiTurmasPath = basePath + options.constantValues.pageSelection.multiTurmas.value;
+  let multiTurmasPath =
+    basePath + options.constantValues.pageSelection.multiTurmas.value;
   let turmasPath = basePath + options.constantValues.pageSelection.turmas.value;
   let alunosPath = basePath + options.constantValues.pageSelection.alunos.value;
-  let professoresPath = basePath + options.constantValues.pageSelection.professores.value;
-  let disciplinasPath = basePath + options.constantValues.pageSelection.disciplinas.value;
+  let professoresPath =
+    basePath + options.constantValues.pageSelection.professores.value;
+  let disciplinasPath =
+    basePath + options.constantValues.pageSelection.disciplinas.value;
   let salasPath = basePath + options.constantValues.pageSelection.salas.value;
-  let notFoundPath = basePath + options.constantValues.pageSelection.notFound.value;
+  let notFoundPath =
+    basePath + options.constantValues.pageSelection.notFound.value;
+  let ccTablePath =
+    basePath + options.constantValues.pageSelection.CCTable.value;
 
   return (
     <BrowserRouter basename="/">
@@ -35,11 +42,12 @@ function MyRouting() {
         <Route element={<Main />} path={basePath} />
         <Route element={<Main />} path={mainPath} />
         <Route element={<MultiTurmas />} path={multiTurmasPath} />
+        <Route element={<CCTable />} path={ccTablePath} />
         <Route element={<Turmas />} path={turmasPath} />
-        <Route element={<Alunos />} path={alunosPath} />
         <Route element={<Professores />} path={professoresPath} />
-        <Route element={<Disciplinas />} path={disciplinasPath} />
         <Route element={<Salas />} path={salasPath} />
+        <Route element={<Disciplinas />} path={disciplinasPath} />
+        <Route element={<Alunos />} path={alunosPath} />
         <Route element={<NoMatch />} path={notFoundPath} />
         <Route element={<NoMatch />} path="*" />
       </Routes>

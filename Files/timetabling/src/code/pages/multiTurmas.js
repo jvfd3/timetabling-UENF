@@ -14,6 +14,7 @@ import {
   SelectDuracao,
   SelectSemestre,
   SelectAno,
+  SelectAnoSemestre,
 } from "../components/mySelects";
 import {
   centralConflicts,
@@ -55,7 +56,9 @@ function Turmas() {
     */
     if (newTurmaValue && turma) {
       let newTurmas = turmas.map((turma, i) =>
-        turma && newTurmaValue && parseInt(turma.id) === parseInt(newTurmaValue.id)
+        turma &&
+        newTurmaValue &&
+        parseInt(turma.id) === parseInt(newTurmaValue.id)
           ? newTurmaValue
           : turmas[i]
       );
@@ -152,8 +155,14 @@ function Turmas() {
       return (
         <div>
           <h1>
-            Disciplinas do período {semestre.value === 1 ? "ím" : ""}par ainda
-            não oferecidas
+            Disciplinas ainda não oferecidas do
+            {semestre.value === 1
+              ? " período ímpar "
+              : semestre.value === 2
+              ? " período par "
+              : "s períodos "}
+            {/* Disciplinas do período{" "}
+            {semestre.value === 1 ? "ím" : ""}par ainda não oferecidas */}
           </h1>
           <table className="showBasicDataTable">
             <thead>
@@ -203,18 +212,17 @@ function Turmas() {
             className="AdicionarHorario"
             onClick={() => {
               let novosHorarios = [...lTurma.horarios];
-              let newId = lTurma.id +"_";
+              let newId = lTurma.id + "_";
               if (novosHorarios.length === 0) {
                 newId += "1";
               } else {
-                let ultimoHorario = novosHorarios[novosHorarios.length-1];
+                let ultimoHorario = novosHorarios[novosHorarios.length - 1];
                 let lastId = ultimoHorario.id;
                 let partes = lastId.split("_");
                 let ultimaParte = parseInt(partes[partes.length - 1]);
                 let resultado = ultimaParte + 1;
                 // console.log("novosHorarios", novosHorarios[novosHorarios.length-1])
                 newId += resultado;
-
               }
               // console.log("newId", newId)
               let newHorario = {
@@ -223,7 +231,7 @@ function Turmas() {
                 dia: null,
                 horaInicio: null,
                 duracao: 2,
-              }
+              };
               novosHorarios.push(newHorario);
               let novaTurma = {
                 ...lTurma,
@@ -270,7 +278,7 @@ function Turmas() {
           </button>
         );
       }
-      function max (array) {
+      function max(array) {
         return Math.max.apply(null, array);
       }
       return (
@@ -290,7 +298,10 @@ function Turmas() {
           </thead>
           <tbody>
             {lTurmas.map((currentTurma) => {
-              let conflitosDisciplina = conflictsDisciplinaPeriodo(lTurmas, currentTurma)
+              let conflitosDisciplina = conflictsDisciplinaPeriodo(
+                lTurmas,
+                currentTurma
+              );
               let id = currentTurma.id;
               let horarios = currentTurma.horarios;
               return (
@@ -393,12 +404,12 @@ function Turmas() {
                                 <td
                                   style={{
                                     backgroundColor: coloredConflicts(
-                                      max(
-                                        [
-                                          conflicts.professor.dia,
-                                          conflitosDisciplina.disciplinaPeriodo[index].nivelConflitoDia
-                                        ]
-                                      )
+                                      max([
+                                        conflicts.professor.dia,
+                                        conflitosDisciplina.disciplinaPeriodo[
+                                          index
+                                        ].nivelConflitoDia,
+                                      ])
                                     ),
                                   }}
                                 >
@@ -411,12 +422,12 @@ function Turmas() {
                                 <td
                                   style={{
                                     backgroundColor: coloredConflicts(
-                                      max(
-                                        [
-                                          conflicts.professor.hora,
-                                          conflitosDisciplina.disciplinaPeriodo[index].nivelConflitoHora
-                                        ]
-                                      )
+                                      max([
+                                        conflicts.professor.hora,
+                                        conflitosDisciplina.disciplinaPeriodo[
+                                          index
+                                        ].nivelConflitoHora,
+                                      ])
                                     ),
                                   }}
                                 >
@@ -467,15 +478,12 @@ function Turmas() {
       <div className="infoCard">
         <div className="MultiTurmasTitle">
           <h2>MultiTurmas</h2>
-          <div className="GlobalSelects">
-            Ano:
-            <SelectAno outerAno={ano} setOuterAno={setAno} />
-            Semestre:
-            <SelectSemestre
-              outerSemestre={semestre}
-              setOuterSemestre={setSemestre}
-            />
-          </div>
+          <SelectAnoSemestre
+            ano={ano}
+            setAno={setAno}
+            semestre={semestre}
+            setSemestre={setSemestre}
+          />
         </div>
         {turmas.length === 0 ? <SemTurmas /> : <TurmasTable turmas={turmas} />}
         <button className="AdicionarHorario" onClick={addTurma}>

@@ -34,15 +34,7 @@ import { getNomesDasDisciplinas } from "../functions/getListaDisciplinas";
 function Disciplinas() {
   // let disciplinasFromJB = await readData(options.JBVars.bins.infoDisciplinasCC);
   // let disciplinas_RS = disciplinasFromJB.map(disciplinaDBtoRS);
-  let DBdisciplinas = allLocalJsonData.static.infoDisciplinasCC;
-  let disciplinas_RS = DBdisciplinas.map((disciplina) => {
-    return {
-      codigo: disciplina.codigo,
-      nome: disciplina.nome,
-      periodo: disciplina.periodo,
-      requisitos: getNomesDasDisciplinas(disciplina.codigo_requisitos),
-    };
-  });
+  let disciplinas_RS = allLocalJsonData.static.infoDisciplinasCC;
 
   const [disciplinas, setDisciplinas] = useState(disciplinas_RS);
   const [disciplina, setDisciplina] = useState(disciplinas[36]);
