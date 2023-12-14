@@ -357,16 +357,16 @@ function Turmas() {
                       <table>
                         <thead>
                           <tr key={id * 100}>
-                            <th>Sala</th>
-                            <th>Dia</th>
-                            <th>Hora Início</th>
-                            <th>Duração</th>
                             <th>
                               <AdicionarHorario
                                 setLTurmas={setTurmas}
                                 lTurma={currentTurma}
                               />
                             </th>
+                            <th>Sala</th>
+                            <th>Dia</th>
+                            <th>Hora Início</th>
+                            <th>Duração</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -394,6 +394,13 @@ function Turmas() {
                               <tr
                                 key={`${id}-${horario.sala}-${horario.dia}-${horario.horaInicio}-${index}`}
                               >
+                                <td>
+                                  <RemoveHorario
+                                    lTurma={currentTurma}
+                                    setLTurma={setLTurma}
+                                    indexHorario={index}
+                                  />
+                                </td>
                                 <td>
                                   <SelectSala
                                     lTurma={currentTurma}
@@ -439,13 +446,6 @@ function Turmas() {
                                 </td>
                                 <td>
                                   <SelectDuracao
-                                    lTurma={currentTurma}
-                                    setLTurma={setLTurma}
-                                    indexHorario={index}
-                                  />
-                                </td>
-                                <td>
-                                  <RemoveHorario
                                     lTurma={currentTurma}
                                     setLTurma={setLTurma}
                                     indexHorario={index}

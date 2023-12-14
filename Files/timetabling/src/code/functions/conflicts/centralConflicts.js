@@ -107,13 +107,13 @@ function conflictsProfessor(turmasListadas, turmaLinear) {
 function removeSameId(turmasListadas, idTurma, idHorario) {
   // console.log(turmasListadas);
   let turmasListadasSemTurmaOriginal = turmasListadas.filter((turmaListada) => {
-    return turmaListada.id + turmaListada.idHorario !== idTurma+idHorario;
+    return turmaListada.id + turmaListada.idHorario !== idTurma + idHorario;
   });
   return turmasListadasSemTurmaOriginal;
 }
 
 /*
-*/
+ */
 
 function centralConflicts(turmasListadas, turmaLinear) {
   let encounteredConflicts = {};
@@ -122,7 +122,7 @@ function centralConflicts(turmasListadas, turmaLinear) {
     splittedTurmas,
     turmaLinear.id,
     turmaLinear.idHorario
-    );
+  );
   // console.log("splittedTurmas", splittedTurmas);
   // console.log("filteredTurmas", filteredTurmas);
   // let filteredTurmas = turmasListadas;
@@ -178,8 +178,8 @@ function conflictsDisciplinaPeriodo(turmasListadas, turma) {
   let disciplinaDaTurma = turma.disciplina.codigo;
   let disciplinas = allLocalJsonData.static.infoDisciplinasCC;
 
-  console.log("disciplinaDaTurma", disciplinaDaTurma);
-  
+  // console.log("disciplinaDaTurma", disciplinaDaTurma);
+
   /* Obter lista de disciplinas que tenham o mesmo período da disciplinaDaTurma */
   let periodoEsperado = "";
   disciplinas.forEach((disciplina) => {
@@ -217,8 +217,8 @@ function conflictsDisciplinaPeriodo(turmasListadas, turma) {
   turma.horarios.forEach((_, index) => {
     flattenedTurma.push(flattenTurma(turma, index));
   });
-  let conflitosDisciplinaPeriodo = {"disciplinaPeriodo": {}};
-  
+  let conflitosDisciplinaPeriodo = { disciplinaPeriodo: {} };
+
   // console.log("flattenedTurma", flattenedTurma);
   flattenedTurma.forEach((turma, indexHorario) => {
     let maxConflito = 0;
@@ -226,16 +226,17 @@ function conflictsDisciplinaPeriodo(turmasListadas, turma) {
       // console.log("(DiaHora, ", turma.dia, turma.horaInicio,")", "(DiaHora, ", turmaDoMesmoPeriodo.dia, turmaDoMesmoPeriodo.horaInicio,")");
       let mesmoDia = turma.dia === turmaDoMesmoPeriodo.dia;
       let mesmaHora = turma.horaInicio === turmaDoMesmoPeriodo.horaInicio;
-      let nivelDeConflito = (mesmoDia && mesmaHora) ? 2 : 0;
-      maxConflito = (nivelDeConflito > maxConflito) ? nivelDeConflito : maxConflito;
+      let nivelDeConflito = mesmoDia && mesmaHora ? 2 : 0;
+      maxConflito =
+        nivelDeConflito > maxConflito ? nivelDeConflito : maxConflito;
     });
     let newConflitos = {
-      "nivelConflitoDia": maxConflito,
-      "nivelConflitoHora": maxConflito
+      nivelConflitoDia: maxConflito,
+      nivelConflitoHora: maxConflito,
     };
 
     conflitosDisciplinaPeriodo.disciplinaPeriodo[indexHorario] = newConflitos;
-  })
+  });
   function maxConflito(conflitosDisciplina) {
     let maxConflito = 0;
     for (let index in conflitosDisciplina.disciplinaPeriodo) {
@@ -251,7 +252,9 @@ function conflictsDisciplinaPeriodo(turmasListadas, turma) {
     }
     return maxConflito;
   }
-  conflitosDisciplinaPeriodo.maxConflito = maxConflito(conflitosDisciplinaPeriodo);
+  conflitosDisciplinaPeriodo.maxConflito = maxConflito(
+    conflitosDisciplinaPeriodo
+  );
   // console.log("conflitosDisciplinaPeriodo", conflitosDisciplinaPeriodo);
   return conflitosDisciplinaPeriodo;
 }

@@ -2,7 +2,7 @@ import React from "react";
 import options from "../temp/options";
 import CRUDPageSelection from "../components/PageSelect";
 import "../CSS/defaultStyle.css";
-// import Workbench from "../components/Workbench";
+import Workbench from "../components/Workbench";
 
 function Main() {
   return (
