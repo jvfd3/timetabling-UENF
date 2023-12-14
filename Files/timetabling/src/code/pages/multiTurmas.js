@@ -293,7 +293,7 @@ function Turmas() {
               <th>Código - Nome</th>
               <th>Professor</th>
               <th>Demanda Estimada</th>
-              <th>Horarios</th>
+              <th colSpan={2}>Horarios</th>
             </tr>
           </thead>
           <tbody>
@@ -348,21 +348,17 @@ function Turmas() {
                     ></input>
                   </td>
                   <td>
-                    {horarios.length === 0 ? (
-                      <AdicionarHorario
-                        setLTurmas={setTurmas}
-                        lTurma={currentTurma}
-                      />
-                    ) : (
+                    <AdicionarHorario
+                      setLTurmas={setTurmas}
+                      lTurma={currentTurma}
+                    />
+                  </td>
+                  <td>
+                    {horarios.length === 0 ? null : (
                       <table>
                         <thead>
                           <tr key={id * 100}>
-                            <th>
-                              <AdicionarHorario
-                                setLTurmas={setTurmas}
-                                lTurma={currentTurma}
-                              />
-                            </th>
+                            <th>Remover</th>
                             <th>Sala</th>
                             <th>Dia</th>
                             <th>Hora Início</th>
