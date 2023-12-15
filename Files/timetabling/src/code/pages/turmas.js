@@ -5,6 +5,7 @@ import CRUDPageSelection from "../components/PageSelect";
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
+import { getNomeDisciplina } from "../functions/auxFunctions";
 import {
   SelectDia,
   SelectDisciplina,
@@ -55,10 +56,10 @@ function Turmas() {
           options={turmas}
           value={turma}
           onChange={setTurma}
-          getOptionLabel={(turma) => turma.disciplina.codigo}
+          getOptionLabel={(turma) => turma.codigoDisciplina}
           getOptionValue={(turma) => turma.professor}
           formatOptionLabel={(turma) =>
-            `(id${turma.id}) ${turma.ano}.${turma.semestre} - ${turma.disciplina.codigo} - ${turma.professor}`
+            `(id${turma.id}) ${turma.ano}.${turma.semestre} - ${turma.codigoDisciplina} - ${turma.professor}`
           }
         />
       </div>
@@ -277,7 +278,7 @@ function Turmas() {
       }
 
       let alunosDessaDisciplina = getStudentsFromSubject(
-        turma3.disciplina.codigo,
+        turma3.codigoDisciplina,
         getCurrentSubjectsPerStudent(andamentoAlunos)
       );
 

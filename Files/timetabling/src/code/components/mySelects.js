@@ -4,6 +4,7 @@ import options from "../temp/options";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
+import { getNomeDisciplina } from "../functions/auxFunctions";
 
 function SelectAnoSemestre(props) {
   let { ano, setAno, semestre, setSemestre } = props;
@@ -146,6 +147,7 @@ function SelectDisciplina(props) {
     setDisciplina(novaDisciplina);
     let novaTurma = {
       ...lTurma,
+      codigoDisciplina: novaDisciplina.codigo,
       disciplina: {
         codigo: novaDisciplina.codigo,
         nome: novaDisciplina.nome,
@@ -161,8 +163,8 @@ function SelectDisciplina(props) {
       options={disciplinas}
       value={disciplina}
       isClearable={true}
-      getOptionValue={(option) => option.codigo}
-      getOptionLabel={(option) => `${option.codigo} - ${option.nome}`}
+      getOptionValue={(disciplina) => disciplina.codigo}
+      getOptionLabel={(disciplina) => `${disciplina.codigo} - ${disciplina.nome}`}
       onChange={updateOuterTurma}
     />
   );

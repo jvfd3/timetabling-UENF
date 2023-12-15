@@ -83,9 +83,9 @@ function VisualizacaoCC() {
             let { turmas } = props;
 
             let listaDeTurmas = turmas.map((turma) => {
-              let periodo = getPeriodoEsperado(turma.disciplina.codigo);
+              let periodo = getPeriodoEsperado(turma.codigoDisciplina);
               let apelidoDisciplina = getApelidoDisciplina(
-                turma.disciplina.codigo
+                turma.codigoDisciplina
               );
               let apelidoProfessor = getApelidoProfessor(turma.professor);
               return (

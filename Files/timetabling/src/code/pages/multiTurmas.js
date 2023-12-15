@@ -109,7 +109,7 @@ function Turmas() {
     const { lTurmas } = props;
 
     /* Percorra cada turma em lTurmas e preencha uma lista dos códigos das disciplinas oferecidas pelas turmas */
-    let disciplinasOferecidas = lTurmas.map((turma) => turma.disciplina.codigo);
+    let disciplinasOferecidas = lTurmas.map((turma) => turma.codigoDisciplina);
     // console.log(disciplinasOferecidas);
 
     let TodasDisciplinas = allLocalJsonData.static.infoDisciplinasCC;
@@ -134,12 +134,10 @@ function Turmas() {
       }
     );
 
-    let EssasDisciplinas = DisciplinasAindaNaoOferecidas;
-
     /* Percorra cada disciplina em EssasDisciplinas e as disponha em uma Tabela no formato
       | Período esperado | Código - Nome |
     */
-    let visualizacaoDisciplinas = EssasDisciplinas.map((disciplina) => (
+    let visualizacaoDisciplinas = DisciplinasAindaNaoOferecidas.map((disciplina) => (
       <tr key={disciplina.codigo}>
         {/* Se o período da disciplina for 1, aplicar o className EnfasePrimeiroPeriodo */}
         <td className={disciplina.periodo === 1 ? "EnfasePrimeiroPeriodo" : ""}>
@@ -187,7 +185,7 @@ function Turmas() {
 
     return (
       <div>
-        {EssasDisciplinas.length === 0 ? (
+        {DisciplinasAindaNaoOferecidas.length === 0 ? (
           <DisciplinasMínimasForamOferecidas />
         ) : (
           <TabelaDeDisciplinasASereOferecidas />
@@ -306,12 +304,12 @@ function Turmas() {
               let horarios = currentTurma.horarios;
               return (
                 <tr
-                  key={`${id}-${currentTurma.disciplina.codigo}-${currentTurma.professor}`}
+                  key={`${id}-${currentTurma.codigoDisciplina}-${currentTurma.professor}`}
                 >
                   <td>
                     <button
                       className="TurmaHorarioRemove"
-                      key={`${id}-${currentTurma.disciplina.codigo}-${currentTurma.professor}`}
+                      key={`${id}-${currentTurma.codigoDisciplina}-${currentTurma.professor}`}
                       onClick={() => removerTurma(id)}
                     >
                       Remover Turma
@@ -337,7 +335,7 @@ function Turmas() {
                   </td>
                   <td>
                     <input
-                      id={`${id}-${currentTurma.disciplina.codigo}-${currentTurma.professor}`}
+                      id={`${id}-${currentTurma.codigoDisciplina}-${currentTurma.professor}`}
                       name="quantity"
                       type="number"
                       min="0"
