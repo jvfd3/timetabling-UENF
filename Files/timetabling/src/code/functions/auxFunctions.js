@@ -51,10 +51,24 @@ function getTurmasDoDia(turmas, dia) {
   return turmasDoDia;
 }
 
+function getNomesDasDisciplinas(listaDeCodigos) {
+  let listaDeCodigosNomes = [];
+  for (let i = 0; i < listaDeCodigos.length; i++) {
+    let codigoDisciplina = listaDeCodigos[i];
+    let nomeDisciplina = getNomeDisciplina(codigoDisciplina);
+    listaDeCodigosNomes.push({
+      codigo: codigoDisciplina,
+      nome: nomeDisciplina,
+    });
+  }
+  return listaDeCodigosNomes;
+}
+
 export {
   getPeriodoEsperado,
   getNomeDisciplina,
   getApelidoDisciplina,
+  getNomesDasDisciplinas,
   getApelidoProfessor,
   getTurmasDoAnoSemestre,
   getTurmasDaHora,

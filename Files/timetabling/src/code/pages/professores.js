@@ -4,7 +4,7 @@ import "../CSS/defaultStyle.css";
 import options from "../temp/options";
 import CRUDPageSelection from "../components/PageSelect";
 import Select from "react-select";
-import { getNomesDasDisciplinas } from "../functions/getListaDisciplinas";
+import { getNomesDasDisciplinas } from "../functions/auxFunctions";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
 import { readData, updateData } from "../functions/CRUD_JSONBIN";
 import {

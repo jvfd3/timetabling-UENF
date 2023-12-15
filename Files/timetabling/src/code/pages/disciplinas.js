@@ -25,7 +25,7 @@ import CRUDPageSelection from "../components/PageSelect";
 import Select from "react-select";
 import { readData } from "../functions/CRUD_JSONBIN";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
-import { getNomesDasDisciplinas } from "../functions/getListaDisciplinas";
+import { getNomesDasDisciplinas } from "../functions/auxFunctions";
 /* import {
   SelectDisciplinasCodigoC,
   SelectDisciplinasDisciplinaC,

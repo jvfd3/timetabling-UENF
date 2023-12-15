@@ -5,7 +5,7 @@ import options from "../temp/options";
 import CRUDPageSelection from "../components/PageSelect";
 import Select from "react-select";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
-import { getNomesDasDisciplinas } from "../functions/getListaDisciplinas";
+import { getNomesDasDisciplinas } from "../functions/auxFunctions";
 
 let andamentoAlunosJsonData = allLocalJsonData.dynamic.andamentoAlunos;
 const dados_agrupados = juntarTodasAsInformacoes();
