@@ -1,4 +1,4 @@
-import {
+/* import {
   getNomesDasDisciplinas,
   // getCodigoNomeDisciplinas,
 } from "../functions/getListaDisciplinas";
@@ -35,3 +35,4 @@ function disciplinaDBtoRS(disciplina) {
 }
 
 export { professorRStoDB, professorDBtoRS, disciplinaDBtoRS };
+ */

@@ -7,7 +7,7 @@ const allDBData = {
   disciplinas: await readData(JB.bins.infoDisciplinasCC),
   professores: await readData(JB.bins.infoProfessores),
   alunos: await readData(JB.bins.infoAlunos),
-  progressao: await readData(JB.bins.andamentoAlunos)
+  progressao: await readData(JB.bins.andamentoAlunos),
 };
 
 console.log("Am I exporting all data from DB?");
