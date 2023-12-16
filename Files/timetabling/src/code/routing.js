@@ -14,6 +14,7 @@ import Disciplinas from "./pages/disciplinas";
 import Salas from "./pages/salas";
 import NoMatch from "./pages/notFound";
 import CCTable from "./pages/ccTable";
+import Professores2 from "./pages/professoresDB";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -33,6 +34,9 @@ function MyRouting() {
     basePath + options.constantValues.pageSelection.notFound.value;
   let ccTablePath =
     basePath + options.constantValues.pageSelection.CCTable.value;
+  let professoresDBPath =
+    basePath + options.constantValues.pageSelection.professoresDB.value;
+
 
   return (
     <BrowserRouter basename="/">
@@ -43,6 +47,7 @@ function MyRouting() {
         <Route element={<Main />} path={"/"} />
         <Route element={<Main />} path={basePath} />
         <Route element={<Main />} path={mainPath} />
+        <Route element={<Professores2 />} path={professoresDBPath} />
         <Route element={<MultiTurmas />} path={multiTurmasPath} />
         <Route element={<CCTable />} path={ccTablePath} />
         <Route element={<Turmas />} path={turmasPath} />

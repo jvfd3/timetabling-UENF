@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
+import CRUDPageSelection from "../components/PageSelect";
+import options from "../temp/options";
+import Select from "react-select";
 import "../CSS/CRUD_professores.css";
 import "../CSS/defaultStyle.css";
-import options from "../temp/options";
-import CRUDPageSelection from "../components/PageSelect";
-import Select from "react-select";
 import { getNomesDasDisciplinas } from "../functions/auxFunctions";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
 import { readData, updateData } from "../functions/CRUD_JSONBIN";
@@ -13,9 +13,7 @@ import {
   SelectProfessorC,
 } from "../components/mySelects";
 
-// import { allLocalJsonData } from "../../DB/dataFromJSON";
-// import { updateDB } from "../functions/update_DB";
-// updateDB(options.JBVars.bins.infoProfessores);
+import { AsyncProfessor } from "../components/SelectDB";
 
 function Professores() {
   let localData = allLocalJsonData.static.infoProfessores; //Tá repetido com o useEffect
@@ -447,13 +445,31 @@ function Professores() {
   );
 }
 
+function ProfessoresDB() {
+  let dummyProfessor = allLocalJsonData.SQL.professores[2];
+  const [professor, setProfessor] = useState(dummyProfessor);
+  return (
+    <div className="CRUDContainComponents">
+      <AsyncProfessor professor={professor} setProfessor={setProfessor} />
+      <div className="infoCard">
+        <h2>ProfessoresDB</h2>
+        <div className="showBasicDataCard">
+          <h3>INFORMAÇÕES DO PROFESSOR</h3>
+          <table className="showBasicDataTable"></table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function CRUDprofessors() {
   return (
     <div className="background">
       <CRUDPageSelection
-        defaultValue={options.constantValues.pageSelection.professores}
+        defaultValue={options.constantValues.pageSelection.professoresDB}
       />
       <Professores />
+      <ProfessoresDB />
     </div>
   );
 }

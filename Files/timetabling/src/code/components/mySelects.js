@@ -4,7 +4,7 @@ import options from "../temp/options";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
-import { getNomeDisciplina } from "../functions/auxFunctions";
+// import { getNomeDisciplina } from "../functions/auxFunctions";
 
 function SelectAnoSemestre(props) {
   let { ano, setAno, semestre, setSemestre } = props;
