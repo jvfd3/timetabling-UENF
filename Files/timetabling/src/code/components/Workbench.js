@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/defaultStyle.css";
 // import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { FaTrash, FaEdit } from "react-icons/fa";
+import { BsDatabaseDown, BsDatabaseFillAdd } from "react-icons/bs";
 import {
   // createDisciplina,
   createProfessor,
@@ -16,7 +17,7 @@ import {
   // updateTurma,
   // updateSala,
   // deleteDisciplina,
-  deleteProfessor,
+  // deleteProfessor,
   thinDeleteProfessor,
   // deleteTurma,
   // deleteSala,
@@ -31,6 +32,12 @@ function Workbench() {
     dummyProfessor.idprofessor = 1234;
     dummyProfessor.laboratorio = "Lab 1";
     dummyProfessor.nomeProfessor = "Professor";
+
+    useEffect(() => {
+      readProfessores().then((data) => {
+        setProfessores(data);
+      });
+    }, []);
 
     const [professores, setProfessores] = useState([dummyProfessor]);
     const [professor, setProfessor] = useState(
@@ -88,9 +95,19 @@ function Workbench() {
 
     return (
       <div className="" style={{ display: "flex", flexDirection: "column" }}>
-        <button onClick={internCreateProfessor}>Create Professor</button>
-        <button onClick={internReadProfessores}>Read Professores</button>
-        <button onClick={internUpdateProfessor}>Update Professor</button>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            gap: 10,
+            paddingBottom: 10,
+          }}
+        >
+          <BsDatabaseFillAdd size="4em" onClick={internCreateProfessor} />
+          <BsDatabaseDown size="4em" onClick={internReadProfessores} />
+          <FaEdit size="4em" onClick={internUpdateProfessor} />
+          <FaTrash size="4em" onClick={internDeleteProfessor} />
+        </div>
         <>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div>last id</div>
@@ -161,8 +178,6 @@ function Workbench() {
             />
           </div>
         </>
-        <button onClick={internDeleteProfessor}>Delete Professor</button>
-        {/* Crie um botão que faça surgir um Toast por 2 segundos */}
       </div>
     );
   }
