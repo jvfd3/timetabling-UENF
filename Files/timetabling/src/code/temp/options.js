@@ -153,7 +153,38 @@ const options = {
       */
     ],
   },
-  defaultValues: {},
+  dbTemplates: {
+    professor: {
+      idprofessor: null,
+      laboratorio: null,
+      curso: null,
+      apelidoProfessor: null,
+      nomeProfessor: null,
+    },
+    disciplina: {
+      iddisciplina: null,
+      periodoEsperado: null,
+      codigoDisciplina: null,
+      nomeDisciplina: null,
+      apelidoDisciplina: null,
+    },
+    sala: {
+      idsala: null,
+      blocoSala: null,
+      capacidade: null,
+      bloco: null,
+      codigoSala: null,
+      descricaoBloco: null,
+    },
+    turma: {
+      idturma: null,
+      ano: null,
+      semestre: null,
+      demandaEstimada: null,
+      nomeProfessor: null,
+      codigoDisciplina: null,
+    },
+  },
   yetUnusedValues: {
     centros: [
       {value: "CBB",  label: "Centro de Biociências e Biotecnologia"},

@@ -8,7 +8,7 @@ function Main() {
   return (
     <div className="CRUDContainComponents">
       <h1>Welcome to my monograph's website!</h1>
-      {/* <Workbench /> */}
+      <Workbench />
       <p>This is the main page.</p>
       <h4>Atalhos</h4>
       <ul>
