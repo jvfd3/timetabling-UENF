@@ -1,11 +1,12 @@
 // import options from "../code/temp/options";
 // import { readData } from "../code/functions/CRUD_JSONBIN";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 let baseUrl = "http://localhost:8800/";
 
 async function createInDB(endPoint, myData) {
+  // let toastMessage = `Dados criados com sucesso: ${endPoint}`;
   await axios
     .post(baseUrl + endPoint, myData)
     .then(({ data }) => toast.success(data))
@@ -36,6 +37,7 @@ async function createSala(sala) {
 async function readDataFromURL(endPoint) {
   try {
     const res = await axios.get(baseUrl + endPoint);
+    toast.success(`Dados lidos com sucesso: ${endPoint}`);
     return res.data;
   } catch (error) {
     toast.error(error);

@@ -14,6 +14,8 @@ import Disciplinas from "./pages/disciplinas";
 import Salas from "./pages/salas";
 import NoMatch from "./pages/notFound";
 import CCTable from "./pages/ccTable";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function MyRouting() {
   let basePath = options.constantValues.routing.urlPath; //"/timetabling-uenf/";
@@ -50,7 +52,18 @@ function MyRouting() {
         <Route element={<Alunos />} path={alunosPath} />
         <Route element={<NoMatch />} path={notFoundPath} />
         <Route element={<NoMatch />} path="*" />
-      </Routes>
+      </Routes>{" "}
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        // closeOnClick
+        // draggable
+        // pauseOnHover
+        // hideProgressBar={false}
+        // newestOnTop={false}
+        // pauseOnFocusLoss
+        // theme="light"
+      />
     </BrowserRouter>
   );
 }

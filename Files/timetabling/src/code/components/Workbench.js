@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/defaultStyle.css";
 // import axios from "axios";
-// import { toast, ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import {
   createDisciplina,
   // createProfessor,
@@ -141,6 +141,16 @@ function Workbench() {
           }
         >
           Delete Disciplina
+        </button>
+        {/* Crie um botão que faça surgir um Toast por 2 segundos */}
+        <button
+          onClick={() => {
+            toast("neutral");
+            toast.success("Success!");
+            toast.error("Error.");
+          }}
+        >
+          Toast
         </button>
       </div>
     );

@@ -16,10 +16,6 @@ import {
   deleteProfessor,
   deleteTurma,
   deleteSala,
-  getUsers,
-  addUser,
-  deleteUser,
-  updateUser,
 } from "../controllers/dbConnector.js";
 
 const router = express.Router();
@@ -43,10 +39,5 @@ router.delete("/disciplina/:id", deleteDisciplina);
 router.delete("/professor/:id", deleteProfessor);
 router.delete("/turma/:id", deleteTurma);
 router.delete("/sala/:id", deleteSala);
-
-router.get("/", getUsers);
-router.post("/", addUser);
-router.put("/:id", updateUser);
-router.delete("/:id", deleteUser);
 
 export default router;

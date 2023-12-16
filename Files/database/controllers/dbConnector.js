@@ -1,5 +1,67 @@
 import { db } from "../db.js";
 
+function defaultCreate(q, values, req, res) {
+  let itemUpdated = req.route.path.split("/")[1];
+  let toastMessage = `Item criado com sucesso: ${itemUpdated}(${values})`;
+  db.query(q, [values], (err) => {
+    return err ? res.json(err) : res.status(200).json(toastMessage);
+  });
+}
+
+function createDisciplina(req, res) {
+  const q =
+    "INSERT INTO disciplinas(`periodoEsperado`, `codigoDisciplina`, `nomeDisciplina`, `apelidoDisciplina`) VALUES(?)";
+  /* Dá para usar o "...req.body"? */
+  const values = [
+    req.body.periodoEsperado,
+    req.body.codigoDisciplina,
+    req.body.nomeDisciplina,
+    req.body.apelidoDisciplina,
+  ];
+  defaultCreate(q, values, req, res);
+}
+
+function createProfessor(req, res) {
+  const q =
+    "INSERT INTO professores(`laboratorio`, `curso`, `apelidoProfessor`, `nomeProfessor`) VALUES(?)";
+  /* Dá para usar o "...req.body"? */
+  const values = [
+    req.body.laboratorio,
+    req.body.curso,
+    req.body.apelidoProfessor,
+    req.body.nomeProfessor,
+  ];
+  defaultCreate(q, values, req, res);
+}
+
+function createTurma(req, res) {
+  const q =
+    "INSERT INTO turmas(`ano`, `semestre`, `demandaEstimada`, `nomeProfessor`, `codigoDisciplina`) VALUES(?)";
+  /* Dá para usar o "...req.body"? */
+  const values = [
+    req.body.ano,
+    req.body.semestre,
+    req.body.demandaEstimada,
+    req.body.nomeProfessor,
+    req.body.codigoDisciplina,
+  ];
+  defaultCreate(q, values, req, res);
+}
+
+function createSala(req, res) {
+  const q =
+    "INSERT INTO salas(`blocoSala`, `capacidade`, `bloco`, `codigoSala`, `descricaoBloco`) VALUES(?)";
+  /* Dá para usar o "...req.body"? */
+  const values = [
+    req.body.blocoSala,
+    req.body.capacidade,
+    req.body.bloco,
+    req.body.codigoSala,
+    req.body.descricaoBloco,
+  ];
+  defaultCreate(q, values, req, res);
+}
+
 function defaultRead(res, q) {
   db.query(q, (err, data) => {
     if (err) return res.json(err);
@@ -27,66 +89,13 @@ function readSalas(_, res) {
   defaultRead(res, q);
 }
 
-function defaultCreate(q, values, res) {
-  db.query(q, [values], (err) => {
-    return err
-      ? res.json(err)
-      : res.status(200).json("Item criado com sucesso.");
+function defaultUpdate(q, values, req, res) {
+  let itemUpdated = req.route.path.split("/")[1];
+  let toastMessage = `Atualização bem sucedida: ${itemUpdated} (id: ${req.params.id})`;
+  db.query(q, [...values, req.params.id], (err) => {
+    if (err) return res.json(err);
+    return res.status(200).json(toastMessage);
   });
-}
-
-function createDisciplina(req, res) {
-  const q =
-    "INSERT INTO disciplinas(`periodoEsperado`, `codigoDisciplina`, `nomeDisciplina`, `apelidoDisciplina`) VALUES(?)";
-  /* Dá para usar o "...req.body"? */
-  const values = [
-    req.body.periodoEsperado,
-    req.body.codigoDisciplina,
-    req.body.nomeDisciplina,
-    req.body.apelidoDisciplina,
-  ];
-  defaultCreate(q, values, res);
-}
-
-function createProfessor(req, res) {
-  const q =
-    "INSERT INTO professores(`laboratorio`, `curso`, `apelidoProfessor`, `nomeProfessor`) VALUES(?)";
-  /* Dá para usar o "...req.body"? */
-  const values = [
-    req.body.laboratorio,
-    req.body.curso,
-    req.body.apelidoProfessor,
-    req.body.nomeProfessor,
-  ];
-  defaultCreate(q, values, res);
-}
-
-function createTurma(req, res) {
-  const q =
-    "INSERT INTO turmas(`ano`, `semestre`, `demandaEstimada`, `nomeProfessor`, `codigoDisciplina`) VALUES(?)";
-  /* Dá para usar o "...req.body"? */
-  const values = [
-    req.body.ano,
-    req.body.semestre,
-    req.body.demandaEstimada,
-    req.body.nomeProfessor,
-    req.body.codigoDisciplina,
-  ];
-  defaultCreate(q, values, res);
-}
-
-function createSala(req, res) {
-  const q =
-    "INSERT INTO salas(`blocoSala`, `capacidade`, `bloco`, `codigoSala`, `descricaoBloco`) VALUES(?)";
-  /* Dá para usar o "...req.body"? */
-  const values = [
-    req.body.blocoSala,
-    req.body.capacidade,
-    req.body.bloco,
-    req.body.codigoSala,
-    req.body.descricaoBloco,
-  ];
-  defaultCreate(q, values, res);
 }
 
 function updateDisciplina(req, res) {
@@ -99,10 +108,7 @@ function updateDisciplina(req, res) {
     req.body.nomeDisciplina,
     req.body.apelidoDisciplina,
   ];
-  db.query(q, [...values, req.params.id], (err) => {
-    if (err) return res.json(err);
-    return res.status(200).json("Item atualizado com sucesso.");
-  });
+  defaultUpdate(q, values, req, res);
 }
 
 function updateProfessor(req, res) {
@@ -115,11 +121,7 @@ function updateProfessor(req, res) {
     req.body.apelidoProfessor,
     req.body.nomeProfessor,
   ];
-
-  db.query(q, [...values, req.params.idprofessor], (err) => {
-    if (err) return res.json(err);
-    return res.status(200).json("Item atualizado com sucesso.");
-  });
+  defaultUpdate(q, values, req, res);
 }
 
 function updateTurma(req, res) {
@@ -132,11 +134,7 @@ function updateTurma(req, res) {
     req.body.nomeProfessor,
     req.body.codigoDisciplina,
   ];
-
-  db.query(q, [...values, req.params.idturma], (err) => {
-    if (err) return res.json(err);
-    return res.status(200).json("Item atualizado com sucesso.");
-  });
+  defaultUpdate(q, values, req, res);
 }
 
 function updateSala(req, res) {
@@ -149,95 +147,35 @@ function updateSala(req, res) {
     req.body.codigoSala,
     req.body.descricaoBloco,
   ];
-
-  db.query(q, [...values, req.params.idsala], (err) => {
-    if (err) return res.json(err);
-    return res.status(200).json("Item atualizado com sucesso.");
-  });
+  defaultUpdate(q, values, req, res);
 }
 
-function defaultDelete(q, id, res) {
+function defaultDelete(q, id, req, res) {
+  let itemUpdated = req.route.path.split("/")[1];
+  let toastMessage = `Deleção bem sucedida: ${itemUpdated} (id: ${id})`;
   db.query(q, [id], (err) => {
-    return err
-      ? res.json(err)
-      : res.status(200).json("Item deletado com sucesso.");
+    return err ? res.json(err) : res.status(200).json(toastMessage);
   });
 }
 
 function deleteDisciplina(req, res) {
   const q = "DELETE FROM disciplinas WHERE `iddisciplina` = ?";
-  defaultDelete(q, req.params.id, res);
+  defaultDelete(q, req.params.id, req, res);
 }
 
 function deleteProfessor(req, res) {
   const q = "DELETE FROM professores WHERE `id` = ?";
-  defaultDelete(q, req.params.id, res);
+  defaultDelete(q, req.params.id, req, res);
 }
 
 function deleteTurma(req, res) {
   const q = "DELETE FROM turmas WHERE `id` = ?";
-  defaultDelete(q, req.params.id, res);
+  defaultDelete(q, req.params.id, req, res);
 }
 
 function deleteSala(req, res) {
   const q = "DELETE FROM salas WHERE `id` = ?";
-  defaultDelete(q, req.params.id, res);
-}
-
-function getUsers(_, res) {
-  const q = "SELECT * FROM usuarios";
-
-  db.query(q, (err, data) => {
-    if (err) return res.json(err);
-
-    return res.status(200).json(data);
-  });
-}
-
-function addUser(req, res) {
-  const q =
-    "INSERT INTO usuarios(`nome`, `email`, `fone`, `data_nascimento`) VALUES(?)";
-
-  const values = [
-    req.body.nome,
-    req.body.email,
-    req.body.fone,
-    req.body.data_nascimento,
-  ];
-
-  db.query(q, [values], (err) => {
-    if (err) return res.json(err);
-
-    return res.status(200).json("Usuário criado com sucesso.");
-  });
-}
-
-function updateUser(req, res) {
-  const q =
-    "UPDATE usuarios SET `nome` = ?, `email` = ?, `fone` = ?, `data_nascimento` = ? WHERE `id` = ?";
-
-  const values = [
-    req.body.nome,
-    req.body.email,
-    req.body.fone,
-    req.body.data_nascimento,
-  ];
-
-  db.query(q, [...values, req.params.id], (err) => {
-    if (err) return res.json(err);
-
-    return res.status(200).json("Usuário atualizado com sucesso.");
-  });
-}
-
-function deleteUser(req, res) {
-  const q = "DELETE FROM usuarios WHERE `id` = ?";
-
-  db.query(q, [req.params.id], (err) => {
-    if (err) return res.json(err);
-
-    return res.status(200).json("Usuário deletado com sucesso.");
-  });
+  defaultDelete(q, req.params.id, req, res);
 }
 
 export {
@@ -257,8 +195,4 @@ export {
   deleteProfessor,
   deleteTurma,
   deleteSala,
-  getUsers,
-  addUser,
-  updateUser,
-  deleteUser,
 };
