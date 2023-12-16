@@ -35,14 +35,14 @@ function Professores() {
     getPreferenciasProfessor(professor.nome)
   );
 
-  function updateProfessores(newProfessor){
-      let newProfessores = professores.map((professor) =>
-        professor.nome === newProfessor.nome ? newProfessor : professor
-      );
-      console.log("professores", professores[0]);
-      console.log("newProfessor", newProfessor);
-      console.log("newProfessores", newProfessores[0]);
-      setProfessores(newProfessores);
+  function updateProfessores(newProfessor) {
+    let newProfessores = professores.map((professor) =>
+      professor.nome === newProfessor.nome ? newProfessor : professor
+    );
+    // console.log("professores", professores[0]);
+    // console.log("newProfessor", newProfessor);
+    // console.log("newProfessores", newProfessores[0]);
+    setProfessores(newProfessores);
   }
 
   useEffect(() => {
@@ -113,7 +113,9 @@ function Professores() {
           getOptionValue={(option) => option.nome}
           getOptionLabel={(option) => option.laboratorio}
           formatOptionLabel={({ nome, laboratorio }, { context }) => {
-            return context === "value" ? `(${laboratorio}) ${nome}` : `(${laboratorio}) ${nome}`;
+            return context === "value"
+              ? `(${laboratorio}) ${nome}`
+              : `(${laboratorio}) ${nome}`;
           }}
           isMulti={false}
           isSearchable={true}

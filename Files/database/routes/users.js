@@ -8,6 +8,10 @@ import {
   readProfessores,
   readTurmas,
   readSalas,
+  updateDisciplina,
+  updateProfessor,
+  updateTurma,
+  updateSala,
   deleteDisciplina,
   deleteProfessor,
   deleteTurma,
@@ -30,11 +34,15 @@ router.get("/professores", readProfessores);
 router.get("/turmas", readTurmas);
 router.get("/salas", readSalas);
 
+router.put("/disciplina/:id", updateDisciplina);
+router.put("/professor/:id", updateProfessor);
+router.put("/turma/:id", updateTurma);
+router.put("/sala/:id", updateSala);
+
 router.delete("/disciplina/:id", deleteDisciplina);
 router.delete("/professor/:id", deleteProfessor);
 router.delete("/turma/:id", deleteTurma);
 router.delete("/sala/:id", deleteSala);
-
 
 router.get("/", getUsers);
 router.post("/", addUser);

@@ -89,6 +89,73 @@ function createSala(req, res) {
   defaultCreate(q, values, res);
 }
 
+function updateDisciplina(req, res) {
+  const q =
+    "UPDATE disciplinas SET `periodoEsperado` = ?, `codigoDisciplina` = ?, `nomeDisciplina` = ?, `apelidoDisciplina` = ? WHERE `iddisciplina` = ?";
+
+  const values = [
+    req.body.periodoEsperado,
+    req.body.codigoDisciplina,
+    req.body.nomeDisciplina,
+    req.body.apelidoDisciplina,
+  ];
+  db.query(q, [...values, req.params.id], (err) => {
+    if (err) return res.json(err);
+    return res.status(200).json("Item atualizado com sucesso.");
+  });
+}
+
+function updateProfessor(req, res) {
+  const q =
+    "UPDATE professores SET `laboratorio` = ?, `curso` = ?, `apelidoProfessor` = ?, `nomeProfessor` = ? WHERE `idprofessor` = ?";
+
+  const values = [
+    req.body.laboratorio,
+    req.body.curso,
+    req.body.apelidoProfessor,
+    req.body.nomeProfessor,
+  ];
+
+  db.query(q, [...values, req.params.idprofessor], (err) => {
+    if (err) return res.json(err);
+    return res.status(200).json("Item atualizado com sucesso.");
+  });
+}
+
+function updateTurma(req, res) {
+  const q =
+    "UPDATE turmas SET `ano` = ?, `semestre` = ?, `demandaEstimada` = ?, `nomeProfessor` = ?, `codigoDisciplina` = ? WHERE `idturma` = ?";
+  const values = [
+    req.body.ano,
+    req.body.semestre,
+    req.body.demandaEstimada,
+    req.body.nomeProfessor,
+    req.body.codigoDisciplina,
+  ];
+
+  db.query(q, [...values, req.params.idturma], (err) => {
+    if (err) return res.json(err);
+    return res.status(200).json("Item atualizado com sucesso.");
+  });
+}
+
+function updateSala(req, res) {
+  const q =
+    "UPDATE salas SET `blocoSala` = ?, `capacidade` = ?, `bloco` = ?, `codigoSala` = ?, `descricaoBloco` = ? WHERE `idsala` = ?";
+  const values = [
+    req.body.blocoSala,
+    req.body.capacidade,
+    req.body.bloco,
+    req.body.codigoSala,
+    req.body.descricaoBloco,
+  ];
+
+  db.query(q, [...values, req.params.idsala], (err) => {
+    if (err) return res.json(err);
+    return res.status(200).json("Item atualizado com sucesso.");
+  });
+}
+
 function defaultDelete(q, id, res) {
   db.query(q, [id], (err) => {
     return err
@@ -182,6 +249,10 @@ export {
   readProfessores,
   readTurmas,
   readSalas,
+  updateDisciplina,
+  updateProfessor,
+  updateTurma,
+  updateSala,
   deleteDisciplina,
   deleteProfessor,
   deleteTurma,

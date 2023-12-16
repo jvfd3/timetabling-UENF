@@ -1,69 +1,26 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/defaultStyle.css";
-import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+// import axios from "axios";
+// import { toast, ToastContainer } from "react-toastify";
 import {
   createDisciplina,
-  createProfessor,
-  createTurma,
-  createSala,
+  // createProfessor,
+  // createTurma,
+  // createSala,
   readDisciplinas,
-  readProfessores,
-  readTurmas,
-  readSalas,
+  // readProfessores,
+  // readTurmas,
+  // readSalas,
+  updateDisciplina,
+  // updateProfessor,
+  // updateTurma,
+  // updateSala,
   deleteDisciplina,
+  // deleteProfessor,
+  // deleteTurma,
+  // deleteSala,
 } from "../../DB/dataFromDB";
 import options from "../temp/options";
-
-const Grid = ({ users, setUsers, setOnEdit }) => {
-  const handleEdit = (item) => {
-    setOnEdit(item);
-  };
-
-  const handleDelete = async (id) => {
-    await axios
-      .delete("http://localhost:8800/" + id)
-      .then(({ data }) => {
-        const newArray = users.filter((user) => user.id !== id);
-
-        setUsers(newArray);
-        toast.success(data);
-      })
-      .catch(({ data }) => toast.error(data));
-
-    setOnEdit(null);
-  };
-
-  return (
-    <table>
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>email</th>
-          <th>Fone</th>
-          <th>Data</th>
-        </tr>
-      </thead>
-      <tbody>
-        {users.map((item, i) => (
-          <tr key={i}>
-            <td width="30%">{item.nome}</td>
-            <td width="30%">{item.email}</td>
-            <td width="20%" onlyWeb>
-              {item.fone}
-            </td>
-            <td alignCenter width="5%">
-              <button onClick={() => handleEdit(item)}>Editar</button>
-            </td>
-            <td alignCenter width="5%">
-              <button onClick={() => handleDelete(item.id)}>Deletar</button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
-};
 
 function Workbench(props) {
   function Workbench2() {
@@ -88,12 +45,21 @@ function Workbench(props) {
       setDisciplina(disciplinas[disciplinas.length - 1]);
     }, [disciplinas]);
 
-    console.log("disciplinas", disciplinas);
+    console.log(
+      "disciplinas",
+      disciplinas[disciplinas.length - 1].iddisciplina
+    );
     console.log("disciplina", disciplina.iddisciplina);
 
     return (
       <div className="" style={{ display: "flex", flexDirection: "column" }}>
-        <button onClick={() => createDisciplina(disciplina)}>
+        <div>{disciplina.iddisciplina}</div>
+        <div>{disciplinas[disciplinas.length - 1].iddisciplina}</div>
+        <button
+          onClick={() =>
+            createDisciplina(disciplinas, setDisciplinas, disciplina)
+          }
+        >
           Create Disciplina
         </button>
         <button
@@ -101,6 +67,70 @@ function Workbench(props) {
         >
           Read Disciplinas
         </button>
+        {/* Botão para atualizar a disciplina */}
+        <button
+          onClick={() => {
+            console.log("disciplina", disciplina);
+            updateDisciplina(disciplinas, setDisciplinas, disciplina);
+          }}
+        >
+          Update Disciplina
+        </button>
+        <>
+          {/* Create here a place where I can show and edit the select disciplina data */}
+          <div>
+            <label>Periodo Esperado</label>
+            <input
+              type="number"
+              value={disciplina.periodoEsperado}
+              onChange={(e) => {
+                setDisciplina({
+                  ...disciplina,
+                  periodoEsperado: e.target.value,
+                });
+              }}
+            />
+          </div>
+          <div>
+            <label>Codigo Disciplina</label>
+            <input
+              type="text"
+              value={disciplina.codigoDisciplina}
+              onChange={(e) => {
+                setDisciplina({
+                  ...disciplina,
+                  codigoDisciplina: e.target.value,
+                });
+              }}
+            />
+          </div>
+          <div>
+            <label>Nome Disciplina</label>
+            <input
+              type="text"
+              value={disciplina.nomeDisciplina}
+              onChange={(e) => {
+                setDisciplina({
+                  ...disciplina,
+                  nomeDisciplina: e.target.value,
+                });
+              }}
+            />
+          </div>
+          <div>
+            <label>Apelido Disciplina</label>
+            <input
+              type="text"
+              value={disciplina.apelidoDisciplina}
+              onChange={(e) => {
+                setDisciplina({
+                  ...disciplina,
+                  apelidoDisciplina: e.target.value,
+                });
+              }}
+            />
+          </div>
+        </>
         <button
           onClick={() =>
             deleteDisciplina(

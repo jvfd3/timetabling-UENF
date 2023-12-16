@@ -12,7 +12,8 @@ async function createInDB(endPoint, myData) {
     .catch(({ data }) => toast.error(data));
 }
 
-async function createDisciplina(disciplina) {
+async function createDisciplina(disciplinas, setDisciplinas, disciplina) {
+  setDisciplinas([...disciplinas, disciplina]);
   let endPoint = "disciplina";
   createInDB(endPoint, disciplina);
 }
@@ -59,6 +60,48 @@ async function readTurmas() {
 async function readSalas() {
   let endPoint = "salas";
   return readDataFromURL(endPoint);
+}
+
+async function updateInDB(endPoint, myData) {
+  /* Vou atualizar as informações locais independente de dar erro. Isso pode causar conflito no futuro */
+  let url = baseUrl + endPoint + myData.id;
+  console.log("url", url);
+  console.log("myData", myData);
+  await axios
+    .put(baseUrl + endPoint + myData.id, myData)
+    .then(({ data }) => toast.success(data))
+    .catch(({ data }) => toast.error(data));
+}
+
+async function updateDisciplina(
+  disciplinas,
+  setDisciplinas,
+  updatedDisciplina
+) {
+  let endPoint = "disciplina/";
+  let newDisciplinas = disciplinas.map((disciplina) =>
+    disciplina.iddisciplina === updateDisciplina.iddisciplina
+      ? updatedDisciplina
+      : disciplina
+  );
+  setDisciplinas(newDisciplinas);
+  updatedDisciplina.id = updatedDisciplina.iddisciplina;
+  updateInDB(endPoint, updatedDisciplina);
+}
+
+async function updateProfessor(professor) {
+  let endPoint = "professor/";
+  updateInDB(endPoint, professor);
+}
+
+async function updateTurma(turma) {
+  let endPoint = "turma/";
+  updateInDB(endPoint, turma);
+}
+
+async function updateSala(sala) {
+  let endPoint = "sala/";
+  updateInDB(endPoint, sala);
 }
 
 async function defaultDelete(endPoint, id, filterFunction) {
@@ -122,6 +165,10 @@ export {
   readProfessores,
   readTurmas,
   readSalas,
+  updateDisciplina,
+  updateProfessor,
+  updateTurma,
+  updateSala,
   deleteDisciplina,
   deleteProfessor,
   deleteTurma,
