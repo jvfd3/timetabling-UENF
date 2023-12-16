@@ -22,7 +22,7 @@ import {
 } from "../../DB/dataFromDB";
 import options from "../temp/options";
 
-function Workbench(props) {
+function Workbench() {
   function Workbench2() {
     let dummyDisciplina = { ...options.dbTemplates.disciplina };
     dummyDisciplina.iddisciplina = 1234;

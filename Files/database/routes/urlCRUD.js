@@ -20,7 +20,7 @@ import {
   addUser,
   deleteUser,
   updateUser,
-} from "../controllers/user.js";
+} from "../controllers/dbConnector.js";
 
 const router = express.Router();
 
