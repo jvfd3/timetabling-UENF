@@ -1,30 +1,40 @@
 import express from "express";
 import {
+  createDisciplina,
+  createProfessor,
+  createTurma,
+  createSala,
+  readDisciplinas,
+  readProfessores,
+  readTurmas,
+  readSalas,
+  deleteDisciplina,
+  deleteProfessor,
+  deleteTurma,
+  deleteSala,
   getUsers,
-  getDisciplinas,
-  getProfessores,
-  getSalas,
-  getTurmas,
-  addProfessor,
   addUser,
   deleteUser,
   updateUser,
-  addDisciplina,
-  addSala,
-  addTurma
 } from "../controllers/user.js";
 
 const router = express.Router();
 
-router.get("/professores", getProfessores);
-router.get("/disciplinas", getDisciplinas);
-router.get("/salas", getSalas);
-router.get("/turmas", getTurmas);
+router.post("/disciplina", createDisciplina);
+router.post("/professor", createProfessor);
+router.post("/turma", createTurma);
+router.post("/sala", createSala);
 
-router.post("/professor", addProfessor);
-router.post("/disciplina", addDisciplina);
-router.post("/sala", addSala);
-router.post("/turma", addTurma);
+router.get("/disciplinas", readDisciplinas);
+router.get("/professores", readProfessores);
+router.get("/turmas", readTurmas);
+router.get("/salas", readSalas);
+
+router.delete("/disciplina/:id", deleteDisciplina);
+router.delete("/professor/:id", deleteProfessor);
+router.delete("/turma/:id", deleteTurma);
+router.delete("/sala/:id", deleteSala);
+
 
 router.get("/", getUsers);
 router.post("/", addUser);
