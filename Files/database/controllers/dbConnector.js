@@ -164,17 +164,17 @@ function deleteDisciplina(req, res) {
 }
 
 function deleteProfessor(req, res) {
-  const q = "DELETE FROM professores WHERE `id` = ?";
+  const q = "DELETE FROM professores WHERE `idprofessor` = ?";
   defaultDelete(q, req.params.id, req, res);
 }
 
 function deleteTurma(req, res) {
-  const q = "DELETE FROM turmas WHERE `id` = ?";
+  const q = "DELETE FROM turmas WHERE `idturma` = ?";
   defaultDelete(q, req.params.id, req, res);
 }
 
 function deleteSala(req, res) {
-  const q = "DELETE FROM salas WHERE `id` = ?";
+  const q = "DELETE FROM salas WHERE `idsala` = ?";
   defaultDelete(q, req.params.id, req, res);
 }
 
