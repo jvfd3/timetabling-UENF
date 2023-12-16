@@ -21,6 +21,7 @@ async function createDisciplina(disciplinas, setDisciplinas, disciplina) {
 
 async function createProfessor(professor) {
   let endPoint = "professor";
+  console.log("adding to DB", professor);
   createInDB(endPoint, professor);
 }
 
@@ -64,13 +65,13 @@ async function readSalas() {
   return readDataFromURL(endPoint);
 }
 
-async function updateInDB(endPoint, myData) {
+async function updateInDB(endPoint, newData) {
   /* Vou atualizar as informações locais independente de dar erro. Isso pode causar conflito no futuro */
-  let url = baseUrl + endPoint + myData.id;
+  let url = baseUrl + endPoint + newData.id;
   console.log("url", url);
-  console.log("myData", myData);
+  console.log("newData", newData);
   await axios
-    .put(baseUrl + endPoint + myData.id, myData)
+    .put(baseUrl + endPoint + newData.id, newData)
     .then(({ data }) => toast.success(data))
     .catch(({ data }) => toast.error(data));
 }
@@ -82,7 +83,7 @@ async function updateDisciplina(
 ) {
   let endPoint = "disciplina/";
   let newDisciplinas = disciplinas.map((disciplina) =>
-    disciplina.iddisciplina === updateDisciplina.iddisciplina
+    disciplina.iddisciplina === updatedDisciplina.iddisciplina
       ? updatedDisciplina
       : disciplina
   );
@@ -91,9 +92,10 @@ async function updateDisciplina(
   updateInDB(endPoint, updatedDisciplina);
 }
 
-async function updateProfessor(professor) {
+async function updateProfessor(updatedProfessor) {
   let endPoint = "professor/";
-  updateInDB(endPoint, professor);
+  updatedProfessor.id = updatedProfessor.idprofessor;
+  updateInDB(endPoint, updatedProfessor);
 }
 
 async function updateTurma(turma) {
@@ -111,6 +113,8 @@ async function defaultDelete(endPoint, id, filterFunction) {
     .delete(baseUrl + endPoint + id)
     .then(filterFunction)
     .then(({ data }) => toast.success(data))
+    .then(() => console.log("deleted?"))
+    .then(({ data }) => console.log("deleted?", { data }))
     .catch(({ data }) => toast.error(data));
 }
 
@@ -136,6 +140,18 @@ async function deleteProfessor(professores, setProfessores, id) {
     return { data };
   };
   await defaultDelete(endPoint, id, filterFunction);
+}
+
+async function thinDefaultDelete(endPoint, id) {
+  await axios
+    .delete(baseUrl + endPoint + id)
+    .then(({ data }) => toast.success(data))
+    .catch(({ data }) => toast.error(data));
+}
+
+async function thinDeleteProfessor(id) {
+  let endPoint = "professor/";
+  await thinDefaultDelete(endPoint, id);
 }
 
 async function deleteTurma(turmas, setTurmas, id) {
@@ -173,6 +189,7 @@ export {
   updateSala,
   deleteDisciplina,
   deleteProfessor,
+  thinDeleteProfessor,
   deleteTurma,
   deleteSala,
 };

@@ -3,20 +3,21 @@ import "../CSS/defaultStyle.css";
 // import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import {
-  createDisciplina,
-  // createProfessor,
+  // createDisciplina,
+  createProfessor,
   // createTurma,
   // createSala,
-  readDisciplinas,
-  // readProfessores,
+  // readDisciplinas,
+  readProfessores,
   // readTurmas,
   // readSalas,
-  updateDisciplina,
-  // updateProfessor,
+  // updateDisciplina,
+  updateProfessor,
   // updateTurma,
   // updateSala,
-  deleteDisciplina,
-  // deleteProfessor,
+  // deleteDisciplina,
+  deleteProfessor,
+  thinDeleteProfessor,
   // deleteTurma,
   // deleteSala,
 } from "../../DB/dataFromDB";
@@ -24,134 +25,144 @@ import options from "../temp/options";
 
 function Workbench() {
   function Workbench2() {
-    let dummyDisciplina = { ...options.dbTemplates.disciplina };
-    dummyDisciplina.iddisciplina = 1234;
-    dummyDisciplina.periodoEsperado = 1234;
-    dummyDisciplina.codigoDisciplina = "B";
-    dummyDisciplina.nomeDisciplina = "B";
-    dummyDisciplina.apelidoDisciplina = "B";
+    let dummyProfessor = { ...options.dbTemplates.professor };
+    dummyProfessor.apelidoProfessor = "Prof";
+    dummyProfessor.curso = "Engenharia de Software";
+    dummyProfessor.idprofessor = 1234;
+    dummyProfessor.laboratorio = "Lab 1";
+    dummyProfessor.nomeProfessor = "Professor";
 
-    const [disciplinas, setDisciplinas] = useState([dummyDisciplina]);
+    const [professores, setProfessores] = useState([dummyProfessor]);
+    const [professor, setProfessor] = useState(
+      professores[professores.length - 1]
+    );
+    const [lastProfessor, setLastProfessor] = useState(
+      professores[professores.length - 1]
+    );
+    const [lastId, setLastId] = useState(0);
 
     useEffect(() => {
-      readDisciplinas().then((data) => setDisciplinas(data));
-    }, []);
-
-    const [disciplina, setDisciplina] = useState(
-      disciplinas[disciplinas.length - 1]
-    );
+      setLastProfessor(professores[professores.length - 1]);
+      setLastId(professores[professores.length - 1].idprofessor);
+    }, [professores]);
 
     useEffect(() => {
-      setDisciplina(disciplinas[disciplinas.length - 1]);
-    }, [disciplinas]);
+      setProfessor(lastProfessor);
+    }, [lastProfessor]);
 
-    console.log(
-      "disciplinas",
-      disciplinas[disciplinas.length - 1].iddisciplina
-    );
-    console.log("disciplina", disciplina.iddisciplina);
+    function internCreateProfessor() {
+      let newProfessor = { ...professor };
+      newProfessor.idprofessor += 1;
+      setProfessores([...professores, newProfessor]);
+      createProfessor(newProfessor);
+      // internReadProfessores();
+    }
+
+    function internReadProfessores() {
+      readProfessores().then((data) => {
+        setProfessores(data);
+      });
+    }
+
+    function internUpdateProfessor() {
+      let updatedProfessor = { ...professor };
+      let newProfessores = professores.map((professor) =>
+        professor.idprofessor === updatedProfessor.idprofessor
+          ? professor
+          : updatedProfessor
+      );
+      setProfessores(newProfessores);
+      updateProfessor(professor);
+    }
+
+    function internDeleteProfessor() {
+      // console.log("deleting: ", professor.idprofessor);
+      // deleteProfessor(professores, setProfessores, professor.idprofessor);
+      function filterProfessor(oldArray, id) {
+        const newArray = oldArray.filter((item) => item.idprofessor !== id);
+        return newArray;
+      }
+      thinDeleteProfessor(professor.idprofessor);
+      setProfessores(filterProfessor(professores, professor.idprofessor));
+    }
 
     return (
       <div className="" style={{ display: "flex", flexDirection: "column" }}>
-        <div>{disciplina.iddisciplina}</div>
-        <div>{disciplinas[disciplinas.length - 1].iddisciplina}</div>
-        <button
-          onClick={() =>
-            createDisciplina(disciplinas, setDisciplinas, disciplina)
-          }
-        >
-          Create Disciplina
-        </button>
-        <button
-          onClick={() => readDisciplinas().then((data) => setDisciplinas(data))}
-        >
-          Read Disciplinas
-        </button>
-        {/* Botão para atualizar a disciplina */}
-        <button
-          onClick={() => {
-            console.log("disciplina", disciplina);
-            updateDisciplina(disciplinas, setDisciplinas, disciplina);
-          }}
-        >
-          Update Disciplina
-        </button>
+        <button onClick={internCreateProfessor}>Create Professor</button>
+        <button onClick={internReadProfessores}>Read Professores</button>
+        <button onClick={internUpdateProfessor}>Update Professor</button>
         <>
-          {/* Create here a place where I can show and edit the select disciplina data */}
-          <div>
-            <label>Periodo Esperado</label>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div>last id</div>
+            <div>{lastId}</div>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div>id professor</div>
+            <div>{professores[professores.length - 1].idprofessor}</div>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div>id lastprofessor</div>
+            <div>{lastProfessor.idprofessor}</div>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div>id professor atual</div>
+            <div>{professor.idprofessor}</div>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <label>Nome Professor</label>
             <input
-              type="number"
-              value={disciplina.periodoEsperado}
+              type="text"
+              value={professor.nomeProfessor || ""}
               onChange={(e) => {
-                setDisciplina({
-                  ...disciplina,
-                  periodoEsperado: e.target.value,
+                setProfessor({
+                  ...professor,
+                  nomeProfessor: e.target.value,
                 });
               }}
             />
           </div>
-          <div>
-            <label>Codigo Disciplina</label>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <label>Apelido Professor</label>
             <input
               type="text"
-              value={disciplina.codigoDisciplina}
+              value={professor.apelidoProfessor || ""}
               onChange={(e) => {
-                setDisciplina({
-                  ...disciplina,
-                  codigoDisciplina: e.target.value,
+                setProfessor({
+                  ...professor,
+                  apelidoProfessor: e.target.value,
                 });
               }}
             />
           </div>
-          <div>
-            <label>Nome Disciplina</label>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <label>Curso</label>
             <input
               type="text"
-              value={disciplina.nomeDisciplina}
+              value={professor.curso || ""}
               onChange={(e) => {
-                setDisciplina({
-                  ...disciplina,
-                  nomeDisciplina: e.target.value,
+                setProfessor({
+                  ...professor,
+                  curso: e.target.value,
                 });
               }}
             />
           </div>
-          <div>
-            <label>Apelido Disciplina</label>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <label>Laboratorio</label>
             <input
               type="text"
-              value={disciplina.apelidoDisciplina}
+              value={professor.laboratorio || ""}
               onChange={(e) => {
-                setDisciplina({
-                  ...disciplina,
-                  apelidoDisciplina: e.target.value,
+                setProfessor({
+                  ...professor,
+                  laboratorio: e.target.value,
                 });
               }}
             />
           </div>
         </>
-        <button
-          onClick={() =>
-            deleteDisciplina(
-              disciplinas,
-              setDisciplinas,
-              disciplina.iddisciplina
-            )
-          }
-        >
-          Delete Disciplina
-        </button>
+        <button onClick={internDeleteProfessor}>Delete Professor</button>
         {/* Crie um botão que faça surgir um Toast por 2 segundos */}
-        <button
-          onClick={() => {
-            toast("neutral");
-            toast.success("Success!");
-            toast.error("Error.");
-          }}
-        >
-          Toast
-        </button>
       </div>
     );
   }
