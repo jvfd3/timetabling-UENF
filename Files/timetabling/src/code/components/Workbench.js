@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import "../CSS/defaultStyle.css";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
-import { getProfessores,
-  getDisciplinas,
-  getSalas,
-  getTurmas,
-  addProfessor,
-  addDisciplina,
-  addSala,
-  addTurma,
+import {
+  createDisciplina,
+  createProfessor,
+  createTurma,
+  createSala,
+  readDisciplinas,
+  readProfessores,
+  readTurmas,
+  readSalas,
+  deleteDisciplina,
 } from "../../DB/dataFromDB";
 import options from "../temp/options";
 
@@ -65,57 +67,51 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
 
 function Workbench(props) {
   function Workbench2() {
-    // const [professores, setProfessores] = useState([]);
-    // const [disciplinas, setDisciplinas] = useState([]);
-    // const [salas, setSalas] = useState([]);
-    // const [turmas, setTurmas] = useState([]);
+    let dummyDisciplina = { ...options.dbTemplates.disciplina };
+    dummyDisciplina.iddisciplina = 1234;
+    dummyDisciplina.periodoEsperado = 1234;
+    dummyDisciplina.codigoDisciplina = "B";
+    dummyDisciplina.nomeDisciplina = "B";
+    dummyDisciplina.apelidoDisciplina = "B";
 
-    const [professor, setProfessor] = useState(options.dbTemplates.professor);
-    const [disciplina, setDisciplina] = useState(options.dbTemplates.disciplina);
-    const [turma, setTurma] = useState(options.dbTemplates.turma);
-    const [sala, setSala] = useState(options.dbTemplates.sala);
-/* 
-    const [users, setUsers] = useState([]);
-    const [onEdit, setOnEdit] = useState(null);
- */
-    useEffect(()=>{
-      // getProfessores().then((data) => setProfessores(data));
-      let newProfessor = {
-        curso: "B",
-        laboratorio: "B",
-        nomeProfessor: "B",
-        apelidoProfessor: "B",
-      }
-      setProfessor(newProfessor);
-      let newDisciplina = {...disciplina};
-      newDisciplina.periodoEsperado = 1234;
-      newDisciplina.codigoDisciplina = "B";
-      newDisciplina.nomeDisciplina = "B";
-      newDisciplina.apelidoDisciplina = "B";
-      setDisciplina(newDisciplina);
-      let newTurma = {...turma};
-      newTurma.ano = 1234;
-      newTurma.semestre = 1234;
-      newTurma.demandaEstimada = 1234;
-      newTurma.nomeProfessor = "B";
-      newTurma.codigoDisciplina = "B";
-      setTurma(newTurma);
-      let newSala = {...sala};
-      newSala.blocoSala = "B";
-      newSala.capacidade = 1234;
-      newSala.bloco = "B";
-      newSala.codigoSala = "B";
-      newSala.descricaoBloco = "B";
-      setSala(newSala);
-    }, [])
+    const [disciplinas, setDisciplinas] = useState([dummyDisciplina]);
+
+    useEffect(() => {
+      readDisciplinas().then((data) => setDisciplinas(data));
+    }, []);
+
+    const [disciplina, setDisciplina] = useState(
+      disciplinas[disciplinas.length - 1]
+    );
+
+    useEffect(() => {
+      setDisciplina(disciplinas[disciplinas.length - 1]);
+    }, [disciplinas]);
+
+    console.log("disciplinas", disciplinas);
+    console.log("disciplina", disciplina.iddisciplina);
 
     return (
-      <div className="" style={{display: "flex", flexDirection: "column"}}>
-        <button onClick={() => addProfessor(professor)}> Add Professor </button>
-        <button onClick={() => addDisciplina(disciplina)}> Add Disciplina</button>
-        <button onClick={() => addTurma(turma)}> Add Turma</button>
-        <button onClick={() => addSala(sala)}> Add Sala</button>
-        {/* <Grid setOnEdit={setOnEdit} users={users} setUsers={setUsers} /> */}
+      <div className="" style={{ display: "flex", flexDirection: "column" }}>
+        <button onClick={() => createDisciplina(disciplina)}>
+          Create Disciplina
+        </button>
+        <button
+          onClick={() => readDisciplinas().then((data) => setDisciplinas(data))}
+        >
+          Read Disciplinas
+        </button>
+        <button
+          onClick={() =>
+            deleteDisciplina(
+              disciplinas,
+              setDisciplinas,
+              disciplina.iddisciplina
+            )
+          }
+        >
+          Delete Disciplina
+        </button>
       </div>
     );
   }

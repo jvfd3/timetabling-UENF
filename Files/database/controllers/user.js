@@ -1,70 +1,71 @@
 import { db } from "../db.js";
 
-function defaultRead (res, q){
+function defaultRead(res, q) {
   db.query(q, (err, data) => {
     if (err) return res.json(err);
     return res.status(200).json(data);
   });
 }
 
-function readDisciplinas (_, res) {
+function readDisciplinas(_, res) {
   const q = "SELECT * FROM disciplinas";
   defaultRead(res, q);
 }
 
-function readProfessores (_, res) {
+function readProfessores(_, res) {
   const q = "SELECT * FROM professores";
   defaultRead(res, q);
 }
 
-function readTurmas (_, res) {
+function readTurmas(_, res) {
   const q = "SELECT * FROM turmas";
   defaultRead(res, q);
 }
 
-function readSalas (_, res) {
+function readSalas(_, res) {
   const q = "SELECT * FROM salas";
   defaultRead(res, q);
 }
 
-
-function defaultCreate (q, values, res){
+function defaultCreate(q, values, res) {
   db.query(q, [values], (err) => {
-    return (err) ? res.json(err) : res.status(200).json("Item criado com sucesso.");
+    return err
+      ? res.json(err)
+      : res.status(200).json("Item criado com sucesso.");
   });
 }
 
-function createDisciplina (req, res) {
+function createDisciplina(req, res) {
   const q =
     "INSERT INTO disciplinas(`periodoEsperado`, `codigoDisciplina`, `nomeDisciplina`, `apelidoDisciplina`) VALUES(?)";
-    /* Dá para usar o "...req.body"? */
-    const values = [
+  /* Dá para usar o "...req.body"? */
+  const values = [
     req.body.periodoEsperado,
     req.body.codigoDisciplina,
     req.body.nomeDisciplina,
-    req.body.apelidoDisciplina
+    req.body.apelidoDisciplina,
   ];
   defaultCreate(q, values, res);
 }
 
-function createProfessor (req, res) {
+function createProfessor(req, res) {
   const q =
     "INSERT INTO professores(`laboratorio`, `curso`, `apelidoProfessor`, `nomeProfessor`) VALUES(?)";
-    /* Dá para usar o "...req.body"? */
-    const values = [
+  /* Dá para usar o "...req.body"? */
+  const values = [
     req.body.laboratorio,
     req.body.curso,
     req.body.apelidoProfessor,
-    req.body.nomeProfessor
+    req.body.nomeProfessor,
   ];
   defaultCreate(q, values, res);
 }
 
-function createTurma (req, res) {
+function createTurma(req, res) {
   const q =
     "INSERT INTO turmas(`ano`, `semestre`, `demandaEstimada`, `nomeProfessor`, `codigoDisciplina`) VALUES(?)";
-    /* Dá para usar o "...req.body"? */
-    const values = [
+  /* Dá para usar o "...req.body"? */
+  const values = [
     req.body.ano,
     req.body.semestre,
     req.body.demandaEstimada,
@@ -74,11 +75,11 @@ function createTurma (req, res) {
   defaultCreate(q, values, res);
 }
 
-function createSala (req, res) {
+function createSala(req, res) {
   const q =
     "INSERT INTO salas(`blocoSala`, `capacidade`, `bloco`, `codigoSala`, `descricaoBloco`) VALUES(?)";
-    /* Dá para usar o "...req.body"? */
-    const values = [
+  /* Dá para usar o "...req.body"? */
+  const values = [
     req.body.blocoSala,
     req.body.capacidade,
     req.body.bloco,
@@ -88,38 +89,35 @@ function createSala (req, res) {
   defaultCreate(q, values, res);
 }
 
-
-function defaultDelete (q, id, res){
+function defaultDelete(q, id, res) {
   db.query(q, [id], (err) => {
-    return (err) ? res.json(err) : res.status(200).json("Item deletado com sucesso.");
+    return err
+      ? res.json(err)
+      : res.status(200).json("Item deletado com sucesso.");
   });
 }
 
-function deleteDisciplina (req, res) {
-  const q = "DELETE FROM disciplinas WHERE `id` = ?";
+function deleteDisciplina(req, res) {
+  const q = "DELETE FROM disciplinas WHERE `iddisciplina` = ?";
   defaultDelete(q, req.params.id, res);
-};
+}
 
-function deleteProfessor (req, res) {
+function deleteProfessor(req, res) {
   const q = "DELETE FROM professores WHERE `id` = ?";
   defaultDelete(q, req.params.id, res);
-};
+}
 
-function deleteTurma (req, res) {
+function deleteTurma(req, res) {
   const q = "DELETE FROM turmas WHERE `id` = ?";
   defaultDelete(q, req.params.id, res);
-};
+}
 
-function deleteSala (req, res) {
+function deleteSala(req, res) {
   const q = "DELETE FROM salas WHERE `id` = ?";
   defaultDelete(q, req.params.id, res);
-};
+}
 
-
-
-
-
-function getUsers (_, res) {
+function getUsers(_, res) {
   const q = "SELECT * FROM usuarios";
 
   db.query(q, (err, data) => {
@@ -127,9 +125,9 @@ function getUsers (_, res) {
 
     return res.status(200).json(data);
   });
-};
+}
 
-function addUser (req, res) {
+function addUser(req, res) {
   const q =
     "INSERT INTO usuarios(`nome`, `email`, `fone`, `data_nascimento`) VALUES(?)";
 
@@ -145,9 +143,9 @@ function addUser (req, res) {
 
     return res.status(200).json("Usuário criado com sucesso.");
   });
-};
+}
 
-function updateUser (req, res) {
+function updateUser(req, res) {
   const q =
     "UPDATE usuarios SET `nome` = ?, `email` = ?, `fone` = ?, `data_nascimento` = ? WHERE `id` = ?";
 
@@ -163,9 +161,9 @@ function updateUser (req, res) {
 
     return res.status(200).json("Usuário atualizado com sucesso.");
   });
-};
+}
 
-function deleteUser (req, res) {
+function deleteUser(req, res) {
   const q = "DELETE FROM usuarios WHERE `id` = ?";
 
   db.query(q, [req.params.id], (err) => {
@@ -173,27 +171,23 @@ function deleteUser (req, res) {
 
     return res.status(200).json("Usuário deletado com sucesso.");
   });
-};
-
+}
 
 export {
   createDisciplina,
   createProfessor,
   createTurma,
   createSala,
-  
   readDisciplinas,
   readProfessores,
   readTurmas,
   readSalas,
-  
   deleteDisciplina,
   deleteProfessor,
   deleteTurma,
   deleteSala,
-
   getUsers,
   addUser,
   updateUser,
   deleteUser,
-}
+};
