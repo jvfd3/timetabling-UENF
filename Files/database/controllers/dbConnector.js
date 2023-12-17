@@ -1,4 +1,4 @@
-import { db } from "../db.js";
+import db from "../db.js";
 
 function defaultCreate(q, values, req, res) {
   let itemUpdated = req.route.path.split("/")[1];

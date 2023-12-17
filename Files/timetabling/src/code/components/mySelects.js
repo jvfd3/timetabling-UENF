@@ -4,6 +4,12 @@ import options from "../temp/options";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
+import {
+  createProfessor,
+  readProfessores,
+  updateProfessor,
+  thinDeleteProfessor,
+} from "../../DB/dataFromDB";
 // import { getNomeDisciplina } from "../functions/auxFunctions";
 
 function SelectAnoSemestre(props) {
@@ -18,8 +24,7 @@ function SelectAnoSemestre(props) {
   );
 }
 
-function SelectAno(props) {
-  const { outerAno, setOuterAno } = props;
+function SelectAno({ outerAno, setOuterAno }) {
   let anos = options.constantValues.years;
 
   let anoSelecionado = anos.find(
@@ -44,8 +49,7 @@ function SelectAno(props) {
   );
 }
 
-function SelectAnoTurma(props) {
-  const { lTurma, setLTurma } = props;
+function SelectAnoTurma({ lTurma, setLTurma }) {
   let anos = options.constantValues.years;
   let anoSelecionado = anos.find((ano) => ano.value === parseInt(lTurma.ano));
   const [ano, setAno] = useState(anoSelecionado);
@@ -71,8 +75,7 @@ function SelectAnoTurma(props) {
   );
 }
 
-function SelectSemestreTurma(props) {
-  const { lTurma, setLTurma } = props;
+function SelectSemestreTurma({ lTurma, setLTurma }) {
   let semestres = options.constantValues.semesters;
 
   let semestreSelecionado = semestres.find(
@@ -104,8 +107,7 @@ function SelectSemestreTurma(props) {
   );
 }
 
-function SelectSemestre(props) {
-  const { outerSemestre, setOuterSemestre } = props;
+function SelectSemestre({ outerSemestre, setOuterSemestre }) {
   let semestres = options.constantValues.semesters;
 
   let semestreSelecionado = semestres.find(
@@ -130,9 +132,7 @@ function SelectSemestre(props) {
   );
 }
 
-function SelectDisciplina(props) {
-  const { lTurma, setLTurma } = props;
-
+function SelectDisciplina({ lTurma, setLTurma }) {
   let disciplinas = allLocalJsonData.static.infoDisciplinasCC;
   let disciplinaSelecionada = disciplinas.find(
     (disciplina) => disciplina.codigo === lTurma.disciplina.codigo
@@ -164,15 +164,15 @@ function SelectDisciplina(props) {
       value={disciplina}
       isClearable={true}
       getOptionValue={(disciplina) => disciplina.codigo}
-      getOptionLabel={(disciplina) => `${disciplina.codigo} - ${disciplina.nome}`}
+      getOptionLabel={(disciplina) =>
+        `${disciplina.codigo} - ${disciplina.nome}`
+      }
       onChange={updateOuterTurma}
     />
   );
 }
 
-function SelectProfessor(props) {
-  const { lTurma, setLTurma } = props;
-
+function SelectProfessor({ lTurma, setLTurma }) {
   let professores = allLocalJsonData.static.infoProfessores;
   let professorSelecionado = professores.find(
     (professor) => professor.nome === lTurma.professor
@@ -276,9 +276,7 @@ function SelectProfessorC(props) {
   );
 }
 
-function SelectSala(props) {
-  const { lTurma, setLTurma, indexHorario } = props;
-
+function SelectSala({ lTurma, setLTurma, indexHorario }) {
   let salas = allLocalJsonData.static.infoSalas;
   let horarios = lTurma.horarios;
   let selectedSala = horarios[indexHorario].sala;
@@ -318,9 +316,7 @@ function SelectSala(props) {
   );
 }
 
-function SelectDia(props) {
-  const { lTurma, setLTurma, indexHorario } = props;
-
+function SelectDia({ lTurma, setLTurma, indexHorario }) {
   let dias = options.constantValues.days;
 
   let horarios = lTurma.horarios;
@@ -372,8 +368,7 @@ function SelectDia(props) {
   );
 }
 
-function SelectHoraTang(props) {
-  const { lTurma, setLTurma, indexHorario } = props;
+function SelectHoraTang({ lTurma, setLTurma, indexHorario }) {
   let horarios = lTurma.horarios;
   let horario = horarios[indexHorario];
 
@@ -418,8 +413,7 @@ function SelectHoraTang(props) {
   );
 }
 
-function SelectDuracao(props) {
-  const { lTurma, setLTurma, indexHorario } = props;
+function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
   let horarios = lTurma.horarios;
   let horario = horarios[indexHorario];
 
@@ -460,8 +454,7 @@ function SelectDuracao(props) {
   );
 }
 
-function SelectCurso(props) {
-  const { professorAtual, setNewProfessor } = props;
+function SelectCurso({ professorAtual, setNewProfessor }) {
   let cursos = options.constantValues.courses;
   let foundCurso = cursos.find((curso) => curso.value === professorAtual.curso);
 
@@ -475,7 +468,7 @@ function SelectCurso(props) {
       ...professorAtual,
       curso: newCurso.value,
     };
-
+    updateProfessor(novoProfessor);
     setNewProfessor(novoProfessor);
   }
 
@@ -492,12 +485,14 @@ function SelectCurso(props) {
           ? `(${value}) ${label}`
           : `(${value}) ${label}`;
       }}
+      styles={{
+        menu: ({ width, ...css }) => ({ ...css }),
+      }}
     />
   );
 }
 
-function SelectLaboratorio(props) {
-  const { professorAtual, setNewProfessor } = props;
+function SelectLaboratorio({ professorAtual, setNewProfessor }) {
   let laboratorios = options.constantValues.laboratorios;
 
   let foundLab = laboratorios.find(
@@ -514,6 +509,7 @@ function SelectLaboratorio(props) {
       laboratorio: newLab.value,
     };
 
+    updateProfessor(novoProfessor);
     setNewProfessor(novoProfessor);
   }
 
@@ -529,6 +525,9 @@ function SelectLaboratorio(props) {
         return context === "value"
           ? `(${value}) ${label}`
           : `(${value}) ${label}`;
+      }}
+      styles={{
+        menu: ({ width, ...css }) => ({ ...css }),
       }}
     />
   );

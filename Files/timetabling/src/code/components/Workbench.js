@@ -49,8 +49,9 @@ function Workbench() {
     const [lastId, setLastId] = useState(0);
 
     useEffect(() => {
-      setLastProfessor(professores[professores.length - 1]);
-      setLastId(professores[professores.length - 1].idprofessor);
+      let ultimo = professores[professores.length - 1];
+      setLastProfessor(ultimo);
+      setLastId(ultimo.idprofessor);
     }, [professores]);
 
     useEffect(() => {
@@ -73,9 +74,9 @@ function Workbench() {
 
     function internUpdateProfessor() {
       let updatedProfessor = { ...professor };
-      let newProfessores = professores.map((professor) =>
-        professor.idprofessor === updatedProfessor.idprofessor
-          ? professor
+      let newProfessores = professores.map((localProfessor) =>
+        localProfessor.idprofessor === updatedProfessor.idprofessor
+          ? localProfessor
           : updatedProfessor
       );
       setProfessores(newProfessores);
@@ -89,6 +90,7 @@ function Workbench() {
         const newArray = oldArray.filter((item) => item.idprofessor !== id);
         return newArray;
       }
+      console.log(professor.idprofessor);
       thinDeleteProfessor(professor.idprofessor);
       setProfessores(filterProfessor(professores, professor.idprofessor));
     }

@@ -3,12 +3,16 @@ import options from "../temp/options";
 import CRUDPageSelection from "../components/PageSelect";
 import "../CSS/defaultStyle.css";
 import Workbench from "../components/Workbench";
+import { LambdaCopilot } from "../components/LambdaComponentCopilot";
 
 function Main() {
   return (
     <div className="CRUDContainComponents">
       <h1>Welcome to my monograph's website!</h1>
-      <Workbench />
+      {/* <Workbench /> */}
+      <div className="showBasicDataCard">
+        <LambdaCopilot />
+      </div>
       <p>This is the main page.</p>
       <h4>Atalhos</h4>
       <ul>
