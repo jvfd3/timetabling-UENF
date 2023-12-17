@@ -1,23 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import options from "../temp/options";
 
 function LambdaCopilot() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // let myEndpoint =
-  // "https://4tw2l96f11.execute-api.us-east-2.amazonaws.com/estagioTeste";
-  let smallEndpoint = "4tw2l96f11.execute-api.us-east-2";
-  let stage = "estagioTeste";
-  // let myLambdaFunction = "nodeMySQLRAR";
-  let url = `https://${smallEndpoint}.amazonaws.com/${stage}`;
-  // let url = myEndpoint + "/" + myLambdaFunction;
-  // let url = myEndpoint;
+  let endpoint = options.AWS.fullEndpoint;
 
   useEffect(() => {
     axios
-      .get(url)
+      .get(endpoint)
       .then((response) => {
         let receivedData = JSON.parse(response.data.body);
         console.log("receivedData", receivedData);
