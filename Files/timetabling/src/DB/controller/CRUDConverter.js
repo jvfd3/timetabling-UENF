@@ -1,16 +1,7 @@
 import { customQuery, customQuery2 } from "../oneQueryToRuleThemAll";
 import mysql from "mysql";
-// import knex from "knex";
 
-// const knexInstance = knex({ client: "mysql" });
-
-function formatQuery(queryStr, values) {
-  let formattedQuery = queryStr;
-  values.forEach((value, index) => {
-    formattedQuery = formattedQuery.replace("?", `"${value}"`);
-  });
-  return formattedQuery;
-}
+/* PROFESSOR */
 
 async function newCreateProfessor(professor) {
   const q =
@@ -22,7 +13,7 @@ async function newCreateProfessor(professor) {
     professor.laboratorio,
     professor.nomeProfessor,
   ];
-  const formattedQuery = formatQuery(q, values);
+  const formattedQuery = mysql.format(q, values);
   return customQuery2(formattedQuery);
 }
 
@@ -30,6 +21,27 @@ async function newReadProfessores() {
   const q = "SELECT * FROM professores";
   return customQuery(q);
 }
+
+async function newUpdateProfessor(professor) {
+  const q =
+    "UPDATE professores SET `apelidoProfessor` = ?, `curso` = ?, `laboratorio` = ?, `nomeProfessor` = ? WHERE `idprofessor` = ?";
+  const values = [
+    professor.apelidoProfessor,
+    professor.curso,
+    professor.laboratorio,
+    professor.nomeProfessor,
+    professor.idprofessor,
+  ];
+  const formattedQuery = mysql.format(q, values);
+  return customQuery2(formattedQuery);
+}
+
+async function newDeleteProfessor(id) {
+  const q = `DELETE FROM professores WHERE idprofessor = ${id}`;
+  return customQuery(q);
+}
+
+/* Disciplinas */
 
 async function newReadDisciplinas() {
   const q = "SELECT * FROM disciplinas";
@@ -46,16 +58,12 @@ async function newReadSalas() {
   return customQuery(q);
 }
 
-async function newDeleteProfessor(id) {
-  const q = `DELETE FROM professores WHERE idprofessor = ${id}`;
-  return customQuery(q);
-}
-
 export {
+  newCreateProfessor,
   newReadProfessores,
+  newUpdateProfessor,
+  newDeleteProfessor,
   newReadDisciplinas,
   newReadTurmas,
   newReadSalas,
-  newCreateProfessor,
-  newDeleteProfessor,
 };
