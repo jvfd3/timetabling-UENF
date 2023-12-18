@@ -242,6 +242,13 @@ const options = {
     endpoint: "https://4tw2l96f11.execute-api.us-east-2.amazonaws.com",
     stage: "timetabling",
     smallEndpoint: "4tw2l96f11.execute-api.us-east-2",
+    dbConfig: {
+      host: "dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com",
+      user: "tang",
+      password: "annabell",
+      database: "timetabling",
+    },
+    KeyAPI: "ifaJUbNoR99ZgqS7g7zOL3nNbBuAi2Un3rbZFsu3",
   },
   JBVars: {
     //Json Bin Variables

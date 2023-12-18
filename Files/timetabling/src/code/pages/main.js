@@ -9,10 +9,8 @@ function Main() {
   return (
     <div className="CRUDContainComponents">
       <h1>Welcome to my monograph's website!</h1>
-      {/* <Workbench /> */}
-      <div className="showBasicDataCard">
-        <LambdaCopilot />
-      </div>
+      <Workbench />
+      <div className="showBasicDataCard">{/* <LambdaCopilot /> */}</div>
       <p>This is the main page.</p>
       <h4>Atalhos</h4>
       <ul>

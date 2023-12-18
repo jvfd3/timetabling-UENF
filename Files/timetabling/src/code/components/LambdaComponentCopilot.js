@@ -1,44 +1,63 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import options from "../temp/options";
+import { customQuery, customQuery2 } from "../../DB/oneQueryToRuleThemAll";
 
-function LambdaCopilot() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+const LambdaCopilot = () => {
+  const [query, setQuery] = useState("SELECT * FROM disciplinas");
+  const [result, setResult] = useState("");
 
-  let endpoint = options.AWS.fullEndpoint;
+  const query3 = async () => {
+    try {
+      // const response = await customQuery(query);
+      const response = await customQuery2(query);
+      console.log("response", response);
+      // let receivedData = JSON.parse(response);
+      // console.log("response", receivedData);
+      // setResult(receivedData);
+    } catch (error) {
+      console.error("Erro ao executar a query:", error);
+    }
+  };
 
-  useEffect(() => {
+  async function query2() {
+    const result = await customQuery("SELECT * FROM turmas");
+    // console.log(JSON.parse(result));
+  }
+
+  async function query1() {
+    let endpoint = options.AWS.fullEndpoint;
     axios
       .get(endpoint)
       .then((response) => {
-        let receivedData = JSON.parse(response.data.body);
-        console.log("receivedData", receivedData);
-        setData(receivedData);
-        setLoading(false);
+        // let receivedData = JSON.parse(response);
+        // console.log("receivedData", receivedData);
       })
       .catch((error) => {
-        setError(error.message);
-        setLoading(false);
+        console.log(error.message);
       });
-  }, []);
-
-  if (loading) return "Carregando...";
-  if (error) return `Erro: ${error}`;
+  }
+  async function executeQuery() {
+    // query1();
+    // query2();
+    query3();
+  }
 
   return (
     <div>
-      <h1>Resultados da Query SQL</h1>
-      {data &&
-        data.map((item, index) => (
-          <div key={index}>
-            {/* Substitua "campo" pelo nome do campo que você deseja exibir */}
-            {/* <p>{item.campo}</p> */}
-          </div>
-        ))}
+      <input
+        type="text"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Digite sua query"
+      />
+      <button onClick={executeQuery}>Executar Query</button>
+      <div>
+        <h2>Resultado:</h2>
+        <pre>{JSON.stringify(result, null, 2)}</pre>
+      </div>
     </div>
   );
-}
+};
 
 export { LambdaCopilot };

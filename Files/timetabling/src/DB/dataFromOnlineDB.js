@@ -41,7 +41,7 @@ async function readDataFromURL(endPoint) {
     toast.success(`Dados lidos com sucesso: ${endPoint}`);
     return res.data;
   } catch (error) {
-    toast.error("erro externo", error);
+    toast.error(error);
   }
 }
 
