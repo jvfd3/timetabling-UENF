@@ -19,12 +19,11 @@ async function defaultCreate(query, newProfessor) {
     let dbConnection = await createDbConnection();
     let queryResult = await dbConnection.execute(query, convertToList(newProfessor));
     await dbConnection.end();
-    let successMessage = local + `>defaultCreate, professor criado com sucesso com id...`;
+    let successMessage = local + `>defaultCreate>Professor criado com sucesso`;
     console.log(successMessage, queryResult);
     return getPayloadResponse(successMessage, query, newProfessor, queryResult, null, 200);
   } catch (error) {
     let errorMessage = local + ">defaultCreate>Erro ao executar a query:";
-    errorMessage += "{query: '" + query + "', newProfessor: '" + newProfessor + "'}";
     console.error(errorMessage, error);
     return getPayloadResponse(errorMessage, query, newProfessor, null, error, 500);
   }
