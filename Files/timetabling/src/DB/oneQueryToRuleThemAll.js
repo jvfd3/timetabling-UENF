@@ -7,8 +7,9 @@ async function customQuery(queryStr) {
   let url = options.AWS.fullEndpoint;
   try {
     const response = await axios.post(url, { query: queryStr });
+    console.log("oneQueryResponse", response);
     let receivedData = JSON.parse(response.data.body);
-    console.log("interno", receivedData.length);
+    // console.log("interno", receivedData.length);
     toast.success(`Dados lidos com sucesso: ${queryStr}`);
     return receivedData;
   } catch (error) {

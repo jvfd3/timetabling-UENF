@@ -1,7 +1,14 @@
 import { customQuery, customQuery2 } from "../oneQueryToRuleThemAll";
 import mysql from "mysql";
+import { axiosTeste } from "./axiosConnection";
 
 /* PROFESSOR */
+
+async function cleanCreateProfessor(professor) {
+  // const q = "INSERT INTO professores SET ?";
+  // return customQuery2(q, professor);
+  axiosTeste(professor);
+}
 
 async function newCreateProfessor(professor) {
   const q =
@@ -43,7 +50,7 @@ async function newDeleteProfessor(id) {
 
 /* Disciplinas */
 
-async function newReadDisciplinas() {
+/* async function newReadDisciplinas() {
   const q = "SELECT * FROM disciplinas";
   return customQuery(q);
 }
@@ -56,14 +63,15 @@ async function newReadTurmas() {
 async function newReadSalas() {
   const q = "SELECT * FROM salas";
   return customQuery(q);
-}
+} */
 
 export {
   newCreateProfessor,
   newReadProfessores,
   newUpdateProfessor,
   newDeleteProfessor,
-  newReadDisciplinas,
-  newReadTurmas,
-  newReadSalas,
+  cleanCreateProfessor,
+  // newReadDisciplinas,
+  // newReadTurmas,
+  // newReadSalas,
 };

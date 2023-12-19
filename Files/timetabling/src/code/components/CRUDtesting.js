@@ -1,33 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "../CSS/defaultStyle.css";
-// import axios from "axios";
+import "./CRUDtesting.css";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { BsDatabaseDown, BsDatabaseFillAdd } from "react-icons/bs";
-import {
-  // createDisciplina,
-  createProfessor,
-  // createTurma,
-  // createSala,
-  // readDisciplinas,
-  readProfessores,
-  // readTurmas,
-  // readSalas,
-  // updateDisciplina,
-  updateProfessor,
-  // updateTurma,
-  // updateSala,
-  // deleteDisciplina,
-  // deleteProfessor,
-  thinDeleteProfessor,
-  // deleteTurma,
-  // deleteSala,
-} from "../../DB/dataFromDB";
 import options from "../temp/options";
 import {
-  newReadProfessores,
-  newCreateProfessor,
-} from "../../DB/controller/CRUDConverter";
-import { toast } from "react-toastify";
+  readProfessores,
+  deleteProfessores,
+  createProfessores,
+  updateProfessores,
+} from "../../DB/controller/axiosConnection";
 
 function CRUDTesting() {
   let dummyProfessor = { ...options.dbTemplates.professor };
@@ -64,17 +46,24 @@ function CRUDTesting() {
 
   function internCreateProfessor() {
     let newProfessor = { ...professor };
-    newProfessor.idprofessor += 1;
-    setProfessores([...professores, newProfessor]);
-    newCreateProfessor(newProfessor);
-    // internReadProfessores();
+    createProfessores(newProfessor).then((data) => {
+      newProfessor.idprofessor = data.newID;
+      setProfessor(newProfessor);
+      setProfessores([...professores, newProfessor]);
+    });
   }
 
   function internReadProfessores() {
-    let data = newReadProfessores();
-    data.then((data) => {
-      console.log("interno", data);
+    // let data = newReadProfessores();
+    // data.then((data) => {
+    //   // console.log("interno", data);
+    //   setProfessores(data);
+    // });
+
+    let dataReceived = readProfessores();
+    dataReceived.then((data) => {
       setProfessores(data);
+      // console.log("CRUDTesting>useEffect>cleanReadProfessor", data);
     });
   }
 
@@ -90,19 +79,27 @@ function CRUDTesting() {
         : updatedProfessor
     );
     setProfessores(newProfessores);
-    updateProfessor(professor);
+    updateProfessores(updatedProfessor);
+    // updateProfessor(professor);
   }
 
   function internDeleteProfessor() {
-    // console.log("deleting: ", professor.idprofessor);
+    console.log("deleting: ", professor.idprofessor);
+    let retorno = deleteProfessores(professor.idprofessor);
+    retorno.then((data) => {
+      console.log("CRUDTesting>internDeleteProfessor>data", data);
+    });
     // deleteProfessor(professores, setProfessores, professor.idprofessor);
+    // console.log(professor.idprofessor);
+    // thinDeleteProfessor(professor.idprofessor);
+
     function filterProfessor(oldArray, id) {
       const newArray = oldArray.filter((item) => item.idprofessor !== id);
       return newArray;
     }
-    console.log(professor.idprofessor);
-    thinDeleteProfessor(professor.idprofessor);
+
     setProfessores(filterProfessor(professores, professor.idprofessor));
+    // internReadProfessores();
   }
 
   return (
@@ -115,10 +112,26 @@ function CRUDTesting() {
           paddingBottom: 10,
         }}
       >
-        <BsDatabaseFillAdd size="4em" onClick={internCreateProfessor} />
-        <BsDatabaseDown size="4em" onClick={internReadProfessores} />
-        <FaEdit size="4em" onClick={internUpdateProfessor} />
-        <FaTrash size="4em" onClick={internDeleteProfessor} />
+        <BsDatabaseFillAdd
+          className="iconCreate"
+          size="4em"
+          onClick={internCreateProfessor}
+        />
+        <BsDatabaseDown
+          className="iconRead"
+          size="4em"
+          onClick={internReadProfessores}
+        />
+        <FaEdit
+          className="iconUpdate"
+          size="4em"
+          onClick={internUpdateProfessor}
+        />
+        <FaTrash
+          className="iconDelete"
+          size="4em"
+          onClick={internDeleteProfessor}
+        />
       </div>
       <>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -127,7 +140,12 @@ function CRUDTesting() {
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div>id professor</div>
-          <div>{professores[professores.length - 1].idprofessor}</div>
+          <div>
+            {professores.length > 0 &&
+            professores[professores.length - 1].idprofessor
+              ? professores[professores.length - 1].idprofessor
+              : "Erro: idprofessor não existe"}
+          </div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div>id lastprofessor</div>

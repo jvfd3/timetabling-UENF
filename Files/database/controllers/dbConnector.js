@@ -8,19 +8,6 @@ function defaultCreate(q, values, req, res) {
   });
 }
 
-function createDisciplina(req, res) {
-  const q =
-    "INSERT INTO disciplinas(`periodoEsperado`, `codigoDisciplina`, `nomeDisciplina`, `apelidoDisciplina`) VALUES(?)";
-  /* Dá para usar o "...req.body"? */
-  const values = [
-    req.body.periodoEsperado,
-    req.body.codigoDisciplina,
-    req.body.nomeDisciplina,
-    req.body.apelidoDisciplina,
-  ];
-  defaultCreate(q, values, req, res);
-}
-
 function createProfessor(req, res) {
   const q =
     "INSERT INTO professores(`laboratorio`, `curso`, `apelidoProfessor`, `nomeProfessor`) VALUES(?)";
@@ -30,6 +17,19 @@ function createProfessor(req, res) {
     req.body.curso,
     req.body.apelidoProfessor,
     req.body.nomeProfessor,
+  ];
+  defaultCreate(q, values, req, res);
+}
+
+function createDisciplina(req, res) {
+  const q =
+    "INSERT INTO disciplinas(`periodoEsperado`, `codigoDisciplina`, `nomeDisciplina`, `apelidoDisciplina`) VALUES(?)";
+  /* Dá para usar o "...req.body"? */
+  const values = [
+    req.body.periodoEsperado,
+    req.body.codigoDisciplina,
+    req.body.nomeDisciplina,
+    req.body.apelidoDisciplina,
   ];
   defaultCreate(q, values, req, res);
 }
@@ -69,13 +69,13 @@ function defaultRead(res, q) {
   });
 }
 
-function readDisciplinas(_, res) {
-  const q = "SELECT * FROM disciplinas";
+function readProfessores(_, res) {
+  const q = "SELECT * FROM professores";
   defaultRead(res, q);
 }
 
-function readProfessores(_, res) {
-  const q = "SELECT * FROM professores";
+function readDisciplinas(_, res) {
+  const q = "SELECT * FROM disciplinas";
   defaultRead(res, q);
 }
 

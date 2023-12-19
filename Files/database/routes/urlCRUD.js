@@ -20,24 +20,24 @@ import {
 
 const router = express.Router();
 
-router.post("/disciplina", createDisciplina);
 router.post("/professor", createProfessor);
-router.post("/turma", createTurma);
-router.post("/sala", createSala);
-
-router.get("/disciplinas", readDisciplinas);
 router.get("/professores", readProfessores);
-router.get("/turmas", readTurmas);
-router.get("/salas", readSalas);
-
-router.put("/disciplina/:id", updateDisciplina);
 router.put("/professor/:id", updateProfessor);
-router.put("/turma/:id", updateTurma);
-router.put("/sala/:id", updateSala);
-
-router.delete("/disciplina/:id", deleteDisciplina);
 router.delete("/professor/:id", deleteProfessor);
+
+router.post("/disciplina", createDisciplina);
+router.get("/disciplinas", readDisciplinas);
+router.put("/disciplina/:id", updateDisciplina);
+router.delete("/disciplina/:id", deleteDisciplina);
+
+router.post("/turma", createTurma);
+router.get("/turmas", readTurmas);
+router.put("/turma/:id", updateTurma);
 router.delete("/turma/:id", deleteTurma);
+
+router.post("/sala", createSala);
+router.get("/salas", readSalas);
+router.put("/sala/:id", updateSala);
 router.delete("/sala/:id", deleteSala);
 
 export default router;
