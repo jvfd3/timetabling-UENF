@@ -35,23 +35,33 @@ async function defaultDelete(query, id) {
   }
   try {
     let dbConnection = await createDbConnection();
-    await dbConnection.execute(query, [id]);
+    let queryResult = await dbConnection.execute(query, [id]);
     await dbConnection.end();
     let successMessage = local + ">defaultDelete, id:" + id + " deletado com sucesso";
-    console.log(successMessage);
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: successMessage}),
-    };
+    console.log(successMessage, queryResult);
+    return getPayloadResponse(successMessage, query, id, queryResult, null, 200);
   } catch (error) {
     let errorMessage = local + ">defaultDelete>Erro ao executar a query:"
     console.error(errorMessage, error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ message: errorMessage }),
-    };
+    return getPayloadResponse(errorMessage, query, id, null, error, 500);
   }
 }
+
+function getPayloadResponse(message, query, queryValues, queryResult, error, statusCode) {
+  let myBody = {
+    message: message,
+    query: query,
+    queryValues: queryValues,
+    queryResult: queryResult,
+    error: error
+  };
+  let returnedMessage = {
+    statusCode: statusCode,
+    body: myBody,
+  };
+  return returnedMessage;
+}
+
 
 async function checkExistance(id) {
   const checkQuery = "SELECT * FROM professores WHERE idprofessor = ?";

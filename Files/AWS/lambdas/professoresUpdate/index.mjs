@@ -1,11 +1,7 @@
 // index.js
+// aws lambda create-function --function-name professoresUpdate --runtime nodejs20.x --role arn:aws:iam::375423677214:role/LambdaRole --handler index.handler --zip-file fileb://D:/HDExt/GitHub/UENF/9Semestre/timetabling-UENF/Files/AWS/lambdas/professoresUpdate/professoresUpdate.zip --environment "Variables={DB_HOST='dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com',DB_USER='tang',DB_PASSWORD='annabell',DB_NAME='timetabling'}"
 import {createDbConnection} from "./db.js";
-
 let local = "aws>lambda>professores>Update";
-
-/*
-aws lambda create-function --function-name professoresUpdate --runtime nodejs20.x --role arn:aws:iam::375423677214:role/LambdaRole --handler index.handler --zip-file fileb://D:/HDExt/GitHub/UENF/9Semestre/timetabling-UENF/Files/AWS/lambdas/professoresUpdate/professoresUpdate.zip --environment "Variables={DB_HOST='dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com',DB_USER='tang',DB_PASSWORD='annabell',DB_NAME='timetabling'}"
-*/
 
 async function handler(event) {
   console.log(local + ">handler>event: <", event, ">");
@@ -18,14 +14,14 @@ async function updateProfessor(professorToUpdate) {
   return await defaultUpdate(updateProfessorQuery, professorToUpdate);
 }
 
-async function defaultUpdate(query, newProfessor) {
-  let exists = await checkExistance(newProfessor.idprofessor);
+async function defaultUpdate(query, professorToUpdate) {
+  let exists = await checkExistance(professorToUpdate.idprofessor);
   if (!exists) {
-    let errorMessage = local + ">defaultUpdate>id:" + newProfessor.idprofessor + " não existe";
+    let errorMessage = local + ">defaultUpdate>id:" + professorToUpdate.idprofessor + " não existe";
     console.error(errorMessage);
     let myBody = {
       errorMessage: errorMessage,
-      userMessage: `Professor com id ${newProfessor.idprofessor} não encontrado`,
+      userMessage: `Professor com id ${professorToUpdate.idprofessor} não encontrado`,
     };
     let returnedMessage = {
       statusCode: 404,
@@ -35,25 +31,32 @@ async function defaultUpdate(query, newProfessor) {
   }
   try {
     let dbConnection = await createDbConnection();
-    await dbConnection.execute(query, convertToList(newProfessor));
+    let queryResult = await dbConnection.execute(query, convertToList(professorToUpdate));
     await dbConnection.end();
-    let successMessage = local + ">defaultUpdate, id:" + newProfessor.idprofessor + " atualizado com sucesso";
-    console.log(successMessage);
-    let returnedMessage = {
-      statusCode: 200,
-      body: JSON.stringify({ message: successMessage}),
-    };
-    return returnedMessage;
+    let successMessage = local + ">defaultUpdate, id:" + professorToUpdate.idprofessor + " atualizado com sucesso";
+    console.log(successMessage, queryResult);
+    return getPayloadResponse(successMessage, query, professorToUpdate, queryResult, null, 200);
   } catch (error) {
     let errorMessage = local + ">defaultUpdate>Erro ao executar a query:";
-    errorMessage += "{q: '" + query + "'}";
+    errorMessage += "{query: '" + query + "'}";
     console.error(errorMessage, error);
-    let returnedMessage = {
-      statusCode: 500,
-      body: JSON.stringify({ message: errorMessage }),
-    };
-    return returnedMessage;
+    return getPayloadResponse(errorMessage, query, professorToUpdate, null, error, 500);
   }
+}
+
+function getPayloadResponse(message, query, queryValues, queryResult, error, statusCode) {
+  let myBody = {
+    message: message,
+    query: query,
+    queryValues: queryValues,
+    queryResult: queryResult,
+    error: error
+  };
+  let returnedMessage = {
+    statusCode: statusCode,
+    body: myBody,
+  };
+  return returnedMessage;
 }
 
 async function checkExistance(id) {
@@ -80,6 +83,5 @@ function convertToList(professor) {
   ];
   return values;
 }
-
 
 export { handler };
