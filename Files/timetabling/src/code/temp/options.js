@@ -243,19 +243,6 @@ const options = {
     stage: "timetabling",
     region: "us-east-2",
     smallEndpoint: "4tw2l96f11.execute-api.us-east-2",
-    dbConfig: {
-      host: "dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com",
-      user: "tang",
-      password: "annabell",
-      database: "timetabling",
-    },
-    KeyAPI: "ifaJUbNoR99ZgqS7g7zOL3nNbBuAi2Un3rbZFsu3",
-    AWS_Access_Key_ID: "AKIAVO2H6WMPKWRNWJ66",
-    AWS_Secret_Access_Key: "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",
-    Default_region_name: "us-east-2",
-    Default_output_format: "json",
-    LambdaRoleARN: "arn:aws:iam::375423677214:role/LambdaRole",
-    APIRoleARN: "arn:aws:iam::375423677214:role/APIRole",
   },
   JBVars: {
     //Json Bin Variables
