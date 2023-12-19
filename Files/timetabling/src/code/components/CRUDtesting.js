@@ -19,35 +19,32 @@ function CRUDTesting() {
   dummyProfessor.laboratorio = "Lab 1";
   dummyProfessor.nomeProfessor = "Professor";
 
-  useEffect(() => {
-    /* readProfessores().then((data) => {
-        setProfessores(data);
-      }); */
-  }, []);
-
   const [professores, setProfessores] = useState([dummyProfessor]);
-  const [professor, setProfessor] = useState(
-    professores[professores.length - 1]
-  );
-  const [lastProfessor, setLastProfessor] = useState(
-    professores[professores.length - 1]
-  );
+  const [professor, setProfessor] = useState(dummyProfessor);
+  const [lastProfessor, setLastProfessor] = useState(dummyProfessor);
   const [lastId, setLastId] = useState(0);
 
   useEffect(() => {
-    let ultimo = professores[professores.length - 1];
-    setLastProfessor(ultimo);
-    setLastId(ultimo.idprofessor);
+    // setProfessores([dummyProfessor]);
+    // setProfessor(professores[professores.length - 1]);
+    // setLastProfessor(professores[professores.length - 1]);
+    // internReadProfessores();
+  }, []);
+
+  useEffect(() => {
+    // let ultimo = professores[professores.length - 1];
+    // setLastProfessor(ultimo);
+    // setLastId(ultimo.idprofessor);
   }, [professores]);
 
   useEffect(() => {
-    setProfessor(lastProfessor);
+    // setProfessor(lastProfessor);
   }, [lastProfessor]);
 
   function internCreateProfessor() {
     let newProfessor = { ...professor };
-    createProfessores(newProfessor).then((data) => {
-      newProfessor.idprofessor = data.newID;
+    createProfessores(newProfessor).then((newId) => {
+      newProfessor.idprofessor = newId;
       setProfessor(newProfessor);
       setProfessores([...professores, newProfessor]);
     });
@@ -68,7 +65,7 @@ function CRUDTesting() {
   }
 
   useEffect(() => {
-    internReadProfessores();
+    // internReadProfessores();
   }, []);
 
   function internUpdateProfessor() {
@@ -141,19 +138,24 @@ function CRUDTesting() {
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div>id professor</div>
           <div>
-            {professores.length > 0 &&
-            professores[professores.length - 1].idprofessor
-              ? professores[professores.length - 1].idprofessor
-              : "Erro: idprofessor não existe"}
+            {professor ? professor.idprofessor : "Professor não definido"}
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div>id lastprofessor</div>
-          <div>{lastProfessor.idprofessor}</div>
+          <div>
+            {lastProfessor.idprofessor
+              ? lastProfessor.idprofessor
+              : "Professor não definido"}
+          </div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div>id professor atual</div>
-          <div>{professor.idprofessor}</div>
+          <div>
+            {professor.idprofessor
+              ? professor.idprofessor
+              : "Professor não definido"}
+          </div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <label>Nome Professor</label>

@@ -4,6 +4,13 @@ import { toast } from "react-toastify";
 
 let url = options.AWS.fullEndpoint;
 
+/*
+API CREATE RETURN:
+{
+
+}
+*/
+
 async function axiosTeste(data) {
   console.log("ready for a journey?", data);
   url += "professores";
@@ -88,23 +95,19 @@ async function createProfessores(professor) {
   // console.log("Creating professor: {", professor, "}");
   let localEndpoint = "professores";
   let localUrl = url + localEndpoint;
+  let dataToSend = { newProfessor: professor };
   try {
-    const res = await axios.post(localUrl, { newProfessor: professor });
-    // console.log("RESPOSTINHA:", res);
+    let res = await axios.post(localUrl, dataToSend);
+    // console.log("res <", res, ">");
     if (res.data.statusCode === 201 || res.status === 200) {
-      toast.success(`Professor criado: ${localEndpoint}`);
-
-      // console.log(
-      //   "CRUDTesting>CRUDConverter>axiosConnection>CreateProfessor>res",
-      //   res
-      // );
-      let parsedBody = JSON.parse(res.data.body);
-      return parsedBody;
+      let currentId = res.data.body.queryResult[0].insertId;
+      toast.success(`Professor criado: ${currentId}`);
+      return currentId;
     } else {
       // Trate outros códigos de status aqui
-      // console.error(
-      //   `Erro ${res.status} ao criar professor. Mensagem: ${res.data.body.message}`
-      // );
+      let errorMessage = `Erro ${res.status} ao criar professor. Mensagem: ${res.data.body.message}`;
+      console.error(errorMessage);
+      toast.error(errorMessage);
     }
   } catch (error) {
     toast.error("erro externo", error);
