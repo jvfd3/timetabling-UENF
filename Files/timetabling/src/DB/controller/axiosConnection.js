@@ -36,49 +36,6 @@ async function axiosTeste(data) {
     });
 }
 
-async function readProfessores() {
-  console.log("ready for a reading journey?");
-  let localEndpoint = "professores";
-  let localUrl = url + localEndpoint;
-  try {
-    const res = await axios.get(localUrl);
-    toast.success(`Dados lidos com sucesso: ${localEndpoint}`);
-    // console.log(
-    //   "CRUDTesting>CRUDConverter>axiosConnection>newAxiosGetProfessor>res",
-    //   res
-    // );
-    return JSON.parse(res.data.body);
-  } catch (error) {
-    toast.error("erro externo", error);
-  }
-}
-
-async function deleteProfessores(id) {
-  if (!id) {
-    let errorMessage =
-      "axiosConnection>ID inválido: " + id + ", a requisição nem saiu do app";
-    // console.error(errorMessage);
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ message: errorMessage }),
-    };
-  }
-  console.log("ready for a deleting journey?", id);
-  let localEndpoint = "professores/";
-  let localUrl = url + localEndpoint + id.toString();
-  try {
-    const res = await axios.delete(localUrl);
-    toast.success(`Professor Deletado: ${localEndpoint}`);
-    // console.log(
-    // "CRUDTesting>CRUDConverter>axiosConnection>DeleteProfessor>res",
-    // res
-    // );
-    return JSON.parse(res.data.body);
-  } catch (error) {
-    toast.error("erro externo", error);
-  }
-}
-
 async function createProfessores(professor) {
   if (!professor) {
     let errorMessage =
@@ -98,7 +55,11 @@ async function createProfessores(professor) {
   let dataToSend = { newProfessor: professor };
   try {
     let res = await axios.post(localUrl, dataToSend);
-    // console.log("res <", res, ">");
+    // console.log(
+    //   "CRUDTesting>CRUDConverter>axiosConnection>createProfessores>res: <",
+    //   res,
+    //   ">"
+    // );
     if (res.data.statusCode === 201 || res.status === 200) {
       let currentId = res.data.body.queryResult[0].insertId;
       toast.success(`Professor criado: ${currentId}`);
@@ -111,6 +72,25 @@ async function createProfessores(professor) {
     }
   } catch (error) {
     toast.error("erro externo", error);
+  }
+}
+
+async function readProfessores() {
+  console.log("ready for a reading journey?");
+  let localEndpoint = "professores";
+  let localUrl = url + localEndpoint;
+  try {
+    let res = await axios.get(localUrl);
+    let readProfessores = res.data.body.queryResult[0];
+    toast.success(`${readProfessores.length} professores lidos com sucesso!`);
+    // console.log(
+    //   "CRUDTesting>CRUDConverter>axiosConnection>readProfessores>res: <",
+    //   res,
+    //   ">"
+    // );
+    return readProfessores;
+  } catch (error) {
+    toast.error("read Professores Axios Error: <", error, ">");
   }
 }
 
@@ -164,10 +144,36 @@ async function updateProfessores(professor) {
   }
 }
 
+async function deleteProfessores(id) {
+  if (!id) {
+    let errorMessage =
+      "axiosConnection>ID inválido: " + id + ", a requisição nem saiu do app";
+    // console.error(errorMessage);
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ message: errorMessage }),
+    };
+  }
+  console.log("ready for a deleting journey?", id);
+  let localEndpoint = "professores/";
+  let localUrl = url + localEndpoint + id.toString();
+  try {
+    const res = await axios.delete(localUrl);
+    toast.success(`Professor Deletado: ${localEndpoint}`);
+    // console.log(
+    // "CRUDTesting>CRUDConverter>axiosConnection>DeleteProfessor>res",
+    // res
+    // );
+    return JSON.parse(res.data.body);
+  } catch (error) {
+    toast.error("erro externo", error);
+  }
+}
+
 export {
   axiosTeste,
-  readProfessores,
-  deleteProfessores,
   createProfessores,
   updateProfessores,
+  readProfessores,
+  deleteProfessores,
 };

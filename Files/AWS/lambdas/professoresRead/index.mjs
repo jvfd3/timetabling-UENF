@@ -21,10 +21,10 @@ async function defaultRead(query) {
     await dbConnection.end();
     let successMessage = local + `>defaultRead, professores lidos com sucesso`;
     console.log(successMessage, queryResult);
+    queryResult[1] = null; // remove excessive metadata
     return getPayloadResponse(successMessage, query, null, queryResult, null, 200);
   } catch (error) {
     let errorMessage = local + ">defaultRead>Erro ao executar a query:";
-    errorMessage += "{query: '" + query + "'}";
     console.error(errorMessage, error);
     return getPayloadResponse(errorMessage, query, null, null, error, 500);
   }
