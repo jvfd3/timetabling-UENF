@@ -157,22 +157,23 @@ async function updateProfessores(professor) {
       let res = await axios.put(localUrl, dataToSend);
       // debugPayload(res);
       let statusCode = res.data.statusCode;
+      let body = res.data.body;
       switch (statusCode) {
         case 200: // Deu bom
-          let newProfessor = res.data.body.queryValues;
+          let newProfessor = body.queryValues;
           returnedData = newProfessor;
           toastMessages.pretty = `Professor atualizado com sucesso!`;
           toastToUse = toast.success;
           break;
         case 404: // Tratamento para código de status 404 (not found)
-          toastMessages.debug.append(`${localMessage}>404>Erro ${statusCode} ao atualizar professor.`);
+          toastMessages.debug.append(`${localMessage}>404>Erro ${statusCode}> O professor não foi encontrado no BD.`);
           toastMessages.pretty= `Professor de id ${professor.idprofessor} não foi encontrado no banco de dados.`;
           toastToUse = toast.warning;
           break;
         default: // Trate outros códigos de status aqui
-          toastMessages.debug.append(`${localMessage}>Defaul>Erro interno do servidor ao atualizar professor`);
-          toastMessages.debug.append(res.data.body.message);
-          toastMessages.debug.append(res.data.body.error);
+          toastMessages.debug.append(`${localMessage}>Default>Erro interno do servidor ao atualizar professor`);
+          toastMessages.debug.append(body.message);
+          toastMessages.debug.append(body.error);
           localError = new Error(toastMessages.debug);
           toastToUse = toast.error;
           break;
