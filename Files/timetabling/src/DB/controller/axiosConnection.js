@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 let url = options.AWS.fullEndpoint;
 let debuggingLocal = ">axiosConnection";
+let debugModeOn = false;
 
 function debugPayload(payload) {
   let local = debuggingLocal + ">debugPayload";
@@ -54,7 +55,7 @@ async function createProfessores(professor) {
   } else {
     try {
       let res = await axios.post(localUrl, dataToSend);
-      // debugPayload(res);
+      debugModeOn && debugPayload(res); // Apenas executa se debugModeOn for true
       let statusCode = res.data.statusCode;
       if (statusCode === 201) {
         let currentId = res.data.body.queryResult.insertId;
@@ -116,7 +117,7 @@ async function readProfessores() {
   let localError = null;
   try {
     let res = await axios.get(localUrl);
-    // debugPayload(res);
+    debugModeOn && debugPayload(res); // Apenas executa se 
     let returnedProfessores = res.data.body.queryResult;
     returnedData = returnedProfessores;
     toastToUse = toast.success;
@@ -155,7 +156,7 @@ async function updateProfessores(professor) {
   } else {
     try {
       let res = await axios.put(localUrl, dataToSend);
-      // debugPayload(res);
+      debugModeOn && debugPayload(res); // Apenas executa se 
       let statusCode = res.data.statusCode;
       let body = res.data.body;
       switch (statusCode) {
