@@ -191,59 +191,58 @@ async function updateProfessores(professor) {
   return returnedData;
 }
 
-
 async function deleteProfessores(id) {
-  // let newDebuggingLocal = debuggingLocal + ">deleteProfessores";
   console.log("ready for a deleting journey?", id);
-  let toastMessage = "";
+  let toastToUse = toast;
+  let toastMessages = {debug: [], pretty: ""}
+  let localMessage = debuggingLocal + ">deleteProfessores";
   let localEndpoint = "professores/";
   let localUrl = url + localEndpoint + id.toString();
+  let returnedData = null;
+  let localError = null;
   if (!id) {
-    toastMessage = `O ID "${id}" é inválido.`;
-    toast.warning(toastMessage);
-    throw new Error(toastMessage);
-  }
-  // let receivedAPIpayload = await axios.delete(localUrl);
-  let deletePromise = axios
-    .delete(localUrl)
-    .then((receivedAPIpayload) => {
-      let statusCode = receivedAPIpayload.data.statusCode;
-      let body = receivedAPIpayload.data.body;
-      // console.log(
-      //   `${newDebuggingLocal}>receivedAPIpayload:`,
-      //   receivedAPIpayload
-      // );
+    toastMessages.debug.append(`${localMessage}>O ID "${id}" é inválido.`);
+    toastMessages.pretty = `O ID "${id}" é inválido.`;
+    toastToUse = toast.warning;
+    localError = new Error(toastMessages.pretty);
+  } else {
+    try {
+      let res = await axios.delete(localUrl);
+      debugModeOn && debugPayload(res); // Apenas executa se 
+      let statusCode = res.data.statusCode;
+      let body = res.data.body;
       switch (statusCode) {
         case 200: // Deu bom
-          toastMessage = "Professor deletado com sucesso!";
-          toast.success(toastMessage);
+          toastMessages.pretty = `Professor deletado com sucesso!`;
+          toastToUse = toast.success;
           break;
         case 404: // Tratamento para código de status 404 (not found)
-          toastMessage = `Erro ${statusCode} ao deletar professor. `;
-          toastMessage += `Professor de id ${id} não foi encontrado.`;
-          toast.warning(toastMessage);
-          throw new Error(toastMessage);
-        case 500: // Erro no servidor
-          let errorInfo = {
-            error: body.error,
-            errorMessage: body.message,
-          };
-          toastMessage = "Erro interno do servidor ao deletar professor:";
-          toastMessage += JSON.stringify(errorInfo);
-          toast.error(toastMessage);
-          throw new Error(toastMessage);
+          toastMessages.debug.append(`${localMessage}>404>Erro ${statusCode}> O professor não foi encontrado no BD.`);
+          toastMessages.pretty = `Erro ${statusCode} ao deletar professor: id ${id} não encontrado.`;
+          toastToUse = toast.warning;
+          break;
         default: // Trate outros códigos de status aqui
-          toastMessage = "Algo inexperado aconteceu: ";
-          toastMessage += JSON.stringify(receivedAPIpayload);
-          toast.error(toastMessage);
-          throw new Error(toastMessage);
+          toastMessages.debug.append(`${localMessage}>Default>`);
+          toastMessages.pretty = "Ocorreu um erro ao deletar o professor.";
+          toastMessages.debug.append(body.message);
+          toastMessages.debug.append(body.error);
+          localError = new Error(toastMessages.debug);
+          toastToUse = toast.error;
+          break;
       }
-    })
-    .catch((error) => {
-      toastMessage = `Erro interno ao deletar professor: ${error}`;
-      throw new Error(toastMessage);
-    });
-  return deletePromise;
+    } catch (error) {
+      toastMessages.debug.append(`${localMessage}>ExternalCatch>{Error: ${error}}`);
+      toastMessages.pretty = `Erro interno ao deletar professor.`;
+      localError = new Error(toastMessages.debug);
+      toastToUse = toast.error;
+    }
+  }
+  toastToUse(toastMessages.pretty);
+  if (localError) {
+    console.log(toastMessages.debug)
+    throw localError
+  }
+  return returnedData;
 }
 
 export {
