@@ -75,22 +75,37 @@ async function createProfessores(professor) {
 }
 
 async function readProfessores() {
-  console.log("ready for a reading journey?");
+  console.log("Ready for a reading journey?");
+  let toastToUse = toast;
+  let toastMessages = {
+    debug: [],
+    pretty: "",
+  }
+  let local = debuggingLocal + ">readProfessores";
   let localEndpoint = "professores";
   let localUrl = url + localEndpoint;
+  let returnedData = [null];
+  let localError = null;
   try {
     let res = await axios.get(localUrl);
-    let readProfessores = res.data.body.queryResult[0];
-    toast.success(`${readProfessores.length} professores lidos com sucesso!`);
-    // console.log(
-    //   "CRUDTesting>CRUDConverter>axiosConnection>readProfessores>res: <",
-    //   res,
-    //   ">"
-    // );
-    return readProfessores;
+    // debugPayload(res);
+    let returnedProfessores = res.data.body.queryResult;
+    returnedData = returnedProfessores;
+    toastToUse = toast.success;
+    toastMessages.debug.append(`${local}>{ProfesoresLidos: ` + returnedProfessores + "}");
+    toastMessages.pretty = `${returnedProfessores.length} Professores lidos com sucesso!`;
   } catch (error) {
-    toast.error("axiosConnection>readProfessor>Error: <", error, ">");
+    toastToUse = toast.error;
+    localError = error;
+    toastMessages.debug.append(`${local}>Catch>Erro interno ao ler professores: ${error}`);
+    toastMessages.pretty = `Erro local ao ler professores.`;
   }
+  toastToUse(toastMessages.pretty);
+  if (localError) {
+    console.log(toastMessages.debug)
+    throw localError
+  }
+  return returnedData;
 }
 
 async function updateProfessores(professor) {
