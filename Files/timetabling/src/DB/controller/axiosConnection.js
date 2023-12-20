@@ -78,17 +78,37 @@ async function createProfessores(professor) {
   return returnedData;
 }
 
+/* async function defaultRead(url){
+  let local = debuggingLocal + ">defaultRead";
+  let returnedData = [null];
+  let localError = null;
+  let toastToUse = toast;
+  let toastMessages = {
+    debug: "",
+    pretty: "",
+  }
+  try {
+    let returnedPayload = axios.get(url)
+    returnedData = returnedPayload.data.body.queryResult;
+  } catch (error) {
+    toastToUse = toast.error;
+    localError = error;
+  }
+  if (localError) {
+    console.log(toastMessages.debug)
+    throw localError
+  }
+  return returnedData;
+} */
+
 async function readProfessores() {
   console.log("Ready for a reading journey?");
   let toastToUse = toast;
-  let toastMessages = {
-    debug: [],
-    pretty: "",
-  }
+  let toastMessages = {debug: [], pretty: ""}
   let local = debuggingLocal + ">readProfessores";
   let localEndpoint = "professores";
   let localUrl = url + localEndpoint;
-  let returnedData = [null];
+  let returnedData = null;
   let localError = null;
   try {
     let res = await axios.get(localUrl);
