@@ -21,16 +21,16 @@ async function defaultDelete(query, id) {
   let localError = null;
   let statusCode = 404;
   if (!exists) {
-    message = `>Exists?>id: Professor com id ${id} não encontrado`;
+    message += `>Exists?>id: Professor com id ${id} não encontrado`;
   } else {
     try {
       let dbConnection = await createDbConnection();
       queryResult = await dbConnection.execute(query, [id]);
       await dbConnection.end();
-      message = `>professor com id ${id} deletado com sucesso`;
+      message += `>professor com id ${id} deletado com sucesso`;
       statusCode = 200;
     } catch (error) {
-      message = ">Erro ao executar a query:";
+      message = local + ">Erro ao executar a query:";
       localError = error;
       statusCode = 500;
     }
@@ -44,8 +44,8 @@ function getPayloadResponse(message, query, queryValues, queryResult, error, sta
   let myBody = {
     message: message,
     query: query,
-    queryValues: queryValues,
     queryResult: queryResult,
+    queryValues: queryValues,
     error: error
   };
   let returnedMessage = {
@@ -54,7 +54,6 @@ function getPayloadResponse(message, query, queryValues, queryResult, error, sta
   };
   return returnedMessage;
 }
-
 
 async function checkExistance(id) {
   const checkQuery = "SELECT * FROM professores WHERE idprofessor = ?";

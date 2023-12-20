@@ -22,29 +22,11 @@ function CRUDTesting() {
 
   const [professores, setProfessores] = useState([dummyProfessor]);
   const [professor, setProfessor] = useState(dummyProfessor);
-  const [lastProfessor, setLastProfessor] = useState(dummyProfessor);
-  const [lastId, setLastId] = useState(0);
 
   useEffect(() => {
-    // setProfessores([dummyProfessor]);
-    // setProfessor(professores[professores.length - 1]);
-    // setLastProfessor(professores[professores.length - 1]);
-    // internReadProfessores();
-  }, []);
-
-  useEffect(() => {
-    // internReadProfessores();
-  }, []);
-
-  useEffect(() => {
-    // let ultimo = professores[professores.length - 1];
-    // setLastProfessor(ultimo);
-    // setLastId(ultimo.idprofessor);
+    let ultimo = professores[professores.length - 1];
+    setProfessor(ultimo);
   }, [professores]);
-
-  useEffect(() => {
-    // setProfessor(lastProfessor);
-  }, [lastProfessor]);
 
   function internCreateProfessor() {
     let newProfessor = { ...professor };
@@ -81,22 +63,21 @@ function CRUDTesting() {
   }
 
   function internDeleteProfessor() {
-    console.log("deleting: ", professor.idprofessor);
-    let retorno = deleteProfessores(professor.idprofessor);
-    retorno.then((data) => {
-      console.log("CRUDTesting>internDeleteProfessor>data", data);
-    });
-    // deleteProfessor(professores, setProfessores, professor.idprofessor);
-    // console.log(professor.idprofessor);
-    // thinDeleteProfessor(professor.idprofessor);
-
     function filterProfessor(oldArray, id) {
       const newArray = oldArray.filter((item) => item.idprofessor !== id);
       return newArray;
     }
 
+    console.log("deleting: ", professor.idprofessor);
+    let oldProfessores = [...professores];
     setProfessores(filterProfessor(professores, professor.idprofessor));
-    // internReadProfessores();
+    deleteProfessores(professor.idprofessor).catch((error) => {
+      toast.warning(
+        "Retornando aos valores anteriores, houve um erro ao atualizar professor: ",
+        error
+      );
+      setProfessores(oldProfessores);
+    });
   }
 
   return (
@@ -132,29 +113,9 @@ function CRUDTesting() {
       </div>
       <>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div>last id</div>
-          <div>{lastId}</div>
-        </div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div>id professor</div>
+          <div>id do último professor</div>
           <div>
             {professor ? professor.idprofessor : "Professor não definido"}
-          </div>
-        </div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div>id lastprofessor</div>
-          <div>
-            {lastProfessor.idprofessor
-              ? lastProfessor.idprofessor
-              : "Professor não definido"}
-          </div>
-        </div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div>id professor atual</div>
-          <div>
-            {professor.idprofessor
-              ? professor.idprofessor
-              : "Professor não definido"}
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
