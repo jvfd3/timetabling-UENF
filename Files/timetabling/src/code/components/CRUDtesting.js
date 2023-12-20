@@ -38,9 +38,12 @@ function CRUDTesting() {
   }
 
   function internReadProfessores() {
+    let local = "CRUDTesting>internReadProfessores";
     let dataReceived = readProfessores();
     dataReceived.then((data) => {
       setProfessores(data);
+    }).catch((error) => {
+      console.log(`${local}>Deu Erro`, error)
     });
   }
 
