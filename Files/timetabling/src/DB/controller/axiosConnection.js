@@ -5,6 +5,11 @@ import { toast } from "react-toastify";
 let url = options.AWS.fullEndpoint;
 let debuggingLocal = ">axiosConnection";
 
+function debugPayload(payload) {
+  let local = debuggingLocal + ">debugPayload";
+  console.log(`${local}>payload:`, payload);
+}
+
 async function axiosTeste(data) {
   console.log("ready for a journey?", data);
   url += "professores";
