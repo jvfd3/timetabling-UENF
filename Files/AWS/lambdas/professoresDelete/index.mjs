@@ -1,11 +1,6 @@
 // index.js
 import {createDbConnection} from "./db.js";
-
 let local = "aws>lambda>professores>delete";
-
-/*
-aws lambda create-function --function-name professoresDelete --runtime nodejs20.x --role arn:aws:iam::375423677214:role/LambdaRole --handler index.handler --zip-file fileb://D:/HDExt/GitHub/UENF/9Semestre/timetabling-UENF/Files/AWS/lambdas/professoresDelete/professoresDelete.zip --environment "Variables={DB_HOST='dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com',DB_USER='tang',DB_PASSWORD='annabell',DB_NAME='timetabling'}"
-*/
 
 async function handler(event) {
   console.log(local + ">handler>receivedEvent: <", event, ">");
@@ -20,31 +15,29 @@ async function deleteProfessor(professorIdToDelete) {
 
 async function defaultDelete(query, id) {
   let exists = await checkExistance(id);
+  local += ">defaultDelete";
+  let message = local;
+  let queryResult = null;
+  let localError = null;
+  let statusCode = 404;
   if (!exists) {
-    let errorMessage = local + ">defaultDelete>id:" + id + " não existe";
-    console.error(errorMessage);
-    let myBody = {
-      errorMessage: errorMessage,
-      userMessage: `Professor com id ${id} não encontrado`,
+    message = `>Exists?>id: Professor com id ${id} não encontrado`;
+  } else {
+    try {
+      let dbConnection = await createDbConnection();
+      queryResult = await dbConnection.execute(query, [id]);
+      await dbConnection.end();
+      message = `>professor com id ${id} deletado com sucesso`;
+      statusCode = 200;
+    } catch (error) {
+      message = ">Erro ao executar a query:";
+      localError = error;
+      statusCode = 500;
     }
-    let returnedMessage = {
-      statusCode: 404,
-      body: JSON.stringify(myBody),
-    };
-    return returnedMessage;
   }
-  try {
-    let dbConnection = await createDbConnection();
-    let queryResult = await dbConnection.execute(query, [id]);
-    await dbConnection.end();
-    let successMessage = local + ">defaultDelete, id:" + id + " deletado com sucesso";
-    console.log(successMessage, queryResult);
-    return getPayloadResponse(successMessage, query, id, queryResult, null, 200);
-  } catch (error) {
-    let errorMessage = local + ">defaultDelete>Erro ao executar a query:"
-    console.error(errorMessage, error);
-    return getPayloadResponse(errorMessage, query, id, null, error, 500);
-  }
+  let payloadResponse = getPayloadResponse(message, query, id, queryResult, localError, statusCode);
+  console.error(payloadResponse);
+  return payloadResponse;
 }
 
 function getPayloadResponse(message, query, queryValues, queryResult, error, statusCode) {
