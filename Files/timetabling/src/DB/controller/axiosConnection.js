@@ -4,13 +4,6 @@ import { toast } from "react-toastify";
 
 let url = options.AWS.fullEndpoint;
 
-/*
-API CREATE RETURN:
-{
-
-}
-*/
-
 async function axiosTeste(data) {
   console.log("ready for a journey?", data);
   url += "professores";
@@ -55,14 +48,14 @@ async function createProfessores(professor) {
   let dataToSend = { newProfessor: professor };
   try {
     let res = await axios.post(localUrl, dataToSend);
-    // console.log(
-    //   "CRUDTesting>CRUDConverter>axiosConnection>createProfessores>res: <",
-    //   res,
-    //   ">"
-    // );
-    if (res.data.statusCode === 201 || res.status === 200) {
+    console.log(
+      "CRUDTesting>CRUDConverter>axiosConnection>createProfessores>res: <",
+      res,
+      ">"
+    );
+    if (res.data.statusCode === 201) {
       let currentId = res.data.body.queryResult[0].insertId;
-      toast.success(`Professor criado: ${currentId}`);
+      toast.success(`Professor criado com id ${currentId}`);
       return currentId;
     } else {
       // Trate outros códigos de status aqui
@@ -71,7 +64,7 @@ async function createProfessores(professor) {
       toast.error(errorMessage);
     }
   } catch (error) {
-    toast.error("erro externo", error);
+    toast.error("axiosConnection>createProfessor>Error: <", error, ">");
   }
 }
 
@@ -90,7 +83,7 @@ async function readProfessores() {
     // );
     return readProfessores;
   } catch (error) {
-    toast.error("read Professores Axios Error: <", error, ">");
+    toast.error("axiosConnection>readProfessor>Error: <", error, ">");
   }
 }
 
@@ -106,41 +99,48 @@ async function updateProfessores(professor) {
       body: JSON.stringify({ message: errorMessage }),
     };
   }
-  console.log("ready for an updating journey?", professor);
+  console.log("ready for an updating journey?");
   let localEndpoint = "professores";
   let localUrl = url + localEndpoint;
+  let dataToSend = { newProfessor: professor };
+  let toastMessage = "";
   try {
-    const res = await axios.put(localUrl, { newProfessor: professor });
-    if (res.data.statusCode === 200) {
-      // toast.success(`Professor atualizado! ${JSON.stringify(professor)}`);
-      toast.success(`Professor atualizado!`);
-      // console.log(
-      //   "CRUDTesting>CRUDConverter>axiosConnection>UpdateProfessor>res",
-      //   res
-      // );
-      return JSON.parse(res.data.body);
-    } else if (res.data.statusCode === 400) {
-      // Tratamento para código de status 400
-      toast.warning(`Erro ao atualizar professor: ${res.data.body.message}`);
-      // console.error(
-      //   `Erro ${res.status} ao atualizar professor. Mensagem: ${res.data.body.message}`
-      // );
-    } else if (res.data.statusCode === 500) {
-      // Tratamento para código de status 500
-      toast.error(
-        `Erro interno do servidor ao atualizar professor: ${res.data.body.message}`
-      );
-      // console.error(
-      //   `Erro ${res.status} ao atualizar professor. Mensagem: ${res.data.body.message}`
-      // );
-    } else {
-      // Trate outros códigos de status aqui
-      // console.error(
-      //   `Erro ${res.status} ao atualizar professor. Mensagem: ${res.data.body.message}`
-      // );
+    let res = await axios.put(localUrl, dataToSend);
+    let statusCode = res.data.statusCode;
+    console.log(
+      "CRUDTesting>CRUDConverter>axiosConnection>readProfessores>res: <",
+      res,
+      ">"
+    );
+    switch (statusCode) {
+      case 200: // Deu bom
+        toastMessage = `Professor atualizado com sucesso!`;
+        toast.success(`Professor atualizado!`);
+        let newProfessor = res.data.body.queryValues;
+        return newProfessor;
+      case 404: // Tratamento para código de status 404 (not found)
+        toastMessage = `Erro ${statusCode} ao atualizar professor.`;
+        toastMessage += `Professor de id ${professor.idprofessor} não foi encontrado.`;
+        toast.warning(toastMessage);
+        break;
+      case 500: // Erro no servidor
+        let errorInfo = {
+          error: res.data.body.error,
+          errorMessage: res.data.body.message,
+        };
+        toast.error(
+          `Erro interno do servidor ao atualizar professor: ${JSON.stringify(
+            errorInfo
+          )}`
+        );
+        break;
+      default: // Trate outros códigos de status aqui
+        toastMessage = `Erro ${statusCode} ao atualizar professor. Mensagem: ${res.data.body.message}`;
+        toast.error(toastMessage);
+        break;
     }
   } catch (error) {
-    toast.error("erro externo", error);
+    toast.error("axiosConnection>createProfessor>Error: <", error, ">");
   }
 }
 
