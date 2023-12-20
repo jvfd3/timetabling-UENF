@@ -114,55 +114,59 @@ async function readProfessores() {
 
 async function updateProfessores(professor) {
   console.log("ready for an updating journey?");
-  // let newDebuggingLocal = debuggingLocal + ">updateProfessores";
+  let toastToUse = toast;
+  let toastMessages = {debug: [], pretty: ""}
+  let localMessage = debuggingLocal + ">updateProfessores";
   let localEndpoint = "professores";
   let localUrl = url + localEndpoint;
+  let returnedData = null;
+  let localError = null;
   let dataToSend = { newProfessor: professor };
-  let toastMessage = "";
   if (!professor) {
-    let toastMessage = `${newDebuggingLocal}>Professor inválido: ${professor}, a requisição nem saiu do app`;
-    toast.warning(toastMessage);
-    throw new Error(toastMessage);
-  }
-  try {
-    let res = await axios.put(localUrl, dataToSend);
-    let statusCode = res.data.statusCode;
-    // console.log(
-    //   "CRUDTesting>CRUDConverter>axiosConnection>readProfessores>res: <",
-    //   res,
-    //   ">"
-    // );
-    switch (statusCode) {
-      case 200: // Deu bom
-        toastMessage = `Professor atualizado com sucesso!`;
-        toast.success(`Professor atualizado!`);
-        let newProfessor = res.data.body.queryValues;
-        return newProfessor;
-      case 404: // Tratamento para código de status 404 (not found)
-        toastMessage = `Erro ${statusCode} ao atualizar professor.`;
-        toastMessage += `Professor de id ${professor.idprofessor} não foi encontrado.`;
-        toast.warning(toastMessage);
-        break;
-      case 500: // Erro no servidor
-        let errorInfo = {
-          error: res.data.body.error,
-          errorMessage: res.data.body.message,
-        };
-        toast.error(
-          `Erro interno do servidor ao atualizar professor: ${JSON.stringify(
-            errorInfo
-          )}`
-        );
-        break;
-      default: // Trate outros códigos de status aqui
-        toastMessage = `Erro ${statusCode} ao atualizar professor. Mensagem: ${res.data.body.message}`;
-        toast.error(toastMessage);
-        break;
+    toastMessages.debug.append(`${localMessage}>O professor "${professor}" é inválido. A requisição nem saiu do app.`);
+    toastMessages.pretty = `O professor "${professor}" é inválido.`;
+    toastToUse = toast.warning;
+    localError = new Error(toastMessages.debug);
+    console.error(toastMessages);
+  } else {
+    try {
+      let res = await axios.put(localUrl, dataToSend);
+      // debugPayload(res);
+      let statusCode = res.data.statusCode;
+      switch (statusCode) {
+        case 200: // Deu bom
+          let newProfessor = res.data.body.queryValues;
+          returnedData = newProfessor;
+          toastMessages.pretty = `Professor atualizado com sucesso!`;
+          toastToUse = toast.success;
+          break;
+        case 404: // Tratamento para código de status 404 (not found)
+          toastMessages.debug.append(`${localMessage}>404>Erro ${statusCode} ao atualizar professor.`);
+          toastMessages.pretty= `Professor de id ${professor.idprofessor} não foi encontrado no banco de dados.`;
+          toastToUse = toast.warning;
+          break;
+        default: // Trate outros códigos de status aqui
+          toastMessages.debug.append(`${localMessage}>Defaul>Erro interno do servidor ao atualizar professor`);
+          toastMessages.debug.append(res.data.body.message);
+          toastMessages.debug.append(res.data.body.error);
+          localError = new Error(toastMessages.debug);
+          toastToUse = toast.error;
+          break;
+        }
+      } catch (error) {
+        toastMessages.debug.append(`${localMessage}>ExternalCatch>{Error: ${error}}`);
+        localError = new Error(toastMessages.debug);
+        toastToUse = toast.error;
     }
-  } catch (error) {
-    toast.error("axiosConnection>createProfessor>Error: <", error, ">");
   }
+  toastToUse(toastMessages.pretty);
+  if (localError) {
+    console.log(toastMessages.debug)
+    throw localError
+  }
+  return returnedData;
 }
+
 
 async function deleteProfessores(id) {
   // let newDebuggingLocal = debuggingLocal + ">deleteProfessores";
