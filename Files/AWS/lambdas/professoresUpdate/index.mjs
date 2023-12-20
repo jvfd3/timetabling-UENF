@@ -18,16 +18,7 @@ async function defaultUpdate(query, professorToUpdate) {
   let exists = await checkExistance(professorToUpdate.idprofessor);
   if (!exists) {
     let errorMessage = local + ">defaultUpdate>id:" + professorToUpdate.idprofessor + " não existe";
-    console.error(errorMessage);
-    let myBody = {
-      errorMessage: errorMessage,
-      userMessage: `Professor com id ${professorToUpdate.idprofessor} não encontrado`,
-    };
-    let returnedMessage = {
-      statusCode: 404,
-      body: JSON.stringify(myBody),
-    };
-    return returnedMessage;
+    return getPayloadResponse(errorMessage, null, professorToUpdate, null, null, 404);
   }
   try {
     let dbConnection = await createDbConnection();
