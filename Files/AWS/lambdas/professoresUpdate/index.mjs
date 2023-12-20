@@ -1,77 +1,83 @@
 // index.js
-import {createDbConnection} from "./db.js";
-let local = "aws>lambda>professores>Update";
+import { dbExecute } from "./db.js";
+let local = "";
 
 async function handler(event) {
-  console.log(local + ">handler>event: <", event, ">");
+  local = "aws>lambda>professores>Update>handler";
+  console.log(local + `>{event: ${event}}`);
   let newProfessor = event.newProfessor;
   return await updateProfessor(newProfessor);
 }
 
 async function updateProfessor(professorToUpdate) {
+  local += ">updateProfessor";
   let updateProfessorQuery = "UPDATE `professores` SET `apelidoProfessor` = ?, `curso` = ?, `laboratorio` = ?, `nomeProfessor` = ? WHERE `idprofessor` = ?";
-  return await defaultUpdate(updateProfessorQuery, professorToUpdate);
+  return await defaultUpdate(updateProfessorQuery, convertToList(professorToUpdate));
 }
 
-async function defaultUpdate(query, professorToUpdate) {
-  let exists = await checkExistance(professorToUpdate.idprofessor);
+async function defaultUpdate(query, queryValues) {
   local += ">defaultUpdate";
+  let message = local;
+  let queryResult = null;
+  let localError = null;
+  let statusCode = 500;
+  let exists = await checkExistance(queryValues[4]);
   if (!exists) {
-    let errorMessage = local + ">id:" + professorToUpdate.idprofessor + " não existe";
-    console.error(errorMessage);
-    return getPayloadResponse(errorMessage, null, professorToUpdate, null, null, 404);
+    message += `>Exists?>item com id ${queryValues[4]} não encontrado.`;
+    statusCode = 404;
   }
   try {
-    let dbConnection = await createDbConnection();
-    let queryResult = await dbConnection.execute(query, convertToList(professorToUpdate));
-    await dbConnection.end();
-    let successMessage = local + ">id:" + professorToUpdate.idprofessor + " atualizado com sucesso";
-    console.log(successMessage, queryResult);
-    return getPayloadResponse(successMessage, query, professorToUpdate, queryResult, null, 200);
+    queryResult = await dbExecute(query, queryValues);
+    message += `>Item com id ${queryValues[4]} adquiriu os valores ${queryValues} com sucesso.`;
+    statusCode = 200;
+    console.log(message, statusCode, queryResult)
   } catch (error) {
-    let errorMessage = local + ">Erro ao executar a query:";
-    errorMessage += `{query: '${query}'}`;
-    console.error(errorMessage, error);
-    return getPayloadResponse(errorMessage, query, professorToUpdate, null, error, 500);
+    statusCode = 500;
+    localError = error;
+    message = local + ">Erro ao executar a atualização.";
+    console.error(message, statusCode, error);
   }
+  return getPayloadResponse(message, query, queryValues, queryResult, localError, statusCode);
 }
 
 function getPayloadResponse(message, query, queryValues, queryResult, error, statusCode) {
   let myBody = {
-    message: message,
-    query: query,
-    queryResult: queryResult,
-    queryValues: queryValues,
-    error: error
+    message: message ?? null,
+    query: query ?? null,
+    queryValues: queryValues ?? null,
+    queryResult: queryResult[0] ?? null,
+    error: error ?? null,
   };
-  let returnedMessage = {
-    statusCode: statusCode,
-    body: myBody,
+  let payloadResponse = {
+    statusCode: statusCode ?? null,
+    body: myBody ?? null,
   };
-  return returnedMessage;
+  console.log(payloadResponse);
+  return payloadResponse;
 }
 
 async function checkExistance(id) {
-  const checkQuery = "SELECT * FROM professores WHERE idprofessor = ?";
+  local += ">checkExistance";
+  let message = local;
+  let checkQuery = "SELECT * FROM professores WHERE idprofessor = ?";
   try {
-    let dbConnection = await createDbConnection();
-    let [rows] = await dbConnection.execute(checkQuery, [id]);
-    await dbConnection.end();
+    let queryResult = dbExecute(checkQuery, [id]);
+    let rows = queryResult[0] ?? [];
     return rows.length > 0;
   } catch (error) {
-    let errorMessage = local + ">checkExistance>Erro ao executar a query:" + checkQuery;
-    console.error(errorMessage, error);
+    message = `>Erro ao executar a {query: ${checkQuery}}`;
+    console.error(message, error);
     return false;
   }
 }
 
 function convertToList(professor) {
-  const values = [
-    professor.apelidoProfessor,
-    professor.curso,
-    professor.laboratorio,
-    professor.nomeProfessor,
-    professor.idprofessor,
+  const values = [  /* Vai ser nulo se algum item não for definido */
+    professor.apelidoProfessor ?? null,
+    professor.curso ?? null,
+    professor.laboratorio ?? null,
+    professor.nomeProfessor ?? null,
+    professor.idprofessor ?? null,
   ];
   return values;
 }

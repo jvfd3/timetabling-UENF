@@ -12,4 +12,11 @@ async function createDbConnection() {
   return dbConnection;
 }
 
-module.exports = { createDbConnection };
+async function dbExecute(query, values=null) {
+  let dbConnection = await createDbConnection();
+  let queryResult = await dbConnection.execute(query, values);
+  await dbConnection.end();
+  return queryResult;
+}
+
+module.exports = { dbExecute };

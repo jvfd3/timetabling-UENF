@@ -1,54 +1,63 @@
 // index.js
-import {createDbConnection} from "./db.js";
-let local = "aws>lambda>professores>Create";
+import { dbExecute } from "./db.js";
+let local = "";
 
 async function handler(event) {
-  console.log(local + ">handler>{event: ", event,"}");
+  local = "aws>lambda>professores>Create>handler";
+  console.log(local + `>{event: ${event}}`);
   let newProfessor = event.newProfessor;
   return await createProfessor(newProfessor);
 }
 
 async function createProfessor(newProfessor) {
+  local += ">createProfessor";
   let createProfessorQuery = "INSERT INTO professores(`apelidoProfessor`, `curso`, `laboratorio`, `nomeProfessor`) VALUES(?, ?, ?, ?)";
-  return await defaultCreate(createProfessorQuery, newProfessor);
+  return await defaultCreate(createProfessorQuery, convertToList(newProfessor));
 }
 
-async function defaultCreate(query, newProfessor) {
+async function defaultCreate(query, queryValues) {
+  local += ">defaultCreate";
+  let message = local;
+  let queryResult = null;
+  let localError = null;
+  let statusCode = 500;
   try {
-    let dbConnection = await createDbConnection();
-    let queryResult = await dbConnection.execute(query, convertToList(newProfessor));
-    await dbConnection.end();
-    let successMessage = local + `>defaultCreate>Professor criado com sucesso`;
-    console.log(successMessage, queryResult);
-    return getPayloadResponse(successMessage, query, newProfessor, queryResult, null, 201);
+    queryResult = await dbExecute(query, queryValues);
+
+    message += `>Item: ${queryValues} criado com sucesso.`;
+    statusCode = 201;
+    console.log(message, statusCode, queryResult)
   } catch (error) {
-    let errorMessage = local + ">defaultCreate>Erro ao executar a query:";
-    console.error(errorMessage, error);
-    return getPayloadResponse(errorMessage, query, newProfessor, null, error, 500);
+    statusCode = 500;
+    localError = error;
+    message = local + ">Erro ao executar a leitura.";
+    console.error(message, statusCode, error);
   }
+  return getPayloadResponse(message, query, queryValues, queryResult, localError, statusCode);
 }
 
 function getPayloadResponse(message, query, queryValues, queryResult, error, statusCode) {
   let myBody = {
     message: message,
     query: query,
-    queryResult: queryResult,
     queryValues: queryValues,
-    error: error
+    queryResult: queryResult[0],
+    error: error,
   };
-  let returnedMessage = {
+  let payloadResponse = {
     statusCode: statusCode,
     body: myBody,
   };
-  return returnedMessage;
+  console.log(payloadResponse);
+  return payloadResponse;
 }
 
 function convertToList(professor) {
-  const values = [
-    professor.apelidoProfessor,
-    professor.curso,
-    professor.laboratorio,
-    professor.nomeProfessor,
+  const values = [  /* Vai ser nulo se algum item não for definido */
+    professor.apelidoProfessor ?? null,
+    professor.curso ?? null,
+    professor.laboratorio ?? null,
+    professor.nomeProfessor ?? null,
   ];
   return values;
 }
