@@ -48,26 +48,30 @@ async function createProfessores(professor) {
   if (!professor) {
     toastMessages.debug.append(`${localMessage}>O professor "${professor}" é inválido. A requisição nem saiu do app.`);
     toastMessages.pretty = `O professor "${professor}" é inválido.`;
-    console.error(toastMessages);
+    toastToUse = toast.warning;
     localError = new Error(toastMessages.debug);
+    console.error(toastMessages);
   } else {
     try {
       let res = await axios.post(localUrl, dataToSend);
       // debugPayload(res);
-      if (res.data.statusCode === 201) {
+      let statusCode = res.data.statusCode;
+      if (statusCode === 201) {
         let currentId = res.data.body.queryResult.insertId;
         returnedData = currentId;
         toastMessages.pretty = `Professor criado com id ${currentId}.`;
         toastToUse = toast.success;
       } else {
-        toastMessages.debug.append(`Erro ${res.status} ao criar professor. Mensagem: ${res.data.body.message}`);
-        toastMessages.pretty = `Erro ${res.status} ao criar professor.`;
+        toastMessages.debug.append(`${localMessage}>Not201>Erro ${res.status}, ${statusCode} ao criar professor. Mensagem: ${res.data.body.message}`);
+        toastMessages.pretty = `Erro ${statusCode} ao criar professor.`;
         toastToUse = toast.error;
+        localError = new Error(toastMessages.debug);
       }
     } catch (error) {
       toastMessages.debug.append(`${localMessage}>{Error: ${error}}`);
       toastMessages.pretty = `Erro ao criar professor.`;
       toastToUse = toast.error;
+      localError = new Error(toastMessages.debug);
     }
   }
   toastToUse(toastMessages.pretty);
