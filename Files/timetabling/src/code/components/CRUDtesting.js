@@ -10,6 +10,7 @@ import {
   createProfessores,
   updateProfessores,
 } from "../../DB/controller/axiosConnection";
+import { toast } from "react-toastify";
 
 function CRUDTesting() {
   let dummyProfessor = { ...options.dbTemplates.professor };
@@ -28,6 +29,10 @@ function CRUDTesting() {
     // setProfessores([dummyProfessor]);
     // setProfessor(professores[professores.length - 1]);
     // setLastProfessor(professores[professores.length - 1]);
+    // internReadProfessores();
+  }, []);
+
+  useEffect(() => {
     // internReadProfessores();
   }, []);
 
@@ -51,33 +56,28 @@ function CRUDTesting() {
   }
 
   function internReadProfessores() {
-    // let data = newReadProfessores();
-    // data.then((data) => {
-    //   // console.log("interno", data);
-    //   setProfessores(data);
-    // });
-
     let dataReceived = readProfessores();
     dataReceived.then((data) => {
       setProfessores(data);
-      // console.log("CRUDTesting>useEffect>cleanReadProfessor", data);
     });
   }
 
-  useEffect(() => {
-    // internReadProfessores();
-  }, []);
-
   function internUpdateProfessor() {
     let updatedProfessor = { ...professor };
+    let oldProfessores = [...professores];
     let newProfessores = professores.map((localProfessor) =>
       localProfessor.idprofessor === updatedProfessor.idprofessor
         ? localProfessor
         : updatedProfessor
     );
     setProfessores(newProfessores);
-    updateProfessores(updatedProfessor);
-    // updateProfessor(professor);
+    updateProfessores(updatedProfessor).catch((error) => {
+      toast.warning(
+        "Retornando aos valores anteriores, houve um erro ao atualizar professor: ",
+        error
+      );
+      setProfessores(oldProfessores);
+    });
   }
 
   function internDeleteProfessor() {

@@ -48,11 +48,11 @@ async function createProfessores(professor) {
   let dataToSend = { newProfessor: professor };
   try {
     let res = await axios.post(localUrl, dataToSend);
-    console.log(
-      "CRUDTesting>CRUDConverter>axiosConnection>createProfessores>res: <",
-      res,
-      ">"
-    );
+    // console.log(
+    //   "CRUDTesting>CRUDConverter>axiosConnection>createProfessores>res: <",
+    //   res,
+    //   ">"
+    // );
     if (res.data.statusCode === 201) {
       let currentId = res.data.body.queryResult[0].insertId;
       toast.success(`Professor criado com id ${currentId}`);
@@ -107,11 +107,11 @@ async function updateProfessores(professor) {
   try {
     let res = await axios.put(localUrl, dataToSend);
     let statusCode = res.data.statusCode;
-    console.log(
-      "CRUDTesting>CRUDConverter>axiosConnection>readProfessores>res: <",
-      res,
-      ">"
-    );
+    // console.log(
+    //   "CRUDTesting>CRUDConverter>axiosConnection>readProfessores>res: <",
+    //   res,
+    //   ">"
+    // );
     switch (statusCode) {
       case 200: // Deu bom
         toastMessage = `Professor atualizado com sucesso!`;
