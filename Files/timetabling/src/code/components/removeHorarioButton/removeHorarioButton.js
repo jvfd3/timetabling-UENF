@@ -1,8 +1,18 @@
 import "./removeHorarioButton.css";
+import { DeleteButton } from "../CRUDButtons/CRUDButtons";
 
-function BotaoRemover(props) {
-  const { placeholder } = props;
-  return <button className="">{placeholder}</button>;
+function RemoveHorarioButton({ lTurma, setLTurma, indexHorario }) {
+  let horarios = lTurma.horarios;
+  function removeHorarioFromTurma() {
+    let novosHorarios = [...horarios];
+    novosHorarios.splice(indexHorario, 1);
+    let novaTurma = {
+      ...lTurma,
+      horarios: novosHorarios,
+    };
+    setLTurma(novaTurma);
+  }
+  return <DeleteButton receivedFunction={removeHorarioFromTurma} size="2em" />;
 }
 
-export default BotaoRemover;
+export default RemoveHorarioButton;
