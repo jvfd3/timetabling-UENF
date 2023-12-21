@@ -61,58 +61,59 @@ function CRUDTesting() {
   }, [professores]);
 
   function internCreateProfessor() {
-    let newProfessor = { ...professor };
-    createProfessores(newProfessor).then((newId) => {
-      newProfessor.idprofessor = newId;
-      setProfessor(newProfessor);
-      setProfessores([...professores, newProfessor]);
-    });
+    createProfessores(professor)
+      .then((newId) => {
+        if (newId) {
+          let newProfessor = { ...professor, idprofessor: newId };
+          setProfessores([...professores, newProfessor]);
+          setProfessor({ ...professores, newProfessor });
+        }
+      })
+      .catch((error) => console.error(error));
   }
 
   function internReadProfessores() {
-    let local = "CRUDTesting>internReadProfessores";
-    let dataReceived = readProfessores();
-    dataReceived.then((data) => {
-      setProfessores(data);
-    }).catch((error) => {
-      console.log(`${local}>Deu Erro`, error)
-    });
+    readProfessores()
+      .then((professoresFromDB) => {
+        setProfessores(professoresFromDB);
+      })
+      .catch((error) => console.error(error));
   }
 
   function internUpdateProfessor() {
-    let updatedProfessor = { ...professor };
-    let oldProfessores = [...professores];
-    let newProfessores = professores.map((localProfessor) =>
-      localProfessor.idprofessor === updatedProfessor.idprofessor
-        ? localProfessor
-        : updatedProfessor
-    );
-    setProfessores(newProfessores);
-    updateProfessores(updatedProfessor).catch((error) => {
-      toast.warning(
-        "Retornando aos valores anteriores, houve um erro ao atualizar professor: ",
-        error
-      );
-      setProfessores(oldProfessores);
-    });
+    function updateProfessorFromList(oldArray, newProfessor) {
+      const newArray = oldArray.map((professorAntigo) => {
+        return professorAntigo.idprofessor === newProfessor.idprofessor
+          ? newProfessor
+          : professorAntigo;
+      });
+      return newArray;
+    }
+    updateProfessores(professor)
+      .then((newProfessor) => {
+        setProfessores(updateProfessorFromList(professores, newProfessor));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   function internDeleteProfessor() {
-    function filterProfessor(oldArray, id) {
-      const newArray = oldArray.filter((item) => item.idprofessor !== id);
+    function deleteProfessorFromList(oldArray, deletedProfessor) {
+      const newArray = oldArray.filter(
+        (oldProfessor) =>
+          oldProfessor.idprofessor !== deletedProfessor.idprofessor
+      );
       return newArray;
     }
-
-    console.log("deleting: ", professor.idprofessor);
-    let oldProfessores = [...professores];
-    setProfessores(filterProfessor(professores, professor.idprofessor));
-    deleteProfessores(professor.idprofessor).catch((error) => {
-      toast.warning(
-        "Retornando aos valores anteriores, houve um erro ao atualizar professor: ",
-        error
-      );
-      setProfessores(oldProfessores);
-    });
+    setProfessor(professores[professores.length - 1]);
+    deleteProfessores(professor)
+      .then((deletedProfessor) => {
+        if (deletedProfessor) {
+          setProfessores(deleteProfessorFromList(professores, deletedProfessor));
+        }
+      })
+      .catch((error) => console.error("internDelete>", error));
   }
 
   return (
