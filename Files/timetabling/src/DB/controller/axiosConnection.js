@@ -121,7 +121,7 @@ async function readProfessores() {
   let localError = null;
   try {
     let res = await axios.get(localUrl);
-    debugModeOn && debugPayload(res); // Apenas executa se
+    debugModeOn && debugPayload(res); // Apenas executa se debugModeOn for true
     let returnedProfessores = res.data.body.queryResult;
     returnedData = returnedProfessores;
     toastToUse = toast.success;
@@ -166,7 +166,7 @@ async function updateProfessores(professor) {
   } else {
     try {
       let res = await axios.put(localUrl, dataToSend);
-      debugModeOn && debugPayload(res); // Apenas executa se
+      debugModeOn && debugPayload(res); // Apenas executa se debugModeOn for true
       let statusCode = res.data.statusCode;
       let body = res.data.body;
       switch (statusCode) {
@@ -226,7 +226,7 @@ async function deleteProfessores(id) {
   } else {
     try {
       let res = await axios.delete(localUrl);
-      debugModeOn && debugPayload(res); // Apenas executa se
+      debugModeOn && debugPayload(res); // Apenas executa se debugModeOn for true
       let statusCode = res.data.statusCode;
       let body = res.data.body;
       switch (statusCode) {
