@@ -12,6 +12,38 @@ import {
 } from "../../DB/controller/axiosConnection";
 import { toast } from "react-toastify";
 
+function CreateButton({ receivedFunction }) {
+  return (
+    <div className="iconCreate">
+      <BsDatabaseFillAdd size="4em" onClick={receivedFunction} />
+    </div>
+  );
+}
+
+function ReadButton({ receivedFunction }) {
+  return (
+    <div className="iconRead">
+      <BsDatabaseDown size="4em" onClick={receivedFunction} />
+    </div>
+  );
+}
+
+function UpdateButton({ receivedFunction }) {
+  return (
+    <div className="iconUpdate">
+      <FaEdit size="4em" onClick={receivedFunction} />
+    </div>
+  );
+}
+
+function DeleteButton({ receivedFunction }) {
+  return (
+    <div className="iconDelete">
+      <FaTrash size="4em" onClick={receivedFunction} />
+    </div>
+  );
+}
+
 function CRUDTesting() {
   let dummyProfessor = { ...options.dbTemplates.professor };
   dummyProfessor.apelidoProfessor = "Prof";
@@ -93,26 +125,10 @@ function CRUDTesting() {
           paddingBottom: 10,
         }}
       >
-        <BsDatabaseFillAdd
-          className="iconCreate"
-          size="4em"
-          onClick={internCreateProfessor}
-        />
-        <BsDatabaseDown
-          className="iconRead"
-          size="4em"
-          onClick={internReadProfessores}
-        />
-        <FaEdit
-          className="iconUpdate"
-          size="4em"
-          onClick={internUpdateProfessor}
-        />
-        <FaTrash
-          className="iconDelete"
-          size="4em"
-          onClick={internDeleteProfessor}
-        />
+        <CreateButton receivedFunction={internCreateProfessor} />
+        <ReadButton receivedFunction={internReadProfessores} />
+        <UpdateButton receivedFunction={internUpdateProfessor} />
+        <DeleteButton receivedFunction={internDeleteProfessor} />
       </div>
       <>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
