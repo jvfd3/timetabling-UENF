@@ -4,7 +4,7 @@ let local = "";
 
 async function handler(event) {
   local = "aws>lambda>professores>Read>handler";
-  console.log(local + `>{event: ${event}}`);
+  console.log(local + ">{event: ", event, "}");
 
   return await readProfessores();
 }
@@ -41,7 +41,7 @@ function getPayloadResponse(message, query, queryValues, queryResult, error, sta
     message: message ?? null,
     query: query ?? null,
     queryValues: queryValues ?? null,
-    queryResult: queryResult[0] ?? null,
+    queryResult: queryResult?.[0] ?? null,
     error: error ?? null,
   };
   let payloadResponse = {

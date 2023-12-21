@@ -4,7 +4,7 @@ let local = "";
 
 async function handler(event) {
   local = "aws>lambda>professores>Delete>handler";
-  console.log(local + `>{event: ${event}}`);
+  console.log(local + ">{event: ", event, "}");
   let idToDelete = event.params.path.id;
   return await deleteProfessor(idToDelete);
 }
@@ -30,7 +30,7 @@ async function defaultDelete(query, queryValues) {
       queryResult = await dbExecute(query, queryValues);
       message += `>Item com id ${queryValues} deletado com sucesso.`;
       statusCode = 200;
-      console.log(message, statusCode, queryResult)
+      console.log(message, statusCode, queryResult);
     } catch (error) {
       statusCode = 500;
       localError = error;
@@ -46,7 +46,7 @@ function getPayloadResponse(message, query, queryValues, queryResult, error, sta
     message: message ?? null,
     query: query ?? null,
     queryValues: queryValues ?? null,
-    queryResult: queryResult[0] ?? null,
+    queryResult: queryResult?.[0] ?? null,
     error: error ?? null,
   };
   let payloadResponse = {
