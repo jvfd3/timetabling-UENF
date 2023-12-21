@@ -26,6 +26,7 @@ import { flattenTurma } from "../functions/conflicts/auxiliarConflictsFunctions"
 // import { readData } from "../functions/CRUD_JSONBIN";
 import RemoveHorarioButton from "../components/RemoveHorarioButton/RemoveHorarioButton";
 import AdicionarHorario from "../components/AdicionarHorarioButton/AdicionarHorario";
+import RemoveTurmaButton from "../components/RemoveTurmaButton/RemoveTurma";
 
 function Turmas() {
   let allTurmas = allLocalJsonData.dynamic.turmas;
@@ -205,10 +206,6 @@ function Turmas() {
   function TurmasCard(props) {
     const { lTurmas, setLTurma } = props;
     function TurmasTable() {
-      function removerTurma(id) {
-        let newTurmas = turmas.filter((turma) => turma.id !== id);
-        setTurmas(newTurmas);
-      }
       function max(array) {
         return Math.max.apply(null, array);
       }
@@ -240,13 +237,11 @@ function Turmas() {
                   key={`${id}-${currentTurma.codigoDisciplina}-${currentTurma.professor}`}
                 >
                   <td>
-                    <button
-                      className="TurmaHorarioRemove"
-                      key={`${id}-${currentTurma.codigoDisciplina}-${currentTurma.professor}`}
-                      onClick={() => removerTurma(id)}
-                    >
-                      Remover Turma
-                    </button>
+                    <RemoveTurmaButton
+                      turmas={lTurmas}
+                      setTurmas={setTurmas}
+                      currentTurma={currentTurma}
+                    />
                   </td>
                   <td
                     style={{
