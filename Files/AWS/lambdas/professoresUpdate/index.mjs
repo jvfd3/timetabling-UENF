@@ -21,7 +21,7 @@ async function defaultUpdate(query, queryValues) {
   let queryResult = null;
   let localError = null;
   let statusCode = 500;
-  let exists = await checkExistance(queryValues[4]);
+  let exists = await checkExistance([queryValues[4]]);
   if (!exists) {
     message += `>Exists?>item com id ${queryValues[4]} não encontrado.`;
     statusCode = 404;
@@ -56,12 +56,12 @@ function getPayloadResponse(message, query, queryValues, queryResult, error, sta
   return payloadResponse;
 }
 
-async function checkExistance(id) {
+async function checkExistance(idInList) {
   local += ">checkExistance";
   let message = local;
   let checkQuery = "SELECT * FROM professores WHERE idprofessor = ?";
   try {
-    let queryResult = dbExecute(checkQuery, [id]);
+    let queryResult = dbExecute(checkQuery, idInList);
     let rows = queryResult[0] ?? [];
     return rows.length > 0;
   } catch (error) {

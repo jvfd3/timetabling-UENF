@@ -57,12 +57,12 @@ function getPayloadResponse(message, query, queryValues, queryResult, error, sta
   return payloadResponse;
 }
 
-async function checkExistance(id) {
+async function checkExistance(idInList) {
   local += ">checkExistance";
   let message = local;
   let checkQuery = "SELECT * FROM professores WHERE idprofessor = ?";
   try {
-    let queryResult = dbExecute(checkQuery, [id]);
+    let queryResult = await dbExecute(checkQuery, idInList);
     let rows = queryResult[0] ?? [];
     return rows.length > 0;
   } catch (error) {
