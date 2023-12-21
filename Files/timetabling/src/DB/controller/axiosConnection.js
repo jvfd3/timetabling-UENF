@@ -171,8 +171,7 @@ async function updateProfessores(professor) {
       let body = res.data.body;
       switch (statusCode) {
         case 200: // Deu bom
-          let newProfessor = body.queryValues;
-          returnedData = newProfessor;
+          returnedData = professor;
           toastMessages.pretty = `Professor atualizado com sucesso!`;
           toastToUse = toast.success;
           break;
@@ -187,8 +186,7 @@ async function updateProfessores(professor) {
           toastMessages.debug.push(
             `${localMessage}>Default>Erro interno do servidor ao atualizar professor`
           );
-          toastMessages.debug.push(body.message);
-          toastMessages.debug.push(body.error);
+          toastMessages.debug.push(body);
           localError = new Error(toastMessages.debug);
           toastToUse = toast.error;
           break;
@@ -209,12 +207,13 @@ async function updateProfessores(professor) {
   return returnedData;
 }
 
-async function deleteProfessores(id) {
-  console.log("ready for a deleting journey?", id);
+async function deleteProfessores(professorToDelete) {
+  console.log("ready for a deleting journey?");
   let toastToUse = toast;
   let toastMessages = { debug: [], pretty: "" };
   let localMessage = debuggingLocal + ">deleteProfessores";
   let localEndpoint = "professores/";
+  let id = professorToDelete.idprofessor;
   let localUrl = url + localEndpoint + id.toString();
   let returnedData = null;
   let localError = null;
@@ -233,6 +232,7 @@ async function deleteProfessores(id) {
         case 200: // Deu bom
           toastMessages.pretty = `Professor deletado com sucesso!`;
           toastToUse = toast.success;
+          returnedData = professorToDelete;
           break;
         case 404: // Tratamento para código de status 404 (not found)
           toastMessages.debug.push(
@@ -244,8 +244,7 @@ async function deleteProfessores(id) {
         default: // Trate outros códigos de status aqui
           toastMessages.debug.push(`${localMessage}>Default>`);
           toastMessages.pretty = "Ocorreu um erro ao deletar o professor.";
-          toastMessages.debug.push(body.message);
-          toastMessages.debug.push(body.error);
+          toastMessages.debug.push(body);
           localError = new Error(toastMessages.debug);
           toastToUse = toast.error;
           break;
