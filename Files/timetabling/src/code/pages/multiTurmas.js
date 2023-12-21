@@ -24,6 +24,8 @@ import {
 import { flattenTurma } from "../functions/conflicts/auxiliarConflictsFunctions";
 // import AsyncSelect from "react-select/async";
 // import { readData } from "../functions/CRUD_JSONBIN";
+import RemoveHorarioButton from "../components/RemoveHorarioButton/RemoveHorarioButton";
+import AdicionarHorario from "../components/AdicionarHorarioButton/AdicionarHorario";
 
 function Turmas() {
   let allTurmas = allLocalJsonData.dynamic.turmas;
@@ -137,17 +139,23 @@ function Turmas() {
     /* Percorra cada disciplina em EssasDisciplinas e as disponha em uma Tabela no formato
       | Período esperado | Código - Nome |
     */
-    let visualizacaoDisciplinas = DisciplinasAindaNaoOferecidas.map((disciplina) => (
-      <tr key={disciplina.codigo}>
-        {/* Se o período da disciplina for 1, aplicar o className EnfasePrimeiroPeriodo */}
-        <td className={disciplina.periodo === 1 ? "EnfasePrimeiroPeriodo" : ""}>
-          {disciplina.periodo}
-        </td>
-        <td className={disciplina.periodo === 1 ? "EnfasePrimeiroPeriodo" : ""}>
-          {disciplina.codigo} - {disciplina.nome}
-        </td>
-      </tr>
-    ));
+    let visualizacaoDisciplinas = DisciplinasAindaNaoOferecidas.map(
+      (disciplina) => (
+        <tr key={disciplina.codigo}>
+          {/* Se o período da disciplina for 1, aplicar o className EnfasePrimeiroPeriodo */}
+          <td
+            className={disciplina.periodo === 1 ? "EnfasePrimeiroPeriodo" : ""}
+          >
+            {disciplina.periodo}
+          </td>
+          <td
+            className={disciplina.periodo === 1 ? "EnfasePrimeiroPeriodo" : ""}
+          >
+            {disciplina.codigo} - {disciplina.nome}
+          </td>
+        </tr>
+      )
+    );
 
     function TabelaDeDisciplinasASereOferecidas() {
       return (
@@ -200,81 +208,6 @@ function Turmas() {
       function removerTurma(id) {
         let newTurmas = turmas.filter((turma) => turma.id !== id);
         setTurmas(newTurmas);
-      }
-
-      function AdicionarHorario(props) {
-        const { setLTurmas, lTurma } = props;
-        // console.log(lTurma);
-        return (
-          <button
-            className="AdicionarHorario"
-            onClick={() => {
-              let novosHorarios = [...lTurma.horarios];
-              let newId = lTurma.id + "_";
-              if (novosHorarios.length === 0) {
-                newId += "1";
-              } else {
-                let ultimoHorario = novosHorarios[novosHorarios.length - 1];
-                let lastId = ultimoHorario.id;
-                let partes = lastId.split("_");
-                let ultimaParte = parseInt(partes[partes.length - 1]);
-                let resultado = ultimaParte + 1;
-                // console.log("novosHorarios", novosHorarios[novosHorarios.length-1])
-                newId += resultado;
-              }
-              // console.log("newId", newId)
-              let newHorario = {
-                id: newId,
-                sala: null,
-                dia: null,
-                horaInicio: null,
-                duracao: 2,
-              };
-              novosHorarios.push(newHorario);
-              let novaTurma = {
-                ...lTurma,
-                horarios: novosHorarios,
-              };
-
-              // Encontre o índice da turma que você deseja atualizar
-              const index = lTurmas.findIndex(
-                (turma) => turma.id === lTurma.id
-              );
-
-              // Crie uma cópia da lista de turmas
-              let novasTurmas = [...lTurmas];
-
-              // Remova a turma antiga e insira a nova turma na mesma posição
-              novasTurmas.splice(index, 1, novaTurma);
-
-              // Atualize o estado da lista de turmas
-              setLTurmas(novasTurmas);
-            }}
-          >
-            Novo Horário
-          </button>
-        );
-      }
-
-      function RemoveHorario(props) {
-        const { lTurma, setLTurma, indexHorario } = props;
-        let horarios = lTurma.horarios;
-        return (
-          <button
-            className="currentTurmaHorarioRemove"
-            onClick={() => {
-              let novosHorarios = [...horarios];
-              novosHorarios.splice(indexHorario, 1);
-              let novaTurma = {
-                ...lTurma,
-                horarios: novosHorarios,
-              };
-              setLTurma(novaTurma);
-            }}
-          >
-            Remover Horário
-          </button>
-        );
       }
       function max(array) {
         return Math.max.apply(null, array);
@@ -348,6 +281,7 @@ function Turmas() {
                   <td>
                     <AdicionarHorario
                       setLTurmas={setTurmas}
+                      lTurmas={lTurmas}
                       lTurma={currentTurma}
                     />
                   </td>
@@ -389,7 +323,7 @@ function Turmas() {
                                 key={`${id}-${horario.sala}-${horario.dia}-${horario.horaInicio}-${index}`}
                               >
                                 <td>
-                                  <RemoveHorario
+                                  <RemoveHorarioButton
                                     lTurma={currentTurma}
                                     setLTurma={setLTurma}
                                     indexHorario={index}
