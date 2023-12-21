@@ -6,7 +6,6 @@ import CRUDPageSelection from "../components/PageSelect";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
 import react, { useState } from "react";
 import Select from "react-select";
-import BotaoRemover from "../components/botaoRemover";
 
 function Salas() {
   let salasFromJson = allLocalJsonData.static.infoSalas;
@@ -122,9 +121,6 @@ function Salas() {
                     <td>{turma.horarios.dia}</td>
                     <td>{turma.horarios.horaInicio}</td>
                     <td>{turma.horarios.duracao}</td>
-                    {/* <td>
-                      <BotaoRemover placeholder="Remover" />
-                    </td> */}
                   </tr>
                 );
               })}
@@ -162,7 +158,9 @@ function Salas() {
 function CRUDrooms() {
   return (
     <div className="background">
-      <CRUDPageSelection defaultValue={options.constantValues.pageSelection.salas} />
+      <CRUDPageSelection
+        defaultValue={options.constantValues.pageSelection.salas}
+      />
       <Salas />
     </div>
   );
