@@ -8,15 +8,26 @@ const dbConfig = {
 };
 
 async function createDbConnection() {
-  const dbConnection = await mysql.createConnection(dbConfig);
-  return dbConnection;
+  try {
+    return await mysql.createConnection(dbConfig);
+  } catch (err) {
+    let error = new Error("db.js>createDbConnection", err);
+    console.error(error);
+    throw error;
+  }
 }
 
 async function dbExecute(query, values=null) {
-  let dbConnection = await createDbConnection();
-  let queryResult = await dbConnection.execute(query, values);
-  await dbConnection.end();
-  return queryResult;
+  try {
+    let dbConnection = await createDbConnection();
+    let queryResult = await dbConnection.execute(query, values);
+    await dbConnection.end();
+    return queryResult;
+  } catch (err) {
+    let error = new Error("db.js>dbExecute", err);
+    console.error(error);
+    throw error;
+  }
 }
 
 module.exports = { dbExecute };
