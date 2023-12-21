@@ -47,7 +47,7 @@ async function createProfessores(professor) {
   let localError = null;
   let dataToSend = { newProfessor: professor };
   if (!professor) {
-    toastMessages.debug.append(
+    toastMessages.debug.push(
       `${localMessage}>O professor "${professor}" é inválido. A requisição nem saiu do app.`
     );
     toastMessages.pretty = `O professor "${professor}" é inválido.`;
@@ -65,7 +65,7 @@ async function createProfessores(professor) {
         toastMessages.pretty = `Professor criado com id ${currentId}.`;
         toastToUse = toast.success;
       } else {
-        toastMessages.debug.append(
+        toastMessages.debug.push(
           `${localMessage}>Not201>Erro ${res.status}, ${statusCode} ao criar professor. Mensagem: ${res.data.body.message}`
         );
         toastMessages.pretty = `Erro ${statusCode} ao criar professor.`;
@@ -73,7 +73,7 @@ async function createProfessores(professor) {
         localError = new Error(toastMessages.debug);
       }
     } catch (error) {
-      toastMessages.debug.append(`${localMessage}>{Error: ${error}}`);
+      toastMessages.debug.push(`${localMessage}>{Error: ${error}}`);
       toastMessages.pretty = `Erro ao criar professor.`;
       toastToUse = toast.error;
       localError = new Error(toastMessages.debug);
@@ -125,14 +125,14 @@ async function readProfessores() {
     let returnedProfessores = res.data.body.queryResult;
     returnedData = returnedProfessores;
     toastToUse = toast.success;
-    toastMessages.debug.append(
+    toastMessages.debug.push(
       `${local}>{ProfesoresLidos: ` + returnedProfessores + "}"
     );
     toastMessages.pretty = `${returnedProfessores.length} Professores lidos com sucesso!`;
   } catch (error) {
     toastToUse = toast.error;
     localError = error;
-    toastMessages.debug.append(
+    toastMessages.debug.push(
       `${local}>Catch>Erro interno ao ler professores: ${error}`
     );
     toastMessages.pretty = `Erro local ao ler professores.`;
@@ -156,7 +156,7 @@ async function updateProfessores(professor) {
   let localError = null;
   let dataToSend = { newProfessor: professor };
   if (!professor) {
-    toastMessages.debug.append(
+    toastMessages.debug.push(
       `${localMessage}>O professor "${professor}" é inválido. A requisição nem saiu do app.`
     );
     toastMessages.pretty = `O professor "${professor}" é inválido.`;
@@ -177,24 +177,24 @@ async function updateProfessores(professor) {
           toastToUse = toast.success;
           break;
         case 404: // Tratamento para código de status 404 (not found)
-          toastMessages.debug.append(
+          toastMessages.debug.push(
             `${localMessage}>404>Erro ${statusCode}> O professor não foi encontrado no BD.`
           );
           toastMessages.pretty = `Professor de id ${professor.idprofessor} não foi encontrado no banco de dados.`;
           toastToUse = toast.warning;
           break;
         default: // Trate outros códigos de status aqui
-          toastMessages.debug.append(
+          toastMessages.debug.push(
             `${localMessage}>Default>Erro interno do servidor ao atualizar professor`
           );
-          toastMessages.debug.append(body.message);
-          toastMessages.debug.append(body.error);
+          toastMessages.debug.push(body.message);
+          toastMessages.debug.push(body.error);
           localError = new Error(toastMessages.debug);
           toastToUse = toast.error;
           break;
       }
     } catch (error) {
-      toastMessages.debug.append(
+      toastMessages.debug.push(
         `${localMessage}>ExternalCatch>{Error: ${error}}`
       );
       localError = new Error(toastMessages.debug);
@@ -219,7 +219,7 @@ async function deleteProfessores(id) {
   let returnedData = null;
   let localError = null;
   if (!id) {
-    toastMessages.debug.append(`${localMessage}>O ID "${id}" é inválido.`);
+    toastMessages.debug.push(`${localMessage}>O ID "${id}" é inválido.`);
     toastMessages.pretty = `O ID "${id}" é inválido.`;
     toastToUse = toast.warning;
     localError = new Error(toastMessages.pretty);
@@ -235,23 +235,23 @@ async function deleteProfessores(id) {
           toastToUse = toast.success;
           break;
         case 404: // Tratamento para código de status 404 (not found)
-          toastMessages.debug.append(
+          toastMessages.debug.push(
             `${localMessage}>404>Erro ${statusCode}> O professor não foi encontrado no BD.`
           );
           toastMessages.pretty = `Erro ${statusCode} ao deletar professor: id ${id} não encontrado.`;
           toastToUse = toast.warning;
           break;
         default: // Trate outros códigos de status aqui
-          toastMessages.debug.append(`${localMessage}>Default>`);
+          toastMessages.debug.push(`${localMessage}>Default>`);
           toastMessages.pretty = "Ocorreu um erro ao deletar o professor.";
-          toastMessages.debug.append(body.message);
-          toastMessages.debug.append(body.error);
+          toastMessages.debug.push(body.message);
+          toastMessages.debug.push(body.error);
           localError = new Error(toastMessages.debug);
           toastToUse = toast.error;
           break;
       }
     } catch (error) {
-      toastMessages.debug.append(
+      toastMessages.debug.push(
         `${localMessage}>ExternalCatch>{Error: ${error}}`
       );
       toastMessages.pretty = `Erro interno ao deletar professor.`;
