@@ -11,7 +11,7 @@ async function createDbConnection() {
   try {
     return await mysql.createConnection(dbConfig);
   } catch (err) {
-    let error = new Error("db.js>createDbConnection", err);
+    let error = new Error(["db.js>createDbConnection", err]);
     console.error(error);
     throw error;
   }
@@ -24,7 +24,7 @@ async function dbExecute(query, values=null) {
     await dbConnection.end();
     return queryResult;
   } catch (err) {
-    let error = new Error("db.js>dbExecute", err);
+    let error = new Error(["db.js>dbExecute", err]);
     console.error(error);
     throw error;
   }
