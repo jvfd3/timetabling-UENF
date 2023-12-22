@@ -3,8 +3,11 @@ import Select from "react-select";
 import options from "../temp/options";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { changePageByScrolling } from "../functions/firulas/minhasFirulas";
+// import { changePageByScrolling } from "../functions/firulas/minhasFirulas";
 
 const CRUDPageSelection = (props) => {
+  let pages = options.constantValues.pageSelection;
   const navigate = useNavigate();
 
   const handleChange = (selectedOption) => {
@@ -12,9 +15,9 @@ const CRUDPageSelection = (props) => {
   };
 
   // Filtrar as opções para remover Not Found e Main CRUD
-  const filteredOptions = Object.values(
-    options.constantValues.pageSelection
-  ).filter((option) => option.label !== "Not Found");
+  const filteredOptions = Object.values(pages).filter(
+    (option) => option.label !== "Not Found"
+  );
 
   useEffect(() => {
     const keydownHandler = (event) => {
@@ -38,30 +41,20 @@ const CRUDPageSelection = (props) => {
     };
   }, []);
 
-  function changePageByScrolling(event) {
-    let diretion = event.deltaY > 0 ? "down" : "up";
-    // console.log("Scrolling ", diretion);
-    let index = filteredOptions.findIndex(
-      (option) => option.value === props.defaultValue.value
-    );
-    // console.log("Came from Index: ", index);
-    index += diretion === "up" ? -1 : 1;
-    // console.log("Trying to go to Index: ", index);
-    index = index < 0 ? filteredOptions.length - 1 : index;
-    index = index >= filteredOptions.length ? 0 : index;
-    // console.log("Actually going to Index: ", index);
-    let newOption = filteredOptions[index];
-    // console.log("new Page: ", newOption);
-    handleChange(newOption);
-  }
-
   const formatOptionLabel = ({ label }) => (
     <div style={{ display: "flex" }}>{label}</div>
   );
 
   return (
     <div className="PageSelection">
-      <div className="PageSelectionSelect" onWheel={changePageByScrolling}>
+      <div
+        className="PageSelectionSelect"
+        onWheel={(event) => {
+          // changePageByScrolling(event);
+          let itemStates = [filteredOptions, props, handleChange];
+          changePageByScrolling(event, itemStates);
+        }}
+      >
         <Select
           className="SelectList"
           placeholder={"Selecionar CRUD"}
