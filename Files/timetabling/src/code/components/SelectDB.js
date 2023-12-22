@@ -48,15 +48,12 @@ function AsyncProfessor({ professor, setProfessor }) {
   const handleChange = (selectedOption) => {
     setProfessor(selectedOption);
   };
-  const styles = {
-    menu: ({ width, ...css }) => ({ ...css }),
-  };
   return (
     <div className="infoCard" style={{ color: "black" }}>
       <AsyncSelect
         cacheOptions
         defaultOptions
-        styles={styles}
+        styles={options.SelectStyles.fullWidth}
         value={professor}
         loadOptions={loadOptions}
         // defaultOptions={allProf}

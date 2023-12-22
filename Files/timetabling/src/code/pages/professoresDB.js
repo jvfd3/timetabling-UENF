@@ -17,12 +17,26 @@ import { FaTrash, FaEdit } from "react-icons/fa";
 import { BsDatabaseFillAdd } from "react-icons/bs";
 import { AsyncProfessor } from "../components/SelectDB";
 import {
-  createProfessor,
-  readProfessores,
+  // createProfessor,
+  // readProfessores,
   updateProfessor,
   thinDeleteProfessor,
 } from "../../DB/dataFromDB";
-import { LambdaCopilot } from "../components/LambdaComponentCopilot";
+import { readProfessores } from "../../DB/controller/axiosConnection";
+import Select from "react-select";
+import TextField from "@mui/material/TextField";
+import {
+  safeCreateProfessores,
+  safeReadProfessores,
+  safeUpdateProfessores,
+  safeDeleteProfessores,
+} from "../functions/cleanCodeFromAxios";
+import {
+  CreateButton,
+  ReadButton,
+  UpdateButton,
+  DeleteButton,
+} from "../components/CRUDButtons/CRUDButtons";
 
 function ProfessoresDB() {
   let dummyProfessor = allLocalJsonData.SQL.professores[2];
@@ -179,14 +193,116 @@ function ProfessoresDB() {
   );
 }
 
+function ProfessoresDBRefactor() {
+  let defaultProfessores = allLocalJsonData.SQL.professores;
+  const [professores, setProfessores] = useState(defaultProfessores);
+  const [professor, setProfessor] = useState(
+    defaultProfessores[professores.length - 1]
+  );
+
+  let professorStates = {
+    professores: professores,
+    setProfessores: setProfessores,
+    professor: professor,
+    setProfessor: setProfessor,
+  };
+
+  useEffect(() => {
+    safeReadProfessores(professorStates);
+  }, []);
+
+  function createProfessor() {
+    safeCreateProfessores(professorStates);
+  }
+
+  function readProfessor() {
+    safeReadProfessores(professorStates);
+  }
+
+  function updateProfessor() {
+    safeUpdateProfessores(professorStates);
+  }
+
+  function deleteProfessor() {
+    safeDeleteProfessores(professorStates);
+  }
+
+  return (
+    <div className="CRUDContainComponents">
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <Select
+          styles={options.SelectStyles.fixedWidth}
+          options={professores}
+          value={professor}
+          onChange={setProfessor}
+          getOptionLabel={({ laboratorio, curso, apelidoProfessor }) =>
+            `(${laboratorio} - ${curso}) ${apelidoProfessor}`
+          }
+          getOptionValue={(option) => option.idprofessor}
+        />
+        <CreateButton createFunction={createProfessor} />
+        <ReadButton readFunction={readProfessor} />
+        <UpdateButton updateFunction={updateProfessor} />
+        <DeleteButton deleteFunction={deleteProfessor} />
+      </div>
+      <div>
+        {/* <div>
+          <pre>{JSON.stringify(professor, null, 2)
+          /Just for debugging purposes
+          }</pre>
+        </div> */}
+        <div>
+          Laboratorio
+          <SelectLaboratorio professorStates={professorStates} />
+        </div>
+        <div>
+          Curso
+          <SelectCurso professorStates={professorStates} />
+        </div>
+        <TextField
+          value={professor.nomeProfessor}
+          onChange={(event) => {
+            let newProfessor = {
+              ...professor,
+              nomeProfessor: event.target.value,
+            };
+            setProfessor(newProfessor);
+          }}
+          fullWidth
+          label="Nome do Professor"
+        />
+        <TextField
+          value={professor.apelidoProfessor}
+          onChange={(event) => {
+            let newProfessor = {
+              ...professor,
+              apelidoProfessor: event.target.value,
+            };
+            setProfessor(newProfessor);
+          }}
+          fullWidth
+          label="Apelido do Professor"
+        />
+        <TextField
+          value={professor.idprofessor}
+          fullWidth
+          label="ID do Professor"
+          disabled
+        />
+      </div>
+    </div>
+  );
+}
+
 function CRUDprofessors() {
   return (
     <div className="background">
       <CRUDPageSelection
         defaultValue={options.constantValues.pageSelection.professoresDB}
       />
+      {/* <ProfessoresDB /> */}
+      <ProfessoresDBRefactor />
       {/* <Professores /> */}
-      <ProfessoresDB />
       {/* <LambdaCopilot /> */}
     </div>
   );

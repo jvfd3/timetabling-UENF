@@ -8,7 +8,6 @@ import {
 function safeCreateProfessores(professorStates) {
   const { professores, setProfessores, professor, setProfessor } =
     professorStates;
-  console.group(professor);
   createProfessores(professor)
     .then((newId) => {
       if (newId) {
@@ -73,7 +72,6 @@ function safeDeleteProfessores(professorStates) {
         const index = professores.findIndex(
           (p) => p.idprofessor === deletedProfessor.idprofessor
         );
-        console.log(index);
         if (index > 0) {
           setProfessor(deletedProfessorList[index - 1]); // continua do anterior
         } else if (deletedProfessorList.length > 0) {

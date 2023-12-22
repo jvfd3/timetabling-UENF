@@ -1,5 +1,5 @@
 import "../CSS/defaultStyle.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import options from "../temp/options";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
 import Select from "react-select";
@@ -10,7 +10,8 @@ import {
   updateProfessor,
   thinDeleteProfessor,
 } from "../../DB/dataFromDB";
-// import { getNomeDisciplina } from "../functions/auxFunctions";
+import { updateProfessorFromList } from "../functions/auxFunctions";
+import { get } from "https-browserify";
 
 function SelectAnoSemestre(props) {
   let { ano, setAno, semestre, setSemestre } = props;
@@ -454,81 +455,93 @@ function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
   );
 }
 
-function SelectCurso({ professorAtual, setNewProfessor }) {
+function SelectCurso({ professorStates }) {
   let cursos = options.constantValues.courses;
-  let foundCurso = cursos.find((curso) => curso.value === professorAtual.curso);
+  const { professores, setProfessores, professor, setProfessor } =
+    professorStates;
 
-  const [curso, setCurso] = useState(foundCurso);
-
-  function updateOuterProfessor(newCurso) {
-    newCurso = newCurso || { value: "" };
-    setCurso(newCurso);
-
-    let novoProfessor = {
-      ...professorAtual,
-      curso: newCurso.value,
+  function getEmptyCurso(cursoValue) {
+    let emptyCurso = {
+      value: cursoValue,
+      label: cursoValue,
     };
-    updateProfessor(novoProfessor);
-    setNewProfessor(novoProfessor);
+    return emptyCurso;
+  }
+
+  function getCurso(cursoValue) {
+    let foundCurso = cursos.find((curso) => curso.value === cursoValue);
+    let returnedCurso = foundCurso ?? getEmptyCurso(cursoValue);
+    return returnedCurso;
+  }
+
+  function updateCurso(selectedCurso) {
+    let newProfessor = { ...professor };
+    if (selectedCurso) {
+      newProfessor.curso = selectedCurso.value;
+    } else {
+      newProfessor.curso = "";
+    }
+    setProfessor(newProfessor);
+    setProfessores(updateProfessorFromList(professores, newProfessor));
   }
 
   return (
     <Select
-      className="SelectList"
-      placeholder="Curso"
-      isClearable
+      onChange={updateCurso}
+      value={getCurso(professor.curso)}
       options={cursos}
-      onChange={updateOuterProfessor}
-      value={curso}
-      formatOptionLabel={({ value, label }, { context }) => {
-        return context === "value"
-          ? `(${value}) ${label}`
-          : `(${value}) ${label}`;
-      }}
-      styles={{
-        menu: ({ width, ...css }) => ({ ...css }),
-      }}
+      isClearable
+      placeholder="Curso"
+      className="SelectList"
+      getOptionLabel={(option) => `${option.value} - ${option.label}`}
+      formatOptionLabel={(option) => `${option.value} - ${option.label}`}
     />
   );
 }
 
-function SelectLaboratorio({ professorAtual, setNewProfessor }) {
+function SelectLaboratorio({ professorStates }) {
   let laboratorios = options.constantValues.laboratorios;
+  const { professores, setProfessores, professor, setProfessor } =
+    professorStates;
 
-  let foundLab = laboratorios.find(
-    (lab) => lab.value === professorAtual.laboratorio
-  );
-  const [laboratorio, setLaboratorio] = useState(foundLab);
-
-  function updateOuterProfessor(newLab) {
-    newLab = newLab || { value: "" };
-    setLaboratorio(newLab);
-
-    let novoProfessor = {
-      ...professorAtual,
-      laboratorio: newLab.value,
+  function getEmptyLaboratorio(labValue) {
+    let emptyLab = {
+      centro: labValue,
+      value: labValue,
+      label: labValue,
     };
+    return emptyLab;
+  }
 
-    updateProfessor(novoProfessor);
-    setNewProfessor(novoProfessor);
+  function getCorrectLaboratorio(labValue) {
+    let foundLab = laboratorios.find(
+      (labOption) => labOption.value === labValue
+    );
+    let returnedLab = foundLab ?? getEmptyLaboratorio(labValue);
+    return returnedLab;
+  }
+
+  function updateLaboratorio(selectedLab) {
+    let newProfessor = { ...professor };
+    if (selectedLab) {
+      newProfessor.laboratorio = selectedLab.value;
+    } else {
+      newProfessor.laboratorio = "";
+    }
+    setProfessor(newProfessor);
+    setProfessores(updateProfessorFromList(professores, newProfessor));
   }
 
   return (
     <Select
-      className="SelectList"
-      placeholder="Laboratório"
-      isClearable
+      onChange={updateLaboratorio}
+      value={getCorrectLaboratorio(professor.laboratorio)}
       options={laboratorios}
-      onChange={updateOuterProfessor}
-      value={laboratorio}
-      formatOptionLabel={({ value, label }, { context }) => {
-        return context === "value"
-          ? `(${value}) ${label}`
-          : `(${value}) ${label}`;
-      }}
-      styles={{
-        menu: ({ width, ...css }) => ({ ...css }),
-      }}
+      isClearable
+      placeholder="Laboratório"
+      className="SelectList"
+      getOptionLabel={(option) => `${option.value} - ${option.label}`}
+      formatOptionLabel={(option) => `${option.value} - ${option.label}`}
     />
   );
 }
