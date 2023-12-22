@@ -99,7 +99,6 @@ const options = {
     pageSelection: {
       main: { label: "Main", value: "main" },
       notFound: { label: "Not Found", value: "notFound" },
-      professoresDB: { label: "Professores DB", value: "professoresdb" },
       multiTurmas: { label: "MultiTurmas", value: "multiturmas" },
       CCTable: { label: "CCTable", value: "cctable" },
       turmas: { label: "Turmas", value: "turmas" },
