@@ -12,7 +12,7 @@ function debugPayload(payload) {
 }
 
 async function axiosTeste(data) {
-  console.log("ready for a journey?", data);
+  // console.log("ready for a journey?", data);
   url += "professores";
   axios
     // .post(url, { query: data })
@@ -37,7 +37,7 @@ async function axiosTeste(data) {
 }
 
 async function createProfessores(professor) {
-  console.log("ready for a creating journey?");
+  // console.log("ready for a creating journey?");
   let toastToUse = toast;
   let toastMessages = { debug: [], pretty: "" };
   let localMessage = debuggingLocal + ">createProfessores";
@@ -81,7 +81,7 @@ async function createProfessores(professor) {
   }
   toastToUse(toastMessages.pretty);
   if (localError) {
-    console.log(toastMessages.debug);
+    console.error(toastMessages.debug);
     throw localError;
   }
   return returnedData;
@@ -111,7 +111,7 @@ async function createProfessores(professor) {
 } */
 
 async function readProfessores() {
-  console.log("Ready for a reading journey?");
+  // console.log("Ready for a reading journey?");
   let toastToUse = toast;
   let toastMessages = { debug: [], pretty: "" };
   let local = debuggingLocal + ">readProfessores";
@@ -139,14 +139,14 @@ async function readProfessores() {
   }
   toastToUse(toastMessages.pretty);
   if (localError) {
-    console.log(toastMessages.debug);
+    console.error(toastMessages.debug);
     throw localError;
   }
   return returnedData;
 }
 
 async function updateProfessores(professor) {
-  console.log("ready for an updating journey?");
+  // console.log("ready for an updating journey?");
   let toastToUse = toast;
   let toastMessages = { debug: [], pretty: "" };
   let localMessage = debuggingLocal + ">updateProfessores";
@@ -201,14 +201,14 @@ async function updateProfessores(professor) {
   }
   toastToUse(toastMessages.pretty);
   if (localError) {
-    console.log(toastMessages.debug);
+    console.error(toastMessages.debug);
     throw localError;
   }
   return returnedData;
 }
 
 async function deleteProfessores(professorToDelete) {
-  console.log("ready for a deleting journey?");
+  // console.log("ready for a deleting journey?");
   let toastToUse = toast;
   let toastMessages = { debug: [], pretty: "" };
   let localMessage = debuggingLocal + ">deleteProfessores";
@@ -260,7 +260,7 @@ async function deleteProfessores(professorToDelete) {
   }
   toastToUse(toastMessages.pretty);
   if (localError) {
-    console.log(toastMessages.debug);
+    console.error(toastMessages.debug);
     throw localError;
   }
   return returnedData;
