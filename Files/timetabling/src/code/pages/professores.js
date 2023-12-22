@@ -81,9 +81,9 @@ function ProfessoresDB() {
     );
   }
 
-  function InformacoesDoProfessor({ professorStates }) {
-    const { professor, setProfessor } = professorStates;
-    return (
+  return (
+    <div className="CRUDContainComponents">
+      <ProfessorSelection professorStates={professorStates} />
       <div className="showBasicCardData">
         <h3>INFORMAÇÕES DO PROFESSOR</h3>
         <table className="showBasicDataTable">
@@ -151,13 +151,6 @@ function ProfessoresDB() {
           </tbody>
         </table>
       </div>
-    );
-  }
-
-  return (
-    <div className="CRUDContainComponents">
-      <ProfessorSelection professorStates={professorStates} />
-      <InformacoesDoProfessor professorStates={professorStates} />
     </div>
   );
 }
