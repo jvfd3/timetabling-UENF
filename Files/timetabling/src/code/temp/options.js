@@ -116,8 +116,8 @@ const options = {
       { value: "Eng Prod", label: "Engenharia de Produção" },
       { value: "Eng Met", label: "Engenharia Meteorológica" },
       { value: "Lic Mat", label: "Licenciatura em Matemática" },
-      { value: "Lic Qui EAD", label: "Licenciatura em Química à Distância" },
       { value: "Eng Mat", label: "Engenharia Metalúrgica e de Materiais" },
+      { value: "Lic Qui EAD", label: "Licenciatura em Química à Distância" },
       {
         value: "Eng Petr",
         label: "Engenharia de Exploração e Produção de Petróleo",
@@ -267,6 +267,14 @@ const options = {
       infoAlunos: "6563ed5a54105e766fd5e0e8",
       preferenciasProfessores: "6563ed1654105e766fd5e0d4",
       andamentoAlunos: "6563ece40574da7622cc821e",
+    },
+  },
+  SelectStyles: {
+    fullWidth: {
+      menu: ({ width, ...css }) => ({ ...css }),
+    },
+    fixedWidth: {
+      menu: ({ width, ...css }) => ({ ...css, width: 300 }),
     },
   },
 };
