@@ -66,6 +66,8 @@ Explanation:
     display: flex;
     align-self: baseline;
     padding: 10px;
+    font-weight: bolder;
+
     /* Fill all parent component */
     /* border: 10w; */
     /* width: 100%; */
@@ -177,8 +179,8 @@ Explanation:
 }
 
 .SelectList {
-    display: flex;
+    /* display: flex; */
     /* padding-left: 2%; */
     font-weight: bolder;
-    min-width: max-content;
+    /* min-width: max-content; */
 }

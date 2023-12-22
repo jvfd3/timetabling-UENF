@@ -487,12 +487,13 @@ function SelectCurso({ professorStates }) {
 
   return (
     <Select
+      className="SelectList"
       onChange={updateCurso}
+      styles={options.SelectStyles.anotherOne}
       value={getCurso(professor.curso)}
       options={cursos}
       isClearable
       placeholder="Curso"
-      className="SelectList"
       getOptionLabel={(option) => `${option.value} - ${option.label}`}
       formatOptionLabel={(option) => `${option.value} - ${option.label}`}
     />
@@ -540,6 +541,7 @@ function SelectLaboratorio({ professorStates }) {
       isClearable
       placeholder="Laboratório"
       className="SelectList"
+      styles={options.SelectStyles.anotherOne}
       getOptionLabel={(option) => `${option.value} - ${option.label}`}
       formatOptionLabel={(option) => `${option.value} - ${option.label}`}
     />

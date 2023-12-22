@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CRUDPageSelection from "../components/PageSelect";
 import options from "../temp/options";
-import "../CSS/CRUD_professores.css";
+import "../CSS/professores.css";
 import "../CSS/defaultStyle.css";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
 import { SelectCurso, SelectLaboratorio } from "../components/mySelects";
@@ -59,13 +59,10 @@ function ProfessoresDB() {
     const { professores, /* setProfessores, */ professor, setProfessor } =
       professorStates;
     return (
-      <div
-        className="SelectionBar"
-        onWheel={(event) => scrollThroughProfessores(event, professorStates)}
-      >
+      <div className="SelectionBar">
         <Select
           className="itemSelectionBar"
-          styles={options.SelectStyles.fixedWidth}
+          styles={options.SelectStyles.anotherOne}
           options={professores}
           value={professor}
           onChange={setProfessor}

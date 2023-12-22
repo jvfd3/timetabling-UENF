@@ -275,6 +275,20 @@ const options = {
     fixedWidth: {
       menu: ({ width, ...css }) => ({ ...css, width: 300 }),
     },
+    anotherOne: {
+      control: (css) => ({
+        ...css,
+        width: "100%",
+      }),
+      menu: (css) => ({
+        ...css,
+        minWidth: "max-content",
+      }),
+      option: (css) => ({
+        ...css,
+        width: "100%",
+      }),
+    },
   },
 };
 
