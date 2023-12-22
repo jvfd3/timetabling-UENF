@@ -2,34 +2,34 @@ import "./CRUDButtons.css";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { BsDatabaseDown, BsDatabaseFillAdd } from "react-icons/bs";
 
-function CreateButton({ receivedFunction, size = "4em" }) {
+function CreateButton({ createFunction, size = "4em" }) {
   return (
     <div className="iconCreate">
-      <BsDatabaseFillAdd size={size} onClick={receivedFunction} />
+      <BsDatabaseFillAdd size={size} onClick={createFunction} />
     </div>
   );
 }
 
-function ReadButton({ receivedFunction, size = "4em" }) {
+function ReadButton({ readFunction, size = "4em" }) {
   return (
     <div className="iconRead">
-      <BsDatabaseDown size={size} onClick={receivedFunction} />
+      <BsDatabaseDown size={size} onClick={readFunction} />
     </div>
   );
 }
 
-function UpdateButton({ receivedFunction, size = "4em" }) {
+function UpdateButton({ updateFunction, size = "4em" }) {
   return (
     <div className="iconUpdate">
-      <FaEdit size={size} onClick={receivedFunction} />
+      <FaEdit size={size} onClick={updateFunction} />
     </div>
   );
 }
 
-function DeleteButton({ receivedFunction, size = "4em" }) {
+function DeleteButton({ deleteFunction, size = "4em" }) {
   return (
     <div className="iconDelete">
-      <FaTrash size={size} onClick={receivedFunction} />
+      <FaTrash size={size} onClick={deleteFunction} />
     </div>
   );
 }
