@@ -2,13 +2,13 @@ import React from "react";
 import options from "../temp/options";
 import CRUDPageSelection from "../components/PageSelect";
 import "../CSS/defaultStyle.css";
-import Workbench from "../components/Workbench";
+// import Workbench from "../components/tests/Workbench";
 
 function Main() {
   return (
     <div className="CRUDContainComponents">
       <h1>Welcome to my monograph's website!</h1>
-      <Workbench />
+      {/* <Workbench /> */}
       <p>This is the main page.</p>
       <h4>Atalhos</h4>
       <ul>

@@ -1,7 +1,7 @@
 import "../CSS/defaultStyle.css";
 import React, { useEffect, useState } from "react";
-import options from "../temp/options";
-import { allLocalJsonData } from "../../DB/dataFromJSON";
+import options from "../../temp/options";
+import { allLocalJsonData } from "../../../DB/dataFromJSON";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 import {
@@ -9,9 +9,9 @@ import {
   readProfessores,
   updateProfessor,
   thinDeleteProfessor,
-} from "../../DB/dataFromDB";
+} from "../../../DB/dataFromDB";
 import AsyncSelect from "react-select/async";
-import { readData } from "../functions/CRUD_JSONBIN";
+import { readData } from "../../functions/CRUD_JSONBIN";
 
 function AsyncProfessor({ professor, setProfessor }) {
   // let allProf = allLocalJsonData.SQL.professores;

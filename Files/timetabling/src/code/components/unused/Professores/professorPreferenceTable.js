@@ -1,5 +1,5 @@
 import React from "react";
-import options from "../../temp/options";
+import options from "../../../temp/options";
 
 function PreferencesTable(props) {
   const { preferencia1, setPreferencia1 } = props;

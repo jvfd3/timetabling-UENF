@@ -1,5 +1,5 @@
 import React from "react";
-import "../CSS/defaultStyle.css";
+import "../../CSS/defaultStyle.css";
 import CRUDTesting from "./CRUDtesting";
 
 function Workbench() {

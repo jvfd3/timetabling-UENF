@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import "../CSS/defaultStyle.css";
-import options from "../temp/options";
+import "../../CSS/defaultStyle.css";
+import options from "../../temp/options";
 import {
   readProfessores,
   deleteProfessores,
   createProfessores,
   updateProfessores,
-} from "../../DB/controller/axiosConnection";
+} from "../../../DB/controller/axiosConnection";
 import {
   CreateButton,
   ReadButton,
   UpdateButton,
   DeleteButton,
-} from "./CRUDButtons/CRUDButtons";
+} from "../CRUDButtons/CRUDButtons";
 
 function CRUDTesting() {
   let dummyProfessor = { ...options.dbTemplates.professor };
