@@ -64,6 +64,15 @@ function getNomesDasDisciplinas(listaDeCodigos) {
   return listaDeCodigosNomes;
 }
 
+function updateProfessorFromList(oldArray, newProfessor) {
+  const newArray = oldArray.map((professorAntigo) => {
+    return professorAntigo.idprofessor === newProfessor.idprofessor
+      ? newProfessor
+      : professorAntigo;
+  });
+  return newArray;
+}
+
 export {
   getPeriodoEsperado,
   getNomeDisciplina,
@@ -73,4 +82,5 @@ export {
   getTurmasDoAnoSemestre,
   getTurmasDaHora,
   getTurmasDoDia,
+  updateProfessorFromList,
 };
