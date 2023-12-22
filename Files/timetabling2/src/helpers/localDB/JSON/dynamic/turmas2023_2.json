@@ -1,0 +1,3 @@
+[
+  {"id": "7",   "ano": 2024, "semestre": 1, "demandaEstimada": 30, "professor": "bolsista",                            "disciplina": {"codigo": "LEL04102", "nome": "Inglês Instrumental I"},                     "horarios": [{"id":  "7_1",  "sala": "Sala",    "dia": "SEX", "horaInicio": 14, "duracao": 3}]},
+]

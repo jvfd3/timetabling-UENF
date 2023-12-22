@@ -1,0 +1,60 @@
+/* .HeaderRow {
+    background-color: tomato;
+}
+
+.TopLeftCorner {
+    background-color: wheat;
+}
+
+.eachClassInCell {
+    background-color: lightgreen;
+}
+
+.DiasHeader {
+    background-color: lightcoral;
+}
+
+.HorariosCol {
+    background-color: burlywood;
+}
+
+.ContentCell {
+    background-color: aquamarine;
+} */
+
+.TabelaCC {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.HeaderRow {
+    border: 1px solid #000;
+}
+
+.TopLeftCorner {
+    border: none;
+}
+
+.DiasHeader {
+    background-color: #dfc778;
+    padding: 10px;
+}
+
+.HorariosCol {
+    border: 1px solid #b83838;
+    padding: 8px;
+    background-color: #eee6e6;
+}
+
+.ContentCell {
+    border: 1px solid #000;
+    /* Adicione a propriedade de borda conforme necessário */
+    padding: 5px;
+    vertical-align: top;
+}
+
+.eachClassInCell {
+    margin-bottom: 5px;
+    border: 2px solid #3b171784;
+    text-wrap: nowrap;
+}

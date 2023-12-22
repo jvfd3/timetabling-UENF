@@ -1,0 +1,186 @@
+/*
+Explanation:
+
+- background is where everything is located, so it's the first thing to be set. Inside it are two divs: CRUD-page-selection and CRUDContainComponents.
+- CRUD-page-selection is the div that contains the buttons for the CRUD pages. It's aligned to the left and top of the screen.
+- CRUDContainComponents is the div that contains the components for the CRUD pages. It's aligned to the bottom-center of the screen. It contains a top select with itemSelectionBar and a div with infoCard.
+- itemSelectionBar is the div that contains the select for the items.
+- infoCard is the div that contains all the information about the selected item.
+- showBasicDataCard is the div that contains the basic information about the selected items.
+- showBasicDataTable is the table that contains the information about the selected item.
+- whiteColor and blackColor are classes that change the color of the text.
+*/
+
+
+
+.whiteColor {
+    color: white;
+}
+
+.blackColor {
+    color: black;
+}
+
+.background {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    align-items: center;
+    /* background-color: rgb(63, 7, 7); */
+    /* background-color: black; */
+    /* width: 95vw; */
+    /* height: 100vh; */
+}
+
+.CRUDContainComponents {
+    background-color: blanchedalmond;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: baseline;
+    height: auto;
+
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px;
+    gap: 10px;
+
+
+    /* width: 450px; */
+    /* width: 1200px; */
+    /* Preenche a tela inteira */
+    /* width: 100%; */
+
+    /* Reduz o blanche até o tamanho mínimo (select) */
+    /* width: min-content; */
+
+    /* Faz nada */
+    /* width: auto; */
+    /* width: fit-content; */
+    /* width: max-content; */
+
+}
+
+.SelectionBar {
+    /* background-color: cadetblue; */
+    display: flex;
+    align-self: baseline;
+    padding: 10px;
+    font-weight: bolder;
+
+    /* Fill all parent component */
+    /* border: 10w; */
+    /* width: 100%; */
+
+    /* Just englobes children */
+    /* width: auto; */
+}
+
+.itemSelectionBar {
+    /* background-color: blueviolet; */
+    display: flex;
+    align-self: baseline;
+    /* padding: 10px; */
+    min-width: max-content;
+    /* width: auto; */
+    /* Fills until reached padding of parent */
+    /* width: 100%; */
+}
+
+.itemSelectionBar:hover {
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    /* Ajuste esses valores para o efeito de sombra desejado */
+}
+
+.infoCard {
+    /* Discorver why it's not working properly */
+    /* background-color: aquamarine; */
+    display: flex;
+    flex-direction: column;
+    align-self: baseline;
+    height: fit-content;
+    /* padding: 1%; */
+
+    /* width: 300px; */
+    /* width: 900px; */
+
+    /* tá pegando o tamanho máximo, ignorando o padding */
+    /* width: max-content; */
+    /* width: 100%; */
+
+    /* Faz nada */
+    /* width: auto; */
+    /* width: fit-content; */
+    /* width: inherit; */
+    /* width: initial; */
+    /* width: min-content; */
+}
+
+.showBasicDataCard {
+    background-color: rgb(251, 205, 148);
+    /* Um rosa pastel suave */
+    /* background-color: brown; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px;
+    margin-bottom: 0;
+    /* align-items: center; */
+
+    /* Forçando o BDC a sair do aquamarine */
+    /* width: 100%; */
+
+    /* Reduzindo pra fit o content */
+    width: fit-content;
+
+    /* Faz nada */
+    /* width: auto; */
+}
+
+.showBasicDataTable {
+    border-collapse: collapse;
+}
+
+.showBasicDataTable th,
+.showBasicDataTable td {
+    padding: 8px;
+    text-align: left;
+    text-wrap: nowrap;
+    border-bottom: 1px solid #ddd;
+}
+
+.manyDisciplinasMultiSelect {
+    /* Para multiselects que tenham muitas disciplinas para mostrar */
+    width: min-content;
+    /* width: auto; */
+    /* width: fit-content; */
+    /* width: max-content; */
+    /* Fix it later */
+    /* width: 50px; */
+}
+
+
+.PageSelection {
+    padding-top: 20px;
+    padding-left: 20px;
+    align-self: baseline;
+    /* background-color: aqua; */
+}
+
+.PageSelectionSelect {}
+
+.PageSelectionSelect:hover {
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    /* Ajuste esses valores para o efeito de sombra desejado */
+}
+
+.SelectList {
+    /* display: flex; */
+    /* padding-left: 2%; */
+    font-weight: bolder;
+    /* min-width: max-content; */
+}

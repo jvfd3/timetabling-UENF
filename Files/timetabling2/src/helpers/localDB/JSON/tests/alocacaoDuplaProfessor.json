@@ -1,0 +1,33 @@
+
+[
+    {
+      "id": 1, "ano": 2022, "semestre": 1, "professor": "Fermín Alfredo Tang Montané",
+      "horarios": [ { "sala": "", "dia": "SEG", "horaInicio": 7, "duracao": 2 },
+                    { "sala": "", "dia": "QUA", "horaInicio": 7, "duracao": 2 }]
+    },
+    {
+      "id": 2, "ano": 2022, "semestre": 1, "professor": "Fermín Alfredo Tang Montané",
+      "horarios": [ { "sala": "", "dia": "TER", "horaInicio": 8, "duracao": 2 },
+                    { "sala": "", "dia": "QUI", "horaInicio": 8, "duracao": 2 }]
+    },
+    {
+      "id": 3, "ano": 2022, "semestre": 1, "professor": "Fermín Alfredo Tang Montané",
+      "horarios": [ { "sala": "", "dia": "QUA", "horaInicio": 9, "duracao": 2 },
+                    { "sala": "", "dia": "SEX", "horaInicio": 9, "duracao": 2 }]
+    },
+    {
+      "id": 4, "ano": 2022, "semestre": 1, "professor": "Fermín Alfredo Tang Montané",
+      "horarios": [ { "sala": "", "dia": "SEG", "horaInicio": 8, "duracao": 2 },
+                    { "sala": "", "dia": "QUA", "horaInicio": 8, "duracao": 2 }]
+    },
+    {
+      "id": 5, "ano": 2022, "semestre": 1, "professor": "Fermín Alfredo Tang Montané",
+      "horarios": [ { "sala": "", "dia": "SEG", "horaInicio": 10, "duracao": 2 },
+                    { "sala": "", "dia": "QUA", "horaInicio": 10, "duracao": 2 }]
+    },
+    {
+      "id": 6, "ano": 2022, "semestre": 1, "professor": "Fermín Alfredo Tang Montané",
+      "horarios": [ { "sala": "", "dia": "SEG", "horaInicio": 9, "duracao": 2 },
+                    { "sala": "", "dia": "QUA", "horaInicio": 9, "duracao": 2 }]
+    }
+  ]

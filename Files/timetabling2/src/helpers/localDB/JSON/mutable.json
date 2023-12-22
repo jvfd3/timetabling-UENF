@@ -1,0 +1,8 @@
+{
+    "mutable1": "mt1",
+    "mutable2": ["mt2", "mt3", "mt4"],
+    "mutable3": {
+        "mt5": "mt6",
+        "mt7": "mt8"
+    }
+}

@@ -1,0 +1,156 @@
+[
+  {
+    "id": 1, "ano": 2023, "semestre": 1, "professor": "Elba Orocia Bravo Asenjo",
+    "disciplina": {"codigo": "MAT01204", "nome": "Álgebra Linear"},
+    "horarios": [ { "sala": "P3-109A", "dia": "SEG", "horaInicio": 8, "duracao": 2 },
+                  { "sala": "P3-109B", "dia": "TER", "horaInicio": 9, "duracao": 2 }],
+    "alunos": { "estimativa": 30, "demandando": ["00115110002", "00115110003", "00115110004"], "inscritos": ["00116110005", "00116110006"]}
+  },
+  {
+    "id": 2, "ano": 2023, "semestre": 1, "professor": "Oscar Alfredo Paz La Torre",
+    "disciplina": {"codigo": "INF01207", "nome": "Estruturas Discretas"},
+    "horarios": [ { "sala": "P3-203A", "dia": "TER", "horaInicio": 11, "duracao": 2 },
+                  { "sala": "P3-206", "dia": "QUI", "horaInicio": 8, "duracao": 2 }],
+    "alunos": { "estimativa": 30, "demandando": ["00116110007", "00116110008", "00117110009"], "inscritos": ["00118110010", "00118110011"]}
+  },
+  {
+    "id": 3, "ano": 2023, "semestre": 2, "professor": "Rigoberto Gregorio Sanabria Castro",
+    "disciplina": {"codigo": "MAT01101", "nome": "Cálculo Diferencial e Integral I"},
+    "horarios": [ { "sala": "P3-207", "dia": "SEG", "horaInicio": 9, "duracao": 2 },
+                  { "sala": "P3-208", "dia": "TER", "horaInicio": 10, "duracao": 2 }],
+    "alunos": { "estimativa": 30, "demandando": ["00118110012", "00118110013", "00118110014"], "inscritos": ["00118110015", "00118110016"]}
+  },
+  {
+    "id": 4, "ano": 2023, "semestre": 2, "professor": "Nelson Machado Barbosa",
+    "disciplina": {"codigo": "MAT01201", "nome": "Estatística e Probabilidade"},
+    "horarios": [ { "sala": "E1-205", "dia": "QUA", "horaInicio": 11, "duracao": 2 },
+                  { "sala": "E1-206", "dia": "QUI", "horaInicio": 12, "duracao": 2 }],
+    "alunos": { "estimativa": 30, "demandando": ["00118110017", "00118110018", "20211100088"], "inscritos": ["20211100089", "20211100090"]}
+  },
+  {
+    "id": 5, "ano": 2023, "semestre": 2, "professor": "Wilma Dora Huacasi Mamani",
+    "disciplina": {"codigo": "MAT01208", "nome": "Cálculo Numérico"},
+    "horarios": [ { "sala": "E1-211", "dia": "SEX", "horaInicio": 13, "duracao": 2 },
+                  { "sala": "E1-217", "dia": "SEG", "horaInicio": 14, "duracao": 2 }],
+    "alunos": { "estimativa": 30, "demandando": ["20211100091", "20211100092", "20211100093"], "inscritos": ["20211100094", "20211100095"]}
+  },
+  {
+    "id": 6, "ano": 2022, "semestre": 1, "professor": "Paulo Cesar Beggio",
+    "disciplina": {"codigo": "MAT01203", "nome": "Cálculo Diferencial e Integral II"},
+    "horarios": [ { "sala": "E1-219", "dia": "TER", "horaInicio": 15, "duracao": 2 },
+                  { "sala": "E1-220", "dia": "QUA", "horaInicio": 16, "duracao": 2 }],
+    "alunos": { "estimativa": 30, "demandando": ["20211100096", "20221100097", "20221100098"], "inscritos": ["20221100099", "20221100100"]}
+  },
+  {
+    "id": 7, "ano": 2022, "semestre": 1, "professor": "Max Erik Soffner",
+    "disciplina": {"codigo": "FIS01202", "nome": "Física Geral I"},
+    "horarios": [ { "sala": "P5-111", "dia": "QUI", "horaInicio": 17, "duracao": 2 },
+                  { "sala": "P5-112", "dia": "SEX", "horaInicio": 18, "duracao": 2 }],
+    "alunos": { "estimativa": 30, "demandando": ["20221100101", "20221100102", "20221100103"], "inscritos": ["20221100104", "20221100105"]}
+  },
+  {
+    "id": 8, "ano": 2022, "semestre": 1, "professor": "Marcelo Gomes da Silva",
+    "disciplina": {"codigo": "FIS01204", "nome": "Laboratório de Física Geral I"},
+    "horarios": [ { "sala": "P10-1", "dia": "SEG", "horaInicio": 19, "duracao": 2 },
+                  { "sala": "P3-109A", "dia": "TER", "horaInicio": 8, "duracao": 2 }],
+    "alunos": { "estimativa": 30, "demandando": ["20221100106", "20221100107", "20221100108"], "inscritos": ["20221100109", "20221100110"]}
+  },
+  {
+    "id": 9, "ano": 2022, "semestre": 1, "professor": "Marcenilda Amorim Lima",
+    "disciplina": {"codigo": "FIS01103", "nome": "Física Geral II"},
+    "horarios": [ { "sala": "P3-109B", "dia": "QUA", "horaInicio": 9, "duracao": 2 },
+                  { "sala": "P3-203A", "dia": "QUI", "horaInicio": 10, "duracao": 2 }],
+    "alunos": { "estimativa": 30, "demandando": ["20221100111", "20221100112", "20221100113"], "inscritos": ["20221100114", "20221100115"]}
+  },
+  {
+    "id": 10, "ano": 2022, "semestre": 2, "professor": "José Augusto Pedro Lima",
+    "disciplina": {"codigo": "FIS01109", "nome": "Laboratório de Física Geral II"},
+    "horarios": [ { "sala": "P3-206", "dia": "SEX", "horaInicio": 11, "duracao": 2 },
+                  { "sala": "P3-207", "dia": "SEG", "horaInicio": 12, "duracao": 2 }],
+    "alunos": { "estimativa": 30, "demandando": ["20221100116", "20221100117", "20221100118"], "inscritos": ["20221100119", "20221100120"]}
+  },
+  {
+    "id": 11, "ano": 2022, "semestre": 2, "professor": "Roberto Weider de Assis Franco",
+    "disciplina": {"codigo": "FIS01202", "nome": "Física Geral I"},
+    "horarios": [ { "sala": "P3-208", "dia": "TER", "horaInicio": 13, "duracao": 2 },
+                  { "sala": "E1-205", "dia": "QUA", "horaInicio": 14, "duracao": 2 }],
+    "alunos": { "estimativa": 30, "demandando": ["20221100121", "20231100122", "20231100123"], "inscritos": ["20231100124", "20231100125"]}
+  },
+  {
+    "id": 12, "ano": 2022, "semestre": 2, "professor": "Marcelo Shoey de Oliveira Massunaga",
+    "disciplina": {"codigo": "FIS01204", "nome": "Laboratório de Física Geral I"},
+    "horarios": [ { "sala": "E1-206", "dia": "QUI", "horaInicio": 15, "duracao": 2 },
+                  { "sala": "E1-211", "dia": "SEX", "horaInicio": 16, "duracao": 2 }],
+    "alunos": { "estimativa": 30, "demandando": ["20231100126", "20231100127", "20231100128"], "inscritos": ["20231100129", "20231100130"]}
+  },
+  {
+    "id": 13, "ano": 2022, "semestre": 2, "professor": "Carlos Alberto Manso Lopez",
+    "disciplina": {"codigo": "LEL04102", "nome": "Inglês Instrumental I"},
+    "horarios": [ { "sala": "E1-217", "dia": "SEG", "horaInicio": 17, "duracao": 2 },
+                  { "sala": "E1-219", "dia": "TER", "horaInicio": 18, "duracao": 2 }],
+    "alunos": { "estimativa": 30, "demandando": ["20231100131", "20231100132", "20231100133"], "inscritos": ["20231100134", "20231100135"]}
+  },
+  {
+    "id": 14, "ano": 2022, "semestre": 2, "professor": "Edson Terra Azevedo Filho",
+    "disciplina": {"codigo": "PRO01540", "nome": "Empreendedorismo"},
+    "horarios": [ { "sala": "E1-220", "dia": "QUA", "horaInicio": 19, "duracao": 2 },
+                  { "sala": "P5-111", "dia": "QUI", "horaInicio": 13, "duracao": 2 }],
+    "alunos": { "estimativa": 30, "demandando": ["20231100136", "20231100137", "20231100138"], "inscritos": ["20231100139", "20231100140"]}
+  },
+  {
+    "id": 15, "ano": 2022, "semestre": 2, "professor": "Manuel Antonio Molina Palma",
+    "disciplina": {"codigo": "PRO01122", "nome": "Metodologia de Trabalho Científico"},
+    "horarios": [ { "sala": "P10-2", "dia": "SEX", "horaInicio": 15, "duracao": 2 },
+                  { "sala": "P10-3", "dia": "SEX", "horaInicio": 18, "duracao": 2 }],
+    "alunos": { "estimativa": 30, "demandando": ["20231100141", "20231100142", "20231100143"], "inscritos": ["20231100144", "20231100145"]}
+  },
+  {
+    "id": 16, "ano": 2021, "semestre": 1, "professor": "Annabell Del Real Tamariz",
+    "disciplina": {"codigo": "INF01106", "nome": "Programação I"},
+    "horarios": [ { "sala": "P3-107", "dia": "TER", "horaInicio": 17, "duracao": 2 },
+                  { "sala": "P3-108", "dia": "SEX", "horaInicio": 16, "duracao": 2 }],
+    "alunos": { "estimativa": 45, "demandando": ["20211100088", "20211100089", "20211100090"], "inscritos": ["20211100088", "20211100091"]}
+  },
+  {
+    "id": 17, "ano": 2021, "semestre": 2, "professor": "Luis Antonio Rivera Escriba",
+    "disciplina": {"codigo": "INF01101", "nome": "Introdução à Ciência da Computação"},
+    "horarios": [ { "sala": "P3-104", "dia": "SEG", "horaInicio": 10, "duracao": 2 },
+                  { "sala": "P3-105", "dia": "QUA", "horaInicio": 8, "duracao": 2 }],
+    "alunos": { "estimativa": 22, "demandando": ["00119110044", "20201100053", "20201100057"], "inscritos": ["20201100057", "20201100065"]}
+  },
+  {
+    "id": 18, "ano": 2021, "semestre": 3, "professor": "Fermín Alfredo Tang Montané",
+    "disciplina": {"codigo": "INF01104", "nome": "Lógica Digital"},
+    "horarios": [ { "sala": "P3-105", "dia": "TER", "horaInicio": 12, "duracao": 2 },
+                  { "sala": "P3-106", "dia": "QUI", "horaInicio": 13, "duracao": 2 }],
+    "alunos": { "estimativa": 12, "demandando": ["00114110001", "00115110002", "00115110003"], "inscritos": ["00116110007", "00116110008"]}
+  },
+  {
+    "id": 18, "ano": 2010, "semestre": 2, "professor": "Fermín Alfredo Tang Montané",
+    "disciplina": {"codigo": "INF01104", "nome": "Lógica Digital"},
+    "horarios": [ { "sala": "P3-105", "dia": "TER", "horaInicio": 12, "duracao": 2 },
+                  { "sala": "P3-106", "dia": "QUI", "horaInicio": 13, "duracao": 2 }],
+    "alunos": { "estimativa": 12, "demandando": ["00114110001", "00115110002", "00115110003"], "inscritos": ["00116110007", "00116110008"]}
+  },
+  {
+    "id": 19, "ano": 2010, "semestre": 2, "professor": "Fermín Alfredo Tang Montané",
+    "disciplina": {"codigo": "MAT01203", "nome": "Cálculo Diferencial e Integral II"},
+    "horarios": [ { "sala": "P3-105", "dia": "TER", "horaInicio": 12, "duracao": 2 },
+                  { "sala": "P3-105", "dia": "TER", "horaInicio": 13, "duracao": 2 }],
+    "alunos": { "estimativa": 12, "demandando": ["00114110001", "00115110002", "00115110003"], "inscritos": ["00116110007", "00116110008"]}
+  },
+  {
+    "id": 20, "ano": 2010, "semestre": 2, "professor": "Fermín Alfredo Tang Montané",
+    "disciplina": {"codigo": "INF01104", "nome": "Lógica Digital"},
+    "horarios": [ { "sala": "P3-105", "dia": "TER", "horaInicio": 13, "duracao": 2 },
+                  { "sala": "P3-105", "dia": "TER", "horaInicio": 13, "duracao": 2 }],
+    "alunos": { "estimativa": 12, "demandando": ["00114110001", "00115110002", "00115110003"], "inscritos": ["00116110007", "00116110008"]}
+  },
+  {
+    "id": 21, "ano": 2010, "semestre": 2, "professor": "Fermín Alfredo Tang Montané",
+    "disciplina": {"codigo": "INF01104", "nome": "Lógica Digital"},
+    "horarios": [ { "sala": "P3-105", "dia": "TER", "horaInicio": 12, "duracao": 2 },
+                  { "sala": "P3-105", "dia": "TER", "horaInicio": 13, "duracao": 2 }],
+    "alunos": { "estimativa": 12, "demandando": ["00114110001", "00115110002", "00115110003"], "inscritos": ["00116110007", "00116110008"]}
+  }
+]

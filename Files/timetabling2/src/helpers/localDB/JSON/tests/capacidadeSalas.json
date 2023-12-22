@@ -1,0 +1,5 @@
+[
+  {"blocoSala": "A", "capacidade": 100},
+  {"blocoSala": "B", "capacidade": 10},
+  {"blocoSala": "C", "capacidade": 1}
+]
