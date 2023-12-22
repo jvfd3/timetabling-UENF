@@ -19,6 +19,7 @@ import {
   UpdateButton,
   DeleteButton,
 } from "../components/CRUDButtons/CRUDButtons";
+import { scrollThroughProfessores } from "../functions/firulas/minhasFirulas";
 
 function ProfessoresDB() {
   let defaultProfessores = allLocalJsonData.SQL.professores;
@@ -54,11 +55,16 @@ function ProfessoresDB() {
     safeDeleteProfessores(professorStates);
   }
 
-  return (
-    <div className="CRUDContainComponents">
-      <div className="a" style={{ display: "flex", flexDirection: "row" }}>
+  function ProfessorSelection({ professorStates }) {
+    const { professores, /* setProfessores, */ professor, setProfessor } =
+      professorStates;
+    return (
+      <div
+        className="SelectionBar"
+        onWheel={(event) => scrollThroughProfessores(event, professorStates)}
+      >
         <Select
-          className="b"
+          className="itemSelectionBar"
           styles={options.SelectStyles.fixedWidth}
           options={professores}
           value={professor}
@@ -68,54 +74,93 @@ function ProfessoresDB() {
           }
           getOptionValue={(option) => option.idprofessor}
         />
-        <CreateButton createFunction={createProfessor} />
-        <ReadButton readFunction={readProfessor} />
-        <UpdateButton updateFunction={updateProfessor} />
-        <DeleteButton deleteFunction={deleteProfessor} />
-      </div>
-      <div className="c">
-        <div className="d">
-          Laboratorio
-          <SelectLaboratorio professorStates={professorStates} />
+        <div className="CRUDButtonsContainer">
+          <CreateButton createFunction={createProfessor} />
+          <ReadButton readFunction={readProfessor} />
+          <UpdateButton updateFunction={updateProfessor} />
+          <DeleteButton deleteFunction={deleteProfessor} />
         </div>
-        <div className="e">
-          Curso
-          <SelectCurso professorStates={professorStates} />
-        </div>
-        <TextField
-          className="f"
-          value={professor.nomeProfessor}
-          onChange={(event) => {
-            let newProfessor = {
-              ...professor,
-              nomeProfessor: event.target.value,
-            };
-            setProfessor(newProfessor);
-          }}
-          fullWidth
-          label="Nome do Professor"
-        />
-        <TextField
-          className="g"
-          value={professor.apelidoProfessor}
-          onChange={(event) => {
-            let newProfessor = {
-              ...professor,
-              apelidoProfessor: event.target.value,
-            };
-            setProfessor(newProfessor);
-          }}
-          fullWidth
-          label="Apelido do Professor"
-        />
-        <TextField
-          className="h"
-          value={professor.idprofessor}
-          fullWidth
-          label="ID do Professor"
-          disabled
-        />
       </div>
+    );
+  }
+
+  function InformacoesDoProfessor({ professorStates }) {
+    const { professor, setProfessor } = professorStates;
+    return (
+      <div className="showBasicCardData">
+        <h3>INFORMAÇÕES DO PROFESSOR</h3>
+        <table className="showBasicDataTable">
+          <tbody>
+            <tr>
+              <th>laboratório</th>
+              <td>
+                <SelectLaboratorio professorStates={professorStates} />
+              </td>
+            </tr>
+            <tr>
+              <th>Curso</th>
+              <td>
+                <SelectCurso professorStates={professorStates} />
+              </td>
+            </tr>
+            <tr>
+              <th>Nome</th>
+              <td>
+                <TextField
+                  className="f"
+                  value={professor.nomeProfessor}
+                  onChange={(event) => {
+                    let newProfessor = {
+                      ...professor,
+                      nomeProfessor: event.target.value,
+                    };
+                    setProfessor(newProfessor);
+                  }}
+                  fullWidth
+                  label="Nome do Professor"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>Apelido</th>
+              <td>
+                <TextField
+                  className="g"
+                  value={professor.apelidoProfessor}
+                  onChange={(event) => {
+                    let newProfessor = {
+                      ...professor,
+                      apelidoProfessor: event.target.value,
+                    };
+                    setProfessor(newProfessor);
+                  }}
+                  fullWidth
+                  label="Apelido do Professor"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>ID</th>
+              <td>
+                <TextField
+                  className="h"
+                  value={professor.idprofessor}
+                  fullWidth
+                  label="ID do Professor"
+                  disabled
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+
+  return (
+    <div className="CRUDContainComponents">
+      <ProfessorSelection professorStates={professorStates} />
+      <InformacoesDoProfessor professorStates={professorStates} />
     </div>
   );
 }
