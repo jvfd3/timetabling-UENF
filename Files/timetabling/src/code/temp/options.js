@@ -275,7 +275,7 @@ const options = {
     fixedWidth: {
       menu: ({ width, ...css }) => ({ ...css, width: 300 }),
     },
-    anotherOne: {
+    fullItem: {
       control: (css) => ({
         ...css,
         width: "100%",
