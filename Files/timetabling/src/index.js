@@ -1,7 +1,8 @@
+import "./index.css";
+import "./defaultStyle.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import MyRouting from "./code/routing";
+import MyRouting from "./app/routing/routing";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
