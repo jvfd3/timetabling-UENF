@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CRUDPageSelection from "../components/PageSelect";
 import options from "../temp/options";
 import "../CSS/professores.css";
