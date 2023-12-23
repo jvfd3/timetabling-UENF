@@ -1,5 +1,10 @@
 # Things that I'd like to do
 
+## 23/12/2023
+
+- [ ] Refatorar meu código
+- [ ] FK
+
 ## Other things to do
 
 - [X] Ver sobre BD com tia fabiane

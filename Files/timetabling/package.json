@@ -1,8 +1,12 @@
 {
-  "name": "timetabling",
-  "version": "0.1.0",
-  "homepage": "https://jvfd3.github.io/timetabling-UENF",
   "private": true,
+  "license": "ISC",
+  "version": "0.1.0",
+  "name": "timetabling",
+  "main": "src-new/app/index.js",
+  "author": "João Vítor Fernandes Dias",
+  "homepage": "https://jvfd3.github.io/timetabling-UENF",
+  "description": "Sistema de suporte à decisão para criação de grade horária",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -53,9 +57,5 @@
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "eslint-config-react-app": "^7.0.1",
     "gh-pages": "^6.1.0"
-  },
-  "main": "index.js",
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  }
 }
