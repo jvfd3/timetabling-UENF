@@ -1,5 +1,5 @@
 import { customQuery, customQuery2 } from "../oneQueryToRuleThemAll";
-import mysql from "mysql";
+// import mysql from "mysql";
 import { axiosTeste } from "./axiosConnection";
 
 /* PROFESSOR */
@@ -20,8 +20,8 @@ async function newCreateProfessor(professor) {
     professor.laboratorio,
     professor.nomeProfessor,
   ];
-  const formattedQuery = mysql.format(q, values);
-  return customQuery2(formattedQuery);
+  // const formattedQuery = mysql.format(q, values);
+  // return customQuery2(formattedQuery);
 }
 
 async function newReadProfessores() {
@@ -39,8 +39,8 @@ async function newUpdateProfessor(professor) {
     professor.nomeProfessor,
     professor.idprofessor,
   ];
-  const formattedQuery = mysql.format(q, values);
-  return customQuery2(formattedQuery);
+  // const formattedQuery = mysql.format(q, values);
+  // return customQuery2(formattedQuery);
 }
 
 async function newDeleteProfessor(id) {

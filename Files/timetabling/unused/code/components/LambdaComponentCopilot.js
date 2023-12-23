@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import options from "../../temp/options";
-import { customQuery, customQuery2 } from "../../../DB/oneQueryToRuleThemAll";
+import { customQuery, customQuery2 } from "../../DB/oneQueryToRuleThemAll";
 
 const LambdaCopilot = () => {
   const [query, setQuery] = useState("SELECT * FROM disciplinas");

@@ -1,6 +1,6 @@
 // LambdaComponent.js
 import React, { useEffect, useState } from "react";
-import { API } from "aws-amplify";
+// import { API } from "aws-amplify";
 
 const LambdaComponent = () => {
   const [lambdaResult, setLambdaResult] = useState(null);
@@ -8,8 +8,8 @@ const LambdaComponent = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await API.get("lambdaFunction", "/path"); // Substitua 'lambdaFunction' e '/path' pelos valores corretos
-        setLambdaResult(result);
+        // const result = await API.get("lambdaFunction", "/path"); // Substitua 'lambdaFunction' e '/path' pelos valores corretos
+        // setLambdaResult(result);
       } catch (error) {
         console.error("Erro ao chamar a função Lambda:", error);
       }
