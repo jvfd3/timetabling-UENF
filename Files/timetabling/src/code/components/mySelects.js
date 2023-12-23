@@ -11,7 +11,6 @@ import {
   thinDeleteProfessor,
 } from "../../DB/dataFromDB";
 import { updateProfessorFromList } from "../functions/auxFunctions";
-import { get } from "https-browserify";
 
 function SelectAnoSemestre(props) {
   let { ano, setAno, semestre, setSemestre } = props;

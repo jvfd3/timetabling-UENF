@@ -1,4 +1,4 @@
-import "./removeHorarioButton.css";
+import "./RemoveHorarioButton.css";
 import { DeleteButton } from "../CRUDButtons/CRUDButtons";
 
 function RemoveHorarioButton({ lTurma, setLTurma, indexHorario }) {
