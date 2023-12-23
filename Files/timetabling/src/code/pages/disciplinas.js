@@ -17,15 +17,13 @@
   - esse valor deve estar definido como value no Select de Docentes
 - ao alterar cada um dos selects, a alteração deve ser enviada ao JSONBIN. - DO LATER
 */
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../CSS/CRUD_disciplinas.css";
 import "../CSS/defaultStyle.css";
 import options from "../temp/options";
 import CRUDPageSelection from "../components/PageSelect";
 import Select from "react-select";
-import { readData } from "../functions/CRUD_JSONBIN";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
-import { getNomesDasDisciplinas } from "../functions/auxFunctions";
 /* import {
   SelectDisciplinasCodigoC,
   SelectDisciplinasDisciplinaC,

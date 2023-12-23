@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CRUDPageSelection from "../components/PageSelect";
 import options from "../temp/options";
 import "../CSS/professores.css";
@@ -19,7 +19,7 @@ import {
   UpdateButton,
   DeleteButton,
 } from "../components/CRUDButtons/CRUDButtons";
-import { scrollThroughProfessores } from "../functions/firulas/minhasFirulas";
+// import { scrollThroughProfessores } from "../functions/firulas/minhasFirulas";
 
 function ProfessoresDB() {
   let defaultProfessores = allLocalJsonData.SQL.professores;

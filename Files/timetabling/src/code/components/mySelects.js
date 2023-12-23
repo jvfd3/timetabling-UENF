@@ -1,15 +1,9 @@
 import "../CSS/defaultStyle.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import options from "../temp/options";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
-import {
-  createProfessor,
-  readProfessores,
-  updateProfessor,
-  thinDeleteProfessor,
-} from "../../DB/dataFromDB";
 import { updateProfessorFromList } from "../functions/auxFunctions";
 
 function SelectAnoSemestre(props) {

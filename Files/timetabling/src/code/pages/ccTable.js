@@ -17,7 +17,7 @@
   - esse valor deve estar definido como value no Select de Docentes
 - ao alterar cada um dos selects, a alteração deve ser enviada ao JSONBIN. - DO LATER
 */
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../CSS/ccTable.css";
 import "../CSS/defaultStyle.css";
 import options from "../temp/options";

@@ -5,7 +5,6 @@ import CRUDPageSelection from "../components/PageSelect";
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
-import { getNomeDisciplina } from "../functions/auxFunctions";
 import {
   SelectDia,
   SelectDisciplina,

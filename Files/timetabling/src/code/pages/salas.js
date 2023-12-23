@@ -4,32 +4,32 @@ import assets from "../../assets/imagesImport";
 import options from "../temp/options";
 import CRUDPageSelection from "../components/PageSelect";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
-import react, { useState } from "react";
+import { useState } from "react";
 import Select from "react-select";
 
 function Salas() {
   let salasFromJson = allLocalJsonData.static.infoSalas;
 
-  const [salas, setSalas] = useState(salasFromJson);
-  const [sala, setSala] = useState(salas[0]);
+  // const [salas, setSalas] = useState(salasFromJson);
+  const [sala, setSala] = useState(salasFromJson[0]);
 
   function SalaSelection() {
     function scrollThroughSalas(event) {
       let diretion = event.deltaY > 0 ? "down" : "up";
-      let index = salas.findIndex(
+      let index = salasFromJson.findIndex(
         (oneOfSalas) => oneOfSalas.blocoSala === sala.blocoSala
       );
       index += diretion === "up" ? -1 : 1;
-      index = index < 0 ? salas.length - 1 : index;
-      index = index >= salas.length ? 0 : index;
-      let newOption = salas[index];
+      index = index < 0 ? salasFromJson.length - 1 : index;
+      index = index >= salasFromJson.length ? 0 : index;
+      let newOption = salasFromJson[index];
       setSala(newOption);
     }
     return (
       <div className="SelectionBar" onWheel={scrollThroughSalas}>
         <Select
           className="itemSelectionBar"
-          options={salas}
+          options={salasFromJson}
           value={sala}
           onChange={setSala}
           getOptionValue={(option) => option.blocoSala}

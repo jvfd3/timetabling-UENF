@@ -1,6 +1,6 @@
 import "../CSS/defaultStyle.css";
 import "../CSS/CRUD_alunos.css";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import options from "../temp/options";
 import CRUDPageSelection from "../components/PageSelect";
 import Select from "react-select";
@@ -210,7 +210,9 @@ function Alunos() {
 function CRUDstudents() {
   return (
     <div className="background">
-      <CRUDPageSelection defaultValue={options.constantValues.pageSelection.alunos} />
+      <CRUDPageSelection
+        defaultValue={options.constantValues.pageSelection.alunos}
+      />
       <Alunos />
     </div>
   );

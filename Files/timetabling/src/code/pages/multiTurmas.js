@@ -12,8 +12,8 @@ import {
   SelectDia,
   SelectHoraTang,
   SelectDuracao,
-  SelectSemestre,
-  SelectAno,
+  // SelectSemestre,
+  // SelectAno,
   SelectAnoSemestre,
 } from "../components/mySelects";
 import {
