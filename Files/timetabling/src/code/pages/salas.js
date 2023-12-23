@@ -14,23 +14,19 @@ function Salas() {
   const [sala, setSala] = useState(salasFromJson[0]);
 
   function SalaSelection() {
-    function scrollThroughSalas(event) {
-      let diretion = event.deltaY > 0 ? "down" : "up";
-      let index = salasFromJson.findIndex(
-        (oneOfSalas) => oneOfSalas.blocoSala === sala.blocoSala
-      );
-      index += diretion === "up" ? -1 : 1;
-      index = index < 0 ? salasFromJson.length - 1 : index;
-      index = index >= salasFromJson.length ? 0 : index;
-      let newOption = salasFromJson[index];
-      setSala(newOption);
-    }
     return (
-      <div className="SelectionBar" onWheel={scrollThroughSalas}>
+      <div
+        className="SelectionBar"
+        onWheel={(event) => {
+          // let itemStates = [salasFromJson, setSala, sala];
+          // scrollThroughSalas(event, itemStates);
+        }}
+      >
         <Select
           className="itemSelectionBar"
           options={salasFromJson}
           value={sala}
+          styles={options.SelectStyles.fullItem}
           onChange={setSala}
           getOptionValue={(option) => option.blocoSala}
           getOptionLabel={(option) => option.capacidade}

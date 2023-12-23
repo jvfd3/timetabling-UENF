@@ -6,6 +6,7 @@ import CRUDPageSelection from "../components/PageSelect";
 import Select from "react-select";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
 import { getNomesDasDisciplinas } from "../functions/auxFunctions";
+// import { scrollThroughAlunos } from "../functions/firulas/minhasFirulas";
 
 let andamentoAlunosJsonData = allLocalJsonData.dynamic.andamentoAlunos;
 const dados_agrupados = juntarTodasAsInformacoes();
@@ -33,23 +34,19 @@ function Alunos() {
   const [aluno, setAluno] = useState(dados_agrupados[38]); // JVFD
 
   function StudentSelection(props) {
-    function scrollThroughAlunos(event) {
-      let diretion = event.deltaY > 0 ? "down" : "up";
-      let index = dados_agrupados.findIndex(
-        (oneOfAlunos) => oneOfAlunos.matricula === aluno.matricula
-      );
-      index += diretion === "up" ? -1 : 1;
-      index = index < 0 ? dados_agrupados.length - 1 : index;
-      index = index >= dados_agrupados.length ? 0 : index;
-      let newOption = dados_agrupados[index];
-      setAluno(newOption);
-    }
     return (
-      <div className="SelectionBar" onWheel={scrollThroughAlunos}>
+      <div
+        className="SelectionBar"
+        onWheel={(event) => {
+          // let itemStates = [dados_agrupados, setAluno, aluno];
+          // scrollThroughAlunos(event, itemStates);
+        }}
+      >
         <Select
           className="itemSelectionBar"
           // defaultValue={props.default_student}
           value={props.student}
+          styles={options.SelectStyles.fullItem}
           onChange={props.change_student}
           placeholder={"Nome do aluno"}
           isClearable={false}

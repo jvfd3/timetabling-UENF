@@ -24,11 +24,8 @@ import options from "../temp/options";
 import CRUDPageSelection from "../components/PageSelect";
 import Select from "react-select";
 import { allLocalJsonData } from "../../DB/dataFromJSON";
-/* import {
-  SelectDisciplinasCodigoC,
-  SelectDisciplinasDisciplinaC,
-} from "../components/mySelects";
- */
+// import { scrollThroughDisciplinas } from "../functions/firulas/minhasFirulas";
+
 function Disciplinas() {
   // let disciplinasFromJB = await readData(options.JBVars.bins.infoDisciplinasCC);
   // let disciplinas_RS = disciplinasFromJB.map(disciplinaDBtoRS);
@@ -38,25 +35,21 @@ function Disciplinas() {
   const [disciplina, setDisciplina] = useState(disciplinas[36]);
 
   function DisciplinasSelection() {
-    function scrollThroughDisciplinas(event) {
-      let diretion = event.deltaY > 0 ? "down" : "up";
-      let index = disciplinas.findIndex(
-        (oneOfDisciplinas) => oneOfDisciplinas.codigo === disciplina.codigo
-      );
-      index += diretion === "up" ? -1 : 1;
-      index = index < 0 ? disciplinas.length - 1 : index;
-      index = index >= disciplinas.length ? 0 : index;
-      let newOption = disciplinas[index];
-      setDisciplina(newOption);
-    }
     return (
-      <div className="SelectionBar" onWheel={scrollThroughDisciplinas}>
+      <div
+        className="SelectionBar"
+        onWheel={(event) => {
+          // let itemStates = [disciplinas, setDisciplina, disciplina];
+          // scrollThroughDisciplinas(event, itemStates);
+        }}
+      >
         <Select
           className="itemSelectionBar"
           placeholder={"Disciplina"}
           value={disciplina}
           options={disciplinas}
           onChange={setDisciplina}
+          styles={options.SelectStyles.fullItem}
           // formatOptionLabel={props.formatOptionLabel}
           isMulti={false}
           getOptionValue={(option) => option.codigo}

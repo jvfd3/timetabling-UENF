@@ -15,6 +15,7 @@ import {
   SelectAnoTurma,
   SelectSemestreTurma,
 } from "../components/mySelects";
+// import { scrollThroughTurmas } from "../functions/firulas/minhasFirulas";
 // import AsyncSelect from "react-select/async";
 // import { readData } from "../functions/CRUD_JSONBIN";
 
@@ -37,19 +38,14 @@ function Turmas() {
   }, [turma]);
 
   function TurmaSelection() {
-    function scrollThroughAlunos(event) {
-      let diretion = event.deltaY > 0 ? "down" : "up";
-      let index = turmas.findIndex(
-        (oneOfTurmas) => oneOfTurmas.id === turma.id
-      );
-      index += diretion === "up" ? -1 : 1;
-      index = index < 0 ? turmas.length - 1 : index;
-      index = index >= turmas.length ? 0 : index;
-      let newOption = turmas[index];
-      setTurma(newOption);
-    }
     return (
-      <div className="SelectionBar" onWheel={scrollThroughAlunos}>
+      <div
+        className="SelectionBar"
+        onWheel={(event) => {
+          // let itemStates = [turmas, setTurma, turma];
+          // scrollThroughTurmas(event, itemStates);
+        }}
+      >
         <Select
           className="itemSelectionBar"
           options={turmas}

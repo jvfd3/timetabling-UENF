@@ -57,7 +57,7 @@ const CRUDPageSelection = (props) => {
       >
         <Select
           className="SelectList"
-          styles={options.SelectStyles.anotherOne}
+          styles={options.SelectStyles.fullItem}
           placeholder={"Selecionar CRUD"}
           options={filteredOptions} // Use as opções filtradas aqui
           defaultValue={props.defaultValue}

@@ -6,6 +6,8 @@ import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { updateProfessorFromList } from "../functions/auxFunctions";
 
+let styleWidthFix = options.SelectStyles.fullItem;
+
 function SelectAnoSemestre(props) {
   let { ano, setAno, semestre, setSemestre } = props;
   return (
@@ -301,6 +303,7 @@ function SelectSala({ lTurma, setLTurma, indexHorario }) {
       placeholder="Sala"
       options={salas}
       value={sala}
+      styles={styleWidthFix}
       getOptionValue={(option) => option.blocoSala}
       getOptionLabel={(option) =>
         `(${option.capacidade}) ${option.bloco} - ${option.codigo}`
@@ -482,7 +485,7 @@ function SelectCurso({ professorStates }) {
     <Select
       className="SelectList"
       onChange={updateCurso}
-      styles={options.SelectStyles.anotherOne}
+      styles={styleWidthFix}
       value={getCurso(professor.curso)}
       options={cursos}
       isClearable
@@ -534,7 +537,7 @@ function SelectLaboratorio({ professorStates }) {
       isClearable
       placeholder="Laboratório"
       className="SelectList"
-      styles={options.SelectStyles.anotherOne}
+      styles={styleWidthFix}
       getOptionLabel={(option) => `${option.value} - ${option.label}`}
       formatOptionLabel={(option) => `${option.value} - ${option.label}`}
     />
