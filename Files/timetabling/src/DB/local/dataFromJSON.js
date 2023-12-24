@@ -32,20 +32,20 @@ import horariosDataSQL from "./JSON/SQL/horarios.json";
 const allLocalJsonData = {
   dynamic: {
     andamentoAlunos: andamentoAlunosData,
-    preferenciasProfessores: preferenciasProfessoresData,
-    turmas: turmasData,
+    //   preferenciasProfessores: preferenciasProfessoresData,
+    //   turmas: turmasData,
   },
-  select: {
-    RSalunos: RSalunosData,
-    RSdisciplinas: RSdisciplinasData,
-    RSprofessores: RSprofessoresData,
-    RSsalas: RSsalasData,
-  },
+  // select: {
+  //   RSalunos: RSalunosData,
+  //   RSdisciplinas: RSdisciplinasData,
+  //   RSprofessores: RSprofessoresData,
+  //   RSsalas: RSsalasData,
+  // },
   static: {
     infoAlunos: infoAlunosData,
     infoDisciplinasCC: infoDisciplinasCCData,
-    infoProfessores: infoProfessoresData,
-    infoSalas: infoSalasData,
+    // infoProfessores: infoProfessoresData,
+    // infoSalas: infoSalasData,
   },
   SQL: {
     disciplinas: disciplinasDataSQL,
@@ -55,15 +55,15 @@ const allLocalJsonData = {
     horarios: horariosDataSQL,
   },
   tests: {
-    alocacaoDuplaAlunos: alocacaoDuplaAlunosData,
-    alocacaoDuplaProfessor: alocacaoDuplaProfessorData,
-    alocacaoDuplaSala: alocacaoDuplaSalaData,
-    capacidadeSalas: capacidadeSalasData,
-    demandaAndamentoAlunos: demandaAndamentoAlunosData,
-    demandaTurmas: demandaTurmasData,
-    turmasTeste: turmasTesteData,
+    // alocacaoDuplaAlunos: alocacaoDuplaAlunosData,
+    // alocacaoDuplaProfessor: alocacaoDuplaProfessorData,
+    // alocacaoDuplaSala: alocacaoDuplaSalaData,
+    // capacidadeSalas: capacidadeSalasData,
+    // demandaAndamentoAlunos: demandaAndamentoAlunosData,
+    // demandaTurmas: demandaTurmasData,
+    // turmasTeste: turmasTesteData,
   },
-  templates: templatesData,
+  // templates: templatesData,
 };
 
 export { allLocalJsonData };
