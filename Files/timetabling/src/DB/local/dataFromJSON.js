@@ -22,11 +22,12 @@ import capacidadeSalasData from "./JSON/tests/capacidadeSalas.json";
 import demandaAndamentoAlunosData from "./JSON/tests/demandaAndamentoAlunos.json";
 import demandaTurmasData from "./JSON/tests/demandaTurmas.json";
 import turmasTesteData from "./JSON/tests/turmasTeste.json";
-
-import disciplinasDataSQL from "./JSON/SQL/infoDisciplinasCC.json";
-import professoresDataSQL from "./JSON/SQL/infoProfessores.json";
-import salasDataSQL from "./JSON/SQL/infoSalas.json";
-import turmasDataSQL from "./JSON/SQL/smallturmas.json";
+/* SQL */
+import disciplinasDataSQL from "./JSON/SQL/disciplinas.json";
+import professoresDataSQL from "./JSON/SQL/professores.json";
+import salasDataSQL from "./JSON/SQL/salas.json";
+import turmasDataSQL from "./JSON/SQL/turmas.json";
+import horariosDataSQL from "./JSON/SQL/horarios.json";
 
 const allLocalJsonData = {
   dynamic: {
@@ -51,6 +52,7 @@ const allLocalJsonData = {
     professores: professoresDataSQL,
     salas: salasDataSQL,
     turmas: turmasDataSQL,
+    horarios: horariosDataSQL,
   },
   tests: {
     alocacaoDuplaAlunos: alocacaoDuplaAlunosData,
