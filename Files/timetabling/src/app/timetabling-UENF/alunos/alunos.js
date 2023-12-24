@@ -11,7 +11,8 @@ let andamentoAlunosJsonData = allLocalJsonData.dynamic.andamentoAlunos;
 const dados_agrupados = juntarTodasAsInformacoes();
 
 function juntarTodasAsInformacoes() {
-  let alunos_RS = allLocalJsonData.static.infoAlunos;
+  // let alunos_RS = allLocalJsonData.static.infoAlunos;
+  let alunos_RS = allLocalJsonData.SQL.alunos;
   let alunosProgressao = andamentoAlunosJsonData;
   let geral = [];
 

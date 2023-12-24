@@ -176,7 +176,8 @@ function conflictsDisciplinaPeriodo(turmasListadas, turma) {
   */
 
   let disciplinaDaTurma = turma.disciplina.codigo;
-  let disciplinas = allLocalJsonData.static.infoDisciplinasCC;
+  // let disciplinas = allLocalJsonData.static.infoDisciplinasCC;
+  let disciplinas = allLocalJsonData.SQL.disciplinas;
 
   // console.log("disciplinaDaTurma", disciplinaDaTurma);
 

@@ -129,7 +129,8 @@ function SelectSemestre({ outerSemestre, setOuterSemestre }) {
 }
 
 function SelectDisciplina({ lTurma, setLTurma }) {
-  let disciplinas = allLocalJsonData.static.infoDisciplinasCC;
+  // let disciplinas = allLocalJsonData.static.infoDisciplinasCC;
+  let disciplinas = allLocalJsonData.SQL.disciplinas;
   let disciplinaSelecionada = disciplinas.find(
     (disciplina) => disciplina.codigo === lTurma.disciplina.codigo
   );

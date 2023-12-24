@@ -1,5 +1,6 @@
 import React from "react";
 import options from "../../../temp/options";
+import { allLocalJsonData } from "../../../../src/DB/local/dataFromJSON";
 
 function PreferencesTable(props) {
   const { preferencia1, setPreferencia1 } = props;
@@ -204,7 +205,9 @@ function DisciplinasMinistradasPeloProfessor() {
       atualizandoProfessores(myProfessores);
       updateData(myProfessores, options.JBVars.bins.infoProfessores);
     }
-    let disciplinas = allLocalJsonData.static.infoDisciplinasCC;
+    // let disciplinas = allLocalJsonData.static.infoDisciplinasCC;
+    let disciplinas = allLocalJsonData.SQL.disciplinas;
+
     let myNewCurrentOptions = getNomesDasDisciplinas(myCurrentOptions);
     return (
       <Select

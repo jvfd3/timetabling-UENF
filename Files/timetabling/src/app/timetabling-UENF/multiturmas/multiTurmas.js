@@ -113,7 +113,8 @@ function Turmas() {
     let disciplinasOferecidas = lTurmas.map((turma) => turma.codigoDisciplina);
     // console.log(disciplinasOferecidas);
 
-    let TodasDisciplinas = allLocalJsonData.static.infoDisciplinasCC;
+    // let TodasDisciplinas = allLocalJsonData.static.infoDisciplinasCC;
+    let TodasDisciplinas = allLocalJsonData.SQL.disciplinas;
 
     /*
       Listar todas os código-nomes de disciplinas que são de semestre ímpar

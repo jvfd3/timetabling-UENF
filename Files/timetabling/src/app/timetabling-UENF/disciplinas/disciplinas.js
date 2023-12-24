@@ -9,7 +9,8 @@ import "./disciplinas.css";
 function Disciplinas() {
   // let disciplinasFromJB = await readData(options.JBVars.bins.infoDisciplinasCC);
   // let disciplinas_RS = disciplinasFromJB.map(disciplinaDBtoRS);
-  let disciplinas_RS = allLocalJsonData.static.infoDisciplinasCC;
+  // let disciplinas_RS = allLocalJsonData.static.infoDisciplinasCC;
+  let disciplinas_RS = allLocalJsonData.SQL.disciplinas;
 
   const [disciplinas, setDisciplinas] = useState(disciplinas_RS);
   const [disciplina, setDisciplina] = useState(disciplinas[36]);

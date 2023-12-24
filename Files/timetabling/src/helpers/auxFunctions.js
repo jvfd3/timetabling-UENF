@@ -1,28 +1,33 @@
 import { allLocalJsonData } from "../DB/local/dataFromJSON";
 
 function getPeriodoEsperado(codigoDisciplina) {
-  let disciplina = allLocalJsonData.static.infoDisciplinasCC.find(
+
+  // let disciplina = allLocalJsonData.static.infoDisciplinasCC.find(
+  let disciplina = allLocalJsonData.SQL.disciplinas.find(
     (disciplina) => disciplina.codigo === codigoDisciplina
   );
   return disciplina.periodo;
 }
 
 function getNomeDisciplina(codigoDisciplina) {
-  let disciplina = allLocalJsonData.static.infoDisciplinasCC.find(
+  // let disciplina = allLocalJsonData.static.infoDisciplinasCC.find(
+  let disciplina = allLocalJsonData.SQL.disciplinas.find(
     (disciplina) => disciplina.codigo === codigoDisciplina
   );
   return disciplina.nome;
 }
 
 function getApelidoDisciplina(codigoDisciplina) {
-  let disciplina = allLocalJsonData.static.infoDisciplinasCC.find(
+  // let disciplina = allLocalJsonData.static.infoDisciplinasCC.find(
+  let disciplina = allLocalJsonData.SQL.disciplinas.find(
     (disciplina) => disciplina.codigo === codigoDisciplina
   );
   return disciplina.apelido;
 }
 
 function getApelidoProfessor(nomeProfessor) {
-  let professor = allLocalJsonData.static.infoProfessores.find(
+  // let professor = allLocalJsonData.static.infoProfessores.find(
+  let professor = allLocalJsonData.SQL.professores.find(
     (professor) => professor.nome === nomeProfessor
   );
   return professor.apelido;
