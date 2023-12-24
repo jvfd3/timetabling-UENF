@@ -36,22 +36,6 @@ async function defaultCreate(query, queryValues) {
   return getPayloadResponse(message, query, queryValues, queryResult, localError, statusCode);
 }
 
-function getPayloadResponse(message, query, queryValues, queryResult, error, statusCode) {
-  let myBody = {
-    message: message,
-    query: query,
-    queryValues: queryValues,
-    queryResult: queryResult?.[0] ?? null,
-    error: error,
-  };
-  let payloadResponse = {
-    statusCode: statusCode,
-    body: myBody,
-  };
-  console.log(payloadResponse);
-  return payloadResponse;
-}
-
 function convertToList(professor) {
   const values = [  /* Vai ser nulo se algum item não for definido */
     professor.apelidoProfessor ?? null,
