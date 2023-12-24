@@ -3,32 +3,10 @@ import Select from "react-select";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
-import { getNomesDasDisciplinas } from "../../../helpers/auxFunctions";
 import "./alunos.css";
 // import { scrollThroughAlunos } from "../functions/firulas/minhasFirulas";
 
-let andamentoAlunosJsonData = allLocalJsonData.dynamic.andamentoAlunos;
-const dados_agrupados = juntarTodasAsInformacoes();
-
-function juntarTodasAsInformacoes() {
-  // let alunos_RS = allLocalJsonData.static.infoAlunos;
-  let alunos_RS = allLocalJsonData.SQL.alunos;
-  let alunosProgressao = andamentoAlunosJsonData;
-  let geral = [];
-
-  for (let i = 0; i < alunos_RS.length; i++) {
-    let filled_aluno = alunos_RS[i];
-    let progressao_desse_aluno = alunosProgressao[filled_aluno.matricula];
-    let cursando = getNomesDasDisciplinas(progressao_desse_aluno.cursando);
-    let naofeitas = getNomesDasDisciplinas(progressao_desse_aluno.naofeitas);
-    let aprovadas = getNomesDasDisciplinas(progressao_desse_aluno.aprovadas);
-    filled_aluno["cursando"] = cursando;
-    filled_aluno["naofeitas"] = naofeitas;
-    filled_aluno["aprovadas"] = aprovadas;
-    geral.push(filled_aluno);
-  }
-  return geral;
-}
+const dados_agrupados = allLocalJsonData.SQL.alunos
 
 function Alunos() {
   const [aluno, setAluno] = useState(dados_agrupados[38]); // JVFD

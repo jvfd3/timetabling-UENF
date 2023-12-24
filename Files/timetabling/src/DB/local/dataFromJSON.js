@@ -1,5 +1,3 @@
-/* Dynamic */
-import andamentoAlunosData from "./JSON/dynamic/andamentoAlunos.json";
 /* SQL */
 import disciplinasDataSQL from "./JSON/SQL/disciplinas.json";
 import professoresDataSQL from "./JSON/SQL/professores.json";
@@ -9,9 +7,6 @@ import horariosDataSQL from "./JSON/SQL/horarios.json";
 import infoAlunosDataSQL from "./JSON/SQL/alunos.json";
 
 const allLocalJsonData = {
-  dynamic: {
-    andamentoAlunos: andamentoAlunosData,
-  },
   SQL: {
     disciplinas: disciplinasDataSQL,
     professores: professoresDataSQL,

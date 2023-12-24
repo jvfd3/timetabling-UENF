@@ -27,7 +27,7 @@ import "./multiTurmas.css";
 // import { readData } from "../functions/CRUD_JSONBIN";
 
 function Turmas() {
-  let allTurmas = allLocalJsonData.dynamic.turmas;
+  let allTurmas = allLocalJsonData.SQL.turmas;
 
   // const [ano, setAno] = useState(options.constantValues.years[10]);
   const [ano, setAno] = useState(options.constantValues.years[15]);
