@@ -41,4 +41,31 @@ function TextInputApelidoProfessor(props) {
   );
 }
 
-export { TextInputNomeProfessor, TextInputApelidoProfessor };
+function NumberInputDemandaEstimada({ lTurma, setLTurma }) {
+  const [demandaEstimada, setDemandaEstimada] = useState(
+    lTurma.demandaEstimada
+  );
+  function handleDemandaEstimadaChange(value) {
+    setDemandaEstimada(value);
+    setLTurma({ ...lTurma, demandaEstimada: value });
+  }
+
+  return (
+    <TextField
+      fullWidth
+      id={`DemandaEstimada-${lTurma.idTurma}`}
+      label="Demanda Estimada"
+      variant="outlined"
+      type="number"
+      value={demandaEstimada}
+      inputProps={{ min: 0, max: 999, step: 1 }}
+      onChange={(event) => handleDemandaEstimadaChange(event.target.value)}
+    />
+  );
+}
+
+export {
+  TextInputNomeProfessor,
+  TextInputApelidoProfessor,
+  NumberInputDemandaEstimada,
+};
