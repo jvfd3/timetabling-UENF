@@ -1,5 +1,51 @@
 import { allLocalJsonData } from "../DB/local/dataFromJSON";
 
+function splittedToUnified(splittedTurmas) {
+  let arr = splittedTurmas;
+  // console.log(arr);
+  let result = arr.reduce((acc, {
+    ano,
+    idTurma,
+    semestre,
+    NomeProfessor,
+    CursoProfessor,
+    NomeDisciplina,
+    demandaEstimada,
+    ApelidoProfessor,
+    CodigoDisciplina,
+    PeriodoDisciplina,
+    ApelidoDisciplina,
+    LaboratorioProfessor,
+    ...rest
+  }) => {
+    let key = idTurma;
+    if (!acc[key]) {
+      acc[key] = {
+        ano: ano,
+        idTurma: idTurma,
+        semestre: semestre,
+        NomeProfessor: NomeProfessor,
+        CursoProfessor: CursoProfessor,
+        NomeDisciplina: NomeDisciplina,
+        demandaEstimada: demandaEstimada,
+        CodigoDisciplina: CodigoDisciplina,
+        ApelidoProfessor: ApelidoProfessor,
+        PeriodoDisciplina: PeriodoDisciplina,
+        ApelidoDisciplina: ApelidoDisciplina,
+        LaboratorioProfessor: LaboratorioProfessor,
+        horarios: []
+      };
+    }
+    acc[key].horarios.push(rest);
+    return acc;
+  }, {});
+  return Object.values(result);
+}
+
+function max(array) {
+  return Math.max.apply(null, array);
+}
+
 function getPeriodoEsperado(codigoDisciplina) {
 
   // let disciplina = allLocalJsonData.static.infoDisciplinasCC.find(
