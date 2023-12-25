@@ -81,7 +81,7 @@ function getApelidoProfessor(nomeProfessor) {
 
 function getTurmasDoAnoSemestre(turmas, ano, semestre) {
   let turmasDoAnoSemestre = turmas.filter((turma) => {
-    return turma.ano === ano && turma.semestre === semestre;
+    return turma.ano === ano.value && turma.semestre === semestre.value;
   });
   return turmasDoAnoSemestre;
 }
@@ -125,6 +125,8 @@ function updateProfessorFromList(oldArray, newProfessor) {
 }
 
 export {
+  max,
+  splittedToUnified,
   getPeriodoEsperado,
   getNomeDisciplina,
   getApelidoDisciplina,
