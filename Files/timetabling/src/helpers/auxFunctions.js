@@ -3,42 +3,48 @@ import { allLocalJsonData } from "../DB/local/dataFromJSON";
 function splittedToUnified(splittedTurmas) {
   let arr = splittedTurmas;
   // console.log(arr);
-  let result = arr.reduce((acc, {
-    ano,
-    idTurma,
-    semestre,
-    NomeProfessor,
-    CursoProfessor,
-    NomeDisciplina,
-    demandaEstimada,
-    ApelidoProfessor,
-    CodigoDisciplina,
-    PeriodoDisciplina,
-    ApelidoDisciplina,
-    LaboratorioProfessor,
-    ...rest
-  }) => {
-    let key = idTurma;
-    if (!acc[key]) {
-      acc[key] = {
-        ano: ano,
-        idTurma: idTurma,
-        semestre: semestre,
-        NomeProfessor: NomeProfessor,
-        CursoProfessor: CursoProfessor,
-        NomeDisciplina: NomeDisciplina,
-        demandaEstimada: demandaEstimada,
-        CodigoDisciplina: CodigoDisciplina,
-        ApelidoProfessor: ApelidoProfessor,
-        PeriodoDisciplina: PeriodoDisciplina,
-        ApelidoDisciplina: ApelidoDisciplina,
-        LaboratorioProfessor: LaboratorioProfessor,
-        horarios: []
-      };
-    }
-    acc[key].horarios.push(rest);
-    return acc;
-  }, {});
+  let result = arr.reduce(
+    (
+      acc,
+      {
+        ano,
+        idTurma,
+        semestre,
+        nomeProfessor,
+        cursoProfessor,
+        nomeDisciplina,
+        demandaEstimada,
+        apelidoProfessor,
+        codigoDisciplina,
+        periodoDisciplina,
+        apelidoDisciplina,
+        laboratorioProfessor,
+        ...rest
+      }
+    ) => {
+      let key = idTurma;
+      if (!acc[key]) {
+        acc[key] = {
+          ano: ano,
+          idTurma: idTurma,
+          semestre: semestre,
+          nomeProfessor: nomeProfessor,
+          cursoProfessor: cursoProfessor,
+          nomeDisciplina: nomeDisciplina,
+          demandaEstimada: demandaEstimada,
+          apelidoProfessor: apelidoProfessor,
+          codigoDisciplina: codigoDisciplina,
+          periodoDisciplina: periodoDisciplina,
+          apelidoDisciplina: apelidoDisciplina,
+          laboratorioProfessor: laboratorioProfessor,
+          horarios: [],
+        };
+      }
+      acc[key].horarios.push(rest);
+      return acc;
+    },
+    {}
+  );
   return Object.values(result);
 }
 
@@ -47,7 +53,6 @@ function max(array) {
 }
 
 function getPeriodoEsperado(codigoDisciplina) {
-
   // let disciplina = allLocalJsonData.static.infoDisciplinasCC.find(
   let disciplina = allLocalJsonData.SQL.disciplinas.find(
     (disciplina) => disciplina.codigo === codigoDisciplina
