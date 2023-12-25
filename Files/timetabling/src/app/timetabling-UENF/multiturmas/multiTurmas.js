@@ -24,25 +24,49 @@ import AdicionarHorario from "../../../components/Buttons/AdicionarHorario/Adici
 import RemoveTurmaButton from "../../../components/Buttons/RemoveTurma/RemoveTurma";
 import "./multiTurmas.css";
 import { readTurmas } from "../../../DB/AWS/axiosConnection";
+import {
+  filterTurmasByAnoSemestre,
+  getTurmasDoAnoSemestre,
+  splittedToUnified,
+} from "../../../helpers/auxFunctions";
+import AdicionarTurma from "../../../components/Buttons/AdicionarTurma/AdicionarTurma";
+import { NumberInputDemandaEstimada } from "../../../components/MyTextFields";
 // import AsyncSelect from "react-select/async";
 // import { readData } from "../functions/CRUD_JSONBIN";
+// let globalTurmas = await readTurmas();
 
-async function Turmas() {
-  let allTurmas = await readTurmas();
-  console.log(allTurmas);
+function Turmas3() {
+  const [ano, setAno] = useState(options.constantValues.years[10]);
+  // const [ano, setAno] = useState(options.constantValues.years[15]);
+  const [semestre, setSemestre] = useState(options.constantValues.semesters[0]);
 
+  // async function getTurmas() {
+  //   let turmas = await readTurmas();
+  //   console.log(turmas);
+  // }
 
-  // const [ano, setAno] = useState(options.constantValues.years[10]);
-  const [ano, setAno] = useState(options.constantValues.years[15]);
-  const [semestre, setSemestre] = useState(options.constantValues.semesters[2]);
+  function filterTurmas(turmas) {
+    let turmasFiltradas = turmas.filter(
+      (turma) => turma.ano === ano.value && turma.semestre === semestre.value
+    );
+    return turmasFiltradas;
+  }
 
-  let turmasFiltradas = allTurmas.filter(
-    (turma) => turma.ano === ano.value && turma.semestre === semestre.value
-  );
+  let allTurmas = [];
+  // let turmasFiltradas = [];
 
-  const [turmas, setTurmas] = useState(turmasFiltradas);
+  const [turmas, setTurmas] = useState([]);
   const [turma, setTurma] = useState(turmas.length > 0 ? turmas[0] : null);
   const [currentId, setCurrentId] = useState(allTurmas.length + 1);
+
+  useEffect(() => {
+    readTurmas().then((turmas) => {
+      let allTurmas = turmas;
+      let unifiedTurmas = splittedToUnified(allTurmas);
+      let turmasFiltradas = filterTurmas(unifiedTurmas);
+      setTurmas(turmasFiltradas);
+    });
+  }, []);
 
   useEffect(() => {
     let turmasFiltradas = allTurmas.filter(
@@ -52,12 +76,10 @@ async function Turmas() {
   }, [ano, semestre]);
 
   function updateTurmas(newTurmaValue) {
-    /* 
-      // ERROR
-        // Cannot read properties of undefined (reading 'id')
-        // TypeError: Cannot read properties of undefined (reading 'id')
-        // at Array.map
-    */
+    // ERROR
+    // Cannot read properties of undefined (reading 'id')
+    // TypeError: Cannot read properties of undefined (reading 'id')
+    // at Array.map
     if (newTurmaValue && turma) {
       let newTurmas = turmas.map((turma, i) =>
         turma &&
@@ -112,17 +134,15 @@ async function Turmas() {
   function DisciplinasNaoOferecidas(props) {
     const { lTurmas } = props;
 
-    /* Percorra cada turma em lTurmas e preencha uma lista dos códigos das disciplinas oferecidas pelas turmas */
+    // Percorra cada turma em lTurmas e preencha uma lista dos códigos das disciplinas oferecidas pelas turmas
     let disciplinasOferecidas = lTurmas.map((turma) => turma.codigoDisciplina);
     // console.log(disciplinasOferecidas);
 
     // let TodasDisciplinas = allLocalJsonData.static.infoDisciplinasCC;
     let TodasDisciplinas = allLocalJsonData.SQL.disciplinas;
 
-    /*
-      Listar todas os código-nomes de disciplinas que são de semestre ímpar
-        Filtrar todas que são de periodoEsperado%2 == 1
-    */
+    // Listar todas os código-nomes de disciplinas que são de semestre ímpar
+    // Filtrar todas que são de periodoEsperado%2 == 1
     let DisciplinasDoSemestre = TodasDisciplinas;
     if (semestre.value !== 3) {
       DisciplinasDoSemestre = TodasDisciplinas.filter(
@@ -130,22 +150,18 @@ async function Turmas() {
       );
     }
 
-    /*
-      Percorrer cada disciplina em DisciplinasDoSemestre e, caso o código da disciplina esteja na lista de disciplinas oferecidas, remover da lista.
-    */
+    // Percorrer cada disciplina em DisciplinasDoSemestre e, caso o código da disciplina esteja na lista de disciplinas oferecidas, remover da lista.
     let DisciplinasAindaNaoOferecidas = DisciplinasDoSemestre.filter(
       (disciplina) => {
         return !disciplinasOferecidas.includes(disciplina.codigo);
       }
     );
 
-    /* Percorra cada disciplina em EssasDisciplinas e as disponha em uma Tabela no formato
-      | Período esperado | Código - Nome |
-    */
+    // | Período esperado | Código - Nome |
+    // Se o período da disciplina for 1, aplicar o className EnfasePrimeiroPeriodo
     let visualizacaoDisciplinas = DisciplinasAindaNaoOferecidas.map(
       (disciplina) => (
         <tr key={disciplina.codigo}>
-          {/* Se o período da disciplina for 1, aplicar o className EnfasePrimeiroPeriodo */}
           <td
             className={disciplina.periodo === 1 ? "EnfasePrimeiroPeriodo" : ""}
           >
@@ -165,13 +181,15 @@ async function Turmas() {
         <div>
           <h1>
             Disciplinas ainda não oferecidas do
-            {semestre.value === 1
-              ? " período ímpar "
-              : semestre.value === 2
-              ? " período par "
-              : "s períodos "}
-            {/* Disciplinas do período{" "}
-            {semestre.value === 1 ? "ím" : ""}par ainda não oferecidas */}
+            {
+              // Disciplinas do período{" "}
+              // {semestre.value === 1 ? "ím" : ""}par ainda não oferecidas
+              semestre.value === 1
+                ? " período ímpar "
+                : semestre.value === 2
+                ? " período par "
+                : "s períodos "
+            }
           </h1>
           <table className="showBasicDataTable">
             <thead>
@@ -228,10 +246,10 @@ async function Turmas() {
           </thead>
           <tbody>
             {lTurmas.map((currentTurma) => {
-              let conflitosDisciplina = conflictsDisciplinaPeriodo(
-                lTurmas,
-                currentTurma
-              );
+              // let conflitosDisciplina = conflictsDisciplinaPeriodo(
+              //   lTurmas,
+              //   currentTurma
+              // );
               let id = currentTurma.id;
               let horarios = currentTurma.horarios;
               return (
@@ -246,11 +264,13 @@ async function Turmas() {
                     />
                   </td>
                   <td
-                    style={{
-                      backgroundColor: coloredConflicts(
-                        conflitosDisciplina.maxConflito
-                      ),
-                    }}
+                    style={
+                      {
+                        // backgroundColor: coloredConflicts(
+                        //   conflitosDisciplina.maxConflito
+                        // ),
+                      }
+                    }
                   >
                     <SelectDisciplina
                       lTurma={currentTurma}
@@ -300,21 +320,21 @@ async function Turmas() {
                               currentTurma,
                               index
                             );
-                            let conflicts = centralConflicts(
-                              lTurmas,
-                              tempLineTurma
-                            );
+                            // let conflicts = centralConflicts(
+                            //   lTurmas,
+                            //   tempLineTurma
+                            // );
 
-                            /* console.log(
-                              "Turma",
-                              currentId,
-                              "Horario",
-                              index,
-                              "Dia:",
-                              conflicts.professor.dia,
-                              "Hora:",
-                              conflicts.professor.hora
-                            ); */
+                            // console.log(
+                            //   "Turma",
+                            //   currentId,
+                            //   "Horario",
+                            //   index,
+                            //   "Dia:",
+                            //   conflicts.professor.dia,
+                            //   "Hora:",
+                            //   conflicts.professor.hora
+                            // );
                             return (
                               <tr
                                 key={`${id}-${horario.sala}-${horario.dia}-${horario.horaInicio}-${index}`}
@@ -334,16 +354,18 @@ async function Turmas() {
                                   />
                                 </td>
                                 <td
-                                  style={{
-                                    backgroundColor: coloredConflicts(
-                                      max([
-                                        conflicts.professor.dia,
-                                        conflitosDisciplina.disciplinaPeriodo[
-                                          index
-                                        ].nivelConflitoDia,
-                                      ])
-                                    ),
-                                  }}
+                                  style={
+                                    {
+                                      // backgroundColor: coloredConflicts(
+                                      //   max([
+                                      //     conflicts.professor.dia,
+                                      //     conflitosDisciplina.disciplinaPeriodo[
+                                      //       index
+                                      //     ].nivelConflitoDia,
+                                      //   ])
+                                      // ),
+                                    }
+                                  }
                                 >
                                   <SelectDia
                                     lTurma={currentTurma}
@@ -352,16 +374,18 @@ async function Turmas() {
                                   />
                                 </td>
                                 <td
-                                  style={{
-                                    backgroundColor: coloredConflicts(
-                                      max([
-                                        conflicts.professor.hora,
-                                        conflitosDisciplina.disciplinaPeriodo[
-                                          index
-                                        ].nivelConflitoHora,
-                                      ])
-                                    ),
-                                  }}
+                                  style={
+                                    {
+                                      // backgroundColor: coloredConflicts(
+                                      //   max([
+                                      //     conflicts.professor.hora,
+                                      //     conflitosDisciplina.disciplinaPeriodo[
+                                      //       index
+                                      //     ].nivelConflitoHora,
+                                      //   ])
+                                      // ),
+                                    }
+                                  }
                                 >
                                   <SelectHoraTang
                                     lTurma={currentTurma}
@@ -422,6 +446,126 @@ async function Turmas() {
     <div className="CRUDContainComponents">
       <TurmasCard lTurmas={turmas} setLTurma={setTurma} />
       <DisciplinasNaoOferecidas lTurmas={turmas} />
+    </div>
+  );
+}
+
+/* $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ */
+
+function TableHeader() {
+  return (
+    <thead>
+      <tr>
+        <th>
+          <AdicionarTurma addTurma={() => {}} />
+        </th>
+        <th>Código - Nome</th>
+        <th>Professor</th>
+        <th>Demanda Estimada</th>
+        <th colSpan={2}>Horarios</th>
+      </tr>
+    </thead>
+  );
+}
+
+function TableRowHorario(horario, index, currentTurma) {
+  return (
+    <div>
+      <div></div>
+    </div>
+  );
+}
+
+function TableRow({ turmas, setTurmas, lTurma, setTurma }) {
+  return (
+    <tr key={lTurma.idTurma}>
+      <td>
+        <RemoveTurmaButton
+          turmas={turmas}
+          setTurmas={setTurmas}
+          currentTurma={lTurma}
+        />
+      </td>
+      <td>
+        <SelectDisciplina lTurma={lTurma} setLTurma={setTurma} />
+      </td>
+      <td>
+        <SelectProfessor lTurma={lTurma} setLTurma={setTurma} />
+      </td>
+      <td>
+        <NumberInputDemandaEstimada lTurma={lTurma} setLTurma={setTurma} />
+      </td>
+    </tr>
+  );
+}
+
+function TurmasTable(myTurmasProps) {
+  const { turmas, setTurmas, turma, setTurma } = myTurmasProps;
+  return (
+    <table className="showBasicDataTable">
+      <TableHeader />
+      <tbody>
+        {turmas.map((lTurma) => (
+          <TableRow
+            turmas={turmas}
+            setTurmas={setTurmas}
+            lTurma={lTurma}
+            setTurma={setTurma}
+            key={lTurma.idTurma}
+          />
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+function SemTurmas() {
+  return (
+    <div className="infoCard">
+      <p>Ainda não há turmas cadastradas</p>
+    </div>
+  );
+}
+
+function TurmasCard({ myTurmasProps, myCurrentSemestreProps }) {
+  const { turmas, setTurmas, turma, setTurma } = myTurmasProps;
+  return (
+    <div className="infoCard">
+      <div className="MultiTurmasTitle">
+        <h2>MultiTurmas</h2>
+        <SelectAnoSemestre {...myCurrentSemestreProps} />
+      </div>
+      {turmas.length === 0 ? <SemTurmas /> : <TurmasTable {...myTurmasProps} />}
+    </div>
+  );
+}
+
+function Turmas() {
+  const [ano, setAno] = useState(options.constantValues.years[10]);
+  const [semestre, setSemestre] = useState(options.constantValues.semesters[0]);
+  const [turmas, setTurmas] = useState([]);
+  const [turma, setTurma] = useState({});
+
+  useEffect(() => {
+    readTurmas().then((turmas) => {
+      let allTurmas = turmas;
+      let unifiedTurmas = splittedToUnified(allTurmas);
+      let turmasFiltradas = getTurmasDoAnoSemestre(
+        unifiedTurmas,
+        ano,
+        semestre
+      );
+      setTurmas(turmasFiltradas);
+    });
+  }, []);
+
+  let myCurrentSemestreProps = { ano, setAno, semestre, setSemestre };
+  let myTurmasProps = { turmas, setTurmas, turma, setTurma };
+  let myProps = { myTurmasProps, myCurrentSemestreProps };
+
+  return (
+    <div className="CRUDContainComponents">
+      <TurmasCard {...myProps} />
     </div>
   );
 }
