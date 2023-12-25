@@ -158,15 +158,15 @@ function SelectDisciplina({ lTurma, setLTurma }) {
     <Select
       className="SelectList"
       placeholder="Disciplina"
-      styles={styleWidthFix}
+      styles={{ styleWidthFix }}
       options={disciplinas}
       value={disciplina}
       isClearable={true}
+      onChange={updateOuterTurma}
       getOptionValue={(disciplina) => disciplina.codigo}
       getOptionLabel={(disciplina) =>
         `${disciplina.codigo} - ${disciplina.nome}`
       }
-      onChange={updateOuterTurma}
     />
   );
 }
@@ -199,6 +199,7 @@ function SelectProfessor({ lTurma, setLTurma }) {
       className="SelectList"
       placeholder="Professor"
       options={professores}
+      // styles={styleWidthFix}
       value={professor}
       isClearable={true}
       getOptionValue={(option) => option.nome}
@@ -314,7 +315,7 @@ function SelectSala({ lTurma, setLTurma, indexHorario }) {
       isClearable={true}
       options={salas}
       value={sala}
-      styles={styleWidthFix}
+      // styles={styleWidthFix}
       onChange={updateOuterTurma}
       getOptionValue={(option) => `${option.bloco} - ${option.codigo}`}
       getOptionLabel={(option) =>
