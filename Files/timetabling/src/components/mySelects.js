@@ -172,11 +172,15 @@ function SelectDisciplina({ lTurma, setLTurma }) {
 }
 
 function SelectProfessor({ lTurma, setLTurma }) {
-  let professores = allLocalJsonData.static.infoProfessores;
-  let professorSelecionado = professores.find(
-    (professor) => professor.nome === lTurma.professor
-  );
+  let professorSelecionado = {
+    laboratorio: lTurma.laboratorioProfessor,
+    apelido: lTurma.apelidoProfessor,
+    curso: lTurma.cursoProfessor,
+    nome: lTurma.nomeProfessor,
+  };
+
   const [professor, setProfessor] = useState(professorSelecionado);
+  let professores = allLocalJsonData.SQL.professores;
 
   function updateOuterTurma(novoProfessor) {
     if (novoProfessor === null) {
@@ -185,7 +189,7 @@ function SelectProfessor({ lTurma, setLTurma }) {
     setProfessor(novoProfessor);
     let novaTurma = {
       ...lTurma,
-      professor: novoProfessor.nome,
+      nomeProfessor: novoProfessor.nome,
     };
     setLTurma(novaTurma);
   }
@@ -198,16 +202,12 @@ function SelectProfessor({ lTurma, setLTurma }) {
       value={professor}
       isClearable={true}
       getOptionValue={(option) => option.nome}
-      getOptionLabel={(option) => option.nome}
+      getOptionLabel={({ nome, apelido, laboratorio, curso }) =>
+        `${nome} - ${apelido} - ${laboratorio} - ${curso}`
+      }
       onChange={updateOuterTurma}
-      formatOptionLabel={(option) => {
-        let completeName = false;
-        let nomeSeparado = option.nome.split(" ");
-        let nomeDenso =
-          nomeSeparado[0] + " " + nomeSeparado[nomeSeparado.length - 1];
-        let name = completeName ? option.nome : nomeDenso;
-        return `(${option.laboratorio}) ${name}`;
-      }}
+      formatOptionLabel={({ apelido }) => `${apelido}`}
+      // formatOptionLabel={({ nome }) => `${nome}`}
     />
   );
 }
