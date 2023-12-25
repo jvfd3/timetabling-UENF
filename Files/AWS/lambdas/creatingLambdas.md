@@ -1,5 +1,12 @@
 # CRUD Lambdas - Professor
 
+## Migrating?
+
+```bash
+mysqldump --all-databases -uuser -ppassword | mysql -hremoteserver -uremoteuser -premoteserver
+mysqldump --all-databases -uroot -pBBB | mysql -hremoteserver -uXXX -pYYY
+```
+
 ## Create Professor
 
 ```bash
