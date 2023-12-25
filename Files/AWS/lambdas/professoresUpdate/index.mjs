@@ -12,7 +12,7 @@ async function handler(event) {
 
 async function updateProfessor(professorToUpdate) {
   local += ">updateProfessor";
-  let updateProfessorQuery = "UPDATE `professores` SET `apelidoProfessor` = ?, `curso` = ?, `laboratorio` = ?, `nomeProfessor` = ? WHERE `idprofessor` = ?";
+  let updateProfessorQuery = "UPDATE `professores` SET `apelido` = ?, `curso` = ?, `laboratorio` = ?, `nome` = ? WHERE `id` = ?";
   return await defaultUpdate(updateProfessorQuery, convertToList(professorToUpdate));
 }
 
@@ -44,7 +44,7 @@ async function defaultUpdate(query, queryValues) {
 async function checkExistance(idInList) {
   local += ">checkExistance";
   let message = local;
-  let checkQuery = "SELECT * FROM professores WHERE idprofessor = ?";
+  let checkQuery = "SELECT * FROM professores WHERE id = ?";
   try {
     let queryResult = dbExecute(checkQuery, idInList);
     let rows = queryResult[0] ?? [];

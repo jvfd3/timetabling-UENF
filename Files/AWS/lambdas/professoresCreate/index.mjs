@@ -12,7 +12,7 @@ async function handler(event) {
 
 async function createProfessor(newProfessor) {
   local += ">createProfessor";
-  let createProfessorQuery = "INSERT INTO professores(`apelidoProfessor`, `curso`, `laboratorio`, `nomeProfessor`) VALUES(?, ?, ?, ?)";
+  let createProfessorQuery = "INSERT INTO professores(`apelido`, `curso`, `laboratorio`, `nome`) VALUES(?, ?, ?, ?)";
   return await defaultCreate(createProfessorQuery, convertToList(newProfessor));
 }
 

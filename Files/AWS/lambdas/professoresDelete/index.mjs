@@ -12,7 +12,7 @@ async function handler(event) {
 
 async function deleteProfessor(professorIdToDelete) {
   local += ">deleteProfessor";
-  let deleteProfessorQuery = "DELETE FROM professores WHERE idprofessor = ?";
+  let deleteProfessorQuery = "DELETE FROM professores WHERE id = ?";
   return await defaultDelete(deleteProfessorQuery, [professorIdToDelete]);
 }
 
@@ -45,7 +45,7 @@ async function defaultDelete(query, queryValues) {
 async function checkExistance(idInList) {
   local += ">checkExistance";
   let message = local;
-  let checkQuery = "SELECT * FROM professores WHERE idprofessor = ?";
+  let checkQuery = "SELECT * FROM professores WHERE id = ?";
   try {
     let queryResult = await dbExecute(checkQuery, idInList);
     let rows = queryResult[0] ?? [];
