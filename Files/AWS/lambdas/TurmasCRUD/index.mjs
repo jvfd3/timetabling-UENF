@@ -44,4 +44,4 @@ async function defaultRead(query, queryValues) {
   );
 }
 
-export { handler };export { handler };
+export { handler };
