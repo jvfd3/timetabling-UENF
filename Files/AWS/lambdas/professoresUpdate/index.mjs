@@ -1,5 +1,6 @@
-// index.js
-import { dbExecute } from "./db.js";
+// professoresUpdate->index.js
+import { dbExecute } from "/opt/db.js";
+import { getPayloadResponse } from "/opt/auxFunctions.js";
 let local = "";
 
 async function handler(event) {
