@@ -475,7 +475,6 @@ function HorariosTableRow({
   lTurmas,
   setLTurma,
 }) {
-  console.log(horario);
   return (
     <tr key={`RowHorario-${horario.idHorario}-${horario.ordemHorario}`}>
       <td>
@@ -494,6 +493,20 @@ function HorariosTableRow({
       </td>
       <td>
         <SelectDia
+          lTurma={lTurma}
+          setLTurma={setLTurma}
+          indexHorario={indexHorario}
+        />
+      </td>
+      <td>
+        <SelectHoraTang
+          lTurma={lTurma}
+          setLTurma={setLTurma}
+          indexHorario={indexHorario}
+        />
+      </td>
+      <td>
+        <SelectDuracao
           lTurma={lTurma}
           setLTurma={setLTurma}
           indexHorario={indexHorario}
