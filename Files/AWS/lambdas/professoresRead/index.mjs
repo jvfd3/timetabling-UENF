@@ -26,7 +26,7 @@ async function defaultRead(query, queryValues) {
     queryResult[1] = null; // remove excessive metadata
     message = `>itens lidos com sucesso: ${queryResult.length}`;
     statusCode = 200;
-    console.log(message, statusCode, queryResult)
+    console.log(message, statusCode, queryResult);
   } catch (error) {
     statusCode = 500;
     localError = error;

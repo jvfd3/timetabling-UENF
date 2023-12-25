@@ -30,7 +30,7 @@ async function defaultUpdate(query, queryValues) {
     queryResult = await dbExecute(query, queryValues);
     message += `>Item com id ${queryValues[4]} adquiriu os valores ${queryValues} com sucesso.`;
     statusCode = 200;
-    console.log(message, statusCode, queryResult)
+    console.log(message, statusCode, queryResult);
   } catch (error) {
     statusCode = 500;
     localError = error;
@@ -39,6 +39,7 @@ async function defaultUpdate(query, queryValues) {
   }
   return getPayloadResponse(message, query, queryValues, queryResult, localError, statusCode);
 }
+
 async function checkExistance(idInList) {
   local += ">checkExistance";
   let message = local;

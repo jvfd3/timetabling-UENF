@@ -26,7 +26,7 @@ async function defaultCreate(query, queryValues) {
 
     message += `>Item: ${queryValues} criado com sucesso.`;
     statusCode = 201;
-    console.log(message, statusCode, queryResult)
+    console.log(message, statusCode, queryResult);
   } catch (error) {
     statusCode = 500;
     localError = error;
