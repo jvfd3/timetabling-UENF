@@ -485,6 +485,13 @@ function HorariosTableRow({
           indexHorario={indexHorario}
         />
       </td>
+      <td>
+        <SelectSala
+          lTurma={lTurma}
+          setLTurma={setLTurma}
+          indexHorario={indexHorario}
+        />
+      </td>
     </tr>
   );
 }

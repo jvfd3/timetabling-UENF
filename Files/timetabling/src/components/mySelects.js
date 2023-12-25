@@ -276,13 +276,21 @@ function SelectProfessorC(props) {
 }
 
 function SelectSala({ lTurma, setLTurma, indexHorario }) {
-  let salas = allLocalJsonData.static.infoSalas;
+  let esseHorario = lTurma.horarios[indexHorario];
+  let salaDesseHorario = {
+    bloco: esseHorario.bloco,
+    capacidade: 24,
+    codigo: "inf1",
+    descricao: "P5",
+  };
+
+  let salas = allLocalJsonData.SQL.salas;
   let horarios = lTurma.horarios;
-  let selectedSala = horarios[indexHorario].sala;
-  let salaSelecionada = salas.find((sala) => sala.blocoSala === selectedSala);
+  let salaSelecionada = salaDesseHorario;
 
   const [sala, setSala] = useState(salaSelecionada);
 
+  // This is wrong
   function updateOuterTurma(novaSala) {
     if (novaSala === null) {
       novaSala = { blocoSala: "" };
@@ -302,16 +310,16 @@ function SelectSala({ lTurma, setLTurma, indexHorario }) {
   return (
     <Select
       className="SelectList"
-      isClearable={true}
       placeholder="Sala"
+      isClearable={true}
       options={salas}
       value={sala}
       styles={styleWidthFix}
-      getOptionValue={(option) => option.blocoSala}
+      onChange={updateOuterTurma}
+      getOptionValue={(option) => `${option.bloco} - ${option.codigo}`}
       getOptionLabel={(option) =>
         `(${option.capacidade}) ${option.bloco} - ${option.codigo}`
       }
-      onChange={updateOuterTurma}
     />
   );
 }
