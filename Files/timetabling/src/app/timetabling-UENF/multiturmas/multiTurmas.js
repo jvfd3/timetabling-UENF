@@ -23,11 +23,12 @@ import RemoveHorarioButton from "../../../components/Buttons/RemoveHorario/Remov
 import AdicionarHorario from "../../../components/Buttons/AdicionarHorario/AdicionarHorario";
 import RemoveTurmaButton from "../../../components/Buttons/RemoveTurma/RemoveTurma";
 import "./multiTurmas.css";
+import { getTurmas } from "../../../helpers/getFullTurmasInfo";
 // import AsyncSelect from "react-select/async";
 // import { readData } from "../functions/CRUD_JSONBIN";
 
 function Turmas() {
-  let allTurmas = allLocalJsonData.SQL.turmas;
+  let allTurmas = getTurmas();
 
   // const [ano, setAno] = useState(options.constantValues.years[10]);
   const [ano, setAno] = useState(options.constantValues.years[15]);
