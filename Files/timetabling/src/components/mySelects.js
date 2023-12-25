@@ -8,8 +8,7 @@ import { updateProfessorFromList } from "../helpers/auxFunctions";
 
 let styleWidthFix = options.SelectStyles.fullItem;
 
-function SelectAnoSemestre(props) {
-  let { ano, setAno, semestre, setSemestre } = props;
+function SelectAnoSemestre({ ano, setAno, semestre, setSemestre }) {
   return (
     <div className="GlobalSelects">
       Ano:
