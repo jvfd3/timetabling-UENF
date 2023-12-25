@@ -95,28 +95,31 @@ WITH turmasCTE AS (
       ON t.idDisciplina = d.id
 )
 SELECT
+    t.id AS idTurma,
     t.ano,
     t.semestre,
     t.demandaEstimada,
-    t.NomeProfessor,
-    t.ApelidoProfessor,
-    t.CursoProfessor,
-    t.LaboratorioProfessor,
-    t.NomeDisciplina,
-    t.ApelidoDisciplina,
-    t.CodigoDisciplina,
-    t.PeriodoDisciplina,
-    h.ordem AS ordem,
-    h.dia AS dia,
+    t.NomeProfessor AS nomeProfessor,
+    t.ApelidoProfessor AS apelidoProfessor,
+    t.CursoProfessor AS cursoProfessor,
+    t.LaboratorioProfessor AS laboratorioProfessor,
+    t.NomeDisciplina AS nomeDisciplina,
+    t.ApelidoDisciplina AS apelidoDisciplina,
+    t.CodigoDisciplina AS codigoDisciplina,
+    t.PeriodoDisciplina AS periodoDisciplina,
+    h.ordem AS ordem AS ordemHorario,
+    h.dia AS diaHorario,
     h.horaInicio AS horaInicio,
     h.duracao AS duracao,
-    s.capacidade AS capacidade,
+    s.capacidade AS capacidadeSala,
     s.bloco AS bloco,
     s.codigo AS codigoSala,
-    s.descricao AS descricao
+    s.descricao AS descricaoSala
 FROM horarios AS h
 JOIN salas AS s
   ON h.idSala = s.id
 JOIN turmasCTE AS t
   ON h.idTurma = t.idTurma
 ORDER BY h.idTurma, h.ordem;
+
+WITH turmasCTE AS ( SELECT t.id AS idTurma, t.ano AS ano, t.semestre AS semestre, t.demandaEstimada AS demandaEstimada, p.nome AS NomeProfessor, p.apelido AS ApelidoProfessor, p.curso AS CursoProfessor, p.laboratorio AS LaboratorioProfessor, d.nome AS NomeDisciplina, d.apelido AS ApelidoDisciplina, d.codigo AS CodigoDisciplina, d.periodo AS PeriodoDisciplina FROM turmas AS t JOIN professores AS p ON t.idProfessor = p.id JOIN disciplinas AS d ON t.idDisciplina = d.id ) SELECT t.idTurma, h.id AS idHorario, t.ano, t.semestre, t.demandaEstimada, t.NomeProfessor, t.ApelidoProfessor, t.CursoProfessor, t.LaboratorioProfessor, t.NomeDisciplina, t.ApelidoDisciplina, t.CodigoDisciplina, t.PeriodoDisciplina, h.ordem AS ordem, h.dia AS dia, h.horaInicio AS horaInicio, h.duracao AS duracao, s.capacidade AS CapacidadeSala, s.bloco AS bloco, s.codigo AS codigoSala, s.descricao AS descricao FROM horarios AS h JOIN salas AS s ON h.idSala = s.id JOIN turmasCTE AS t ON h.idTurma = t.idTurma ORDER BY h.idTurma, h.ordem;
