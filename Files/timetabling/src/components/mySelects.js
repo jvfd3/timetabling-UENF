@@ -6,6 +6,8 @@ import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { updateProfessorFromList } from "../helpers/auxFunctions";
 
+/* Depois separar os selects por página */
+
 let styleWidthFix = options.SelectStyles.fullItem;
 
 function SelectAnoSemestre({ ano, setAno, semestre, setSemestre }) {
@@ -330,7 +332,7 @@ function SelectDia({ lTurma, setLTurma, indexHorario }) {
 
   let horarios = lTurma.horarios;
   let horario = horarios[indexHorario];
-  let selectedDia = horario.dia;
+  let selectedDia = horario.diaHorario;
 
   let diaSelecionado = dias.find((dia) => dia.value === selectedDia);
   const [dia, setDia] = useState(diaSelecionado);

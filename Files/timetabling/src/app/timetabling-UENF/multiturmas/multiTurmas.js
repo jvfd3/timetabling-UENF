@@ -492,6 +492,13 @@ function HorariosTableRow({
           indexHorario={indexHorario}
         />
       </td>
+      <td>
+        <SelectDia
+          lTurma={lTurma}
+          setLTurma={setLTurma}
+          indexHorario={indexHorario}
+        />
+      </td>
     </tr>
   );
 }
