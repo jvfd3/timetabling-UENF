@@ -468,11 +468,51 @@ function TableHeader() {
   );
 }
 
-function TableRowHorario(horario, index, currentTurma) {
+function HorariosTableRow({
+  horario,
+  indexHorario,
+  lTurma,
+  lTurmas,
+  setLTurma,
+}) {
+  console.log(horario);
   return (
-    <div>
-      <div></div>
-    </div>
+    <tr key={`RowHorario-${horario.idHorario}-${horario.ordemHorario}`}>
+      <td>
+        <RemoveHorarioButton
+          lTurma={lTurma}
+          setLTurma={setLTurma}
+          indexHorario={indexHorario}
+        />
+      </td>
+    </tr>
+  );
+}
+
+function HorariosTable({ lTurmas, setLTurma, lTurma }) {
+  return (
+    <table>
+      <thead>
+        <tr key={`LinhaHorarios-${lTurma.idTurma}`}>
+          <th>Remover</th>
+          <th>Sala</th>
+          <th>Dia</th>
+          <th>Hora Início</th>
+          <th>Duração</th>
+        </tr>
+      </thead>
+      <tbody>
+        {lTurma.horarios.map((horario, index) => (
+          <HorariosTableRow
+            horario={horario}
+            indexHorario={index}
+            lTurma={lTurma}
+            lTurmas={lTurmas}
+            setLTurma={setLTurma}
+          />
+        ))}
+      </tbody>
+    </table>
   );
 }
 
@@ -494,6 +534,22 @@ function TableRow({ turmas, setTurmas, lTurma, setTurma }) {
       </td>
       <td>
         <NumberInputDemandaEstimada lTurma={lTurma} setLTurma={setTurma} />
+      </td>
+      <td>
+        <AdicionarHorario
+          setLTurmas={setTurmas}
+          lTurmas={turmas}
+          lTurma={lTurma}
+        />
+      </td>
+      <td>
+        {lTurma.horarios.length === 0 ? null : (
+          <HorariosTable
+            setLTurma={setTurma}
+            lTurmas={turmas}
+            lTurma={lTurma}
+          />
+        )}
       </td>
     </tr>
   );
