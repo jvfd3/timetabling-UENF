@@ -34,7 +34,14 @@ async function defaultRead(query, queryValues) {
     message = local + ">Erro ao executar a leitura.";
     console.error(message, statusCode, error);
   }
-  return getPayloadResponse(message, query, queryValues, queryResult, localError, statusCode);
+  return getPayloadResponse(
+    message,
+    query,
+    queryValues,
+    queryResult,
+    localError,
+    statusCode
+  );
 }
 
-export { handler };
+export { handler };export { handler };
