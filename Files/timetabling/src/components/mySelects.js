@@ -128,13 +128,15 @@ function SelectSemestre({ outerSemestre, setOuterSemestre }) {
 }
 
 function SelectDisciplina({ lTurma, setLTurma }) {
-  // let disciplinas = allLocalJsonData.static.infoDisciplinasCC;
+  let localDisciplina = {
+    apelido: lTurma.apelidoDisciplina,
+    codigo: lTurma.codigoDisciplina,
+    nome: lTurma.nomeDisciplina,
+    periodo: lTurma.periodoDisciplina,
+  };
   let disciplinas = allLocalJsonData.SQL.disciplinas;
-  let disciplinaSelecionada = disciplinas.find(
-    (disciplina) => disciplina.codigo === lTurma.disciplina.codigo
-  );
 
-  const [disciplina, setDisciplina] = useState(disciplinaSelecionada);
+  const [disciplina, setDisciplina] = useState(localDisciplina);
 
   function updateOuterTurma(novaDisciplina) {
     if (novaDisciplina === null) {
@@ -156,6 +158,7 @@ function SelectDisciplina({ lTurma, setLTurma }) {
     <Select
       className="SelectList"
       placeholder="Disciplina"
+      styles={styleWidthFix}
       options={disciplinas}
       value={disciplina}
       isClearable={true}
