@@ -36,6 +36,41 @@ async function axiosTeste(data) {
     });
 }
 
+async function readTurmas() {
+  // console.log("Ready for a reading journey?");
+  let toastToUse = toast;
+  let toastMessages = { debug: [], pretty: "" };
+  let local = debuggingLocal + ">readTurmas";
+  let localEndpoint = "turmas";
+  let localUrl = url + localEndpoint;
+  let returnedData = null;
+  let localError = null;
+  try {
+    let res = await axios.get(localUrl);
+    debugModeOn && debugPayload(res); // Apenas executa se debugModeOn for true
+    let returnedTurmas = res.data.body.queryResult;
+    returnedData = returnedTurmas;
+    toastToUse = toast.success;
+    toastMessages.debug.push(
+      `${local}>{Turmas lidas: ` + returnedTurmas + "}"
+    );
+    toastMessages.pretty = `${returnedTurmas.length} Turmas lidos com sucesso!`;
+  } catch (error) {
+    toastToUse = toast.error;
+    localError = error;
+    toastMessages.debug.push(
+      `${local}>Catch>Erro interno ao ler Turmas: ${error}`
+    );
+    toastMessages.pretty = `Erro local ao ler Turmas.`;
+  }
+  toastToUse(toastMessages.pretty);
+  if (localError) {
+    console.error(toastMessages.debug);
+    throw localError;
+  }
+  return returnedData;
+}
+
 async function createProfessores(professor) {
   // console.log("ready for a creating journey?");
   let toastToUse = toast;
@@ -126,7 +161,7 @@ async function readProfessores() {
     returnedData = returnedProfessores;
     toastToUse = toast.success;
     toastMessages.debug.push(
-      `${local}>{ProfesoresLidos: ` + returnedProfessores + "}"
+      `${local}>{ProfessoresLidos: ` + returnedProfessores + "}"
     );
     toastMessages.pretty = `${returnedProfessores.length} Professores lidos com sucesso!`;
   } catch (error) {
@@ -266,8 +301,11 @@ async function deleteProfessores(professorToDelete) {
   return returnedData;
 }
 
+
+
 export {
   axiosTeste,
+  readTurmas,
   createProfessores,
   updateProfessores,
   readProfessores,
