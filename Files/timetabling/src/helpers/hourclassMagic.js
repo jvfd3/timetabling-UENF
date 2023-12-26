@@ -1,23 +1,24 @@
 /* A ideia é que seja um trocadilho com hourglass */
 
-function removerHorario(id) {
-  let newTurma = { ...turma1 };
-  let newHorarios = [...newTurma.horarios];
-  newHorarios.splice(id, 1);
-  newTurma.horarios = newHorarios;
-  setTurma1(newTurma);
-}
-
 function adicionarHorario(turma, setTurma) {
   let newTurma = { ...turma };
   let newHorarios = [...newTurma.horarios];
-  newHorarios.push({
+  console.log(newHorarios);
+  let blankHorario = {
     sala: null,
     dia: null,
-    horaInicio: null,
     duracao: 2,
-  });
+    horaInicio: null,
+  };
+  newHorarios.push(blankHorario);
+  newTurma.horarios = newHorarios;
+  setTurma(newTurma);
+}
 
+function removerHorario(horaIndex, turma, setTurma) {
+  let newTurma = { ...turma };
+  let newHorarios = [...newTurma.horarios];
+  newHorarios.splice(horaIndex, 1);
   newTurma.horarios = newHorarios;
   setTurma(newTurma);
 }

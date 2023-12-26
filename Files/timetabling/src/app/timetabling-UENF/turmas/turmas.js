@@ -19,7 +19,14 @@ import {
   getFullHorarios,
   splittedToUnified2,
 } from "../../../helpers/auxFunctions";
-import { adicionarHorario } from "../../../helpers/hourclassMagic";
+import {
+  adicionarHorario,
+  removerHorario,
+} from "../../../helpers/hourclassMagic";
+import {
+  DumbAddHora,
+  DumbRemoveHora,
+} from "../../../components/Buttons/CRUDTurmas/CRUDTurmas";
 // import { scrollThroughTurmas } from "../functions/firulas/minhasFirulas";
 // import AsyncSelect from "react-select/async";
 // import { readData } from "../functions/CRUD_JSONBIN";
@@ -426,12 +433,100 @@ function Turmas() {
     );
   }
 
+  function HorariosTurma({ turma, setTurma }) {
+    let quantidadeHorarios = turma.horarios.length;
+
+    function HorariosTable({ turma, setTurma }) {
+      return (
+        <table className="showBasicDataTable">
+          <thead>
+            <tr>
+              <th>
+                <DumbAddHora
+                  addHourFunction={adicionarHorario}
+                  turma={turma}
+                  setTurma={setTurma}
+                />
+              </th>
+              <th>Dia</th>
+              <th>Hora de início</th>
+              <th>Duração</th>
+              <th>Sala</th>
+            </tr>
+          </thead>
+          <tbody>
+            {turma.horarios.map((horario, index) => {
+              return (
+                <tr key={`Linha Horário: ${horario.idHorario}-${index}`}>
+                  <td>
+                    <DumbRemoveHora
+                      removeHourFunction={removerHorario}
+                      turma={turma}
+                      setTurma={setTurma}
+                      horaIndex={index}
+                    />
+                  </td>
+                  <td>
+                    <SelectDia
+                      lTurma={turma}
+                      setLTurma={setTurma}
+                      indexHorario={index}
+                    />
+                  </td>
+                  <td>
+                    <SelectHoraTang
+                      lTurma={turma}
+                      setLTurma={setTurma}
+                      indexHorario={index}
+                    />
+                  </td>
+                  <td>
+                    <SelectDuracao
+                      lTurma={turma}
+                      setLTurma={setTurma}
+                      indexHorario={index}
+                    />
+                  </td>
+                  <td>
+                    <SelectSala
+                      lTurma={turma}
+                      setLTurma={setTurma}
+                      indexHorario={index}
+                    />
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      );
+    }
+
+    return (
+      <div className="showBasicDataCard">
+        <h3>
+          {quantidadeHorarios > 0 ? "" : "Sem "}
+          Horários
+        </h3>
+        {quantidadeHorarios > 0 ? (
+          <HorariosTable turma={turma} setTurma={setTurma} />
+        ) : (
+          <DumbAddHora
+            addHourFunction={adicionarHorario}
+            turma={turma}
+            setTurma={setTurma}
+          />
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="CRUDContainComponents">
       <TurmaSelection {...myTurmaStates} />
       <div className="infoCard">
         <DadosTurma {...myTurmaStates} />
-        {/* <HorariosTurma {...myTurmaStates} /> */}
+        <HorariosTurma {...myTurmaStates} />
         {/* <Participants {...myTurmaStates} /> */}
       </div>
     </div>

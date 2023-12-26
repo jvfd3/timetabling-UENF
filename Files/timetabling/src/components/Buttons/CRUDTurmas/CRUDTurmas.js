@@ -129,7 +129,38 @@ function AdicionarHorario({ setLTurmas, lTurmas, lTurma }) {
   );
 }
 
+function DumbAddHora(props) {
+  const { addHourFunction, turma, setTurma } = props;
+  // console.log(props);
+  return (
+    <button
+      className="AdicionarHorario"
+      onClick={() => {
+        addHourFunction(turma, setTurma);
+      }}
+    >
+      Adicionar Horario
+    </button>
+  );
+}
+
+function DumbRemoveHora({ removeHourFunction, turma, setTurma, horaIndex }) {
+  return (
+    <button
+      className="TurmaHorarioRemove"
+      key={`RemoveHoraButton-${turma.idTurma}`}
+      onClick={() => {
+        removeHourFunction(horaIndex, turma, setTurma);
+      }}
+    >
+      Remover
+    </button>
+  );
+}
+
 export {
+  DumbAddHora,
+  DumbRemoveHora,
   RemoveTurmaButton,
   RemoveHorarioButton,
   AdicionarTurma,

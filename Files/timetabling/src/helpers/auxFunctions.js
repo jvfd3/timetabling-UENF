@@ -112,7 +112,7 @@ function splittedToUnified(splittedTurmas) {
 }
 
 function splittedToUnified2(splittedTurmas) {
-  console.log(splittedTurmas);
+  // console.log(splittedTurmas);
   let result = splittedTurmas.reduce(
     (
       acc,

@@ -181,47 +181,24 @@ function SelectProfessor({ lTurma, setLTurma }) {
 }
 
 function SelectSala({ lTurma, setLTurma, indexHorario }) {
-  let esseHorario = lTurma.horarios[indexHorario];
-  let salaDesseHorario = {
-    bloco: esseHorario.bloco,
-    capacidade: 24,
-    codigo: "inf1",
-    descricao: "P5",
-  };
-
   let salas = allLocalJsonData.SQL.salas;
-  let horarios = lTurma.horarios;
-  let salaSelecionada = salaDesseHorario;
+  let horarios = [...lTurma.horarios];
+  // console.log("horarios", horarios[indexHorario].sala);
+  // console.log("horarios", salas[0]);
+  const [sala, setSala] = useState(horarios[indexHorario].sala);
 
-  const [sala, setSala] = useState(salaSelecionada);
-  function updateOuterTurma(novaSala) {
-    let blankSala = {
-      capacidade: null,
-      descricao: null,
-      codigo: null,
-      bloco: null,
-    };
+  function updateOuterTurmaSala(novaSala) {
     let salaAtualizada = null;
     if (!novaSala) {
-      salaAtualizada = blankSala;
       setSala(null);
     } else {
       salaAtualizada = novaSala;
       setSala(salaAtualizada);
     }
-    let novoHorario = {
-      ...horarios[indexHorario],
-      bloco: salaAtualizada.bloco,
-      codigoSala: salaAtualizada.codigo,
-      descricao: salaAtualizada.descricao,
-      capacidadeSala: salaAtualizada.capacidade,
-    };
-    let novosHorarios = [...horarios];
-    novosHorarios[indexHorario] = novoHorario;
-
+    horarios[indexHorario].sala = salaAtualizada;
     let novaTurma = {
       ...lTurma,
-      horarios: novosHorarios,
+      horarios: horarios,
     };
     setLTurma(novaTurma);
   }
@@ -231,14 +208,19 @@ function SelectSala({ lTurma, setLTurma, indexHorario }) {
       className="SelectList"
       styles={styleWidthFix}
       isClearable={true}
-      onChange={updateOuterTurma}
+      onChange={updateOuterTurmaSala}
       placeholder="Sala"
       options={salas}
       value={sala}
       getOptionValue={(option) => `${option.bloco} - ${option.codigo}`}
-      getOptionLabel={(option) =>
-        `(${option.capacidade}) ${option.bloco} - ${option.codigo}`
+      getOptionLabel={({ capacidade, bloco, codigo }) =>
+        `${capacidade} - ${bloco} - ${codigo}`
       }
+      formatOptionLabel={({ capacidade, bloco, codigo }, { context }) => {
+        return context === "value"
+          ? `(${capacidade}) ${bloco} - ${codigo}`
+          : `(${capacidade}) ${bloco} - ${codigo}`;
+      }}
     />
   );
 }
@@ -248,7 +230,7 @@ function SelectDia({ lTurma, setLTurma, indexHorario }) {
 
   let horarios = lTurma.horarios;
   let horario = horarios[indexHorario];
-  let selectedDia = horario.diaHorario;
+  let selectedDia = horario.dia;
 
   let diaSelecionado = dias.find((dia) => dia.value === selectedDia);
   const [dia, setDia] = useState(diaSelecionado);
@@ -264,7 +246,7 @@ function SelectDia({ lTurma, setLTurma, indexHorario }) {
       setDia(diaAtualizado);
     }
     let novosHorarios = [...horarios];
-    novosHorarios[indexHorario].diaHorario = diaAtualizado.value;
+    novosHorarios[indexHorario].dia = diaAtualizado.value;
 
     let novaTurma = {
       ...lTurma,
