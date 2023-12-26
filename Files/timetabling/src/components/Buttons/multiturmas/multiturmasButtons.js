@@ -1,4 +1,43 @@
-import "./AdicionarHorario.css";
+import "./multiturmas.css";
+import { DeleteButton } from "../CRUDButtons/CRUDButtons";
+
+function RemoveTurmaButton({ turmas, setTurmas, currentTurma }) {
+  function removerTurma() {
+    let newTurmas = turmas.filter((turma) => turma.id !== currentTurma.id);
+    setTurmas(newTurmas);
+  }
+  return (
+    <button
+      className="TurmaHorarioRemove"
+      key={`${currentTurma.id}-${currentTurma.codigoDisciplina}-${currentTurma.professor}`}
+      onClick={removerTurma}
+    >
+      Remover Turma
+    </button>
+  );
+}
+
+function RemoveHorarioButton({ lTurma, setLTurma, indexHorario }) {
+  let horarios = lTurma.horarios;
+  function removeHorarioFromTurma() {
+    let novosHorarios = [...horarios];
+    novosHorarios.splice(indexHorario, 1);
+    let novaTurma = {
+      ...lTurma,
+      horarios: novosHorarios,
+    };
+    setLTurma(novaTurma);
+  }
+  return <DeleteButton receivedFunction={removeHorarioFromTurma} size="2em" />;
+}
+
+function AdicionarTurma({ addTurma }) {
+  return (
+    <button className="AdicionarHorario" onClick={addTurma}>
+      Nova Turma
+    </button>
+  );
+}
 
 function AdicionarHorario({ setLTurmas, lTurmas, lTurma }) {
   function adicionarHorarioNaTurma() {
@@ -48,4 +87,9 @@ function AdicionarHorario({ setLTurmas, lTurmas, lTurma }) {
   );
 }
 
-export default AdicionarHorario;
+export {
+  RemoveTurmaButton,
+  RemoveHorarioButton,
+  AdicionarTurma,
+  AdicionarHorario,
+};

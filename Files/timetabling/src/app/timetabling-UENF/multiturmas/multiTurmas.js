@@ -9,19 +9,14 @@ import {
   SelectDia,
   SelectHoraTang,
   SelectDuracao,
-  // SelectSemestre,
-  // SelectAno,
   SelectAnoSemestre,
 } from "../../../components/mySelects";
-import {
-  centralConflicts,
-  coloredConflicts,
-  conflictsDisciplinaPeriodo,
-} from "../../../helpers/conflicts/centralConflicts";
+// import {
+//   centralConflicts,
+//   coloredConflicts,
+//   conflictsDisciplinaPeriodo,
+// } from "../../../helpers/conflicts/centralConflicts";
 import { flattenTurma } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
-import RemoveHorarioButton from "../../../components/Buttons/RemoveHorario/RemoveHorario";
-import AdicionarHorario from "../../../components/Buttons/AdicionarHorario/AdicionarHorario";
-import RemoveTurmaButton from "../../../components/Buttons/RemoveTurma/RemoveTurma";
 import "./multiTurmas.css";
 import { readTurmas } from "../../../DB/AWS/axiosConnection";
 import {
@@ -29,15 +24,16 @@ import {
   getTurmasDoAnoSemestre,
   splittedToUnified,
 } from "../../../helpers/auxFunctions";
-import AdicionarTurma from "../../../components/Buttons/AdicionarTurma/AdicionarTurma";
 import { NumberInputDemandaEstimada } from "../../../components/MyTextFields";
-// import AsyncSelect from "react-select/async";
-// import { readData } from "../functions/CRUD_JSONBIN";
-// let globalTurmas = await readTurmas();
+import {
+  RemoveTurmaButton,
+  RemoveHorarioButton,
+  AdicionarTurma,
+  AdicionarHorario,
+} from "../../../components/Buttons/multiturmas/multiturmasButtons";
 
 function Turmas3() {
   const [ano, setAno] = useState(options.constantValues.years[10]);
-  // const [ano, setAno] = useState(options.constantValues.years[15]);
   const [semestre, setSemestre] = useState(options.constantValues.semesters[0]);
 
   // async function getTurmas() {
