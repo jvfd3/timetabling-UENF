@@ -113,13 +113,13 @@ function SelectDisciplina({ lTurma, setLTurma }) {
 
   return (
     <Select
+      onChange={updateOuterTurma}
       className="SelectList"
-      placeholder="Disciplina"
       styles={styleWidthFix}
+      isClearable={true}
+      placeholder="Disciplina"
       options={disciplinas}
       value={disciplina}
-      isClearable={true}
-      onChange={updateOuterTurma}
       getOptionValue={(disciplina) => disciplina.codigo}
       formatOptionLabel={({ codigo, apelido, nome }, { context }) => {
         let editedLabel = `${codigo} - `;
@@ -168,17 +168,17 @@ function SelectProfessor({ lTurma, setLTurma }) {
 
   return (
     <Select
+      onChange={updateOuterTurma}
       className="SelectList"
+      styles={styleWidthFix}
+      isClearable={true}
       placeholder="Professor"
       options={professores}
-      // styles={styleWidthFix}
       value={professor}
-      isClearable={true}
       getOptionValue={(option) => option.nome}
       getOptionLabel={({ nome, apelido, laboratorio, curso }) =>
         `${nome} - ${apelido} - ${laboratorio} - ${curso}`
       }
-      onChange={updateOuterTurma}
       formatOptionLabel={({ apelido }) => `${apelido}`}
       // formatOptionLabel={({ nome }) => `${nome}`}
     />
@@ -234,12 +234,12 @@ function SelectSala({ lTurma, setLTurma, indexHorario }) {
   return (
     <Select
       className="SelectList"
-      placeholder="Sala"
+      styles={styleWidthFix}
       isClearable={true}
+      onChange={updateOuterTurma}
+      placeholder="Sala"
       options={salas}
       value={sala}
-      // styles={styleWidthFix}
-      onChange={updateOuterTurma}
       getOptionValue={(option) => `${option.bloco} - ${option.codigo}`}
       getOptionLabel={(option) =>
         `(${option.capacidade}) ${option.bloco} - ${option.codigo}`
@@ -280,12 +280,13 @@ function SelectDia({ lTurma, setLTurma, indexHorario }) {
 
   return (
     <Select
+      onChange={updateOuterTurma}
       className="SelectList"
-      placeholder="Dia"
+      styles={styleWidthFix}
       isClearable={true}
+      placeholder="Dia"
       options={dias}
       value={dia}
-      onChange={updateOuterTurma}
       // getOptionLabel={(option) => option.value}
       // getOptionValue={(option) => option.label}
       formatOptionLabel={({ value, label }, { context }) => {
@@ -329,17 +330,18 @@ function SelectHoraTang({ lTurma, setLTurma, indexHorario }) {
 
   return (
     <Select
+      onChange={updateOuterTurma}
       className="SelectList"
+      styles={styleWidthFix}
+      isClearable={true}
       placeholder="Hora"
       options={horasTang}
       value={hora}
-      isClearable={true}
       getOptionValue={(option) => option.hora}
       getOptionLabel={(option) => `${option.hora} (${option.turno})`}
       formatOptionLabel={({ hora, turno }, { context }) => {
         return context === "value" ? `${hora}` : `${hora} (${turno})`;
       }}
-      onChange={updateOuterTurma}
     />
   );
 }
@@ -379,13 +381,14 @@ function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
 
   return (
     <Select
+      onChange={updateOuterTurma}
       className="SelectList"
-      placeholder="Duração"
+      styles={styleWidthFix}
       isClearable={true}
+      placeholder="Duração"
       options={duracoes}
       value={duracao}
       getOptionValue={(option) => option.value}
-      onChange={updateOuterTurma}
     />
   );
 }
