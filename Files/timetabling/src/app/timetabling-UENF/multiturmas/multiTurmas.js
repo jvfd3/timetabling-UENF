@@ -533,6 +533,7 @@ function HorariosTable({ lTurmas, setLTurma, lTurma }) {
       <tbody>
         {lTurma.horarios.map((horario, index) => (
           <HorariosTableRow
+            key={`RowHorario-${horario.idHorario}-${horario.ordemHorario}`}
             horario={horario}
             indexHorario={index}
             lTurma={lTurma}
