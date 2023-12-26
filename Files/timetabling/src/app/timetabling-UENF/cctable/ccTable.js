@@ -42,8 +42,12 @@ function VisualizacaoCC() {
       }
 
       function TopRow() {
-        let dias = options.constantValues.days.map((dia) => {
-          return <th className="DiasHeader">{dia.label}</th>;
+        let dias = options.constantValues.days.map((dia, index) => {
+          return (
+            <th key={index} className="DiasHeader">
+              {dia.label}
+            </th>
+          );
         });
 
         return [dias];
@@ -67,7 +71,10 @@ function VisualizacaoCC() {
           function CellContent({ turmas }) {
             let listaDeTurmas = turmas.map((turma) => {
               return (
-                <div className="eachClassInCell">
+                <div
+                  key={`ChaveCellContent: ${turma.idTurma}-${turma.idHorario}`}
+                  className="eachClassInCell"
+                >
                   {turma.disciplina.periodo} - {turma.disciplina.apelido} - (
                   {turma.professor.apelido} / {turma.sala.bloco} -{" "}
                   {turma.sala.numero})
@@ -79,7 +86,10 @@ function VisualizacaoCC() {
           }
 
           return (
-            <td className="ContentCell">
+            <td
+              key={`Key Coluna: ${dia.value}-${hora}`}
+              className="ContentCell"
+            >
               <CellContent turmas={turmasDoDia} />
             </td>
           );
@@ -87,7 +97,9 @@ function VisualizacaoCC() {
 
         return (
           <tr key={`Linha: ${hora}`}>
-            <td className="HorariosCol">{hora}</td>
+            <td className="HorariosCol" key={`Linha: ${hora}, Header: ${hora}`}>
+              {hora}
+            </td>
             {colunasDosDias}
           </tr>
         );
@@ -96,10 +108,7 @@ function VisualizacaoCC() {
       return (
         <tbody>
           {horasTang.map((hora, rowIndex) => (
-            <Linha
-              key={`${rowIndex}-${JSON.stringify(hora)}`}
-              hora={hora.hora}
-            />
+            <Linha key={`Linha: ${hora.hora}`} hora={hora.hora} />
           ))}
         </tbody>
       );
