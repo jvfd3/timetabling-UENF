@@ -10,6 +10,60 @@ let styleWidthFix = options.SelectStyles.fullItem;
 
 /* \/ \/ \/ \/ \/ \/ \/ \/ MULTITURMAS \/ \/ \/ \/ \/ \/ \/ \/ */
 
+function SelectAno({ outerAno, setOuterAno }) {
+  let anos = options.constantValues.years;
+
+  let anoSelecionado = anos.find(
+    (ano) => ano.value === parseInt(outerAno.value)
+  );
+
+  const [ano, setAno] = useState(anoSelecionado);
+
+  function updateOuterValue(novoAno) {
+    setOuterAno(novoAno);
+    setAno(novoAno);
+  }
+
+  return (
+    <Select
+      onChange={updateOuterValue}
+      className="SelectList"
+      styles={styleWidthFix}
+      isClearable={false}
+      placeholder="Ano"
+      options={anos}
+      value={ano}
+    />
+  );
+}
+
+function SelectSemestre({ outerSemestre, setOuterSemestre }) {
+  let semestres = options.constantValues.semesters;
+
+  let semestreSelecionado = semestres.find(
+    (semestre) => semestre.value === parseInt(outerSemestre.value)
+  );
+
+  const [semestre, setSemestre] = useState(semestreSelecionado);
+
+  function updateOuterValue(novoSemestre) {
+    setOuterSemestre(novoSemestre);
+    setSemestre(novoSemestre);
+  }
+
+  return (
+    <Select
+      onChange={updateOuterValue}
+      className="SelectList"
+      styles={styleWidthFix}
+      isClearable={false}
+      placeholder="Semestre"
+      options={semestres}
+      value={semestre}
+    />
+  );
+}
+
 function SelectAnoSemestre({ ano, setAno, semestre, setSemestre }) {
   return (
     <div className="GlobalSelects">
@@ -338,31 +392,6 @@ function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
 
 /* /\ /\ /\ /\ /\ /\ /\ /\ MULTITURMAS /\ /\ /\ /\ /\ /\ /\ /\ */
 
-function SelectAno({ outerAno, setOuterAno }) {
-  let anos = options.constantValues.years;
-
-  let anoSelecionado = anos.find(
-    (ano) => ano.value === parseInt(outerAno.value)
-  );
-
-  const [ano, setAno] = useState(anoSelecionado);
-
-  function updateOuterValue(novoAno) {
-    setOuterAno(novoAno);
-    setAno(novoAno);
-  }
-
-  return (
-    <Select
-      className="SelectList"
-      placeholder="Ano"
-      options={anos}
-      value={ano}
-      onChange={updateOuterValue}
-    />
-  );
-}
-
 function SelectAnoTurma({ lTurma, setLTurma }) {
   let anos = options.constantValues.years;
   let anoSelecionado = anos.find((ano) => ano.value === parseInt(lTurma.ano));
@@ -408,31 +437,6 @@ function SelectSemestreTurma({ lTurma, setLTurma }) {
       semestre: novoSemestre.value,
     };
     setLTurma(novaTurma);
-  }
-
-  return (
-    <Select
-      className="SelectList"
-      placeholder="Semestre"
-      options={semestres}
-      value={semestre}
-      onChange={updateOuterValue}
-    />
-  );
-}
-
-function SelectSemestre({ outerSemestre, setOuterSemestre }) {
-  let semestres = options.constantValues.semesters;
-
-  let semestreSelecionado = semestres.find(
-    (semestre) => semestre.value === parseInt(outerSemestre.value)
-  );
-
-  const [semestre, setSemestre] = useState(semestreSelecionado);
-
-  function updateOuterValue(novoSemestre) {
-    setOuterSemestre(novoSemestre);
-    setSemestre(novoSemestre);
   }
 
   return (
