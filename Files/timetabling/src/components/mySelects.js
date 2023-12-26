@@ -423,6 +423,34 @@ function StudentSelection(props) {
   );
 }
 
+function DisciplinasSelection(props) {
+  return (
+    <div
+      className="SelectionBar"
+      onWheel={(event) => {
+        // let itemStates = [disciplinas, setDisciplina, disciplina];
+        // scrollThroughDisciplinas(event, itemStates);
+      }}
+    >
+      <Select
+        onChange={props.setDisciplina}
+        className="itemSelectionBar"
+        styles={styleWidthFix}
+        isClearable={false}
+        placeholder={"Disciplina"}
+        value={props.disciplina}
+        options={props.disciplinas}
+        // formatOptionLabel={props.formatOptionLabel}
+        getOptionValue={(option) => option.codigo}
+        getOptionLabel={(option) => option.nome}
+        formatOptionLabel={({ periodo, codigo, nome }) =>
+          `(${periodo}) ${codigo}: ${nome}`
+        }
+      />
+    </div>
+  );
+}
+
 /* /\ /\ /\ /\ /\ /\ /\ /\ Item Selections /\ /\ /\ /\ /\ /\ /\ /\ */
 
 function SelectAnoTurma({ lTurma, setLTurma }) {
@@ -657,6 +685,7 @@ export {
   SelectDuracao,
   /* Item Selection */
   StudentSelection,
+  DisciplinasSelection,
   /* Outros */
   SelectCurso,
   SelectAnoTurma,

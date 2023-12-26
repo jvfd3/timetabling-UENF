@@ -4,6 +4,7 @@ import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 import "./disciplinas.css";
+import { DisciplinasSelection } from "../../../components/mySelects";
 // import { scrollThroughDisciplinas } from "../functions/firulas/minhasFirulas";
 
 function Disciplinas() {
@@ -14,34 +15,6 @@ function Disciplinas() {
 
   const [disciplinas, setDisciplinas] = useState(disciplinas_RS);
   const [disciplina, setDisciplina] = useState(disciplinas[36]);
-
-  function DisciplinasSelection() {
-    return (
-      <div
-        className="SelectionBar"
-        onWheel={(event) => {
-          // let itemStates = [disciplinas, setDisciplina, disciplina];
-          // scrollThroughDisciplinas(event, itemStates);
-        }}
-      >
-        <Select
-          className="itemSelectionBar"
-          placeholder={"Disciplina"}
-          value={disciplina}
-          options={disciplinas}
-          onChange={setDisciplina}
-          styles={options.SelectStyles.fullItem}
-          // formatOptionLabel={props.formatOptionLabel}
-          isMulti={false}
-          getOptionValue={(option) => option.codigo}
-          getOptionLabel={(option) => option.nome}
-          formatOptionLabel={({ periodo, codigo, nome }) =>
-            `(${periodo}) ${codigo}: ${nome}`
-          }
-        />
-      </div>
-    );
-  }
 
   function DisciplinasCard() {
     function InformacoesBaseDaDisciplina() {
@@ -163,7 +136,11 @@ function Disciplinas() {
 
   return (
     <div className="CRUDContainComponents">
-      <DisciplinasSelection />
+      <DisciplinasSelection
+        disciplina={disciplina}
+        disciplinas={disciplinas}
+        setDisciplina={setDisciplina}
+      />
       <DisciplinasCard />
     </div>
   );
