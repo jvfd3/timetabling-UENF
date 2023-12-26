@@ -205,12 +205,18 @@ function SelectDia({ lTurma, setLTurma, indexHorario }) {
   const [dia, setDia] = useState(diaSelecionado);
 
   function updateOuterTurma(novoDia) {
-    if (novoDia === null) {
-      novoDia = { value: "" };
+    let blankDia = { value: null, label: null };
+    let diaAtualizado = null;
+    if (!novoDia) {
+      diaAtualizado = blankDia;
+      setDia(null);
+    } else {
+      diaAtualizado = novoDia;
+      setDia(diaAtualizado);
     }
-    setDia(novoDia);
     let novosHorarios = [...horarios];
-    novosHorarios[indexHorario].dia = novoDia.value;
+    console.log(novosHorarios[indexHorario]);
+    novosHorarios[indexHorario].diaHorario = diaAtualizado.value;
 
     let novaTurma = {
       ...lTurma,
@@ -218,16 +224,6 @@ function SelectDia({ lTurma, setLTurma, indexHorario }) {
     };
     setLTurma(novaTurma);
   }
-
-  /*
-    let novosHorarios = [...horarios];
-    novosHorarios[indexHorario].dia = novoDia.value;
-
-    let novaTurma = {
-        ...lTurma,
-        horarios: novosHorarios,
-    };
-  */
 
   return (
     <Select
