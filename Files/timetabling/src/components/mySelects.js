@@ -145,16 +145,30 @@ function SelectSala({ lTurma, setLTurma, indexHorario }) {
   let salaSelecionada = salaDesseHorario;
 
   const [sala, setSala] = useState(salaSelecionada);
-
-  // This is wrong
   function updateOuterTurma(novaSala) {
-    if (novaSala === null) {
-      novaSala = { blocoSala: "" };
+    let blankSala = {
+      capacidade: null,
+      descricao: null,
+      codigo: null,
+      bloco: null,
+    };
+    let salaAtualizada = null;
+    if (!novaSala) {
+      salaAtualizada = blankSala;
+      setSala(null);
+    } else {
+      salaAtualizada = novaSala;
+      setSala(salaAtualizada);
     }
-    setSala(novaSala);
-
+    let novoHorario = {
+      ...horarios[indexHorario],
+      bloco: salaAtualizada.bloco,
+      codigoSala: salaAtualizada.codigo,
+      descricao: salaAtualizada.descricao,
+      capacidadeSala: salaAtualizada.capacidade,
+    };
     let novosHorarios = [...horarios];
-    novosHorarios[indexHorario].sala = novaSala.blocoSala;
+    novosHorarios[indexHorario] = novoHorario;
 
     let novaTurma = {
       ...lTurma,
