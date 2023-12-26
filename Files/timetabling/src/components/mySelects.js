@@ -303,13 +303,18 @@ function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
   const [duracao, setDuracao] = useState(duracaoSelecionada);
 
   function updateOuterTurma(novaDuracao) {
-    if (novaDuracao === null) {
-      novaDuracao = { value: "" };
+    let blankDuracao = { value: null, label: null };
+    let novaDuracaoAtualizada = null;
+    if (!novaDuracao) {
+      novaDuracaoAtualizada = blankDuracao;
+      setDuracao(null);
+    } else {
+      novaDuracaoAtualizada = novaDuracao;
+      setDuracao(novaDuracaoAtualizada);
     }
-    setDuracao(novaDuracao);
 
     let novosHorarios = [...horarios];
-    novosHorarios[indexHorario].duracao = novaDuracao.value;
+    novosHorarios[indexHorario].duracao = novaDuracaoAtualizada.value;
 
     let novaTurma = {
       ...lTurma,
