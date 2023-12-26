@@ -88,13 +88,26 @@ function SelectProfessor({ lTurma, setLTurma }) {
   let professores = allLocalJsonData.SQL.professores;
 
   function updateOuterTurma(novoProfessor) {
-    if (novoProfessor === null) {
-      novoProfessor = { nome: "" };
+    let blankProfessor = {
+      nomeProfessor: null,
+      cursoProfessor: null,
+      apelidoProfessor: null,
+      laboratorioProfessor: null,
+    };
+    let professorAtualizado = null;
+    if (!novoProfessor) {
+      professorAtualizado = blankProfessor;
+      setProfessor(null);
+    } else {
+      professorAtualizado = novoProfessor;
+      setProfessor(professorAtualizado);
     }
-    setProfessor(novoProfessor);
     let novaTurma = {
       ...lTurma,
-      nomeProfessor: novoProfessor.nome,
+      nomeProfessor: professorAtualizado.nomeProfessor,
+      cursoProfessor: professorAtualizado.cursoProfessor,
+      apelidoProfessor: professorAtualizado.apelidoProfessor,
+      laboratorioProfessor: professorAtualizado.laboratorioProfessor,
     };
     setLTurma(novaTurma);
   }
