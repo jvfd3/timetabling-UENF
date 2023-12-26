@@ -5,14 +5,17 @@ import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 import "./salas.css";
+import { SalaItemSelection } from "../../../components/mySelects";
 
 function Salas() {
-  let salasFromJson = allLocalJsonData.static.infoSalas;
+  let salasFromJson = allLocalJsonData.SQL.salas;
 
-  // const [salas, setSalas] = useState(salasFromJson);
+  const [salas, setSalas] = useState(salasFromJson);
   const [sala, setSala] = useState(salasFromJson[0]);
 
-  function SalaSelection() {
+  let mySalasStates = { salas, setSalas, sala, setSala };
+
+  function SalaSelection({ mySalasStates }) {
     return (
       <div
         className="SelectionBar"
@@ -21,18 +24,7 @@ function Salas() {
           // scrollThroughSalas(event, itemStates);
         }}
       >
-        <Select
-          className="itemSelectionBar"
-          options={salasFromJson}
-          value={sala}
-          styles={options.SelectStyles.fullItem}
-          onChange={setSala}
-          getOptionValue={(option) => option.blocoSala}
-          getOptionLabel={(option) => option.capacidade}
-          formatOptionLabel={(sala) =>
-            `(${sala.capacidade}) ${sala.bloco}-${sala.codigo}`
-          }
-        />
+        <SalaItemSelection mySalasStates={mySalasStates} />
       </div>
     );
   }
@@ -144,7 +136,7 @@ function Salas() {
 
   return (
     <div className="CRUDContainComponents">
-      <SalaSelection />
+      <SalaSelection mySalasStates={mySalasStates} />
       <SalaCard currentSala={sala} />
     </div>
   );

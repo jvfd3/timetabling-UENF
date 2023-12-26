@@ -470,6 +470,25 @@ function ProfessorItemSelection({ professorStates }) {
   );
 }
 
+function SalaItemSelection({ mySalasStates }) {
+  const { salas, setSalas, sala, setSala } = mySalasStates;
+  return (
+    <Select
+      className="itemSelectionBar"
+      styles={styleWidthFix}
+      isClearable={false}
+      onChange={setSala}
+      options={salas}
+      value={sala}
+      getOptionValue={(option) => option.id}
+      getOptionLabel={(option) => option.capacidade}
+      formatOptionLabel={(sala) =>
+        `(${sala.capacidade}) ${sala.bloco}-${sala.codigo}`
+      }
+    />
+  );
+}
+
 /* /\ /\ /\ /\ /\ /\ /\ /\ Item Selections /\ /\ /\ /\ /\ /\ /\ /\ */
 
 function SelectAnoTurma({ lTurma, setLTurma }) {
@@ -706,6 +725,7 @@ export {
   StudentSelection,
   DisciplinasSelection,
   ProfessorItemSelection,
+  SalaItemSelection,
   /* Outros */
   SelectCurso,
   SelectAnoTurma,
