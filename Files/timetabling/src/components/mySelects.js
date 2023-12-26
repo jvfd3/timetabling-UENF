@@ -412,11 +412,13 @@ function SelectAnoTurma({ lTurma, setLTurma }) {
   }
   return (
     <Select
+      onChange={updateOuterValue}
       className="SelectList"
+      styles={styleWidthFix}
+      isClearable={false}
       placeholder="Ano"
       options={anos}
       value={ano}
-      onChange={updateOuterValue}
     />
   );
 }
@@ -444,11 +446,13 @@ function SelectSemestreTurma({ lTurma, setLTurma }) {
 
   return (
     <Select
+      onChange={updateOuterValue}
       className="SelectList"
+      styles={styleWidthFix}
+      isClearable={false}
       placeholder="Semestre"
       options={semestres}
       value={semestre}
-      onChange={updateOuterValue}
     />
   );
 }
@@ -500,17 +504,18 @@ function SelectProfessorC(props) {
 
   return (
     <CreatableSelect
+      onChange={updateOuterTurma}
+      className="SelectList"
+      styles={styleWidthFix}
+      isClearable={true}
       onCreateOption={handleCreate}
       isDisabled={isLoading}
       isLoading={isLoading}
       isSearchable
-      isClearable={false}
       options={professores}
       value={professor}
-      onChange={updateOuterTurma}
       getOptionValue={(option) => option.nome}
       getOptionLabel={(option) => option.nome}
-      className="SelectList"
       placeholder="Professor"
     />
   );
@@ -548,12 +553,12 @@ function SelectCurso({ professorStates }) {
 
   return (
     <Select
-      className="SelectList"
       onChange={updateCurso}
+      className="SelectList"
       styles={styleWidthFix}
+      isClearable={true}
       value={getCurso(professor.curso)}
       options={cursos}
-      isClearable
       placeholder="Curso"
       getOptionLabel={(option) => `${option.value} - ${option.label}`}
       formatOptionLabel={(option) => `${option.value} - ${option.label}`}
@@ -597,12 +602,12 @@ function SelectLaboratorio({ professorStates }) {
   return (
     <Select
       onChange={updateLaboratorio}
-      value={getCorrectLaboratorio(professor.laboratorio)}
-      options={laboratorios}
-      isClearable
-      placeholder="Laboratório"
       className="SelectList"
       styles={styleWidthFix}
+      isClearable={true}
+      value={getCorrectLaboratorio(professor.laboratorio)}
+      options={laboratorios}
+      placeholder="Laboratório"
       getOptionLabel={(option) => `${option.value} - ${option.label}`}
       formatOptionLabel={(option) => `${option.value} - ${option.label}`}
     />
