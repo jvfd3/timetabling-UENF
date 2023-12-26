@@ -215,7 +215,6 @@ function SelectDia({ lTurma, setLTurma, indexHorario }) {
       setDia(diaAtualizado);
     }
     let novosHorarios = [...horarios];
-    console.log(novosHorarios[indexHorario]);
     novosHorarios[indexHorario].diaHorario = diaAtualizado.value;
 
     let novaTurma = {
