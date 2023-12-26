@@ -111,6 +111,40 @@ function splittedToUnified(splittedTurmas) {
   return Object.values(result);
 }
 
+function splittedToUnified2(splittedTurmas) {
+  console.log(splittedTurmas);
+  let result = splittedTurmas.reduce(
+    (
+      acc,
+      {
+        ano,
+        idTurma,
+        semestre,
+        professor,
+        disciplina,
+        demandaEstimada,
+        ...rest
+      }
+    ) => {
+      let key = idTurma;
+      if (!acc[key]) {
+        acc[key] = {
+          ano: ano,
+          idTurma: idTurma,
+          semestre: semestre,
+          professor: professor,
+          disciplina: disciplina,
+          horarios: [],
+        };
+      }
+      acc[key].horarios.push(rest);
+      return acc;
+    },
+    {}
+  );
+  return Object.values(result);
+}
+
 function max(array) {
   return Math.max.apply(null, array);
 }
@@ -248,4 +282,5 @@ export {
   getTurmasDaHora,
   getTurmasDoDia,
   updateProfessorFromList,
+  splittedToUnified2,
 };

@@ -77,10 +77,10 @@ function SelectAnoSemestre({ ano, setAno, semestre, setSemestre }) {
 
 function SelectDisciplina({ lTurma, setLTurma }) {
   let localDisciplina = {
-    apelido: lTurma.apelidoDisciplina,
-    codigo: lTurma.codigoDisciplina,
-    nome: lTurma.nomeDisciplina,
-    periodo: lTurma.periodoDisciplina,
+    apelido: lTurma.disciplina.apelido,
+    codigo: lTurma.disciplina.codigo,
+    nome: lTurma.disciplina.nome,
+    periodo: lTurma.disciplina.periodo,
   };
   let disciplinas = allLocalJsonData.SQL.disciplinas;
 
@@ -132,10 +132,10 @@ function SelectDisciplina({ lTurma, setLTurma }) {
 
 function SelectProfessor({ lTurma, setLTurma }) {
   let professorSelecionado = {
-    laboratorio: lTurma.laboratorioProfessor,
-    apelido: lTurma.apelidoProfessor,
-    curso: lTurma.cursoProfessor,
-    nome: lTurma.nomeProfessor,
+    laboratorio: lTurma.professor.laboratorio,
+    apelido: lTurma.professor.apelido,
+    curso: lTurma.professor.curso,
+    nome: lTurma.professor.nome,
   };
 
   const [professor, setProfessor] = useState(professorSelecionado);
@@ -156,13 +156,7 @@ function SelectProfessor({ lTurma, setLTurma }) {
       professorAtualizado = novoProfessor;
       setProfessor(professorAtualizado);
     }
-    let novaTurma = {
-      ...lTurma,
-      laboratorioProfessor: professorAtualizado.laboratorio,
-      apelidoProfessor: professorAtualizado.apelido,
-      cursoProfessor: professorAtualizado.curso,
-      nomeProfessor: professorAtualizado.nome,
-    };
+    let novaTurma = { ...lTurma, professor: professorAtualizado };
     setLTurma(novaTurma);
   }
 
@@ -179,8 +173,9 @@ function SelectProfessor({ lTurma, setLTurma }) {
       getOptionLabel={({ nome, apelido, laboratorio, curso }) =>
         `${nome} - ${apelido} - ${laboratorio} - ${curso}`
       }
-      formatOptionLabel={({ apelido }) => `${apelido}`}
-      // formatOptionLabel={({ nome }) => `${nome}`}
+      formatOptionLabel={({ apelido, nome }, { context }) => {
+        return context === "value" ? `${apelido}` : `${nome}`;
+      }}
     />
   );
 }
@@ -489,6 +484,24 @@ function SalaItemSelection({ mySalasStates }) {
   );
 }
 
+function TurmaItemSelection({ turmas, setTurmas, turma, setTurma }) {
+  return (
+    <Select
+      className="itemSelectionBar"
+      styles={styleWidthFix}
+      isClearable={false}
+      options={turmas}
+      value={turma}
+      onChange={setTurma}
+      getOptionValue={(turma) => turma.idTurma}
+      getOptionLabel={(turma) => `${turma.idTurma}`}
+      formatOptionLabel={({ idTurma, ano, semestre, disciplina, professor }) =>
+        `(id: ${idTurma}) ${ano}.${semestre} - ${disciplina.apelido} - ${professor.apelido}`
+      }
+    />
+  );
+}
+
 /* /\ /\ /\ /\ /\ /\ /\ /\ Item Selections /\ /\ /\ /\ /\ /\ /\ /\ */
 
 function SelectAnoTurma({ lTurma, setLTurma }) {
@@ -758,6 +771,7 @@ export {
   DisciplinasSelection,
   ProfessorItemSelection,
   SalaItemSelection,
+  TurmaItemSelection,
   /* Outros */
   SelectPeriodoEsperado,
   SelectCurso,

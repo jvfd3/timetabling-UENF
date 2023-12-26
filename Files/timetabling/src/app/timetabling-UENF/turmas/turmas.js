@@ -12,14 +12,20 @@ import {
   SelectSala,
   SelectAnoTurma,
   SelectSemestreTurma,
+  TurmaItemSelection,
 } from "../../../components/mySelects";
 import "./turmas.css";
+import {
+  getFullHorarios,
+  splittedToUnified2,
+} from "../../../helpers/auxFunctions";
+import { adicionarHorario } from "../../../helpers/hourclassMagic";
 // import { scrollThroughTurmas } from "../functions/firulas/minhasFirulas";
 // import AsyncSelect from "react-select/async";
 // import { readData } from "../functions/CRUD_JSONBIN";
 
-function Turmas() {
-  let allTurmas = allLocalJsonData.tests.turmasTeste;
+function Turmas2() {
+  let allTurmas = getFullHorarios();
   const [turmas, setTurmas] = useState(allTurmas);
   const [turma, setTurma] = useState(turmas[0]);
 
@@ -364,12 +370,79 @@ function Turmas() {
   );
 }
 
+function Turmas() {
+  let allTurmas = getFullHorarios();
+  let unifiedHorarios = splittedToUnified2(allTurmas);
+  const [turmas, setTurmas] = useState(unifiedHorarios);
+  const [turma, setTurma] = useState(turmas[0]);
+
+  let myTurmaStates = { turmas, setTurmas, turma, setTurma };
+
+  function TurmaSelection(myTurmaStates) {
+    return (
+      <div
+        className="SelectionBar"
+        onWheel={(event) => {
+          // let itemStates = [turmas, setTurma, turma];
+          // scrollThroughTurmas(event, itemStates);
+        }}
+      >
+        <TurmaItemSelection {...myTurmaStates} />
+      </div>
+    );
+  }
+
+  function DadosTurma({ turma, setTurma }) {
+    return (
+      <div className="showBasicDataCard">
+        <h3>INFORMAÇÕES DA TURMA</h3>
+        <table className="showBasicDataTable">
+          <thead></thead>
+          <tbody>
+            <tr>
+              <th>Ano/Semestre</th>
+              <td>
+                <div className="SelectAnoSemestre">
+                  <SelectAnoTurma lTurma={turma} setLTurma={setTurma} />
+                  <SelectSemestreTurma lTurma={turma} setLTurma={setTurma} />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th>Disciplina</th>
+              <td>
+                <SelectDisciplina lTurma={turma} setLTurma={setTurma} />
+              </td>
+            </tr>
+            <tr>
+              <th>Professor</th>
+              <td>
+                <SelectProfessor lTurma={turma} setLTurma={setTurma} />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+
+  return (
+    <div className="CRUDContainComponents">
+      <TurmaSelection {...myTurmaStates} />
+      <div className="infoCard">
+        <DadosTurma {...myTurmaStates} />
+        {/* <HorariosTurma {...myTurmaStates} /> */}
+        {/* <Participants {...myTurmaStates} /> */}
+      </div>
+    </div>
+  );
+}
+
 function CRUDclass() {
+  let defaultPageValue = options.constantValues.pageSelection.turmas;
   return (
     <div className="background">
-      <CRUDPageSelection
-        defaultValue={options.constantValues.pageSelection.turmas}
-      />
+      <CRUDPageSelection defaultValue={defaultPageValue} />
       <Turmas />
     </div>
   );
