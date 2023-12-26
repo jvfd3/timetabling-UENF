@@ -17,4 +17,6 @@ const allLocalJsonData = {
   },
 };
 
+// Talvez esse seja um ponto de melhoria. Por estar catando todos os dados de uma vez só, pode ser que o sistema fique lento.
+
 export { allLocalJsonData };
