@@ -236,12 +236,12 @@ function SelectDia({ lTurma, setLTurma, indexHorario }) {
       isClearable={true}
       options={dias}
       value={dia}
+      onChange={updateOuterTurma}
       // getOptionLabel={(option) => option.value}
       // getOptionValue={(option) => option.label}
       formatOptionLabel={({ value, label }, { context }) => {
         return context === "value" ? `${value}` : `${label}`;
       }}
-      onChange={updateOuterTurma}
     />
   );
 }
