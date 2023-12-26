@@ -89,10 +89,10 @@ function SelectProfessor({ lTurma, setLTurma }) {
 
   function updateOuterTurma(novoProfessor) {
     let blankProfessor = {
-      nomeProfessor: null,
-      cursoProfessor: null,
-      apelidoProfessor: null,
-      laboratorioProfessor: null,
+      laboratorio: null,
+      apelido: null,
+      curso: null,
+      nome: null,
     };
     let professorAtualizado = null;
     if (!novoProfessor) {
@@ -104,10 +104,10 @@ function SelectProfessor({ lTurma, setLTurma }) {
     }
     let novaTurma = {
       ...lTurma,
-      nomeProfessor: professorAtualizado.nomeProfessor,
-      cursoProfessor: professorAtualizado.cursoProfessor,
-      apelidoProfessor: professorAtualizado.apelidoProfessor,
-      laboratorioProfessor: professorAtualizado.laboratorioProfessor,
+      laboratorioProfessor: professorAtualizado.laboratorio,
+      apelidoProfessor: professorAtualizado.apelido,
+      cursoProfessor: professorAtualizado.curso,
+      nomeProfessor: professorAtualizado.nome,
     };
     setLTurma(novaTurma);
   }
