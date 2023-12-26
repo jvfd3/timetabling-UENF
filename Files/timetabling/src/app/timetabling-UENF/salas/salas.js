@@ -6,12 +6,13 @@ import CRUDPageSelection from "../../../components/PageSelect";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 import "./salas.css";
 import { SalaItemSelection } from "../../../components/mySelects";
+import { appendInfoFromTurmasUsingHorarios } from "../../../helpers/auxFunctions";
 
 function Salas() {
   let salasFromJson = allLocalJsonData.SQL.salas;
 
   const [salas, setSalas] = useState(salasFromJson);
-  const [sala, setSala] = useState(salasFromJson[0]);
+  const [sala, setSala] = useState(salasFromJson[20]);
 
   let mySalasStates = { salas, setSalas, sala, setSala };
 
@@ -40,7 +41,7 @@ function Salas() {
             <tbody>
               <tr>
                 <th>Bloco</th>
-                <td>{`${currentSala.bloco} (${currentSala.descricaoBloco})`}</td>
+                <td>{`${currentSala.bloco} (${currentSala.descricao})`}</td>
               </tr>
               <tr>
                 <th>Código</th>
@@ -56,30 +57,41 @@ function Salas() {
       );
     }
 
-    function TurmasNaSala({ blocoSala }) {
-      function getTurmas() {
-        let turmasTeste = allLocalJsonData.dynamic.turmas;
-        // console.log(turmasTeste);
+    function TurmasNaSala({ lSala }) {
+      function getTurmas(id) {
+        let horarios = allLocalJsonData.SQL.horarios;
         let horariosNestaSala = [];
-        for (const chaveTurma in turmasTeste) {
-          let turma = turmasTeste[chaveTurma];
-          for (const chaveHorario in turma.horarios) {
-            let horario = turma.horarios[chaveHorario];
-            let salaDoHorario = horario.sala;
-            // console.log(salaDoHorario);
-            // console.log(blocoSala);
-            if (blocoSala === salaDoHorario) {
-              let newTurma = { ...turmasTeste[chaveTurma] };
-              newTurma.horarios = { ...horario };
-              horariosNestaSala.push(newTurma);
-            }
+        for (const chaveTurma in horarios) {
+          let horario = horarios[chaveTurma];
+          if (horario.idSala === id) {
+            horariosNestaSala.push(horario);
           }
         }
-        return horariosNestaSala;
-      }
+        let fullInfoFromTurmasNaSala =
+          appendInfoFromTurmasUsingHorarios(horariosNestaSala);
 
-      let turmasNestaSala = getTurmas();
-      // console.log(turmasNestaSala);
+        let dias = options.constantValues.days;
+
+        fullInfoFromTurmasNaSala.sort((a, b) => {
+          let diaA = dias.find((dia) => dia.value === a.dia);
+          let diaB = dias.find((dia) => dia.value === b.dia);
+          if (dias.indexOf(diaA) < dias.indexOf(diaB)) {
+            return -1;
+          }
+          if (dias.indexOf(diaA) > dias.indexOf(diaB)) {
+            return 1;
+          }
+          if (a.horaInicio < b.horaInicio) {
+            return -1;
+          }
+          if (a.horaInicio > b.horaInicio) {
+            return 1;
+          }
+          return 0;
+        });
+        return fullInfoFromTurmasNaSala;
+      }
+      let turmasNestaSala = getTurmas(lSala.id);
       return (
         <div className="showBasicDataCard">
           <h4>TURMAS NESTA SALA</h4>
@@ -102,12 +114,12 @@ function Salas() {
                       {turma.ano}.{turma.semestre}
                     </td>
                     <td>
-                      {turma.disciplina.codigo} {turma.disciplina.nome}
+                      {turma.codigoDisciplina} {turma.apelidoDisciplina}
                     </td>
-                    <td>{turma.professor}</td>
-                    <td>{turma.horarios.dia}</td>
-                    <td>{turma.horarios.horaInicio}</td>
-                    <td>{turma.horarios.duracao}</td>
+                    <td>{turma.apelidoProfessor}</td>
+                    <td>{turma.dia}</td>
+                    <td>{turma.horaInicio}</td>
+                    <td>{turma.duracao}</td>
                   </tr>
                 );
               })}
@@ -128,7 +140,7 @@ function Salas() {
     return (
       <div className="infoCard">
         <InformacoesBaseDaSala />
-        <TurmasNaSala blocoSala={currentSala.blocoSala} />
+        <TurmasNaSala lSala={sala} />
         <OcupacaoNaSala />
       </div>
     );
