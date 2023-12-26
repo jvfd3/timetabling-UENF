@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
-import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
-import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
 import {
   getApelidoDisciplina,
   getApelidoProfessor,
+  getFullHorarios,
   getPeriodoEsperado,
   getTurmasDaHora,
   getTurmasDoAnoSemestre,
@@ -17,16 +16,24 @@ import "./ccTable.css";
 function VisualizacaoCC() {
   let semestres = options.constantValues.semesters;
   let anos = options.constantValues.years;
+  let dias = options.constantValues.days;
+  let horasTang = options.constantValues.hoursTang;
   const [ano, setAno] = useState(anos[10]);
   const [semestre, setSemestre] = useState(semestres[0]);
 
-  let turmas = allLocalJsonData.dynamic.turmas;
+  let myTimeStates = {
+    ano,
+    setAno,
+    semestre,
+    setSemestre,
+  };
+
+  let turmas = getFullHorarios();
   let TurmasDoSemestre = getTurmasDoAnoSemestre(
     turmas,
     ano.value,
     semestre.value
   );
-  let splittedTurmasDoSemestre = splitTurmas(TurmasDoSemestre);
 
   function TabelaCC() {
     function Header() {
@@ -52,26 +59,18 @@ function VisualizacaoCC() {
     }
 
     function Body() {
-      function Linha(props) {
-        let { hora } = props;
-        let horaValue = hora.hora;
-        let turmasDaHora = getTurmasDaHora(splittedTurmasDoSemestre, horaValue);
-        let dias = options.constantValues.days.map((dia) => {
+      function Linha({ hora }) {
+        let turmasDaHora = getTurmasDaHora(TurmasDoSemestre, hora);
+        let colunasDosDias = dias.map((dia) => {
           let turmasDoDia = getTurmasDoDia(turmasDaHora, dia.value);
 
-          function CellContent(props) {
-            let { turmas } = props;
-
+          function CellContent({ turmas }) {
             let listaDeTurmas = turmas.map((turma) => {
-              let periodo = getPeriodoEsperado(turma.codigoDisciplina);
-              let apelidoDisciplina = getApelidoDisciplina(
-                turma.codigoDisciplina
-              );
-              let apelidoProfessor = getApelidoProfessor(turma.professor);
               return (
                 <div className="eachClassInCell">
-                  {periodo} - {apelidoDisciplina} - ({apelidoProfessor} /{" "}
-                  {turma.sala})
+                  {turma.disciplina.periodo} - {turma.disciplina.apelido} - (
+                  {turma.professor.apelido} / {turma.sala.bloco} -{" "}
+                  {turma.sala.numero})
                 </div>
               );
             });
@@ -87,18 +86,23 @@ function VisualizacaoCC() {
         });
 
         return (
-          <tr>
-            <td className="HorariosCol">{horaValue}</td>
-            {dias}
+          <tr key={`Linha: ${hora}`}>
+            <td className="HorariosCol">{hora}</td>
+            {colunasDosDias}
           </tr>
         );
       }
 
-      let linhas = options.constantValues.hoursTang.map((hora, rowIndex) => {
-        return <Linha key={rowIndex} hora={hora} />;
-      });
-
-      return <tbody>{linhas}</tbody>;
+      return (
+        <tbody>
+          {horasTang.map((hora, rowIndex) => (
+            <Linha
+              key={`${rowIndex}-${JSON.stringify(hora)}`}
+              hora={hora.hora}
+            />
+          ))}
+        </tbody>
+      );
     }
 
     return (
@@ -112,12 +116,7 @@ function VisualizacaoCC() {
   return (
     <div className="CRUDContainComponents">
       <div className="infoCard">
-        <SelectAnoSemestre
-          ano={ano}
-          setAno={setAno}
-          semestre={semestre}
-          setSemestre={setSemestre}
-        />
+        <SelectAnoSemestre {...myTimeStates} />
         <TabelaCC />
       </div>
     </div>

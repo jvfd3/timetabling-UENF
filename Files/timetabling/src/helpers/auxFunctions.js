@@ -1,5 +1,68 @@
 import { allLocalJsonData } from "../DB/local/dataFromJSON";
 
+function getByIDdisciplina(idDisciplina) {
+  let disciplinas = allLocalJsonData.SQL.disciplinas;
+  return disciplinas.find((disciplina) => disciplina.id === idDisciplina);
+}
+
+function getByIDprofessor(idProfessor) {
+  let professores = allLocalJsonData.SQL.professores;
+  return professores.find((professor) => professor.id === idProfessor);
+}
+
+function getByIDturma(idTurma) {
+  let turmas = allLocalJsonData.SQL.turmas;
+  return turmas.find((turma) => turma.id === idTurma);
+}
+
+function getByIDhorario(idHorario) {
+  let horarios = allLocalJsonData.SQL.horarios;
+  return horarios.find((horario) => horario.id === idHorario);
+}
+
+function getByIDsala(idSala) {
+  let salas = allLocalJsonData.SQL.salas;
+  return salas.find((sala) => sala.id === idSala);
+}
+
+function getFullHorarios() {
+  let turmas = allLocalJsonData.SQL.turmas;
+  let horarios = allLocalJsonData.SQL.horarios;
+
+  let filledTurmas = turmas.map((turma) => {
+    let newTurma = {
+      ...turma,
+      idTurma: turma.id,
+      disciplina: getByIDdisciplina(turma.idDisciplina),
+      professor: getByIDprofessor(turma.idProfessor),
+    };
+    delete newTurma.id;
+    delete newTurma.idDisciplina;
+    delete newTurma.idProfessor;
+    return newTurma;
+  });
+
+  let filledHorarios = horarios.map((horario) => {
+    let newHorario = {
+      ...horario,
+      idHorario: horario.id,
+      sala: getByIDsala(horario.idSala),
+    };
+    delete newHorario.id;
+    delete newHorario.idSala;
+    return newHorario;
+  });
+
+  let filledHorariosAndTurmas = filledHorarios.map((horario) => {
+    let filledTurma = filledTurmas.find(
+      (turma) => turma.idTurma === horario.idTurma
+    );
+    return { ...horario, ...filledTurma };
+  });
+
+  return filledHorariosAndTurmas;
+}
+
 function splittedToUnified(splittedTurmas) {
   let arr = splittedTurmas;
   // console.log(arr);
@@ -86,13 +149,12 @@ function getApelidoProfessor(nomeProfessor) {
 
 function getTurmasDoAnoSemestre(turmas, ano, semestre) {
   let turmasDoAnoSemestre = turmas.filter((turma) => {
-    return turma.ano === ano.value && turma.semestre === semestre.value;
+    return turma.ano === ano && turma.semestre === semestre;
   });
   return turmasDoAnoSemestre;
 }
 
 function getTurmasDaHora(turmas, hora) {
-  /* Turmas splitted */
   let turmasDaHora = turmas.filter((turma) => {
     return turma.horaInicio === hora;
   });
@@ -174,6 +236,7 @@ function appendInfoFromTurmasUsingHorarios(horarios) {
 
 export {
   max,
+  getFullHorarios,
   appendInfoFromTurmasUsingHorarios,
   splittedToUnified,
   getPeriodoEsperado,

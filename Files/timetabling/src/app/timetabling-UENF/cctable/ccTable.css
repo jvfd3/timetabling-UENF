@@ -44,6 +44,7 @@
     border: 1px solid #b83838;
     padding: 8px;
     background-color: #eee6e6;
+    text-align: right;
 }
 
 .ContentCell {
@@ -56,5 +57,6 @@
 .eachClassInCell {
     margin-bottom: 5px;
     border: 2px solid #3b171784;
+    font-weight: bolder;
     text-wrap: nowrap;
 }
