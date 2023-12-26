@@ -433,10 +433,10 @@ function DisciplinasSelection(props) {
       }}
     >
       <Select
-        onChange={props.setDisciplina}
         className="itemSelectionBar"
         styles={styleWidthFix}
         isClearable={false}
+        onChange={props.setDisciplina}
         placeholder={"Disciplina"}
         value={props.disciplina}
         options={props.disciplinas}
@@ -448,6 +448,25 @@ function DisciplinasSelection(props) {
         }
       />
     </div>
+  );
+}
+
+function ProfessorItemSelection({ professorStates }) {
+  const { professores, /* setProfessores, */ professor, setProfessor } =
+    professorStates;
+  return (
+    <Select
+      className="itemSelectionBar"
+      styles={styleWidthFix}
+      isClearable={false}
+      onChange={setProfessor}
+      options={professores}
+      value={professor}
+      getOptionValue={(option) => option.id}
+      getOptionLabel={({ laboratorio, curso, apelido }) =>
+        `(${laboratorio} - ${curso}) ${apelido}`
+      }
+    />
   );
 }
 
@@ -686,6 +705,7 @@ export {
   /* Item Selection */
   StudentSelection,
   DisciplinasSelection,
+  ProfessorItemSelection,
   /* Outros */
   SelectCurso,
   SelectAnoTurma,

@@ -4,7 +4,11 @@ import TextField from "@mui/material/TextField";
 import CRUDPageSelection from "../../../components/PageSelect";
 import options from "../../../DB/local/options";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
-import { SelectCurso, SelectLaboratorio } from "../../../components/mySelects";
+import {
+  ProfessorItemSelection,
+  SelectCurso,
+  SelectLaboratorio,
+} from "../../../components/mySelects";
 import {
   safeCreateProfessores,
   safeReadProfessores,
@@ -55,21 +59,9 @@ function ProfessoresDB() {
   }
 
   function ProfessorSelection({ professorStates }) {
-    const { professores, /* setProfessores, */ professor, setProfessor } =
-      professorStates;
     return (
       <div className="SelectionBar">
-        <Select
-          className="itemSelectionBar"
-          styles={options.SelectStyles.anotherOne}
-          options={professores}
-          value={professor}
-          onChange={setProfessor}
-          getOptionLabel={({ laboratorio, curso, apelidoProfessor }) =>
-            `(${laboratorio} - ${curso}) ${apelidoProfessor}`
-          }
-          getOptionValue={(option) => option.idprofessor}
-        />
+        <ProfessorItemSelection professorStates={professorStates} />
         <div className="CRUDButtonsContainer">
           <CreateButton createFunction={createProfessor} />
           <ReadButton readFunction={readProfessor} />
