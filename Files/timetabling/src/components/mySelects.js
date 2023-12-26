@@ -254,13 +254,17 @@ function SelectHoraTang({ lTurma, setLTurma, indexHorario }) {
   const [hora, setHora] = useState(horaSelecionada);
 
   function updateOuterTurma(novaHoraTang) {
-    if (novaHoraTang === null) {
-      novaHoraTang = { hora: "" };
+    let blankHora = { hora: null, turno: null };
+    let novaHoraTangAtualizada = null;
+    if (!novaHoraTang) {
+      novaHoraTangAtualizada = blankHora;
+      setHora(null);
+    } else {
+      novaHoraTangAtualizada = novaHoraTang;
+      setHora(novaHoraTangAtualizada);
     }
-    setHora(novaHoraTang);
-
     let novosHorarios = [...horarios];
-    novosHorarios[indexHorario].horaInicio = novaHoraTang.hora;
+    novosHorarios[indexHorario].horaInicio = novaHoraTangAtualizada.hora;
 
     let novaTurma = {
       ...lTurma,
