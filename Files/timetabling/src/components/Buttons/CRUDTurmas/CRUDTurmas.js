@@ -1,12 +1,32 @@
-import "./multiturmas.css";
+import "./CRUDTurmas.css";
 import { DeleteButton } from "../CRUDButtons/CRUDButtons";
+import { FaPlusCircle } from "react-icons/fa";
+
+let compactBuild = true;
+
+function AddCircle({ size, onClick, title }) {
+  return (
+    <FaPlusCircle
+      className="iconCreate"
+      size={size}
+      onClick={onClick}
+      title={title}
+    />
+  );
+}
 
 function RemoveTurmaButton({ turmas, setTurmas, currentTurma }) {
   function removerTurma() {
     let newTurmas = turmas.filter((turma) => turma.id !== currentTurma.id);
     setTurmas(newTurmas);
   }
-  return (
+  return compactBuild ? (
+    <DeleteButton
+      size="2em"
+      deleteFunction={removerTurma}
+      title={"Remover Turma"}
+    />
+  ) : (
     <button
       className="TurmaHorarioRemove"
       key={`${currentTurma.id}-${currentTurma.codigoDisciplina}-${currentTurma.professor}`}
@@ -28,11 +48,27 @@ function RemoveHorarioButton({ lTurma, setLTurma, indexHorario }) {
     };
     setLTurma(novaTurma);
   }
-  return <DeleteButton receivedFunction={removeHorarioFromTurma} size="2em" />;
+  return compactBuild ? (
+    <DeleteButton
+      size="2em"
+      deleteFunction={removeHorarioFromTurma}
+      title={"Remover horário"}
+    />
+  ) : (
+    <button
+      className="TurmaHorarioRemove"
+      key={`${lTurma.id}-${lTurma.codigoDisciplina}-${lTurma.professor}-${indexHorario}`}
+      onClick={removeHorarioFromTurma}
+    >
+      Remover Horário
+    </button>
+  );
 }
 
 function AdicionarTurma({ addTurma }) {
-  return (
+  return compactBuild ? (
+    <AddCircle size="2em" onClick={addTurma} title={"Adicionar turma"} />
+  ) : (
     <button className="AdicionarHorario" onClick={addTurma}>
       Nova Turma
     </button>
@@ -80,7 +116,13 @@ function AdicionarHorario({ setLTurmas, lTurmas, lTurma }) {
     // Atualize o estado da lista de turmas
     setLTurmas(novasTurmas);
   }
-  return (
+  return compactBuild ? (
+    <AddCircle
+      size="2em"
+      onClick={adicionarHorarioNaTurma}
+      title={"Adicionar horário"}
+    />
+  ) : (
     <button className="AdicionarHorario" onClick={adicionarHorarioNaTurma}>
       Novo Horário
     </button>

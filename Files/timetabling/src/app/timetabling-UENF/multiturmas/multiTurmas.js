@@ -30,7 +30,7 @@ import {
   RemoveHorarioButton,
   AdicionarTurma,
   AdicionarHorario,
-} from "../../../components/Buttons/multiturmas/multiturmasButtons";
+} from "../../../components/Buttons/CRUDTurmas/CRUDTurmas";
 
 function Turmas3() {
   const [ano, setAno] = useState(options.constantValues.years[10]);
@@ -517,7 +517,13 @@ function HorariosTable({ lTurmas, setLTurma, lTurma }) {
     <table>
       <thead>
         <tr key={`LinhaHorarios-${lTurma.idTurma}`}>
-          <th>Remover</th>
+          <th>
+            <AdicionarHorario
+              setLTurmas={setLTurma}
+              lTurmas={lTurmas}
+              lTurma={lTurma}
+            />
+          </th>
           <th>Sala</th>
           <th>Dia</th>
           <th>Hora Início</th>
@@ -557,13 +563,6 @@ function TableRow({ turmas, setTurmas, lTurma, setTurma }) {
       </td>
       <td>
         <NumberInputDemandaEstimada lTurma={lTurma} setLTurma={setTurma} />
-      </td>
-      <td>
-        <AdicionarHorario
-          setLTurmas={setTurmas}
-          lTurmas={turmas}
-          lTurma={lTurma}
-        />
       </td>
       <td>
         {lTurma.horarios.length === 0 ? null : (
