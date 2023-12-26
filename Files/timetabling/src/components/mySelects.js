@@ -33,17 +33,26 @@ function SelectDisciplina({ lTurma, setLTurma }) {
   const [disciplina, setDisciplina] = useState(localDisciplina);
 
   function updateOuterTurma(novaDisciplina) {
-    if (novaDisciplina === null) {
-      novaDisciplina = { codigo: "", nome: "" };
+    let blankDisciplina = {
+      apelido: "",
+      codigo: "",
+      nome: "",
+      periodo: 0,
+    };
+    let disciplinaAtualizada = null;
+    if (!novaDisciplina) {
+      setDisciplina(disciplinaAtualizada);
+      disciplinaAtualizada = blankDisciplina;
+    } else {
+      disciplinaAtualizada = novaDisciplina;
+      setDisciplina(disciplinaAtualizada);
     }
-    setDisciplina(novaDisciplina);
     let novaTurma = {
       ...lTurma,
-      codigoDisciplina: novaDisciplina.codigo,
-      disciplina: {
-        codigo: novaDisciplina.codigo,
-        nome: novaDisciplina.nome,
-      },
+      apelidoDisciplina: disciplinaAtualizada.apelido,
+      periodoDisciplina: disciplinaAtualizada.periodo,
+      codigoDisciplina: disciplinaAtualizada.codigo,
+      nomeDisciplina: disciplinaAtualizada.nome,
     };
     setLTurma(novaTurma);
   }
