@@ -6,9 +6,9 @@ import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { updateProfessorFromList } from "../helpers/auxFunctions";
 
-/* Depois separar os selects por página */
-
 let styleWidthFix = options.SelectStyles.fullItem;
+
+/* \/ \/ \/ \/ \/ \/ \/ \/ MULTITURMAS \/ \/ \/ \/ \/ \/ \/ \/ */
 
 function SelectAnoSemestre({ ano, setAno, semestre, setSemestre }) {
   return (
@@ -18,114 +18,6 @@ function SelectAnoSemestre({ ano, setAno, semestre, setSemestre }) {
       Semestre:
       <SelectSemestre outerSemestre={semestre} setOuterSemestre={setSemestre} />
     </div>
-  );
-}
-
-function SelectAno({ outerAno, setOuterAno }) {
-  let anos = options.constantValues.years;
-
-  let anoSelecionado = anos.find(
-    (ano) => ano.value === parseInt(outerAno.value)
-  );
-
-  const [ano, setAno] = useState(anoSelecionado);
-
-  function updateOuterValue(novoAno) {
-    setOuterAno(novoAno);
-    setAno(novoAno);
-  }
-
-  return (
-    <Select
-      className="SelectList"
-      placeholder="Ano"
-      options={anos}
-      value={ano}
-      onChange={updateOuterValue}
-    />
-  );
-}
-
-function SelectAnoTurma({ lTurma, setLTurma }) {
-  let anos = options.constantValues.years;
-  let anoSelecionado = anos.find((ano) => ano.value === parseInt(lTurma.ano));
-  const [ano, setAno] = useState(anoSelecionado);
-  function updateOuterValue(novoAno) {
-    if (novoAno === null) {
-      novoAno = { value: "", label: "" };
-    }
-    setAno(novoAno);
-    let novaTurma = {
-      ...lTurma,
-      ano: novoAno.value,
-    };
-    setLTurma(novaTurma);
-  }
-  return (
-    <Select
-      className="SelectList"
-      placeholder="Ano"
-      options={anos}
-      value={ano}
-      onChange={updateOuterValue}
-    />
-  );
-}
-
-function SelectSemestreTurma({ lTurma, setLTurma }) {
-  let semestres = options.constantValues.semesters;
-
-  let semestreSelecionado = semestres.find(
-    (semestre) => semestre.value === parseInt(lTurma.semestre)
-  );
-
-  const [semestre, setSemestre] = useState(semestreSelecionado);
-
-  function updateOuterValue(novoSemestre) {
-    if (novoSemestre === null) {
-      novoSemestre = { value: "", label: "" };
-    }
-    setSemestre(novoSemestre);
-    let novaTurma = {
-      ...lTurma,
-      semestre: novoSemestre.value,
-    };
-    setLTurma(novaTurma);
-  }
-
-  return (
-    <Select
-      className="SelectList"
-      placeholder="Semestre"
-      options={semestres}
-      value={semestre}
-      onChange={updateOuterValue}
-    />
-  );
-}
-
-function SelectSemestre({ outerSemestre, setOuterSemestre }) {
-  let semestres = options.constantValues.semesters;
-
-  let semestreSelecionado = semestres.find(
-    (semestre) => semestre.value === parseInt(outerSemestre.value)
-  );
-
-  const [semestre, setSemestre] = useState(semestreSelecionado);
-
-  function updateOuterValue(novoSemestre) {
-    setOuterSemestre(novoSemestre);
-    setSemestre(novoSemestre);
-  }
-
-  return (
-    <Select
-      className="SelectList"
-      placeholder="Semestre"
-      options={semestres}
-      value={semestre}
-      onChange={updateOuterValue}
-    />
   );
 }
 
@@ -211,69 +103,6 @@ function SelectProfessor({ lTurma, setLTurma }) {
       onChange={updateOuterTurma}
       formatOptionLabel={({ apelido }) => `${apelido}`}
       // formatOptionLabel={({ nome }) => `${nome}`}
-    />
-  );
-}
-
-function SelectProfessorC(props) {
-  const {
-    professorAtual,
-    setNewProfessor,
-    professoresAtuais,
-    setNewProfessores,
-  } = props;
-
-  const [professores, setProfessores] = useState(professoresAtuais);
-  let professorSelecionado = professorAtual;
-  // let professorSelecionado = professores.find(
-  //   (professor) => professor.nome === lTurma.professor
-  // );
-  const [professor, setProfessor] = useState(professorSelecionado);
-  const [isLoading, setIsLoading] = useState(false);
-
-  function updateOuterTurma(novoProfessor) {
-    if (novoProfessor === null) {
-      novoProfessor = { nome: "" };
-    }
-    setProfessor(novoProfessor);
-    setNewProfessor(novoProfessor);
-  }
-
-  function createOption(newValue) {
-    let newOption = {
-      laboratorio: null,
-      curso: null,
-      nome: newValue,
-      disciplinas: [],
-    };
-    return newOption;
-  }
-  function handleCreate(newValue) {
-    setIsLoading(true);
-    setTimeout(() => {
-      const newOption = createOption(newValue);
-      setIsLoading(false);
-      setNewProfessores((prev) => [...prev, newOption]);
-      setProfessores((prev) => [...prev, newOption]);
-      setProfessor(newOption);
-      setNewProfessor(newOption);
-    }, 1000);
-  }
-
-  return (
-    <CreatableSelect
-      onCreateOption={handleCreate}
-      isDisabled={isLoading}
-      isLoading={isLoading}
-      isSearchable
-      isClearable={false}
-      options={professores}
-      value={professor}
-      onChange={updateOuterTurma}
-      getOptionValue={(option) => option.nome}
-      getOptionLabel={(option) => option.nome}
-      className="SelectList"
-      placeholder="Professor"
     />
   );
 }
@@ -461,6 +290,179 @@ function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
       value={duracao}
       getOptionValue={(option) => option.value}
       onChange={updateOuterTurma}
+    />
+  );
+}
+
+/* /\ /\ /\ /\ /\ /\ /\ /\ MULTITURMAS /\ /\ /\ /\ /\ /\ /\ /\ */
+
+function SelectAno({ outerAno, setOuterAno }) {
+  let anos = options.constantValues.years;
+
+  let anoSelecionado = anos.find(
+    (ano) => ano.value === parseInt(outerAno.value)
+  );
+
+  const [ano, setAno] = useState(anoSelecionado);
+
+  function updateOuterValue(novoAno) {
+    setOuterAno(novoAno);
+    setAno(novoAno);
+  }
+
+  return (
+    <Select
+      className="SelectList"
+      placeholder="Ano"
+      options={anos}
+      value={ano}
+      onChange={updateOuterValue}
+    />
+  );
+}
+
+function SelectAnoTurma({ lTurma, setLTurma }) {
+  let anos = options.constantValues.years;
+  let anoSelecionado = anos.find((ano) => ano.value === parseInt(lTurma.ano));
+  const [ano, setAno] = useState(anoSelecionado);
+  function updateOuterValue(novoAno) {
+    if (novoAno === null) {
+      novoAno = { value: "", label: "" };
+    }
+    setAno(novoAno);
+    let novaTurma = {
+      ...lTurma,
+      ano: novoAno.value,
+    };
+    setLTurma(novaTurma);
+  }
+  return (
+    <Select
+      className="SelectList"
+      placeholder="Ano"
+      options={anos}
+      value={ano}
+      onChange={updateOuterValue}
+    />
+  );
+}
+
+function SelectSemestreTurma({ lTurma, setLTurma }) {
+  let semestres = options.constantValues.semesters;
+
+  let semestreSelecionado = semestres.find(
+    (semestre) => semestre.value === parseInt(lTurma.semestre)
+  );
+
+  const [semestre, setSemestre] = useState(semestreSelecionado);
+
+  function updateOuterValue(novoSemestre) {
+    if (novoSemestre === null) {
+      novoSemestre = { value: "", label: "" };
+    }
+    setSemestre(novoSemestre);
+    let novaTurma = {
+      ...lTurma,
+      semestre: novoSemestre.value,
+    };
+    setLTurma(novaTurma);
+  }
+
+  return (
+    <Select
+      className="SelectList"
+      placeholder="Semestre"
+      options={semestres}
+      value={semestre}
+      onChange={updateOuterValue}
+    />
+  );
+}
+
+function SelectSemestre({ outerSemestre, setOuterSemestre }) {
+  let semestres = options.constantValues.semesters;
+
+  let semestreSelecionado = semestres.find(
+    (semestre) => semestre.value === parseInt(outerSemestre.value)
+  );
+
+  const [semestre, setSemestre] = useState(semestreSelecionado);
+
+  function updateOuterValue(novoSemestre) {
+    setOuterSemestre(novoSemestre);
+    setSemestre(novoSemestre);
+  }
+
+  return (
+    <Select
+      className="SelectList"
+      placeholder="Semestre"
+      options={semestres}
+      value={semestre}
+      onChange={updateOuterValue}
+    />
+  );
+}
+
+function SelectProfessorC(props) {
+  const {
+    professorAtual,
+    setNewProfessor,
+    professoresAtuais,
+    setNewProfessores,
+  } = props;
+
+  const [professores, setProfessores] = useState(professoresAtuais);
+  let professorSelecionado = professorAtual;
+  // let professorSelecionado = professores.find(
+  //   (professor) => professor.nome === lTurma.professor
+  // );
+  const [professor, setProfessor] = useState(professorSelecionado);
+  const [isLoading, setIsLoading] = useState(false);
+
+  function updateOuterTurma(novoProfessor) {
+    if (novoProfessor === null) {
+      novoProfessor = { nome: "" };
+    }
+    setProfessor(novoProfessor);
+    setNewProfessor(novoProfessor);
+  }
+
+  function createOption(newValue) {
+    let newOption = {
+      laboratorio: null,
+      curso: null,
+      nome: newValue,
+      disciplinas: [],
+    };
+    return newOption;
+  }
+  function handleCreate(newValue) {
+    setIsLoading(true);
+    setTimeout(() => {
+      const newOption = createOption(newValue);
+      setIsLoading(false);
+      setNewProfessores((prev) => [...prev, newOption]);
+      setProfessores((prev) => [...prev, newOption]);
+      setProfessor(newOption);
+      setNewProfessor(newOption);
+    }, 1000);
+  }
+
+  return (
+    <CreatableSelect
+      onCreateOption={handleCreate}
+      isDisabled={isLoading}
+      isLoading={isLoading}
+      isSearchable
+      isClearable={false}
+      options={professores}
+      value={professor}
+      onChange={updateOuterTurma}
+      getOptionValue={(option) => option.nome}
+      getOptionLabel={(option) => option.nome}
+      className="SelectList"
+      placeholder="Professor"
     />
   );
 }
