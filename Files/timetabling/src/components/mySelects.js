@@ -61,15 +61,17 @@ function SelectDisciplina({ lTurma, setLTurma }) {
     <Select
       className="SelectList"
       placeholder="Disciplina"
-      styles={{ styleWidthFix }}
+      styles={styleWidthFix}
       options={disciplinas}
       value={disciplina}
       isClearable={true}
       onChange={updateOuterTurma}
       getOptionValue={(disciplina) => disciplina.codigo}
-      getOptionLabel={(disciplina) =>
-        `${disciplina.codigo} - ${disciplina.nome}`
-      }
+      formatOptionLabel={({ codigo, apelido, nome }, { context }) => {
+        let editedLabel = `${codigo} - `;
+        editedLabel += context === "value" ? `${apelido}` : `${nome}`;
+        return editedLabel;
+      }}
     />
   );
 }
