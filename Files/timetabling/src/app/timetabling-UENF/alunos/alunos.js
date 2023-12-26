@@ -4,39 +4,13 @@ import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 import "./alunos.css";
+import { StudentSelection } from "../../../components/mySelects";
 // import { scrollThroughAlunos } from "../functions/firulas/minhasFirulas";
 
-const dados_agrupados = allLocalJsonData.SQL.alunos
+const dados_agrupados = allLocalJsonData.SQL.alunos;
 
 function Alunos() {
   const [aluno, setAluno] = useState(dados_agrupados[38]); // JVFD
-
-  function StudentSelection(props) {
-    return (
-      <div
-        className="SelectionBar"
-        onWheel={(event) => {
-          // let itemStates = [dados_agrupados, setAluno, aluno];
-          // scrollThroughAlunos(event, itemStates);
-        }}
-      >
-        <Select
-          className="itemSelectionBar"
-          // defaultValue={props.default_student}
-          value={props.student}
-          styles={options.SelectStyles.fullItem}
-          onChange={props.change_student}
-          placeholder={"Nome do aluno"}
-          isClearable={false}
-          isSearchable={true}
-          options={dados_agrupados}
-          getOptionValue={(option) => option.matricula}
-          getOptionLabel={(option) => option.nome}
-          formatOptionLabel={(option) => `${option.matricula}: ${option.nome}`}
-        />
-      </div>
-    );
-  }
 
   function StudentCard(props) {
     const { student, change_student } = props;
@@ -80,7 +54,11 @@ function Alunos() {
 
   return (
     <div className="CRUDContainComponents">
-      <StudentSelection student={aluno} change_student={setAluno} />
+      <StudentSelection
+        student={aluno}
+        change_student={setAluno}
+        options={dados_agrupados}
+      />
       <StudentCard student={aluno} change_student={setAluno} />
     </div>
   );

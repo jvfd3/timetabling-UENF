@@ -395,6 +395,36 @@ function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
 
 /* /\ /\ /\ /\ /\ /\ /\ /\ MULTITURMAS /\ /\ /\ /\ /\ /\ /\ /\ */
 
+/* \/ \/ \/ \/ \/ \/ \/ \/ Item Selections \/ \/ \/ \/ \/ \/ \/ \/ */
+
+function StudentSelection(props) {
+  return (
+    <div
+      className="SelectionBar"
+      onWheel={(event) => {
+        // let itemStates = [dados_agrupados, setAluno, aluno];
+        // scrollThroughAlunos(event, itemStates);
+      }}
+    >
+      <Select
+        onChange={props.change_student}
+        className="itemSelectionBar"
+        styles={styleWidthFix}
+        isClearable={false}
+        value={props.student}
+        placeholder={"Nome do aluno"}
+        isSearchable={true}
+        options={props.options}
+        getOptionValue={(option) => option.matricula}
+        getOptionLabel={(option) => option.nome}
+        formatOptionLabel={(option) => `${option.matricula}: ${option.nome}`}
+      />
+    </div>
+  );
+}
+
+/* /\ /\ /\ /\ /\ /\ /\ /\ Item Selections /\ /\ /\ /\ /\ /\ /\ /\ */
+
 function SelectAnoTurma({ lTurma, setLTurma }) {
   let anos = options.constantValues.years;
   let anoSelecionado = anos.find((ano) => ano.value === parseInt(lTurma.ano));
@@ -615,17 +645,22 @@ function SelectLaboratorio({ professorStates }) {
 }
 
 export {
-  SelectDia,
+  /* Multiturmas (MTT) */
   SelectAno,
-  SelectSala,
-  SelectCurso,
-  SelectDuracao,
   SelectSemestre,
-  SelectHoraTang,
-  SelectAnoTurma,
   SelectProfessor,
-  SelectProfessorC,
   SelectDisciplina,
+  /* MTT: Horario */
+  SelectSala,
+  SelectDia,
+  SelectHoraTang,
+  SelectDuracao,
+  /* Item Selection */
+  StudentSelection,
+  /* Outros */
+  SelectCurso,
+  SelectAnoTurma,
+  SelectProfessorC,
   SelectAnoSemestre,
   SelectLaboratorio,
   SelectSemestreTurma,
