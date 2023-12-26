@@ -34,10 +34,10 @@ function SelectDisciplina({ lTurma, setLTurma }) {
 
   function updateOuterTurma(novaDisciplina) {
     let blankDisciplina = {
-      apelido: "",
-      codigo: "",
-      nome: "",
-      periodo: 0,
+      apelido: null,
+      periodo: null,
+      codigo: null,
+      nome: null,
     };
     let disciplinaAtualizada = null;
     if (!novaDisciplina) {
