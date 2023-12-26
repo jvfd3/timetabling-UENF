@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import Select from "react-select";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 import "./disciplinas.css";
-import { DisciplinasSelection } from "../../../components/mySelects";
+import {
+  DisciplinasSelection,
+  SelectPeriodoEsperado,
+} from "../../../components/mySelects";
 // import { scrollThroughDisciplinas } from "../functions/firulas/minhasFirulas";
 
 function Disciplinas() {
@@ -16,27 +18,15 @@ function Disciplinas() {
   const [disciplinas, setDisciplinas] = useState(disciplinas_RS);
   const [disciplina, setDisciplina] = useState(disciplinas[36]);
 
+  let myDisciplinasStates = {
+    disciplinas,
+    setDisciplinas,
+    disciplina,
+    setDisciplina,
+  };
+
   function DisciplinasCard() {
     function InformacoesBaseDaDisciplina() {
-      function getCorrectPeriodo(periodo) {
-        let correctPeriodo = options.constantValues.expectedSemester.find(
-          (option) => option.value === periodo
-        );
-        return correctPeriodo;
-      }
-
-      function updatingSelect(newValue, individual, setIndividual) {
-        console.log("Updating Select");
-        console.log("individual: ", individual);
-
-        let myIndividual = { ...individual };
-        myIndividual["periodo"] = newValue.value;
-        setIndividual(myIndividual);
-
-        console.log("newValue: ", newValue);
-        console.log("individual: ", individual);
-      }
-
       return (
         <div className="showBasicDataCard">
           <h3>INFORMAÇÕES DA DISCIPLINA</h3>
@@ -45,45 +35,17 @@ function Disciplinas() {
             <tbody>
               <tr>
                 <th>Código</th>
-                <td>
-                  {disciplina.codigo}
-                  {/* <SelectDisciplinasCodigoC
-                    disciplina={disciplina}
-                    disciplinas={disciplinas}
-                    setDisciplina={setDisciplina}
-                    setDisciplinas={setDisciplinas}
-                  /> */}
-                </td>
+                <td>{disciplina.codigo}</td>
               </tr>
               <tr>
                 <th>Nome</th>
-                <td>
-                  {disciplina.nome}
-                  {/* <SelectDisciplinasDisciplinaC
-                    disciplina={disciplina}
-                    disciplinas={disciplinas}
-                    setDisciplina={setDisciplina}
-                    setDisciplinas={setDisciplinas}
-                  /> */}
-                </td>
+                <td>{disciplina.nome}</td>
               </tr>
               <tr>
                 <th>Período Esperado</th>
                 <td>
-                  <Select
-                    className="SelectList"
-                    newPlaceHolder="Período Esperado"
-                    value={getCorrectPeriodo(disciplina.periodo)}
-                    options={options.constantValues.expectedSemester}
-                    onChange={(newValue) => {
-                      updatingSelect(
-                        newValue,
-                        disciplinas,
-                        setDisciplinas,
-                        disciplina,
-                        setDisciplina
-                      );
-                    }}
+                  <SelectPeriodoEsperado
+                    myDisciplinasStates={myDisciplinasStates}
                   />
                 </td>
               </tr>

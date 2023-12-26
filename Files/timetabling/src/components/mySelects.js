@@ -710,6 +710,38 @@ function SelectLaboratorio({ professorStates }) {
   );
 }
 
+function SelectPeriodoEsperado({ myDisciplinasStates }) {
+  const { /* disciplinas, setDisciplinas, */ disciplina, setDisciplina } =
+    myDisciplinasStates;
+  let periodos = options.constantValues.expectedSemester;
+  function findPeriodo(periodoValue) {
+    let periodoSelecionado = periodos.find(
+      (periodo) => periodo.value === periodoValue
+    );
+    return periodoSelecionado;
+  }
+  const [periodo, setPeriodo] = useState(findPeriodo(disciplina.periodo));
+
+  function outerUpdate(newPeriodo) {
+    setPeriodo(newPeriodo);
+    let novaDisciplina = { ...disciplina };
+    novaDisciplina.periodo = newPeriodo.value;
+    setDisciplina(novaDisciplina);
+  }
+
+  return (
+    <Select
+      placeholder="Período Esperado"
+      className="SelectList"
+      styles={styleWidthFix}
+      isClearable={false}
+      options={periodos}
+      value={periodo}
+      onChange={outerUpdate}
+    />
+  );
+}
+
 export {
   /* Multiturmas (MTT) */
   SelectAno,
@@ -727,6 +759,7 @@ export {
   ProfessorItemSelection,
   SalaItemSelection,
   /* Outros */
+  SelectPeriodoEsperado,
   SelectCurso,
   SelectAnoTurma,
   SelectProfessorC,
