@@ -130,30 +130,31 @@ function AdicionarHorario({ setLTurmas, lTurmas, lTurma }) {
   );
 }
 
-function DumbAddHora(props) {
-  const { addHourFunction, turma, setTurma } = props;
-  // console.log(props);
-  return (
-    <button
-      className="AdicionarHorario"
-      onClick={() => {
-        addHourFunction(turma, setTurma);
-      }}
-    >
+function DumbAddHora({ addHourFunction, turma, setTurma }) {
+  function addHour() {
+    addHourFunction(turma, setTurma);
+  }
+  return compactBuild ? (
+    <AddCircle size="2em" onClick={DumbAddHora} title={"Adicionar turma"} />
+  ) : (
+    <button className="AdicionarHorario" onClick={addHour}>
       Adicionar Horario
     </button>
   );
 }
 
 function DumbRemoveHora({ removeHourFunction, turma, setTurma, horaIndex }) {
-  return (
-    <button
-      className="TurmaHorarioRemove"
-      key={`RemoveHoraButton-${turma.idTurma}`}
-      onClick={() => {
-        removeHourFunction(horaIndex, turma, setTurma);
-      }}
-    >
+  function removeHour() {
+    removeHourFunction(horaIndex, turma, setTurma);
+  }
+  return compactBuild ? (
+    <DeleteButton
+      size="2em"
+      deleteFunction={removeHour}
+      title={"Remover horário"}
+    />
+  ) : (
+    <button className="TurmaHorarioRemove" onClick={removeHour}>
       Remover
     </button>
   );
