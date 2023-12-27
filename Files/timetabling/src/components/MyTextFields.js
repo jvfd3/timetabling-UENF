@@ -43,7 +43,7 @@ function TextInputApelidoProfessor(props) {
 
 function NumberInputDemandaEstimada({ lTurma, setLTurma }) {
   const [demandaEstimada, setDemandaEstimada] = useState(
-    lTurma.demandaEstimada
+    lTurma.demandaEstimada || undefined
   );
 
   // console.log(lTurma);
