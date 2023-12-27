@@ -18,13 +18,9 @@ import {
   splittedToUnified2,
 } from "../../../helpers/auxFunctions";
 import {
-  adicionarHorario,
-  removerHorario,
-} from "../../../helpers/hourclassMagic";
-import {
-  DumbAddHora,
-  DumbRemoveHora,
-} from "../../../components/Buttons/CRUDTurmas/CRUDTurmas";
+  SmartCreateHora,
+  SmartDeleteHora,
+} from "../../../components/Buttons/Smart/Smart";
 
 function Turmas() {
   let allTurmas = getFullHorarios();
@@ -91,11 +87,7 @@ function Turmas() {
           <thead>
             <tr>
               <th>
-                <DumbAddHora
-                  addHourFunction={adicionarHorario}
-                  turma={turma}
-                  setTurma={setTurma}
-                />
+                <SmartCreateHora turma={turma} setTurma={setTurma} />
               </th>
               <th>Dia</th>
               <th>Hora de início</th>
@@ -108,8 +100,7 @@ function Turmas() {
               return (
                 <tr key={`Linha Horário: ${horario.idHorario}-${index}`}>
                   <td>
-                    <DumbRemoveHora
-                      removeHourFunction={removerHorario}
+                    <SmartDeleteHora
                       turma={turma}
                       setTurma={setTurma}
                       horaIndex={index}
@@ -160,11 +151,7 @@ function Turmas() {
         {quantidadeHorarios > 0 ? (
           <HorariosTable turma={turma} setTurma={setTurma} />
         ) : (
-          <DumbAddHora
-            addHourFunction={adicionarHorario}
-            turma={turma}
-            setTurma={setTurma}
-          />
+          <SmartCreateHora turma={turma} setTurma={setTurma} />
         )}
       </div>
     );

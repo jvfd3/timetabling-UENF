@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Select from "react-select";
 import TextField from "@mui/material/TextField";
 import CRUDPageSelection from "../../../components/PageSelect";
 import options from "../../../DB/local/options";
@@ -16,11 +15,12 @@ import {
   safeDeleteProfessores,
 } from "../../../DB/AWS/cleanCodeFromAxios";
 import {
-  CreateButton,
-  ReadButton,
-  UpdateButton,
-  DeleteButton,
-} from "../../../components/Buttons/CRUDButtons/CRUDButtons";
+  CreateDBButton,
+  ReadDBButton,
+  UpdateInfo,
+  DeleteInfo,
+} from "../../../components/Buttons/Dumb/Dumb";
+
 import "./professores.css";
 // import { scrollThroughProfessores } from "../functions/firulas/minhasFirulas";
 
@@ -63,10 +63,10 @@ function ProfessoresDB() {
       <div className="SelectionBar">
         <ProfessorItemSelection professorStates={professorStates} />
         <div className="CRUDButtonsContainer">
-          <CreateButton createFunction={createProfessor} />
-          <ReadButton readFunction={readProfessor} />
-          <UpdateButton updateFunction={updateProfessor} />
-          <DeleteButton deleteFunction={deleteProfessor} />
+          <CreateDBButton createFunc={createProfessor} />
+          <ReadDBButton readFunc={readProfessor} />
+          <UpdateInfo updateFunc={updateProfessor} />
+          <DeleteInfo deleteFunc={deleteProfessor} />
         </div>
       </div>
     );

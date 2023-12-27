@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
-import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 import {
   SelectDisciplina,
   SelectProfessor,
@@ -16,31 +15,30 @@ import {
 //   coloredConflicts,
 //   conflictsDisciplinaPeriodo,
 // } from "../../../helpers/conflicts/centralConflicts";
-import { flattenTurma } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
 import "./multiTurmas.css";
-import { readTurmas } from "../../../DB/AWS/axiosConnection";
+// import { readTurmas } from "../../../DB/AWS/axiosConnection";
 import {
-  filterTurmasByAnoSemestre,
   getFullHorarios,
-  getTurmasDoAnoSemestre,
-  splittedToUnified,
+  // filterTurmasByAnoSemestre,
+  // getTurmasDoAnoSemestre,
+  // splittedToUnified,
   splittedToUnified2,
 } from "../../../helpers/auxFunctions";
 import { NumberInputDemandaEstimada } from "../../../components/MyTextFields";
 import {
-  RemoveTurmaButton,
-  RemoveHorarioButton,
-  AdicionarTurma,
-  AdicionarHorario,
-} from "../../../components/Buttons/CRUDTurmas/CRUDTurmas";
-
+  SmartCreateTurma,
+  SmartDeleteTurma,
+  SmartCreateHora,
+  SmartDeleteHora,
+} from "../../../components/Buttons/Smart/Smart";
+import { insertNewTurmaInTurmas } from "../../../helpers/hourclassMagic";
 
 function TableHeader() {
   return (
     <thead>
       <tr>
         <th>
-          <AdicionarTurma addTurma={() => {}} />
+          <SmartCreateTurma />
         </th>
         <th>Código - Nome</th>
         <th>Professor</th>
@@ -61,9 +59,9 @@ function HorariosTableRow({
   return (
     <tr key={`RowHorario-${horario.idHorario}-${horario.ordemHorario}`}>
       <td>
-        <RemoveHorarioButton
-          lTurma={lTurma}
-          setLTurma={setLTurma}
+        <SmartDeleteHora
+          turma={lTurma}
+          setTurma={setLTurma}
           indexHorario={indexHorario}
         />
       </td>
@@ -105,11 +103,7 @@ function HorariosTable({ lTurmas, setLTurma, lTurma }) {
       <thead>
         <tr key={`LinhaHorarios-${lTurma.idTurma}`}>
           <th>
-            <AdicionarHorario
-              setLTurmas={setLTurma}
-              lTurmas={lTurmas}
-              lTurma={lTurma}
-            />
+            <SmartCreateHora turma={lTurma} setTurma={setLTurma} />
           </th>
           <th>Sala</th>
           <th>Dia</th>
@@ -137,10 +131,10 @@ function TableRow({ turmas, setTurmas, lTurma, setTurma }) {
   return (
     <tr key={lTurma.idTurma}>
       <td>
-        <RemoveTurmaButton
+        <SmartDeleteTurma
           turmas={turmas}
           setTurmas={setTurmas}
-          currentTurma={lTurma}
+          turma={lTurma}
         />
       </td>
       <td>
@@ -228,6 +222,10 @@ function Turmas() {
     //   setTurmas(turmasFiltradas);
     // });
   }, []);
+
+  useEffect(() => {
+    insertNewTurmaInTurmas(turmas, setTurmas, turma);
+  }, [turma]);
 
   let myCurrentSemestreProps = { ano, setAno, semestre, setSemestre };
   let myTurmasProps = { turmas, setTurmas, turma, setTurma };
