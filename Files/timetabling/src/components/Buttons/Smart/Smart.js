@@ -6,6 +6,7 @@ import {
   CustomDeleteButton,
   DeleteHora,
   DeleteInfo,
+  InputDisciplina,
 } from "../Dumb/Dumb";
 import options from "../../../DB/local/options";
 import {
@@ -61,4 +62,26 @@ function SmartDeleteHora({ turma, setTurma, horaIndex }) {
   );
 }
 
-export { SmartCreateTurma, SmartDeleteTurma, SmartCreateHora, SmartDeleteHora };
+function AddTurmaWithDisciplinaButton({ turmas, setTurmas, disciplina }) {
+  function addTurmaWithDisciplina() {
+    let newTurma = {
+      id: turmas.length + 1,
+      disciplina: disciplina,
+    };
+    setTurmas([...turmas, newTurma]);
+  }
+  return (
+    <InputDisciplina
+      insertDiscFunc={addTurmaWithDisciplina}
+      text={"Adicionar turma dessa disciplina"}
+    />
+  );
+}
+
+export {
+  SmartCreateTurma,
+  SmartDeleteTurma,
+  SmartCreateHora,
+  SmartDeleteHora,
+  AddTurmaWithDisciplinaButton,
+};
