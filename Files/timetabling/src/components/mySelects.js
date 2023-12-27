@@ -76,44 +76,22 @@ function SelectAnoSemestre({ ano, setAno, semestre, setSemestre }) {
 }
 
 function SelectDisciplina({ lTurma, setLTurma }) {
-  let localDisciplina = {
-    apelido: lTurma.disciplina.apelido,
-    codigo: lTurma.disciplina.codigo,
-    nome: lTurma.disciplina.nome,
-    periodo: lTurma.disciplina.periodo,
-  };
+  const [disciplina, setDisciplina] = useState(lTurma.disciplina);
   let disciplinas = allLocalJsonData.SQL.disciplinas;
 
-  const [disciplina, setDisciplina] = useState(localDisciplina);
-
-  function updateOuterTurma(novaDisciplina) {
-    let blankDisciplina = {
-      apelido: null,
-      periodo: null,
-      codigo: null,
-      nome: null,
-    };
-    let disciplinaAtualizada = null;
-    if (!novaDisciplina) {
-      setDisciplina(disciplinaAtualizada);
-      disciplinaAtualizada = blankDisciplina;
-    } else {
-      disciplinaAtualizada = novaDisciplina;
-      setDisciplina(disciplinaAtualizada);
-    }
+  function updateOuterTurmaDisciplina(novaDisciplina) {
+    let disciplinaAtualizada = novaDisciplina ? novaDisciplina : null;
+    setDisciplina(disciplinaAtualizada);
     let novaTurma = {
       ...lTurma,
-      apelidoDisciplina: disciplinaAtualizada.apelido,
-      periodoDisciplina: disciplinaAtualizada.periodo,
-      codigoDisciplina: disciplinaAtualizada.codigo,
-      nomeDisciplina: disciplinaAtualizada.nome,
+      disciplina: disciplinaAtualizada,
     };
     setLTurma(novaTurma);
   }
 
   return (
     <Select
-      onChange={updateOuterTurma}
+      onChange={updateOuterTurmaDisciplina}
       className="SelectList"
       styles={styleWidthFix}
       isClearable={true}
@@ -131,38 +109,19 @@ function SelectDisciplina({ lTurma, setLTurma }) {
 }
 
 function SelectProfessor({ lTurma, setLTurma }) {
-  let professorSelecionado = {
-    laboratorio: lTurma.professor.laboratorio,
-    apelido: lTurma.professor.apelido,
-    curso: lTurma.professor.curso,
-    nome: lTurma.professor.nome,
-  };
-
-  const [professor, setProfessor] = useState(professorSelecionado);
+  const [professor, setProfessor] = useState(lTurma.professor);
   let professores = allLocalJsonData.SQL.professores;
 
-  function updateOuterTurma(novoProfessor) {
-    let blankProfessor = {
-      laboratorio: null,
-      apelido: null,
-      curso: null,
-      nome: null,
-    };
-    let professorAtualizado = null;
-    if (!novoProfessor) {
-      professorAtualizado = blankProfessor;
-      setProfessor(null);
-    } else {
-      professorAtualizado = novoProfessor;
-      setProfessor(professorAtualizado);
-    }
+  function updateOuterTurmaProfessor(novoProfessor) {
+    let professorAtualizado = novoProfessor ? novoProfessor : null;
+    setProfessor(professorAtualizado);
     let novaTurma = { ...lTurma, professor: professorAtualizado };
     setLTurma(novaTurma);
   }
 
   return (
     <Select
-      onChange={updateOuterTurma}
+      onChange={updateOuterTurmaProfessor}
       className="SelectList"
       styles={styleWidthFix}
       isClearable={true}
@@ -181,25 +140,14 @@ function SelectProfessor({ lTurma, setLTurma }) {
 }
 
 function SelectSala({ lTurma, setLTurma, indexHorario }) {
+  const [sala, setSala] = useState(lTurma.horarios[indexHorario].sala);
   let salas = allLocalJsonData.SQL.salas;
-  let horarios = [...lTurma.horarios];
-  // console.log("horarios", horarios[indexHorario].sala);
-  // console.log("horarios", salas[0]);
-  const [sala, setSala] = useState(horarios[indexHorario].sala);
 
   function updateOuterTurmaSala(novaSala) {
-    let salaAtualizada = null;
-    if (!novaSala) {
-      setSala(null);
-    } else {
-      salaAtualizada = novaSala;
-      setSala(salaAtualizada);
-    }
-    horarios[indexHorario].sala = salaAtualizada;
-    let novaTurma = {
-      ...lTurma,
-      horarios: horarios,
-    };
+    let salaAtualizada = novaSala ? novaSala : null;
+    setSala(salaAtualizada);
+    let novaTurma = { ...lTurma };
+    novaTurma.horarios[indexHorario].sala = salaAtualizada;
     setLTurma(novaTurma);
   }
 
@@ -212,7 +160,7 @@ function SelectSala({ lTurma, setLTurma, indexHorario }) {
       placeholder="Sala"
       options={salas}
       value={sala}
-      getOptionValue={(option) => `${option.bloco} - ${option.codigo}`}
+      getOptionValue={({ bloco, codigo }) => `${bloco} - ${codigo}`}
       getOptionLabel={({ capacidade, bloco, codigo }) =>
         `${capacidade} - ${bloco} - ${codigo}`
       }
@@ -477,9 +425,15 @@ function TurmaItemSelection({ turmas, setTurmas, turma, setTurma }) {
       onChange={setTurma}
       getOptionValue={(turma) => turma.idTurma}
       getOptionLabel={(turma) => `${turma.idTurma}`}
-      formatOptionLabel={({ idTurma, ano, semestre, disciplina, professor }) =>
-        `(id: ${idTurma}) ${ano}.${semestre} - ${disciplina.apelido} - ${professor.apelido}`
-      }
+      formatOptionLabel={(option) => {
+        let { idTurma, ano, semestre, disciplina, professor } = option;
+        let message = `(id: ${idTurma}) ${ano}.${semestre}`;
+        message += ` - ${
+          disciplina ? disciplina.apelido : "disciplina indef."
+        }`;
+        message += ` - ${professor ? professor.apelido : "prof. indef."}`;
+        return message;
+      }}
     />
   );
 }
