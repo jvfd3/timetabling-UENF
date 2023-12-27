@@ -184,7 +184,9 @@ function getApelidoProfessor(nomeProfessor) {
 
 function getTurmasDoAnoSemestre(turmas, ano, semestre) {
   let turmasDoAnoSemestre = turmas.filter((turma) => {
-    return turma.ano === ano && turma.semestre === semestre;
+    let mesmoAno = turma.ano === ano;
+    let mesmoSemestre = turma.semestre === semestre;
+    return mesmoAno && mesmoSemestre;
   });
   return turmasDoAnoSemestre;
 }

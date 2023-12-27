@@ -16,9 +16,9 @@ import {
 //   conflictsDisciplinaPeriodo,
 // } from "../../../helpers/conflicts/centralConflicts";
 import "./multiTurmas.css";
-// import { readTurmas } from "../../../DB/AWS/axiosConnection";
 import {
   getFullHorarios,
+  getTurmasDoAnoSemestre,
   // filterTurmasByAnoSemestre,
   // getTurmasDoAnoSemestre,
   // splittedToUnified,
@@ -212,29 +212,31 @@ function TurmasCard(myProps) {
 function Turmas() {
   const [ano, setAno] = useState(options.constantValues.years[10]);
   const [semestre, setSemestre] = useState(options.constantValues.semesters[0]);
+
+  let allTurmas = getFullHorarios();
+  let unifiedHorarios = splittedToUnified2(allTurmas);
+  let filteredTurmas = getTurmasDoAnoSemestre(
+    unifiedHorarios,
+    ano.value,
+    semestre.value
+  );
   const [turmas, setTurmas] = useState([]);
   const [turma, setTurma] = useState({});
 
-  /*
-
-  */
+  useEffect(() => {
+    setTurmas(filteredTurmas);
+    setTurma(filteredTurmas[0]);
+  }, []);
 
   useEffect(() => {
-    let allTurmas = getFullHorarios();
-    let unifiedHorarios = splittedToUnified2(allTurmas);
-    setTurmas(unifiedHorarios);
-    setTurma(unifiedHorarios[0]);
-    // readTurmas().then((turmas) => {
-    //   let allTurmas = turmas;
-    //   let unifiedTurmas = splittedToUnified(allTurmas);
-    //   let turmasFiltradas = getTurmasDoAnoSemestre(
-    //     unifiedTurmas,
-    //     ano,
-    //     semestre
-    //   );
-    //   setTurmas(turmasFiltradas);
-    // });
-  }, []);
+    let filteredTurmas = getTurmasDoAnoSemestre(
+      unifiedHorarios,
+      ano.value,
+      semestre.value
+    );
+    setTurmas(filteredTurmas);
+    setTurma(filteredTurmas[0]);
+  }, [ano, semestre]);
 
   let myCurrentSemestreProps = { ano, setAno, semestre, setSemestre };
   let myTurmasProps = { turmas, setTurmas, turma, setTurma };
