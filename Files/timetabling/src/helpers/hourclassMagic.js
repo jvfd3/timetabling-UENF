@@ -1,9 +1,39 @@
 /* A ideia é que seja um trocadilho com hourglass */
 
-function adicionarHorario(turma, setTurma) {
+function insertNewTurmaInTurmas(turmas, setTurmas, turma) {
+  let currentId = turma.idTurma;
+  let newTurmas = turmas.map((turmaAtual) => {
+    return turmaAtual.idTurma === currentId ? turma : turmaAtual;
+  });
+  console.log(newTurmas[0]?.horarios);
+  // setTurmas(newTurmas);
+}
+
+function createTurma(turmas, setTurmas) {
+  let newTurma = {
+    nome: null,
+    horarios: [
+      {
+        sala: null,
+        dia: null,
+        horaInicio: null,
+        duracao: 2,
+      },
+    ],
+  };
+  let newTurmas = [...turmas, newTurma];
+  setTurmas(newTurmas);
+}
+
+function deleteTurma(turmas, setTurmas, turma) {
+  let newTurmas = [...turmas];
+  newTurmas.splice(turma.id, 1);
+  setTurmas(newTurmas);
+}
+
+function createHorario(turma, setTurma) {
   let newTurma = { ...turma };
   let newHorarios = [...newTurma.horarios];
-  console.log(newHorarios);
   let blankHorario = {
     sala: null,
     dia: null,
@@ -15,34 +45,20 @@ function adicionarHorario(turma, setTurma) {
   setTurma(newTurma);
 }
 
-function removerHorario(horaIndex, turma, setTurma) {
+function deleteHorario(turma, setTurma, horaIndex) {
   let newTurma = { ...turma };
   let newHorarios = [...newTurma.horarios];
   newHorarios.splice(horaIndex, 1);
   newTurma.horarios = newHorarios;
+  console.log("turma", turma);
+  console.log("newTurma", newTurma);
   setTurma(newTurma);
 }
 
-function removerTurma(id) {
-  let newTurmas = [...turmas];
-  newTurmas.splice(id, 1);
-  setTurmas(newTurmas);
-}
-
-function adicionarTurma() {
-  let newTurmas = [...turmas];
-  newTurmas.push({
-    nome: null,
-    horarios: [
-      {
-        sala: null,
-        dia: null,
-        horaInicio: null,
-        duracao: 2,
-      },
-    ],
-  });
-  setTurmas(newTurmas);
-}
-
-export { removerHorario, adicionarHorario, removerTurma, adicionarTurma };
+export {
+  createTurma,
+  deleteTurma,
+  createHorario,
+  deleteHorario,
+  insertNewTurmaInTurmas,
+};
