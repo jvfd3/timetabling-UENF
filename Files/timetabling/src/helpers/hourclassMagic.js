@@ -27,7 +27,8 @@ function createTurma(turmas, setTurmas) {
 
 function deleteTurma(turmas, setTurmas, turma) {
   let newTurmas = [...turmas];
-  newTurmas.splice(turma.id, 1);
+  let turmaIndex = turmas.indexOf(turma);
+  newTurmas.splice(turmaIndex, 1);
   setTurmas(newTurmas);
 }
 
