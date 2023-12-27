@@ -187,10 +187,19 @@ function TurmasTable(myProps) {
   );
 }
 
-function SemTurmas() {
+function SemTurmas(myProps) {
+  const { myTurmasProps, myCurrentSemestreProps } = myProps;
+  const { turmas, setTurmas } = myTurmasProps;
+  const { semestre, ano } = myCurrentSemestreProps;
+  const createStates = { turmas, setTurmas, semestre, ano };
   return (
-    <div className="infoCard">
-      <p>Ainda não há turmas cadastradas</p>
+    <div
+      className="infoCard"
+      style={{ display: "flex", flexDirection: "row", textAlignLast: "center" }}
+    >
+      <p>Ainda não há turmas cadastradas. Clique Aqui</p>
+      <SmartCreateTurma {...createStates} />
+      <p>para criar uma turma</p>
     </div>
   );
 }
@@ -204,7 +213,11 @@ function TurmasCard(myProps) {
         <h2>MultiTurmas</h2>
         <SelectAnoSemestre {...myCurrentSemestreProps} />
       </div>
-      {turmas.length === 0 ? <SemTurmas /> : <TurmasTable {...myProps} />}
+      {turmas.length === 0 ? (
+        <SemTurmas {...myProps} />
+      ) : (
+        <TurmasTable {...myProps} />
+      )}
     </div>
   );
 }
