@@ -243,6 +243,9 @@ const options = {
     region: "us-east-2",
     smallEndpoint: "4tw2l96f11.execute-api.us-east-2",
   },
+  config: {
+    iconButtons: true,
+  },
   SelectStyles: {
     fullWidth: {
       menu: ({ width, ...css }) => ({ ...css }),

@@ -1,8 +1,9 @@
 import "./CRUDTurmas.css";
 import { DeleteButton } from "../CRUDButtons/CRUDButtons";
 import { FaPlusCircle } from "react-icons/fa";
+import options from "../../../DB/local/options";
 
-let compactBuild = true;
+let compactBuild = options.config.iconButtons;
 
 function AddCircle({ size, onClick, title }) {
   return (
