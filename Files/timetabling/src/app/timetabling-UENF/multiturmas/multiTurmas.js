@@ -32,6 +32,33 @@ import {
   SmartDeleteHora,
 } from "../../../components/Buttons/Smart/Smart";
 
+/* ESTRUTURA DOS COMPONENTES
+- CRUDclass
+  - CRUDPageSelection
+  - Turmas
+    - SemTurmas
+    - TurmasCard
+      - MultiTurmasTitle
+        - h2
+        - SelectAnoSemestre
+      - TurmasTable
+        - TableHeader
+        - tbody
+          - TableRow
+            - SmartDeleteTurma
+            - SelectDisciplina
+            - SelectProfessor
+            - NumberInputDemandaEstimada
+            - HorariosTable
+              - SmartCreateHora
+              - HorariosTableRow
+                - SmartDeleteHora
+                - SelectSala
+                - SelectDia
+                - SelectHoraTang
+                - SelectDuracao
+*/
+
 function TableHeader(myProps) {
   const { myTurmasProps, myCurrentSemestreProps } = myProps;
   const { turmas, setTurmas } = myTurmasProps;
