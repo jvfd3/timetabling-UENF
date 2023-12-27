@@ -18,9 +18,9 @@ import {
 
 let compactBuild = options.config.iconButtons;
 
-function SmartCreateTurma({ turmas, setTurmas }) {
+function SmartCreateTurma(myProps) {
   function addTurma() {
-    createTurma(turmas, setTurmas);
+    createTurma(myProps);
   }
   return compactBuild ? (
     <CreateInfo createFunc={addTurma} text={"Adicionar turma"} />

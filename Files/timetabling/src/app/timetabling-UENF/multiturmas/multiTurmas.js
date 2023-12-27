@@ -31,14 +31,17 @@ import {
   SmartCreateHora,
   SmartDeleteHora,
 } from "../../../components/Buttons/Smart/Smart";
-import { insertNewTurmaInTurmas } from "../../../helpers/hourclassMagic";
 
-function TableHeader() {
+function TableHeader(myProps) {
+  const { myTurmasProps, myCurrentSemestreProps } = myProps;
+  const { turmas, setTurmas } = myTurmasProps;
+  const { semestre, ano } = myCurrentSemestreProps;
+  const createStates = { turmas, setTurmas, semestre, ano };
   return (
     <thead>
       <tr>
         <th>
-          <SmartCreateTurma />
+          <SmartCreateTurma {...createStates} />
         </th>
         <th>Código - Nome</th>
         <th>Professor</th>
@@ -57,7 +60,9 @@ function HorariosTableRow({
   setLTurma,
 }) {
   return (
-    <tr key={`RowHorario-${horario.idHorario}-${horario.ordemHorario}`}>
+    <tr
+      key={`HorariosTableRow>tr: ${horario.idHorario}-${horario.ordem}-${indexHorario}`}
+    >
       <td>
         <SmartDeleteHora
           turma={lTurma}
@@ -114,7 +119,7 @@ function HorariosTable({ lTurmas, setLTurma, lTurma }) {
       <tbody>
         {lTurma.horarios.map((horario, index) => (
           <HorariosTableRow
-            key={`RowHorario-${horario.idHorario}-${horario.ordemHorario}`}
+            key={`HorariosTable>HorariosTableRow: ${horario.idHorario}-${horario.ordem}-${index}`}
             horario={horario}
             indexHorario={index}
             lTurma={lTurma}
@@ -129,7 +134,9 @@ function HorariosTable({ lTurmas, setLTurma, lTurma }) {
 
 function TableRow({ turmas, setTurmas, lTurma, setTurma }) {
   return (
-    <tr key={lTurma.idTurma}>
+    <tr
+      key={`TableRow>tr: ${lTurma.idTurma}-${lTurma.disciplina?.codigoDisciplina}-${lTurma?.professor?.nome}`}
+    >
       <td>
         <SmartDeleteTurma
           turmas={turmas}
@@ -159,19 +166,20 @@ function TableRow({ turmas, setTurmas, lTurma, setTurma }) {
   );
 }
 
-function TurmasTable(myTurmasProps) {
+function TurmasTable(myProps) {
+  const { myTurmasProps } = myProps;
   const { turmas, setTurmas, turma, setTurma } = myTurmasProps;
   return (
     <table className="showBasicDataTable">
-      <TableHeader />
+      <TableHeader {...myProps} />
       <tbody>
-        {turmas.map((lTurma) => (
+        {turmas.map((lTurma, index) => (
           <TableRow
             turmas={turmas}
             setTurmas={setTurmas}
             lTurma={lTurma}
             setTurma={setTurma}
-            key={lTurma.idTurma}
+            key={`TableRow: ${lTurma.idTurma}-${lTurma.disciplina?.codigoDisciplina}-${lTurma?.professor?.nome}-${index}`}
           />
         ))}
       </tbody>
@@ -187,7 +195,8 @@ function SemTurmas() {
   );
 }
 
-function TurmasCard({ myTurmasProps, myCurrentSemestreProps }) {
+function TurmasCard(myProps) {
+  const { myTurmasProps, myCurrentSemestreProps } = myProps;
   const { turmas, setTurmas, turma, setTurma } = myTurmasProps;
   return (
     <div className="infoCard">
@@ -195,7 +204,7 @@ function TurmasCard({ myTurmasProps, myCurrentSemestreProps }) {
         <h2>MultiTurmas</h2>
         <SelectAnoSemestre {...myCurrentSemestreProps} />
       </div>
-      {turmas.length === 0 ? <SemTurmas /> : <TurmasTable {...myTurmasProps} />}
+      {turmas.length === 0 ? <SemTurmas /> : <TurmasTable {...myProps} />}
     </div>
   );
 }
@@ -205,6 +214,10 @@ function Turmas() {
   const [semestre, setSemestre] = useState(options.constantValues.semesters[0]);
   const [turmas, setTurmas] = useState([]);
   const [turma, setTurma] = useState({});
+
+  /*
+
+  */
 
   useEffect(() => {
     let allTurmas = getFullHorarios();
@@ -222,10 +235,6 @@ function Turmas() {
     //   setTurmas(turmasFiltradas);
     // });
   }, []);
-
-  useEffect(() => {
-    insertNewTurmaInTurmas(turmas, setTurmas, turma);
-  }, [turma]);
 
   let myCurrentSemestreProps = { ano, setAno, semestre, setSemestre };
   let myTurmasProps = { turmas, setTurmas, turma, setTurma };
