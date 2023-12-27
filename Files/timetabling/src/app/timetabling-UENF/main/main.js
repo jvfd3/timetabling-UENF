@@ -7,9 +7,11 @@ import "./main.css";
 function Main() {
   return (
     <div className="CRUDContainComponents">
-      <h1>👩‍🏫⌛ OurClass ⌛👨‍🏫</h1>
-      {/* <Workbench /> */}
-      <p>This is the main page.</p>
+      <img
+        src={process.env.PUBLIC_URL + "/logos/OurClass.png"}
+        alt="Logo OurClass"
+        style={{ width: "50%" }}
+      />
       <h4>Atalhos</h4>
       <ul>
         <li>
