@@ -134,6 +134,7 @@ function splittedToUnified2(splittedTurmas) {
           semestre: semestre,
           professor: professor,
           disciplina: disciplina,
+          demandaEstimada,
           horarios: [],
         };
       }

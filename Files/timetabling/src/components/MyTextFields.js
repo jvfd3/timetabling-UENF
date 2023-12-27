@@ -45,11 +45,12 @@ function NumberInputDemandaEstimada({ lTurma, setLTurma }) {
   const [demandaEstimada, setDemandaEstimada] = useState(
     lTurma.demandaEstimada
   );
+
+  // console.log(lTurma);
   function handleDemandaEstimadaChange(value) {
     setDemandaEstimada(value);
     setLTurma({ ...lTurma, demandaEstimada: value });
   }
-
   return (
     <TextField
       fullWidth

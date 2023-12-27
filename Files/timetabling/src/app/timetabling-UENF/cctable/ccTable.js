@@ -75,9 +75,7 @@ function VisualizacaoCC() {
                   key={`ChaveCellContent: ${turma.idTurma}-${turma.idHorario}`}
                   className="eachClassInCell"
                 >
-                  {turma.disciplina.periodo} - {turma.disciplina.apelido} - (
-                  {turma.professor.apelido} / {turma.sala.bloco} -{" "}
-                  {turma.sala.numero})
+                  {`${turma.disciplina.periodo} - ${turma.disciplina.apelido} - (${turma.professor.apelido} / ${turma.sala.bloco}-${turma.sala.codigo})`}
                 </div>
               );
             });

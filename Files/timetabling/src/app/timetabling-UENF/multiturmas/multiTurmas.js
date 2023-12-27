@@ -21,8 +21,10 @@ import "./multiTurmas.css";
 import { readTurmas } from "../../../DB/AWS/axiosConnection";
 import {
   filterTurmasByAnoSemestre,
+  getFullHorarios,
   getTurmasDoAnoSemestre,
   splittedToUnified,
+  splittedToUnified2,
 } from "../../../helpers/auxFunctions";
 import { NumberInputDemandaEstimada } from "../../../components/MyTextFields";
 import {
@@ -626,16 +628,20 @@ function Turmas() {
   const [turma, setTurma] = useState({});
 
   useEffect(() => {
-    readTurmas().then((turmas) => {
-      let allTurmas = turmas;
-      let unifiedTurmas = splittedToUnified(allTurmas);
-      let turmasFiltradas = getTurmasDoAnoSemestre(
-        unifiedTurmas,
-        ano,
-        semestre
-      );
-      setTurmas(turmasFiltradas);
-    });
+    let allTurmas = getFullHorarios();
+    let unifiedHorarios = splittedToUnified2(allTurmas);
+    setTurmas(unifiedHorarios);
+    setTurma(unifiedHorarios[0]);
+    // readTurmas().then((turmas) => {
+    //   let allTurmas = turmas;
+    //   let unifiedTurmas = splittedToUnified(allTurmas);
+    //   let turmasFiltradas = getTurmasDoAnoSemestre(
+    //     unifiedTurmas,
+    //     ano,
+    //     semestre
+    //   );
+    //   setTurmas(turmasFiltradas);
+    // });
   }, []);
 
   let myCurrentSemestreProps = { ano, setAno, semestre, setSemestre };
