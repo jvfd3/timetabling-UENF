@@ -184,36 +184,44 @@ const options = {
       */
     ],
   },
-  dbTemplates: {
+  emptyObjects: {
+    turma: {
+      id: null, //INT
+      ano: null, //INT
+      semestre: null, //INT
+      demandaEstimada: null, //INT
+      professor: null, //OBJ
+      disciplina: null, //OBJ
+      horarios: null, //ARRAY
+    },
     professor: {
-      idprofessor: null,
-      laboratorio: null,
-      curso: null,
-      apelidoProfessor: null,
-      nomeProfessor: null,
+      apelido: null, //STR
+      curso: null, //STR
+      id: null, //INT
+      laboratorio: null, //STR
+      nome: null, //STR
     },
     disciplina: {
-      iddisciplina: null,
-      periodoEsperado: null,
-      codigoDisciplina: null,
-      nomeDisciplina: null,
-      apelidoDisciplina: null,
+      apelido: null, //STR
+      codigo: null, //INT
+      id: null, //INT
+      nome: null, //STR
+      periodo: null, //INT
+    },
+    horario: {
+      dia: null, //STR
+      duracao: null, //INT
+      horaInicio: null, //INT
+      idHorario: null, //INT
+      ordem: null, //INT
+      sala: null, //OBJ
     },
     sala: {
-      idsala: null,
-      blocoSala: null,
-      capacidade: null,
-      bloco: null,
-      codigoSala: null,
-      descricaoBloco: null,
-    },
-    turma: {
-      idturma: null,
-      ano: null,
-      semestre: null,
-      demandaEstimada: null,
-      nomeProfessor: null,
-      codigoDisciplina: null,
+      bloco: null, //STR
+      capacidade: null, //INT
+      codigo: null, //STR
+      descricao: null, //STR
+      id: null, //INT
     },
   },
   yetUnusedValues: {
