@@ -16,14 +16,7 @@ import {
 //   conflictsDisciplinaPeriodo,
 // } from "../../../helpers/conflicts/centralConflicts";
 import "./multiTurmas.css";
-import {
-  getFullHorarios,
-  getTurmasDoAnoSemestre,
-  // filterTurmasByAnoSemestre,
-  // getTurmasDoAnoSemestre,
-  // splittedToUnified,
-  splittedToUnified2,
-} from "../../../helpers/auxFunctions";
+import { getTurmasDoAnoSemestre } from "../../../helpers/auxFunctions";
 import { NumberInputDemandaEstimada } from "../../../components/MyTextFields";
 import {
   SmartCreateTurma,
@@ -31,6 +24,7 @@ import {
   SmartCreateHora,
   SmartDeleteHora,
 } from "../../../components/Buttons/Smart/Smart";
+import { getTurmasData } from "../../../DB/retrieveData";
 
 /* ESTRUTURA DOS COMPONENTES
 - CRUDclass
@@ -260,11 +254,10 @@ function TurmasCard(myProps) {
 }
 
 function Turmas() {
-  let allTurmas = getFullHorarios();
-  let unifiedHorarios = splittedToUnified2(allTurmas);
-
   const [ano, setAno] = useState(options.constantValues.years[10]);
   const [semestre, setSemestre] = useState(options.constantValues.semesters[0]);
+
+  let unifiedHorarios = getTurmasData();
 
   let filteredTurmas = getTurmasDoAnoSemestre(
     unifiedHorarios,
@@ -274,7 +267,6 @@ function Turmas() {
 
   const [turmas, setTurmas] = useState(filteredTurmas);
   const [turma, setTurma] = useState(filteredTurmas[0]);
-
   /* useEffect(() => {
     setTurmas();
     setTurma();
