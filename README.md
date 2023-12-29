@@ -62,3 +62,103 @@ def get_secret():
     # Your code goes here.
 
  -->
+
+## Brainstorming conflitos
+
+Estou fazendo um sistema em React. Em determinado momento eu tenho uma turma que segue a seguinte estrutura:
+
+turma = {
+  ano: 123,
+  demandaEstimada: 123,
+  professor: "Fulano",
+  horarios: [
+    {
+      sala: "A1",
+      dia: "Segunda",
+    },
+    {
+      sala: "A2",
+      dia: "Terça",
+    },
+  ]
+}
+
+Eu tenho uma lista contendo várias dessas turmas.
+
+Atualmente estou usando um turmas.map() para percorrer todas as turmas.
+
+O que desejo é que cada item receba um estilo diferente baseado no conceito de "conflitos". Por exemplo: se duas turmas tiverem o mesmo professor, quero que elas fiquem rosas. Caso dois horários tenham o mesmo dia e hora, quero que fiquem azuis. E assim por diante.
+
+Estou cogitando fazer de duas formas, mas aceito sugestões:
+
+1. Processamento individual em cada um dos itens.
+  Ex.: para cada sala, eu envio o item "turma" para uma função "obterConflitosDaSala", ela processa e me retorna um objeto de estilos no seguinte formato:
+
+  ```json
+  {"backGroundColor": "corDoConflito"}
+  ```
+
+2. Processamento individual em cada uma das turmas.
+Ex.: para cada sala, eu envio o item "turma" para uma função "obterConflitosDaTurma", e ela me retorna um objeto contendo vários estilos no seguinte formato:
+
+```json
+{
+  "conflitoProfessor": {"backgroundColor": "corDoConflitoDoProfessor"},
+  "conflitoDisciplina": {"backgroundColor": "conflitoDisciplina"},
+  "conflitoDemanda": {"backgroundColor": "conflitoDemanda"},
+  "conflitoHorarios": [
+    {
+      "dia": {"backgroundColor": "corDoConflitoDoDia"},
+      "hora": {"backgroundColor": "corDoConflitoDaHora"},
+      "Sala": {"backgroundColor": "corDoConflitoDaSala"},
+    },
+    {
+      "dia": {"backgroundColor": "corDoConflitoDoDia"},
+      "hora": {"backgroundColor": "corDoConflitoDaHora"},
+      "Sala": {"backgroundColor": "corDoConflitoDaSala"},
+    },
+  ]
+}
+```
+
+3. Processamento em todas as turmas.
+Ex. Antes de gerar os componentes, já criar uma lista contendo todos os conflitos de todas as turmas. Então bastando aplicar.
+
+```json
+[
+  {
+  "conflitoProfessor": {"backgroundColor": "corDoConflitoDoProfessor"},
+  "conflitoDisciplina": {"backgroundColor": "conflitoDisciplina"},
+  "conflitoDemanda": {"backgroundColor": "conflitoDemanda"},
+  "conflitoHorarios": [
+    {
+      "dia": {"backgroundColor": "corDoConflitoDoDia"},
+      "hora": {"backgroundColor": "corDoConflitoDaHora"},
+      "Sala": {"backgroundColor": "corDoConflitoDaSala"},
+    },
+    {
+      "dia": {"backgroundColor": "corDoConflitoDoDia"},
+      "hora": {"backgroundColor": "corDoConflitoDaHora"},
+      "Sala": {"backgroundColor": "corDoConflitoDaSala"},
+    },
+  ]
+},
+{
+  "conflitoProfessor": {"backgroundColor": "corDoConflitoDoProfessor"},
+  "conflitoDisciplina": {"backgroundColor": "conflitoDisciplina"},
+  "conflitoDemanda": {"backgroundColor": "conflitoDemanda"},
+  "conflitoHorarios": [
+    {
+      "dia": {"backgroundColor": "corDoConflitoDoDia"},
+      "hora": {"backgroundColor": "corDoConflitoDaHora"},
+      "Sala": {"backgroundColor": "corDoConflitoDaSala"},
+    },
+    {
+      "dia": {"backgroundColor": "corDoConflitoDoDia"},
+      "hora": {"backgroundColor": "corDoConflitoDaHora"},
+      "Sala": {"backgroundColor": "corDoConflitoDaSala"},
+    },
+  ]
+}
+]
+```
