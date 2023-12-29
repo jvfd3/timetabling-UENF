@@ -40,9 +40,9 @@ function SmartDeleteTurma({ turmas, setTurmas, turma }) {
   );
 }
 
-function SmartCreateHora({ turma, setTurma }) {
+function SmartCreateHora(myProps) {
   function addHour() {
-    createHorario(turma, setTurma);
+    createHorario(myProps);
   }
   return compactBuild ? (
     <CreateHora createFunc={addHour} text="Adicionar Horário" />

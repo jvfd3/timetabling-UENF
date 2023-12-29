@@ -79,49 +79,43 @@ function TableHeader(myProps) {
   );
 }
 
-function HorariosTableRow({
-  horario,
-  indexHorario,
-  lTurma,
-  lTurmas,
-  setLTurma,
-}) {
+function HorariosTableRow({ turmas, turma, setTurma, horario, indexHorario }) {
   return (
     <tr
       key={`HorariosTableRow>tr: ${horario.idHorario}-${horario.ordem}-${indexHorario}`}
     >
       <td>
         <SmartDeleteHora
-          turma={lTurma}
-          setTurma={setLTurma}
+          turma={turma}
+          setTurma={setTurma}
           indexHorario={indexHorario}
         />
       </td>
       <td>
         <SelectSala
-          lTurma={lTurma}
-          setLTurma={setLTurma}
+          lTurma={turma}
+          setLTurma={setTurma}
           indexHorario={indexHorario}
         />
       </td>
       <td>
         <SelectDia
-          lTurma={lTurma}
-          setLTurma={setLTurma}
+          lTurma={turma}
+          setLTurma={setTurma}
           indexHorario={indexHorario}
         />
       </td>
       <td>
         <SelectHoraTang
-          lTurma={lTurma}
-          setLTurma={setLTurma}
+          lTurma={turma}
+          setLTurma={setTurma}
           indexHorario={indexHorario}
         />
       </td>
       <td>
         <SelectDuracao
-          lTurma={lTurma}
-          setLTurma={setLTurma}
+          lTurma={turma}
+          setLTurma={setTurma}
           indexHorario={indexHorario}
         />
       </td>
@@ -129,13 +123,21 @@ function HorariosTableRow({
   );
 }
 
-function HorariosTable({ lTurmas, setLTurma, lTurma }) {
+function HorariosTable(myProps) {
+  const { rowStates, myTurmasProps } = myProps;
+  const { rowTurma, setRowTurma } = rowStates;
+  const { turmas, setTurmas, turma, setTurma } = myTurmasProps;
   return (
     <table>
       <thead>
-        <tr key={`LinhaHorarios-${lTurma.idTurma}`}>
+        <tr key={`LinhaHorarios-${rowTurma.idTurma}`}>
           <th>
-            <SmartCreateHora turma={lTurma} setTurma={setLTurma} />
+            <SmartCreateHora
+              turmas={turmas}
+              setTurmas={setTurmas}
+              turma={rowTurma}
+              setTurma={setRowTurma}
+            />
           </th>
           <th>Sala</th>
           <th>Dia</th>
@@ -144,14 +146,14 @@ function HorariosTable({ lTurmas, setLTurma, lTurma }) {
         </tr>
       </thead>
       <tbody>
-        {lTurma.horarios.map((horario, index) => (
+        {rowTurma.horarios.map((horario, index) => (
           <HorariosTableRow
             key={`HorariosTable>HorariosTableRow: ${horario.idHorario}-${horario.ordem}-${index}`}
+            turmas={turmas}
+            turma={rowTurma}
+            setTurma={setRowTurma}
             horario={horario}
             indexHorario={index}
-            lTurma={lTurma}
-            lTurmas={lTurmas}
-            setLTurma={setLTurma}
           />
         ))}
       </tbody>
@@ -159,7 +161,15 @@ function HorariosTable({ lTurmas, setLTurma, lTurma }) {
   );
 }
 
-function TableRow({ turmas, setTurmas, lTurma, setTurma }) {
+function TableRow(myProps) {
+  const { lTurma, myTurmasProps } = myProps;
+  const { turmas, setTurmas, turma, setTurma } = myTurmasProps;
+
+  const [rowTurma, setRowTurma] = useState(lTurma);
+  const rowStates = { rowTurma, setRowTurma };
+
+  console.log("rowTurma", rowTurma.horarios.length);
+
   return (
     <tr
       key={`TableRow>tr: ${lTurma.idTurma}-${lTurma.disciplina?.codigoDisciplina}-${lTurma?.professor?.nome}`}
@@ -168,25 +178,28 @@ function TableRow({ turmas, setTurmas, lTurma, setTurma }) {
         <SmartDeleteTurma
           turmas={turmas}
           setTurmas={setTurmas}
-          turma={lTurma}
+          turma={rowTurma}
         />
       </td>
       <td>
-        <SelectDisciplina lTurma={lTurma} setLTurma={setTurma} />
+        <SelectDisciplina lTurma={rowTurma} setLTurma={setRowTurma} />
       </td>
       <td>
-        <SelectProfessor lTurma={lTurma} setLTurma={setTurma} />
+        <SelectProfessor lTurma={rowTurma} setLTurma={setRowTurma} />
       </td>
       <td>
-        <NumberInputDemandaEstimada lTurma={lTurma} setLTurma={setTurma} />
+        <NumberInputDemandaEstimada lTurma={rowTurma} setLTurma={setRowTurma} />
       </td>
       <td>
-        {lTurma.horarios.length === 0 ? null : (
-          <HorariosTable
-            setLTurma={setTurma}
-            lTurmas={turmas}
-            lTurma={lTurma}
+        {rowTurma.horarios.length === 0 ? (
+          <SmartCreateHora
+            turmas={turmas}
+            setTurmas={setTurmas}
+            turma={rowTurma}
+            setTurma={setRowTurma}
           />
+        ) : (
+          <HorariosTable rowStates={rowStates} myTurmasProps={myTurmasProps} />
         )}
       </td>
     </tr>
@@ -194,7 +207,7 @@ function TableRow({ turmas, setTurmas, lTurma, setTurma }) {
 }
 
 function TurmasTable(myProps) {
-  const { myTurmasProps } = myProps;
+  const { myTurmasProps, myCurrentSemestreProps } = myProps;
   const { turmas, setTurmas, turma, setTurma } = myTurmasProps;
   return (
     <table className="showBasicDataTable">
@@ -202,10 +215,8 @@ function TurmasTable(myProps) {
       <tbody>
         {turmas.map((lTurma, index) => (
           <TableRow
-            turmas={turmas}
-            setTurmas={setTurmas}
             lTurma={lTurma}
-            setTurma={setTurma}
+            myTurmasProps={myTurmasProps}
             key={`TableRow: ${lTurma.idTurma}-${lTurma.disciplina?.codigoDisciplina}-${lTurma?.professor?.nome}-${index}`}
           />
         ))}
@@ -250,32 +261,34 @@ function TurmasCard(myProps) {
 }
 
 function Turmas() {
+  let allTurmas = getFullHorarios();
+  let unifiedHorarios = splittedToUnified2(allTurmas);
+
   const [ano, setAno] = useState(options.constantValues.years[10]);
   const [semestre, setSemestre] = useState(options.constantValues.semesters[0]);
 
-  let allTurmas = getFullHorarios();
-  let unifiedHorarios = splittedToUnified2(allTurmas);
   let filteredTurmas = getTurmasDoAnoSemestre(
     unifiedHorarios,
     ano.value,
     semestre.value
   );
-  const [turmas, setTurmas] = useState([]);
-  const [turma, setTurma] = useState({});
+
+  const [turmas, setTurmas] = useState(filteredTurmas);
+  const [turma, setTurma] = useState(filteredTurmas[0]);
+
+  /* useEffect(() => {
+    setTurmas();
+    setTurma();
+  }, []); */
 
   useEffect(() => {
-    setTurmas(filteredTurmas);
-    setTurma(filteredTurmas[0]);
-  }, []);
-
-  useEffect(() => {
-    let filteredTurmas = getTurmasDoAnoSemestre(
+    let newFilteredTurmas = getTurmasDoAnoSemestre(
       unifiedHorarios,
       ano.value,
       semestre.value
     );
-    setTurmas(filteredTurmas);
-    setTurma(filteredTurmas[0]);
+    setTurmas(newFilteredTurmas);
+    setTurma(newFilteredTurmas[0]);
   }, [ano, semestre]);
 
   let myCurrentSemestreProps = { ano, setAno, semestre, setSemestre };

@@ -81,13 +81,14 @@ function Turmas() {
   function HorariosTurma({ turma, setTurma }) {
     let quantidadeHorarios = turma.horarios.length;
 
-    function HorariosTable({ turma, setTurma }) {
+    function HorariosTable(turmaProps) {
+      const { turma, setTurma } = turmaProps;
       return (
         <table className="showBasicDataTable">
           <thead>
             <tr>
               <th>
-                <SmartCreateHora turma={turma} setTurma={setTurma} />
+                <SmartCreateHora {...turmaProps} />
               </th>
               <th>Dia</th>
               <th>Hora de início</th>

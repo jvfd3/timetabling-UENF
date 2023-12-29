@@ -1,14 +1,10 @@
 /* A ideia é que seja um trocadilho com hourglass */
+import options from "../DB/local/options";
 
 function createTurma({ ano, semestre, turmas, setTurmas }) {
-  let blankHorario = {
-    horaInicio: null,
-    idHorario: null,
-    duracao: 2,
-    sala: null,
-    dia: null,
-    ordem: 1,
-  };
+  let blankHorario = options.emptyObjects.horario;
+  blankHorario.duracao = 2;
+  blankHorario.ordem = 1;
 
   let newTurma = {
     ano: ano,
@@ -33,21 +29,19 @@ function deleteTurma(turmas, setTurmas, turma) {
   setTurmas(newTurmas);
 }
 
-function createHorarioInTurmas(turmas, setTurmas, turma, setTurma) {
+function createHorario(turmasStates) {
+  const { turmas, setTurmas, turma, setTurma } = turmasStates;
+
   let newTurma = { ...turma };
   let newHorarios = [...newTurma.horarios];
-  let blankHorario = {
-    horaInicio: null,
-    idHorario: null,
-    duracao: 2,
-    sala: null,
-    dia: null,
-    ordem: 1,
-  };
+  let blankHorario = options.emptyObjects.horario;
+  blankHorario.duracao = 2;
   newHorarios.push(blankHorario);
   newTurma.horarios = newHorarios;
   setTurma(newTurma);
-  insertNewTurmaInTurmas(turmas, setTurmas, newTurma);
+  if (turmas !== undefined && setTurmas !== undefined) {
+    insertNewTurmaInTurmas(turmas, setTurmas, newTurma);
+  }
 }
 
 function insertNewTurmaInTurmas(turmas, setTurmas, turma) {
@@ -56,25 +50,7 @@ function insertNewTurmaInTurmas(turmas, setTurmas, turma) {
   newTurmas = newTurmas.map((turmaAtual) => {
     return turmaAtual.idTurma === currentId ? turma : turmaAtual;
   });
-  console.log("inTurmas", turmas[0]?.demandaEstimada);
-  console.log("inTurma", turma?.demandaEstimada);
-  console.log("inTurma", turma);
-  console.log("inNewTurmas", newTurmas[0]?.demandaEstimada);
   setTurmas(newTurmas);
-}
-
-function createHorario(turma, setTurma) {
-  let newTurma = { ...turma };
-  let newHorarios = [...newTurma.horarios];
-  let blankHorario = {
-    sala: null,
-    dia: null,
-    duracao: 2,
-    horaInicio: null,
-  };
-  newHorarios.push(blankHorario);
-  newTurma.horarios = newHorarios;
-  setTurma(newTurma);
 }
 
 function deleteHorario(turma, setTurma, horaIndex) {
@@ -82,8 +58,6 @@ function deleteHorario(turma, setTurma, horaIndex) {
   let newHorarios = [...newTurma.horarios];
   newHorarios.splice(horaIndex, 1);
   newTurma.horarios = newHorarios;
-  console.log("turma", turma);
-  console.log("newTurma", newTurma);
   setTurma(newTurma);
 }
 
@@ -92,6 +66,5 @@ export {
   deleteTurma,
   createHorario,
   deleteHorario,
-  createHorarioInTurmas,
   insertNewTurmaInTurmas,
 };
