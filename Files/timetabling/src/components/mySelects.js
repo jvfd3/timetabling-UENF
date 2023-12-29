@@ -1,10 +1,10 @@
-// import "../CSS/defaultStyle.css";
 import React, { useState } from "react";
 import options from "../DB/local/options";
 import { allLocalJsonData } from "../DB/local/dataFromJSON";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { updateProfessorFromList } from "../helpers/auxFunctions";
+import "./mySelects.css";
 
 let styleWidthFix = options.SelectStyles.fullItem;
 
@@ -27,7 +27,7 @@ function SelectAno({ outerAno, setOuterAno }) {
   return (
     <Select
       onChange={updateOuterValue}
-      className="SelectList"
+      className="mySelectList"
       styles={styleWidthFix}
       isClearable={false}
       placeholder="Ano"
@@ -54,7 +54,7 @@ function SelectSemestre({ outerSemestre, setOuterSemestre }) {
   return (
     <Select
       onChange={updateOuterValue}
-      className="SelectList"
+      className="mySelectList"
       styles={styleWidthFix}
       isClearable={false}
       placeholder="Semestre"
@@ -92,7 +92,7 @@ function SelectDisciplina({ lTurma, setLTurma }) {
   return (
     <Select
       onChange={updateOuterTurmaDisciplina}
-      className="SelectList"
+      className="mySelectList"
       styles={styleWidthFix}
       isClearable={true}
       placeholder="Disciplina"
@@ -122,7 +122,7 @@ function SelectProfessor({ lTurma, setLTurma }) {
   return (
     <Select
       onChange={updateOuterTurmaProfessor}
-      className="SelectList"
+      className="mySelectList"
       styles={styleWidthFix}
       isClearable={true}
       placeholder="Professor"
@@ -153,7 +153,7 @@ function SelectSala({ lTurma, setLTurma, indexHorario }) {
 
   return (
     <Select
-      className="SelectList"
+      className="mySelectList"
       styles={styleWidthFix}
       isClearable={true}
       onChange={updateOuterTurmaSala}
@@ -206,7 +206,7 @@ function SelectDia({ lTurma, setLTurma, indexHorario }) {
   return (
     <Select
       onChange={updateOuterTurma}
-      className="SelectList"
+      className="mySelectList"
       styles={styleWidthFix}
       isClearable={true}
       placeholder="Dia"
@@ -256,7 +256,7 @@ function SelectHoraTang({ lTurma, setLTurma, indexHorario }) {
   return (
     <Select
       onChange={updateOuterTurma}
-      className="SelectList"
+      className="mySelectList"
       styles={styleWidthFix}
       isClearable={true}
       placeholder="Hora"
@@ -307,7 +307,7 @@ function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
   return (
     <Select
       onChange={updateOuterTurma}
-      className="SelectList"
+      className="mySelectList"
       styles={styleWidthFix}
       isClearable={true}
       placeholder="Duração"
@@ -458,7 +458,7 @@ function SelectAnoTurma({ lTurma, setLTurma }) {
   return (
     <Select
       onChange={updateOuterValue}
-      className="SelectList"
+      className="mySelectList"
       styles={styleWidthFix}
       isClearable={false}
       placeholder="Ano"
@@ -492,7 +492,7 @@ function SelectSemestreTurma({ lTurma, setLTurma }) {
   return (
     <Select
       onChange={updateOuterValue}
-      className="SelectList"
+      className="mySelectList"
       styles={styleWidthFix}
       isClearable={false}
       placeholder="Semestre"
@@ -550,7 +550,7 @@ function SelectProfessorC(props) {
   return (
     <CreatableSelect
       onChange={updateOuterTurma}
-      className="SelectList"
+      className="mySelectList"
       styles={styleWidthFix}
       isClearable={true}
       onCreateOption={handleCreate}
@@ -599,7 +599,7 @@ function SelectCurso({ professorStates }) {
   return (
     <Select
       onChange={updateCurso}
-      className="SelectList"
+      className="mySelectList"
       styles={styleWidthFix}
       isClearable={true}
       value={getCurso(professor.curso)}
@@ -647,7 +647,7 @@ function SelectLaboratorio({ professorStates }) {
   return (
     <Select
       onChange={updateLaboratorio}
-      className="SelectList"
+      className="mySelectList"
       styles={styleWidthFix}
       isClearable={true}
       value={getCorrectLaboratorio(professor.laboratorio)}
@@ -681,7 +681,7 @@ function SelectPeriodoEsperado({ myDisciplinasStates }) {
   return (
     <Select
       placeholder="Período Esperado"
-      className="SelectList"
+      className="mySelectList"
       styles={styleWidthFix}
       isClearable={false}
       options={periodos}

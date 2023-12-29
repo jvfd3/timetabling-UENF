@@ -1,0 +1,27 @@
+.mySelectList .react-select__control {
+  /* Adicione suas regras de estilo aqui */
+  background-color: #f8f9fa;
+  border-color: #ced4da;
+  border-radius: 0.25rem;
+}
+
+.mySelectList .react-select__menu {
+  /* Adicione suas regras de estilo aqui */
+  border-color: #ced4da;
+}
+
+.mySelectList .react-select__option--is-selected {
+  /* Adicione suas regras de estilo aqui */
+  background-color: #ff0000;
+  color: white;
+}
+
+.mySelectList {
+  font-weight: bolder;
+  width: max-content;
+}
+
+.mySelectList .react-select__option--is-focused {
+  /* Adicione suas regras de estilo aqui */
+  background-color: #9fbe17;
+}
