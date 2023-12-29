@@ -11,6 +11,21 @@ Explanation:
 - whiteColor and blackColor are classes that change the color of the text.
 */
 
+/*
+My CSS Structure:
+
+- background
+  - CRUD-page-selection
+    - PageSelection
+    - PageSelectionSelect
+  - CRUDContainComponents
+    - SelectionBar
+      - SelectList
+    - infoCard
+      - showBasicDataCard
+        - showBasicDataTable
+*/
+
 body {
   /* sleeper agent 🕵️ */
   background-color: #000;
