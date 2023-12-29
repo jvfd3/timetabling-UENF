@@ -12,8 +12,12 @@ async function handler(event) {
 
 async function updateProfessor(professorToUpdate) {
   local += ">updateProfessor";
-  let updateProfessorQuery = "UPDATE `professores` SET `apelido` = ?, `curso` = ?, `laboratorio` = ?, `nome` = ? WHERE `id` = ?";
-  return await defaultUpdate(updateProfessorQuery, convertToList(professorToUpdate));
+  let updateProfessorQuery =
+    "UPDATE `professores` SET `apelido` = ?, `curso` = ?, `laboratorio` = ?, `nome` = ? WHERE `id` = ?";
+  return await defaultUpdate(
+    updateProfessorQuery,
+    convertToList(professorToUpdate)
+  );
 }
 
 async function defaultUpdate(query, queryValues) {
@@ -38,7 +42,14 @@ async function defaultUpdate(query, queryValues) {
     message = local + ">Erro ao executar a atualização.";
     console.error(message, statusCode, error);
   }
-  return getPayloadResponse(message, query, queryValues, queryResult, localError, statusCode);
+  return getPayloadResponse(
+    message,
+    query,
+    queryValues,
+    queryResult,
+    localError,
+    statusCode
+  );
 }
 
 async function checkExistance(idInList) {
@@ -57,12 +68,12 @@ async function checkExistance(idInList) {
 }
 
 function convertToList(professor) {
-  const values = [  /* Vai ser nulo se algum item não for definido */
-    professor.apelidoProfessor ?? null,
+  const values = [
+    /* Vai ser nulo se algum item não for definido */ professor.apelido ?? null,
     professor.curso ?? null,
     professor.laboratorio ?? null,
-    professor.nomeProfessor ?? null,
-    professor.idprofessor ?? null,
+    professor.nome ?? null,
+    professor.id ?? null,
   ];
   return values;
 }

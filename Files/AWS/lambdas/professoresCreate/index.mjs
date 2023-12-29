@@ -12,7 +12,8 @@ async function handler(event) {
 
 async function createProfessor(newProfessor) {
   local += ">createProfessor";
-  let createProfessorQuery = "INSERT INTO professores(`apelido`, `curso`, `laboratorio`, `nome`) VALUES(?, ?, ?, ?)";
+  let createProfessorQuery =
+    "INSERT INTO professores(`apelido`, `curso`, `laboratorio`, `nome`) VALUES(?, ?, ?, ?)";
   return await defaultCreate(createProfessorQuery, convertToList(newProfessor));
 }
 
@@ -34,15 +35,22 @@ async function defaultCreate(query, queryValues) {
     message = local + ">Erro ao executar a leitura.";
     console.error(message, statusCode, error);
   }
-  return getPayloadResponse(message, query, queryValues, queryResult, localError, statusCode);
+  return getPayloadResponse(
+    message,
+    query,
+    queryValues,
+    queryResult,
+    localError,
+    statusCode
+  );
 }
 
 function convertToList(professor) {
-  const values = [  /* Vai ser nulo se algum item não for definido */
-    professor.apelidoProfessor ?? null,
+  const values = [
+    /* Vai ser nulo se algum item não for definido */ professor.apelido ?? null,
     professor.curso ?? null,
     professor.laboratorio ?? null,
-    professor.nomeProfessor ?? null,
+    professor.nome ?? null,
   ];
   return values;
 }
