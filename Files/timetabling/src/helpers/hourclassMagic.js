@@ -31,13 +31,13 @@ function deleteTurma(turmas, setTurmas, turma) {
 
 function createHorario(turmasStates) {
   const { turmas, setTurmas, turma, setTurma } = turmasStates;
-
+  // console.log("Horarios", turma.horarios);
   let newTurma = { ...turma };
   let newHorarios = [...newTurma.horarios];
   let blankHorario = options.emptyObjects.horario;
   blankHorario.duracao = 2;
-  newHorarios.push(blankHorario);
-  newTurma.horarios = newHorarios;
+  // newHorarios.push(blankHorario);
+  newTurma.horarios = [...newHorarios, blankHorario];
   setTurma(newTurma);
   if (turmas !== undefined && setTurmas !== undefined) {
     insertNewTurmaInTurmas(turmas, setTurmas, newTurma);
@@ -53,12 +53,18 @@ function insertNewTurmaInTurmas(turmas, setTurmas, turma) {
   setTurmas(newTurmas);
 }
 
-function deleteHorario(turma, setTurma, horaIndex) {
+function deleteHorario(myProps) {
+  const { turma, setTurma, indexHorario } = myProps;
   let newTurma = { ...turma };
   let newHorarios = [...newTurma.horarios];
-  newHorarios.splice(horaIndex, 1);
+  newHorarios.splice(indexHorario, 1);
   newTurma.horarios = newHorarios;
-  setTurma(newTurma);
+  let newNewTurma = {
+    ...newTurma,
+    horarios: newHorarios,
+  };
+
+  setTurma(newNewTurma);
 }
 
 export {

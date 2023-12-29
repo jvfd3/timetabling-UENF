@@ -51,9 +51,9 @@ function SmartCreateHora(myProps) {
   );
 }
 
-function SmartDeleteHora({ turma, setTurma, horaIndex }) {
+function SmartDeleteHora(myProps) {
   function removeHour() {
-    deleteHorario(turma, setTurma, horaIndex);
+    deleteHorario(myProps);
   }
   return compactBuild ? (
     <DeleteHora deleteFunc={removeHour} text={"Remover horário"} />

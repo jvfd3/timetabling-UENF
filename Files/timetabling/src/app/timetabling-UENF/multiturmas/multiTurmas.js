@@ -79,7 +79,8 @@ function TableHeader(myProps) {
   );
 }
 
-function HorariosTableRow({ turmas, turma, setTurma, horario, indexHorario }) {
+function HorariosTableRow(myProps) {
+  const { turmas, turma, setTurma, horario, indexHorario } = myProps;
   return (
     <tr
       key={`HorariosTableRow>tr: ${horario.idHorario}-${horario.ordem}-${indexHorario}`}
@@ -167,8 +168,6 @@ function TableRow(myProps) {
 
   const [rowTurma, setRowTurma] = useState(lTurma);
   const rowStates = { rowTurma, setRowTurma };
-
-  console.log("rowTurma", rowTurma.horarios.length);
 
   return (
     <tr
