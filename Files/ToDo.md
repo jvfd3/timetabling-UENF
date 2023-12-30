@@ -17,3 +17,4 @@
     - Semana que vem tem lá pra janeiro
 - [ ] Falar com Tang para pedir pro Rodrigo um CSV do andamento atual dos alunos
 - [ ] Chamar Márcia (Professora de petróleo) (nova diretora do CCT) pra banca?
+- [ ] Ver com Annabell qual é a desse "pacto de horário fixo"
