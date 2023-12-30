@@ -75,6 +75,7 @@ function TableHeader(myProps) {
 
 function HorariosTableRow(myProps) {
   const { turmas, turma, setTurma, horario, indexHorario } = myProps;
+
   return (
     <tr
       key={`HorariosTableRow>tr: ${horario.idHorario}-${horario.ordem}-${indexHorario}`}
@@ -163,6 +164,21 @@ function TableRow(myProps) {
   const [rowTurma, setRowTurma] = useState(lTurma);
   const rowStates = { rowTurma, setRowTurma };
 
+  let myStyle = {
+    disciplina: {
+      title: "RRR",
+      style: { backgroundColor: "red" },
+    },
+    professor: {
+      title: "GGG",
+      style: { backgroundColor: "green" },
+    },
+    demanda: {
+      title: "BBB",
+      style: { backgroundColor: "blue" },
+    },
+  };
+
   return (
     <tr
       key={`TableRow>tr: ${lTurma.idTurma}-${lTurma.disciplina?.codigoDisciplina}-${lTurma?.professor?.nome}`}
@@ -174,13 +190,13 @@ function TableRow(myProps) {
           turma={rowTurma}
         />
       </td>
-      <td>
+      <td {...myStyle.disciplina}>
         <SelectDisciplina lTurma={rowTurma} setLTurma={setRowTurma} />
       </td>
-      <td>
+      <td {...myStyle.professor}>
         <SelectProfessor lTurma={rowTurma} setLTurma={setRowTurma} />
       </td>
-      <td>
+      <td {...myStyle.demanda}>
         <NumberInputDemandaEstimada lTurma={rowTurma} setLTurma={setRowTurma} />
       </td>
       <td>
