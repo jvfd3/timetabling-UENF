@@ -51,9 +51,7 @@ async function readTurmas() {
     let returnedTurmas = res.data.body.queryResult;
     returnedData = returnedTurmas;
     toastToUse = toast.success;
-    toastMessages.debug.push(
-      `${local}>{Turmas lidas: ` + returnedTurmas + "}"
-    );
+    toastMessages.debug.push(`${local}>{Turmas lidas: ` + returnedTurmas + "}");
     toastMessages.pretty = `${returnedTurmas.length} Turmas lidos com sucesso!`;
   } catch (error) {
     toastToUse = toast.error;
@@ -181,7 +179,7 @@ async function readProfessores() {
 }
 
 async function updateProfessores(professor) {
-  // console.log("ready for an updating journey?");
+  // console.log("ready for an updating journey?", professor);
   let toastToUse = toast;
   let toastMessages = { debug: [], pretty: "" };
   let localMessage = debuggingLocal + ">updateProfessores";
@@ -214,7 +212,7 @@ async function updateProfessores(professor) {
           toastMessages.debug.push(
             `${localMessage}>404>Erro ${statusCode}> O professor não foi encontrado no BD.`
           );
-          toastMessages.pretty = `Professor de id ${professor.idprofessor} não foi encontrado no banco de dados.`;
+          toastMessages.pretty = `Professor de id ${professor.id} não foi encontrado no banco de dados.`;
           toastToUse = toast.warning;
           break;
         default: // Trate outros códigos de status aqui
@@ -248,7 +246,7 @@ async function deleteProfessores(professorToDelete) {
   let toastMessages = { debug: [], pretty: "" };
   let localMessage = debuggingLocal + ">deleteProfessores";
   let localEndpoint = "professores/";
-  let id = professorToDelete.idprofessor;
+  let id = professorToDelete.id;
   let localUrl = url + localEndpoint + id.toString();
   let returnedData = null;
   let localError = null;
@@ -300,8 +298,6 @@ async function deleteProfessores(professorToDelete) {
   }
   return returnedData;
 }
-
-
 
 export {
   axiosTeste,

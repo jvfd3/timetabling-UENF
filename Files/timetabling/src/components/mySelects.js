@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import options from "../DB/local/options";
 import { allLocalJsonData } from "../DB/local/dataFromJSON";
 import Select from "react-select";
@@ -365,7 +365,6 @@ function DisciplinasSelection(props) {
         placeholder={"Disciplina"}
         value={props.disciplina}
         options={props.disciplinas}
-        // formatOptionLabel={props.formatOptionLabel}
         getOptionValue={(option) => option.codigo}
         getOptionLabel={(option) => option.nome}
         formatOptionLabel={({ periodo, codigo, nome }) =>
@@ -388,9 +387,14 @@ function ProfessorItemSelection({ professorStates }) {
       options={professores}
       value={professor}
       getOptionValue={(option) => option.id}
-      getOptionLabel={({ laboratorio, curso, apelido }) =>
-        `(${laboratorio} - ${curso}) ${apelido}`
-      }
+      getOptionLabel={({ laboratorio, curso, apelido }) => {
+        let message = "";
+        message += `(`;
+        message += `${laboratorio || "lab indef."} - `;
+        message += `${curso || "cur indef."}) - `;
+        message += `${apelido || "Apelido indef."}`;
+        return message;
+      }}
     />
   );
 }
@@ -439,6 +443,117 @@ function TurmaItemSelection({ turmas, setTurmas, turma, setTurma }) {
 }
 
 /* /\ /\ /\ /\ /\ /\ /\ /\ Item Selections /\ /\ /\ /\ /\ /\ /\ /\ */
+
+function SelectLaboratorio(professorStates) {
+  const { professores, setProfessores, professor, setProfessor } =
+    professorStates;
+  let laboratorios = options.constantValues.laboratorios;
+  let selectedLab = professor.laboratorio;
+  let labSelecionado = getLab(selectedLab);
+  const [laboratorio, setLaboratorio] = useState(labSelecionado);
+
+  useEffect(() => {
+    setLaboratorio(labSelecionado);
+  }, [professor.laboratorio]);
+
+  function getLab(apelidoLab) {
+    let foundLab = laboratorios.find(
+      (labOption) => labOption.apelido === apelidoLab
+    );
+    let returnedLab = foundLab ?? null;
+    return returnedLab;
+  }
+
+  function updateOuterProfessorLab(selectedLab) {
+    let newLabValue = null;
+    if (selectedLab) {
+      newLabValue = selectedLab.apelido;
+    }
+    let newProfessor = {
+      ...professor,
+      laboratorio: newLabValue,
+    };
+    setLaboratorio(selectedLab);
+    setProfessor(newProfessor);
+    let newProfessores = updateProfessorFromList(professores, newProfessor);
+    setProfessores(newProfessores);
+  }
+
+  return (
+    <Select
+      value={laboratorio}
+      options={laboratorios}
+      onChange={updateOuterProfessorLab}
+      className="mySelectList"
+      placeholder="Laboratório"
+      styles={styleWidthFix}
+      isClearable={true}
+      getOptionValue={(lab) => lab.apelido}
+      getOptionLabel={(lab) => `${lab.centro} -${lab.apelido} - ${lab.nome}`}
+      formatOptionLabel={({ centro, apelido, nome }, { context }) => {
+        let isOpened = context === "value";
+        let message = isOpened ? `${apelido}` : `${apelido} - ${nome}`;
+        return message;
+      }}
+    />
+  );
+}
+
+function SelectCurso(professorStates) {
+  const { professores, setProfessores, professor, setProfessor } =
+    professorStates;
+  let cursos = options.constantValues.courses;
+
+  let selectedCurso = professor.curso;
+  let cursoSelecionado = getCurso(selectedCurso);
+  const [curso, setCurso] = useState(cursoSelecionado);
+
+  useEffect(() => {
+    setCurso(cursoSelecionado);
+  }, [professor.curso]);
+
+  function getCurso(apelidoCurso) {
+    let foundCurso = cursos.find((curso) => curso.apelido === apelidoCurso);
+    let returnedCurso = foundCurso ?? null;
+    return returnedCurso;
+  }
+
+  function updateCurso(selectedCurso) {
+    let newCursoValue = null;
+    if (selectedCurso) {
+      newCursoValue = selectedCurso.apelido;
+    }
+    let newProfessor = {
+      ...professor,
+      curso: newCursoValue,
+    };
+    setCurso(selectedCurso);
+    setProfessor(newProfessor);
+    let newProfessores = updateProfessorFromList(professores, newProfessor);
+    setProfessores(newProfessores);
+  }
+
+  return (
+    <Select
+      value={curso}
+      options={cursos}
+      onChange={updateCurso}
+      className="mySelectList"
+      placeholder="Curso"
+      styles={styleWidthFix}
+      isClearable={true}
+      getOptionValue={(curso) => curso.apelido}
+      getOptionLabel={(curso) => `${curso.apelido} - ${curso.nome}`}
+      formatOptionLabel={({ apelido, nome }, { context }) => {
+        let isOpened = context === "value";
+        let message = isOpened ? `${apelido}` : `${nome}`;
+        return message;
+      }}
+    />
+  );
+}
+
+/* /\ /\ /\ /\ /\ /\ /\ /\ Página Professores /\ /\ /\ /\ /\ /\ /\ /\ */
 
 function SelectAnoTurma({ lTurma, setLTurma }) {
   let anos = options.constantValues.years;
@@ -562,99 +677,6 @@ function SelectProfessorC(props) {
       getOptionValue={(option) => option.nome}
       getOptionLabel={(option) => option.nome}
       placeholder="Professor"
-    />
-  );
-}
-
-function SelectCurso({ professorStates }) {
-  let cursos = options.constantValues.courses;
-  const { professores, setProfessores, professor, setProfessor } =
-    professorStates;
-
-  function getEmptyCurso(cursoValue) {
-    let emptyCurso = {
-      value: cursoValue,
-      label: cursoValue,
-    };
-    return emptyCurso;
-  }
-
-  function getCurso(cursoValue) {
-    let foundCurso = cursos.find((curso) => curso.value === cursoValue);
-    let returnedCurso = foundCurso ?? getEmptyCurso(cursoValue);
-    return returnedCurso;
-  }
-
-  function updateCurso(selectedCurso) {
-    let newProfessor = { ...professor };
-    if (selectedCurso) {
-      newProfessor.curso = selectedCurso.value;
-    } else {
-      newProfessor.curso = "";
-    }
-    setProfessor(newProfessor);
-    setProfessores(updateProfessorFromList(professores, newProfessor));
-  }
-
-  return (
-    <Select
-      onChange={updateCurso}
-      className="mySelectList"
-      styles={styleWidthFix}
-      isClearable={true}
-      value={getCurso(professor.curso)}
-      options={cursos}
-      placeholder="Curso"
-      getOptionLabel={(option) => `${option.value} - ${option.label}`}
-      formatOptionLabel={(option) => `${option.value} - ${option.label}`}
-    />
-  );
-}
-
-function SelectLaboratorio({ professorStates }) {
-  let laboratorios = options.constantValues.laboratorios;
-  const { professores, setProfessores, professor, setProfessor } =
-    professorStates;
-
-  function getEmptyLaboratorio(labValue) {
-    let emptyLab = {
-      centro: labValue,
-      value: labValue,
-      label: labValue,
-    };
-    return emptyLab;
-  }
-
-  function getCorrectLaboratorio(labValue) {
-    let foundLab = laboratorios.find(
-      (labOption) => labOption.value === labValue
-    );
-    let returnedLab = foundLab ?? getEmptyLaboratorio(labValue);
-    return returnedLab;
-  }
-
-  function updateLaboratorio(selectedLab) {
-    let newProfessor = { ...professor };
-    if (selectedLab) {
-      newProfessor.laboratorio = selectedLab.value;
-    } else {
-      newProfessor.laboratorio = "";
-    }
-    setProfessor(newProfessor);
-    setProfessores(updateProfessorFromList(professores, newProfessor));
-  }
-
-  return (
-    <Select
-      onChange={updateLaboratorio}
-      className="mySelectList"
-      styles={styleWidthFix}
-      isClearable={true}
-      value={getCorrectLaboratorio(professor.laboratorio)}
-      options={laboratorios}
-      placeholder="Laboratório"
-      getOptionLabel={(option) => `${option.value} - ${option.label}`}
-      formatOptionLabel={(option) => `${option.value} - ${option.label}`}
     />
   );
 }

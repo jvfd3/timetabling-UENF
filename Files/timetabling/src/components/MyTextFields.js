@@ -1,13 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 
 function TextInputNomeProfessor(props) {
-  let { professor, setProfessor, inputRef1 } = props;
-  const [nomeProfessor, setNomeProfessor] = useState(professor.nomeProfessor);
-  const handleChange = (event) => {
-    setNomeProfessor(event.target.value);
-    setProfessor({ ...professor, nomeProfessor: event.target.value });
-  };
+  let { professores, setProfessores, professor, setProfessor } = props;
+  // console.log("Tinp", professor);
+  // console.log("Tinp>nome:", professor.nome);
+  const [nomeProfessor, setNomeProfessor] = useState(professor.nome);
+
+  console.log("a");
+  useEffect(() => {
+    console.log(professor.nome);
+    setNomeProfessor(professor.nome);
+  }, [professor.nome]);
+
+  function updateNomeProfessor(event) {
+    let newNome = event.target.value;
+    let newProfessor = { ...professor, nome: newNome };
+    setNomeProfessor(newNome);
+    setProfessor(newProfessor);
+  }
+
   return (
     <TextField
       fullWidth
@@ -16,27 +28,35 @@ function TextInputNomeProfessor(props) {
       label="Nome"
       variant="outlined"
       value={nomeProfessor}
-      onChange={handleChange}
-      inputRef={inputRef1}
+      onChange={updateNomeProfessor}
     />
   );
 }
 
 function TextInputApelidoProfessor(props) {
-  let { professor, setProfessor, inputRef2 } = props;
-  const handleChange = (event) => {
-    setProfessor({ ...professor, apelidoProfessor: event.target.value });
-  };
+  let { professor, setProfessor } = props;
+  const [apelidoProfessor, setApelidoProfessor] = useState(professor.apelido);
+
+  useEffect(() => {
+    setApelidoProfessor(professor.apelido);
+  }, [professor.apelido]);
+
+  function handleChange(event) {
+    let newApelido = event.target.value;
+    let newProfessor = { ...professor, apelido: newApelido };
+    setApelidoProfessor(newApelido);
+    setProfessor(newProfessor);
+  }
+
   return (
     <TextField
       fullWidth
       id="Apelido1"
       key="Apelido2"
-      label="Apelido"
+      label="Apelido do Professor"
       variant="outlined"
-      defaultValue={professor.apelidoProfessor}
+      value={apelidoProfessor}
       onChange={handleChange}
-      inputRef={inputRef2}
     />
   );
 }
@@ -65,8 +85,21 @@ function NumberInputDemandaEstimada({ lTurma, setLTurma }) {
   );
 }
 
+function TextInputIdProfessor(props) {
+  return (
+    <TextField
+      className="h"
+      value={props.professor.id}
+      // fullWidth
+      label="ID do Professor"
+      disabled
+    />
+  );
+}
+
 export {
   TextInputNomeProfessor,
+  TextInputIdProfessor,
   TextInputApelidoProfessor,
   NumberInputDemandaEstimada,
 };

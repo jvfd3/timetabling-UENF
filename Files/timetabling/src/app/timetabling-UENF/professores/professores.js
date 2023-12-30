@@ -22,6 +22,11 @@ import {
 } from "../../../components/Buttons/Dumb/Dumb";
 
 import "./professores.css";
+import {
+  TextInputApelidoProfessor,
+  TextInputIdProfessor,
+  TextInputNomeProfessor,
+} from "../../../components/MyTextFields";
 // import { scrollThroughProfessores } from "../functions/firulas/minhasFirulas";
 
 function ProfessoresDB() {
@@ -32,16 +37,16 @@ function ProfessoresDB() {
   );
 
   let professorStates = {
-    professores: professores,
-    setProfessores: setProfessores,
-    professor: professor,
-    setProfessor: setProfessor,
+    professores,
+    setProfessores,
+    professor,
+    setProfessor,
   };
 
   useEffect(() => {
-    safeReadProfessores(professorStates);
+    // safeReadProfessores(professorStates);
   }, []);
-
+  /* 
   function createProfessor() {
     safeCreateProfessores(professorStates);
   }
@@ -56,17 +61,33 @@ function ProfessoresDB() {
 
   function deleteProfessor() {
     safeDeleteProfessores(professorStates);
-  }
+  } */
 
-  function ProfessorSelection({ professorStates }) {
+  function ProfessorSelection(professorStates) {
     return (
       <div className="SelectionBar">
         <ProfessorItemSelection professorStates={professorStates} />
         <div className="CRUDButtonsContainer">
-          <CreateDBButton createFunc={createProfessor} />
-          <ReadDBButton readFunc={readProfessor} />
-          <UpdateInfo updateFunc={updateProfessor} />
-          <DeleteInfo deleteFunc={deleteProfessor} />
+          <CreateDBButton
+            createFunc={() => {
+              safeCreateProfessores(professorStates);
+            }}
+          />
+          <ReadDBButton
+            readFunc={() => {
+              safeReadProfessores(professorStates);
+            }}
+          />
+          <UpdateInfo
+            updateFunc={() => {
+              safeUpdateProfessores(professorStates);
+            }}
+          />
+          <DeleteInfo
+            deleteFunc={() => {
+              safeDeleteProfessores(professorStates);
+            }}
+          />
         </div>
       </div>
     );
@@ -74,7 +95,7 @@ function ProfessoresDB() {
 
   return (
     <div className="CRUDContainComponents">
-      <ProfessorSelection professorStates={professorStates} />
+      <ProfessorSelection {...professorStates} />
       <div className="showBasicCardData">
         <h3>INFORMAÇÕES DO PROFESSOR</h3>
         <table className="showBasicDataTable">
@@ -82,61 +103,31 @@ function ProfessoresDB() {
             <tr>
               <th>laboratório</th>
               <td>
-                <SelectLaboratorio professorStates={professorStates} />
+                <SelectLaboratorio {...professorStates} />
               </td>
             </tr>
             <tr>
               <th>Curso</th>
               <td>
-                <SelectCurso professorStates={professorStates} />
+                <SelectCurso {...professorStates} />
               </td>
             </tr>
             <tr>
               <th>Nome</th>
               <td>
-                <TextField
-                  className="f"
-                  value={professor.nomeProfessor}
-                  onChange={(event) => {
-                    let newProfessor = {
-                      ...professor,
-                      nomeProfessor: event.target.value,
-                    };
-                    setProfessor(newProfessor);
-                  }}
-                  fullWidth
-                  label="Nome do Professor"
-                />
+                <TextInputNomeProfessor {...professorStates} />
               </td>
             </tr>
             <tr>
               <th>Apelido</th>
               <td>
-                <TextField
-                  className="g"
-                  value={professor.apelidoProfessor}
-                  onChange={(event) => {
-                    let newProfessor = {
-                      ...professor,
-                      apelidoProfessor: event.target.value,
-                    };
-                    setProfessor(newProfessor);
-                  }}
-                  fullWidth
-                  label="Apelido do Professor"
-                />
+                <TextInputApelidoProfessor {...professorStates} />
               </td>
             </tr>
             <tr>
               <th>ID</th>
               <td>
-                <TextField
-                  className="h"
-                  value={professor.idprofessor}
-                  fullWidth
-                  label="ID do Professor"
-                  disabled
-                />
+                <TextInputIdProfessor {...professorStates} />
               </td>
             </tr>
           </tbody>
