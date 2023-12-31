@@ -28,6 +28,7 @@ import { allLocalJsonData } from "../../DB/local/dataFromJSON";
     - [ ] Retornar um objeto com todos os conflitos encontrados.
 */
 
+// Discarded (?)
 function centralConflicts(turmasListadas, turmaLinear) {
   let encounteredConflicts = {};
   let filteredTurmas = removeSameId(
@@ -205,8 +206,9 @@ function conflictsProfessor(turmas, turma) {
           - [ ] Se sim, há conflito
   */
 
-  /*   function cleanNotUsedForNow(turmas) {
+  function cleanNotUsedForNow(turmas) {
     let cleanedTurmas = [];
+    /*
     turmas.forEach((turma) => {
       delete turma.ano;
       delete turma.demandaEstimada;
@@ -222,10 +224,8 @@ function conflictsProfessor(turmas, turma) {
       delete turma.semestre;
       cleanedTurmas.push(turma);
     });
-    return cleanedTurmas;
-  } */
-  function cleanNotUsedForNow(turmas) {
-    return turmas.map(
+ */
+    cleanedTurmas = turmas.map(
       ({
         ano,
         demandaEstimada,
@@ -236,6 +236,7 @@ function conflictsProfessor(turmas, turma) {
         ...rest
       }) => rest
     );
+    return cleanedTurmas;
   }
 
   let conflitosProfessor = {};
@@ -266,7 +267,7 @@ function conflictsProfessor(turmas, turma) {
   // console.log("horariosProfessor", horariosProfessor);
   // console.log("cleanedHorarios", cleanedHorarios);
   // console.log("Conflitos encontrados", conflitosEncontrados);
-  // return conflitosProfessor;
+  return conflitosProfessor;
 }
 
 function cleanTurmas(turmas, turma) {

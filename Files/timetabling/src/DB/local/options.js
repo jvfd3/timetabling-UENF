@@ -285,6 +285,13 @@ const options = {
       }),
     },
   },
+  conflictsWeights: {
+    professorAlloc: 1,
+    roomAlloc: 1,
+    roomCapacity: 1,
+    professorPreferences: 1,
+    professorSubjectPreferences: 1,
+  },
 };
 
 export default options;

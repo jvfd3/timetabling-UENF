@@ -187,38 +187,37 @@ function searchSameDayAndHour(horarios, horario) {
   O objeto retornado deve ser da seguinte forma:
     Caso não haja conflitos: null
     Caso haja conflitos: {
-      numeroDeConflitos: 1, // o número de conflitos encontrados
       conflitos: [
         {
-          dia: "SEG",
-          horaComConflito: 8,
+          weight: options.weights.professorAlloc,
+          type: "HORARIO",
+          day: "SEG",
+          hour: 8,
         },
       ],
     }
 
   */
-  let conflitos = {
-    numeroDeConflitos: 0,
-    conflitos: [],
-  };
+  let hourAllocConflicts = [];
 
-  horarios.forEach((iterHorario) => {
-    let mesmoDia = horario.dia === iterHorario.dia;
-    let mesmaHora = horario.horaInicio === iterHorario.horaInicio;
+  horarios.forEach((iterClasstime) => {
+    let sameDay = horario.dia === iterClasstime.dia;
+    let sameHour = horario.horaInicio === iterClasstime.horaInicio;
     let duracaoConflito =
-      horario.horaInicio < iterHorario.horaInicio + iterHorario.duracao &&
-      horario.horaInicio + horario.duracao > iterHorario.horaInicio;
+      horario.horaInicio < iterClasstime.horaInicio + iterClasstime.duracao &&
+      horario.horaInicio + horario.duracao > iterClasstime.horaInicio;
 
-    if (mesmoDia && mesmaHora && duracaoConflito) {
-      conflitos.numeroDeConflitos += 1;
-      conflitos.conflitos.push({
-        dia: iterHorario.dia,
-        horaComConflito: iterHorario.horaInicio,
+    if (sameDay && (sameHour || duracaoConflito)) {
+      hourAllocConflicts.push({
+        weight: options.weights.professorAlloc,
+        type: "HORARIO",
+        day: iterClasstime.dia,
+        hour: iterClasstime.horaInicio,
       });
     }
   });
 
-  return conflitos.numeroDeConflitos > 0 ? conflitos : null;
+  return hourAllocConflicts.length > 0 ? hourAllocConflicts : null;
 }
 
 // 4
