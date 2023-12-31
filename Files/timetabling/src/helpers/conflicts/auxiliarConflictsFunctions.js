@@ -12,31 +12,6 @@ function testingTurmas2022_1(turmas) {
   return turmas2022_1;
 }
 
-function flattenTurma(turma, horarioIndex) {
-  let turmaHorario = turma.horarios[horarioIndex];
-  let newTurma = { ...turmaHorario, ...turma };
-  newTurma.horaInicio = turmaHorario.horaInicio;
-  newTurma.duracao = turmaHorario.duracao;
-  newTurma.idHorario = turmaHorario.id;
-  newTurma.sala = turmaHorario.sala;
-  newTurma.dia = turmaHorario.dia;
-  delete newTurma.horarios;
-  // console.log("turma", turma);
-  // console.log("newTurma", newTurma);
-  return newTurma;
-}
-
-function splitTurmas(turmas) {
-  let newSplittedTurmas = [];
-  turmas.forEach((turma) => {
-    turma.horarios.forEach((horario, idxHorario) => {
-      let newTurma = flattenTurma(turma, idxHorario);
-      newSplittedTurmas.push(newTurma);
-    });
-  });
-  return newSplittedTurmas;
-}
-
 function getTurmasPorAnoESemestre(turmas, ano, semestre, splitted = false) {
   /*
     Essa função retorna um array de turmas que acontecem no ano e semestre passados como parâmetro.
@@ -168,14 +143,168 @@ function getAtendimentoDeDemandas(turmas, disciplinasDemandadas) {
   return atendimentoDeDisciplinas;
 }
 
+/* Post refactor \/ */
+
+// 5
+function searchSameDayAndHour(horarios, horario) {
+  /* Horarios tem a seguinte estrutura:
+  [
+    {
+      dia: "SEG",
+      duracao: 2,
+      horaInicio: 8,
+      idHorario: 1,
+      idTurma: 1,
+      ordem: 1,
+    },
+    {
+      dia: "QUA",
+      duracao: 2,
+      horaInicio: 8,
+      idHorario: 2,
+      idTurma: 1,
+      ordem: 2,
+    },
+    {
+      dia: "TER",
+      duracao: 2,
+      horaInicio: 8,
+      idHorario: 3,
+      idTurma: 2,
+      ordem: 1,
+    },
+    {
+      dia: "QUI",
+      duracao: 2,
+      horaInicio: 8,
+      idHorario: 4,
+      idTurma: 2,
+      ordem: 2,
+    },
+  ]
+  Essa função deve reconhecer os valores de hora início, dia e duração do horário passado como parâmetro para verificar se há conflitos com o horário de cada um dos horários da lista.
+  Lembre de considerar que com uma horaInicio de 8 e uma duração de 2, o horário vai até 10, ou seja, os horários de 8 e 9 estão ocupados, mas o de 10 não.
+  O objeto retornado deve ser da seguinte forma:
+    Caso não haja conflitos: null
+    Caso haja conflitos: {
+      numeroDeConflitos: 1, // o número de conflitos encontrados
+      conflitos: [
+        {
+          dia: "SEG",
+          horaComConflito: 8,
+        },
+      ],
+    }
+
+  */
+  let conflitos = {
+    numeroDeConflitos: 0,
+    conflitos: [],
+  };
+
+  horarios.forEach((iterHorario) => {
+    let mesmoDia = horario.dia === iterHorario.dia;
+    let mesmaHora = horario.horaInicio === iterHorario.horaInicio;
+    let duracaoConflito =
+      horario.horaInicio < iterHorario.horaInicio + iterHorario.duracao &&
+      horario.horaInicio + horario.duracao > iterHorario.horaInicio;
+
+    if (mesmoDia && mesmaHora && duracaoConflito) {
+      conflitos.numeroDeConflitos += 1;
+      conflitos.conflitos.push({
+        dia: iterHorario.dia,
+        horaComConflito: iterHorario.horaInicio,
+      });
+    }
+  });
+
+  return conflitos.numeroDeConflitos > 0 ? conflitos : null;
+}
+
+// 4
+/* function getTurmasDoProfessor(turmas, professor) {
+  let outrasTurmasDoProfessor = [];
+  turmas.forEach((iterTurma) => {
+    let profIgual = iterTurma.professor === professor;
+    let profNaoNulo = professor !== null;
+    let profNaoVazio = professor !== "";
+    let profNaoUndefined = professor !== undefined;
+    let profValido =
+      profIgual && profNaoNulo && profNaoVazio && profNaoUndefined;
+    if (profValido) {
+      outrasTurmasDoProfessor.push(iterTurma);
+    }
+  });
+  return outrasTurmasDoProfessor;
+} */
+
+function getTurmasDoProfessor(turmas, professor) {
+  return turmas.filter((turma) => turma.professor === professor);
+}
+
+// 3
+function removeSameId(turmas, turma) {
+  // console.log("Quantidade de Turmas", turmas.length);
+  let turmasListadasSemTurmaOriginal = turmas.filter((iterTurma) => {
+    let found = iterTurma.idTurma !== turma.idTurma;
+    return found;
+  });
+  return turmasListadasSemTurmaOriginal;
+}
+
+// 2
+function flattenTurma(turma, horario) {
+  let newTurma = {
+    ...turma,
+    ...horario,
+  };
+  delete newTurma.horarios;
+  // delete newTurma.id;
+  // console.log("turmaHorario", turmaHorario);
+  // console.log("newTurma", newTurma);
+  // console.log("turma", turma);
+  // console.log("newTurma", newTurma);
+  return newTurma;
+}
+
+/* function flattenTurma(turma, horario) {
+  const { horarios, ...rest } = turma;
+  return {
+    ...rest,
+    ...horario,
+  };
+} */
+
+/* function splitTurmas(turmas) {
+  return turmas.flatMap((turma) =>
+    turma.horarios.map((horario) => flattenTurma(turma, horario))
+  );
+} */
+
+// 1
+function splitTurmas(turmas) {
+  let newSplittedTurmas = [];
+  turmas.forEach((turma) => {
+    turma.horarios.forEach((horario) => {
+      let newTurma = flattenTurma(turma, horario);
+      newSplittedTurmas.push(newTurma);
+    });
+  });
+  return newSplittedTurmas;
+}
+
 export {
   andamentoToDemanda,
   testingTurmas2022_1,
-  splitTurmas,
   getTurmasDaSalaPorValorDoHorario,
   getTurmasPorAnoESemestre,
   searchListForKeyWithValue,
   getNumeroDeConflitos,
-  flattenTurma,
   getAtendimentoDeDemandas,
+  /* Refactored: */
+  searchSameDayAndHour, // 5
+  getTurmasDoProfessor, // 4
+  removeSameId, // 3
+  flattenTurma, // 2
+  splitTurmas, // 1
 };

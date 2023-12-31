@@ -25,6 +25,7 @@ import {
   SmartDeleteHora,
 } from "../../../components/Buttons/Smart/Smart";
 import { getTurmasData } from "../../../DB/retrieveData";
+import { baseTurmaConflicts } from "../../../helpers/conflicts/centralConflicts";
 
 /* ESTRUTURA DOS COMPONENTES
 - CRUDclass
@@ -164,20 +165,28 @@ function TableRow(myProps) {
   const [rowTurma, setRowTurma] = useState(lTurma);
   const rowStates = { rowTurma, setRowTurma };
 
-  let myStyle = {
-    disciplina: {
-      title: "RRR",
-      style: { backgroundColor: "red" },
+  /*
+  Pretendo percorrer todas as turmas e verificar se há conflitos entre elas.
+  Para isso, preciso de uma função que receba a lista de turmas e a turma em questão.
+  Essa função deve retornar um objeto com os conflitos encontrados.
+  Esse objeto deve ser usado para colorir a linha da tabela.
+  Esse objeto deve ter a seguinte estrutura:
+  {
+    conflitosDisciplinaPeriodo: {
+      title: "Conflitos Disciplina Período",
+      style: { backgroundColor: "#6560f0" },
     },
-    professor: {
-      title: "GGG",
-      style: { backgroundColor: "green" },
+    conflitosProfessor: {
+      title: "Conflitos Professor",
+      style: { backgroundColor: "#84d47d" },
     },
-    demanda: {
-      title: "BBB",
-      style: { backgroundColor: "blue" },
+    conflitosDemanda: {
+      title: "Conflitos Demanda",
+      style: { backgroundColor: "#d9b57c" },
     },
-  };
+  }
+  */
+  let myStyle = baseTurmaConflicts(turmas, rowTurma);
 
   return (
     <tr
