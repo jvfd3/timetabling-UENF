@@ -27,5 +27,13 @@
   {"id": 26, "ano": 2024, "semestre": 1, "demandaEstimada":  7, "idProfessor":  1, "idDisciplina": 65 },
   {"id": 27, "ano": 2024, "semestre": 1, "demandaEstimada":  5, "idProfessor":  1, "idDisciplina": 56 },
   {"id": 28, "ano": 2024, "semestre": 1, "demandaEstimada":  5, "idProfessor":  3, "idDisciplina": 58 },
-  {"id": 29, "ano": 2024, "semestre": 1, "demandaEstimada":  4, "idProfessor":  3, "idDisciplina": 59 }
+  {"id": 29, "ano": 2024, "semestre": 1, "demandaEstimada":  4, "idProfessor":  3, "idDisciplina": 59 },
+  {"id": 30, "ano": 2025, "semestre": 1, "demandaEstimada": 40, "idProfessor":  1, "idDisciplina":  1 },
+  {"id": 31, "ano": 2025, "semestre": 1, "demandaEstimada": 40, "idProfessor":  1, "idDisciplina":  1 },
+  {"id": 32, "ano": 2025, "semestre": 1, "demandaEstimada": 40, "idProfessor":  2, "idDisciplina":  1 },
+  {"id": 33, "ano": 2025, "semestre": 1, "demandaEstimada": 40, "idProfessor":  2, "idDisciplina":  1 },
+  {"id": 34, "ano": 2025, "semestre": 1, "demandaEstimada": 40, "idProfessor":  3, "idDisciplina":  1 },
+  {"id": 35, "ano": 2025, "semestre": 1, "demandaEstimada": 40, "idProfessor":  3, "idDisciplina":  1 },
+  {"id": 36, "ano": 2025, "semestre": 1, "demandaEstimada": 40, "idProfessor":  4, "idDisciplina":  1 },
+  {"id": 37, "ano": 2025, "semestre": 1, "demandaEstimada": 40, "idProfessor":  4, "idDisciplina":  1 }
 ]
