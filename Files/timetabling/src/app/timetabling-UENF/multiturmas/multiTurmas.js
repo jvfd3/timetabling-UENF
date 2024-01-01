@@ -187,6 +187,8 @@ function TableRow(myProps) {
   }
   */
   let myStyle = baseTurmaConflicts(turmas, rowTurma);
+  // console.log("rowTurma", rowTurma);
+  // console.log("myStyle", myStyle);
 
   return (
     <tr
@@ -209,7 +211,7 @@ function TableRow(myProps) {
         <NumberInputDemandaEstimada lTurma={rowTurma} setLTurma={setRowTurma} />
       </td>
       <td>
-        {rowTurma.horarios.length === 0 ? (
+        {rowTurma.horarios === null || rowTurma.horarios.length === 0 ? (
           <SmartCreateHora
             turmas={turmas}
             setTurmas={setTurmas}
@@ -279,7 +281,7 @@ function TurmasCard(myProps) {
 }
 
 function Turmas() {
-  const [ano, setAno] = useState(options.constantValues.years[10]);
+  const [ano, setAno] = useState(options.constantValues.years[11]);
   const [semestre, setSemestre] = useState(options.constantValues.semesters[0]);
 
   let unifiedHorarios = getTurmasData();
@@ -298,6 +300,8 @@ function Turmas() {
   }, []); */
 
   useEffect(() => {
+    console.log("ano", ano.value, "semestre", semestre.value);
+    // console.log(unifiedHorarios[unifiedHorarios.length - 1]);
     let newFilteredTurmas = getTurmasDoAnoSemestre(
       unifiedHorarios,
       ano.value,

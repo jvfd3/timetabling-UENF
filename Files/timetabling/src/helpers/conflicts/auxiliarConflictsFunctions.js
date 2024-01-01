@@ -146,79 +146,6 @@ function getAtendimentoDeDemandas(turmas, disciplinasDemandadas) {
 /* Post refactor \/ */
 
 // 5
-function searchSameDayAndHour(horarios, horario) {
-  /* Horarios tem a seguinte estrutura:
-  [
-    {
-      dia: "SEG",
-      duracao: 2,
-      horaInicio: 8,
-      idHorario: 1,
-      idTurma: 1,
-      ordem: 1,
-    },
-    {
-      dia: "QUA",
-      duracao: 2,
-      horaInicio: 8,
-      idHorario: 2,
-      idTurma: 1,
-      ordem: 2,
-    },
-    {
-      dia: "TER",
-      duracao: 2,
-      horaInicio: 8,
-      idHorario: 3,
-      idTurma: 2,
-      ordem: 1,
-    },
-    {
-      dia: "QUI",
-      duracao: 2,
-      horaInicio: 8,
-      idHorario: 4,
-      idTurma: 2,
-      ordem: 2,
-    },
-  ]
-  Essa função deve reconhecer os valores de hora início, dia e duração do horário passado como parâmetro para verificar se há conflitos com o horário de cada um dos horários da lista.
-  Lembre de considerar que com uma horaInicio de 8 e uma duração de 2, o horário vai até 10, ou seja, os horários de 8 e 9 estão ocupados, mas o de 10 não.
-  O objeto retornado deve ser da seguinte forma:
-    Caso não haja conflitos: null
-    Caso haja conflitos: {
-      conflitos: [
-        {
-          weight: options.weights.professorAlloc,
-          type: "HORARIO",
-          day: "SEG",
-          hour: 8,
-        },
-      ],
-    }
-
-  */
-  let hourAllocConflicts = [];
-
-  horarios.forEach((iterClasstime) => {
-    let sameDay = horario.dia === iterClasstime.dia;
-    let sameHour = horario.horaInicio === iterClasstime.horaInicio;
-    let duracaoConflito =
-      horario.horaInicio < iterClasstime.horaInicio + iterClasstime.duracao &&
-      horario.horaInicio + horario.duracao > iterClasstime.horaInicio;
-
-    if (sameDay && (sameHour || duracaoConflito)) {
-      hourAllocConflicts.push({
-        weight: options.weights.professorAlloc,
-        type: "HORARIO",
-        day: iterClasstime.dia,
-        hour: iterClasstime.horaInicio,
-      });
-    }
-  });
-
-  return hourAllocConflicts.length > 0 ? hourAllocConflicts : null;
-}
 
 // 4
 /* function getTurmasDoProfessor(turmas, professor) {
@@ -284,10 +211,19 @@ function flattenTurma(turma, horario) {
 function splitTurmas(turmas) {
   let newSplittedTurmas = [];
   turmas.forEach((turma) => {
-    turma.horarios.forEach((horario) => {
-      let newTurma = flattenTurma(turma, horario);
+    if (turma.horarios !== null) {
+      // Isso daqui foi de uma vez que eu tentei fazer um teste com horários nulos, mas ficou muito embolado.
+      turma.horarios.forEach((horario) => {
+        let newTurma = flattenTurma(turma, horario);
+        newSplittedTurmas.push(newTurma);
+      });
+    } else {
+      let newTurma = {
+        ...turma,
+        horarios: null,
+      };
       newSplittedTurmas.push(newTurma);
-    });
+    }
   });
   return newSplittedTurmas;
 }
@@ -301,7 +237,6 @@ export {
   getNumeroDeConflitos,
   getAtendimentoDeDemandas,
   /* Refactored: */
-  searchSameDayAndHour, // 5
   getTurmasDoProfessor, // 4
   removeSameId, // 3
   flattenTurma, // 2

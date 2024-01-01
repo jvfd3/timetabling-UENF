@@ -2,10 +2,11 @@ import {
   flattenTurma,
   getTurmasDoProfessor,
   removeSameId,
-  searchSameDayAndHour,
   splitTurmas,
 } from "./auxiliarConflictsFunctions";
 import { allLocalJsonData } from "../../DB/local/dataFromJSON";
+import { searchSameDayAndHour } from "./conflictCalculation";
+import { getStyledConflict } from "./visualConflicts";
 
 /*
 ## Visualizar conflitos impeditivos #30
@@ -174,41 +175,11 @@ function conflictsDisciplinaPeriodo(turmasListadas, turma) {
   return conflitosDisciplinaPeriodo;
 }
 
-function coloredConflicts(conflictLevel) {
-  let color = "";
-  switch (conflictLevel) {
-    case 0:
-      color = "green";
-      break;
-    case 1:
-      color = "yellow";
-      break;
-    case 2:
-      color = "orange";
-      break;
-    case 3:
-      color = "red";
-      break;
-    default:
-      color = "";
-      break;
-  }
-  return color;
-}
-
 /* Post Refactor \/ */
 
-function conflictsProfessor(turmas, turma) {
-  /* 
-      - [ ] Professores
-        - [ ] Filtrar todas que tenham o mesmo professor:
-          - [ ] conferir se o dia e horário são iguais.
-          - [ ] Se sim, há conflito
-  */
-
-  function cleanNotUsedForNow(turmas) {
-    let cleanedTurmas = [];
-    /*
+function cleanNotUsedForNow(turmas) {
+  let cleanedTurmas = [];
+  /*
     turmas.forEach((turma) => {
       delete turma.ano;
       delete turma.demandaEstimada;
@@ -224,85 +195,56 @@ function conflictsProfessor(turmas, turma) {
       delete turma.semestre;
       cleanedTurmas.push(turma);
     });
- */
-    cleanedTurmas = turmas.map(
-      ({
-        ano,
-        demandaEstimada,
-        disciplina,
-        professor,
-        sala,
-        semestre,
-        ...rest
-      }) => rest
-    );
-    return cleanedTurmas;
-  }
+    */
+  cleanedTurmas = turmas.map(
+    ({
+      ano,
+      demandaEstimada,
+      disciplina,
+      professor,
+      sala,
+      semestre,
+      ...rest
+    }) => rest
+  );
+  return cleanedTurmas;
+}
 
-  let conflitosProfessor = {};
-  let turmasDoProfessor = getTurmasDoProfessor(turmas, turma.professor);
-  // console.log(`turmasDo de ${turma.professor.apelido}:`, turmasDoProfessor);
-  let horariosProfessor = splitTurmas(turmasDoProfessor);
-  // console.log(`horarios de ${turma.professor.apelido}:`, horariosProfessor[0]);
-  let cleanedHorarios = cleanNotUsedForNow(horariosProfessor);
-  // let HoraDia = searchSameDayAndHour(cleanedHorarios, turmaLinear);
-  let flattenedTurma = splitTurmas([turma]);
-  // console.log("flattenedTurma", flattenedTurma);
-  let currentCleanedHorarios = cleanNotUsedForNow(flattenedTurma);
-  // console.log("currentCleanedHorarios", currentCleanedHorarios);
+function conflictsProfessor(turmas, turma) {
   let conflictsList = [];
+  let professorConflicts = {};
+  let flattenedTurma = splitTurmas([turma]);
+  let cleanFlatTurma = cleanNotUsedForNow(flattenedTurma);
 
-  currentCleanedHorarios.forEach((horario) => {
-    let foundConflicts = searchSameDayAndHour(cleanedHorarios, horario);
-    // console.log("foundConflicts", foundConflicts);
+  cleanFlatTurma.forEach((cleanedClassTime) => {
+    let foundConflicts = searchSameDayAndHour(turmas, cleanedClassTime);
 
     if (foundConflicts !== null) {
       conflictsList.push(foundConflicts);
     }
   });
 
-  console.log("Lista de conflitos", conflictsList);
-  // conflitosProfessor = HoraDia;
-  // console.log("turmasDoProfessor", turmasDoProfessor);
-  // console.log("horariosProfessor", horariosProfessor);
-  // console.log("cleanedHorarios", cleanedHorarios);
-  // console.log("Conflitos encontrados", conflitosEncontrados);
-  return conflitosProfessor;
+  professorConflicts.alloc = conflictsList;
+  // console.log("Lista de conflitos", conflictsList);
+  return professorConflicts;
 }
 
 function cleanTurmas(turmas, turma) {
-  let currentCleanedTurmas = turmas;
-  currentCleanedTurmas = removeSameId(currentCleanedTurmas, turma);
-  // currentCleanedTurmas = splitTurmas(currentCleanedTurmas);
-  // console.log("turmas", turmas.length);
-  // console.log("filteredTurmas", filteredTurmas.length);
-  // console.log("splittedTurmas", splittedTurmas.length);
-  return currentCleanedTurmas;
+  let currentTurmas = turmas;
+  // Isso daqui impede que um conflito (SEGUNDA 8h) seja encontrado com um outro horário da mesma turma.
+  currentTurmas = removeSameId(currentTurmas, turma);
+  currentTurmas = getTurmasDoProfessor(currentTurmas, turma.professor);
+  currentTurmas = splitTurmas(currentTurmas);
+  currentTurmas = cleanNotUsedForNow(currentTurmas);
+  return currentTurmas;
 }
 
 function baseTurmaConflicts(turmas, turma) {
   let myClassConflicts = {};
-  myClassConflicts.disciplina = {
-    title: "Conflitos Disciplina Período",
-    style: { backgroundColor: "#6560f0" },
-  };
-  myClassConflicts.professor = {
-    title: "Conflitos Professor",
-    style: { backgroundColor: "#84d47d" },
-  };
-  myClassConflicts.demanda = {
-    title: "Conflitos Demanda",
-    style: { backgroundColor: "#d9b57c" },
-  };
   let cleanedTurmas = cleanTurmas(turmas, turma);
-  let conflitosProfessor = conflictsProfessor(cleanedTurmas, turma);
-
-  return myClassConflicts;
+  myClassConflicts.professor = conflictsProfessor(cleanedTurmas, turma);
+  let styledConflict = getStyledConflict(myClassConflicts);
+  return styledConflict;
 }
 
-export {
-  centralConflicts,
-  coloredConflicts,
-  conflictsDisciplinaPeriodo,
-  baseTurmaConflicts,
-};
+export { centralConflicts, conflictsDisciplinaPeriodo, baseTurmaConflicts };

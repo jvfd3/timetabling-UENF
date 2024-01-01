@@ -50,5 +50,25 @@
   {"id": 49, "dia": "QUI", "horaInicio": 14, "duracao": 2, "ordem": 2, "idTurma": 26, "idSala": 20},
   {"id": 50, "dia": "SEX", "horaInicio": 10, "duracao": 2, "ordem": 1, "idTurma": 27, "idSala": 21},
   {"id": 51, "dia": "SEX", "horaInicio": 14, "duracao": 2, "ordem": 1, "idTurma": 28, "idSala": 20},
-  {"id": 52, "dia": "SEX", "horaInicio": 16, "duracao": 2, "ordem": 1, "idTurma": 29, "idSala": 20}
+  {"id": 52, "dia": "SEX", "horaInicio": 16, "duracao": 2, "ordem": 1, "idTurma": 29, "idSala": 20},
+  
+  {"id": 53, "dia": "SEG", "horaInicio":  8, "duracao": 2, "ordem": null, "idTurma": 30, "idSala": 20},
+  {"id": 54, "dia": "SEG", "horaInicio":  8, "duracao": 2, "ordem": null, "idTurma": 30, "idSala": 20},
+  {"id": 55, "dia": "SEG", "horaInicio":  8, "duracao": 2, "ordem": null, "idTurma": 31, "idSala": 20},
+  {"id": 56, "dia": "SEG", "horaInicio":  8, "duracao": 2, "ordem": null, "idTurma": 31, "idSala": 20},
+  
+  {"id": 57, "dia": "TER", "horaInicio":  8, "duracao": 2, "ordem": null, "idTurma": 32, "idSala": 20},
+  {"id": 58, "dia": "QUA", "horaInicio":  8, "duracao": 2, "ordem": null, "idTurma": 32, "idSala": 20},
+  {"id": 59, "dia": "QUI", "horaInicio":  8, "duracao": 2, "ordem": null, "idTurma": 33, "idSala": 20},
+  {"id": 60, "dia": "SEX", "horaInicio":  8, "duracao": 2, "ordem": null, "idTurma": 33, "idSala": 20},
+  
+  {"id": 61, "dia": "TER", "horaInicio":  8, "duracao": 2, "ordem": null, "idTurma": 34, "idSala": 20},
+  {"id": 62, "dia": "QUI", "horaInicio":  8, "duracao": 2, "ordem": null, "idTurma": 34, "idSala": 20},
+  {"id": 63, "dia": "TER", "horaInicio":  8, "duracao": 2, "ordem": null, "idTurma": 35, "idSala": 20},
+  {"id": 64, "dia": "SEX", "horaInicio":  8, "duracao": 2, "ordem": null, "idTurma": 35, "idSala": 20},
+  
+  {"id": 65, "dia": "TER", "horaInicio":  8, "duracao": 2, "ordem": null, "idTurma": 36, "idSala": 20},
+  {"id": 66, "dia": "QUA", "horaInicio":  8, "duracao": 2, "ordem": null, "idTurma": 36, "idSala": 20},
+  {"id": 67, "dia": "QUI", "horaInicio":  8, "duracao": 2, "ordem": null, "idTurma": 37, "idSala": 20},
+  {"id": 68, "dia": "SEX", "horaInicio":  8, "duracao": 2, "ordem": null, "idTurma": 37, "idSala": 20}
 ]

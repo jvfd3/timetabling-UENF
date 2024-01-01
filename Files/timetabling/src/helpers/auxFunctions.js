@@ -1,15 +1,5 @@
 import { allLocalJsonData } from "../DB/local/dataFromJSON";
 
-function getByIDdisciplina(idDisciplina) {
-  let disciplinas = allLocalJsonData.SQL.disciplinas;
-  return disciplinas.find((disciplina) => disciplina.id === idDisciplina);
-}
-
-function getByIDprofessor(idProfessor) {
-  let professores = allLocalJsonData.SQL.professores;
-  return professores.find((professor) => professor.id === idProfessor);
-}
-
 function getByIDturma(idTurma) {
   let turmas = allLocalJsonData.SQL.turmas;
   return turmas.find((turma) => turma.id === idTurma);
@@ -18,49 +8,6 @@ function getByIDturma(idTurma) {
 function getByIDhorario(idHorario) {
   let horarios = allLocalJsonData.SQL.horarios;
   return horarios.find((horario) => horario.id === idHorario);
-}
-
-function getByIDsala(idSala) {
-  let salas = allLocalJsonData.SQL.salas;
-  return salas.find((sala) => sala.id === idSala);
-}
-
-function getFullHorarios() {
-  let turmas = allLocalJsonData.SQL.turmas;
-  let horarios = allLocalJsonData.SQL.horarios;
-
-  let filledTurmas = turmas.map((turma) => {
-    let newTurma = {
-      ...turma,
-      idTurma: turma.id,
-      disciplina: getByIDdisciplina(turma.idDisciplina),
-      professor: getByIDprofessor(turma.idProfessor),
-    };
-    delete newTurma.id;
-    delete newTurma.idDisciplina;
-    delete newTurma.idProfessor;
-    return newTurma;
-  });
-
-  let filledHorarios = horarios.map((horario) => {
-    let newHorario = {
-      ...horario,
-      idHorario: horario.id,
-      sala: getByIDsala(horario.idSala),
-    };
-    delete newHorario.id;
-    delete newHorario.idSala;
-    return newHorario;
-  });
-
-  let filledHorariosAndTurmas = filledHorarios.map((horario) => {
-    let filledTurma = filledTurmas.find(
-      (turma) => turma.idTurma === horario.idTurma
-    );
-    return { ...horario, ...filledTurma };
-  });
-
-  return filledHorariosAndTurmas;
 }
 
 function splittedToUnified(splittedTurmas) {
@@ -269,6 +216,85 @@ function appendInfoFromTurmasUsingHorarios(horarios) {
     };
   });
   return updatedHorarios;
+}
+
+/* Post refactor */
+
+function getByIDdisciplina(idDisciplina) {
+  let disciplinas = allLocalJsonData.SQL.disciplinas;
+  return disciplinas.find((disciplina) => disciplina.id === idDisciplina);
+}
+
+function getByIDprofessor(idProfessor) {
+  let professores = allLocalJsonData.SQL.professores;
+  return professores.find((professor) => professor.id === idProfessor);
+}
+
+function getByIDsala(idSala) {
+  let salas = allLocalJsonData.SQL.salas;
+  return salas.find((sala) => sala.id === idSala);
+}
+
+function getTurmas() {
+  let turmas = allLocalJsonData.SQL.turmas;
+  let filledTurmas = turmas.map((turma) => {
+    let newTurma = {
+      ...turma,
+      idTurma: turma.id,
+      disciplina: getByIDdisciplina(turma.idDisciplina),
+      professor: getByIDprofessor(turma.idProfessor),
+    };
+    delete newTurma.id;
+    delete newTurma.idDisciplina;
+    delete newTurma.idProfessor;
+    return newTurma;
+  });
+  return filledTurmas;
+}
+
+function getHorarios() {
+  let horarios = allLocalJsonData.SQL.horarios;
+  let filledHorarios = horarios.map((horario) => {
+    let newHorario = {
+      ...horario,
+      idHorario: horario.id,
+      sala: getByIDsala(horario.idSala),
+    };
+    delete newHorario.id;
+    delete newHorario.idSala;
+    return newHorario;
+  });
+  return filledHorarios;
+}
+
+function joinTurmasAndHorarios(turmas, classTimes) {
+  let filledClassTimesAndTurmas = turmas.map((turma) => {
+    let currentClassTimes = classTimes.filter(
+      (iterTimes) => iterTimes.idTurma === turma.idTurma
+    );
+    let newTurma = {
+      ...turma,
+    };
+    newTurma.horarios = currentClassTimes.length > 0 ? currentClassTimes : [];
+    if (newTurma.ano === 2025) {
+      // console.log("newTurma", newTurma);
+    }
+    return newTurma;
+  });
+  // console.log(
+  //   "filledClassTimesAndTurmas",
+  //   filledClassTimesAndTurmas[filledClassTimesAndTurmas.length - 1]
+  // );
+  return filledClassTimesAndTurmas;
+}
+
+function getFullHorarios() {
+  let filledTurmas = getTurmas();
+  // console.log("filledTurmas", filledTurmas);
+  let filledClassTimes = getHorarios();
+  let classTimes = joinTurmasAndHorarios(filledTurmas, filledClassTimes);
+  // console.log("classTimes", classTimes[classTimes.length - 1]);
+  return classTimes;
 }
 
 export {

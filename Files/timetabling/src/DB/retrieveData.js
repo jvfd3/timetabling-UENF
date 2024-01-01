@@ -8,9 +8,10 @@ import {
 // import { readTurmas } from "../../../DB/AWS/axiosConnection";
 
 function processRawData(rawData) {
-  let unifiedHorarios = splittedToUnified2(rawData);
+  let processedData = rawData;
+  // processedData = splittedToUnified2(processedData);
   // let turmasFiltradas = getTurmasDoAnoSemestre(unifiedTurmas, ano, semestre);
-  return unifiedHorarios;
+  return processedData;
 }
 
 function getTurmasData(setTurmas) {
@@ -24,6 +25,7 @@ function getTurmasData(setTurmas) {
     });
   }
   let localTurmas = getFullHorarios();
+  // console.log("localTurmas", localTurmas);
   let unified = processRawData(localTurmas);
   // setTurmas(unified);
   return unified;
