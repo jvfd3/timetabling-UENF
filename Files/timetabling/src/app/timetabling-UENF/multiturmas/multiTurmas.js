@@ -75,7 +75,79 @@ function TableHeader(myProps) {
 }
 
 function HorariosTableRow(myProps) {
-  const { turmas, turma, setTurma, horario, indexHorario } = myProps;
+  const { turmas, turma, setTurma, horario, indexHorario, conflicts } = myProps;
+
+  let classDay = turma.horarios[indexHorario].dia;
+  let classHour = turma.horarios[indexHorario].horaInicio;
+  let conflictSize = conflicts.raw.professor.alloc.length;
+  let professorConflicts = conflicts.raw.professor.alloc;
+
+  let DayHourStyle = {};
+  /*
+  professorConflicts é uma lista de conflitos podendo ter 0 ou mais conflitos.
+  cada conflito é um objeto com a seguinte estrutura:
+  {
+    from: {
+      idTurma: "T01",
+      idHorario: "H01",
+    },
+    time: {
+      day: "SEGUNDA",
+      hour: "8",
+    },
+    to: [
+      {
+        idTurma: "T02",
+        idHorario: "H01",
+      },
+      {
+        idTurma: "T03",
+        idHorario: "H01",
+      },
+    ],
+    type: {
+      name: "Conflito de alocação múltipla",
+      weight: 3,
+    },
+  }
+  a turma recebida nas props é a turma que está sendo renderizada.
+  ela tem a seguinte estrutura relevante:
+  {
+    idTurma: "T01",
+    horarios: [
+      {
+      idHorario: "H01",
+      dia: "SEG",
+      horaInicio: 8,
+      duracao: 2,
+      idTurma: T01
+      },
+    ]
+  }
+  e horário é o horário que está sendo renderizado.
+
+  O que eu desejo é que, caso o horário que está sendo renderizado esteja em conflito com algum outro horário, ele seja colorido. Para isso, deve-se comprar o idHorario do horário que está sendo renderizado cada um dos idHorario do professorConflicts.to. Caso haja um match, o horário deve ser colorido.
+  */
+
+  console.log(classDay, classHour + "h");
+  console.log("conflicts", conflicts);
+
+  if (isConflict()) {
+    DayHourStyle = conflicts.styled.professor;
+  } else {
+    DayHourStyle = {};
+  }
+
+  function isConflict() {
+    if (conflictSize > 0) {
+      for (let conflict of professorConflicts) {
+        if (conflict.from.idHorario === horario.idHorario) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 
   return (
     <tr
@@ -95,14 +167,14 @@ function HorariosTableRow(myProps) {
           indexHorario={indexHorario}
         />
       </td>
-      <td>
+      <td {...DayHourStyle}>
         <SelectDia
           lTurma={turma}
           setLTurma={setTurma}
           indexHorario={indexHorario}
         />
       </td>
-      <td>
+      <td {...DayHourStyle}>
         <SelectHoraTang
           lTurma={turma}
           setLTurma={setTurma}
@@ -121,7 +193,7 @@ function HorariosTableRow(myProps) {
 }
 
 function HorariosTable(myProps) {
-  const { rowStates, myTurmasProps } = myProps;
+  const { rowStates, myTurmasProps, conflicts } = myProps;
   const { rowTurma, setRowTurma } = rowStates;
   const { turmas, setTurmas, turma, setTurma } = myTurmasProps;
   return (
@@ -150,6 +222,7 @@ function HorariosTable(myProps) {
             turma={rowTurma}
             setTurma={setRowTurma}
             horario={horario}
+            conflicts={conflicts}
             indexHorario={index}
           />
         ))}
@@ -186,7 +259,7 @@ function TableRow(myProps) {
     },
   }
   */
-  let myStyle = baseTurmaConflicts(turmas, rowTurma);
+  let conflicts = baseTurmaConflicts(turmas, rowTurma);
   // console.log("rowTurma", rowTurma);
   // console.log("myStyle", myStyle);
 
@@ -201,13 +274,13 @@ function TableRow(myProps) {
           turma={rowTurma}
         />
       </td>
-      <td {...myStyle.disciplina}>
+      <td {...conflicts.styled.disciplina}>
         <SelectDisciplina lTurma={rowTurma} setLTurma={setRowTurma} />
       </td>
-      <td {...myStyle.professor}>
+      <td {...conflicts.styled.professor}>
         <SelectProfessor lTurma={rowTurma} setLTurma={setRowTurma} />
       </td>
-      <td {...myStyle.demanda}>
+      <td {...conflicts.styled.demanda}>
         <NumberInputDemandaEstimada lTurma={rowTurma} setLTurma={setRowTurma} />
       </td>
       <td>
@@ -219,7 +292,11 @@ function TableRow(myProps) {
             setTurma={setRowTurma}
           />
         ) : (
-          <HorariosTable rowStates={rowStates} myTurmasProps={myTurmasProps} />
+          <HorariosTable
+            rowStates={rowStates}
+            myTurmasProps={myTurmasProps}
+            conflicts={conflicts}
+          />
         )}
       </td>
     </tr>

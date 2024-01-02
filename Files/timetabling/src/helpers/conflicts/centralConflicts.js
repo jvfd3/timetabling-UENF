@@ -244,7 +244,11 @@ function baseTurmaConflicts(turmas, turma) {
   let cleanedTurmas = cleanTurmas(turmas, turma);
   myClassConflicts.professor = conflictsProfessor(cleanedTurmas, turma);
   let styledConflict = getStyledConflict(myClassConflicts);
-  return styledConflict;
+  let conflicts = {
+    styled: styledConflict,
+    raw: myClassConflicts,
+  };
+  return conflicts;
 }
 
 export { centralConflicts, conflictsDisciplinaPeriodo, baseTurmaConflicts };

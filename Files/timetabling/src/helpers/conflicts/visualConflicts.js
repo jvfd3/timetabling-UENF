@@ -25,6 +25,18 @@ function getColorByLevel(conflictLevel) {
   return color;
 }
 
+function getProfessorAllocConflictMessage(profConflicts) {
+  let mensagem = "";
+  profConflicts.forEach((conflito) => {
+    mensagem += `"${conflito.type.name}", `;
+    mensagem += `${conflito.time.day} às ${conflito.time.hour}h, com as turmas:\n`;
+    conflito.to.forEach((turmaConflituosa) => {
+      mensagem += `--- Turma: ${turmaConflituosa.idTurma}, horário: ${turmaConflituosa.idHorario}\n`;
+    });
+  });
+  return mensagem;
+}
+
 function getProfessorStyledConflict(conflicts) {
   /*  Posso fazer isso de algumas formas:
 - Mais simples:
@@ -45,7 +57,7 @@ function getProfessorStyledConflict(conflicts) {
   currentStyle.style = { backgroundColor: color };
   currentStyle.title = "Sem conflitos de alocação múltipla";
 
-  console.log("profConflicts", profConflicts);
+  // console.log("profConflicts", profConflicts);
 
   /*
 - Se hover conflitos:
@@ -60,15 +72,10 @@ function getProfessorStyledConflict(conflicts) {
   - definir o currentStyle.title como mensagem
 */
 
-  let mensagem = "";
-  profConflicts.forEach((conflito) => {
-    mensagem += `"${conflito.type.name}", `;
-    mensagem += `${conflito.time.day} às ${conflito.time.hour}h, com as turmas:\n`;
-    conflito.to.forEach((turmaConflituosa) => {
-      mensagem += `--- Turma: ${turmaConflituosa.idTurma}, horário: ${turmaConflituosa.idHorario}\n`;
-    });
-  });
-  currentStyle.title = mensagem;
+  let mensagem = getProfessorAllocConflictMessage(profConflicts);
+  if (mensagem !== "") {
+    currentStyle.title = mensagem;
+  }
 
   // console.log("currentStyle", currentStyle);
   return currentStyle;

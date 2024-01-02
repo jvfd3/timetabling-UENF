@@ -213,6 +213,7 @@ const options = {
       duracao: null, //INT
       horaInicio: null, //INT
       idHorario: null, //INT
+      idTurma: null, //INT
       ordem: null, //INT
       sala: null, //OBJ
     },

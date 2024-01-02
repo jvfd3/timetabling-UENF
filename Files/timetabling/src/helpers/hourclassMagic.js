@@ -11,11 +11,21 @@ function createTurma({ ano, semestre, turmas, setTurmas }) {
     semestre: semestre,
     demandaEstimada: null,
     disciplina: null,
-    idTurma: null,
+    idTurma: turmas.length,
     professor: null,
     horarios: [
-      { ...blankHorario, ordem: 1 },
-      { ...blankHorario, ordem: 2 },
+      {
+        ...blankHorario,
+        ordem: 1,
+        idHorario: turmas.length,
+        idTurma: turmas.length,
+      },
+      {
+        ...blankHorario,
+        ordem: 2,
+        idHorario: turmas.length + 1,
+        idTurma: turmas.length,
+      },
     ],
   };
   let newTurmas = [newTurma, ...turmas];
@@ -34,8 +44,12 @@ function createHorario(turmasStates) {
   // console.log("Horarios", turma.horarios);
   let newTurma = { ...turma };
   let newHorarios = [...newTurma.horarios];
+  console.log("newHorarios", newHorarios);
   let blankHorario = options.emptyObjects.horario;
   blankHorario.duracao = 2;
+  blankHorario.ordem = newHorarios.length + 1;
+  blankHorario.idTurma = newTurma.idTurma;
+  blankHorario.idHorario = newHorarios.length + 1;
   // newHorarios.push(blankHorario);
   newTurma.horarios = [...newHorarios, blankHorario];
   setTurma(newTurma);
