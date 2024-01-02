@@ -36,15 +36,40 @@ function getProfessorStyledConflict(conflicts) {
   */
   let profConflicts = conflicts.professor.alloc;
   // console.log("profConflicts", profConflicts);
-  let profConflictsLevel = 0;
   let size = profConflicts.length;
-  if (size > 0) {
-    profConflictsLevel = 3;
-  }
-  let color = getColorByLevel(profConflictsLevel);
+  let profConflictsLevel = size > 0 ? 3 : 0;
+
   let currentStyle = { ...baseStyle };
-  currentStyle.title = "Alocação múltipla";
+
+  let color = getColorByLevel(profConflictsLevel);
   currentStyle.style = { backgroundColor: color };
+  currentStyle.title = "Sem conflitos de alocação múltipla";
+
+  console.log("profConflicts", profConflicts);
+
+  /*
+- Se hover conflitos:
+  - Para cada conflito:
+    - adicionar à mensagem de conflito o dia e hora do conflito que está em conflito.time.day e conflito.time.hour
+      - Exemplo: mensagem = `${conflito.time.day} às ${conflito.time.hour} `
+    - adicionar à mensagem de conflito o nome do conflito que está em conflito.type.name
+      - Exemplo: mensagem `há o conflito "${conflito.type.name}"`
+    - adicionar à mensagem de conflito o códigos de turma e horario que estão em conflito.
+      - Os horários de mesma turma devem estar agrupados.
+        Ex.: "com as turmas: ${JSON.stringify(conflito.to)}."
+  - definir o currentStyle.title como mensagem
+*/
+
+  let mensagem = "";
+  profConflicts.forEach((conflito) => {
+    mensagem += `"${conflito.type.name}", `;
+    mensagem += `${conflito.time.day} às ${conflito.time.hour}h, com as turmas:\n`;
+    conflito.to.forEach((turmaConflituosa) => {
+      mensagem += `--- Turma: ${turmaConflituosa.idTurma}, horário: ${turmaConflituosa.idHorario}\n`;
+    });
+  });
+  currentStyle.title = mensagem;
+
   // console.log("currentStyle", currentStyle);
   return currentStyle;
 }
