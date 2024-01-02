@@ -19,46 +19,53 @@ import {
 let compactBuild = options.config.iconButtons;
 
 function SmartCreateTurma(myProps) {
+  let titleText = "Adicionar turma";
   function addTurma() {
     createTurma(myProps);
   }
   return compactBuild ? (
-    <CreateInfo createFunc={addTurma} text={"Adicionar turma"} />
+    <CreateInfo createFunc={addTurma} text={titleText} />
   ) : (
-    <CustomCreateButton createFunc={addTurma} text="Adicionar Turma" />
+    <CustomCreateButton createFunc={addTurma} text={titleText} />
   );
 }
 
 function SmartDeleteTurma({ turmas, setTurmas, turma }) {
+  let titleText = `Remover turma ${turma.idTurma}`;
   function delTurma() {
     deleteTurma(turmas, setTurmas, turma);
   }
   return compactBuild ? (
-    <DeleteInfo deleteFunc={delTurma} text={"Remover Turma"} />
+    <DeleteInfo deleteFunc={delTurma} text={titleText} />
   ) : (
-    <CustomDeleteButton deleteFunc={delTurma} text="Remover Turma" />
+    <CustomDeleteButton deleteFunc={delTurma} text={titleText} />
   );
 }
 
 function SmartCreateHora(myProps) {
+  let titleText = "Adicionar horário";
   function addHour() {
     createHorario(myProps);
   }
   return compactBuild ? (
-    <CreateHora createFunc={addHour} text="Adicionar Horário" />
+    <CreateHora createFunc={addHour} text={titleText} />
   ) : (
-    <CustomCreateButton createFunc={addHour} text="Adicionar Horário" />
+    <CustomCreateButton createFunc={addHour} text={titleText} />
   );
 }
 
 function SmartDeleteHora(myProps) {
+  let idTurma = myProps.turma.idTurma;
+  let index = myProps.indexHorario;
+  let idHorario = myProps.turma.horarios[index].idHorario;
+  let titleText = `Remover horário ${idHorario} da turma ${idTurma}`;
   function removeHour() {
     deleteHorario(myProps);
   }
   return compactBuild ? (
-    <DeleteHora deleteFunc={removeHour} text={"Remover horário"} />
+    <DeleteHora deleteFunc={removeHour} text={titleText} />
   ) : (
-    <CustomDeleteButton deleteFunc={removeHour} text="Remover Horário" />
+    <CustomDeleteButton deleteFunc={removeHour} text={titleText} />
   );
 }
 
