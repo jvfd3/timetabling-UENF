@@ -7,19 +7,19 @@ function getColorByLevel(conflictLevel) {
   let color = "";
   switch (conflictLevel) {
     case 0:
-      color = "green";
+      color = "#008B45";
       break;
     case 1:
-      color = "yellow";
+      color = "#D7B740";
       break;
     case 2:
-      color = "orange";
+      color = "#D77A61";
       break;
     case 3:
-      color = "red";
+      color = "#8B0000";
       break;
     default:
-      color = "";
+      color = "#708090";
       break;
   }
   return color;
@@ -35,7 +35,7 @@ function getProfessorStyledConflict(conflicts) {
   - Contar a quantidade de conflitos e multiplicar pelo peso de cada conflito.
   */
   let profConflicts = conflicts.professor.alloc;
-  console.log("profConflicts", profConflicts);
+  // console.log("profConflicts", profConflicts);
   let profConflictsLevel = 0;
   let size = profConflicts.length;
   if (size > 0) {
