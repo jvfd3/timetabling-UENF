@@ -35,5 +35,16 @@
   {"id": 34, "ano": 2025, "semestre": 1, "demandaEstimada": 40, "idProfessor":  3, "idDisciplina":  1 },
   {"id": 35, "ano": 2025, "semestre": 1, "demandaEstimada": 40, "idProfessor":  3, "idDisciplina":  1 },
   {"id": 36, "ano": 2025, "semestre": 1, "demandaEstimada": 40, "idProfessor":  4, "idDisciplina":  1 },
-  {"id": 37, "ano": 2025, "semestre": 1, "demandaEstimada": 40, "idProfessor":  4, "idDisciplina":  1 }
+  {"id": 37, "ano": 2025, "semestre": 1, "demandaEstimada": 40, "idProfessor":  4, "idDisciplina":  1 },
+  {"id": 38, "ano": 2025, "semestre": 2, "demandaEstimada": null, "idProfessor":  null, "idDisciplina": 64 },
+  {"id": 39, "ano": 2025, "semestre": 2, "demandaEstimada": null, "idProfessor":  null, "idDisciplina":  2 },
+  {"id": 40, "ano": 2025, "semestre": 2, "demandaEstimada": null, "idProfessor":  null, "idDisciplina": 10 },
+  {"id": 41, "ano": 2025, "semestre": 2, "demandaEstimada": null, "idProfessor":  null, "idDisciplina": 24 },
+  {"id": 42, "ano": 2025, "semestre": 2, "demandaEstimada": null, "idProfessor":  null, "idDisciplina": 28 },
+  {"id": 43, "ano": 2025, "semestre": 2, "demandaEstimada": null, "idProfessor":  null, "idDisciplina": 35 },
+  {"id": 44, "ano": 2025, "semestre": 2, "demandaEstimada": null, "idProfessor":  null, "idDisciplina": 44 },
+  {"id": 45, "ano": 2025, "semestre": 2, "demandaEstimada": null, "idProfessor":  null, "idDisciplina": 47 },
+  {"id": 46, "ano": 2025, "semestre": 2, "demandaEstimada": null, "idProfessor":  null, "idDisciplina": 57 },
+  {"id": 47, "ano": 2025, "semestre": 2, "demandaEstimada": null, "idProfessor":  null, "idDisciplina": 56 },
+  {"id": 48, "ano": 2025, "semestre": 2, "demandaEstimada": null, "idProfessor":  null, "idDisciplina": 59 }
 ]

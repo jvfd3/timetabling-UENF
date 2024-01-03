@@ -232,8 +232,9 @@ function HorariosTable(myProps) {
 }
 
 function TableRow(myProps) {
-  const { lTurma, myTurmasProps } = myProps;
+  const { lTurma, myTurmasProps, myCurrentSemestreProps } = myProps;
   const { turmas, setTurmas, turma, setTurma } = myTurmasProps;
+  const { semestre, ano } = myCurrentSemestreProps;
 
   const [rowTurma, setRowTurma] = useState(lTurma);
   const rowStates = { rowTurma, setRowTurma };
@@ -259,9 +260,9 @@ function TableRow(myProps) {
     },
   }
   */
-  let conflicts = baseTurmaConflicts(turmas, rowTurma);
+  let conflicts = baseTurmaConflicts(turmas, rowTurma, semestre.value);
   // console.log("rowTurma", rowTurma);
-  // console.log("myStyle", myStyle);
+  // console.log("conflicts", conflicts);
 
   return (
     <tr
@@ -314,6 +315,7 @@ function TurmasTable(myProps) {
           <TableRow
             lTurma={lTurma}
             myTurmasProps={myTurmasProps}
+            myCurrentSemestreProps={myCurrentSemestreProps}
             key={`TableRow: ${lTurma.idTurma}-${lTurma.disciplina?.codigoDisciplina}-${lTurma?.professor?.nome}-${index}`}
           />
         ))}
@@ -359,7 +361,7 @@ function TurmasCard(myProps) {
 
 function Turmas() {
   const [ano, setAno] = useState(options.constantValues.years[11]);
-  const [semestre, setSemestre] = useState(options.constantValues.semesters[0]);
+  const [semestre, setSemestre] = useState(options.constantValues.semesters[1]);
 
   let unifiedHorarios = getTurmasData();
 

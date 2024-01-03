@@ -239,11 +239,11 @@ function cleanTurmas(turmas, turma) {
   return currentTurmas;
 }
 
-function baseTurmaConflicts(turmas, turma) {
+function baseTurmaConflicts(turmas, turma, semestre) {
   let myClassConflicts = {};
   let cleanedTurmas = cleanTurmas(turmas, turma);
   myClassConflicts.professor = conflictsProfessor(cleanedTurmas, turma);
-  let styledConflict = getStyledConflict(myClassConflicts);
+  let styledConflict = getStyledConflict(myClassConflicts, turma, semestre);
   let conflicts = {
     styled: styledConflict,
     raw: myClassConflicts,
