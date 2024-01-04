@@ -279,6 +279,7 @@ const options = {
       menu: (css) => ({
         ...css,
         minWidth: "max-content",
+        zIndex: 2,
       }),
       option: (css) => ({
         ...css,
