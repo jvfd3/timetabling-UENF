@@ -87,6 +87,16 @@ function getProfessorStyledConflict(conflicts) {
 
 /* Disciplina \/ */
 
+function checkCorrectPeriodParity(periodoEsperado, semestreAtual) {
+  let evenSubjectOnEvenSemester =
+    semestreAtual === 1 && periodoEsperado % 2 === 1;
+  let oddSubjectOnOddSemester =
+    semestreAtual === 2 && periodoEsperado % 2 === 0;
+  let correctPeriodParity =
+    evenSubjectOnEvenSemester || oddSubjectOnOddSemester;
+  return correctPeriodParity;
+}
+
 function getColorGradient(periodoEsperado, semestreAtual) {
   function getColorValue(baseColor, percentile) {
     let maxValue = 255;
@@ -97,7 +107,7 @@ function getColorGradient(periodoEsperado, semestreAtual) {
   let grayValue = 128;
   let color = `rgb(${grayValue}, ${grayValue}, ${grayValue})`;
   // console.log("periodoEsperado", periodoEsperado);
-  console.log("semestreAtual", semestreAtual);
+  // console.log("semestreAtual", semestreAtual);
   let baseColor = 200; //Maior deixa mais claro
   if (periodoEsperado !== 0) {
     if (semestreAtual === 3) {
@@ -112,7 +122,7 @@ function getColorGradient(periodoEsperado, semestreAtual) {
         semestreAtual === 1 && periodoEsperado % 2 === 1;
       let oddSubjectOnOddSemester =
         semestreAtual === 2 && periodoEsperado % 2 === 0;
-      if (evenSubjectOnEvenSemester || oddSubjectOnOddSemester) {
+      if (checkCorrectPeriodParity(periodoEsperado, semestreAtual)) {
         //Semestres no período correto
         color = `rgb(0, ${colorValue}, 0)`;
       } else {
@@ -125,12 +135,27 @@ function getColorGradient(periodoEsperado, semestreAtual) {
 }
 
 function getSubjectStyledConflict(turma, semestreAtual) {
-  let periodoEsperado = turma.disciplina.periodo;
-  let newColor = getColorGradient(periodoEsperado, semestreAtual);
-  let subjectStyle = {
-    title: "Disciplina do período " + periodoEsperado,
-    style: { backgroundColor: newColor },
-  };
+  let subjectStyle = {}
+  let periodoEsperado = turma.disciplina?.periodo;
+  let newColor = "";
+  let titleMessage = "";
+  if (periodoEsperado === undefined) {
+    titleMessage = "Disciplina ainda não definida";
+    newColor = "#708090"
+  } else {
+    newColor = getColorGradient(periodoEsperado, semestreAtual);
+    if (periodoEsperado === 0) {
+      titleMessage = "Disciplina não-obrigatória";
+    } else {
+      titleMessage = `Disciplina do período ${periodoEsperado}\n`;
+      let periodoCerto = checkCorrectPeriodParity(periodoEsperado, semestreAtual);
+      titleMessage += periodoCerto ? "Está" : "Não está";
+      titleMessage += " na paridade esperada";
+    }
+  }
+
+  subjectStyle.title = titleMessage;
+  subjectStyle.style = { backgroundColor: newColor };
   return subjectStyle;
 }
 
