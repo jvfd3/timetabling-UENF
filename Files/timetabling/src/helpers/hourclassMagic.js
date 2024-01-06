@@ -8,7 +8,7 @@ function createTurma({ ano, semestre, turmas, setTurmas, classIndex }) {
   let semester = semestre.value;
   blankHorario.duracao = 2;
   blankHorario.ordem = 1;
-  console.log("createTurma>3", classIndex);
+  // console.log("createTurma>3", class;Index);
   classIndex.current += 1;
 
   let newTurma = {

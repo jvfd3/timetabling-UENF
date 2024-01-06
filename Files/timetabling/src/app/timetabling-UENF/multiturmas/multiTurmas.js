@@ -62,7 +62,7 @@ function TableHeader(myProps) {
   const { turmas, setTurmas, classIndex } = myTurmasProps;
   const { semestre, ano } = myCurrentSemestreProps;
   const createStates = { turmas, setTurmas, semestre, ano, classIndex };
-  console.log("TableHeader>2", classIndex);
+  // console.log("TableHeader>2", classIndex);
   return (
     <thead>
       <tr>
@@ -427,7 +427,7 @@ function NotOfferedSubjects(props) {
       };
       return newTurma;
     });
-    console.log("turmasToAdd", turmasToAdd);
+    // console.log("turmasToAdd", turmasToAdd);
     setTurmas([...turmas, ...turmasToAdd]);
   }
 
@@ -537,7 +537,7 @@ function Turmas() {
   }, []); */
 
   const classIndex = useRef(turmas.length);
-  console.log("Turmas>1", classIndex);
+  // console.log("Turmas>1", classIndex);
 
   useEffect(() => {
     console.log("ano", ano.value, "semestre", semestre.value);
