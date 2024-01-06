@@ -139,6 +139,7 @@ function getTurmasDoAnoSemestre(turmas, ano, semestre) {
 }
 
 function getTurmasDaHora(turmas, hora) {
+  // console.log("turmas", turmas);
   let turmasDaHora = turmas.filter((turma) => {
     return turma.horaInicio === hora;
   });

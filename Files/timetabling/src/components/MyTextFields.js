@@ -7,9 +7,8 @@ function TextInputNomeProfessor(props) {
   // console.log("Tinp>nome:", professor.nome);
   const [nomeProfessor, setNomeProfessor] = useState(professor.nome);
 
-  console.log("a");
   useEffect(() => {
-    console.log(professor.nome);
+    // console.log(professor.nome);
     setNomeProfessor(professor.nome);
   }, [professor.nome]);
 
