@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import {
@@ -376,13 +376,36 @@ function TurmasCard(myProps) {
   );
 }
 
+/*
+# Novos bugs!!! 🤩🎉
+
+## Permanência inesperada de sala
+
+- Etapas: adicionar horário, definir sala, remover horário, adicionar horário
+- Esperado: novo horário com sala nula
+- Resultado: novo horário com a mesma sala anterior.
+![Image](https://github.com/jvfd3/timetabling-UENF/assets/10092672/f9f92df2-f06d-4899-b999-7149dad5b483)
+
+## inconsistência em id de Horário
+
+- Adicionar 2 horários, remover o primeiro, adicionar um novo horário
+- Esperado: novo horário com idHorario diferente do segundo
+- Resultado: novo horário com idHorario igual ao segundo
+
+## Duplicação de id de horário
+
+- Criar turma, adicionar horário, adicionar horário
+- Esperado: 2 horários com idHorario diferentes
+- Resultado: 2 horários com idHorario iguais; E se adicionar mais horários, serão mais horários com mesmo id.
+*/
+
 function NotOfferedSubjects(props) {
   const { myTurmasProps, myCurrentSemestreProps } = props;
   const { turmas, setTurmas, turma, setTurma } = myTurmasProps;
   const { semestre, ano } = myCurrentSemestreProps;
   let semester = semestre.value;
   // console.log(semester);
-  console.log("turmas", turmas);
+  // console.log("turmas", turmas);
   // Percorra cada turma em turmas e preencha uma lista dos códigos das disciplinas oferecidas pelas turmas
   let disciplinasOferecidas = turmas
     .map((turma) => turma.disciplina?.codigo)
@@ -410,19 +433,19 @@ function NotOfferedSubjects(props) {
   );
 
   // console.log("DisciplinasAindaNaoOferecidas", DisciplinasAindaNaoOferecidas);
-
-  const [index, setIndex] = useState(turmas.length);
+  const indexRef = useRef(turmas.length);
+  // console.log("indexRef", indexRef);
 
   function addSubjectsToClasses(subjects) {
     // console.log("subjects", subjects);
     let turmasToAdd = subjects.map((subject) => {
+      indexRef.current += 1;
       let blankClass = options.emptyObjects.turma;
       let newTurma = {
         ...blankClass,
-        idTurma: `202701-${index}`,
+        idTurma: `202701-${indexRef.current}`,
         disciplina: subject,
       };
-      setIndex(index + 1);
       return newTurma;
     });
     console.log("turmasToAdd", turmasToAdd);
