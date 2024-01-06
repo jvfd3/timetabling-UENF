@@ -77,9 +77,6 @@ function TableHeader(myProps) {
 function HorariosTableRow(myProps) {
   const { turmas, turma, setTurma, horario, indexHorario, conflicts } = myProps;
 
-  let classDay = turma.horarios[indexHorario].dia;
-  let classHour = turma.horarios[indexHorario].horaInicio;
-  let conflictSize = conflicts.raw.professor.alloc.length;
   let professorConflicts = conflicts.raw.professor.alloc;
 
   let conflictStyles = {
@@ -135,13 +132,13 @@ function HorariosTableRow(myProps) {
   // console.log(classDay, classHour + "h");
   // console.log("conflicts", conflicts);
 
-  if (isConflict()) {
+  if (isConflict(professorConflicts)) {
     conflictStyles.day = conflicts.styled.professor;
     conflictStyles.hour = conflicts.styled.professor;
   }
 
-  function isConflict() {
-    if (conflictSize > 0) {
+  function isConflict(conflicts) {
+    if (conflicts.length > 0) {
       for (let conflict of professorConflicts) {
         if (conflict.from.idHorario === horario.idHorario) {
           return true;
