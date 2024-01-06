@@ -76,16 +76,38 @@ function VisualizacaoCC() {
           let turmasDoDia = getTurmasDoDia(turmasDaHora, dia.value);
 
           function CellContent({ turmas }) {
-            let listaDeTurmas = turmas.map((turma) => {
+            function getCellMessage(turma) {
               // console.log("turma", turma.sala);
               let subject = turma.disciplina;
-              let sala = turma.sala;
-              let subjectInfo = `${subject.periodo} - ${subject.apelido}`;
-              let profInfo = `${turma.professor.apelido}`;
-              let roomInfo = `${sala.bloco}${
-                sala.codigo ? "-" + sala.codigo : ""
-              }`;
+              let prof = turma.professor;
+              let room = turma.sala;
+              let subjectInfo = "";
+              let profInfo = "";
+              let roomInfo = "";
+              if (subject) {
+                subjectInfo += `${subject?.periodo} - ${subject?.apelido}`;
+              } else {
+                subjectInfo = "Discip. indef.";
+              }
+              if (prof) {
+                profInfo += `${prof.apelido}`;
+              } else {
+                profInfo = "Prof. indef.";
+              }
+
+              if (room) {
+                roomInfo += `${room?.bloco}${
+                  room?.codigo ? "-" + room?.codigo : ""
+                }`;
+              } else {
+                roomInfo = "Sala indef.";
+              }
               let cellMessage = `${subjectInfo} (${profInfo} / ${roomInfo})`;
+              return cellMessage;
+            }
+
+            let listaDeTurmas = turmas.map((turma) => {
+              let cellMessage = getCellMessage(turma);
               return (
                 <div
                   key={`ChaveCellContent: ${turma.idTurma}-${turma.idHorario}`}
