@@ -2,24 +2,24 @@ import React, { useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import {
-  getApelidoDisciplina,
-  getApelidoProfessor,
+  // getApelidoDisciplina,
+  // getApelidoProfessor,
   getFullHorarios,
-  getPeriodoEsperado,
+  // getPeriodoEsperado,
   getTurmasDaHora,
   getTurmasDoAnoSemestre,
   getTurmasDoDia,
 } from "../../../helpers/auxFunctions";
 import { SelectAnoSemestre } from "../../../components/mySelects";
 import "./ccTable.css";
+import { getTurmasData } from "../../../DB/retrieveData";
+import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
 
 function VisualizacaoCC() {
-  let semestres = options.constantValues.semesters;
-  let anos = options.constantValues.years;
-  let dias = options.constantValues.days;
-  let horasTang = options.constantValues.hoursTang;
-  const [ano, setAno] = useState(anos[10]);
-  const [semestre, setSemestre] = useState(semestres[0]);
+  let semesters = options.constantValues.semesters;
+  let years = options.constantValues.years;
+  const [ano, setAno] = useState(years[10]);
+  const [semestre, setSemestre] = useState(semesters[0]);
 
   let myTimeStates = {
     ano,
@@ -28,12 +28,17 @@ function VisualizacaoCC() {
     setSemestre,
   };
 
-  let turmas = getFullHorarios();
+  let turmas = getTurmasData();
+
   let TurmasDoSemestre = getTurmasDoAnoSemestre(
     turmas,
     ano.value,
     semestre.value
   );
+
+  let splittedCurrentClasses = splitTurmas(TurmasDoSemestre);
+
+  // console.log("TurmasDoSemestre", TurmasDoSemestre);
 
   function TabelaCC() {
     function Header() {
@@ -64,18 +69,29 @@ function VisualizacaoCC() {
 
     function Body() {
       function Linha({ hora }) {
-        let turmasDaHora = getTurmasDaHora(TurmasDoSemestre, hora);
-        let colunasDosDias = dias.map((dia) => {
+        let turmasDaHora = getTurmasDaHora(splittedCurrentClasses, hora);
+        // console.log("turmasDaHora", turmasDaHora);
+        // console.log("hora", hora);
+        let colunasDosDias = options.constantValues.days.map((dia) => {
           let turmasDoDia = getTurmasDoDia(turmasDaHora, dia.value);
 
           function CellContent({ turmas }) {
             let listaDeTurmas = turmas.map((turma) => {
+              // console.log("turma", turma.sala);
+              let subject = turma.disciplina;
+              let sala = turma.sala;
+              let subjectInfo = `${subject.periodo} - ${subject.apelido}`;
+              let profInfo = `${turma.professor.apelido}`;
+              let roomInfo = `${sala.bloco}${
+                sala.codigo ? "-" + sala.codigo : ""
+              }`;
+              let cellMessage = `${subjectInfo} (${profInfo} / ${roomInfo})`;
               return (
                 <div
                   key={`ChaveCellContent: ${turma.idTurma}-${turma.idHorario}`}
                   className="eachClassInCell"
                 >
-                  {`${turma.disciplina.periodo} - ${turma.disciplina.apelido} - (${turma.professor.apelido} / ${turma.sala.bloco}-${turma.sala.codigo})`}
+                  {cellMessage}
                 </div>
               );
             });
@@ -105,7 +121,7 @@ function VisualizacaoCC() {
 
       return (
         <tbody>
-          {horasTang.map((hora, rowIndex) => (
+          {options.constantValues.hoursTang.map((hora, rowIndex) => (
             <Linha key={`Linha: ${hora.hora}`} hora={hora.hora} />
           ))}
         </tbody>
