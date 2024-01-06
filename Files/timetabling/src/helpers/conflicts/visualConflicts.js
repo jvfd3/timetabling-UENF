@@ -135,20 +135,23 @@ function getColorGradient(periodoEsperado, semestreAtual) {
 }
 
 function getSubjectStyledConflict(turma, semestreAtual) {
-  let subjectStyle = {}
+  let subjectStyle = {};
   let periodoEsperado = turma.disciplina?.periodo;
   let newColor = "";
   let titleMessage = "";
   if (periodoEsperado === undefined) {
     titleMessage = "Disciplina ainda não definida";
-    newColor = "#708090"
+    newColor = "#708090";
   } else {
     newColor = getColorGradient(periodoEsperado, semestreAtual);
     if (periodoEsperado === 0) {
       titleMessage = "Disciplina não-obrigatória";
     } else {
       titleMessage = `Disciplina do período ${periodoEsperado}\n`;
-      let periodoCerto = checkCorrectPeriodParity(periodoEsperado, semestreAtual);
+      let periodoCerto = checkCorrectPeriodParity(
+        periodoEsperado,
+        semestreAtual
+      );
       titleMessage += periodoCerto ? "Está" : "Não está";
       titleMessage += " na paridade esperada";
     }
@@ -161,6 +164,43 @@ function getSubjectStyledConflict(turma, semestreAtual) {
 
 /* Disciplina /\ */
 
+function getDemandStyledConflict(conflicts) {
+  let demandConflicts = conflicts.expectedDemand.singleTurmaCapacity;
+  let newColor = "#008B45";
+  let titleMessage = "Não foi identificado conflitos de demanda";
+  let demandStyle = {
+    title: newColor,
+    style: titleMessage,
+  };
+  // console.log("demandConflicts", demandConflicts); //idRoom Undefined
+  let numberOfConflicts = demandConflicts.length;
+  if (numberOfConflicts > 0) {
+    newColor = "#DD3333";
+    titleMessage = `Há ${numberOfConflicts} conflitos de demanda.`;
+    let surplus = 0;
+    demandConflicts.forEach((iterConflict) => {
+      // console.log("iterConflict", iterConflict);
+      let cap = iterConflict.capacity;
+      let demand = iterConflict.expectedDemand;
+      let diff = demand - cap;
+      surplus = diff > surplus ? diff : surplus;
+      let idRoom = iterConflict.idRoom;
+      let idClassTime = iterConflict.idClassTime;
+      let idClass = iterConflict.idClass;
+      titleMessage += `\n\t- Sobraram ${diff} alunos `;
+      titleMessage += `na Sala ${idRoom} `;
+      titleMessage += `do Horário ${idClassTime} `;
+      titleMessage += `da Turma ${idClass}`;
+    });
+    // titleMessage += `\nNo pior caso ${surplus} alunos ficam de fora`;
+  }
+  demandStyle.title = titleMessage;
+  demandStyle.style = { backgroundColor: newColor };
+  return demandStyle;
+}
+
+/* Demand /\ */
+
 function getStyledConflict(conflicts, turma, semestre) {
   let myClassConflicts = {};
   myClassConflicts.demanda = {
@@ -169,6 +209,7 @@ function getStyledConflict(conflicts, turma, semestre) {
   };
   myClassConflicts.disciplina = getSubjectStyledConflict(turma, semestre);
   myClassConflicts.professor = getProfessorStyledConflict(conflicts);
+  myClassConflicts.demand = getDemandStyledConflict(conflicts);
   return myClassConflicts;
 }
 

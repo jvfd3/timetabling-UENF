@@ -129,8 +129,8 @@ function HorariosTableRow(myProps) {
   O que eu desejo é que, caso o horário que está sendo renderizado esteja em conflito com algum outro horário, ele seja colorido. Para isso, deve-se comprar o idHorario do horário que está sendo renderizado cada um dos idHorario do professorConflicts.to. Caso haja um match, o horário deve ser colorido.
   */
 
-  console.log(classDay, classHour + "h");
-  console.log("conflicts", conflicts);
+  // console.log(classDay, classHour + "h");
+  // console.log("conflicts", conflicts);
 
   if (isConflict()) {
     DayHourStyle = conflicts.styled.professor;
@@ -281,7 +281,7 @@ function TableRow(myProps) {
       <td {...conflicts.styled.professor}>
         <SelectProfessor lTurma={rowTurma} setLTurma={setRowTurma} />
       </td>
-      <td {...conflicts.styled.demanda}>
+      <td {...conflicts.styled.demand}>
         <NumberInputDemandaEstimada lTurma={rowTurma} setLTurma={setRowTurma} />
       </td>
       <td>
@@ -360,7 +360,7 @@ function TurmasCard(myProps) {
 }
 
 function Turmas() {
-  const [ano, setAno] = useState(options.constantValues.years[11]);
+  const [ano, setAno] = useState(options.constantValues.years[14]);
   const [semestre, setSemestre] = useState(options.constantValues.semesters[1]);
 
   let unifiedHorarios = getTurmasData();

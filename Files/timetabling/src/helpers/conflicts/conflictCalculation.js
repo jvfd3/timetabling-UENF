@@ -1,7 +1,7 @@
 import options from "../../DB/local/options";
 
-function searchSameDayAndHour(horarios, horario) {
-  /* Horarios tem a seguinte estrutura:
+function searchSameDayAndHour(flatTurmas, horario) {
+  /* flatTurmas tem a seguinte estrutura:
   [
     {
       dia: "SEG",
@@ -62,15 +62,19 @@ function searchSameDayAndHour(horarios, horario) {
 
   */
   let hourAllocConflicts = [];
-
-  horarios.forEach((iterClasstime) => {
+  // console.log(`(${horario.dia}, ${horario.horaInicio})`, flatTurmas);
+  flatTurmas.forEach((iterClasstime) => {
     let sameDay = horario.dia === iterClasstime.dia;
+    let dayNotNull = horario.dia !== null || iterClasstime.dia !== null;
+    let hourNotNull =
+      horario.horaInicio !== null || iterClasstime.horaInicio !== null;
+    let dayTimeNotNull = dayNotNull && hourNotNull;
     let sameHour = horario.horaInicio === iterClasstime.horaInicio;
     let duracaoConflito =
       horario.horaInicio < iterClasstime.horaInicio + iterClasstime.duracao &&
       horario.horaInicio + horario.duracao > iterClasstime.horaInicio;
-
-    if (sameDay && (sameHour || duracaoConflito)) {
+    let sameTime = sameDay && (sameHour || duracaoConflito) && dayTimeNotNull;
+    if (sameTime) {
       let iterConflict = {
         idTurma: iterClasstime.idTurma,
         idHorario: iterClasstime.idHorario,
@@ -78,10 +82,10 @@ function searchSameDayAndHour(horarios, horario) {
       hourAllocConflicts.push(iterConflict);
     }
   });
-
-  let conflictObject = {};
+  // console.log("hourAllocConflicts", hourAllocConflicts);
+  /* The part below should be apart from the upper one*/
+  let conflictObject = null;
   let hasConflicts = hourAllocConflicts.length > 0;
-
   if (hasConflicts) {
     conflictObject = {
       type: options.conflicts.professorAlloc,
@@ -95,10 +99,47 @@ function searchSameDayAndHour(horarios, horario) {
       },
       to: hourAllocConflicts,
     };
-  } else {
-    conflictObject = null;
   }
 
   return conflictObject;
 }
-export { searchSameDayAndHour };
+
+function getSingleClassDemandConflict(demandClassData) {
+  let singleClassDemandConflicts = [];
+  demandClassData.forEach((iterClass) => {
+    /*
+      forEach class, check if there is a room capacity conflict.
+      it checks if the capacity is smaller than the expected demand.
+      and also if there is a demand and a capacity.
+      If there is, add it to the list of conflicts.
+    */
+    let conflictObject = null;
+
+    // Checking if there is a conflict
+    let expectedDemand = iterClass.expectedDemand;
+    let capacity = iterClass.roomCapacity;
+    let hasRoomSmallerThanDemand = capacity < expectedDemand;
+
+    // Checking nullability
+    let hasExpectedDemand = expectedDemand !== null;
+    let hasCapacity = capacity !== null;
+    let hasDemandAndCapacity = hasExpectedDemand && hasCapacity;
+
+    let hasConflict = hasDemandAndCapacity && hasRoomSmallerThanDemand;
+    if (hasConflict) {
+      conflictObject = {
+        expectedDemand: expectedDemand,
+        capacity: capacity,
+        type: options.conflicts.roomCapacity,
+        idClass: iterClass.idClass,
+        idClassTime: iterClass.idClassTime,
+        idRoom: iterClass.idRoom,
+      };
+      singleClassDemandConflicts.push(conflictObject);
+    }
+  });
+  // console.log("singleClassDemandConflicts", singleClassDemandConflicts);
+  return singleClassDemandConflicts;
+}
+
+export { searchSameDayAndHour, getSingleClassDemandConflict };

@@ -5,7 +5,10 @@ import {
   splitTurmas,
 } from "./auxiliarConflictsFunctions";
 import { allLocalJsonData } from "../../DB/local/dataFromJSON";
-import { searchSameDayAndHour } from "./conflictCalculation";
+import {
+  getSingleClassDemandConflict,
+  searchSameDayAndHour,
+} from "./conflictCalculation";
 import { getStyledConflict } from "./visualConflicts";
 
 /*
@@ -177,6 +180,43 @@ function conflictsDisciplinaPeriodo(turmasListadas, turma) {
 
 /* Post Refactor \/ */
 
+function cleanTurmas(turmas, turma) {
+  /* The current turma is being constanylt filtered:
+      - First it removes the turma that have the same idTurma.
+        - Maybe it should only remove the turma that have the same idTurma and idHorario.
+      - Then it gets all the turmas that have the same professor.
+      - Then it splits the turmas by horario. Flattening the horarios
+      - Then it removes the data that are not used for now.
+  */
+
+  let currentTurmas = turmas;
+  // Isso daqui impede que um conflito (SEGUNDA 8h) seja encontrado com um outro horário da mesma turma.
+  currentTurmas = removeSameId(currentTurmas, turma);
+  currentTurmas = getTurmasDoProfessor(currentTurmas, turma.professor);
+  currentTurmas = splitTurmas(currentTurmas);
+  currentTurmas = cleanBaseTurmas(currentTurmas);
+  return currentTurmas;
+}
+
+function conflictsProfessor(turmas, turma) {
+  let conflictsList = [];
+  let professorConflicts = {};
+  let flattenedTurma = splitTurmas([turma]);
+  let cleanFlatTurma = cleanNotUsedForNow(flattenedTurma);
+
+  cleanFlatTurma.forEach((cleanedClassTime) => {
+    let foundConflicts = searchSameDayAndHour(turmas, cleanedClassTime);
+
+    if (foundConflicts !== null) {
+      conflictsList.push(foundConflicts);
+    }
+  });
+
+  professorConflicts.alloc = conflictsList;
+  // console.log("Lista de conflitos", conflictsList);
+  return professorConflicts;
+}
+
 function cleanNotUsedForNow(turmas) {
   let cleanedTurmas = [];
   /*
@@ -210,43 +250,111 @@ function cleanNotUsedForNow(turmas) {
   return cleanedTurmas;
 }
 
-function conflictsProfessor(turmas, turma) {
-  let conflictsList = [];
-  let professorConflicts = {};
-  let flattenedTurma = splitTurmas([turma]);
-  let cleanFlatTurma = cleanNotUsedForNow(flattenedTurma);
-
-  cleanFlatTurma.forEach((cleanedClassTime) => {
-    let foundConflicts = searchSameDayAndHour(turmas, cleanedClassTime);
-
-    if (foundConflicts !== null) {
-      conflictsList.push(foundConflicts);
-    }
-  });
-
-  professorConflicts.alloc = conflictsList;
-  // console.log("Lista de conflitos", conflictsList);
-  return professorConflicts;
+function cleanBaseTurmas(turmas) {
+  let cleanedTurmas = [];
+  cleanedTurmas = turmas.map(
+    ({
+      ano,
+      comment,
+      // demandaEstimada,
+      // dia,
+      disciplina,
+      // duracao,
+      // horaInicio,
+      // idHorario,
+      // idTurma,
+      ordem,
+      professor,
+      // sala,
+      semestre,
+      ...rest
+    }) => rest
+  );
+  return cleanedTurmas;
 }
 
-function cleanTurmas(turmas, turma) {
-  let currentTurmas = turmas;
-  // Isso daqui impede que um conflito (SEGUNDA 8h) seja encontrado com um outro horário da mesma turma.
-  currentTurmas = removeSameId(currentTurmas, turma);
-  currentTurmas = getTurmasDoProfessor(currentTurmas, turma.professor);
-  currentTurmas = splitTurmas(currentTurmas);
-  currentTurmas = cleanNotUsedForNow(currentTurmas);
-  return currentTurmas;
+function removeUnecessaryDataForDemandCalculation(turmas) {
+  // console.log("turmas", turmas[0]);
+  let cleanedTurmas = turmas.map(
+    ({
+      ano,
+      comment,
+      // demandaEstimada,
+      dia,
+      // disciplina, //Deve ser usado posteriormente para turmas de mesma disciplina
+      duracao,
+      horaInicio,
+      // idHorario,
+      // idTurma,
+      ordem,
+      professor,
+      // sala,
+      semestre,
+      ...rest
+    }) => rest
+  );
+  // console.log("cleanedTurmas", cleanedTurmas[0]);
+  return cleanedTurmas;
+}
+
+function getDemandNeededData(turma) {
+  let classTimes = turma.horarios;
+  let cleanedTurma = {
+    idClass: turma.idTurma,
+    expectedDemand: turma.demandaEstimada,
+  };
+  let neededData = [];
+  classTimes.forEach((classTime) => {
+    // console.log("classTime", classTime);
+    // console.log("classTime.sala", classTime.sala);
+    // console.log("classTime.sala.id", classTime.sala?.id);
+    let newFlattenedData = {
+      idRoom: classTime.sala?.id,
+      idClassTime: classTime.idHorario,
+      ...cleanedTurma,
+      roomCapacity: classTime.sala?.capacidade,
+    };
+    // console.log("newFlattenedData.idRoom", newFlattenedData.idRoom);
+    neededData.push(newFlattenedData);
+  });
+  // console.log("turma", turma);
+  // console.log("neededData", neededData);
+  return neededData;
+}
+
+function conflictDemand(turmas, classData) {
+  /* First I need to filter the turma to have all flattened data to be processed:
+    classTimes: [
+      {
+        idClass: 1,
+        idClassTime: 1,
+        idRoom: 1,
+        expectedDemand: 1,
+        roomCapacity: 1,
+      },
+      ...
+    ]
+  */
+  let demandConflictData = getDemandNeededData(classData);
+  let singleClassDemandConflicts =
+    getSingleClassDemandConflict(demandConflictData);
+  let demandConflicts = {};
+  demandConflicts.singleTurmaCapacity = singleClassDemandConflicts;
+  return demandConflicts;
 }
 
 function baseTurmaConflicts(turmas, turma, semestre) {
   let myClassConflicts = {};
   let cleanedTurmas = cleanTurmas(turmas, turma);
   myClassConflicts.professor = conflictsProfessor(cleanedTurmas, turma);
+
+  myClassConflicts.expectedDemand = conflictDemand(turmas, turma);
+
+  // console.log("myClassConflicts", myClassConflicts.professor);
   let styledConflict = getStyledConflict(myClassConflicts, turma, semestre);
   let conflicts = {
-    styled: styledConflict,
     raw: myClassConflicts,
+    styled: styledConflict,
   };
   return conflicts;
 }
