@@ -26,6 +26,9 @@ import {
 } from "../../../components/Buttons/Smart/Smart";
 import { getTurmasData } from "../../../DB/retrieveData";
 import { baseTurmaConflicts } from "../../../helpers/conflicts/centralConflicts";
+import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
+import { InputDisciplina } from "../../../components/Buttons/Dumb/Dumb";
+import { Button } from "@mui/material";
 
 /* ESTRUTURA DOS COMPONENTES
 - CRUDclass
@@ -79,7 +82,7 @@ function HorariosTableRow(myProps) {
 
   let professorConflicts = conflicts.raw.professor.alloc;
   let singleDemandConflicts = conflicts.raw.expectedDemand.singleTurmaCapacity;
-  console.log("singleDemandConflicts", singleDemandConflicts);
+  // console.log("singleDemandConflicts", singleDemandConflicts);
 
   let conflictStyles = {
     day: {},
@@ -357,6 +360,7 @@ function SemTurmas(myProps) {
 function TurmasCard(myProps) {
   const { myTurmasProps, myCurrentSemestreProps } = myProps;
   const { turmas, setTurmas, turma, setTurma } = myTurmasProps;
+
   return (
     <div className="infoCard">
       <div className="MultiTurmasTitle">
@@ -372,9 +376,148 @@ function TurmasCard(myProps) {
   );
 }
 
+function NotOfferedSubjects(props) {
+  const { myTurmasProps, myCurrentSemestreProps } = props;
+  const { turmas, setTurmas, turma, setTurma } = myTurmasProps;
+  const { semestre, ano } = myCurrentSemestreProps;
+  let semester = semestre.value;
+  // console.log(semester);
+  console.log("turmas", turmas);
+  // Percorra cada turma em turmas e preencha uma lista dos códigos das disciplinas oferecidas pelas turmas
+  let disciplinasOferecidas = turmas
+    .map((turma) => turma.disciplina?.codigo)
+    .filter(Boolean);
+  // Neste código, filter(Boolean) remove todos os valores falsy do array, incluindo null e undefined.
+  // console.log("disciplinasOferecidas", disciplinasOferecidas);
+
+  // let TodasDisciplinas = allLocalJsonData.static.infoDisciplinasCC;
+  let TodasDisciplinas = allLocalJsonData.SQL.disciplinas;
+
+  // Listar todas os código-nomes de disciplinas que são de semestre ímpar
+  // Filtrar todas que são de periodoEsperado%2 == 1
+  let DisciplinasDoSemestre = TodasDisciplinas;
+  if (semester !== 3) {
+    DisciplinasDoSemestre = TodasDisciplinas.filter(
+      (disciplina) => disciplina.periodo % 2 === semester % 2
+    );
+  }
+
+  // Percorrer cada disciplina em DisciplinasDoSemestre e, caso o código da disciplina esteja na lista de disciplinas oferecidas, remover da lista.
+  let DisciplinasAindaNaoOferecidas = DisciplinasDoSemestre.filter(
+    (disciplina) => {
+      return !disciplinasOferecidas.includes(disciplina.codigo);
+    }
+  );
+
+  // console.log("DisciplinasAindaNaoOferecidas", DisciplinasAindaNaoOferecidas);
+
+  const [index, setIndex] = useState(turmas.length);
+
+  function addSubjectsToClasses(subjects) {
+    // console.log("subjects", subjects);
+    let turmasToAdd = subjects.map((subject) => {
+      let blankClass = options.emptyObjects.turma;
+      let newTurma = {
+        ...blankClass,
+        idTurma: `202701-${index}`,
+        disciplina: subject,
+      };
+      setIndex(index + 1);
+      return newTurma;
+    });
+    console.log("turmasToAdd", turmasToAdd);
+    setTurmas([...turmas, ...turmasToAdd]);
+  }
+
+  // Se o período da disciplina for 1, aplicar o className EnfasePrimeiroPeriodo
+  function SubjectsTableBody() {
+    return (
+      <tbody>
+        {DisciplinasAindaNaoOferecidas.map((disciplina) => (
+          <tr key={disciplina.codigo}>
+            <td
+              className={
+                disciplina.periodo === 1 ? "EnfasePrimeiroPeriodo" : ""
+              }
+            >
+              <InputDisciplina
+                text={`Criar uma turma para a disciplina ${disciplina.codigo}`}
+                insertDiscFunc={() => {
+                  addSubjectsToClasses([disciplina]);
+                }}
+              />
+            </td>
+            <td
+              className={
+                disciplina.periodo === 1 ? "EnfasePrimeiroPeriodo" : ""
+              }
+            >
+              {`${disciplina.periodo} - (${disciplina.codigo}) ${disciplina.nome}`}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    );
+  }
+
+  function TabelaDeDisciplinasASereOferecidas() {
+    return (
+      <div>
+        <h1>
+          Disciplinas ainda não oferecidas do
+          {
+            // Disciplinas do período{" "}
+            // {semester === 1 ? "ím" : ""}par ainda não oferecidas
+            semester === 1
+              ? " período ímpar "
+              : semester === 2
+              ? " período par "
+              : "s períodos "
+          }
+        </h1>
+        <table className="showBasicDataTable">
+          <thead>
+            <tr>
+              <th>
+                <InputDisciplina
+                  size="4em"
+                  text="Adicionar todas as turmas pendentes"
+                  insertDiscFunc={() =>
+                    addSubjectsToClasses(DisciplinasAindaNaoOferecidas)
+                  }
+                />
+              </th>
+              <th>Período - (Código) Nome</th>
+            </tr>
+          </thead>
+          <SubjectsTableBody />
+        </table>
+      </div>
+    );
+  }
+
+  function DisciplinasMínimasForamOferecidas() {
+    return (
+      <div>
+        <h1>Todas as disciplinas do período ímpar foram oferecidas 👍</h1>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      {DisciplinasAindaNaoOferecidas.length === 0 ? (
+        <DisciplinasMínimasForamOferecidas />
+      ) : (
+        <TabelaDeDisciplinasASereOferecidas />
+      )}
+    </div>
+  );
+}
+
 function Turmas() {
-  const [ano, setAno] = useState(options.constantValues.years[14]);
-  const [semestre, setSemestre] = useState(options.constantValues.semesters[1]);
+  const [ano, setAno] = useState(options.constantValues.years[13]);
+  const [semestre, setSemestre] = useState(options.constantValues.semesters[0]);
 
   let unifiedHorarios = getTurmasData();
 
@@ -410,6 +553,7 @@ function Turmas() {
   return (
     <div className="CRUDContainComponents">
       <TurmasCard {...myProps} />
+      <NotOfferedSubjects {...myProps} />
     </div>
   );
 }

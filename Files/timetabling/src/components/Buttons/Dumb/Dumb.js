@@ -4,15 +4,15 @@ import {
   BsDatabaseDown as ReadDBIcon,
 } from "react-icons/bs";
 import {
-  MdAddCircleOutline as CreateInfoIcon,
-  MdRefresh as ReadInfoIcon,
-  MdEdit as UpdateInfoIcon,
-  MdDelete as DeleteInfoIcon,
-  MdAddAlarm as CreateHoraIcon,
-  MdAutoDelete as DeleteHoraIcon,
-  MdLockOutline as LockedPropIcon,
-  MdLockOpen as UnlockedPropIcon,
-  MdInput as InputDisciplinaIcon,
+  MdAddCircleOutline as CreateInfoIcon, // Plus sign with circle around it
+  MdRefresh as ReadInfoIcon, // Two arrows in a circle
+  MdEdit as UpdateInfoIcon, // Pencil
+  MdDelete as DeleteInfoIcon, // Trash can
+  MdAddAlarm as CreateHoraIcon, // Clock with plus sign
+  MdAutoDelete as DeleteHoraIcon, // Trash Can with clock
+  MdLockOutline as LockedPropIcon, // Lock
+  MdLockOpen as UnlockedPropIcon, // Unlocked lock
+  MdInput as InputDisciplinaIcon, // Arrow pointing into a box
 } from "react-icons/md";
 // import {
 //   AddCircleOutlineIcon as CreateInfoIcon,

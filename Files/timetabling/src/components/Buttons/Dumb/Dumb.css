@@ -9,7 +9,8 @@
 .iconCreate:hover,
 .iconRead:hover,
 .iconUpdate:hover,
-.iconDelete:hover {
+.iconDelete:hover,
+.iconInputDisciplina:hover {
   transform: scale(1.2);
   cursor: pointer;
 }
@@ -22,7 +23,8 @@
   /* Reduz a opacidade quando clicado */
 }
 
-.iconCreate:active {
+.iconCreate:active,
+.iconInputDisciplina:active {
   color: #28a745;
 }
 
@@ -142,4 +144,16 @@
     padding: 12px 20px;
     font-size: 14px;
   }
+}
+
+/* ICON INPUT DISCIPLINA */
+
+.iconInputDisciplina {
+  color: #007bff;
+  transition: transform 0.5s;
+}
+
+.iconInputDisciplina:active {
+  /* transform: translateX(500px); */
+  /* transform: translateX(50px); */
 }

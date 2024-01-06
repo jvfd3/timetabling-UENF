@@ -186,13 +186,13 @@ const options = {
   },
   emptyObjects: {
     turma: {
-      id: null, //INT
+      idTurma: null, //INT
       ano: null, //INT
       semestre: null, //INT
       demandaEstimada: null, //INT
       professor: null, //OBJ
       disciplina: null, //OBJ
-      horarios: null, //ARRAY
+      horarios: [], //ARRAY
     },
     professor: {
       apelido: null, //STR
