@@ -422,6 +422,8 @@ function NotOfferedSubjects(props) {
         ...blankClass,
         idTurma: `${year}0${semester}-${classIndex.current}`,
         disciplina: subject,
+        ano: year,
+        semestre: semester,
       };
       return newTurma;
     });
