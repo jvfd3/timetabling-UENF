@@ -82,7 +82,10 @@ function HorariosTableRow(myProps) {
   let conflictSize = conflicts.raw.professor.alloc.length;
   let professorConflicts = conflicts.raw.professor.alloc;
 
-  let DayHourStyle = {};
+  let conflictStyles = {
+    day: {},
+    hour: {},
+  };
   /*
   professorConflicts é uma lista de conflitos podendo ter 0 ou mais conflitos.
   cada conflito é um objeto com a seguinte estrutura:
@@ -133,9 +136,8 @@ function HorariosTableRow(myProps) {
   // console.log("conflicts", conflicts);
 
   if (isConflict()) {
-    DayHourStyle = conflicts.styled.professor;
-  } else {
-    DayHourStyle = {};
+    conflictStyles.day = conflicts.styled.professor;
+    conflictStyles.hour = conflicts.styled.professor;
   }
 
   function isConflict() {
@@ -167,14 +169,14 @@ function HorariosTableRow(myProps) {
           indexHorario={indexHorario}
         />
       </td>
-      <td {...DayHourStyle}>
+      <td {...conflictStyles.day}>
         <SelectDia
           lTurma={turma}
           setLTurma={setTurma}
           indexHorario={indexHorario}
         />
       </td>
-      <td {...DayHourStyle}>
+      <td {...conflictStyles.hour}>
         <SelectHoraTang
           lTurma={turma}
           setLTurma={setTurma}
