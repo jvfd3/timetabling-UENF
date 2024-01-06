@@ -15,6 +15,7 @@ function testingTurmas2022_1(turmas) {
 function flattenTurma(turma, horarioIndex) {
   let turmaHorario = turma.horarios[horarioIndex];
   let newTurma = { ...turmaHorario, ...turma };
+  /* Essa parte daqui de baixo não tá repetindo o que essa linha acima faz? Tô confuso. */
   newTurma.horaInicio = turmaHorario.horaInicio;
   newTurma.duracao = turmaHorario.duracao;
   newTurma.idHorario = turmaHorario.id;
