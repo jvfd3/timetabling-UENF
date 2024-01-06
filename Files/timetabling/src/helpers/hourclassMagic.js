@@ -1,77 +1,90 @@
 /* A ideia é que seja um trocadilho com hourglass */
 import options from "../DB/local/options";
 
-function createTurma({ ano, semestre, turmas, setTurmas, classIndex }) {
+function createTurma(myProps) {
+  const { ano, semestre, turmas, setTurmas, classIndex, classTimeIndex } =
+    myProps;
   let blankTurma = options.emptyObjects.turma;
   let blankHorario = options.emptyObjects.horario;
   let year = ano.value;
   let semester = semestre.value;
   blankHorario.duracao = 2;
-  blankHorario.ordem = 1;
+  // blankHorario.ordem = 1;
+  blankHorario.idTurma = `${ano.value}0${semestre.value}-${classIndex.current}`;
+  blankHorario.idHorario = classTimeIndex.current;
   // console.log("createTurma>3", class;Index);
   classIndex.current += 1;
+
+  let newHorarios = [
+    {
+      ...blankHorario,
+      idHorario: classTimeIndex.current + 1,
+    },
+    {
+      ...blankHorario,
+    },
+  ];
 
   let newTurma = {
     ...blankTurma,
     idTurma: `${ano.value}0${semestre.value}-${classIndex.current}`,
     ano: year,
     semestre: semester,
-    horarios: [
-      {
-        ...blankHorario,
-        ordem: 1,
-        idHorario: turmas.length,
-        idTurma: turmas.length,
-      },
-      {
-        ...blankHorario,
-        ordem: 2,
-        idHorario: turmas.length + 1,
-        idTurma: turmas.length,
-      },
-    ],
+    horarios: newHorarios,
   };
   let newTurmas = [newTurma, ...turmas];
   setTurmas(newTurmas);
+  classTimeIndex.current += 2;
 }
 
 function deleteTurma(turmas, setTurmas, turma) {
-  console.log("Turmas:", turmas);
-  console.log("Turma to delete:", turma);
+  // console.log("Turmas:", turmas);
+  // console.log("Turma to delete:", turma);
   let newTurmas = [...turmas];
   let turmaIndex = turmas.indexOf(turma);
-  console.log("Index:", turmaIndex);
+  // console.log("Index:", turmaIndex);
   newTurmas.splice(turmaIndex, 1);
-  console.log("New turmas:", newTurmas);
+  // console.log("New turmas:", newTurmas);
   setTurmas(newTurmas);
 }
 
 function createHorario(turmasStates) {
-  const { turmas, setTurmas, turma, setTurma } = turmasStates;
-  // console.log("Horarios", turma.horarios);
-  let newTurma = { ...turma };
-  let newHorarios = [...newTurma.horarios];
-  console.log("newHorarios", newHorarios);
+  const { turmas, setTurmas, rowTurma, setRowTurma, classTimeIndex } =
+    turmasStates;
+  classTimeIndex.current += 1;
+  // console.log("Classtime", classTimeIndex.current);
+  // console.log("Turma", rowTurma);
   let blankHorario = options.emptyObjects.horario;
-  blankHorario.duracao = 2;
-  blankHorario.ordem = newHorarios.length + 1;
-  blankHorario.idTurma = newTurma.idTurma;
-  blankHorario.idHorario = newHorarios.length + 1;
-  // newHorarios.push(blankHorario);
-  newTurma.horarios = [...newHorarios, blankHorario];
-  setTurma(newTurma);
+  let newHorario = {
+    ...blankHorario,
+    idHorario: classTimeIndex.current,
+    idTurma: rowTurma.idTurma,
+    duracao: 2,
+  };
+  let newTurma = {
+    ...rowTurma,
+    horarios: [newHorario, ...rowTurma.horarios],
+  };
+  setRowTurma(newTurma);
   if (turmas !== undefined && setTurmas !== undefined) {
-    insertNewTurmaInTurmas(turmas, setTurmas, newTurma);
+    // setTurmas(newTurmas);
+    updateClassInClasses(turmas, setTurmas, newTurma);
   }
 }
 
-function insertNewTurmaInTurmas(turmas, setTurmas, turma) {
-  let currentId = turma.idTurma;
-  let newTurmas = [...turmas];
-  newTurmas = newTurmas.map((turmaAtual) => {
-    return turmaAtual.idTurma === currentId ? turma : turmaAtual;
+function updateClassInClasses(classesData, setClassesData, updatedClassData) {
+  let currentId = updatedClassData.idTurma;
+  let newClassesData = [...classesData];
+  newClassesData = classesData.map((iterClass) => {
+    let hasSameId = iterClass.idTurma === currentId;
+    // console.log("Has same id:", iterClass.idTurma, currentId);
+    // if (hasSameId) {
+    // console.log("Updated class:", updatedClassData);
+    // console.log("Iter class:", iterClass);
+    // }
+    return hasSameId ? updatedClassData : iterClass;
   });
-  setTurmas(newTurmas);
+  setClassesData(newClassesData);
 }
 
 function deleteHorario(myProps) {
@@ -93,5 +106,5 @@ export {
   deleteTurma,
   createHorario,
   deleteHorario,
-  insertNewTurmaInTurmas,
+  // updateClassInClasses,
 };

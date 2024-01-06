@@ -28,7 +28,6 @@ import { getTurmasData } from "../../../DB/retrieveData";
 import { baseTurmaConflicts } from "../../../helpers/conflicts/centralConflicts";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 import { InputDisciplina } from "../../../components/Buttons/Dumb/Dumb";
-import { Button } from "@mui/material";
 
 /* ESTRUTURA DOS COMPONENTES
 - CRUDclass
@@ -59,9 +58,16 @@ import { Button } from "@mui/material";
 
 function TableHeader(myProps) {
   const { myTurmasProps, myCurrentSemestreProps } = myProps;
-  const { turmas, setTurmas, classIndex } = myTurmasProps;
+  const { turmas, setTurmas, classIndex, classTimeIndex } = myTurmasProps;
   const { semestre, ano } = myCurrentSemestreProps;
-  const createStates = { turmas, setTurmas, semestre, ano, classIndex };
+  const createStates = {
+    turmas,
+    setTurmas,
+    semestre,
+    ano,
+    classIndex,
+    classTimeIndex,
+  };
   // console.log("TableHeader>2", classIndex);
   return (
     <thead>
@@ -212,18 +218,20 @@ function HorariosTableRow(myProps) {
 function HorariosTable(myProps) {
   const { rowStates, myTurmasProps, conflicts } = myProps;
   const { rowTurma, setRowTurma } = rowStates;
-  const { turmas, setTurmas, turma, setTurma } = myTurmasProps;
+  const { turmas, setTurmas, turma, setTurma, classTimeIndex } = myTurmasProps;
+  const createHourProps = {
+    turmas,
+    setTurmas,
+    rowTurma,
+    setRowTurma,
+    classTimeIndex,
+  };
   return (
     <table>
       <thead>
         <tr key={`LinhaHorarios-${rowTurma.idTurma}`}>
           <th>
-            <SmartCreateHora
-              turmas={turmas}
-              setTurmas={setTurmas}
-              turma={rowTurma}
-              setTurma={setRowTurma}
-            />
+            <SmartCreateHora {...createHourProps} />
           </th>
           <th>Sala</th>
           <th>Dia</th>
@@ -250,11 +258,18 @@ function HorariosTable(myProps) {
 
 function TableRow(myProps) {
   const { lTurma, myTurmasProps, myCurrentSemestreProps } = myProps;
-  const { turmas, setTurmas, turma, setTurma } = myTurmasProps;
+  const { turmas, setTurmas, turma, setTurma, classTimeIndex } = myTurmasProps;
   const { semestre, ano } = myCurrentSemestreProps;
 
   const [rowTurma, setRowTurma] = useState(lTurma);
   const rowStates = { rowTurma, setRowTurma };
+  const createHourProps = {
+    turmas,
+    setTurmas,
+    rowTurma,
+    setRowTurma,
+    classTimeIndex,
+  };
 
   /*
   Pretendo percorrer todas as turmas e verificar se há conflitos entre elas.
@@ -303,12 +318,7 @@ function TableRow(myProps) {
       </td>
       <td>
         {rowTurma.horarios === null || rowTurma.horarios.length === 0 ? (
-          <SmartCreateHora
-            turmas={turmas}
-            setTurmas={setTurmas}
-            turma={rowTurma}
-            setTurma={setRowTurma}
-          />
+          <SmartCreateHora {...createHourProps} />
         ) : (
           <HorariosTable
             rowStates={rowStates}
@@ -343,9 +353,16 @@ function TurmasTable(myProps) {
 
 function SemTurmas(myProps) {
   const { myTurmasProps, myCurrentSemestreProps } = myProps;
-  const { turmas, setTurmas, classIndex } = myTurmasProps;
+  const { turmas, setTurmas, classIndex, classTimeIndex } = myTurmasProps;
   const { semestre, ano } = myCurrentSemestreProps;
-  const createStates = { turmas, setTurmas, semestre, ano, classIndex };
+  const createStates = {
+    turmas,
+    setTurmas,
+    semestre,
+    ano,
+    classIndex,
+    classTimeIndex,
+  };
   return (
     <div
       className="infoCard"
@@ -537,6 +554,7 @@ function Turmas() {
   }, []); */
 
   const classIndex = useRef(turmas.length);
+  const classTimeIndex = useRef(allLocalJsonData.SQL.horarios.length);
   // console.log("Turmas>1", classIndex);
 
   useEffect(() => {
@@ -552,7 +570,14 @@ function Turmas() {
   }, [ano, semestre]);
 
   let myCurrentSemestreProps = { ano, setAno, semestre, setSemestre };
-  let myTurmasProps = { turmas, setTurmas, turma, setTurma, classIndex };
+  let myTurmasProps = {
+    turmas,
+    setTurmas,
+    turma,
+    setTurma,
+    classIndex,
+    classTimeIndex,
+  };
   let myProps = { myTurmasProps, myCurrentSemestreProps };
 
   return (
