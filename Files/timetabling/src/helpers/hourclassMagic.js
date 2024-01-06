@@ -1,18 +1,21 @@
 /* A ideia é que seja um trocadilho com hourglass */
 import options from "../DB/local/options";
 
-function createTurma({ ano, semestre, turmas, setTurmas }) {
+function createTurma({ ano, semestre, turmas, setTurmas, classIndex }) {
+  let blankTurma = options.emptyObjects.turma;
   let blankHorario = options.emptyObjects.horario;
+  let year = ano.value;
+  let semester = semestre.value;
   blankHorario.duracao = 2;
   blankHorario.ordem = 1;
+  console.log("createTurma>3", classIndex);
+  classIndex.current += 1;
 
   let newTurma = {
-    ano: ano,
-    semestre: semestre,
-    demandaEstimada: null,
-    disciplina: null,
-    idTurma: turmas.length,
-    professor: null,
+    ...blankTurma,
+    idTurma: `${ano.value}0${semestre.value}-${classIndex.current}`,
+    ano: year,
+    semestre: semester,
     horarios: [
       {
         ...blankHorario,
@@ -33,9 +36,13 @@ function createTurma({ ano, semestre, turmas, setTurmas }) {
 }
 
 function deleteTurma(turmas, setTurmas, turma) {
+  console.log("Turmas:", turmas);
+  console.log("Turma to delete:", turma);
   let newTurmas = [...turmas];
   let turmaIndex = turmas.indexOf(turma);
+  console.log("Index:", turmaIndex);
   newTurmas.splice(turmaIndex, 1);
+  console.log("New turmas:", newTurmas);
   setTurmas(newTurmas);
 }
 
