@@ -78,10 +78,16 @@ function HorariosTableRow(myProps) {
   const { turmas, turma, setTurma, horario, indexHorario, conflicts } = myProps;
 
   let professorConflicts = conflicts.raw.professor.alloc;
+  let singleDemandConflicts = conflicts.raw.expectedDemand.singleTurmaCapacity;
+  console.log("singleDemandConflicts", singleDemandConflicts);
 
   let conflictStyles = {
     day: {},
     hour: {},
+    classRoom: {
+      title: "Sala",
+      style: { backgroundColor: "" },
+    },
   };
   /*
   professorConflicts é uma lista de conflitos podendo ter 0 ou mais conflitos.
@@ -148,6 +154,14 @@ function HorariosTableRow(myProps) {
     return false;
   }
 
+  if (singleDemandConflicts.length > 0) {
+    for (let conflict of singleDemandConflicts) {
+      if (conflict.idClassTime === horario.idHorario) {
+        conflictStyles.classRoom = conflicts.styled.demand;
+      }
+    }
+  }
+
   return (
     <tr
       key={`HorariosTableRow>tr: ${horario.idHorario}-${horario.ordem}-${indexHorario}`}
@@ -159,7 +173,7 @@ function HorariosTableRow(myProps) {
           indexHorario={indexHorario}
         />
       </td>
-      <td>
+      <td {...conflictStyles.classRoom}>
         <SelectSala
           lTurma={turma}
           setLTurma={setTurma}
