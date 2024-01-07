@@ -165,9 +165,11 @@ function SelectSala({ lTurma, setLTurma, indexHorario }) {
         `${capacidade} - ${bloco} - ${codigo}`
       }
       formatOptionLabel={({ capacidade, bloco, codigo }, { context }) => {
-        return context === "value"
-          ? `(${capacidade}) ${bloco} - ${codigo}`
-          : `(${capacidade}) ${bloco} - ${codigo}`;
+        let msg = "";
+        msg += capacidade ? `(${capacidade})` : "(Cap. indef.)";
+        msg += bloco ? ` ${bloco}` : "(Bloco indef.)";
+        msg += codigo ? ` - ${codigo}` : " (Cod. indef.)";
+        return context === "value" ? msg : msg;
       }}
     />
   );
