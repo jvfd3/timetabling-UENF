@@ -24,8 +24,8 @@ import {
 
 function Turmas() {
   let allTurmas = getFullHorarios();
-  let unifiedHorarios = splittedToUnified2(allTurmas);
-  const [turmas, setTurmas] = useState(unifiedHorarios);
+  // let unifiedHorarios = splittedToUnified2(allTurmas);
+  const [turmas, setTurmas] = useState(allTurmas);
   const [turma, setTurma] = useState(turmas[0]);
 
   let myTurmaStates = { turmas, setTurmas, turma, setTurma };
@@ -80,7 +80,7 @@ function Turmas() {
 
   function HorariosTurma({ turma, setTurma }) {
     let quantidadeHorarios = turma.horarios.length;
-
+    console.log("quantidadeHorarios", quantidadeHorarios);
     function HorariosTable(turmaProps) {
       const { turma, setTurma } = turmaProps;
       return (
