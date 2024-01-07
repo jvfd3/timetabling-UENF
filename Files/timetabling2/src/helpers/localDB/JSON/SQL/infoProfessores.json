@@ -16,7 +16,7 @@
   { "idprofessor": 15, "laboratorio": "LCMAT",  "curso": "Lic Mat", "apelidoProfessor": "Nilson",         "nomeProfessor": "Nilson Sergio Peres Stahl"           },
   { "idprofessor": 16, "laboratorio": "LCMAT",  "curso": "Lic Mat", "apelidoProfessor": "Ana Senna",      "nomeProfessor": "Ana Silva de Senna"                  },
   { "idprofessor": 17, "laboratorio": "LCFIS",  "curso": "Lic Fis", "apelidoProfessor": "Max",            "nomeProfessor": "Max Erik Soffner"                    },
-  { "idprofessor": 18, "laboratorio": "LCFIS",  "curso": "Lic Fis", "apelidoProfessor": "Narcelo Gomes",  "nomeProfessor": "Marcelo Gomes da Silva"              },
+  { "idprofessor": 18, "laboratorio": "LCFIS",  "curso": "Lic Fis", "apelidoProfessor": "Marcelo Gomes",  "nomeProfessor": "Marcelo Gomes da Silva"              },
   { "idprofessor": 19, "laboratorio": "LCFIS",  "curso": "Lic Fis", "apelidoProfessor": "Marcenilda",     "nomeProfessor": "Marcenilda Amorim Lima"              },
   { "idprofessor": 20, "laboratorio": "LCFIS",  "curso": "Lic Fis", "apelidoProfessor": "José Augusto",   "nomeProfessor": "José Augusto Pedro Lima"             },
   { "idprofessor": 21, "laboratorio": "LCFIS",  "curso": "Lic Fis", "apelidoProfessor": "Leonardo Mota",  "nomeProfessor": "Leonardo Mota de Oliveira"           },

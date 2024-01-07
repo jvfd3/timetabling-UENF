@@ -16,7 +16,7 @@
   { "idprofessor": 15, "laboratorio": "LCMAT",  "curso": "Lic Mat", "apelido": "Nilson",         "nome": "Nilson Sergio Peres Stahl",             "disciplinas": []},
   { "idprofessor": 16, "laboratorio": "LCMAT",  "curso": "Lic Mat", "apelido": "Ana Senna",      "nome": "Ana Silva de Senna",                    "disciplinas": []},
   { "idprofessor": 17, "laboratorio": "LCFIS",  "curso": "Lic Fis", "apelido": "Max",            "nome": "Max Erik Soffner",                      "disciplinas": ["FIS01103", "FIS01109", "FIS01202", "FIS01204"]},
-  { "idprofessor": 18, "laboratorio": "LCFIS",  "curso": "Lic Fis", "apelido": "Narcelo Gomes",  "nome": "Marcelo Gomes da Silva",                "disciplinas": ["FIS01103", "FIS01109", "FIS01202", "FIS01204"]},
+  { "idprofessor": 18, "laboratorio": "LCFIS",  "curso": "Lic Fis", "apelido": "Marcelo Gomes",  "nome": "Marcelo Gomes da Silva",                "disciplinas": ["FIS01103", "FIS01109", "FIS01202", "FIS01204"]},
   { "idprofessor": 19, "laboratorio": "LCFIS",  "curso": "Lic Fis", "apelido": "Marcenilda",     "nome": "Marcenilda Amorim Lima",                "disciplinas": ["FIS01103", "FIS01109", "FIS01202", "FIS01204"]},
   { "idprofessor": 20, "laboratorio": "LCFIS",  "curso": "Lic Fis", "apelido": "José Augusto",   "nome": "José Augusto Pedro Lima",               "disciplinas": ["FIS01103", "FIS01109", "FIS01202", "FIS01204"]},
   { "idprofessor": 21, "laboratorio": "LCFIS",  "curso": "Lic Fis", "apelido": "Leonardo Mota",  "nome": "Leonardo Mota de Oliveira",             "disciplinas": ["FIS01103", "FIS01109", "FIS01202", "FIS01204"]},
