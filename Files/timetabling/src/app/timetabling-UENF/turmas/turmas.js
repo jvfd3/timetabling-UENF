@@ -98,14 +98,15 @@ function Turmas() {
           </thead>
           <tbody>
             {turma.horarios.map((horario, index) => {
+              let smartDeleteProps = {
+                turma: turma,
+                setTurma: setTurma,
+                horaIndex: index,
+              };
               return (
                 <tr key={`Linha Horário: ${horario.idHorario}-${index}`}>
                   <td>
-                    <SmartDeleteHora
-                      turma={turma}
-                      setTurma={setTurma}
-                      horaIndex={index}
-                    />
+                    <SmartDeleteHora {...smartDeleteProps} />
                   </td>
                   <td>
                     <SelectDia

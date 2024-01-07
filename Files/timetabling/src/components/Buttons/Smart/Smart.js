@@ -55,9 +55,10 @@ function SmartCreateHora(myProps) {
 }
 
 function SmartDeleteHora(myProps) {
-  let idTurma = myProps.turma.idTurma;
-  let index = myProps.indexHorario;
-  let idHorario = myProps.turma.horarios[index].idHorario;
+  const { horaIndex, setTurma, turma } = myProps;
+  let idTurma = turma.idTurma;
+  let index = horaIndex;
+  let idHorario = turma.horarios[index]?.idHorario;
   let titleText = `Remover horário ${idHorario} da turma ${idTurma}`;
   function removeHour() {
     deleteHorario(myProps);
