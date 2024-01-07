@@ -4,7 +4,7 @@
   {"id":  3, "capacidade":  24,  "bloco": "P5",           "codigo": "inf2", "descricao": "P5"                                  },
   {"id":  4, "capacidade":  24,  "bloco": "P5",           "codigo": "111",  "descricao": "P5"                                  },
   {"id":  5, "capacidade":  24,  "bloco": "P5",           "codigo": "112",  "descricao": "P5"                                  },
-  {"id":  6, "capacidade":  30,  "bloco": "P3",           "codigo": "1",    "descricao": "Bancada do CCT"                      },
+  {"id":  6, "capacidade":  30,  "bloco": "P3",           "codigo": "Bcct", "descricao": "Bancada do CCT"                      },
   {"id":  7, "capacidade":  35,  "bloco": "P3",           "codigo": "104",  "descricao": "Prédio do CCT"                       },
   {"id":  8, "capacidade":  35,  "bloco": "P3",           "codigo": "105",  "descricao": "Prédio do CCT"                       },
   {"id":  9, "capacidade":  35,  "bloco": "P3",           "codigo": "107",  "descricao": "Prédio do CCT"                       },
