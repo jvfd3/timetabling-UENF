@@ -177,9 +177,9 @@ function updateProfessorFromList(oldArray, newProfessor) {
 }
 
 function appendInfoFromTurmasUsingHorarios(horarios) {
+  /* This function is used in the page "Turmas" */
   /* Tá mal feito e repetindo propriedades. Deve ser ajustado com o BD */
   let turmas = allLocalJsonData.SQL.turmas;
-  let disciplinas = allLocalJsonData.SQL.disciplinas;
   let professores = allLocalJsonData.SQL.professores;
   let foundTurmas = turmas.filter((turma) =>
     horarios.some((horario) => horario.idTurma === turma.id)
@@ -193,15 +193,15 @@ function appendInfoFromTurmasUsingHorarios(horarios) {
   });
 
   updatedHorarios = updatedHorarios.map((horario) => {
-    let correspondingDisciplina = disciplinas.find(
-      (disciplina) => disciplina.id === horario.idDisciplina
-    );
+    console.log(horario);
+    let correspondingDisciplina = getByIDdisciplina(horario.idDisciplina);
+    console.log("correspondingDisciplina", correspondingDisciplina);
     return {
       ...horario,
       ...correspondingDisciplina,
-      nomeDisciplina: correspondingDisciplina.nome,
-      apelidoDisciplina: correspondingDisciplina.apelido,
-      codigoDisciplina: correspondingDisciplina.codigo,
+      nomeDisciplina: correspondingDisciplina?.nome,
+      apelidoDisciplina: correspondingDisciplina?.apelido,
+      codigoDisciplina: correspondingDisciplina?.codigo,
     };
   });
 

@@ -6,7 +6,13 @@ import CRUDPageSelection from "../../../components/PageSelect";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 import "./salas.css";
 import { SalaItemSelection } from "../../../components/mySelects";
-import { appendInfoFromTurmasUsingHorarios } from "../../../helpers/auxFunctions";
+import {
+  appendInfoFromTurmasUsingHorarios,
+  getFullHorarios,
+  getTurmasDoAnoSemestre,
+} from "../../../helpers/auxFunctions";
+import { getTurmasData } from "../../../DB/retrieveData";
+import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
 
 function Salas() {
   let salasFromJson = allLocalJsonData.SQL.salas;
@@ -30,9 +36,7 @@ function Salas() {
     );
   }
 
-  function SalaCard(props) {
-    let { currentSala } = props;
-
+  function SalaCard({ currentSala }) {
     function InformacoesBaseDaSala() {
       return (
         <div className="showBasicDataCard">
@@ -58,7 +62,7 @@ function Salas() {
     }
 
     function TurmasNaSala({ lSala }) {
-      function getTurmas(id) {
+      /* function getTurmas(id) {
         let horarios = allLocalJsonData.SQL.horarios;
         let horariosNestaSala = [];
         for (const chaveTurma in horarios) {
@@ -90,14 +94,27 @@ function Salas() {
           return 0;
         });
         return fullInfoFromTurmasNaSala;
-      }
-      let turmasNestaSala = getTurmas(lSala.id);
-      return (
+      } */
+      let idSala = lSala.id;
+      let classes = getTurmasData();
+      let splittedClasses = splitTurmas(classes);
+      let turmasNestaSala = splittedClasses.filter((splittedClass) => {
+        let found = splittedClass.sala?.id === idSala;
+        return found;
+      });
+      return turmasNestaSala.length === 0 ? (
+        <div className="showBasicDataCard">
+          <h5>Não há turmas nesta sala</h5>
+        </div>
+      ) : (
         <div className="showBasicDataCard">
           <h4>TURMAS NESTA SALA</h4>
+
           <table className="showBasicDataTable">
             <thead>
               <tr>
+                <th>idTurma</th>
+                <th>idHorario</th>
                 <th>Ano.Semestre</th>
                 <th>Disciplina</th>
                 <th>Professor</th>
@@ -108,18 +125,26 @@ function Salas() {
             </thead>
             <tbody>
               {turmasNestaSala.map((turma, i) => {
+                function checkIndefinition(value) {
+                  return value ? value : "Indef.";
+                }
+
                 return (
                   <tr key={i}>
+                    <td>{turma.idTurma}</td>
+                    <td>{turma.idHorario}</td>
                     <td>
                       {turma.ano}.{turma.semestre}
                     </td>
                     <td>
-                      {turma.codigoDisciplina} {turma.apelidoDisciplina}
+                      {turma.codigoDisciplina && turma.apelidoDisciplina
+                        ? `${turma.codigoDisciplina} - ${turma.apelidoDisciplina}`
+                        : "Indef."}
                     </td>
-                    <td>{turma.apelidoProfessor}</td>
-                    <td>{turma.dia}</td>
-                    <td>{turma.horaInicio}</td>
-                    <td>{turma.duracao}</td>
+                    <td>{checkIndefinition(turma.apelidoProfessor)}</td>
+                    <td>{checkIndefinition(turma.dia)}</td>
+                    <td>{checkIndefinition(turma.horaInicio)}</td>
+                    <td>{checkIndefinition(turma.duracao)}</td>
                   </tr>
                 );
               })}
@@ -141,7 +166,7 @@ function Salas() {
       <div className="infoCard">
         <InformacoesBaseDaSala />
         <TurmasNaSala lSala={sala} />
-        <OcupacaoNaSala />
+        {/* <OcupacaoNaSala /> */}
       </div>
     );
   }
