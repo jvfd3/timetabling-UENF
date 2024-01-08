@@ -390,18 +390,18 @@ function SelectTesting({}) {
     title: "Testando select deletável",
   };
 
-  let lockableSelectProps = {
-    placeholder: "Testando",
-    options: dummyOptions,
-    value: dummySelectedValue,
-    onChange: setDummySelectedValue,
-    getOptionValue: (option) => option.nome,
-    getOptionLabel: ({ nome }) => nome,
-    formatOptionLabel: ({ nome }) => nome,
-    lockStates,
-  };
-
-  return <LockableSelect {...lockableSelectProps} />;
+  return (
+    <LockableSelect
+      placeholder={"Testando"}
+      options={dummyOptions}
+      value={dummySelectedValue}
+      onChange={setDummySelectedValue}
+      getOptionValue={({ nome }) => nome}
+      getOptionLabel={({ nome }) => nome}
+      formatOptionLabel={({ nome }) => nome}
+      lockStates={lockStates}
+    />
+  );
 }
 
 /* /\ /\ /\ /\ /\ /\ /\ /\ MULTITURMAS /\ /\ /\ /\ /\ /\ /\ /\ */
