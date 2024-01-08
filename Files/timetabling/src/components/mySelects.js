@@ -50,7 +50,7 @@ function LockableSelect(extProps) {
   }
 
   return (
-    <div style={{ backgroundColor: "white", display: "flex" }}>
+    <div style={{ display: "flex" }}>
       <Select
         placeholder={placeholder}
         options={options}
@@ -316,19 +316,23 @@ function SelectHoraTang({ lTurma, setLTurma, indexHorario }) {
     setLTurma(novaTurma);
   }
 
+  const [isLocked, setIsLocked] = useState(false);
+
   return (
-    <Select
-      onChange={updateOuterTurma}
-      className="mySelectList"
-      styles={styleWidthFix}
-      isClearable={true}
+    <LockableSelect
       placeholder="Hora"
       options={horasTang}
       value={hora}
+      onChange={updateOuterTurma}
       getOptionValue={(option) => option.hora}
       getOptionLabel={(option) => `${option.hora} (${option.turno})`}
       formatOptionLabel={({ hora, turno }, { context }) => {
         return context === "value" ? `${hora}` : `${hora} (${turno})`;
+      }}
+      lockStates={{
+        isLocked: isLocked,
+        setIsLocked: setIsLocked,
+        title: "Fixar hora",
       }}
     />
   );
