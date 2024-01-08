@@ -306,17 +306,18 @@ function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
 
     setLTurma(novaTurma);
   }
+  const [isLocked, setIsLocked] = useState(true);
 
   return (
-    <Select
-      onChange={updateOuterTurma}
-      className="mySelectList"
-      styles={styleWidthFix}
-      isClearable={true}
+    <LockableSelect
       placeholder="Duração"
       options={duracoes}
       value={duracao}
+      onChange={updateOuterTurma}
       getOptionValue={(option) => option.value}
+      getOptionLabel={(option) => option.label}
+      formatOptionLabel={(option) => `${option.label}`}
+      lockStates={{ isLocked, setIsLocked, title: "Fixar duração" }}
     />
   );
 }
