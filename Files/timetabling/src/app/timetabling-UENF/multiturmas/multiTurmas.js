@@ -9,7 +9,6 @@ import {
   SelectHoraTang,
   SelectDuracao,
   SelectAnoSemestre,
-  SelectTesting,
 } from "../../../components/mySelects";
 // import {
 //   centralConflicts,
@@ -599,7 +598,6 @@ function CRUDclass() {
       <CRUDPageSelection
         defaultValue={options.constantValues.pageSelection.multiTurmas}
       />
-      <SelectTesting />
       <Turmas />
     </div>
   );

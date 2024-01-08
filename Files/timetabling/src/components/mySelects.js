@@ -9,6 +9,66 @@ import { LockedProp, UnlockedProp } from "./Buttons/Dumb/Dumb";
 
 let styleWidthFix = options.SelectStyles.fullItem;
 
+/* Internal-use Selects \/ */
+
+function LockableSelect(extProps) {
+  const {
+    placeholder,
+    options,
+    value,
+    onChange,
+    getOptionValue,
+    getOptionLabel,
+    formatOptionLabel,
+    lockStates,
+  } = extProps;
+
+  let { isLocked, setIsLocked, title } = lockStates;
+
+  function LockSelect() {
+    function toggleLock() {
+      setIsLocked(!isLocked);
+    }
+
+    return (
+      <div
+        onClick={toggleLock}
+        style={{ pointerEvents: "auto", color: isLocked ? "red" : "green" }}
+      >
+        {isLocked ? <LockedProp text={title} /> : <UnlockedProp text={title} />}
+      </div>
+    );
+  }
+
+  function LockableDropdown(props) {
+    return (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <components.DropdownIndicator {...props} />
+        <LockSelect {...lockStates} />
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ backgroundColor: "white", display: "flex" }}>
+      <Select
+        placeholder={placeholder}
+        options={options}
+        value={value}
+        onChange={onChange}
+        getOptionValue={getOptionValue}
+        getOptionLabel={getOptionLabel}
+        className="mySelectList"
+        styles={styleWidthFix}
+        isDisabled={isLocked}
+        isClearable={true}
+        components={{ DropdownIndicator: LockableDropdown }}
+        formatOptionLabel={formatOptionLabel}
+      />
+    </div>
+  );
+}
+
 /* \/ \/ \/ \/ \/ \/ \/ \/ MULTITURMAS \/ \/ \/ \/ \/ \/ \/ \/ */
 
 function SelectAno({ outerAno, setOuterAno }) {
@@ -283,6 +343,7 @@ function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
   let duracaoSelecionada = duracoes.find(
     (duracao) => duracao.value === selectedDuracao
   );
+
   const [duracao, setDuracao] = useState(duracaoSelecionada);
 
   function updateOuterTurma(novaDuracao) {
@@ -306,8 +367,8 @@ function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
 
     setLTurma(novaTurma);
   }
-  const [isLocked, setIsLocked] = useState(true);
 
+  const [isLocked, setIsLocked] = useState(true);
   return (
     <LockableSelect
       placeholder="Duração"
@@ -322,65 +383,7 @@ function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
   );
 }
 
-function LockableSelect(extProps) {
-  const {
-    placeholder,
-    options,
-    value,
-    onChange,
-    getOptionValue,
-    getOptionLabel,
-    formatOptionLabel,
-    lockStates,
-  } = extProps;
-
-  let { isLocked, setIsLocked, title } = lockStates;
-
-  function LockSelect() {
-    function toggleLock() {
-      setIsLocked(!isLocked);
-    }
-
-    return (
-      <div
-        onClick={toggleLock}
-        style={{ pointerEvents: "auto", color: isLocked ? "red" : "green" }}
-      >
-        {isLocked ? <LockedProp text={title} /> : <UnlockedProp text={title} />}
-      </div>
-    );
-  }
-
-  function LockableDropdown(props) {
-    return (
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <components.DropdownIndicator {...props} />
-        <LockSelect {...lockStates} />
-      </div>
-    );
-  }
-
-  return (
-    <div style={{ backgroundColor: "white", display: "flex" }}>
-      <Select
-        placeholder={placeholder}
-        options={options}
-        value={value}
-        onChange={onChange}
-        getOptionValue={getOptionValue}
-        getOptionLabel={getOptionLabel}
-        className="mySelectList"
-        styles={styleWidthFix}
-        isDisabled={isLocked}
-        isClearable={true}
-        components={{ DropdownIndicator: LockableDropdown }}
-        formatOptionLabel={formatOptionLabel}
-      />
-    </div>
-  );
-}
-
-function SelectTesting({}) {
+function SelectTesting() {
   let dummyOptions = allLocalJsonData.SQL.professores;
   const [dummySelectedValue, setDummySelectedValue] = useState(dummyOptions[0]);
   const [isLocked, setIsLocked] = useState(true);
