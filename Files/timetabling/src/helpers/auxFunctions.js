@@ -1,5 +1,15 @@
 import { allLocalJsonData } from "../DB/local/dataFromJSON";
 
+function debugFunc(debugClasses, message) {
+  let debug = [];
+  debugClasses.forEach((classe) => {
+    debug.push(classe.idTurma);
+  });
+  let debugSet = new Set(debug.sort((a, b) => a - b));
+  let debugArray = Array.from(debugSet);
+  console.log(message, debugArray.length);
+}
+
 function getByIDturma(idTurma) {
   let turmas = allLocalJsonData.SQL.turmas;
   return turmas.find((turma) => turma.id === idTurma);
@@ -90,6 +100,38 @@ function splittedToUnified2(splittedTurmas) {
     },
     {}
   );
+  return Object.values(result);
+}
+
+function splittedToUnified3(splittedTurmas) {
+  let result = {};
+
+  splittedTurmas.forEach(
+    ({
+      ano,
+      idTurma,
+      semestre,
+      professor,
+      disciplina,
+      demandaEstimada,
+      ...rest
+    }) => {
+      let key = idTurma;
+      if (!result[key]) {
+        result[key] = {
+          ano: ano,
+          idTurma: idTurma,
+          semestre: semestre,
+          professor: professor,
+          disciplina: disciplina,
+          demandaEstimada,
+          horarios: [],
+        };
+      }
+      result[key].horarios.push(rest);
+    }
+  );
+
   return Object.values(result);
 }
 
@@ -299,10 +341,13 @@ function getFullHorarios() {
 }
 
 export {
+  debugFunc,
   max,
   getFullHorarios,
   appendInfoFromTurmasUsingHorarios,
   splittedToUnified,
+  splittedToUnified2,
+  splittedToUnified3,
   getPeriodoEsperado,
   getNomeDisciplina,
   getApelidoDisciplina,
@@ -312,5 +357,4 @@ export {
   getTurmasDaHora,
   getTurmasDoDia,
   updateProfessorFromList,
-  splittedToUnified2,
 };

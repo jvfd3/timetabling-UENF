@@ -179,52 +179,42 @@ function removeSameId(turmas, turma) {
 }
 
 // 2
-function flattenTurma(turma, horario) {
-  let newTurma = {
-    ...turma,
-    ...horario,
+function flattenTurma(classData, classTime) {
+  const { horarios, ...rest } = classData;
+  let newClassData = {
+    ...rest,
+    ...classTime,
   };
-  delete newTurma.horarios;
-  // delete newTurma.id;
-  // console.log("turmaHorario", turmaHorario);
-  // console.log("newTurma", newTurma);
-  // console.log("turma", turma);
-  // console.log("newTurma", newTurma);
-  return newTurma;
+  return newClassData;
 }
 
-/* function flattenTurma(turma, horario) {
-  const { horarios, ...rest } = turma;
-  return {
-    ...rest,
-    ...horario,
-  };
-} */
-
-/* function splitTurmas(turmas) {
-  return turmas.flatMap((turma) =>
-    turma.horarios.map((horario) => flattenTurma(turma, horario))
-  );
-} */
-
 // 1
+/* function splitTurmas(classes) {
+  let splittedClasses = classes.flatMap((classData) =>
+    classData.horarios.map((classTime) => flattenTurma(classData, classTime))
+  );
+  return splittedClasses;
+} */
+
 function splitTurmas(turmas) {
   let newSplittedTurmas = [];
   turmas.forEach((turma) => {
-    if (turma.horarios !== null) {
-      // Isso daqui foi de uma vez que eu tentei fazer um teste com horários nulos, mas ficou muito embolado.
+    if ((turma.horarios !== null) && (turma.horarios.length > 0)) {
       turma.horarios.forEach((horario) => {
         let newTurma = flattenTurma(turma, horario);
         newSplittedTurmas.push(newTurma);
       });
     } else {
       let newTurma = {
+        ...options.emptyObjects.horario,
+        /* when I do that, the idHorario is null and it shouldn't. Check it later. */
         ...turma,
-        horarios: null,
       };
+      delete newTurma.horarios;
       newSplittedTurmas.push(newTurma);
     }
   });
+
   return newSplittedTurmas;
 }
 

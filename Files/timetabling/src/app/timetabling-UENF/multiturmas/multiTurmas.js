@@ -16,7 +16,11 @@ import {
 //   conflictsDisciplinaPeriodo,
 // } from "../../../helpers/conflicts/centralConflicts";
 import "./multiTurmas.css";
-import { getTurmasDoAnoSemestre } from "../../../helpers/auxFunctions";
+import {
+  getTurmasDoAnoSemestre,
+  splittedToUnified2,
+  splittedToUnified3,
+} from "../../../helpers/auxFunctions";
 import { NumberInputDemandaEstimada } from "../../../components/MyTextFields";
 import {
   SmartCreateTurma,
@@ -28,6 +32,8 @@ import { getTurmasData } from "../../../DB/retrieveData";
 import { baseTurmaConflicts } from "../../../helpers/conflicts/centralConflicts";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 import { InputDisciplina } from "../../../components/Buttons/Dumb/Dumb";
+import { FilteringSelects } from "../../../components/filteringSelects";
+import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
 
 /* ESTRUTURA DOS COMPONENTES
 - CRUDclass
@@ -78,7 +84,7 @@ function TableHeader(myProps) {
         <th>Código - Nome</th>
         <th>Professor</th>
         <th>Demanda Estimada</th>
-        <th colSpan={2}>Horarios</th>
+        <th colSpan={5}>Horários</th>
       </tr>
     </thead>
   );
@@ -333,12 +339,11 @@ function TableRow(myProps) {
 
 function TurmasTable(myProps) {
   const { myTurmasProps, myCurrentSemestreProps } = myProps;
-  const { turmas, setTurmas, turma, setTurma } = myTurmasProps;
   return (
     <table className="showBasicDataTable">
       <TableHeader {...myProps} />
       <tbody>
-        {turmas.map((lTurma, index) => (
+        {myTurmasProps.turmas.map((lTurma, index) => (
           <TableRow
             lTurma={lTurma}
             myTurmasProps={myTurmasProps}
@@ -377,15 +382,18 @@ function SemTurmas(myProps) {
 
 function TurmasCard(myProps) {
   const { myTurmasProps, myCurrentSemestreProps } = myProps;
-  const { turmas, setTurmas, turma, setTurma } = myTurmasProps;
+  // const { turmas, setTurmas, turma, setTurma, allSplittedClasses } =
+  //   myTurmasProps;
+  // const filteringProps = { allSplittedClasses, setCurrentClasses: setTurmas };
 
   return (
     <div className="infoCard">
       <div className="MultiTurmasTitle">
         <h2>MultiTurmas</h2>
         <SelectAnoSemestre {...myCurrentSemestreProps} />
+        {/* <FilteringSelects {...filteringProps} /> */}
       </div>
-      {turmas.length === 0 ? (
+      {myTurmasProps.turmas.length === 0 ? (
         <SemTurmas {...myProps} />
       ) : (
         <TurmasTable {...myProps} />
@@ -535,34 +543,29 @@ function NotOfferedSubjects(props) {
 }
 
 function Turmas() {
-  const [ano, setAno] = useState(options.constantValues.years[14]);
-  const [semestre, setSemestre] = useState(options.constantValues.semesters[0]);
-  const [professor, setProfessor] = useState(null);
-  const [disciplina, setDisciplina] = useState(null);
-  const [sala, setSala] = useState(null);
-  /* Filters States */
+  const classIndex = useRef(allLocalJsonData.SQL.turmas.length);
+  const classTimeIndex = useRef(allLocalJsonData.SQL.horarios.length);
 
   let unifiedHorarios = getTurmasData();
+
+  const [ano, setAno] = useState(options.constantValues.years[14]);
+  const [semestre, setSemestre] = useState(options.constantValues.semesters[0]);
 
   let filteredTurmas = getTurmasDoAnoSemestre(
     unifiedHorarios,
     ano.value,
     semestre.value
   );
-
   const [turmas, setTurmas] = useState(filteredTurmas);
   const [turma, setTurma] = useState(filteredTurmas[0]);
-  /* useEffect(() => {
-    setTurmas();
-    setTurma();
-  }, []); */
 
-  const classIndex = useRef(turmas.length);
-  const classTimeIndex = useRef(allLocalJsonData.SQL.horarios.length);
-  // console.log("Turmas>1", classIndex);
+  let classes = unifiedHorarios;
+  let allSplittedClasses = splitTurmas(classes);
+  // let newReunitedClasses = splittedToUnified3(allSplittedClasses);
+
 
   useEffect(() => {
-    console.log("ano", ano.value, "semestre", semestre.value);
+    // console.log("ano", ano.value, "semestre", semestre.value);
     // console.log(unifiedHorarios[unifiedHorarios.length - 1]);
     let newFilteredTurmas = getTurmasDoAnoSemestre(
       unifiedHorarios,
@@ -581,6 +584,7 @@ function Turmas() {
     setTurma,
     classIndex,
     classTimeIndex,
+    allSplittedClasses,
   };
   let myProps = { myTurmasProps, myCurrentSemestreProps };
 
