@@ -1,131 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
-import {
-  SelectAnoSemestre,
-  SelectFilterAno,
-  SelectFilterExpectedSemester,
-  SelectFilterProfessor,
-  SelectFilterRoom,
-  SelectFilterSemester,
-} from "../../../components/mySelects";
 import "./ccTable.css";
 import { getTurmasData } from "../../../DB/retrieveData";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
 // import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
-import {
-  filterDay,
-  filterExpectedSemester,
-  filterHour,
-  filterProfessor,
-  filterRoom,
-  filterSemester,
-  filterYear,
-} from "../../../helpers/filters";
-
-function FilteringSelects(filterProps) {
-  let {
-    ano,
-    setAno,
-    semestre,
-    setSemestre,
-    professor,
-    setProfessor,
-    room,
-    setRoom,
-    expectedSemester,
-    setExpectedSemester,
-  } = filterProps;
-  let myTimeStates = {
-    ano,
-    setAno,
-    semestre,
-    setSemestre,
-  };
-  let anoProps = {
-    ano,
-    setAno,
-  };
-  let semestreProps = {
-    semestre,
-    setSemestre,
-  };
-  let professorProps = {
-    professor,
-    setProfessor,
-  };
-  let roomProps = {
-    room,
-    setRoom,
-  };
-  let expectedSemesterProps = {
-    expectedSemester,
-    setExpectedSemester,
-  };
-  return (
-    <div className="filterHeader">
-      Ano:
-      <SelectFilterAno {...anoProps} />
-      Semestre:
-      <SelectFilterSemester {...semestreProps} />
-      Professor:
-      <SelectFilterProfessor {...professorProps} />
-      Sala:
-      <SelectFilterRoom {...roomProps} />
-      Período esperado:
-      <SelectFilterExpectedSemester {...expectedSemesterProps} />
-    </div>
-  );
-}
+import { filterDay, filterHour } from "../../../helpers/filters";
+import { FilteringSelects } from "../../../components/filteringSelects";
 
 function VisualizacaoCC() {
-  let years = options.constantValues.years;
-  let semesters = options.constantValues.semesters;
-  const [ano, setAno] = useState(years[10]);
-  const [semestre, setSemestre] = useState(semesters[0]);
-  const [professor, setProfessor] = useState(null);
-  const [room, setRoom] = useState(null);
-  const [expectedSemester, setExpectedSemester] = useState(null);
-
   let turmas = getTurmasData();
+  let allSplittedClasses = splitTurmas(turmas);
+  const [currentClasses, setCurrentClasses] = useState(allSplittedClasses);
 
-  let splittedCurrentClasses = splitTurmas(turmas);
-  // let TurmasDoSemestre = getTurmasDoAnoSemestre(
-  //   turmas,
-  //   ano.value,
-  //   semestre.value
-  // );
-
-  const [currentClasses, setCurrentClasses] = useState(splittedCurrentClasses);
-
-  useEffect(() => {
-    let filteringClasses = splittedCurrentClasses;
-    filteringClasses = filterYear(filteringClasses, ano);
-    filteringClasses = filterSemester(filteringClasses, semestre);
-    filteringClasses = filterProfessor(filteringClasses, professor);
-    filteringClasses = filterRoom(filteringClasses, room);
-    filteringClasses = filterExpectedSemester(
-      filteringClasses,
-      expectedSemester
-    );
-    setCurrentClasses(filteringClasses);
-  }, [ano, semestre, professor, room, expectedSemester]);
-
-  const filterProps = {
-    ano,
-    setAno,
-    semestre,
-    setSemestre,
-    professor,
-    setProfessor,
-    room,
-    setRoom,
-    expectedSemester,
-    setExpectedSemester,
+  let classesStates = {
+    currentClasses,
+    setCurrentClasses,
+    allSplittedClasses,
   };
-  // filterProfessor(splittedCurrentClasses, tempprofessor);
-  // filterRoom(splittedCurrentClasses, room);
-  filterExpectedSemester(splittedCurrentClasses, expectedSemester);
 
   function TabelaCC({ curClasses }) {
     function Header() {
@@ -248,7 +140,7 @@ function VisualizacaoCC() {
   return (
     <div className="CRUDContainComponents">
       <div className="infoCard">
-        <FilteringSelects {...filterProps} />
+        <FilteringSelects {...classesStates} />
         <TabelaCC curClasses={currentClasses} />
       </div>
     </div>
