@@ -33,18 +33,22 @@ function LockableSelect(extProps) {
     return (
       <div
         onClick={toggleLock}
-        style={{ pointerEvents: "auto", color: isLocked ? "red" : "green" }}
+        style={{
+          pointerEvents: "auto",
+          color: isLocked ? "black" : "#708090",
+          cursor: "pointer",
+        }}
       >
         {isLocked ? <LockedProp text={title} /> : <UnlockedProp text={title} />}
       </div>
     );
   }
 
-  function LockableDropdown(props) {
+  function ValueWithLock(props) {
     return (
       <div style={{ display: "flex", alignItems: "center" }}>
-        <components.DropdownIndicator {...props} />
         <LockSelect {...lockStates} />
+        <components.ValueContainer {...props} />
       </div>
     );
   }
@@ -62,7 +66,7 @@ function LockableSelect(extProps) {
         styles={styleWidthFix}
         isDisabled={isLocked}
         isClearable={true}
-        components={{ DropdownIndicator: LockableDropdown }}
+        components={{ ValueContainer: ValueWithLock }}
         formatOptionLabel={formatOptionLabel}
       />
     </div>
