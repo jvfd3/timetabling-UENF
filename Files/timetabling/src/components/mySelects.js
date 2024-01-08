@@ -266,8 +266,10 @@ function SelectDia({ lTurma, setLTurma, indexHorario }) {
     setLTurma(novaTurma);
   }
 
+  const [isLocked, setIsLocked] = useState(false);
+
   return (
-    <Select
+    <LockableSelect
       onChange={updateOuterTurma}
       className="mySelectList"
       styles={styleWidthFix}
@@ -275,10 +277,15 @@ function SelectDia({ lTurma, setLTurma, indexHorario }) {
       placeholder="Dia"
       options={dias}
       value={dia}
-      // getOptionLabel={(option) => option.value}
-      // getOptionValue={(option) => option.label}
+      // getOptionValue={(option) => option.value}
+      // getOptionLabel={(option) => option.label}
       formatOptionLabel={({ value, label }, { context }) => {
         return context === "value" ? `${value}` : `${label}`;
+      }}
+      lockStates={{
+        isLocked: isLocked,
+        setIsLocked: setIsLocked,
+        title: "Fixar dia",
       }}
     />
   );
