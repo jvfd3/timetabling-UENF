@@ -96,7 +96,7 @@ function ProfessoresDB() {
   return (
     <div className="CRUDContainComponents">
       <ProfessorSelection {...professorStates} />
-      <div className="showBasicCardData">
+      <div className="showBasicDataCard">
         <h3>INFORMAÇÕES DO PROFESSOR</h3>
         <table className="showBasicDataTable">
           <tbody>

@@ -1,5 +1,5 @@
 [
-  {"id":  1, "periodo":  1, "codigo": "MAT01117", "apelido": "Geom Analit",       "nome": "Geometria Analítica e Vetores"                                      },
+  {"id":  1, "periodo":  1, "codigo": "MAT01117", "apelido": "Geom Analít",       "nome": "Geometria Analítica e Vetores"                                      },
   {"id":  2, "periodo":  1, "codigo": "MAT01101", "apelido": "Calc 1",            "nome": "Cálculo Diferencial e Integral I"                                   },
   {"id":  3, "periodo":  1, "codigo": "INF01105", "apelido": "Org Comp",          "nome": "Organização de Computadores"                                        },
   {"id":  4, "periodo":  1, "codigo": "MAT01104", "apelido": "Lógic Mat",         "nome": "Lógica Matemática"                                                  },
