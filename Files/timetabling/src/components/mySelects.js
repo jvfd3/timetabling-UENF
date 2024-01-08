@@ -150,11 +150,11 @@ function SelectDisciplina({ lTurma, setLTurma }) {
     setLTurma(novaTurma);
   }
 
+  const [isLocked, setIsLocked] = useState(false);
+
   return (
-    <Select
+    <LockableSelect
       onChange={updateOuterTurmaDisciplina}
-      className="mySelectList"
-      styles={styleWidthFix}
       isClearable={true}
       placeholder="Disciplina"
       options={disciplinas}
@@ -164,6 +164,11 @@ function SelectDisciplina({ lTurma, setLTurma }) {
         let editedLabel = `${codigo} - `;
         editedLabel += context === "value" ? `${apelido}` : `${nome}`;
         return editedLabel;
+      }}
+      lockStates={{
+        isLocked: isLocked,
+        setIsLocked: setIsLocked,
+        title: "Fixar disciplina",
       }}
     />
   );
@@ -180,11 +185,11 @@ function SelectProfessor({ lTurma, setLTurma }) {
     setLTurma(novaTurma);
   }
 
+  const [isLocked, setIsLocked] = useState(false);
+
   return (
-    <Select
+    <LockableSelect
       onChange={updateOuterTurmaProfessor}
-      className="mySelectList"
-      styles={styleWidthFix}
       isClearable={true}
       placeholder="Professor"
       options={professores}
@@ -195,6 +200,11 @@ function SelectProfessor({ lTurma, setLTurma }) {
       }
       formatOptionLabel={({ apelido, nome }, { context }) => {
         return context === "value" ? `${apelido}` : `${nome}`;
+      }}
+      lockStates={{
+        isLocked: isLocked,
+        setIsLocked: setIsLocked,
+        title: "Fixar professor",
       }}
     />
   );
