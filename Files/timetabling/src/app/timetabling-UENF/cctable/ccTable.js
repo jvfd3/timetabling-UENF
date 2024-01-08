@@ -2,15 +2,6 @@ import React, { useEffect, useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import {
-  // getApelidoDisciplina,
-  // getApelidoProfessor,
-  // getFullHorarios,
-  // getPeriodoEsperado,
-  getTurmasDaHora,
-  getTurmasDoAnoSemestre,
-  getTurmasDoDia,
-} from "../../../helpers/auxFunctions";
-import {
   SelectAnoSemestre,
   SelectFilterAno,
   SelectFilterExpectedSemester,
@@ -21,11 +12,15 @@ import {
 import "./ccTable.css";
 import { getTurmasData } from "../../../DB/retrieveData";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
-import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
+// import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 import {
+  filterDay,
   filterExpectedSemester,
+  filterHour,
   filterProfessor,
   filterRoom,
+  filterSemester,
+  filterYear,
 } from "../../../helpers/filters";
 
 function FilteringSelects(filterProps) {
@@ -69,11 +64,15 @@ function FilteringSelects(filterProps) {
   };
   return (
     <div className="filterHeader">
-      <SelectAnoSemestre {...myTimeStates} />
+      Ano:
       <SelectFilterAno {...anoProps} />
+      Semestre:
       <SelectFilterSemester {...semestreProps} />
+      Professor:
       <SelectFilterProfessor {...professorProps} />
+      Sala:
       <SelectFilterRoom {...roomProps} />
+      Período esperado:
       <SelectFilterExpectedSemester {...expectedSemesterProps} />
     </div>
   );
@@ -101,6 +100,8 @@ function VisualizacaoCC() {
 
   useEffect(() => {
     let filteringClasses = splittedCurrentClasses;
+    filteringClasses = filterYear(filteringClasses, ano);
+    filteringClasses = filterSemester(filteringClasses, semestre);
     filteringClasses = filterProfessor(filteringClasses, professor);
     filteringClasses = filterRoom(filteringClasses, room);
     filteringClasses = filterExpectedSemester(
@@ -155,11 +156,11 @@ function VisualizacaoCC() {
 
     function Body() {
       function Linha({ hora }) {
-        let turmasDaHora = getTurmasDaHora(curClasses, hora);
+        let turmasDaHora = filterHour(curClasses, hora);
         // console.log("turmasDaHora", turmasDaHora);
         // console.log("hora", hora);
         let colunasDosDias = options.constantValues.days.map((dia) => {
-          let turmasDoDia = getTurmasDoDia(turmasDaHora, dia.value);
+          let turmasDoDia = filterDay(turmasDaHora, dia.value);
 
           function CellContent({ turmas }) {
             function getCellMessage(turma) {

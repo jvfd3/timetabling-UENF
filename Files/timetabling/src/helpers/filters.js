@@ -34,6 +34,48 @@ function generalFilter(originData, originPropArray, propValueToFind) {
   return filteredData;
 }
 
+function filterHour(classes, hour) {
+  let filteredClasses = classes;
+  if (hour) {
+    filteredClasses = generalFilter(classes, ["horaInicio"], hour);
+  }
+  // console.log("hour", hour);
+  // console.log("hourClasses", filteredClasses);
+  return filteredClasses;
+}
+
+function filterDay(classes, day) {
+  let filteredClasses = classes;
+  if (day) {
+    filteredClasses = generalFilter(classes, ["dia"], day);
+  }
+  // console.log("day", day);
+  // console.log("dayClasses", filteredClasses);
+  return filteredClasses;
+}
+
+function filterYear(classes, year) {
+  let filteredClasses = classes;
+  if (year) {
+    filteredClasses = generalFilter(classes, ["ano"], year?.value);
+  }
+  // console.log("year", year);
+  // console.log("yearClasses", yearClasses);
+  // console.log("yearClasses", filteredClasses);
+  return filteredClasses;
+}
+
+function filterSemester(classes, semester) {
+  let filteredClasses = classes;
+  if (semester) {
+    filteredClasses = generalFilter(classes, ["semestre"], semester?.value);
+  }
+  // console.log("semester", semester);
+  // console.log("semesterClasses", semesterClasses);
+  // console.log("semesterClasses", filteredClasses);
+  return filteredClasses;
+}
+
 function filterProfessor(classes, professor) {
   let filteredClasses = classes;
   if (professor) {
@@ -78,6 +120,10 @@ function filterExpectedSemester(classes, expectedSemester) {
 }
 
 export {
+  filterYear,
+  filterSemester,
+  filterHour,
+  filterDay,
   filterProfessor,
   filterRoom,
   filterExpectedSemester,
