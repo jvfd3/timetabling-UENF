@@ -212,8 +212,10 @@ function SelectSala({ lTurma, setLTurma, indexHorario }) {
     setLTurma(novaTurma);
   }
 
+  const [isLocked, setIsLocked] = useState(false);
+
   return (
-    <Select
+    <LockableSelect
       className="mySelectList"
       styles={styleWidthFix}
       isClearable={true}
@@ -231,6 +233,11 @@ function SelectSala({ lTurma, setLTurma, indexHorario }) {
         msg += bloco ? ` ${bloco}` : "(Bloco indef.)";
         msg += codigo ? ` - ${codigo}` : " (Cod. indef.)";
         return context === "value" ? msg : msg;
+      }}
+      lockStates={{
+        isLocked: isLocked,
+        setIsLocked: setIsLocked,
+        title: "Fixar sala",
       }}
     />
   );
