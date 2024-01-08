@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import options from "../DB/local/options";
 import { allLocalJsonData } from "../DB/local/dataFromJSON";
-import Select from "react-select";
+import Select, { components } from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { updateProfessorFromList } from "../helpers/auxFunctions";
 import "./mySelects.css";
+import { LockedProp, UnlockedProp } from "./Buttons/Dumb/Dumb";
 
 let styleWidthFix = options.SelectStyles.fullItem;
 
@@ -320,6 +321,88 @@ function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
   );
 }
 
+function LockableSelect(extProps) {
+  const {
+    placeholder,
+    options,
+    value,
+    onChange,
+    getOptionValue,
+    getOptionLabel,
+    formatOptionLabel,
+    lockStates,
+  } = extProps;
+
+  let { isLocked, setIsLocked, title } = lockStates;
+
+  function LockSelect() {
+    function toggleLock() {
+      setIsLocked(!isLocked);
+    }
+
+    return (
+      <div
+        onClick={toggleLock}
+        style={{ pointerEvents: "auto", color: isLocked ? "red" : "green" }}
+      >
+        {isLocked ? <LockedProp text={title} /> : <UnlockedProp text={title} />}
+      </div>
+    );
+  }
+
+  function LockableDropdown(props) {
+    return (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <components.DropdownIndicator {...props} />
+        <LockSelect {...lockStates} />
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ backgroundColor: "white", display: "flex" }}>
+      <Select
+        placeholder={placeholder}
+        options={options}
+        value={value}
+        onChange={onChange}
+        getOptionValue={getOptionValue}
+        getOptionLabel={getOptionLabel}
+        className="mySelectList"
+        styles={styleWidthFix}
+        isDisabled={isLocked}
+        isClearable={true}
+        components={{ DropdownIndicator: LockableDropdown }}
+        formatOptionLabel={formatOptionLabel}
+      />
+    </div>
+  );
+}
+
+function SelectTesting({}) {
+  let dummyOptions = allLocalJsonData.SQL.professores;
+  const [dummySelectedValue, setDummySelectedValue] = useState(dummyOptions[0]);
+  const [isLocked, setIsLocked] = useState(true);
+  let lockStates = {
+    isLocked,
+    setIsLocked,
+    title: "Testando select deletável",
+  };
+
+  let lockableSelectProps = {
+    placeholder: "Testando",
+    options: dummyOptions,
+    value: dummySelectedValue,
+    onChange: setDummySelectedValue,
+    getOptionValue: (option) => option.nome,
+    getOptionLabel: ({ nome }) => nome,
+    formatOptionLabel: ({ nome }) => nome,
+    lockStates,
+  };
+
+  return <LockableSelect {...lockableSelectProps} />;
+}
+
 /* /\ /\ /\ /\ /\ /\ /\ /\ MULTITURMAS /\ /\ /\ /\ /\ /\ /\ /\ */
 
 /* \/ \/ \/ \/ \/ \/ \/ \/ Item Selections \/ \/ \/ \/ \/ \/ \/ \/ */
@@ -557,6 +640,123 @@ function SelectCurso(professorStates) {
 
 /* /\ /\ /\ /\ /\ /\ /\ /\ Página Professores /\ /\ /\ /\ /\ /\ /\ /\ */
 
+function SelectFilterAno(outerAnoStates) {
+  let years = options.constantValues.years;
+  const { ano, setAno } = outerAnoStates;
+
+  return (
+    <Select
+      placeholder="Filtro Ano"
+      className="mySelectList"
+      styles={styleWidthFix}
+      // isClearable
+      options={years}
+      value={ano}
+      onChange={setAno}
+      getOptionValue={(option) => option.value}
+      getOptionLabel={(option) => option.label}
+      // formatOptionLabel={(option) => `${option.value}`}
+    />
+  );
+}
+
+function SelectFilterSemester(outerSemesterStates) {
+  let semesters = options.constantValues.semesters;
+  const { semestre, setSemestre } = outerSemesterStates;
+
+  return (
+    <Select
+      placeholder="Filtro Semestre"
+      className="mySelectList"
+      styles={styleWidthFix}
+      // isClearable
+      options={semesters}
+      value={semestre}
+      onChange={setSemestre}
+      getOptionValue={(option) => option.value}
+      getOptionLabel={(option) => option.label}
+      // formatOptionLabel={(option) => `${option.label}`}
+    />
+  );
+}
+
+function SelectFilterProfessor(outerProfessorStates) {
+  const { professor, setProfessor } = outerProfessorStates;
+  let professors = allLocalJsonData.SQL.professores;
+
+  return (
+    <Select
+      placeholder="Filtro Professor"
+      className="mySelectList"
+      styles={styleWidthFix}
+      isClearable
+      options={professors}
+      value={professor}
+      onChange={setProfessor}
+      getOptionValue={(option) => option.nome}
+      getOptionLabel={({ nome, apelido, laboratorio, curso }) =>
+        `${nome} - ${apelido} - ${laboratorio} - ${curso}`
+      }
+      formatOptionLabel={({ apelido, nome }, { context }) => {
+        return context === "value" ? `${apelido}` : `${nome}`;
+      }}
+    />
+  );
+}
+
+function SelectFilterRoom(outerRoomStates) {
+  const { room, setRoom } = outerRoomStates;
+  let rooms = allLocalJsonData.SQL.salas;
+
+  return (
+    <Select
+      placeholder="Filtro Sala"
+      className="mySelectList"
+      styles={styleWidthFix}
+      isClearable
+      options={rooms}
+      value={room}
+      onChange={setRoom}
+      getOptionValue={({ bloco, codigo }) => `${bloco} - ${codigo}`}
+      getOptionLabel={({ capacidade, bloco, codigo }) =>
+        `${capacidade} - ${bloco} - ${codigo}`
+      }
+      formatOptionLabel={({ capacidade, bloco, codigo }, { context }) => {
+        let msg = "";
+        msg += capacidade ? `(${capacidade})` : "(Cap. indef.)";
+        msg += bloco ? ` ${bloco}` : "(Bloco indef.)";
+        msg += codigo ? ` - ${codigo}` : " (Cod. indef.)";
+        return context === "value" ? msg : msg;
+      }}
+    />
+  );
+}
+
+function SelectFilterExpectedSemester(outerExpectedSemesterStates) {
+  const { expectedSemester, setExpectedSemester } = outerExpectedSemesterStates;
+  let expectedSemesters = options.constantValues.expectedSemester;
+
+  return (
+    <Select
+      placeholder="Filtro Período"
+      className="mySelectList"
+      styles={styleWidthFix}
+      isClearable
+      options={expectedSemesters}
+      value={expectedSemester}
+      onChange={setExpectedSemester}
+      formatOptionLabel={({ value, label }, { context }) => {
+        let message = "";
+        message += value;
+        message += "º Período";
+        return context === "value" ? `${message}` : `${message}`;
+      }}
+    />
+  );
+}
+
+/* /\ /\ /\ /\ /\ /\ /\ /\ CCTurma filtering Selects /\ /\ /\ /\ /\ /\ /\ /\ */
+
 function SelectAnoTurma({ lTurma, setLTurma }) {
   let anos = options.constantValues.years;
   let anoSelecionado = anos.find((ano) => ano.value === parseInt(lTurma.ano));
@@ -721,6 +921,7 @@ export {
   SelectSemestre,
   SelectProfessor,
   SelectDisciplina,
+  SelectTesting,
   /* MTT: Horario */
   SelectSala,
   SelectDia,
@@ -732,6 +933,12 @@ export {
   ProfessorItemSelection,
   SalaItemSelection,
   TurmaItemSelection,
+  /* CCTurma */
+  SelectFilterAno,
+  SelectFilterSemester,
+  SelectFilterProfessor,
+  SelectFilterRoom,
+  SelectFilterExpectedSemester,
   /* Outros */
   SelectPeriodoEsperado,
   SelectCurso,
