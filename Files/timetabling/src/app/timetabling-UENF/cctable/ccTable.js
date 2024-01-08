@@ -1,46 +1,132 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import {
   // getApelidoDisciplina,
   // getApelidoProfessor,
-  getFullHorarios,
+  // getFullHorarios,
   // getPeriodoEsperado,
   getTurmasDaHora,
   getTurmasDoAnoSemestre,
   getTurmasDoDia,
 } from "../../../helpers/auxFunctions";
-import { SelectAnoSemestre } from "../../../components/mySelects";
+import {
+  SelectAnoSemestre,
+  SelectFilterAno,
+  SelectFilterExpectedSemester,
+  SelectFilterProfessor,
+  SelectFilterRoom,
+  SelectFilterSemester,
+} from "../../../components/mySelects";
 import "./ccTable.css";
 import { getTurmasData } from "../../../DB/retrieveData";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
+import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
+import {
+  filterExpectedSemester,
+  filterProfessor,
+  filterRoom,
+} from "../../../helpers/filters";
 
-function VisualizacaoCC() {
-  let semesters = options.constantValues.semesters;
-  let years = options.constantValues.years;
-  const [ano, setAno] = useState(years[10]);
-  const [semestre, setSemestre] = useState(semesters[0]);
-
+function FilteringSelects(filterProps) {
+  let {
+    ano,
+    setAno,
+    semestre,
+    setSemestre,
+    professor,
+    setProfessor,
+    room,
+    setRoom,
+    expectedSemester,
+    setExpectedSemester,
+  } = filterProps;
   let myTimeStates = {
     ano,
     setAno,
     semestre,
     setSemestre,
   };
+  let anoProps = {
+    ano,
+    setAno,
+  };
+  let semestreProps = {
+    semestre,
+    setSemestre,
+  };
+  let professorProps = {
+    professor,
+    setProfessor,
+  };
+  let roomProps = {
+    room,
+    setRoom,
+  };
+  let expectedSemesterProps = {
+    expectedSemester,
+    setExpectedSemester,
+  };
+  return (
+    <div className="filterHeader">
+      <SelectAnoSemestre {...myTimeStates} />
+      <SelectFilterAno {...anoProps} />
+      <SelectFilterSemester {...semestreProps} />
+      <SelectFilterProfessor {...professorProps} />
+      <SelectFilterRoom {...roomProps} />
+      <SelectFilterExpectedSemester {...expectedSemesterProps} />
+    </div>
+  );
+}
+
+function VisualizacaoCC() {
+  let years = options.constantValues.years;
+  let semesters = options.constantValues.semesters;
+  const [ano, setAno] = useState(years[10]);
+  const [semestre, setSemestre] = useState(semesters[0]);
+  const [professor, setProfessor] = useState(null);
+  const [room, setRoom] = useState(null);
+  const [expectedSemester, setExpectedSemester] = useState(null);
 
   let turmas = getTurmasData();
 
-  let TurmasDoSemestre = getTurmasDoAnoSemestre(
-    turmas,
-    ano.value,
-    semestre.value
-  );
+  let splittedCurrentClasses = splitTurmas(turmas);
+  // let TurmasDoSemestre = getTurmasDoAnoSemestre(
+  //   turmas,
+  //   ano.value,
+  //   semestre.value
+  // );
 
-  let splittedCurrentClasses = splitTurmas(TurmasDoSemestre);
+  const [currentClasses, setCurrentClasses] = useState(splittedCurrentClasses);
 
-  // console.log("TurmasDoSemestre", TurmasDoSemestre);
+  useEffect(() => {
+    let filteringClasses = splittedCurrentClasses;
+    filteringClasses = filterProfessor(filteringClasses, professor);
+    filteringClasses = filterRoom(filteringClasses, room);
+    filteringClasses = filterExpectedSemester(
+      filteringClasses,
+      expectedSemester
+    );
+    setCurrentClasses(filteringClasses);
+  }, [ano, semestre, professor, room, expectedSemester]);
 
-  function TabelaCC() {
+  const filterProps = {
+    ano,
+    setAno,
+    semestre,
+    setSemestre,
+    professor,
+    setProfessor,
+    room,
+    setRoom,
+    expectedSemester,
+    setExpectedSemester,
+  };
+  // filterProfessor(splittedCurrentClasses, tempprofessor);
+  // filterRoom(splittedCurrentClasses, room);
+  filterExpectedSemester(splittedCurrentClasses, expectedSemester);
+
+  function TabelaCC({ curClasses }) {
     function Header() {
       function TopLeft() {
         return <th className="TopLeftCorner"></th>;
@@ -69,7 +155,7 @@ function VisualizacaoCC() {
 
     function Body() {
       function Linha({ hora }) {
-        let turmasDaHora = getTurmasDaHora(splittedCurrentClasses, hora);
+        let turmasDaHora = getTurmasDaHora(curClasses, hora);
         // console.log("turmasDaHora", turmasDaHora);
         // console.log("hora", hora);
         let colunasDosDias = options.constantValues.days.map((dia) => {
@@ -161,8 +247,8 @@ function VisualizacaoCC() {
   return (
     <div className="CRUDContainComponents">
       <div className="infoCard">
-        <SelectAnoSemestre {...myTimeStates} />
-        <TabelaCC />
+        <FilteringSelects {...filterProps} />
+        <TabelaCC curClasses={currentClasses} />
       </div>
     </div>
   );

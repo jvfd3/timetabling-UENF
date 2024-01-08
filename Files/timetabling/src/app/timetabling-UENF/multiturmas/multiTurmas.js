@@ -535,8 +535,12 @@ function NotOfferedSubjects(props) {
 }
 
 function Turmas() {
-  const [ano, setAno] = useState(options.constantValues.years[13]);
+  const [ano, setAno] = useState(options.constantValues.years[14]);
   const [semestre, setSemestre] = useState(options.constantValues.semesters[0]);
+  const [professor, setProfessor] = useState(null);
+  const [disciplina, setDisciplina] = useState(null);
+  const [sala, setSala] = useState(null);
+  /* Filters States */
 
   let unifiedHorarios = getTurmasData();
 
