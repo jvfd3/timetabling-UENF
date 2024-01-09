@@ -92,24 +92,31 @@ function Turmas() {
               </th>
               <th>Dia</th>
               <th>Hora de início</th>
-              <th>Duração</th>
               <th>Sala</th>
+              <th>Duração</th>
             </tr>
           </thead>
           <tbody>
             {turma.horarios.map((horario, index) => {
-              let smartDeleteProps = {
-                turma: turma,
-                setTurma: setTurma,
-                horaIndex: index,
-              };
               return (
                 <tr key={`Linha Horário: ${horario.idHorario}-${index}`}>
                   <td>
-                    <SmartDeleteHora {...smartDeleteProps} />
+                    <SmartDeleteHora
+                      turma={turma}
+                      setTurma={setTurma}
+                      idHorario={horario.idHorario}
+                      // {...smartDeleteProps}
+                    />
                   </td>
                   <td>
                     <SelectDia
+                      lTurma={turma}
+                      setLTurma={setTurma}
+                      indexHorario={index}
+                    />
+                  </td>
+                  <td>
+                    <SelectSala
                       lTurma={turma}
                       setLTurma={setTurma}
                       indexHorario={index}
@@ -124,13 +131,6 @@ function Turmas() {
                   </td>
                   <td>
                     <SelectDuracao
-                      lTurma={turma}
-                      setLTurma={setTurma}
-                      indexHorario={index}
-                    />
-                  </td>
-                  <td>
-                    <SelectSala
                       lTurma={turma}
                       setLTurma={setTurma}
                       indexHorario={index}
