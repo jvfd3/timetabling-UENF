@@ -25,10 +25,10 @@ function safeReadProfessores(professorStates) {
     professorStates;
   readProfessores()
     .then((professoresFromDB) => {
-      console.log("professoresFromDB", professoresFromDB);
+      // console.log("professoresFromDB", professoresFromDB);
       setProfessores(professoresFromDB);
       let lastProfessor = professoresFromDB[professoresFromDB.length - 1];
-      console.log("lastProfessor", lastProfessor);
+      // console.log("lastProfessor", lastProfessor);
       setProfessor(lastProfessor);
     })
     .catch((error) => console.error(error));
@@ -47,15 +47,15 @@ function safeUpdateProfessores(professorStates) {
   }
   updateProfessores(professor)
     .then((newProfessor) => {
-      console.log("professores", professores[professores.length - 2]);
+      // console.log("professores", professores[professores.length - 2]);
       const updatedProfessores = updateProfessorFromList(
         professores,
         newProfessor
       );
-      console.log(
-        "updatedProfessores",
-        updatedProfessores[updatedProfessores.length - 2]
-      );
+      // console.log(
+      //   "updatedProfessores",
+      //   updatedProfessores[updatedProfessores.length - 2]
+      // );
       setProfessores(updatedProfessores);
     })
     .catch((error) => {
