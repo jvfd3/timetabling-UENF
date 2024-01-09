@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import {
@@ -21,150 +21,165 @@ import {
   SmartCreateHora,
   SmartDeleteHora,
 } from "../../../components/Buttons/Smart/Smart";
+import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
+
+
+function TurmaSelection(myTurmaStates) {
+  /* It just contains the selection an maybe allows scrolling selection */
+  return (
+    <div
+      className="SelectionBar"
+      onWheel={(event) => {
+        // let itemStates = [turmas, setTurma, turma];
+        // scrollThroughTurmas(event, itemStates);
+      }}
+    >
+      <TurmaItemSelection {...myTurmaStates} />
+    </div>
+  );
+}
+
+function DadosTurma(myTurmaStates) {
+  const { turma, setTurma, /* turmas, setTurmas  */} = myTurmaStates;
+  return (
+    <div className="showBasicDataCard">
+      <h3>INFORMAÇÕES DA TURMA</h3>
+      <table className="showBasicDataTable">
+        <thead></thead>
+        <tbody>
+          <tr>
+            <th>Ano/Semestre</th>
+            <td>
+              <div className="SelectAnoSemestre">
+                <SelectAnoTurma lTurma={turma} setLTurma={setTurma} />
+                <SelectSemestreTurma lTurma={turma} setLTurma={setTurma} />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>Disciplina</th>
+            <td>
+              <SelectDisciplina lTurma={turma} setLTurma={setTurma} />
+            </td>
+          </tr>
+          <tr>
+            <th>Professor</th>
+            <td>
+              <SelectProfessor lTurma={turma} setLTurma={setTurma} />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function HorariosTurma(myStates) {
+  const { myTurmaStates, indexes } = myStates;
+  const { turma, setTurma, turmas, setTurmas } = myTurmaStates;
+  const { /* classIndex, */ classTimeIndex } = indexes;
+  let quantidadeHorarios = turma.horarios.length;
+  // console.log("quantidadeHorarios", quantidadeHorarios);
+  let createClassTimeStates = {turmas, setTurmas, rowTurma:turma, setRowTurma:setTurma, classTimeIndex}
+
+  return (
+    <div className="showBasicDataCard">
+      <h3>
+        {quantidadeHorarios > 0 ? "" : "Sem "}
+        Horários
+      </h3>
+      {quantidadeHorarios > 0 ? (
+        <HorariosTable {...myStates} createClassTimeStates={createClassTimeStates} />
+      ) : (
+        <SmartCreateHora {...createClassTimeStates} />
+      )}
+    </div>
+  );
+}
+
+function HorariosTable(myStates) {
+  const { myTurmaStates, createClassTimeStates } = myStates;
+  const { turma, setTurma } = myTurmaStates;
+  return (
+    <table className="showBasicDataTable">
+      <thead>
+        <tr>
+          <th>
+            <SmartCreateHora {...createClassTimeStates} />
+          </th>
+          <th>Dia</th>
+          <th>Hora de início</th>
+          <th>Sala</th>
+          <th>Duração</th>
+        </tr>
+      </thead>
+      <tbody>
+        {turma.horarios.map((horario, index) => {
+          return (
+            <tr key={`Linha Horário: ${horario.idHorario}-${index}`}>
+              <td>
+                <SmartDeleteHora
+                  turma={turma}
+                  setTurma={setTurma}
+                  idHorario={horario.idHorario}
+                  // {...smartDeleteProps}
+                />
+              </td>
+              <td>
+                <SelectDia
+                  lTurma={turma}
+                  setLTurma={setTurma}
+                  indexHorario={index}
+                />
+              </td>
+              <td>
+                <SelectSala
+                  lTurma={turma}
+                  setLTurma={setTurma}
+                  indexHorario={index}
+                />
+              </td>
+              <td>
+                <SelectHoraTang
+                  lTurma={turma}
+                  setLTurma={setTurma}
+                  indexHorario={index}
+                />
+              </td>
+              <td>
+                <SelectDuracao
+                  lTurma={turma}
+                  setLTurma={setTurma}
+                  indexHorario={index}
+                />
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
+}
 
 function Turmas() {
-  let allTurmas = getFullHorarios();
-  // let unifiedHorarios = splittedToUnified2(allTurmas);
-  const [turmas, setTurmas] = useState(allTurmas);
+  const classIndex = useRef(allLocalJsonData.SQL.turmas.length);
+  const classTimeIndex = useRef(allLocalJsonData.SQL.horarios.length);
+
+  let unifiedHorarios = getFullHorarios();
+
+  const [turmas, setTurmas] = useState(unifiedHorarios);
   const [turma, setTurma] = useState(turmas[0]);
 
+  let indexes = { classIndex, classTimeIndex };
   let myTurmaStates = { turmas, setTurmas, turma, setTurma };
-
-  function TurmaSelection(myTurmaStates) {
-    return (
-      <div
-        className="SelectionBar"
-        onWheel={(event) => {
-          // let itemStates = [turmas, setTurma, turma];
-          // scrollThroughTurmas(event, itemStates);
-        }}
-      >
-        <TurmaItemSelection {...myTurmaStates} />
-      </div>
-    );
-  }
-
-  function DadosTurma({ turma, setTurma }) {
-    return (
-      <div className="showBasicDataCard">
-        <h3>INFORMAÇÕES DA TURMA</h3>
-        <table className="showBasicDataTable">
-          <thead></thead>
-          <tbody>
-            <tr>
-              <th>Ano/Semestre</th>
-              <td>
-                <div className="SelectAnoSemestre">
-                  <SelectAnoTurma lTurma={turma} setLTurma={setTurma} />
-                  <SelectSemestreTurma lTurma={turma} setLTurma={setTurma} />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th>Disciplina</th>
-              <td>
-                <SelectDisciplina lTurma={turma} setLTurma={setTurma} />
-              </td>
-            </tr>
-            <tr>
-              <th>Professor</th>
-              <td>
-                <SelectProfessor lTurma={turma} setLTurma={setTurma} />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    );
-  }
-
-  function HorariosTurma({ turma, setTurma }) {
-    let quantidadeHorarios = turma.horarios.length;
-    console.log("quantidadeHorarios", quantidadeHorarios);
-    function HorariosTable(turmaProps) {
-      const { turma, setTurma } = turmaProps;
-      return (
-        <table className="showBasicDataTable">
-          <thead>
-            <tr>
-              <th>
-                <SmartCreateHora {...turmaProps} />
-              </th>
-              <th>Dia</th>
-              <th>Hora de início</th>
-              <th>Sala</th>
-              <th>Duração</th>
-            </tr>
-          </thead>
-          <tbody>
-            {turma.horarios.map((horario, index) => {
-              return (
-                <tr key={`Linha Horário: ${horario.idHorario}-${index}`}>
-                  <td>
-                    <SmartDeleteHora
-                      turma={turma}
-                      setTurma={setTurma}
-                      idHorario={horario.idHorario}
-                      // {...smartDeleteProps}
-                    />
-                  </td>
-                  <td>
-                    <SelectDia
-                      lTurma={turma}
-                      setLTurma={setTurma}
-                      indexHorario={index}
-                    />
-                  </td>
-                  <td>
-                    <SelectSala
-                      lTurma={turma}
-                      setLTurma={setTurma}
-                      indexHorario={index}
-                    />
-                  </td>
-                  <td>
-                    <SelectHoraTang
-                      lTurma={turma}
-                      setLTurma={setTurma}
-                      indexHorario={index}
-                    />
-                  </td>
-                  <td>
-                    <SelectDuracao
-                      lTurma={turma}
-                      setLTurma={setTurma}
-                      indexHorario={index}
-                    />
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      );
-    }
-
-    return (
-      <div className="showBasicDataCard">
-        <h3>
-          {quantidadeHorarios > 0 ? "" : "Sem "}
-          Horários
-        </h3>
-        {quantidadeHorarios > 0 ? (
-          <HorariosTable turma={turma} setTurma={setTurma} />
-        ) : (
-          <SmartCreateHora turma={turma} setTurma={setTurma} />
-        )}
-      </div>
-    );
-  }
+  let myStates = { indexes, myTurmaStates };
 
   return (
     <div className="CRUDContainComponents">
       <TurmaSelection {...myTurmaStates} />
       <div className="infoCard">
         <DadosTurma {...myTurmaStates} />
-        <HorariosTurma {...myTurmaStates} />
+        <HorariosTurma {...myStates} />
         {/* <Participants {...myTurmaStates} /> */}
       </div>
     </div>
