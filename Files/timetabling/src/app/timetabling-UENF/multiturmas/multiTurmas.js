@@ -32,8 +32,8 @@ import { getTurmasData } from "../../../DB/retrieveData";
 import { baseTurmaConflicts } from "../../../helpers/conflicts/centralConflicts";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 import { InputDisciplina } from "../../../components/Buttons/Dumb/Dumb";
-import { FilteringSelects } from "../../../components/filteringSelects";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
+// import { FilteringSelects } from "../../../components/filteringSelects";
 
 /* ESTRUTURA DOS COMPONENTES
 - CRUDclass
@@ -347,11 +347,11 @@ function TurmasTable(myProps) {
         {myTurmasProps.turmas.map((lTurma, index) => {
           return (
             <TableRow
-            lTurma={lTurma}
-            myTurmasProps={myTurmasProps}
-            myCurrentSemestreProps={myCurrentSemestreProps}
-            key={`TableRow: ${lTurma.idTurma}-${lTurma.disciplina?.codigoDisciplina}-${lTurma?.professor?.nome}-${index}`}
-          />
+              lTurma={lTurma}
+              myTurmasProps={myTurmasProps}
+              myCurrentSemestreProps={myCurrentSemestreProps}
+              key={`TableRow: ${lTurma.idTurma}-${lTurma.disciplina?.codigoDisciplina}-${lTurma?.professor?.nome}-${index}`}
+            />
           );
         })}
       </tbody>
@@ -559,13 +559,13 @@ function Turmas() {
     ano.value,
     semestre.value
   );
+  
   const [turmas, setTurmas] = useState(filteredTurmas);
   const [turma, setTurma] = useState(filteredTurmas[0]);
 
   let classes = unifiedHorarios;
   let allSplittedClasses = splitTurmas(classes);
   // let newReunitedClasses = splittedToUnified3(allSplittedClasses);
-
 
   useEffect(() => {
     // console.log("ano", ano.value, "semestre", semestre.value);

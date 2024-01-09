@@ -43,6 +43,10 @@ function SmartDeleteTurma({ turmas, setTurmas, turma }) {
 }
 
 function SmartCreateHora(myProps) {
+  /* Should receive these props:
+  const { turmas, setTurmas, rowTurma, setRowTurma, classTimeIndex } = turmasStates;
+  */
+
   let titleText = "Adicionar horário";
   function addHour() {
     createHorario(myProps);
