@@ -88,17 +88,14 @@ function updateClassInClasses(classesData, setClassesData, updatedClassData) {
 }
 
 function deleteHorario(myProps) {
-  const { turma, setTurma, indexHorario } = myProps;
+  const { turma, setTurma, idHorario } = myProps;
   let newTurma = { ...turma };
-  let newHorarios = [...newTurma.horarios];
-  newHorarios.splice(indexHorario, 1);
+  let newHorarios = newTurma.horarios.filter((horario) => {
+    let hasSameId = horario.idHorario === idHorario;
+    return !hasSameId;
+  });
   newTurma.horarios = newHorarios;
-  let newNewTurma = {
-    ...newTurma,
-    horarios: newHorarios,
-  };
-
-  setTurma(newNewTurma);
+  setTurma(newTurma);
 }
 
 export {

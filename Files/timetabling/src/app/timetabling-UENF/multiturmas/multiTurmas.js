@@ -92,7 +92,8 @@ function TableHeader(myProps) {
 
 function HorariosTableRow(myProps) {
   const { turmas, turma, setTurma, horario, indexHorario, conflicts } = myProps;
-
+  // console.log(indexHorario);
+  let currentIdHorario = horario.idHorario;
   let professorConflicts = conflicts.raw.professor.alloc;
   let singleDemandConflicts = conflicts.raw.expectedDemand.singleTurmaCapacity;
   // console.log("singleDemandConflicts", singleDemandConflicts);
@@ -180,13 +181,13 @@ function HorariosTableRow(myProps) {
 
   return (
     <tr
-      key={`HorariosTableRow>tr: ${horario.idHorario}-${horario.ordem}-${indexHorario}`}
+      key={`HorariosTableRow>tr: ${currentIdHorario}-${horario.ordem}-${indexHorario}`}
     >
       <td>
         <SmartDeleteHora
           turma={turma}
           setTurma={setTurma}
-          indexHorario={indexHorario}
+          idHorario={currentIdHorario}
         />
       </td>
       <td {...conflictStyles.classRoom}>
@@ -343,14 +344,16 @@ function TurmasTable(myProps) {
     <table className="showBasicDataTable">
       <TableHeader {...myProps} />
       <tbody>
-        {myTurmasProps.turmas.map((lTurma, index) => (
-          <TableRow
+        {myTurmasProps.turmas.map((lTurma, index) => {
+          return (
+            <TableRow
             lTurma={lTurma}
             myTurmasProps={myTurmasProps}
             myCurrentSemestreProps={myCurrentSemestreProps}
             key={`TableRow: ${lTurma.idTurma}-${lTurma.disciplina?.codigoDisciplina}-${lTurma?.professor?.nome}-${index}`}
           />
-        ))}
+          );
+        })}
       </tbody>
     </table>
   );
