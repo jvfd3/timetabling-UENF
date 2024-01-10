@@ -1,6 +1,60 @@
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 
+/* DEFAULT TEXTINPUT */
+
+function TextInputDefault(myStates) {
+  let { generalStates, specificValues } = myStates;
+  let { /* items, setItems, item, */ setItem } = generalStates;
+  let { mainValue, getNewItemObject, title, isNumeric } = specificValues;
+
+  const [mainProp, setMainProp] = useState(mainValue);
+
+  useEffect(() => {
+    /* this useEffect serves to update internal values when it's changed outside */
+    // console.log(mainValue);
+    setMainProp(mainValue);
+  }, [mainValue]);
+
+  function updateValue(event) {
+    let newValue = event.target.value;
+    if (isNumeric) {
+      newValue = Number(newValue);
+      if (newValue < 0) newValue = 0;
+      if (newValue > 9999) newValue = 9999;
+    }
+    setMainProp(newValue);
+    setItem(getNewItemObject(newValue));
+  }
+
+  let isId = title === "ID";
+  let specificNumericProps = isNumeric
+    ? {
+        type: "number",
+        inputProps: { min: 0, max: 999, step: 1 },
+        inputMode: "numeric",
+        pattern: "[0-9]*",
+      }
+    : {};
+  let specificIDProps = isId ? { disabled: true } : {};
+
+  return (
+    <TextField
+      fullWidth
+      {...specificIDProps}
+      {...specificNumericProps}
+      id={`TextField ID: ${title}`}
+      key={`TextField Key: ${title}`}
+      label={`${title}`}
+      variant="outlined"
+      value={mainProp}
+      onChange={updateValue}
+      style={{ width: "100%" }} // Adicionado para garantir que o TextField preencha todo o conteúdo
+      disabled={isId}
+    />
+  );
+}
+
 /* CRUD PROFESSOR */
 
 function TextInputNomeProfessor(props) {
@@ -323,60 +377,6 @@ function TextInputRoomId(myRoomStates) {
   };
   let idStates = { generalStates, specificValues };
   return <TextInputDefault {...idStates} />;
-}
-
-/* DEFAULT TEXTINPUT */
-
-function TextInputDefault(myStates) {
-  let { generalStates, specificValues } = myStates;
-  let { /* items, setItems, item, */ setItem } = generalStates;
-  let { mainValue, getNewItemObject, title, isNumeric } = specificValues;
-
-  const [mainProp, setMainProp] = useState(mainValue);
-
-  useEffect(() => {
-    /* this useEffect serves to update internal values when it's changed outside */
-    // console.log(mainValue);
-    setMainProp(mainValue);
-  }, [mainValue]);
-
-  function updateValue(event) {
-    let newValue = event.target.value;
-    if (isNumeric) {
-      newValue = Number(newValue);
-      if (newValue < 0) newValue = 0;
-      if (newValue > 9999) newValue = 9999;
-    }
-    setMainProp(newValue);
-    setItem(getNewItemObject(newValue));
-  }
-
-  let isId = title === "ID";
-  let specificNumericProps = isNumeric
-    ? {
-        type: "number",
-        inputProps: { min: 0, max: 999, step: 1 },
-        inputMode: "numeric",
-        pattern: "[0-9]*",
-      }
-    : {};
-  let specificIDProps = isId ? { disabled: true } : {};
-
-  return (
-    <TextField
-      fullWidth
-      {...specificIDProps}
-      {...specificNumericProps}
-      id={`TextField ID: ${title}`}
-      key={`TextField Key: ${title}`}
-      label={`${title}`}
-      variant="outlined"
-      value={mainProp}
-      onChange={updateValue}
-      style={{ width: "100%" }} // Adicionado para garantir que o TextField preencha todo o conteúdo
-      disabled={isId}
-    />
-  );
 }
 
 export {
