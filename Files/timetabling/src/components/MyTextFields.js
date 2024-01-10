@@ -270,7 +270,7 @@ function TextInputStudentId(myStates) {
 function TextInputDefault(myStates) {
   let { generalStates, specificValues } = myStates;
   let { /* items, setItems, item, */ setItem } = generalStates;
-  let { mainValue, getNewItemObject, title } = specificValues;
+  let { mainValue, getNewItemObject, title, isNumeric } = specificValues;
 
   const [mainProp, setMainProp] = useState(mainValue);
 
@@ -282,23 +282,31 @@ function TextInputDefault(myStates) {
 
   function updateValue(event) {
     let newValue = event.target.value;
+    if (isNumeric) {
+      newValue = Number(newValue);
+      if (newValue < 0) newValue = 0;
+      if (newValue > 9999) newValue = 9999;
+    }
     setMainProp(newValue);
     setItem(getNewItemObject(newValue));
   }
 
   let isId = title === "ID";
-  let specificIDProps = isId
+  let specificNumericProps = isNumeric
     ? {
-        disabled: true,
+        type: "number",
+        inputProps: { min: 0, max: 999, step: 1 },
         inputMode: "numeric",
         pattern: "[0-9]*",
       }
     : {};
+  let specificIDProps = isId ? { disabled: true } : {};
 
   return (
     <TextField
       fullWidth
       {...specificIDProps}
+      {...specificNumericProps}
       id={`TextField ID: ${title}`}
       key={`TextField Key: ${title}`}
       label={`${title}`}
@@ -306,7 +314,7 @@ function TextInputDefault(myStates) {
       value={mainProp}
       onChange={updateValue}
       style={{ width: "100%" }} // Adicionado para garantir que o TextField preencha todo o conteúdo
-      disabled={title === "ID"}
+      disabled={isId}
     />
   );
 }
