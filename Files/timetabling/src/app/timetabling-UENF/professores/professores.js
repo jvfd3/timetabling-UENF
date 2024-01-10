@@ -140,7 +140,7 @@ function CRUDprofessors() {
   return (
     <div className="background">
       <CRUDPageSelection
-        defaultValue={options.constantValues.pageSelection.professores}
+        defaultValue={options.constantValues.pageSelection.professors}
       />
       <ProfessoresDB />
     </div>

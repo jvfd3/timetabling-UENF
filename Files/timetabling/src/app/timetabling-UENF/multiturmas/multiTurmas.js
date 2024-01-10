@@ -559,7 +559,7 @@ function Turmas() {
     ano.value,
     semestre.value
   );
-  
+
   const [turmas, setTurmas] = useState(filteredTurmas);
   const [turma, setTurma] = useState(filteredTurmas[0]);
 
@@ -603,7 +603,7 @@ function CRUDclass() {
   return (
     <div className="background">
       <CRUDPageSelection
-        defaultValue={options.constantValues.pageSelection.multiTurmas}
+        defaultValue={options.constantValues.pageSelection.multiClasses}
       />
       <Turmas />
     </div>

@@ -93,7 +93,7 @@ function CRUDstudents() {
   return (
     <div className="background">
       <CRUDPageSelection
-        defaultValue={options.constantValues.pageSelection.alunos}
+        defaultValue={options.constantValues.pageSelection.students}
       />
       <Students />
     </div>

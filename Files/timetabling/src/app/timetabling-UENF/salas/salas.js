@@ -185,7 +185,7 @@ function CRUDrooms() {
   return (
     <div className="background">
       <CRUDPageSelection
-        defaultValue={options.constantValues.pageSelection.salas}
+        defaultValue={options.constantValues.pageSelection.classrooms}
       />
       <Salas />
     </div>

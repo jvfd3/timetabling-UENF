@@ -148,10 +148,11 @@ function VisualizacaoCC() {
 }
 
 function CCTable() {
-  let defaultPage = options.constantValues.pageSelection.CCTable;
   return (
     <div className="background">
-      <CRUDPageSelection defaultValue={defaultPage} />
+      <CRUDPageSelection
+        defaultValue={options.constantValues.pageSelection.CCTable}
+      />
       <VisualizacaoCC />
     </div>
   );

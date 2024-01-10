@@ -105,7 +105,7 @@ function CRUDDisciplinas() {
   return (
     <div className="background">
       <CRUDPageSelection
-        defaultValue={options.constantValues.pageSelection.disciplinas}
+        defaultValue={options.constantValues.pageSelection.subjects}
       />
       <Disciplinas />
     </div>

@@ -21,14 +21,17 @@ function MyRouting() {
   let basePath = options.constantValues.routing.urlPath; //"/timetabling-uenf/";
   let mainPath = basePath + options.constantValues.pageSelection.main.value;
   let multiTurmasPath =
-    basePath + options.constantValues.pageSelection.multiTurmas.value;
-  let turmasPath = basePath + options.constantValues.pageSelection.turmas.value;
-  let alunosPath = basePath + options.constantValues.pageSelection.alunos.value;
+    basePath + options.constantValues.pageSelection.multiClasses.value;
+  let turmasPath =
+    basePath + options.constantValues.pageSelection.classes.value;
+  let alunosPath =
+    basePath + options.constantValues.pageSelection.students.value;
   let professoresPath =
-    basePath + options.constantValues.pageSelection.professores.value;
+    basePath + options.constantValues.pageSelection.professors.value;
   let disciplinasPath =
-    basePath + options.constantValues.pageSelection.disciplinas.value;
-  let salasPath = basePath + options.constantValues.pageSelection.salas.value;
+    basePath + options.constantValues.pageSelection.subjects.value;
+  let salasPath =
+    basePath + options.constantValues.pageSelection.classrooms.value;
   let notFoundPath =
     basePath + options.constantValues.pageSelection.notFound.value;
   let ccTablePath =
