@@ -4,9 +4,16 @@ import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 import "./salas.css";
-import { ItemSelectionRoom, SelectRoomBlock } from "../../../components/mySelects";
+import {
+  ItemSelectionRoom,
+  SelectRoomBlock,
+} from "../../../components/mySelects";
 import { getTurmasData } from "../../../DB/retrieveData";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
+import {
+  TextInputRoomCapacity,
+  TextInputRoomCode,
+} from "../../../components/MyTextFields";
 
 function SalaSelection(mySalasStates) {
   return (
@@ -33,21 +40,33 @@ function InformacoesBaseDaSala(mySalasStates) {
         <tbody>
           <tr>
             <th>Bloco</th>
-            <td><SelectRoomBlock  {...mySalasStates} /></td>
+            <td>
+              <SelectRoomBlock {...mySalasStates} />
+            </td>
             {/* For debug purposes */}
             {/* <td>{bloco}</td> */}
           </tr>
           <tr>
             <th>Descrição</th>
+            {/* <td>{descricao}</td> */}
             <td>{descricao}</td>
           </tr>
           <tr>
             <th>Código</th>
-            <td>{codigo}</td>
+            {/* <td>{codigo}</td> */}
+            <td>
+              <TextInputRoomCode {...mySalasStates} />
+            </td>
+            {/* For debug purposes */}
+            {/* <td>{codigo}</td> */}
           </tr>
           <tr>
             <th>Capacidade</th>
-            <td>{capacidade}</td>
+            <td>
+              <TextInputRoomCapacity {...mySalasStates} />
+            </td>
+            {/* For debug purposes */}
+            {/* <td>{capacidade}</td> */}
           </tr>
           <tr>
             <th>ID</th>
