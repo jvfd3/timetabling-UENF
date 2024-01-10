@@ -4,7 +4,7 @@ import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 import "./salas.css";
-import { SalaItemSelection } from "../../../components/mySelects";
+import { ItemSelectionRoom } from "../../../components/mySelects";
 import { getTurmasData } from "../../../DB/retrieveData";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
 
@@ -17,14 +17,14 @@ function SalaSelection(mySalasStates) {
         // scrollThroughSalas(event, itemStates);
       }}
     >
-      <SalaItemSelection {...mySalasStates} />
+      <ItemSelectionRoom {...mySalasStates} />
     </div>
   );
 }
 
 function InformacoesBaseDaSala(mySalasStates) {
-  const { sala } = mySalasStates;
-  const { id, capacidade, bloco, codigo, descricao } = sala;
+  const { room } = mySalasStates;
+  const { id, capacidade, bloco, codigo, descricao } = room;
   // {"id":  5, "capacidade":  24,  "bloco": "P5",           "codigo": "112",  "descricao": "P5"                                  },
 
   return (
@@ -151,18 +151,18 @@ function SalaCard(mySalasStates) {
   return (
     <div className="infoCard">
       <InformacoesBaseDaSala {...mySalasStates} />
-      <TurmasNaSala {...mySalasStates.sala} />
+      <TurmasNaSala {...mySalasStates.room} />
     </div>
   );
 }
 
 function Salas() {
-  let salasFromJson = allLocalJsonData.SQL.salas;
+  let roomsFromJSON = allLocalJsonData.SQL.salas;
 
-  const [salas, setSalas] = useState(salasFromJson);
-  const [sala, setSala] = useState(salasFromJson[3]);
+  const [rooms, setRooms] = useState(roomsFromJSON);
+  const [room, setRoom] = useState(roomsFromJSON[3]);
 
-  let mySalasStates = { salas, setSalas, sala, setSala };
+  let mySalasStates = { rooms, setRooms, room, setRoom };
 
   return (
     <div className="CRUDContainComponents">

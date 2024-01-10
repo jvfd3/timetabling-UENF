@@ -621,16 +621,16 @@ function ProfessorItemSelection(professorStates) {
   );
 }
 
-function SalaItemSelection(mySalasStates) {
-  const { salas, setSalas, sala, setSala } = mySalasStates;
+function ItemSelectionRoom(mySalasStates) {
+  const { rooms, setRooms, room, setRoom } = mySalasStates;
   return (
     <Select
       className="itemSelectionBar"
       styles={styleWidthFix}
       isClearable={false}
-      onChange={setSala}
-      options={salas}
-      value={sala}
+      onChange={setRoom}
+      options={rooms}
+      value={room}
       getOptionValue={(option) => option.id}
       getOptionLabel={(option) => option.capacidade}
       formatOptionLabel={(sala) =>
@@ -1109,7 +1109,7 @@ export {
   StudentSelection,
   DisciplinasSelection,
   ProfessorItemSelection,
-  SalaItemSelection,
+  ItemSelectionRoom,
   TurmaItemSelection,
   /* CCTurma */
   SelectFilterAno,
