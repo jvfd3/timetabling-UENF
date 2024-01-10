@@ -306,6 +306,25 @@ function TextInputRoomCode(myRoomStates) {
   return <TextInputDefault {...codeStates} />;
 }
 
+function TextInputRoomId(myRoomStates) {
+  let generalStates = {
+    items: myRoomStates.rooms,
+    setItems: myRoomStates.setRooms,
+    item: myRoomStates.room,
+    setItem: myRoomStates.setRoom,
+  };
+  let specificValues = {
+    mainValue: myRoomStates.room.id,
+    getNewItemObject: (newValue) => {
+      return { ...myRoomStates.room, id: newValue };
+    },
+    title: "ID",
+    isNumeric: true,
+  };
+  let idStates = { generalStates, specificValues };
+  return <TextInputDefault {...idStates} />;
+}
+
 /* DEFAULT TEXTINPUT */
 
 function TextInputDefault(myStates) {
@@ -375,6 +394,7 @@ export {
   TextInputStudentMatricula,
   TextInputStudentName,
   TextInputStudentId,
+  TextInputRoomId,
   /* \ Room / */
   TextInputRoomCapacity,
   TextInputRoomCode,
