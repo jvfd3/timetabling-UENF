@@ -50,7 +50,9 @@
 .ContentCell {
     border: 1px solid #000;
     /* Adicione a propriedade de borda conforme necessário */
-    padding: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 5px;
     vertical-align: top;
 }
 
