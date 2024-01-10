@@ -209,7 +209,9 @@ function TextInputIdDisciplina(myDisciplinasStates) {
   );
 }
 
-/* CRUD Aluno */
+/* \\\ CRUD /// */
+
+/* \\ Student // */
 
 function TextInputStudentMatricula(myStates) {
   let generalStates = {
@@ -265,7 +267,10 @@ function TextInputStudentId(myStates) {
   return <TextInputDefault {...idStates} />;
 }
 
-/* Default TextInput */
+/* \\ Room // */
+
+
+/* DEFAULT TEXTINPUT */
 
 function TextInputDefault(myStates) {
   let { generalStates, specificValues } = myStates;
@@ -324,13 +329,15 @@ export {
   TextInputIdProfessor,
   TextInputApelidoProfessor,
   NumberInputDemandaEstimada,
-  /* CRUD Disciplina */
+  /* \\ CRUD // */
+  /* \ Subjects / */
   TextInputCodigoDisciplina,
   TextInputNomeDisciplina,
   TextInputApelidoDisciplina,
   TextInputIdDisciplina,
-  /* CRUD Student */
+  /* \ Student / */
   TextInputStudentMatricula,
   TextInputStudentName,
   TextInputStudentId,
+  /* \ Room / */
 };
