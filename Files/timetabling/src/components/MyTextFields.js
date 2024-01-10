@@ -330,7 +330,7 @@ function TextInputStudentId(myStates) {
 
 /* \ Room / */
 
-function TextInputRoomCapacity(myRoomStates) {
+function TextInputRoomDescription(myRoomStates) {
   let generalStates = {
     items: myRoomStates.rooms,
     setItems: myRoomStates.setRooms,
@@ -338,15 +338,14 @@ function TextInputRoomCapacity(myRoomStates) {
     setItem: myRoomStates.setRoom,
   };
   let specificValues = {
-    mainValue: myRoomStates.room.capacidade,
+    mainValue: myRoomStates.room.descricao,
     getNewItemObject: (newValue) => {
-      return { ...myRoomStates.room, capacidade: newValue };
+      return { ...myRoomStates.room, descricao: newValue };
     },
-    title: "Capacidade",
-    isNumeric: true,
+    title: "Descrição",
   };
-  let capacityStates = { generalStates, specificValues };
-  return <TextInputDefault {...capacityStates} />;
+  let descriptionStates = { generalStates, specificValues };
+  return <TextInputDefault {...descriptionStates} />;
 }
 
 function TextInputRoomCode(myRoomStates) {
@@ -365,6 +364,25 @@ function TextInputRoomCode(myRoomStates) {
   };
   let codeStates = { generalStates, specificValues };
   return <TextInputDefault {...codeStates} />;
+}
+
+function TextInputRoomCapacity(myRoomStates) {
+  let generalStates = {
+    items: myRoomStates.rooms,
+    setItems: myRoomStates.setRooms,
+    item: myRoomStates.room,
+    setItem: myRoomStates.setRoom,
+  };
+  let specificValues = {
+    mainValue: myRoomStates.room.capacidade,
+    getNewItemObject: (newValue) => {
+      return { ...myRoomStates.room, capacidade: newValue };
+    },
+    title: "Capacidade",
+    isNumeric: true,
+  };
+  let capacityStates = { generalStates, specificValues };
+  return <TextInputDefault {...capacityStates} />;
 }
 
 function TextInputRoomId(myRoomStates) {
@@ -403,6 +421,7 @@ export {
   TextInputStudentName,
   TextInputStudentId,
   /* \ Room / */
+  TextInputRoomDescription,
   TextInputRoomCode,
   TextInputRoomCapacity,
   TextInputRoomId,

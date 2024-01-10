@@ -13,6 +13,7 @@ import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctio
 import {
   TextInputRoomCapacity,
   TextInputRoomCode,
+  TextInputRoomDescription,
   TextInputRoomId,
 } from "../../../components/MyTextFields";
 
@@ -49,8 +50,11 @@ function InformacoesBaseDaSala(mySalasStates) {
           </tr>
           <tr>
             <th>Descrição</th>
+            <td>
+              <TextInputRoomDescription {...mySalasStates} />
+            </td>
+            {/* For debug purposes */}
             {/* <td>{descricao}</td> */}
-            <td>{descricao}</td>
           </tr>
           <tr>
             <th>Código</th>
