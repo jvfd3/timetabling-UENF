@@ -147,20 +147,11 @@ function TurmasNaSala(lSala) {
   );
 }
 
-function OcupacaoNaSala() {
-  return (
-    <div className="showBasicDataCard">
-      {/* <img className="CRUD-room-placeholderimg" src={assets.room} alt="" /> */}
-    </div>
-  );
-}
-
 function SalaCard(mySalasStates) {
   return (
     <div className="infoCard">
       <InformacoesBaseDaSala {...mySalasStates} />
       <TurmasNaSala {...mySalasStates.sala} />
-      {/* <OcupacaoNaSala /> */}
     </div>
   );
 }
