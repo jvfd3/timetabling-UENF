@@ -23,7 +23,6 @@ import {
 } from "../../../components/Buttons/Smart/Smart";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 
-
 function TurmaSelection(myTurmaStates) {
   /* It just contains the selection an maybe allows scrolling selection */
   return (
@@ -40,7 +39,7 @@ function TurmaSelection(myTurmaStates) {
 }
 
 function DadosTurma(myTurmaStates) {
-  const { turma, setTurma, /* turmas, setTurmas  */} = myTurmaStates;
+  const { turma, setTurma /* turmas, setTurmas  */ } = myTurmaStates;
   return (
     <div className="showBasicDataCard">
       <h3>INFORMAÇÕES DA TURMA</h3>
@@ -80,7 +79,13 @@ function HorariosTurma(myStates) {
   const { /* classIndex, */ classTimeIndex } = indexes;
   let quantidadeHorarios = turma.horarios.length;
   // console.log("quantidadeHorarios", quantidadeHorarios);
-  let createClassTimeStates = {turmas, setTurmas, rowTurma:turma, setRowTurma:setTurma, classTimeIndex}
+  let createClassTimeStates = {
+    turmas,
+    setTurmas,
+    rowTurma: turma,
+    setRowTurma: setTurma,
+    classTimeIndex,
+  };
 
   return (
     <div className="showBasicDataCard">
@@ -89,7 +94,10 @@ function HorariosTurma(myStates) {
         Horários
       </h3>
       {quantidadeHorarios > 0 ? (
-        <HorariosTable {...myStates} createClassTimeStates={createClassTimeStates} />
+        <HorariosTable
+          {...myStates}
+          createClassTimeStates={createClassTimeStates}
+        />
       ) : (
         <SmartCreateHora {...createClassTimeStates} />
       )}
