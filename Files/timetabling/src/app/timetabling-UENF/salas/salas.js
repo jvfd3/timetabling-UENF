@@ -4,7 +4,7 @@ import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 import "./salas.css";
-import { ItemSelectionRoom } from "../../../components/mySelects";
+import { ItemSelectionRoom, SelectRoomBlock } from "../../../components/mySelects";
 import { getTurmasData } from "../../../DB/retrieveData";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
 
@@ -25,7 +25,6 @@ function SalaSelection(mySalasStates) {
 function InformacoesBaseDaSala(mySalasStates) {
   const { room } = mySalasStates;
   const { id, capacidade, bloco, codigo, descricao } = room;
-  // {"id":  5, "capacidade":  24,  "bloco": "P5",           "codigo": "112",  "descricao": "P5"                                  },
 
   return (
     <div className="showBasicDataCard">
@@ -34,7 +33,13 @@ function InformacoesBaseDaSala(mySalasStates) {
         <tbody>
           <tr>
             <th>Bloco</th>
-            <td>{`${bloco} (${descricao})`}</td>
+            <td><SelectRoomBlock  {...mySalasStates} /></td>
+            {/* For debug purposes */}
+            {/* <td>{bloco}</td> */}
+          </tr>
+          <tr>
+            <th>Descrição</th>
+            <td>{descricao}</td>
           </tr>
           <tr>
             <th>Código</th>
@@ -44,10 +49,10 @@ function InformacoesBaseDaSala(mySalasStates) {
             <th>Capacidade</th>
             <td>{capacidade}</td>
           </tr>
-          {/*  <tr>
+          <tr>
             <th>ID</th>
             <td>{id}</td>
-          </tr> */}
+          </tr>
         </tbody>
       </table>
     </div>

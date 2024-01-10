@@ -93,7 +93,7 @@ function DefaultSelect(defaultProps) {
 
   useEffect(() => {
     let correnctObject = findCorrectObject(value);
-    // console.log(correnctObject);
+    console.log(value);
     setCurrentValue(correnctObject);
   }, [value]);
 
@@ -159,6 +159,42 @@ function SelectCourse({ outerCourse, setOuterCourse }) {
       setOuterValue={setOuterCourse}
       findCorrectObject={findCourseObject}
       value={outerCourse}
+      customProps={customProps}
+    />
+  );
+}
+
+function SelectBlock({ outerBlock, setOuterBlock }) {
+  let blocks = options.constantValues.blocks;
+
+  function findBlockObject(block) {
+    let blockObject = options.constantValues.blocks.find(
+      (iterBlock) => iterBlock.id == block
+    );
+    return blockObject;
+  }
+
+  let customProps = {
+    getOptionValue: ({ id }) => id,
+    getOptionLabel: ({ id, code, alias, name }) => `(${code}) ` + alias===code? `${name}` : `${alias}`,
+    formatOptionLabel: ({ id, code, alias, name }, { context }) => {
+      let isMenuLabel = context === "menu";
+      let msg = `(${code}) `;
+      let sameCodigoAndApelido = alias===code;
+      msg += sameCodigoAndApelido ? `${name}` : `${alias}`;
+      let finalMessage = isMenuLabel ? msg : `${code}`;
+      return finalMessage;
+    },
+  };
+
+  return (
+    <DefaultSelect
+      placeHolderText="Bloco"
+      isClearable={false}
+      options={blocks}
+      setOuterValue={setOuterBlock}
+      findCorrectObject={findBlockObject}
+      value={outerBlock}
       customProps={customProps}
     />
   );
@@ -930,6 +966,31 @@ function SelectStudentCourse(myStudentStates) {
   return <SelectCourse {...courseStates} />;
 }
 
+/* \ CRUD ROOMS / */
+
+function SelectRoomBlock(myRoomStates) {
+  const { room, setRoom } = myRoomStates;
+
+  function updateRoomBlock(newBlock) {
+    const { id, code, alias, name } = newBlock;
+    // let sameCodeAlias = code === alias;
+    // let description = sameCodeAlias ? name : alias;
+    // let newBlockValue = `(${code}) ${description}`
+    let newRoom = { ...room, idBlock: id, bloco: code };
+    setRoom(newRoom);
+  }
+
+  console.log(room.bloco)
+
+  let blockStates = {
+    // outerBlock: room.bloco,
+    outerBlock: room.idBlock,
+    setOuterBlock: updateRoomBlock,
+  };
+
+  return <SelectBlock {...blockStates} />;
+}
+
 /* \ Others: I'm not even sure if are still used / */
 function SelectAnoTurma({ lTurma, setLTurma }) {
   let anos = options.constantValues.years;
@@ -1121,6 +1182,8 @@ export {
   /* student */
   SelectStudentYear,
   SelectStudentCourse,
+  /* room */
+  SelectRoomBlock,
   /* Outros */
   SelectPeriodoEsperado,
   SelectCurso,
