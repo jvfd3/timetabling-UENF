@@ -4,6 +4,11 @@ import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 import { StudentSelection } from "../../../components/mySelects";
+import {
+  TextInputStudentId,
+  TextInputStudentMatricula,
+  TextInputStudentName,
+} from "../../../components/MyTextFields";
 // import { scrollThroughAlunos } from "../functions/firulas/minhasFirulas";
 
 function InformacoesBaseDoAluno(studentStates) {
@@ -30,15 +35,21 @@ function InformacoesBaseDoAluno(studentStates) {
           </tr>
           <tr>
             <th>Matrícula</th>
-            <td>{matricula}</td>
+            <td>
+              <TextInputStudentMatricula {...studentStates} />
+            </td>
           </tr>
           <tr>
             <th>Nome</th>
-            <td>{nome}</td>
+            <td>
+              <TextInputStudentName {...studentStates} />
+            </td>
           </tr>
           <tr>
             <th>ID</th>
-            <td>{id}</td>
+            <td>
+              <TextInputStudentId {...studentStates} />
+            </td>
           </tr>
         </tbody>
       </table>
@@ -53,7 +64,6 @@ function StudentCard(studentStates) {
     </div>
   );
 }
-
 
 function Students() {
   const [students, setStudents] = useState(allLocalJsonData.SQL.alunos); // [dados_agrupados[38]

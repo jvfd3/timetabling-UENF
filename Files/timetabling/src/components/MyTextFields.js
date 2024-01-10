@@ -209,6 +209,108 @@ function TextInputIdDisciplina(myDisciplinasStates) {
   );
 }
 
+/* CRUD Aluno */
+
+function TextInputStudentMatricula(myStates) {
+  let generalStates = {
+    items: myStates.students,
+    setItems: myStates.setStudents,
+    item: myStates.student,
+    setItem: myStates.setStudent,
+  };
+  let specificValues = {
+    mainValue: myStates.student.matricula,
+    getNewItemObject: (newValue) => {
+      return { ...myStates.student, matricula: newValue };
+    },
+    title: "Matrícula",
+  };
+  let matriculaStates = { generalStates, specificValues };
+  return <TextInputDefault {...matriculaStates} />;
+}
+
+function TextInputStudentName(myStates) {
+  let generalStates = {
+    items: myStates.students,
+    setItems: myStates.setStudents,
+    item: myStates.student,
+    setItem: myStates.setStudent,
+  };
+  let specificValues = {
+    mainValue: myStates.student.nome,
+    getNewItemObject: (newValue) => {
+      return { ...myStates.student, nome: newValue };
+    },
+    title: "Nome",
+  };
+  let nomeStates = { generalStates, specificValues };
+  return <TextInputDefault {...nomeStates} />;
+}
+
+function TextInputStudentId(myStates) {
+  let generalStates = {
+    items: myStates.students,
+    setItems: myStates.setStudents,
+    item: myStates.student,
+    setItem: myStates.setStudent,
+  };
+  let specificValues = {
+    mainValue: myStates.student.id,
+    getNewItemObject: (newValue) => {
+      return { ...myStates.student, id: newValue };
+    },
+    title: "ID",
+  };
+  let idStates = { generalStates, specificValues };
+  return <TextInputDefault {...idStates} />;
+}
+
+/* Default TextInput */
+
+function TextInputDefault(myStates) {
+  let { generalStates, specificValues } = myStates;
+  let { /* items, setItems, item, */ setItem } = generalStates;
+  let { mainValue, getNewItemObject, title } = specificValues;
+
+  const [mainProp, setMainProp] = useState(mainValue);
+
+  useEffect(() => {
+    /* this useEffect serves to update internal values when it's changed outside */
+    // console.log(mainValue);
+    setMainProp(mainValue);
+  }, [mainValue]);
+
+  function updateValue(event) {
+    let newValue = event.target.value;
+    setMainProp(newValue);
+    setItem(getNewItemObject(newValue));
+  }
+
+  let isId = title === "ID";
+  let specificIDProps = isId
+    ? {
+        disabled: true,
+        inputMode: "numeric",
+        pattern: "[0-9]*",
+      }
+    : {};
+
+  return (
+    <TextField
+      fullWidth
+      {...specificIDProps}
+      id={`TextField ID: ${title}`}
+      key={`TextField Key: ${title}`}
+      label={`${title}`}
+      variant="outlined"
+      value={mainProp}
+      onChange={updateValue}
+      style={{ width: "100%" }} // Adicionado para garantir que o TextField preencha todo o conteúdo
+      disabled={title === "ID"}
+    />
+  );
+}
+
 export {
   TextInputNomeProfessor,
   TextInputIdProfessor,
@@ -219,4 +321,8 @@ export {
   TextInputNomeDisciplina,
   TextInputApelidoDisciplina,
   TextInputIdDisciplina,
+  /* CRUD Student */
+  TextInputStudentMatricula,
+  TextInputStudentName,
+  TextInputStudentId,
 };
