@@ -19,6 +19,7 @@ const CRUDPageSelection = (props) => {
     (option) => option.label !== "Not Found"
   );
 
+  /*
   useEffect(() => {
     const keydownHandler = (event) => {
       if (event.key === "s") {
@@ -40,6 +41,7 @@ const CRUDPageSelection = (props) => {
       window.removeEventListener("keyup", keyupHandler);
     };
   }, []);
+  */
 
   const formatOptionLabel = ({ label }) => (
     <div style={{ display: "flex" }}>{label}</div>
