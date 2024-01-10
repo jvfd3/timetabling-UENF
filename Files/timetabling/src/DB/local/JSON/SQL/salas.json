@@ -1,5 +1,5 @@
 [
-  {"id":  1, "capacidade":  20,  "bloco": "E1",           "codigo": "217",  "descricao": "E1 (DESENHO) Prédio da REITORIA"      },
+  {"id":  1, "capacidade":  20,  "bloco": "E1",           "codigo": "217",  "descricao": "E1 (DESENHO) Prédio da REITORIA"     },
   {"id":  2, "capacidade":  24,  "bloco": "P5",           "codigo": "inf1", "descricao": "P5"                                  },
   {"id":  3, "capacidade":  24,  "bloco": "P5",           "codigo": "inf2", "descricao": "P5"                                  },
   {"id":  4, "capacidade":  24,  "bloco": "P5",           "codigo": "111",  "descricao": "P5"                                  },

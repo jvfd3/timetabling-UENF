@@ -1,68 +1,61 @@
 import { useState } from "react";
-import Select from "react-select";
 // import assets from "../../assets/imagesImport";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 import "./salas.css";
 import { SalaItemSelection } from "../../../components/mySelects";
-import {
-  appendInfoFromTurmasUsingHorarios,
-  getFullHorarios,
-  getTurmasDoAnoSemestre,
-} from "../../../helpers/auxFunctions";
 import { getTurmasData } from "../../../DB/retrieveData";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
 
-function Salas() {
-  let salasFromJson = allLocalJsonData.SQL.salas;
+function SalaSelection({ mySalasStates }) {
+  return (
+    <div
+      className="SelectionBar"
+      onWheel={(event) => {
+        // let itemStates = [salasFromJson, setSala, sala];
+        // scrollThroughSalas(event, itemStates);
+      }}
+    >
+      <SalaItemSelection mySalasStates={mySalasStates} />
+    </div>
+  );
+}
 
-  const [salas, setSalas] = useState(salasFromJson);
-  const [sala, setSala] = useState(salasFromJson[20]);
+function InformacoesBaseDaSala(mySalasStates) {
+  const { sala } = mySalasStates;
+  const { id, capacidade, bloco, codigo, descricao } = sala;
+  // {"id":  5, "capacidade":  24,  "bloco": "P5",           "codigo": "112",  "descricao": "P5"                                  },
 
-  let mySalasStates = { salas, setSalas, sala, setSala };
+  return (
+    <div className="showBasicDataCard">
+      <h3>INFORMAÇÕES DA SALA</h3>
+      <table className="showBasicDataTable">
+        <tbody>
+          <tr>
+            <th>Bloco</th>
+            <td>{`${bloco} (${descricao})`}</td>
+          </tr>
+          <tr>
+            <th>Código</th>
+            <td>{codigo}</td>
+          </tr>
+          <tr>
+            <th>Capacidade</th>
+            <td>{capacidade}</td>
+          </tr>
+          {/*  <tr>
+            <th>ID</th>
+            <td>{id}</td>
+          </tr> */}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
-  function SalaSelection({ mySalasStates }) {
-    return (
-      <div
-        className="SelectionBar"
-        onWheel={(event) => {
-          // let itemStates = [salasFromJson, setSala, sala];
-          // scrollThroughSalas(event, itemStates);
-        }}
-      >
-        <SalaItemSelection mySalasStates={mySalasStates} />
-      </div>
-    );
-  }
-
-  function SalaCard({ currentSala }) {
-    function InformacoesBaseDaSala() {
-      return (
-        <div className="showBasicDataCard">
-          <h3>INFORMAÇÕES DA SALA</h3>
-          <table className="showBasicDataTable">
-            <tbody>
-              <tr>
-                <th>Bloco</th>
-                <td>{`${currentSala.bloco} (${currentSala.descricao})`}</td>
-              </tr>
-              <tr>
-                <th>Código</th>
-                <td>{currentSala.codigo}</td>
-              </tr>
-              <tr>
-                <th>Capacidade</th>
-                <td>{currentSala.capacidade}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      );
-    }
-
-    function TurmasNaSala({ lSala }) {
-      /* function getTurmas(id) {
+function TurmasNaSala(lSala) {
+  /* function getTurmas(id) {
         let horarios = allLocalJsonData.SQL.horarios;
         let horariosNestaSala = [];
         for (const chaveTurma in horarios) {
@@ -95,86 +88,95 @@ function Salas() {
         });
         return fullInfoFromTurmasNaSala;
       } */
-      let idSala = lSala.id;
-      let classes = getTurmasData();
-      let splittedClasses = splitTurmas(classes);
-      let turmasNestaSala = splittedClasses.filter((splittedClass) => {
-        let found = splittedClass.sala?.id === idSala;
-        return found;
-      });
-      return turmasNestaSala.length === 0 ? (
-        <div className="showBasicDataCard">
-          <h5>Não há turmas nesta sala</h5>
-        </div>
-      ) : (
-        <div className="showBasicDataCard">
-          <h4>TURMAS NESTA SALA</h4>
+  let idSala = lSala.id;
+  let classes = getTurmasData();
+  let splittedClasses = splitTurmas(classes);
+  let turmasNestaSala = splittedClasses.filter((splittedClass) => {
+    let found = splittedClass.sala?.id === idSala;
+    return found;
+  });
+  return turmasNestaSala.length === 0 ? (
+    <div className="showBasicDataCard">
+      <h5>Não há turmas nesta sala</h5>
+    </div>
+  ) : (
+    <div className="showBasicDataCard">
+      <h4>TURMAS NESTA SALA</h4>
 
-          <table className="showBasicDataTable">
-            <thead>
-              <tr>
-                <th>idTurma</th>
-                <th>idHorario</th>
-                <th>Ano.Semestre</th>
-                <th>Disciplina</th>
-                <th>Professor</th>
-                <th>Dia</th>
-                <th>Hora Início</th>
-                <th>Duração</th>
+      <table className="showBasicDataTable">
+        <thead>
+          <tr>
+            <th>idTurma</th>
+            <th>idHorario</th>
+            <th>Ano.Semestre</th>
+            <th>Disciplina</th>
+            <th>Professor</th>
+            <th>Dia</th>
+            <th>Hora Início</th>
+            <th>Duração</th>
+          </tr>
+        </thead>
+        <tbody>
+          {turmasNestaSala.map((turma, i) => {
+            function checkIndefinition(value) {
+              return value ? value : "Indef.";
+            }
+
+            return (
+              <tr key={i}>
+                <td>{turma.idTurma}</td>
+                <td>{turma.idHorario}</td>
+                <td>
+                  {turma.ano}.{turma.semestre}
+                </td>
+                <td>
+                  {turma.codigoDisciplina && turma.apelidoDisciplina
+                    ? `${turma.codigoDisciplina} - ${turma.apelidoDisciplina}`
+                    : "Indef."}
+                </td>
+                <td>{checkIndefinition(turma.apelidoProfessor)}</td>
+                <td>{checkIndefinition(turma.dia)}</td>
+                <td>{checkIndefinition(turma.horaInicio)}</td>
+                <td>{checkIndefinition(turma.duracao)}</td>
               </tr>
-            </thead>
-            <tbody>
-              {turmasNestaSala.map((turma, i) => {
-                function checkIndefinition(value) {
-                  return value ? value : "Indef.";
-                }
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
-                return (
-                  <tr key={i}>
-                    <td>{turma.idTurma}</td>
-                    <td>{turma.idHorario}</td>
-                    <td>
-                      {turma.ano}.{turma.semestre}
-                    </td>
-                    <td>
-                      {turma.codigoDisciplina && turma.apelidoDisciplina
-                        ? `${turma.codigoDisciplina} - ${turma.apelidoDisciplina}`
-                        : "Indef."}
-                    </td>
-                    <td>{checkIndefinition(turma.apelidoProfessor)}</td>
-                    <td>{checkIndefinition(turma.dia)}</td>
-                    <td>{checkIndefinition(turma.horaInicio)}</td>
-                    <td>{checkIndefinition(turma.duracao)}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      );
-    }
+function OcupacaoNaSala() {
+  return (
+    <div className="showBasicDataCard">
+      {/* <img className="CRUD-room-placeholderimg" src={assets.room} alt="" /> */}
+    </div>
+  );
+}
 
-    function OcupacaoNaSala() {
-      return (
-        <div className="showBasicDataCard">
-          {/* <img className="CRUD-room-placeholderimg" src={assets.room} alt="" /> */}
-        </div>
-      );
-    }
+function SalaCard(mySalasStates) {
+  return (
+    <div className="infoCard">
+      <InformacoesBaseDaSala {...mySalasStates} />
+      <TurmasNaSala {...mySalasStates.sala} />
+      {/* <OcupacaoNaSala /> */}
+    </div>
+  );
+}
 
-    return (
-      <div className="infoCard">
-        <InformacoesBaseDaSala />
-        <TurmasNaSala lSala={sala} />
-        {/* <OcupacaoNaSala /> */}
-      </div>
-    );
-  }
+function Salas() {
+  let salasFromJson = allLocalJsonData.SQL.salas;
+
+  const [salas, setSalas] = useState(salasFromJson);
+  const [sala, setSala] = useState(salasFromJson[20]);
+
+  let mySalasStates = { salas, setSalas, sala, setSala };
 
   return (
     <div className="CRUDContainComponents">
       <SalaSelection mySalasStates={mySalasStates} />
-      <SalaCard currentSala={sala} />
+      <SalaCard {...mySalasStates} />
     </div>
   );
 }
