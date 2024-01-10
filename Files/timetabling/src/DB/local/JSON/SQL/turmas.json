@@ -28,7 +28,7 @@
   {"id":      27, "ano": 2024, "semestre": 1, "idDisciplina":   56, "idProfessor":     1, "demandaEstimada":    5},
   {"id":      28, "ano": 2024, "semestre": 1, "idDisciplina":   58, "idProfessor":     3, "demandaEstimada":    5},
   {"id":      29, "ano": 2024, "semestre": 1, "idDisciplina":   59, "idProfessor":     3, "demandaEstimada":    4},
-
+  
   {"id": 20220201, "ano": 2022, "semestre": 2, "idDisciplina": 2, "idProfessor": 45, "demandaEstimada": 9},
   {"id": 20220202, "ano": 2022, "semestre": 2, "idDisciplina": 2, "idProfessor": 46, "demandaEstimada": 6},
   {"id": 20220203, "ano": 2022, "semestre": 2, "idDisciplina": 9, "idProfessor": 7, "demandaEstimada": 28},
