@@ -62,7 +62,9 @@ function TextInputDefault(myStates) {
   );
 }
 
-/* CRUD PROFESSOR */
+/* \\ CRUD // */
+
+/* \ Professor / */
 
 function TextInputNomeProfessor(props) {
   let { professores, setProfessores, professor, setProfessor } = props;
@@ -159,7 +161,7 @@ function NumberInputDemandaEstimada({ lTurma, setLTurma }) {
   );
 }
 
-/* CRUD DISCIPLINA */
+/* \ Subject / */
 
 function TextInputCodigoDisciplina(myDisciplinasStates) {
   let { disciplinas, setDisciplinas, disciplina, setDisciplina } =
@@ -270,9 +272,7 @@ function TextInputIdDisciplina(myDisciplinasStates) {
   );
 }
 
-/* \\\ CRUD /// */
-
-/* \\ Student // */
+/* \ Student / */
 
 function TextInputStudentMatricula(myStates) {
   let generalStates = {
@@ -328,7 +328,7 @@ function TextInputStudentId(myStates) {
   return <TextInputDefault {...idStates} />;
 }
 
-/* \\ Room // */
+/* \ Room / */
 
 function TextInputRoomCapacity(myRoomStates) {
   let generalStates = {
@@ -387,11 +387,12 @@ function TextInputRoomId(myRoomStates) {
 }
 
 export {
+  /* \\ CRUD // */
+  /* \ Professor / */
   TextInputNomeProfessor,
   TextInputIdProfessor,
   TextInputApelidoProfessor,
   NumberInputDemandaEstimada,
-  /* \\ CRUD // */
   /* \ Subjects / */
   TextInputCodigoDisciplina,
   TextInputNomeDisciplina,
