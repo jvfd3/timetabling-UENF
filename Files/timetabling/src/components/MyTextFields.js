@@ -376,6 +376,6 @@ export {
   TextInputStudentName,
   TextInputStudentId,
   /* \ Room / */
-  TextInputRoomCode,
   TextInputRoomCapacity,
+  TextInputRoomCode,
 };
