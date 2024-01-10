@@ -17,7 +17,7 @@ import {
   TextInputRoomId,
 } from "../../../components/MyTextFields";
 
-function SalaSelection(mySalasStates) {
+function RoomSelection(mySalasStates) {
   return (
     <div
       className="SelectionBar"
@@ -180,7 +180,7 @@ function TurmasNaSala(lSala) {
   );
 }
 
-function SalaCard(mySalasStates) {
+function RoomCard(mySalasStates) {
   return (
     <div className="infoCard">
       <InformacoesBaseDaSala {...mySalasStates} />
@@ -189,7 +189,7 @@ function SalaCard(mySalasStates) {
   );
 }
 
-function Salas() {
+function Rooms() {
   let roomsFromJSON = allLocalJsonData.SQL.salas;
 
   const [rooms, setRooms] = useState(roomsFromJSON);
@@ -199,8 +199,8 @@ function Salas() {
 
   return (
     <div className="CRUDContainComponents">
-      <SalaSelection {...mySalasStates} />
-      <SalaCard {...mySalasStates} />
+      <RoomSelection {...mySalasStates} />
+      <RoomCard {...mySalasStates} />
     </div>
   );
 }
@@ -211,7 +211,7 @@ function CRUDrooms() {
       <CRUDPageSelection
         defaultValue={options.constantValues.pageSelection.classrooms}
       />
-      <Salas />
+      <Rooms />
     </div>
   );
 }
