@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 
 function TextInputDefault(myStates) {
   let { generalStates, specificValues } = myStates;
-  let { /* items, setItems, item, */ setItem } = generalStates;
+  let { /* items, setItems,*/ item, setItem } = generalStates;
   let { mainValue, getNewItemObject, title, isNumeric } = specificValues;
 
   const [mainProp, setMainProp] = useState(mainValue);
@@ -35,6 +35,7 @@ function TextInputDefault(myStates) {
   }
 
   let isId = title === "ID";
+  let specificIDProps = isId ? { disabled: true } : {};
   let specificNumericProps = isNumeric
     ? {
         type: "number",
@@ -43,15 +44,14 @@ function TextInputDefault(myStates) {
         pattern: "[0-9]*",
       }
     : {};
-  let specificIDProps = isId ? { disabled: true } : {};
 
   return (
     <TextField
       fullWidth
       {...specificIDProps}
       {...specificNumericProps}
-      id={`TextField ID: ${title}`}
-      key={`TextField Key: ${title}`}
+      id={`TextField ID: ${title}-${item?.id || item?.idTurma}`}
+      key={`TextField Key: ${title}-${item?.id || item?.idTurma}`}
       label={`${title}`}
       variant="outlined"
       value={mainProp || ""}
