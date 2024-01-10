@@ -74,7 +74,8 @@ function InformacoesBaseDaSala(mySalasStates) {
             <td>
               <TextInputRoomId {...mySalasStates} />
             </td>
-            <td>{id}</td>
+            {/* For debug purposes */}
+            {/* <td>{id}</td> */}
           </tr>
         </tbody>
       </table>
