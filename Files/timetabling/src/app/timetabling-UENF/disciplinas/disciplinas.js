@@ -7,7 +7,71 @@ import {
   DisciplinasSelection,
   SelectPeriodoEsperado,
 } from "../../../components/mySelects";
+import {
+  TextInputApelidoDisciplina,
+  TextInputCodigoDisciplina,
+  TextInputIdDisciplina,
+  TextInputNomeDisciplina,
+} from "../../../components/MyTextFields";
 // import { scrollThroughDisciplinas } from "../functions/firulas/minhasFirulas";
+
+function InformacoesBaseDaDisciplina(myDisciplinasStates) {
+  const { disciplina } = myDisciplinasStates;
+  const { codigo, nome } = disciplina;
+  return (
+    <div className="showBasicDataCard">
+      <h3>INFORMAÇÕES DA DISCIPLINA</h3>
+      <table className="showBasicDataTable">
+        <thead>
+          <tr>
+            <th>Chave</th>
+            <th>Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Código</th>
+            <td>
+              <TextInputCodigoDisciplina {...myDisciplinasStates} />
+            </td>
+          </tr>
+          <tr>
+            <th>Nome</th>
+            <td>
+              <TextInputNomeDisciplina {...myDisciplinasStates} />
+            </td>
+          </tr>
+          <tr>
+            <th>Apelido</th>
+            <td>
+              <TextInputApelidoDisciplina {...myDisciplinasStates} />
+            </td>
+          </tr>
+          <tr>
+            <th>Período Esperado</th>
+            <td>
+              <SelectPeriodoEsperado {...myDisciplinasStates} />
+            </td>
+          </tr>
+          <tr>
+            <th>ID</th>
+            <td>
+              <TextInputIdDisciplina {...myDisciplinasStates} />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function DisciplinasCard(myDisciplinasStates) {
+  return (
+    <div className="infoCard">
+      <InformacoesBaseDaDisciplina {...myDisciplinasStates} />
+    </div>
+  );
+}
 
 function Disciplinas() {
   // let disciplinasFromJB = await readData(options.JBVars.bins.infoDisciplinasCC);
@@ -25,77 +89,6 @@ function Disciplinas() {
     setDisciplina,
   };
 
-  function DisciplinasCard() {
-    function InformacoesBaseDaDisciplina() {
-      return (
-        <div className="showBasicDataCard">
-          <h3>INFORMAÇÕES DA DISCIPLINA</h3>
-          <table className="showBasicDataTable">
-            <thead></thead>
-            <tbody>
-              <tr>
-                <th>Código</th>
-                <td>{disciplina.codigo}</td>
-              </tr>
-              <tr>
-                <th>Nome</th>
-                <td>{disciplina.nome}</td>
-              </tr>
-              <tr>
-                <th>Período Esperado</th>
-                <td>
-                  <SelectPeriodoEsperado
-                    myDisciplinasStates={myDisciplinasStates}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      );
-    }
-
-    return (
-      <div className="infoCard">
-        <InformacoesBaseDaDisciplina />
-        {/* <div className="showBasicDataCard">
-          <table className="showBasicDataTable">
-            <thead>
-              <tr>
-                <th>Requisitos</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <Select
-                    className="manyDisciplinasMultiSelect"
-                    placeholder={"Requisitos da disciplina"}
-                    options={disciplinas} // deveriam ser todas as disciplinas
-                    value={disciplina.requisitos}
-                    onChange={(option) => {
-                      let myNewValue = { ...disciplina };
-                      myNewValue["requisitos"] = option;
-                      setDisciplina(myNewValue);
-                    }}
-                    isMulti={true}
-                    isClearable={true}
-                    isSearchable={true}
-                    getOptionValue={(option) => option.codigo}
-                    getOptionLabel={(option) => option.nome}
-                    formatOptionLabel={({ codigo, nome }) =>
-                      `${codigo}: ${nome}`
-                    }
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div> */}
-      </div>
-    );
-  }
-
   return (
     <div className="CRUDContainComponents">
       <DisciplinasSelection
@@ -103,7 +96,7 @@ function Disciplinas() {
         disciplinas={disciplinas}
         setDisciplina={setDisciplina}
       />
-      <DisciplinasCard />
+      <DisciplinasCard {...myDisciplinasStates} />
     </div>
   );
 }

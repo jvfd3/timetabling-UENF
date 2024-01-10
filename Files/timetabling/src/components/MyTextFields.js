@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 
+/* CRUD PROFESSOR */
+
 function TextInputNomeProfessor(props) {
   let { professores, setProfessores, professor, setProfessor } = props;
   // console.log("Tinp", professor);
@@ -60,6 +62,18 @@ function TextInputApelidoProfessor(props) {
   );
 }
 
+function TextInputIdProfessor(props) {
+  return (
+    <TextField
+      className="h"
+      value={props.professor.id}
+      // fullWidth
+      label="ID do Professor"
+      disabled
+    />
+  );
+}
+
 function NumberInputDemandaEstimada({ lTurma, setLTurma }) {
   const [demandaEstimada, setDemandaEstimada] = useState(
     lTurma.demandaEstimada || undefined
@@ -84,13 +98,112 @@ function NumberInputDemandaEstimada({ lTurma, setLTurma }) {
   );
 }
 
-function TextInputIdProfessor(props) {
+/* CRUD DISCIPLINA */
+
+function TextInputCodigoDisciplina(myDisciplinasStates) {
+  let { disciplinas, setDisciplinas, disciplina, setDisciplina } =
+    myDisciplinasStates;
+  // console.log("TiCD", disciplina);
+  // console.log("TiCD>codigo:", disciplina.codigo);
+  const [codigoDisciplina, setCodigoDisciplina] = useState(disciplina.codigo);
+
+  useEffect(() => {
+    // console.log(disciplina.codigo);
+    setCodigoDisciplina(disciplina.codigo);
+  }, [disciplina.codigo]);
+
+  function updateCodigoDisciplina(event) {
+    let newCodigo = event.target.value;
+    let newDisciplina = { ...disciplina, codigo: newCodigo };
+    setCodigoDisciplina(newCodigo);
+    setDisciplina(newDisciplina);
+  }
+
   return (
     <TextField
-      className="h"
-      value={props.professor.id}
+      fullWidth
+      id="Codigo1"
+      key="Codigo2"
+      label="Código"
+      variant="outlined"
+      value={codigoDisciplina}
+      onChange={updateCodigoDisciplina}
+    />
+  );
+}
+
+function TextInputNomeDisciplina(myDisciplinasStates) {
+  let { disciplinas, setDisciplinas, disciplina, setDisciplina } =
+    myDisciplinasStates;
+  // console.log("Tinp", disciplina);
+  // console.log("Tinp>nome:", disciplina.nome);
+  const [nomeDisciplina, setNomeDisciplina] = useState(disciplina.nome);
+
+  useEffect(() => {
+    /* this useEffect serves to update internal values when it's changed outside */
+    // console.log(disciplina.nome);
+    setNomeDisciplina(disciplina.nome);
+  }, [disciplina.nome]);
+
+  function updateNomeDisciplina(event) {
+    let newNome = event.target.value;
+    let newDisciplina = { ...disciplina, nome: newNome };
+    setNomeDisciplina(newNome);
+    setDisciplina(newDisciplina);
+  }
+
+  return (
+    <TextField
+      fullWidth
+      id="Nome1"
+      key="Nome2"
+      label="Nome"
+      variant="outlined"
+      value={nomeDisciplina}
+      onChange={updateNomeDisciplina}
+      style={{ width: "100%" }} // Adicionado para garantir que o TextField preencha todo o conteúdo
+    />
+  );
+}
+
+function TextInputApelidoDisciplina(myDisciplinasStates) {
+  let { disciplina, setDisciplina } = myDisciplinasStates;
+  const [apelidoDisciplina, setApelidoDisciplina] = useState(
+    disciplina.apelido
+  );
+
+  useEffect(() => {
+    setApelidoDisciplina(disciplina.apelido);
+  }, [disciplina.apelido]);
+
+  function handleChange(event) {
+    let newApelido = event.target.value;
+    let newDisciplina = { ...disciplina, apelido: newApelido };
+    setApelidoDisciplina(newApelido);
+    setDisciplina(newDisciplina);
+  }
+
+  return (
+    <TextField
+      fullWidth
+      id="Apelido1"
+      key="Apelido2"
+      label="Apelido do Disciplina"
+      variant="outlined"
+      value={apelidoDisciplina}
+      onChange={handleChange}
+    />
+  );
+}
+
+function TextInputIdDisciplina(myDisciplinasStates) {
+  const { disciplina } = myDisciplinasStates;
+  const { id } = disciplina;
+  return (
+    <TextField
+      value={id}
       // fullWidth
-      label="ID do Professor"
+      label="ID da Disciplina"
       disabled
     />
   );
@@ -101,4 +214,9 @@ export {
   TextInputIdProfessor,
   TextInputApelidoProfessor,
   NumberInputDemandaEstimada,
+  /* CRUD Disciplina */
+  TextInputCodigoDisciplina,
+  TextInputNomeDisciplina,
+  TextInputApelidoDisciplina,
+  TextInputIdDisciplina,
 };

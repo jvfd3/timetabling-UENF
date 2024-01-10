@@ -919,7 +919,7 @@ function SelectProfessorC(props) {
   );
 }
 
-function SelectPeriodoEsperado({ myDisciplinasStates }) {
+function SelectPeriodoEsperado(myDisciplinasStates) {
   const { /* disciplinas, setDisciplinas, */ disciplina, setDisciplina } =
     myDisciplinasStates;
   let periodos = options.constantValues.expectedSemester;
@@ -930,6 +930,10 @@ function SelectPeriodoEsperado({ myDisciplinasStates }) {
     return periodoSelecionado;
   }
   const [periodo, setPeriodo] = useState(findPeriodo(disciplina.periodo));
+
+  useEffect(() => {
+    setPeriodo(findPeriodo(disciplina.periodo));
+  }, [disciplina.periodo]);
 
   function outerUpdate(newPeriodo) {
     setPeriodo(newPeriodo);
