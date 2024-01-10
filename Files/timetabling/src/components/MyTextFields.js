@@ -16,12 +16,19 @@ function TextInputDefault(myStates) {
     setMainProp(mainValue);
   }, [mainValue]);
 
+  function numericValueFilter(value) {
+    let newValue = null;
+    // console.log("value", value);
+    newValue = Number(value);
+    if (newValue < 1) newValue = null;
+    if (newValue > 9999) newValue = 9999;
+    return newValue;
+  }
+
   function updateValue(event) {
     let newValue = event.target.value;
     if (isNumeric) {
-      newValue = Number(newValue);
-      if (newValue < 0) newValue = 0;
-      if (newValue > 9999) newValue = 9999;
+      newValue = numericValueFilter(newValue);
     }
     setMainProp(newValue);
     setItem(getNewItemObject(newValue));
@@ -47,7 +54,7 @@ function TextInputDefault(myStates) {
       key={`TextField Key: ${title}`}
       label={`${title}`}
       variant="outlined"
-      value={mainProp}
+      value={mainProp || ""}
       onChange={updateValue}
       style={{ width: "100%" }} // Adicionado para garantir que o TextField preencha todo o conteúdo
       disabled={isId}

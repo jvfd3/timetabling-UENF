@@ -93,7 +93,7 @@ function DefaultSelect(defaultProps) {
 
   useEffect(() => {
     let correnctObject = findCorrectObject(value);
-    console.log(value);
+    // console.log(value);
     setCurrentValue(correnctObject);
   }, [value]);
 
@@ -176,11 +176,12 @@ function SelectBlock({ outerBlock, setOuterBlock }) {
 
   let customProps = {
     getOptionValue: ({ id }) => id,
-    getOptionLabel: ({ id, code, alias, name }) => `(${code}) ` + alias===code? `${name}` : `${alias}`,
+    getOptionLabel: ({ id, code, alias, name }) =>
+      `(${code}) ` + alias === code ? `${name}` : `${alias}`,
     formatOptionLabel: ({ id, code, alias, name }, { context }) => {
       let isMenuLabel = context === "menu";
       let msg = `(${code}) `;
-      let sameCodigoAndApelido = alias===code;
+      let sameCodigoAndApelido = alias === code;
       msg += sameCodigoAndApelido ? `${name}` : `${alias}`;
       let finalMessage = isMenuLabel ? msg : `${code}`;
       return finalMessage;
@@ -669,9 +670,13 @@ function ItemSelectionRoom(mySalasStates) {
       value={room}
       getOptionValue={(option) => option.id}
       getOptionLabel={(option) => option.capacidade}
-      formatOptionLabel={(sala) =>
-        `(${sala.capacidade}) ${sala.bloco}-${sala.codigo}`
-      }
+      formatOptionLabel={({ capacidade, bloco, codigo }) => {
+        let msg = "";
+        msg += capacidade ? `(${capacidade})` : "(Cap. indef.)";
+        msg += bloco ? ` ${bloco}` : "(Bloco indef.)";
+        msg += codigo ? ` - ${codigo}` : " (Cod. indef.)";
+        return msg;
+      }}
     />
   );
 }
@@ -980,7 +985,7 @@ function SelectRoomBlock(myRoomStates) {
     setRoom(newRoom);
   }
 
-  console.log(room.bloco)
+  // console.log(room.bloco);
 
   let blockStates = {
     // outerBlock: room.bloco,
