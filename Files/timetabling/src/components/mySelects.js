@@ -75,6 +75,79 @@ function LockableSelect(extProps) {
 
 /* \/ \/ \/ \/ \/ \/ \/ \/ MULTITURMAS \/ \/ \/ \/ \/ \/ \/ \/ */
 
+function DefaultSelect(defaultProps) {
+  const {
+    placeHolderText,
+    isClearable,
+    options,
+    setOuterValue,
+    value,
+    findCorrectObject,
+  } = defaultProps;
+
+  const [currentValue, setCurrentValue] = useState(value);
+
+  function updateOuterValue(newValue) {
+    setCurrentValue(newValue);
+    setOuterValue(newValue);
+  }
+
+  useEffect(() => {
+    setCurrentValue(findCorrectObject(value));
+  }, [value]);
+
+  return (
+    <Select
+      placeholder={placeHolderText}
+      isClearable={isClearable}
+      options={options}
+      onChange={updateOuterValue}
+      value={currentValue}
+      className="mySelectList"
+      styles={styleWidthFix}
+    />
+  );
+}
+
+function SelectYear({ outerYear, setOuterYear }) {
+  let years = options.constantValues.years;
+
+  function findYearObject(year) {
+    let yearObject = options.constantValues.years.find(
+      (iterYear) => iterYear.value == year
+    );
+    return yearObject;
+  }
+
+  return (
+    <DefaultSelect
+      placeHolderText="Ano"
+      isClearable={false}
+      options={years}
+      setOuterValue={setOuterYear}
+      findCorrectObject={findYearObject}
+      value={outerYear}
+    />
+  );
+}
+
+function SelectStudentYear(myStudentStates) {
+  const { student, setStudent } = myStudentStates;
+
+  function updateStudentYear(newYear) {
+    // console.log(newYear);
+    let newStudent = { ...student, anoEntrada: newYear.value };
+    setStudent(newStudent);
+  }
+
+  let yearStates = {
+    outerYear: student.anoEntrada,
+    setOuterYear: updateStudentYear,
+  };
+
+  return <SelectYear {...yearStates} />;
+}
+
 function SelectAno({ outerAno, setOuterAno }) {
   let anos = options.constantValues.years;
 
@@ -464,7 +537,7 @@ function StudentSelection(studentStates) {
         options={students}
         getOptionValue={(student) => student.matricula}
         getOptionLabel={(student) => student.nome}
-        formatOptionLabel={({matricula, nome}) => `${matricula}: ${nome}`}
+        formatOptionLabel={({ matricula, nome }) => `${matricula}: ${nome}`}
         // formatOptionLabel={(student) => `${student.matricula}: ${student.nome}`}
       />
     </div>
@@ -795,6 +868,9 @@ function SelectFilterExpectedSemester(outerExpectedSemesterStates) {
 
 /* /\ /\ /\ /\ /\ /\ /\ /\ CCTurma filtering Selects /\ /\ /\ /\ /\ /\ /\ /\ */
 
+/* \ Ano Selection / */
+
+/* \ Others: I'm not even sure if are still used / */
 function SelectAnoTurma({ lTurma, setLTurma }) {
   let anos = options.constantValues.years;
   let anoSelecionado = anos.find((ano) => ano.value === parseInt(lTurma.ano));
@@ -981,6 +1057,9 @@ export {
   SelectFilterProfessor,
   SelectFilterRoom,
   SelectFilterExpectedSemester,
+  /* CRUD */
+  /* student */
+  SelectStudentYear,
   /* Outros */
   SelectPeriodoEsperado,
   SelectCurso,

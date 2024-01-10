@@ -3,7 +3,10 @@ import React, { useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
-import { StudentSelection } from "../../../components/mySelects";
+import {
+  SelectStudentYear,
+  StudentSelection,
+} from "../../../components/mySelects";
 import {
   TextInputStudentId,
   TextInputStudentMatricula,
@@ -27,7 +30,10 @@ function InformacoesBaseDoAluno(studentStates) {
         <tbody>
           <tr>
             <th>Ano de entrada</th>
-            <td>{anoEntrada}</td>
+            <td>
+              <SelectStudentYear {...studentStates} />
+            </td>
+            {/* <td>{anoEntrada}</td> */}
           </tr>
           <tr>
             <th>Curso</th>
