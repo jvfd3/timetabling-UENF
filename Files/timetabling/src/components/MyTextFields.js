@@ -137,28 +137,23 @@ function TextInputIdProfessor(props) {
   );
 }
 
-function NumberInputDemandaEstimada({ lTurma, setLTurma }) {
-  const [demandaEstimada, setDemandaEstimada] = useState(
-    lTurma.demandaEstimada || undefined
-  );
-
-  // console.log(lTurma);
-  function handleDemandaEstimadaChange(value) {
-    setDemandaEstimada(value);
-    setLTurma({ ...lTurma, demandaEstimada: value });
-  }
-  return (
-    <TextField
-      fullWidth
-      id={`DemandaEstimada-${lTurma.idTurma}`}
-      label="Demanda Estimada"
-      variant="outlined"
-      type="number"
-      value={demandaEstimada}
-      inputProps={{ min: 0, max: 999, step: 1 }}
-      onChange={(event) => handleDemandaEstimadaChange(event.target.value)}
-    />
-  );
+function NumberInputMultiClassesExpectedDemand(myClassStates) {
+  let generalStates = {
+    items: myClassStates.classes,
+    setItems: myClassStates.setClasses,
+    item: myClassStates.class,
+    setItem: myClassStates.setClass,
+  };
+  let specificValues = {
+    mainValue: myClassStates.class.demandaEstimada,
+    getNewItemObject: (newValue) => {
+      return { ...myClassStates.class, demandaEstimada: newValue };
+    },
+    title: "Demanda Estimada",
+    isNumeric: true,
+  };
+  let capacityStates = { generalStates, specificValues };
+  return <TextInputDefault {...capacityStates} />;
 }
 
 /* \ Subject / */
@@ -405,12 +400,13 @@ function TextInputRoomId(myRoomStates) {
 }
 
 export {
+  /* \ MultiClasses / */
+  NumberInputMultiClassesExpectedDemand,
   /* \\ CRUD // */
   /* \ Professor / */
   TextInputNomeProfessor,
   TextInputIdProfessor,
   TextInputApelidoProfessor,
-  NumberInputDemandaEstimada,
   /* \ Subjects / */
   TextInputCodigoDisciplina,
   TextInputNomeDisciplina,

@@ -10,18 +10,13 @@ import {
   SelectDuracao,
   SelectAnoSemestre,
 } from "../../../components/mySelects";
-// import {
-//   centralConflicts,
-//   coloredConflicts,
-//   conflictsDisciplinaPeriodo,
-// } from "../../../helpers/conflicts/centralConflicts";
 import "./multiTurmas.css";
 import {
   getTurmasDoAnoSemestre,
   splittedToUnified2,
   splittedToUnified3,
 } from "../../../helpers/auxFunctions";
-import { NumberInputDemandaEstimada } from "../../../components/MyTextFields";
+import { NumberInputMultiClassesExpectedDemand } from "../../../components/MyTextFields";
 import {
   SmartCreateTurma,
   SmartDeleteTurma,
@@ -33,7 +28,6 @@ import { baseTurmaConflicts } from "../../../helpers/conflicts/centralConflicts"
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 import { InputDisciplina } from "../../../components/Buttons/Dumb/Dumb";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
-// import { FilteringSelects } from "../../../components/filteringSelects";
 
 /* ESTRUTURA DOS COMPONENTES
 - CRUDclass
@@ -266,6 +260,7 @@ function HorariosTable(myProps) {
 function TableRow(myProps) {
   const { lTurma, myTurmasProps, myCurrentSemestreProps } = myProps;
   const { turmas, setTurmas, turma, setTurma, classTimeIndex } = myTurmasProps;
+
   const { semestre, ano } = myCurrentSemestreProps;
 
   const [rowTurma, setRowTurma] = useState(lTurma);
@@ -275,6 +270,14 @@ function TableRow(myProps) {
     setTurmas,
     rowTurma,
     setRowTurma,
+    classTimeIndex,
+  };
+
+  const englishProps = {
+    classes: turmas,
+    setClasses: setTurmas,
+    class: rowTurma,
+    setClass: setRowTurma,
     classTimeIndex,
   };
 
@@ -321,7 +324,7 @@ function TableRow(myProps) {
         <SelectProfessor lTurma={rowTurma} setLTurma={setRowTurma} />
       </td>
       <td {...conflicts.styled.demand}>
-        <NumberInputDemandaEstimada lTurma={rowTurma} setLTurma={setRowTurma} />
+        <NumberInputMultiClassesExpectedDemand {...englishProps} />
       </td>
       <td>
         {rowTurma.horarios === null || rowTurma.horarios.length === 0 ? (
