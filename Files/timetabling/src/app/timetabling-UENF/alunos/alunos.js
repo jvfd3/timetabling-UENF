@@ -4,6 +4,7 @@ import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 import {
+  SelectStudentCourse,
   SelectStudentYear,
   StudentSelection,
 } from "../../../components/mySelects";
@@ -37,7 +38,10 @@ function InformacoesBaseDoAluno(studentStates) {
           </tr>
           <tr>
             <th>Curso</th>
-            <td>{curso}</td>
+            <td>
+              {curso}
+              <SelectStudentCourse {...studentStates} />
+            </td>
           </tr>
           <tr>
             <th>Matrícula</th>

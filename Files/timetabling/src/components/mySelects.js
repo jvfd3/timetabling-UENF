@@ -73,8 +73,6 @@ function LockableSelect(extProps) {
   );
 }
 
-/* \/ \/ \/ \/ \/ \/ \/ \/ MULTITURMAS \/ \/ \/ \/ \/ \/ \/ \/ */
-
 function DefaultSelect(defaultProps) {
   const {
     placeHolderText,
@@ -83,6 +81,7 @@ function DefaultSelect(defaultProps) {
     setOuterValue,
     value,
     findCorrectObject,
+    customProps,
   } = defaultProps;
 
   const [currentValue, setCurrentValue] = useState(value);
@@ -93,7 +92,9 @@ function DefaultSelect(defaultProps) {
   }
 
   useEffect(() => {
-    setCurrentValue(findCorrectObject(value));
+    let correnctObject = findCorrectObject(value);
+    // console.log(correnctObject);
+    setCurrentValue(correnctObject);
   }, [value]);
 
   return (
@@ -103,6 +104,7 @@ function DefaultSelect(defaultProps) {
       options={options}
       onChange={updateOuterValue}
       value={currentValue}
+      {...customProps}
       className="mySelectList"
       styles={styleWidthFix}
     />
@@ -131,22 +133,38 @@ function SelectYear({ outerYear, setOuterYear }) {
   );
 }
 
-function SelectStudentYear(myStudentStates) {
-  const { student, setStudent } = myStudentStates;
+function SelectCourse({ outerCourse, setOuterCourse }) {
+  let courses = options.constantValues.courses;
 
-  function updateStudentYear(newYear) {
-    // console.log(newYear);
-    let newStudent = { ...student, anoEntrada: newYear.value };
-    setStudent(newStudent);
+  function findCourseObject(course) {
+    let courseObject = options.constantValues.courses.find(
+      (iterCourse) => iterCourse.nome == course
+    );
+    return courseObject;
   }
 
-  let yearStates = {
-    outerYear: student.anoEntrada,
-    setOuterYear: updateStudentYear,
+  let customProps = {
+    getOptionLabel: ({ nome, apelido }) => `${nome} - ${apelido}`,
+    getOptionValue: ({ nome, apelido }) => `${nome} - ${apelido}`,
+    formatOptionLabel: ({ nome, apelido }, { context }) => {
+      return context === "value" ? `${apelido}` : `${nome}`;
+    },
   };
 
-  return <SelectYear {...yearStates} />;
+  return (
+    <DefaultSelect
+      placeHolderText="Curso"
+      isClearable={false}
+      options={courses}
+      setOuterValue={setOuterCourse}
+      findCorrectObject={findCourseObject}
+      value={outerCourse}
+      customProps={customProps}
+    />
+  );
 }
+
+/* \/ \/ \/ \/ \/ \/ \/ \/ MULTITURMAS \/ \/ \/ \/ \/ \/ \/ \/ */
 
 function SelectAno({ outerAno, setOuterAno }) {
   let anos = options.constantValues.years;
@@ -868,7 +886,40 @@ function SelectFilterExpectedSemester(outerExpectedSemesterStates) {
 
 /* /\ /\ /\ /\ /\ /\ /\ /\ CCTurma filtering Selects /\ /\ /\ /\ /\ /\ /\ /\ */
 
-/* \ Ano Selection / */
+/* \ CRUD STUDENTS / */
+
+function SelectStudentYear(myStudentStates) {
+  const { student, setStudent } = myStudentStates;
+
+  function updateStudentYear(newYear) {
+    // console.log(newYear);
+    let newStudent = { ...student, anoEntrada: newYear.value };
+    setStudent(newStudent);
+  }
+
+  let yearStates = {
+    outerYear: student.anoEntrada,
+    setOuterYear: updateStudentYear,
+  };
+
+  return <SelectYear {...yearStates} />;
+}
+
+function SelectStudentCourse(myStudentStates) {
+  const { student, setStudent } = myStudentStates;
+
+  function updateStudentCourse(newCourse) {
+    let newStudent = { ...student, curso: newCourse.value };
+    setStudent(newStudent);
+  }
+
+  let courseStates = {
+    outerCourse: student.curso,
+    setOuterCourse: updateStudentCourse,
+  };
+
+  return <SelectCourse {...courseStates} />;
+}
 
 /* \ Others: I'm not even sure if are still used / */
 function SelectAnoTurma({ lTurma, setLTurma }) {
@@ -1060,6 +1111,7 @@ export {
   /* CRUD */
   /* student */
   SelectStudentYear,
+  SelectStudentCourse,
   /* Outros */
   SelectPeriodoEsperado,
   SelectCurso,
