@@ -402,8 +402,8 @@ export {
   TextInputStudentMatricula,
   TextInputStudentName,
   TextInputStudentId,
-  TextInputRoomId,
   /* \ Room / */
-  TextInputRoomCapacity,
   TextInputRoomCode,
+  TextInputRoomCapacity,
+  TextInputRoomId,
 };
