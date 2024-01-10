@@ -39,6 +39,12 @@ function InformacoesBaseDaSala(mySalasStates) {
     <div className="showBasicDataCard">
       <h3>INFORMAÇÕES DA SALA</h3>
       <table className="showBasicDataTable">
+        <thead>
+          <tr>
+            <th>Chave</th>
+            <th>Valor</th>
+          </tr>
+        </thead>
         <tbody>
           <tr>
             <th>Bloco</th>

@@ -24,7 +24,7 @@ function InformacoesBaseDoAluno(studentStates) {
       <table className="showBasicDataTable">
         <thead>
           <tr>
-            <th>Informação</th>
+            <th>Chave</th>
             <th>Valor</th>
           </tr>
         </thead>
@@ -39,7 +39,8 @@ function InformacoesBaseDoAluno(studentStates) {
           <tr>
             <th>Curso</th>
             <td>
-              {curso}
+              {/* Debugging Purpose */}
+              {/* {curso} */}
               <SelectStudentCourse {...studentStates} />
             </td>
           </tr>
