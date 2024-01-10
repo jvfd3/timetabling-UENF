@@ -1,10 +1,10 @@
+import "./mySelects.css";
 import React, { useEffect, useState } from "react";
 import options from "../DB/local/options";
 import { allLocalJsonData } from "../DB/local/dataFromJSON";
 import Select, { components } from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { updateProfessorFromList } from "../helpers/auxFunctions";
-import "./mySelects.css";
 import { LockedProp, UnlockedProp } from "./Buttons/Dumb/Dumb";
 
 let styleWidthFix = options.SelectStyles.fullItem;
@@ -443,7 +443,8 @@ function SelectTesting() {
 
 /* \/ \/ \/ \/ \/ \/ \/ \/ Item Selections \/ \/ \/ \/ \/ \/ \/ \/ */
 
-function StudentSelection(props) {
+function StudentSelection(studentStates) {
+  const { students, setStudents, student, setStudent } = studentStates;
   return (
     <div
       className="SelectionBar"
@@ -453,17 +454,18 @@ function StudentSelection(props) {
       }}
     >
       <Select
-        onChange={props.change_student}
+        onChange={setStudent}
         className="itemSelectionBar"
         styles={styleWidthFix}
         isClearable={false}
-        value={props.student}
+        value={student}
         placeholder={"Nome do aluno"}
         isSearchable={true}
-        options={props.options}
-        getOptionValue={(option) => option.matricula}
-        getOptionLabel={(option) => option.nome}
-        formatOptionLabel={(option) => `${option.matricula}: ${option.nome}`}
+        options={students}
+        getOptionValue={(student) => student.matricula}
+        getOptionLabel={(student) => student.nome}
+        formatOptionLabel={({matricula, nome}) => `${matricula}: ${nome}`}
+        // formatOptionLabel={(student) => `${student.matricula}: ${student.nome}`}
       />
     </div>
   );
