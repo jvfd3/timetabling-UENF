@@ -269,6 +269,24 @@ function TextInputStudentId(myStates) {
 
 /* \\ Room // */
 
+function TextInputRoomCapacity(myRoomStates) {
+  let generalStates = {
+    items: myRoomStates.rooms,
+    setItems: myRoomStates.setRooms,
+    item: myRoomStates.room,
+    setItem: myRoomStates.setRoom,
+  };
+  let specificValues = {
+    mainValue: myRoomStates.room.capacidade,
+    getNewItemObject: (newValue) => {
+      return { ...myRoomStates.room, capacidade: newValue };
+    },
+    title: "Capacidade",
+    isNumeric: true,
+  };
+  let capacityStates = { generalStates, specificValues };
+  return <TextInputDefault {...capacityStates} />;
+}
 
 function TextInputRoomCode(myRoomStates) {
   let generalStates = {
@@ -359,4 +377,5 @@ export {
   TextInputStudentId,
   /* \ Room / */
   TextInputRoomCode,
+  TextInputRoomCapacity,
 };
