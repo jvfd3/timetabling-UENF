@@ -562,7 +562,9 @@ function StudentSelection(studentStates) {
   );
 }
 
-function DisciplinasSelection(props) {
+function DisciplinasSelection(subjectsStates) {
+  const { disciplinas, setDisciplinas, disciplina, setDisciplina } =
+    subjectsStates;
   return (
     <div
       className="SelectionBar"
@@ -575,12 +577,12 @@ function DisciplinasSelection(props) {
         className="itemSelectionBar"
         styles={styleWidthFix}
         isClearable={false}
-        onChange={props.setDisciplina}
+        onChange={setDisciplina}
         placeholder={"Disciplina"}
-        value={props.disciplina}
-        options={props.disciplinas}
-        getOptionValue={(option) => option.codigo}
-        getOptionLabel={(option) => option.nome}
+        value={disciplina}
+        options={disciplinas}
+        getOptionValue={(disciplina) => disciplina.codigo}
+        getOptionLabel={(disciplina) => disciplina.nome}
         formatOptionLabel={({ periodo, codigo, nome }) =>
           `(${periodo}) ${codigo}: ${nome}`
         }
@@ -589,7 +591,7 @@ function DisciplinasSelection(props) {
   );
 }
 
-function ProfessorItemSelection({ professorStates }) {
+function ProfessorItemSelection(professorStates) {
   const { professores, /* setProfessores, */ professor, setProfessor } =
     professorStates;
   return (
@@ -613,7 +615,7 @@ function ProfessorItemSelection({ professorStates }) {
   );
 }
 
-function SalaItemSelection({ mySalasStates }) {
+function SalaItemSelection(mySalasStates) {
   const { salas, setSalas, sala, setSala } = mySalasStates;
   return (
     <Select
@@ -632,7 +634,8 @@ function SalaItemSelection({ mySalasStates }) {
   );
 }
 
-function TurmaItemSelection({ turmas, setTurmas, turma, setTurma }) {
+function TurmaItemSelection(turmasStates) {
+  const { turmas, setTurmas, turma, setTurma } = turmasStates;
   return (
     <Select
       className="itemSelectionBar"

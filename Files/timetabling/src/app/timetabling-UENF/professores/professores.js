@@ -65,7 +65,7 @@ function ProfessoresDB() {
   function ProfessorSelection(professorStates) {
     return (
       <div className="SelectionBar">
-        <ProfessorItemSelection professorStates={professorStates} />
+        <ProfessorItemSelection {...professorStates} />
         <div className="CRUDButtonsContainer">
           <CreateDBButton
             createFunc={() => {

@@ -8,7 +8,7 @@ import { SalaItemSelection } from "../../../components/mySelects";
 import { getTurmasData } from "../../../DB/retrieveData";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
 
-function SalaSelection({ mySalasStates }) {
+function SalaSelection(mySalasStates) {
   return (
     <div
       className="SelectionBar"
@@ -17,7 +17,7 @@ function SalaSelection({ mySalasStates }) {
         // scrollThroughSalas(event, itemStates);
       }}
     >
-      <SalaItemSelection mySalasStates={mySalasStates} />
+      <SalaItemSelection {...mySalasStates} />
     </div>
   );
 }
@@ -160,13 +160,13 @@ function Salas() {
   let salasFromJson = allLocalJsonData.SQL.salas;
 
   const [salas, setSalas] = useState(salasFromJson);
-  const [sala, setSala] = useState(salasFromJson[20]);
+  const [sala, setSala] = useState(salasFromJson[3]);
 
   let mySalasStates = { salas, setSalas, sala, setSala };
 
   return (
     <div className="CRUDContainComponents">
-      <SalaSelection mySalasStates={mySalasStates} />
+      <SalaSelection {...mySalasStates} />
       <SalaCard {...mySalasStates} />
     </div>
   );
