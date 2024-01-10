@@ -565,6 +565,12 @@ function StudentSelection(studentStates) {
 function DisciplinasSelection(subjectsStates) {
   const { disciplinas, setDisciplinas, disciplina, setDisciplina } =
     subjectsStates;
+
+  const subjects = disciplinas;
+  // const setSubjects = setDisciplinas;
+  const subject = disciplina;
+  const setSubject = setDisciplina;
+
   return (
     <div
       className="SelectionBar"
@@ -577,10 +583,10 @@ function DisciplinasSelection(subjectsStates) {
         className="itemSelectionBar"
         styles={styleWidthFix}
         isClearable={false}
-        onChange={setDisciplina}
+        onChange={setSubject}
         placeholder={"Disciplina"}
-        value={disciplina}
-        options={disciplinas}
+        value={subject}
+        options={subjects}
         getOptionValue={(disciplina) => disciplina.codigo}
         getOptionLabel={(disciplina) => disciplina.nome}
         formatOptionLabel={({ periodo, codigo, nome }) =>
