@@ -1,7 +1,7 @@
 import "./mySelects.css";
 import React, { useEffect, useState } from "react";
 import options from "../DB/local/options";
-import { allLocalJsonData, sqlDataFromJson } from "../DB/local/dataFromJSON";
+import { sqlDataFromJson } from "../DB/local/dataFromJSON";
 import Select, { components } from "react-select";
 // import { updateProfessorFromList } from "../helpers/auxFunctions";
 import { LockedProp, UnlockedProp } from "./Buttons/Dumb/Dumb";
@@ -418,7 +418,7 @@ function SelectAnoSemestre({ ano, setAno, semestre, setSemestre }) {
 
 function SelectDisciplina({ lTurma, setLTurma }) {
   const [disciplina, setDisciplina] = useState(lTurma.disciplina);
-  let disciplinas = allLocalJsonData.SQL.disciplinas;
+  let disciplinas = sqlDataFromJson.subjects;
 
   function updateOuterTurmaDisciplina(novaDisciplina) {
     let disciplinaAtualizada = novaDisciplina ? novaDisciplina : null;
@@ -471,7 +471,7 @@ function SelectProfessor({ lTurma, setLTurma }) {
       onChange={updateOuterTurmaProfessor}
       isClearable={true}
       placeholder="Professor"
-      options={allLocalJsonData.SQL.professores}
+      options={sqlDataFromJson.professors}
       value={professor}
       getOptionValue={(option) => option.nome}
       getOptionLabel={({ nome, apelido, laboratorio, curso }) =>
@@ -491,7 +491,7 @@ function SelectProfessor({ lTurma, setLTurma }) {
 
 function SelectSala({ lTurma, setLTurma, indexHorario }) {
   const [sala, setSala] = useState(lTurma.horarios[indexHorario].sala);
-  let salas = allLocalJsonData.SQL.salas;
+  let salas = sqlDataFromJson.rooms;
 
   function updateOuterTurmaSala(novaSala) {
     let salaAtualizada = novaSala ? novaSala : null;
@@ -770,7 +770,7 @@ function SelectFilterProfessor(outerProfessorStates) {
       className="mySelectList"
       styles={styleWidthFix}
       isClearable
-      options={allLocalJsonData.SQL.professores}
+      options={sqlDataFromJson.professors}
       value={professor}
       onChange={setProfessor}
       getOptionValue={(option) => option.nome}
@@ -786,7 +786,7 @@ function SelectFilterProfessor(outerProfessorStates) {
 
 function SelectFilterRoom(outerRoomStates) {
   const { room, setRoom } = outerRoomStates;
-  let rooms = allLocalJsonData.SQL.salas;
+  let rooms = sqlDataFromJson.rooms;
 
   return (
     <Select

@@ -4,7 +4,6 @@ import CRUDPageSelection from "../../../components/PageSelect";
 import "./ccTable.css";
 import { getTurmasData } from "../../../DB/retrieveData";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
-// import { allLocalJsonData, sqlDataFromJson } from "../../../DB/local/dataFromJSON";
 import { filterDay, filterHour } from "../../../helpers/filters";
 import { FilteringSelects } from "../../../components/filteringSelects";
 

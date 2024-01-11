@@ -1,4 +1,4 @@
-import { allLocalJsonData, sqlDataFromJson } from "../../DB/dataFromJSON";
+import { sqlDataFromJson } from "../../DB/dataFromJSON";
 
 function getPeriodoEsperado(codigoDisciplina) {
   let disciplina = allLocalJsonData.static.infoDisciplinasCC.find(

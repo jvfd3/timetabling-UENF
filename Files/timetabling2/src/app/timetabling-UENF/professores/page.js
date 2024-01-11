@@ -25,7 +25,7 @@ import {
 } from "@/components/buttons/CRUDButtons/CRUDButtons";
 
 function ProfessoresDB() {
-  let defaultProfessores = allLocalJsonData.SQL.professores;
+  let defaultProfessores = sqlDataFromJson.professors;
   const [professores, setProfessores] = useState(defaultProfessores);
   const [professor, setProfessor] = useState(
     defaultProfessores[professores.length - 1]

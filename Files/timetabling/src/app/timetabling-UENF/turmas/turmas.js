@@ -173,8 +173,8 @@ function HorariosTable(myStates) {
 }
 
 function Turmas() {
-  const classIndex = useRef(allLocalJsonData.SQL.turmas.length);
-  const classTimeIndex = useRef(allLocalJsonData.SQL.horarios.length);
+  const classIndex = useRef(sqlDataFromJson.classes.length);
+  const classTimeIndex = useRef(sqlDataFromJson.classtimes.length);
 
   let unifiedHorarios = getFullHorarios();
 

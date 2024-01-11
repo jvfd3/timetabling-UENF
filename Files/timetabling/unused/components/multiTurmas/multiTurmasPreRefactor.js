@@ -121,7 +121,7 @@ function Turmas3() {
     // console.log(disciplinasOferecidas);
 
     // let TodasDisciplinas = allLocalJsonData.static.infoDisciplinasCC;
-    let TodasDisciplinas = allLocalJsonData.SQL.disciplinas;
+    let TodasDisciplinas = sqlDataFromJson.subjects;
 
     // Listar todas os código-nomes de disciplinas que são de semestre ímpar
     // Filtrar todas que são de periodoEsperado%2 == 1

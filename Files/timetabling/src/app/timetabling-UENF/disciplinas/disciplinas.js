@@ -86,7 +86,7 @@ function SubjectCard(mySubjectsStates) {
 }
 
 function Subjects() {
-  const [subjects, setSubjects] = useState(allLocalJsonData.SQL.disciplinas);
+  const [subjects, setSubjects] = useState(sqlDataFromJson.subjects);
   const [subject, setSubject] = useState(subjects[36]);
 
   let mySubjectsStates = { subjects, setSubjects, subject, setSubject };

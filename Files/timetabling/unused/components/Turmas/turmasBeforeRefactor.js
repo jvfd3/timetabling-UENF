@@ -259,7 +259,7 @@ function Turmas2() {
 
       function getInfoAlunos() {
         // let infoAlunos = allLocalJsonData.static.infoAlunos;
-        let infoAlunos = allLocalJsonData.SQL.alunos;
+        let infoAlunos = sqlDataFromJson.students;
         return infoAlunos;
       }
 

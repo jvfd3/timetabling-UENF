@@ -426,8 +426,7 @@ function NotOfferedSubjects(props) {
   // Neste código, filter(Boolean) remove todos os valores falsy do array, incluindo null e undefined.
   // console.log("disciplinasOferecidas", disciplinasOferecidas);
 
-  // let TodasDisciplinas = allLocalJsonData.static.infoDisciplinasCC;
-  let TodasDisciplinas = allLocalJsonData.SQL.disciplinas;
+  let TodasDisciplinas = sqlDataFromJson.subjects;
 
   // Listar todas os código-nomes de disciplinas que são de semestre ímpar
   // Filtrar todas que são de periodoEsperado%2 == 1
@@ -552,8 +551,8 @@ function NotOfferedSubjects(props) {
 }
 
 function Turmas() {
-  const classIndex = useRef(allLocalJsonData.SQL.turmas.length);
-  const classTimeIndex = useRef(allLocalJsonData.SQL.horarios.length);
+  const classIndex = useRef(sqlDataFromJson.classes.length);
+  const classTimeIndex = useRef(sqlDataFromJson.classtimes.length);
 
   let unifiedHorarios = getTurmasData();
 

@@ -1,4 +1,4 @@
-import { allLocalJsonData, sqlDataFromJson } from "../DB/local/dataFromJSON";
+import { sqlDataFromJson } from "../DB/local/dataFromJSON";
 
 function debugFunc(debugClasses, message) {
   let debug = [];
@@ -11,12 +11,12 @@ function debugFunc(debugClasses, message) {
 }
 
 function getByIDturma(idTurma) {
-  let turmas = allLocalJsonData.SQL.turmas;
+  let turmas = sqlDataFromJson.classes;
   return turmas.find((turma) => turma.id === idTurma);
 }
 
 function getByIDhorario(idHorario) {
-  let horarios = allLocalJsonData.SQL.horarios;
+  let horarios = sqlDataFromJson.classtimes;
   return horarios.find((horario) => horario.id === idHorario);
 }
 
@@ -140,32 +140,28 @@ function max(array) {
 }
 
 function getPeriodoEsperado(codigoDisciplina) {
-  // let disciplina = allLocalJsonData.static.infoDisciplinasCC.find(
-  let disciplina = allLocalJsonData.SQL.disciplinas.find(
+  let disciplina = sqlDataFromJson.subjects.find(
     (disciplina) => disciplina.codigo === codigoDisciplina
   );
   return disciplina.periodo;
 }
 
 function getNomeDisciplina(codigoDisciplina) {
-  // let disciplina = allLocalJsonData.static.infoDisciplinasCC.find(
-  let disciplina = allLocalJsonData.SQL.disciplinas.find(
+  let disciplina = sqlDataFromJson.subjects.find(
     (disciplina) => disciplina.codigo === codigoDisciplina
   );
   return disciplina.nome;
 }
 
 function getApelidoDisciplina(codigoDisciplina) {
-  // let disciplina = allLocalJsonData.static.infoDisciplinasCC.find(
-  let disciplina = allLocalJsonData.SQL.disciplinas.find(
+  let disciplina = sqlDataFromJson.subjects.find(
     (disciplina) => disciplina.codigo === codigoDisciplina
   );
   return disciplina.apelido;
 }
 
 function getApelidoProfessor(nomeProfessor) {
-  // let professor = allLocalJsonData.static.infoProfessores.find(
-  let professor = allLocalJsonData.SQL.professores.find(
+  let professor = sqlDataFromJson.professors.find(
     (professor) => professor.nome === nomeProfessor
   );
   return professor.apelido;
@@ -221,8 +217,8 @@ function updateProfessorFromList(oldArray, newProfessor) {
 function appendInfoFromTurmasUsingHorarios(horarios) {
   /* This function is used in the page "Turmas" */
   /* Tá mal feito e repetindo propriedades. Deve ser ajustado com o BD */
-  let turmas = allLocalJsonData.SQL.turmas;
-  let professores = allLocalJsonData.SQL.professores;
+  let turmas = sqlDataFromJson.classes;
+  let professores = sqlDataFromJson.professors;
   let foundTurmas = turmas.filter((turma) =>
     horarios.some((horario) => horario.idTurma === turma.id)
   );
@@ -264,22 +260,22 @@ function appendInfoFromTurmasUsingHorarios(horarios) {
 /* Post refactor */
 
 function getByIDdisciplina(idDisciplina) {
-  let disciplinas = allLocalJsonData.SQL.disciplinas;
+  let disciplinas = sqlDataFromJson.subjects;
   return disciplinas.find((disciplina) => disciplina.id === idDisciplina);
 }
 
 function getByIDprofessor(idProfessor) {
-  let professores = allLocalJsonData.SQL.professores;
+  let professores = sqlDataFromJson.professors;
   return professores.find((professor) => professor.id === idProfessor);
 }
 
 function getByIDsala(idSala) {
-  let salas = allLocalJsonData.SQL.salas;
+  let salas = sqlDataFromJson.rooms;
   return salas.find((sala) => sala.id === idSala);
 }
 
 function getTurmas() {
-  let turmas = allLocalJsonData.SQL.turmas;
+  let turmas = sqlDataFromJson.classes;
   let filledTurmas = turmas.map((turma) => {
     let newTurma = {
       ...turma,
@@ -296,7 +292,7 @@ function getTurmas() {
 }
 
 function getHorarios() {
-  let horarios = allLocalJsonData.SQL.horarios;
+  let horarios = sqlDataFromJson.classtimes;
   let filledHorarios = horarios.map((horario) => {
     let newHorario = {
       ...horario,

@@ -92,7 +92,7 @@ function RoomBaseInfo(myRoomsStates) {
 function ClassesInRoom(room) {
   const { id } = room;
   /* function getTurmas(id) {
-        let horarios = allLocalJsonData.SQL.horarios;
+        let horarios = sqlDataFromJson.classtimes;
         let horariosNestaSala = [];
         for (const chaveTurma in horarios) {
           let horario = horarios[chaveTurma];
@@ -192,7 +192,7 @@ function RoomCard(myRoomsStates) {
 }
 
 function Rooms() {
-  let roomsFromJSON = allLocalJsonData.SQL.salas;
+  let roomsFromJSON = sqlDataFromJson.rooms;
 
   const [rooms, setRooms] = useState(roomsFromJSON);
   const [room, setRoom] = useState(roomsFromJSON[3]);

@@ -88,7 +88,7 @@ function StudentCard(studentStates) {
 }
 
 function Students() {
-  const [students, setStudents] = useState(allLocalJsonData.SQL.alunos);
+  const [students, setStudents] = useState(sqlDataFromJson.students);
   const [student, setStudent] = useState(students[38]); // JVFD
 
   let studentStates = { students, setStudents, student, setStudent };

@@ -1,7 +1,7 @@
 import "../CSS/defaultStyle.css";
 import React, { useEffect, useState } from "react";
 import options from "../../temp/options";
-import { allLocalJsonData, sqlDataFromJson } from "../../../DB/dataFromJSON";
+import { sqlDataFromJson } from "../../../DB/dataFromJSON";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 import {
@@ -14,7 +14,7 @@ import AsyncSelect from "react-select/async";
 import { readData } from "../../functions/CRUD_JSONBIN";
 
 function AsyncProfessor({ professor, setProfessor }) {
-  // let allProf = allLocalJsonData.SQL.professores;
+  // let allProf = sqlDataFromJson.professors;
 
   async function loadOptions() {
     let response = await readProfessores();

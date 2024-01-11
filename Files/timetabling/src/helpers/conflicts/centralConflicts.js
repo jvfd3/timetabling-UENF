@@ -4,7 +4,7 @@ import {
   removeSameId,
   splitTurmas,
 } from "./auxiliarConflictsFunctions";
-import { allLocalJsonData, sqlDataFromJson } from "../../DB/local/dataFromJSON";
+import { sqlDataFromJson } from "../../DB/local/dataFromJSON";
 import {
   getSingleClassDemandConflict,
   searchSameDayAndHour,
@@ -94,8 +94,7 @@ function conflictsDisciplinaPeriodo(turmasListadas, turma) {
   */
 
   let disciplinaDaTurma = turma.disciplina.codigo;
-  // let disciplinas = allLocalJsonData.static.infoDisciplinasCC;
-  let disciplinas = allLocalJsonData.SQL.disciplinas;
+  let disciplinas = sqlDataFromJson.subjects;
 
   // console.log("disciplinaDaTurma", disciplinaDaTurma);
 

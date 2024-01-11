@@ -208,8 +208,7 @@ function DisciplinasMinistradasPeloProfessor() {
       atualizandoProfessores(myProfessores);
       updateData(myProfessores, options.JBVars.bins.infoProfessores);
     }
-    // let disciplinas = allLocalJsonData.static.infoDisciplinasCC;
-    let disciplinas = allLocalJsonData.SQL.disciplinas;
+    let disciplinas = sqlDataFromJson.subjects;
 
     let myNewCurrentOptions = getNomesDasDisciplinas(myCurrentOptions);
     return (

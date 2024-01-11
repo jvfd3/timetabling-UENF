@@ -107,7 +107,7 @@ function ProfessorCard(professorStates) {
 }
 
 function Professors() {
-  let defaultProfessors = allLocalJsonData.SQL.professores;
+  let defaultProfessors = sqlDataFromJson.professors;
 
   const [professors, setProfessors] = useState(defaultProfessors);
   const [professor, setProfessor] = useState(professors[professors.length - 1]);
