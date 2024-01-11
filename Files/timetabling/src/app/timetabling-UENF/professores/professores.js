@@ -11,35 +11,27 @@ import {
   SelectProfessorLab,
 } from "../../../components/mySelects";
 import {
-  safeCreateProfessores,
-  safeReadProfessores,
-  safeUpdateProfessores,
-  safeDeleteProfessores,
-} from "../../../DB/AWS/cleanCodeFromAxios";
-import {
   TextInputProfessorId,
   TextInputProfessorName,
   TextinputProfessorAlias,
 } from "../../../components/MyTextFields";
+import {
+  createProfessor,
+  readProfessor,
+  updateProfessor,
+  deleteProfessor,
+} from "../../../helpers/CRUDFunctions/professorCRUD";
 
 function ProfessorSelection(professorStates) {
-  let crudFunctions = {
-    createFunc: () => {
-      safeCreateProfessores(professorStates);
-    },
-    readFunc: () => {
-      safeReadProfessores(professorStates);
-    },
-    updateFunc: () => {
-      safeUpdateProfessores(professorStates);
-    },
-    deleteFunc: () => {
-      safeDeleteProfessores(professorStates);
-    },
+  let professorCRUDFunctions = {
+    createFunc: () => createProfessor(professorStates),
+    readFunc: () => readProfessor(professorStates),
+    updateFunc: () => updateProfessor(professorStates),
+    deleteFunc: () => deleteProfessor(professorStates),
   };
   return (
     <div className="SelectionBar">
-      <CRUDButtonsContainer {...crudFunctions} />
+      <CRUDButtonsContainer {...professorCRUDFunctions} />
       <SelectProfessorItem {...professorStates} />
     </div>
   );

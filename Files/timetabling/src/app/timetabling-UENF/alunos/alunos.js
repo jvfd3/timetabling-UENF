@@ -14,10 +14,25 @@ import {
   TextInputStudentName,
   TextInputStudentId,
 } from "../../../components/MyTextFields";
+import {
+  createStudent,
+  readStudent,
+  updateStudent,
+  deleteStudent,
+} from "../../../helpers/CRUDFunctions/studentCRUD";
+import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
 
 function StudentSelection(studentStates) {
+  const studentCRUDFunctions = {
+    createFunc: () => createStudent(studentStates),
+    readFunc: () => readStudent(studentStates),
+    updateFunc: () => updateStudent(studentStates),
+    deleteFunc: () => deleteStudent(studentStates),
+  };
+
   return (
     <div className="SelectionBar">
+      <CRUDButtonsContainer {...studentCRUDFunctions} />
       <SelectStudentItem {...studentStates} />
     </div>
   );

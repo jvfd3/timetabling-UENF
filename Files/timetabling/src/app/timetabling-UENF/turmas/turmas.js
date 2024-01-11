@@ -22,17 +22,31 @@ import {
   SmartCreateHora,
   SmartDeleteHora,
 } from "../../../components/Buttons/Smart/Smart";
+import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
+import {
+  createClass,
+  readClass,
+  updateClass,
+  deleteClass,
+} from "../../../helpers/CRUDFunctions/classCRUD";
+import {
+  createClassTime,
+  readClassTime,
+  updateClassTime,
+  deleteClassTime,
+} from "../../../helpers/CRUDFunctions/classTimeCRUD";
 
 function TurmaSelection(myTurmaStates) {
   /* It just contains the selection an maybe allows scrolling selection */
+  const turmaCRUDFunctions = {
+    createFunc: () => createClass(myTurmaStates),
+    readFunc: () => readClass(myTurmaStates),
+    updateFunc: () => updateClass(myTurmaStates),
+    deleteFunc: () => deleteClass(myTurmaStates),
+  };
   return (
-    <div
-      className="SelectionBar"
-      onWheel={(event) => {
-        // let itemStates = [turmas, setTurma, turma];
-        // scrollThroughTurmas(event, itemStates);
-      }}
-    >
+    <div className="SelectionBar">
+      <CRUDButtonsContainer {...turmaCRUDFunctions} />
       <TurmaItemSelection {...myTurmaStates} />
     </div>
   );
@@ -93,6 +107,7 @@ function HorariosTurma(myStates) {
         {quantidadeHorarios > 0 ? "" : "Sem "}
         Horários
       </h3>
+
       {quantidadeHorarios > 0 ? (
         <HorariosTable
           {...myStates}

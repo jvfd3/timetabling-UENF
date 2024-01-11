@@ -12,17 +12,25 @@ import {
   TextInputRoomDescription,
   TextInputRoomId,
 } from "../../../components/MyTextFields";
+import {
+  createRoom,
+  readRoom,
+  updateRoom,
+  deleteRoom,
+} from "../../../helpers/CRUDFunctions/roomCRUD";
+import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
 
-function RoomSelection(myRoomsStates) {
+function RoomSelection(roomStates) {
+  const roomCRUDFunctions = {
+    createFunc: () => createRoom(roomStates),
+    readFunc: () => readRoom(roomStates),
+    updateFunc: () => updateRoom(roomStates),
+    deleteFunc: () => deleteRoom(roomStates),
+  };
   return (
-    <div
-      className="SelectionBar"
-      onWheel={(event) => {
-        // let itemStates = [salasFromJson, setSala, sala];
-        // scrollThroughSalas(event, itemStates);
-      }}
-    >
-      <SelectRoomItem {...myRoomsStates} />
+    <div className="SelectionBar">
+      <CRUDButtonsContainer {...roomCRUDFunctions} />
+      <SelectRoomItem {...roomStates} />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import "./disciplinas.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
@@ -14,10 +14,25 @@ import {
   TextInputSubjectAlias,
   TextInputSubjectId,
 } from "../../../components/MyTextFields";
+import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
+import {
+  createSubject,
+  readSubject,
+  updateSubject,
+  deleteSubject,
+} from "../../../helpers/CRUDFunctions/subjectCRUD";
 
 function SubjectSelection(mySubjectsStates) {
+  const subjectCRUDFunctions = {
+    createFunc: () => createSubject(mySubjectsStates),
+    readFunc: () => readSubject(mySubjectsStates),
+    updateFunc: () => updateSubject(mySubjectsStates),
+    deleteFunc: () => deleteSubject(mySubjectsStates),
+  };
+
   return (
     <div className="SelectionBar">
+      <CRUDButtonsContainer {...subjectCRUDFunctions} />
       <SelectSubjectItem {...mySubjectsStates} />
     </div>
   );
@@ -87,6 +102,8 @@ function Subjects() {
   const [subject, setSubject] = useState(subjects[36]);
 
   let mySubjectsStates = { subjects, setSubjects, subject, setSubject };
+
+  useEffect(() => {}), [subject.apelido];
 
   return (
     <div className="CRUDContainComponents">
