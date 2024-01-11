@@ -457,7 +457,6 @@ function SelectDisciplina({ lTurma, setLTurma }) {
 
 function SelectProfessor({ lTurma, setLTurma }) {
   const [professor, setProfessor] = useState(lTurma.professor);
-  let professores = allLocalJsonData.SQL.professores;
 
   function updateOuterTurmaProfessor(novoProfessor) {
     let professorAtualizado = novoProfessor ? novoProfessor : null;
@@ -473,7 +472,7 @@ function SelectProfessor({ lTurma, setLTurma }) {
       onChange={updateOuterTurmaProfessor}
       isClearable={true}
       placeholder="Professor"
-      options={professores}
+      options={allLocalJsonData.SQL.professores}
       value={professor}
       getOptionValue={(option) => option.nome}
       getOptionLabel={({ nome, apelido, laboratorio, curso }) =>
@@ -789,7 +788,6 @@ function SelectFilterSemester(outerSemesterStates) {
 
 function SelectFilterProfessor(outerProfessorStates) {
   const { professor, setProfessor } = outerProfessorStates;
-  let professors = allLocalJsonData.SQL.professores;
 
   return (
     <Select
@@ -797,7 +795,7 @@ function SelectFilterProfessor(outerProfessorStates) {
       className="mySelectList"
       styles={styleWidthFix}
       isClearable
-      options={professors}
+      options={allLocalJsonData.SQL.professores}
       value={professor}
       onChange={setProfessor}
       getOptionValue={(option) => option.nome}
