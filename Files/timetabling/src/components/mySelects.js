@@ -882,7 +882,7 @@ function SelectProfessorLab({
   setProfessor,
 }) {
   function updateProfessorLab(newLab) {
-    let newProfessor = { ...professore, laboratorio: newLab?.apelido ?? null };
+    let newProfessor = { ...professor, laboratorio: newLab?.apelido ?? null };
     setProfessor(newProfessor);
     // let newProfessors = updateProfessorFromList(professors, newProfessor);
     // setProfessors(newProfessors);
