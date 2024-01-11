@@ -201,6 +201,195 @@ function SelectBlock({ outerBlock, setOuterBlock }) {
   );
 }
 
+function SelectExpectedSemester({
+  outerExpectedSemester,
+  setOuterExpectedSemester,
+}) {
+  let expectedSemesters = options.constantValues.expectedSemester;
+
+  function findExpectedSemesterObject(expectedSemester) {
+    let expectedSemesterObject = options.constantValues.expectedSemester.find(
+      (iterExpectedSemester) => iterExpectedSemester.value == expectedSemester
+    );
+    return expectedSemesterObject;
+  }
+
+  return (
+    <DefaultSelect
+      placeHolderText="Semestre esperado"
+      isClearable={false}
+      options={expectedSemesters}
+      setOuterValue={setOuterExpectedSemester}
+      findCorrectObject={findExpectedSemesterObject}
+      value={outerExpectedSemester}
+    />
+  );
+}
+
+/* \ Others: I'm not even sure if are still used / */
+function SelectAnoTurma({ lTurma, setLTurma }) {
+  let anos = options.constantValues.years;
+  let anoSelecionado = anos.find((ano) => ano.value === parseInt(lTurma.ano));
+  const [ano, setAno] = useState(anoSelecionado);
+  function updateOuterValue(novoAno) {
+    if (novoAno === null) {
+      novoAno = { value: "", label: "" };
+    }
+    setAno(novoAno);
+    let novaTurma = {
+      ...lTurma,
+      ano: novoAno.value,
+    };
+    setLTurma(novaTurma);
+  }
+  return (
+    <Select
+      onChange={updateOuterValue}
+      className="mySelectList"
+      styles={styleWidthFix}
+      isClearable={false}
+      placeholder="Ano"
+      options={anos}
+      value={ano}
+    />
+  );
+}
+
+function SelectSemestreTurma({ lTurma, setLTurma }) {
+  let semestres = options.constantValues.semesters;
+
+  let semestreSelecionado = semestres.find(
+    (semestre) => semestre.value === parseInt(lTurma.semestre)
+  );
+
+  const [semestre, setSemestre] = useState(semestreSelecionado);
+
+  function updateOuterValue(novoSemestre) {
+    if (novoSemestre === null) {
+      novoSemestre = { value: "", label: "" };
+    }
+    setSemestre(novoSemestre);
+    let novaTurma = {
+      ...lTurma,
+      semestre: novoSemestre.value,
+    };
+    setLTurma(novaTurma);
+  }
+
+  return (
+    <Select
+      onChange={updateOuterValue}
+      className="mySelectList"
+      styles={styleWidthFix}
+      isClearable={false}
+      placeholder="Semestre"
+      options={semestres}
+      value={semestre}
+    />
+  );
+}
+
+function SelectProfessorC(props) {
+  const {
+    professorAtual,
+    setNewProfessor,
+    professoresAtuais,
+    setNewProfessores,
+  } = props;
+
+  const [professores, setProfessores] = useState(professoresAtuais);
+  let professorSelecionado = professorAtual;
+  // let professorSelecionado = professores.find(
+  //   (professor) => professor.nome === lTurma.professor
+  // );
+  const [professor, setProfessor] = useState(professorSelecionado);
+  const [isLoading, setIsLoading] = useState(false);
+
+  function updateOuterTurma(novoProfessor) {
+    if (novoProfessor === null) {
+      novoProfessor = { nome: "" };
+    }
+    setProfessor(novoProfessor);
+    setNewProfessor(novoProfessor);
+  }
+
+  function createOption(newValue) {
+    let newOption = {
+      laboratorio: null,
+      curso: null,
+      nome: newValue,
+      disciplinas: [],
+    };
+    return newOption;
+  }
+  function handleCreate(newValue) {
+    setIsLoading(true);
+    setTimeout(() => {
+      const newOption = createOption(newValue);
+      setIsLoading(false);
+      setNewProfessores((prev) => [...prev, newOption]);
+      setProfessores((prev) => [...prev, newOption]);
+      setProfessor(newOption);
+      setNewProfessor(newOption);
+    }, 1000);
+  }
+
+  return (
+    <CreatableSelect
+      onChange={updateOuterTurma}
+      className="mySelectList"
+      styles={styleWidthFix}
+      isClearable={true}
+      onCreateOption={handleCreate}
+      isDisabled={isLoading}
+      isLoading={isLoading}
+      isSearchable
+      options={professores}
+      value={professor}
+      getOptionValue={(option) => option.nome}
+      getOptionLabel={(option) => option.nome}
+      placeholder="Professor"
+    />
+  );
+}
+
+function SelectPeriodoEsperado(myDisciplinasStates) {
+  const { /* disciplinas, setDisciplinas, */ disciplina, setDisciplina } =
+    myDisciplinasStates;
+  let periodos = options.constantValues.expectedSemester;
+  function findPeriodo(periodoValue) {
+    let periodoSelecionado = periodos.find(
+      (periodo) => periodo.value === periodoValue
+    );
+    return periodoSelecionado;
+  }
+  const [periodo, setPeriodo] = useState(findPeriodo(disciplina.periodo));
+
+  useEffect(() => {
+    setPeriodo(findPeriodo(disciplina.periodo));
+  }, [disciplina.periodo]);
+
+  function outerUpdate(newPeriodo) {
+    setPeriodo(newPeriodo);
+    let novaDisciplina = { ...disciplina };
+    novaDisciplina.periodo = newPeriodo.value;
+    setDisciplina(novaDisciplina);
+  }
+
+  return (
+    <Select
+      placeholder="Período Esperado"
+      className="mySelectList"
+      styles={styleWidthFix}
+      isClearable={false}
+      options={periodos}
+      value={periodo}
+      onChange={outerUpdate}
+    />
+  );
+}
+/* / Are they used? \ */
+
 /* \/ \/ \/ \/ \/ \/ \/ \/ MULTITURMAS \/ \/ \/ \/ \/ \/ \/ \/ */
 
 function SelectAno({ outerAno, setOuterAno }) {
@@ -571,116 +760,6 @@ function SelectTesting() {
 
 /* \/ \/ \/ \/ \/ \/ \/ \/ Item Selections \/ \/ \/ \/ \/ \/ \/ \/ */
 
-function StudentSelection(studentStates) {
-  const { students, setStudents, student, setStudent } = studentStates;
-  return (
-    <div
-      className="SelectionBar"
-      onWheel={(event) => {
-        // let itemStates = [dados_agrupados, setAluno, aluno];
-        // scrollThroughAlunos(event, itemStates);
-      }}
-    >
-      <Select
-        onChange={setStudent}
-        className="itemSelectionBar"
-        styles={styleWidthFix}
-        isClearable={false}
-        value={student}
-        placeholder={"Nome do aluno"}
-        isSearchable={true}
-        options={students}
-        getOptionValue={(student) => student.matricula}
-        getOptionLabel={(student) => student.nome}
-        formatOptionLabel={({ matricula, nome }) => `${matricula}: ${nome}`}
-        // formatOptionLabel={(student) => `${student.matricula}: ${student.nome}`}
-      />
-    </div>
-  );
-}
-
-function DisciplinasSelection(subjectsStates) {
-  const { disciplinas, setDisciplinas, disciplina, setDisciplina } =
-    subjectsStates;
-
-  const subjects = disciplinas;
-  // const setSubjects = setDisciplinas;
-  const subject = disciplina;
-  const setSubject = setDisciplina;
-
-  return (
-    <div
-      className="SelectionBar"
-      onWheel={(event) => {
-        // let itemStates = [disciplinas, setDisciplina, disciplina];
-        // scrollThroughDisciplinas(event, itemStates);
-      }}
-    >
-      <Select
-        className="itemSelectionBar"
-        styles={styleWidthFix}
-        isClearable={false}
-        onChange={setSubject}
-        placeholder={"Disciplina"}
-        value={subject}
-        options={subjects}
-        getOptionValue={(disciplina) => disciplina.codigo}
-        getOptionLabel={(disciplina) => disciplina.nome}
-        formatOptionLabel={({ periodo, codigo, nome }) =>
-          `(${periodo}) ${codigo}: ${nome}`
-        }
-      />
-    </div>
-  );
-}
-
-function ProfessorItemSelection(professorStates) {
-  const { professores, /* setProfessores, */ professor, setProfessor } =
-    professorStates;
-  return (
-    <Select
-      className="itemSelectionBar"
-      styles={styleWidthFix}
-      isClearable={false}
-      onChange={setProfessor}
-      options={professores}
-      value={professor}
-      getOptionValue={(option) => option.id}
-      getOptionLabel={({ laboratorio, curso, apelido }) => {
-        let message = "";
-        message += `(`;
-        message += `${laboratorio || "lab indef."} - `;
-        message += `${curso || "cur indef."}) - `;
-        message += `${apelido || "Apelido indef."}`;
-        return message;
-      }}
-    />
-  );
-}
-
-function ItemSelectionRoom(mySalasStates) {
-  const { rooms, setRooms, room, setRoom } = mySalasStates;
-  return (
-    <Select
-      className="itemSelectionBar"
-      styles={styleWidthFix}
-      isClearable={false}
-      onChange={setRoom}
-      options={rooms}
-      value={room}
-      getOptionValue={(option) => option.id}
-      getOptionLabel={(option) => option.capacidade}
-      formatOptionLabel={({ capacidade, bloco, codigo }) => {
-        let msg = "";
-        msg += capacidade ? `(${capacidade})` : "(Cap. indef.)";
-        msg += bloco ? ` ${bloco}` : "(Bloco indef.)";
-        msg += codigo ? ` - ${codigo}` : " (Cod. indef.)";
-        return msg;
-      }}
-    />
-  );
-}
-
 function TurmaItemSelection(turmasStates) {
   const { turmas, setTurmas, turma, setTurma } = turmasStates;
   return (
@@ -707,117 +786,6 @@ function TurmaItemSelection(turmasStates) {
 }
 
 /* /\ /\ /\ /\ /\ /\ /\ /\ Item Selections /\ /\ /\ /\ /\ /\ /\ /\ */
-
-function SelectLaboratorio(professorStates) {
-  const { professores, setProfessores, professor, setProfessor } =
-    professorStates;
-  let laboratorios = options.constantValues.laboratorios;
-  let selectedLab = professor.laboratorio;
-  let labSelecionado = getLab(selectedLab);
-  const [laboratorio, setLaboratorio] = useState(labSelecionado);
-
-  useEffect(() => {
-    setLaboratorio(labSelecionado);
-  }, [professor.laboratorio]);
-
-  function getLab(apelidoLab) {
-    let foundLab = laboratorios.find(
-      (labOption) => labOption.apelido === apelidoLab
-    );
-    let returnedLab = foundLab ?? null;
-    return returnedLab;
-  }
-
-  function updateOuterProfessorLab(selectedLab) {
-    let newLabValue = null;
-    if (selectedLab) {
-      newLabValue = selectedLab.apelido;
-    }
-    let newProfessor = {
-      ...professor,
-      laboratorio: newLabValue,
-    };
-    setLaboratorio(selectedLab);
-    setProfessor(newProfessor);
-    let newProfessores = updateProfessorFromList(professores, newProfessor);
-    setProfessores(newProfessores);
-  }
-
-  return (
-    <Select
-      value={laboratorio}
-      options={laboratorios}
-      onChange={updateOuterProfessorLab}
-      className="mySelectList"
-      placeholder="Laboratório"
-      styles={styleWidthFix}
-      isClearable={true}
-      getOptionValue={(lab) => lab.apelido}
-      getOptionLabel={(lab) => `${lab.centro} -${lab.apelido} - ${lab.nome}`}
-      formatOptionLabel={({ centro, apelido, nome }, { context }) => {
-        let isOpened = context === "value";
-        let message = isOpened ? `${apelido}` : `${apelido} - ${nome}`;
-        return message;
-      }}
-    />
-  );
-}
-
-function SelectCurso(professorStates) {
-  const { professores, setProfessores, professor, setProfessor } =
-    professorStates;
-  let cursos = options.constantValues.courses;
-
-  let selectedCurso = professor.curso;
-  let cursoSelecionado = getCurso(selectedCurso);
-  const [curso, setCurso] = useState(cursoSelecionado);
-
-  useEffect(() => {
-    setCurso(cursoSelecionado);
-  }, [professor.curso]);
-
-  function getCurso(apelidoCurso) {
-    let foundCurso = cursos.find((curso) => curso.apelido === apelidoCurso);
-    let returnedCurso = foundCurso ?? null;
-    return returnedCurso;
-  }
-
-  function updateCurso(selectedCurso) {
-    let newCursoValue = null;
-    if (selectedCurso) {
-      newCursoValue = selectedCurso.apelido;
-    }
-    let newProfessor = {
-      ...professor,
-      curso: newCursoValue,
-    };
-    setCurso(selectedCurso);
-    setProfessor(newProfessor);
-    let newProfessores = updateProfessorFromList(professores, newProfessor);
-    setProfessores(newProfessores);
-  }
-
-  return (
-    <Select
-      value={curso}
-      options={cursos}
-      onChange={updateCurso}
-      className="mySelectList"
-      placeholder="Curso"
-      styles={styleWidthFix}
-      isClearable={true}
-      getOptionValue={(curso) => curso.apelido}
-      getOptionLabel={(curso) => `${curso.apelido} - ${curso.nome}`}
-      formatOptionLabel={({ apelido, nome }, { context }) => {
-        let isOpened = context === "value";
-        let message = isOpened ? `${apelido}` : `${nome}`;
-        return message;
-      }}
-    />
-  );
-}
-
-/* /\ /\ /\ /\ /\ /\ /\ /\ Página Professores /\ /\ /\ /\ /\ /\ /\ /\ */
 
 function SelectFilterAno(outerAnoStates) {
   let years = options.constantValues.years;
@@ -936,42 +904,181 @@ function SelectFilterExpectedSemester(outerExpectedSemesterStates) {
 
 /* /\ /\ /\ /\ /\ /\ /\ /\ CCTurma filtering Selects /\ /\ /\ /\ /\ /\ /\ /\ */
 
-/* \ CRUD STUDENTS / */
+/* \\ CRUD // */
 
-function SelectStudentYear(myStudentStates) {
-  const { student, setStudent } = myStudentStates;
+/* \ Professor / */
 
-  function updateStudentYear(newYear) {
-    // console.log(newYear);
-    let newStudent = { ...student, anoEntrada: newYear.value };
-    setStudent(newStudent);
-  }
-
-  let yearStates = {
-    outerYear: student.anoEntrada,
-    setOuterYear: updateStudentYear,
-  };
-
-  return <SelectYear {...yearStates} />;
+function SelectProfessorItem(professorStates) {
+  const { professores, /* setProfessores, */ professor, setProfessor } =
+    professorStates;
+  return (
+    <Select
+      className="itemSelectionBar"
+      styles={styleWidthFix}
+      isClearable={false}
+      onChange={setProfessor}
+      options={professores}
+      value={professor}
+      getOptionValue={(option) => option.id}
+      getOptionLabel={({ laboratorio, curso, apelido }) => {
+        let message = "";
+        message += `(`;
+        message += `${laboratorio || "lab indef."} - `;
+        message += `${curso || "cur indef."}) - `;
+        message += `${apelido || "Apelido indef."}`;
+        return message;
+      }}
+    />
+  );
 }
 
-function SelectStudentCourse(myStudentStates) {
-  const { student, setStudent } = myStudentStates;
+function SelectLaboratorio(professorStates) {
+  const { professores, setProfessores, professor, setProfessor } =
+    professorStates;
+  let laboratorios = options.constantValues.laboratorios;
+  let selectedLab = professor.laboratorio;
+  let labSelecionado = getLab(selectedLab);
+  const [laboratorio, setLaboratorio] = useState(labSelecionado);
 
-  function updateStudentCourse(newCourse) {
-    let newStudent = { ...student, curso: newCourse.value };
-    setStudent(newStudent);
+  useEffect(() => {
+    setLaboratorio(labSelecionado);
+  }, [professor.laboratorio]);
+
+  function getLab(apelidoLab) {
+    let foundLab = laboratorios.find(
+      (labOption) => labOption.apelido === apelidoLab
+    );
+    let returnedLab = foundLab ?? null;
+    return returnedLab;
+  }
+
+  function updateOuterProfessorLab(selectedLab) {
+    let newLabValue = null;
+    if (selectedLab) {
+      newLabValue = selectedLab.apelido;
+    }
+    let newProfessor = {
+      ...professor,
+      laboratorio: newLabValue,
+    };
+    setLaboratorio(selectedLab);
+    setProfessor(newProfessor);
+    let newProfessores = updateProfessorFromList(professores, newProfessor);
+    setProfessores(newProfessores);
+  }
+
+  return (
+    <Select
+      value={laboratorio}
+      options={laboratorios}
+      onChange={updateOuterProfessorLab}
+      className="mySelectList"
+      placeholder="Laboratório"
+      styles={styleWidthFix}
+      isClearable={true}
+      getOptionValue={(lab) => lab.apelido}
+      getOptionLabel={(lab) => `${lab.centro} -${lab.apelido} - ${lab.nome}`}
+      formatOptionLabel={({ centro, apelido, nome }, { context }) => {
+        let isOpened = context === "value";
+        let message = isOpened ? `${apelido}` : `${apelido} - ${nome}`;
+        return message;
+      }}
+    />
+  );
+}
+
+function SelectCurso(professorStates) {
+  const { professores, setProfessores, professor, setProfessor } =
+    professorStates;
+  let cursos = options.constantValues.courses;
+
+  let selectedCurso = professor.curso;
+  let cursoSelecionado = getCurso(selectedCurso);
+  const [curso, setCurso] = useState(cursoSelecionado);
+
+  useEffect(() => {
+    setCurso(cursoSelecionado);
+  }, [professor.curso]);
+
+  function getCurso(apelidoCurso) {
+    let foundCurso = cursos.find((curso) => curso.apelido === apelidoCurso);
+    let returnedCurso = foundCurso ?? null;
+    return returnedCurso;
+  }
+
+  function updateCurso(selectedCurso) {
+    let newCursoValue = null;
+    if (selectedCurso) {
+      newCursoValue = selectedCurso.apelido;
+    }
+    let newProfessor = {
+      ...professor,
+      curso: newCursoValue,
+    };
+    setCurso(selectedCurso);
+    setProfessor(newProfessor);
+    let newProfessores = updateProfessorFromList(professores, newProfessor);
+    setProfessores(newProfessores);
+  }
+
+  return (
+    <Select
+      value={curso}
+      options={cursos}
+      onChange={updateCurso}
+      className="mySelectList"
+      placeholder="Curso"
+      styles={styleWidthFix}
+      isClearable={true}
+      getOptionValue={(curso) => curso.apelido}
+      getOptionLabel={(curso) => `${curso.apelido} - ${curso.nome}`}
+      formatOptionLabel={({ apelido, nome }, { context }) => {
+        let isOpened = context === "value";
+        let message = isOpened ? `${apelido}` : `${nome}`;
+        return message;
+      }}
+    />
+  );
+}
+
+function SelectProfessorCourse({ professor, setProfessor }) {
+  function updateProfessorCourse(newCourse) {
+    let newProfessor = { ...professor, curso: newCourse.apelido };
+    setProfessor(newProfessor);
   }
 
   let courseStates = {
-    outerCourse: student.curso,
-    setOuterCourse: updateStudentCourse,
+    outerCourse: professor.curso,
+    setOuterCourse: updateProfessorCourse,
   };
 
   return <SelectCourse {...courseStates} />;
 }
 
-/* \ CRUD ROOMS / */
+/* \ Rooms / */
+
+function SelectRoomItem(mySalasStates) {
+  const { rooms, setRooms, room, setRoom } = mySalasStates;
+  return (
+    <Select
+      className="itemSelectionBar"
+      styles={styleWidthFix}
+      isClearable={false}
+      onChange={setRoom}
+      options={rooms}
+      value={room}
+      getOptionValue={(option) => option.id}
+      getOptionLabel={(option) => option.capacidade}
+      formatOptionLabel={({ capacidade, bloco, codigo }) => {
+        let msg = "";
+        msg += capacidade ? `(${capacidade})` : "(Cap. indef.)";
+        msg += bloco ? ` ${bloco}` : "(Bloco indef.)";
+        msg += codigo ? ` - ${codigo}` : " (Cod. indef.)";
+        return msg;
+      }}
+    />
+  );
+}
 
 function SelectRoomBlock(myRoomStates) {
   const { room, setRoom } = myRoomStates;
@@ -996,167 +1103,108 @@ function SelectRoomBlock(myRoomStates) {
   return <SelectBlock {...blockStates} />;
 }
 
-/* \ Others: I'm not even sure if are still used / */
-function SelectAnoTurma({ lTurma, setLTurma }) {
-  let anos = options.constantValues.years;
-  let anoSelecionado = anos.find((ano) => ano.value === parseInt(lTurma.ano));
-  const [ano, setAno] = useState(anoSelecionado);
-  function updateOuterValue(novoAno) {
-    if (novoAno === null) {
-      novoAno = { value: "", label: "" };
-    }
-    setAno(novoAno);
-    let novaTurma = {
-      ...lTurma,
-      ano: novoAno.value,
-    };
-    setLTurma(novaTurma);
-  }
+/* \\ Subjects // */
+
+function SelectSubjectItem(subjectsStates) {
+  const { subjects, setSubjects, subject, setSubject } = subjectsStates;
+
   return (
-    <Select
-      onChange={updateOuterValue}
-      className="mySelectList"
-      styles={styleWidthFix}
-      isClearable={false}
-      placeholder="Ano"
-      options={anos}
-      value={ano}
-    />
+    <div
+      className="SelectionBar"
+      onWheel={(event) => {
+        // let itemStates = [disciplinas, setDisciplina, disciplina];
+        // scrollThroughDisciplinas(event, itemStates);
+      }}
+    >
+      <Select
+        className="itemSelectionBar"
+        styles={styleWidthFix}
+        isClearable={false}
+        onChange={setSubject}
+        placeholder={"Disciplina"}
+        value={subject}
+        options={subjects}
+        getOptionValue={(disciplina) => disciplina.codigo}
+        getOptionLabel={(disciplina) => disciplina.nome}
+        formatOptionLabel={({ periodo, codigo, nome }) =>
+          `(${periodo}) ${codigo}: ${nome}`
+        }
+      />
+    </div>
   );
 }
 
-function SelectSemestreTurma({ lTurma, setLTurma }) {
-  let semestres = options.constantValues.semesters;
-
-  let semestreSelecionado = semestres.find(
-    (semestre) => semestre.value === parseInt(lTurma.semestre)
-  );
-
-  const [semestre, setSemestre] = useState(semestreSelecionado);
-
-  function updateOuterValue(novoSemestre) {
-    if (novoSemestre === null) {
-      novoSemestre = { value: "", label: "" };
-    }
-    setSemestre(novoSemestre);
-    let novaTurma = {
-      ...lTurma,
-      semestre: novoSemestre.value,
-    };
-    setLTurma(novaTurma);
+function SelectSubjectExpectedSemester({ subject, setSubject }) {
+  function updateDisciplinaExpectedSemester(newExpectedSemester) {
+    let newDisciplina = { ...subject, periodo: newExpectedSemester.value };
+    setSubject(newDisciplina);
   }
 
+  let expectedSemesterStates = {
+    outerExpectedSemester: subject.periodo,
+    setOuterExpectedSemester: updateDisciplinaExpectedSemester,
+  };
+
+  return <SelectExpectedSemester {...expectedSemesterStates} />;
+}
+
+/* \ Students / */
+
+function SelectStudentItem(studentStates) {
+  const { students, setStudents, student, setStudent } = studentStates;
   return (
-    <Select
-      onChange={updateOuterValue}
-      className="mySelectList"
-      styles={styleWidthFix}
-      isClearable={false}
-      placeholder="Semestre"
-      options={semestres}
-      value={semestre}
-    />
+    <div
+      className="SelectionBar"
+      onWheel={(event) => {
+        // let itemStates = [dados_agrupados, setAluno, aluno];
+        // scrollThroughAlunos(event, itemStates);
+      }}
+    >
+      <Select
+        onChange={setStudent}
+        className="itemSelectionBar"
+        styles={styleWidthFix}
+        isClearable={false}
+        value={student}
+        placeholder={"Nome do aluno"}
+        isSearchable={true}
+        options={students}
+        getOptionValue={(student) => student.matricula}
+        getOptionLabel={(student) => student.nome}
+        formatOptionLabel={({ matricula, nome }) => `${matricula}: ${nome}`}
+        // formatOptionLabel={(student) => `${student.matricula}: ${student.nome}`}
+      />
+    </div>
   );
 }
 
-function SelectProfessorC(props) {
-  const {
-    professorAtual,
-    setNewProfessor,
-    professoresAtuais,
-    setNewProfessores,
-  } = props;
-
-  const [professores, setProfessores] = useState(professoresAtuais);
-  let professorSelecionado = professorAtual;
-  // let professorSelecionado = professores.find(
-  //   (professor) => professor.nome === lTurma.professor
-  // );
-  const [professor, setProfessor] = useState(professorSelecionado);
-  const [isLoading, setIsLoading] = useState(false);
-
-  function updateOuterTurma(novoProfessor) {
-    if (novoProfessor === null) {
-      novoProfessor = { nome: "" };
-    }
-    setProfessor(novoProfessor);
-    setNewProfessor(novoProfessor);
+function SelectStudentYear({ student, setStudent }) {
+  function updateStudentYear(newYear) {
+    // console.log(newYear);
+    let newStudent = { ...student, anoEntrada: newYear.value };
+    setStudent(newStudent);
   }
 
-  function createOption(newValue) {
-    let newOption = {
-      laboratorio: null,
-      curso: null,
-      nome: newValue,
-      disciplinas: [],
-    };
-    return newOption;
-  }
-  function handleCreate(newValue) {
-    setIsLoading(true);
-    setTimeout(() => {
-      const newOption = createOption(newValue);
-      setIsLoading(false);
-      setNewProfessores((prev) => [...prev, newOption]);
-      setProfessores((prev) => [...prev, newOption]);
-      setProfessor(newOption);
-      setNewProfessor(newOption);
-    }, 1000);
-  }
+  let yearStates = {
+    outerYear: student.anoEntrada,
+    setOuterYear: updateStudentYear,
+  };
 
-  return (
-    <CreatableSelect
-      onChange={updateOuterTurma}
-      className="mySelectList"
-      styles={styleWidthFix}
-      isClearable={true}
-      onCreateOption={handleCreate}
-      isDisabled={isLoading}
-      isLoading={isLoading}
-      isSearchable
-      options={professores}
-      value={professor}
-      getOptionValue={(option) => option.nome}
-      getOptionLabel={(option) => option.nome}
-      placeholder="Professor"
-    />
-  );
+  return <SelectYear {...yearStates} />;
 }
 
-function SelectPeriodoEsperado(myDisciplinasStates) {
-  const { /* disciplinas, setDisciplinas, */ disciplina, setDisciplina } =
-    myDisciplinasStates;
-  let periodos = options.constantValues.expectedSemester;
-  function findPeriodo(periodoValue) {
-    let periodoSelecionado = periodos.find(
-      (periodo) => periodo.value === periodoValue
-    );
-    return periodoSelecionado;
-  }
-  const [periodo, setPeriodo] = useState(findPeriodo(disciplina.periodo));
-
-  useEffect(() => {
-    setPeriodo(findPeriodo(disciplina.periodo));
-  }, [disciplina.periodo]);
-
-  function outerUpdate(newPeriodo) {
-    setPeriodo(newPeriodo);
-    let novaDisciplina = { ...disciplina };
-    novaDisciplina.periodo = newPeriodo.value;
-    setDisciplina(novaDisciplina);
+function SelectStudentCourse({ student, setStudent }) {
+  function updateStudentCourse(newCourse) {
+    let newStudent = { ...student, curso: newCourse.apelido };
+    setStudent(newStudent);
   }
 
-  return (
-    <Select
-      placeholder="Período Esperado"
-      className="mySelectList"
-      styles={styleWidthFix}
-      isClearable={false}
-      options={periodos}
-      value={periodo}
-      onChange={outerUpdate}
-    />
-  );
+  let courseStates = {
+    outerCourse: student.curso,
+    setOuterCourse: updateStudentCourse,
+  };
+
+  return <SelectCourse {...courseStates} />;
 }
 
 export {
@@ -1166,35 +1214,48 @@ export {
   SelectProfessor,
   SelectDisciplina,
   SelectTesting,
+
   /* MTT: Horario */
   SelectSala,
   SelectDia,
   SelectHoraTang,
   SelectDuracao,
-  /* Item Selection */
-  StudentSelection,
-  DisciplinasSelection,
-  ProfessorItemSelection,
-  ItemSelectionRoom,
-  TurmaItemSelection,
+
   /* CCTurma */
   SelectFilterAno,
   SelectFilterSemester,
   SelectFilterProfessor,
   SelectFilterRoom,
   SelectFilterExpectedSemester,
-  /* CRUD */
-  /* student */
-  SelectStudentYear,
-  SelectStudentCourse,
-  /* room */
-  SelectRoomBlock,
+
   /* Outros */
   SelectPeriodoEsperado,
-  SelectCurso,
   SelectAnoTurma,
   SelectProfessorC,
   SelectAnoSemestre,
-  SelectLaboratorio,
   SelectSemestreTurma,
+
+  /* \\ CRUD // */
+
+  /* \ Class / */
+  TurmaItemSelection,
+
+  /* \ Professor / */
+  SelectProfessorItem,
+  SelectLaboratorio,
+  SelectCurso,
+  SelectProfessorCourse,
+
+  /* Room */
+  SelectRoomItem,
+  SelectRoomBlock,
+
+  /* \ Subject / */
+  SelectSubjectItem,
+  SelectSubjectExpectedSemester,
+
+  /* Student */
+  SelectStudentItem,
+  SelectStudentYear,
+  SelectStudentCourse,
 };

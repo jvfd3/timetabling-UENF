@@ -62,80 +62,7 @@ function TextInputDefault(myStates) {
   );
 }
 
-/* \\ CRUD // */
-
-/* \ Professor / */
-
-function TextInputNomeProfessor(props) {
-  let { professores, setProfessores, professor, setProfessor } = props;
-  // console.log("Tinp", professor);
-  // console.log("Tinp>nome:", professor.nome);
-  const [nomeProfessor, setNomeProfessor] = useState(professor.nome);
-
-  useEffect(() => {
-    // console.log(professor.nome);
-    setNomeProfessor(professor.nome);
-  }, [professor.nome]);
-
-  function updateNomeProfessor(event) {
-    let newNome = event.target.value;
-    let newProfessor = { ...professor, nome: newNome };
-    setNomeProfessor(newNome);
-    setProfessor(newProfessor);
-  }
-
-  return (
-    <TextField
-      fullWidth
-      id="Nome1"
-      key="Nome2"
-      label="Nome"
-      variant="outlined"
-      value={nomeProfessor}
-      onChange={updateNomeProfessor}
-    />
-  );
-}
-
-function TextInputApelidoProfessor(props) {
-  let { professor, setProfessor } = props;
-  const [apelidoProfessor, setApelidoProfessor] = useState(professor.apelido);
-
-  useEffect(() => {
-    setApelidoProfessor(professor.apelido);
-  }, [professor.apelido]);
-
-  function handleChange(event) {
-    let newApelido = event.target.value;
-    let newProfessor = { ...professor, apelido: newApelido };
-    setApelidoProfessor(newApelido);
-    setProfessor(newProfessor);
-  }
-
-  return (
-    <TextField
-      fullWidth
-      id="Apelido1"
-      key="Apelido2"
-      label="Apelido do Professor"
-      variant="outlined"
-      value={apelidoProfessor}
-      onChange={handleChange}
-    />
-  );
-}
-
-function TextInputIdProfessor(props) {
-  return (
-    <TextField
-      className="h"
-      value={props.professor.id}
-      // fullWidth
-      label="ID do Professor"
-      disabled
-    />
-  );
-}
+/* \\ MultiClasses // */
 
 function NumberInputMultiClassesExpectedDemand(myClassStates) {
   let generalStates = {
@@ -156,246 +83,273 @@ function NumberInputMultiClassesExpectedDemand(myClassStates) {
   return <TextInputDefault {...capacityStates} />;
 }
 
+/* \\ CRUD // */
+
+/* \ Professor / */
+
+function TextInputProfessorName({
+  professors,
+  setProfessors,
+  professor,
+  setProfessor,
+}) {
+  const generalStates = {
+    items: professors,
+    setItems: setProfessors,
+    item: professor,
+    setItem: setProfessor,
+  };
+  const specificValues = {
+    mainValue: professor.nome,
+    getNewItemObject: (newValue) => ({ ...professor, nome: newValue }),
+    title: "Nome",
+  };
+  const nomeStates = { generalStates, specificValues };
+  return <TextInputDefault {...nomeStates} />;
+}
+
+function TextinputProfessorAlias({
+  professors,
+  setProfessors,
+  professor,
+  setProfessor,
+}) {
+  const generalStates = {
+    items: professors,
+    setItems: setProfessors,
+    item: professor,
+    setItem: setProfessor,
+  };
+  const specificValues = {
+    mainValue: professor.apelido,
+    getNewItemObject: (newValue) => ({ ...professor, apelido: newValue }),
+    title: "Apelido",
+  };
+  const aliasStates = { generalStates, specificValues };
+  return <TextInputDefault {...aliasStates} />;
+}
+
+function TextInputProfessorId({
+  professors,
+  setProfessors,
+  professor,
+  setProfessor,
+}) {
+  const generalStates = {
+    items: professors,
+    setItems: setProfessors,
+    item: professor,
+    setItem: setProfessor,
+  };
+  const specificValues = {
+    mainValue: professor.id,
+    getNewItemObject: (newValue) => ({ ...professor, id: newValue }),
+    title: "ID",
+    isNumeric: true,
+  };
+  const idStates = { generalStates, specificValues };
+
+  return <TextInputDefault {...idStates} />;
+}
+
 /* \ Subject / */
 
-function TextInputCodigoDisciplina(myDisciplinasStates) {
-  let { disciplinas, setDisciplinas, disciplina, setDisciplina } =
-    myDisciplinasStates;
-  // console.log("TiCD", disciplina);
-  // console.log("TiCD>codigo:", disciplina.codigo);
-  const [codigoDisciplina, setCodigoDisciplina] = useState(disciplina.codigo);
+function TextInputSubjectCode({ subjects, setSubjects, subject, setSubject }) {
+  const generalStates = {
+    items: subjects,
+    setItems: setSubjects,
+    item: subject,
+    setItem: setSubject,
+  };
+  const specificValues = {
+    mainValue: subject.codigo,
+    getNewItemObject: (newValue) => ({ ...subject, codigo: newValue }),
+    title: "Código",
+  };
+  const codeStates = { generalStates, specificValues };
 
-  useEffect(() => {
-    // console.log(disciplina.codigo);
-    setCodigoDisciplina(disciplina.codigo);
-  }, [disciplina.codigo]);
-
-  function updateCodigoDisciplina(event) {
-    let newCodigo = event.target.value;
-    let newDisciplina = { ...disciplina, codigo: newCodigo };
-    setCodigoDisciplina(newCodigo);
-    setDisciplina(newDisciplina);
-  }
-
-  return (
-    <TextField
-      fullWidth
-      id="Codigo1"
-      key="Codigo2"
-      label="Código"
-      variant="outlined"
-      value={codigoDisciplina}
-      onChange={updateCodigoDisciplina}
-    />
-  );
+  return <TextInputDefault {...codeStates} />;
 }
 
-function TextInputNomeDisciplina(myDisciplinasStates) {
-  let { disciplinas, setDisciplinas, disciplina, setDisciplina } =
-    myDisciplinasStates;
-  // console.log("Tinp", disciplina);
-  // console.log("Tinp>nome:", disciplina.nome);
-  const [nomeDisciplina, setNomeDisciplina] = useState(disciplina.nome);
+function TextInputSubjectName({ subjects, setSubjects, subject, setSubject }) {
+  const generalStates = {
+    items: subjects,
+    setItems: setSubjects,
+    item: subject,
+    setItem: setSubject,
+  };
+  const specificValues = {
+    mainValue: subject.nome,
+    getNewItemObject: (newValue) => ({ ...subject, nome: newValue }),
+    title: "Nome",
+  };
+  const nomeStates = { generalStates, specificValues };
 
-  useEffect(() => {
-    /* this useEffect serves to update internal values when it's changed outside */
-    // console.log(disciplina.nome);
-    setNomeDisciplina(disciplina.nome);
-  }, [disciplina.nome]);
-
-  function updateNomeDisciplina(event) {
-    let newNome = event.target.value;
-    let newDisciplina = { ...disciplina, nome: newNome };
-    setNomeDisciplina(newNome);
-    setDisciplina(newDisciplina);
-  }
-
-  return (
-    <TextField
-      fullWidth
-      id="Nome1"
-      key="Nome2"
-      label="Nome"
-      variant="outlined"
-      value={nomeDisciplina}
-      onChange={updateNomeDisciplina}
-      style={{ width: "100%" }} // Adicionado para garantir que o TextField preencha todo o conteúdo
-    />
-  );
+  return <TextInputDefault {...nomeStates} />;
 }
 
-function TextInputApelidoDisciplina(myDisciplinasStates) {
-  let { disciplina, setDisciplina } = myDisciplinasStates;
-  const [apelidoDisciplina, setApelidoDisciplina] = useState(
-    disciplina.apelido
-  );
+function TextInputSubjectAlias({ subjects, setSubjects, subject, setSubject }) {
+  const generalStates = {
+    items: subjects,
+    setItems: setSubjects,
+    item: subject,
+    setItem: setSubject,
+  };
+  const specificValues = {
+    mainValue: subject.apelido,
+    getNewItemObject: (newValue) => ({ ...subject, apelido: newValue }),
+    title: "Apelido",
+  };
+  const aliasStates = { generalStates, specificValues };
 
-  useEffect(() => {
-    setApelidoDisciplina(disciplina.apelido);
-  }, [disciplina.apelido]);
-
-  function handleChange(event) {
-    let newApelido = event.target.value;
-    let newDisciplina = { ...disciplina, apelido: newApelido };
-    setApelidoDisciplina(newApelido);
-    setDisciplina(newDisciplina);
-  }
-
-  return (
-    <TextField
-      fullWidth
-      id="Apelido1"
-      key="Apelido2"
-      label="Apelido do Disciplina"
-      variant="outlined"
-      value={apelidoDisciplina}
-      onChange={handleChange}
-    />
-  );
+  return <TextInputDefault {...aliasStates} />;
 }
 
-function TextInputIdDisciplina(myDisciplinasStates) {
-  const { disciplina } = myDisciplinasStates;
-  const { id } = disciplina;
-  return (
-    <TextField
-      value={id}
-      // fullWidth
-      label="ID da Disciplina"
-      disabled
-    />
-  );
+function TextInputSubjectId({ subjects, setSubjects, subject, setSubject }) {
+  const generalStates = {
+    items: subjects,
+    setItems: setSubjects,
+    item: subject,
+    setItem: setSubject,
+  };
+  const specificValues = {
+    mainValue: subject.id,
+    getNewItemObject: (newValue) => ({ ...subject, id: newValue }),
+    title: "ID",
+    isNumeric: true,
+  };
+  const idStates = { generalStates, specificValues };
+
+  return <TextInputDefault {...idStates} />;
 }
 
 /* \ Student / */
 
-function TextInputStudentMatricula(myStates) {
-  let generalStates = {
-    items: myStates.students,
-    setItems: myStates.setStudents,
-    item: myStates.student,
-    setItem: myStates.setStudent,
+function TextInputStudentEnrollment({
+  students,
+  setStudents,
+  student,
+  setStudent,
+}) {
+  const generalStates = {
+    items: students,
+    setItems: setStudents,
+    item: student,
+    setItem: setStudent,
   };
-  let specificValues = {
-    mainValue: myStates.student.matricula,
-    getNewItemObject: (newValue) => {
-      return { ...myStates.student, matricula: newValue };
-    },
+  const specificValues = {
+    mainValue: student.matricula,
+    getNewItemObject: (newValue) => ({ ...student, matricula: newValue }),
     title: "Matrícula",
   };
-  let matriculaStates = { generalStates, specificValues };
+  const matriculaStates = { generalStates, specificValues };
+
   return <TextInputDefault {...matriculaStates} />;
 }
 
-function TextInputStudentName(myStates) {
-  let generalStates = {
-    items: myStates.students,
-    setItems: myStates.setStudents,
-    item: myStates.student,
-    setItem: myStates.setStudent,
+function TextInputStudentName({ students, setStudents, student, setStudent }) {
+  const generalStates = {
+    items: students,
+    setItems: setStudents,
+    item: student,
+    setItem: setStudent,
   };
-  let specificValues = {
-    mainValue: myStates.student.nome,
-    getNewItemObject: (newValue) => {
-      return { ...myStates.student, nome: newValue };
-    },
+  const specificValues = {
+    mainValue: student.nome,
+    getNewItemObject: (newValue) => ({ ...student, nome: newValue }),
     title: "Nome",
   };
-  let nomeStates = { generalStates, specificValues };
+  const nomeStates = { generalStates, specificValues };
   return <TextInputDefault {...nomeStates} />;
 }
 
-function TextInputStudentId(myStates) {
-  let generalStates = {
-    items: myStates.students,
-    setItems: myStates.setStudents,
-    item: myStates.student,
-    setItem: myStates.setStudent,
+function TextInputStudentId({ students, setStudents, student, setStudent }) {
+  const generalStates = {
+    items: students,
+    setItems: setStudents,
+    item: student,
+    setItem: setStudent,
   };
-  let specificValues = {
-    mainValue: myStates.student.id,
-    getNewItemObject: (newValue) => {
-      return { ...myStates.student, id: newValue };
-    },
+  const specificValues = {
+    mainValue: student.id,
+    getNewItemObject: (newValue) => ({ ...student, id: newValue }),
     title: "ID",
+    isNumeric: true,
   };
-  let idStates = { generalStates, specificValues };
+  const idStates = { generalStates, specificValues };
+
   return <TextInputDefault {...idStates} />;
 }
 
 /* \ Room / */
 
-function TextInputRoomDescription(myRoomStates) {
-  let generalStates = {
-    items: myRoomStates.rooms,
-    setItems: myRoomStates.setRooms,
-    item: myRoomStates.room,
-    setItem: myRoomStates.setRoom,
+function TextInputRoomDescription({ rooms, setRooms, room, setRoom }) {
+  const generalStates = {
+    items: rooms,
+    setItems: setRooms,
+    item: room,
+    setItem: setRoom,
   };
-  let specificValues = {
-    mainValue: myRoomStates.room.descricao,
-    getNewItemObject: (newValue) => {
-      return { ...myRoomStates.room, descricao: newValue };
-    },
+  const specificValues = {
+    mainValue: room.descricao,
+    getNewItemObject: (newValue) => ({ ...room, descricao: newValue }),
     title: "Descrição",
   };
-  let descriptionStates = { generalStates, specificValues };
+  const descriptionStates = { generalStates, specificValues };
+
   return <TextInputDefault {...descriptionStates} />;
 }
 
-function TextInputRoomCode(myRoomStates) {
-  let generalStates = {
-    items: myRoomStates.rooms,
-    setItems: myRoomStates.setRooms,
-    item: myRoomStates.room,
-    setItem: myRoomStates.setRoom,
+function TextInputRoomCode({ rooms, setRooms, room, setRoom }) {
+  const generalStates = {
+    items: rooms,
+    setItems: setRooms,
+    item: room,
+    setItem: setRoom,
   };
-  let specificValues = {
-    mainValue: myRoomStates.room.codigo,
-    getNewItemObject: (newValue) => {
-      return { ...myRoomStates.room, codigo: newValue };
-    },
+  const specificValues = {
+    mainValue: room.codigo,
+    getNewItemObject: (newValue) => ({ ...room, codigo: newValue }),
     title: "Código",
   };
-  let codeStates = { generalStates, specificValues };
+  const codeStates = { generalStates, specificValues };
+
   return <TextInputDefault {...codeStates} />;
 }
 
-function TextInputRoomCapacity(myRoomStates) {
-  let generalStates = {
-    items: myRoomStates.rooms,
-    setItems: myRoomStates.setRooms,
-    item: myRoomStates.room,
-    setItem: myRoomStates.setRoom,
+function TextInputRoomCapacity({ rooms, setRooms, room, setRoom }) {
+  const generalStates = {
+    items: rooms,
+    setItems: setRooms,
+    item: room,
+    setItem: setRoom,
   };
-  let specificValues = {
-    mainValue: myRoomStates.room.capacidade,
-    getNewItemObject: (newValue) => {
-      return { ...myRoomStates.room, capacidade: newValue };
-    },
+  const specificValues = {
+    mainValue: room.capacidade,
+    getNewItemObject: (newValue) => ({ ...room, capacidade: newValue }),
     title: "Capacidade",
     isNumeric: true,
   };
-  let capacityStates = { generalStates, specificValues };
+  const capacityStates = { generalStates, specificValues };
+
   return <TextInputDefault {...capacityStates} />;
 }
 
-function TextInputRoomId(myRoomStates) {
-  let generalStates = {
-    items: myRoomStates.rooms,
-    setItems: myRoomStates.setRooms,
-    item: myRoomStates.room,
-    setItem: myRoomStates.setRoom,
+function TextInputRoomId({ rooms, setRooms, room, setRoom }) {
+  const generalStates = {
+    items: rooms,
+    setItems: setRooms,
+    item: room,
+    setItem: setRoom,
   };
-  let specificValues = {
-    mainValue: myRoomStates.room.id,
-    getNewItemObject: (newValue) => {
-      return { ...myRoomStates.room, id: newValue };
-    },
+  const specificValues = {
+    mainValue: room.id,
+    getNewItemObject: (newValue) => ({ ...room, id: newValue }),
     title: "ID",
     isNumeric: true,
   };
-  let idStates = { generalStates, specificValues };
+  const idStates = { generalStates, specificValues };
+
   return <TextInputDefault {...idStates} />;
 }
 
@@ -404,16 +358,16 @@ export {
   NumberInputMultiClassesExpectedDemand,
   /* \\ CRUD // */
   /* \ Professor / */
-  TextInputNomeProfessor,
-  TextInputIdProfessor,
-  TextInputApelidoProfessor,
+  TextInputProfessorName,
+  TextinputProfessorAlias,
+  TextInputProfessorId,
   /* \ Subjects / */
-  TextInputCodigoDisciplina,
-  TextInputNomeDisciplina,
-  TextInputApelidoDisciplina,
-  TextInputIdDisciplina,
+  TextInputSubjectCode,
+  TextInputSubjectName,
+  TextInputSubjectAlias,
+  TextInputSubjectId,
   /* \ Student / */
-  TextInputStudentMatricula,
+  TextInputStudentEnrollment,
   TextInputStudentName,
   TextInputStudentId,
   /* \ Room / */

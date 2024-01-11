@@ -3,21 +3,27 @@ import React, { useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
+// import { scrollThroughAlunos } from "../functions/firulas/minhasFirulas";
 import {
-  SelectStudentCourse,
+  SelectStudentItem,
   SelectStudentYear,
-  StudentSelection,
+  SelectStudentCourse,
 } from "../../../components/mySelects";
 import {
-  TextInputStudentId,
-  TextInputStudentMatricula,
+  TextInputStudentEnrollment,
   TextInputStudentName,
+  TextInputStudentId,
 } from "../../../components/MyTextFields";
-// import { scrollThroughAlunos } from "../functions/firulas/minhasFirulas";
 
-function InformacoesBaseDoAluno(studentStates) {
-  const { student } = studentStates;
-  const { id, anoEntrada, curso, matricula, nome } = student;
+function StudentSelection(studentStates) {
+  return (
+    <div className="SelectionBar">
+      <SelectStudentItem {...studentStates} />
+    </div>
+  );
+}
+
+function StudentBaseInfo(studentStates) {
   return (
     <div className="showBasicDataCard">
       <h3>INFORMAÇÕES DO ALUNO</h3>
@@ -47,7 +53,7 @@ function InformacoesBaseDoAluno(studentStates) {
           <tr>
             <th>Matrícula</th>
             <td>
-              <TextInputStudentMatricula {...studentStates} />
+              <TextInputStudentEnrollment {...studentStates} />
             </td>
           </tr>
           <tr>
@@ -71,13 +77,15 @@ function InformacoesBaseDoAluno(studentStates) {
 function StudentCard(studentStates) {
   return (
     <div className="infoCard">
-      <InformacoesBaseDoAluno {...studentStates} />
+      <StudentBaseInfo {...studentStates} />
+      {/* <StudentClasses {...studentStates} /> */}
+      {/* <StudentProgress {...studentStates} /> */}
     </div>
   );
 }
 
 function Students() {
-  const [students, setStudents] = useState(allLocalJsonData.SQL.alunos); // [dados_agrupados[38]
+  const [students, setStudents] = useState(allLocalJsonData.SQL.alunos);
   const [student, setStudent] = useState(students[38]); // JVFD
 
   let studentStates = { students, setStudents, student, setStudent };
@@ -90,7 +98,7 @@ function Students() {
   );
 }
 
-function CRUDstudents() {
+function CRUDStudents() {
   return (
     <div className="background">
       <CRUDPageSelection
@@ -101,4 +109,4 @@ function CRUDstudents() {
   );
 }
 
-export default CRUDstudents;
+export default CRUDStudents;

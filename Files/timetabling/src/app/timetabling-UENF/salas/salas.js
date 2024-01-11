@@ -1,13 +1,9 @@
+import "./salas.css";
 import { useState } from "react";
-// import assets from "../../assets/imagesImport";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
-import "./salas.css";
-import {
-  ItemSelectionRoom,
-  SelectRoomBlock,
-} from "../../../components/mySelects";
+import { SelectRoomItem, SelectRoomBlock } from "../../../components/mySelects";
 import { getTurmasData } from "../../../DB/retrieveData";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
 import {
@@ -17,7 +13,7 @@ import {
   TextInputRoomId,
 } from "../../../components/MyTextFields";
 
-function RoomSelection(mySalasStates) {
+function RoomSelection(myRoomsStates) {
   return (
     <div
       className="SelectionBar"
@@ -26,15 +22,12 @@ function RoomSelection(mySalasStates) {
         // scrollThroughSalas(event, itemStates);
       }}
     >
-      <ItemSelectionRoom {...mySalasStates} />
+      <SelectRoomItem {...myRoomsStates} />
     </div>
   );
 }
 
-function InformacoesBaseDaSala(mySalasStates) {
-  const { room } = mySalasStates;
-  const { id, capacidade, bloco, codigo, descricao } = room;
-
+function RoomBaseInfo(myRoomsStates) {
   return (
     <div className="showBasicDataCard">
       <h3>INFORMAÇÕES DA SALA</h3>
@@ -49,7 +42,7 @@ function InformacoesBaseDaSala(mySalasStates) {
           <tr>
             <th>Bloco</th>
             <td>
-              <SelectRoomBlock {...mySalasStates} />
+              <SelectRoomBlock {...myRoomsStates} />
             </td>
             {/* For debug purposes */}
             {/* <td>{bloco}</td> */}
@@ -57,7 +50,7 @@ function InformacoesBaseDaSala(mySalasStates) {
           <tr>
             <th>Descrição</th>
             <td>
-              <TextInputRoomDescription {...mySalasStates} />
+              <TextInputRoomDescription {...myRoomsStates} />
             </td>
             {/* For debug purposes */}
             {/* <td>{descricao}</td> */}
@@ -66,7 +59,7 @@ function InformacoesBaseDaSala(mySalasStates) {
             <th>Código</th>
             {/* <td>{codigo}</td> */}
             <td>
-              <TextInputRoomCode {...mySalasStates} />
+              <TextInputRoomCode {...myRoomsStates} />
             </td>
             {/* For debug purposes */}
             {/* <td>{codigo}</td> */}
@@ -74,7 +67,7 @@ function InformacoesBaseDaSala(mySalasStates) {
           <tr>
             <th>Capacidade</th>
             <td>
-              <TextInputRoomCapacity {...mySalasStates} />
+              <TextInputRoomCapacity {...myRoomsStates} />
             </td>
             {/* For debug purposes */}
             {/* <td>{capacidade}</td> */}
@@ -82,7 +75,7 @@ function InformacoesBaseDaSala(mySalasStates) {
           <tr>
             <th>ID</th>
             <td>
-              <TextInputRoomId {...mySalasStates} />
+              <TextInputRoomId {...myRoomsStates} />
             </td>
             {/* For debug purposes */}
             {/* <td>{id}</td> */}
@@ -93,7 +86,8 @@ function InformacoesBaseDaSala(mySalasStates) {
   );
 }
 
-function TurmasNaSala(lSala) {
+function ClassesInRoom(room) {
+  const { id } = room;
   /* function getTurmas(id) {
         let horarios = allLocalJsonData.SQL.horarios;
         let horariosNestaSala = [];
@@ -127,11 +121,10 @@ function TurmasNaSala(lSala) {
         });
         return fullInfoFromTurmasNaSala;
       } */
-  let idSala = lSala.id;
   let classes = getTurmasData();
   let splittedClasses = splitTurmas(classes);
   let turmasNestaSala = splittedClasses.filter((splittedClass) => {
-    let found = splittedClass.sala?.id === idSala;
+    let found = splittedClass.sala?.id === id;
     return found;
   });
   return turmasNestaSala.length === 0 ? (
@@ -186,11 +179,11 @@ function TurmasNaSala(lSala) {
   );
 }
 
-function RoomCard(mySalasStates) {
+function RoomCard(myRoomsStates) {
   return (
     <div className="infoCard">
-      <InformacoesBaseDaSala {...mySalasStates} />
-      <TurmasNaSala {...mySalasStates.room} />
+      <RoomBaseInfo {...myRoomsStates} />
+      <ClassesInRoom {...myRoomsStates.room} />
     </div>
   );
 }
@@ -201,12 +194,12 @@ function Rooms() {
   const [rooms, setRooms] = useState(roomsFromJSON);
   const [room, setRoom] = useState(roomsFromJSON[3]);
 
-  let mySalasStates = { rooms, setRooms, room, setRoom };
+  let myRoomsStates = { rooms, setRooms, room, setRoom };
 
   return (
     <div className="CRUDContainComponents">
-      <RoomSelection {...mySalasStates} />
-      <RoomCard {...mySalasStates} />
+      <RoomSelection {...myRoomsStates} />
+      <RoomCard {...myRoomsStates} />
     </div>
   );
 }

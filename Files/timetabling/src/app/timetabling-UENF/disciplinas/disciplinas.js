@@ -1,23 +1,29 @@
+import "./disciplinas.css";
 import React, { useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
-import "./disciplinas.css";
 import {
-  DisciplinasSelection,
-  SelectPeriodoEsperado,
+  SelectSubjectItem,
+  SelectSubjectExpectedSemester,
 } from "../../../components/mySelects";
-import {
-  TextInputApelidoDisciplina,
-  TextInputCodigoDisciplina,
-  TextInputIdDisciplina,
-  TextInputNomeDisciplina,
-} from "../../../components/MyTextFields";
 // import { scrollThroughDisciplinas } from "../functions/firulas/minhasFirulas";
+import {
+  TextInputSubjectCode,
+  TextInputSubjectName,
+  TextInputSubjectAlias,
+  TextInputSubjectId,
+} from "../../../components/MyTextFields";
 
-function InformacoesBaseDaDisciplina(myDisciplinasStates) {
-  const { disciplina } = myDisciplinasStates;
-  const { codigo, nome } = disciplina;
+function SubjectSelection(mySubjectsStates) {
+  return (
+    <div className="SelectionBar">
+      <SelectSubjectItem {...mySubjectsStates} />
+    </div>
+  );
+}
+
+function SubjectBaseInfo(mySubjectsStates) {
   return (
     <div className="showBasicDataCard">
       <h3>INFORMAÇÕES DA DISCIPLINA</h3>
@@ -32,31 +38,31 @@ function InformacoesBaseDaDisciplina(myDisciplinasStates) {
           <tr>
             <th>Código</th>
             <td>
-              <TextInputCodigoDisciplina {...myDisciplinasStates} />
+              <TextInputSubjectCode {...mySubjectsStates} />
             </td>
           </tr>
           <tr>
             <th>Nome</th>
             <td>
-              <TextInputNomeDisciplina {...myDisciplinasStates} />
+              <TextInputSubjectName {...mySubjectsStates} />
             </td>
           </tr>
           <tr>
             <th>Apelido</th>
             <td>
-              <TextInputApelidoDisciplina {...myDisciplinasStates} />
+              <TextInputSubjectAlias {...mySubjectsStates} />
             </td>
           </tr>
           <tr>
             <th>Período Esperado</th>
             <td>
-              <SelectPeriodoEsperado {...myDisciplinasStates} />
+              <SelectSubjectExpectedSemester {...mySubjectsStates} />
             </td>
           </tr>
           <tr>
             <th>ID</th>
             <td>
-              <TextInputIdDisciplina {...myDisciplinasStates} />
+              <TextInputSubjectId {...mySubjectsStates} />
             </td>
           </tr>
         </tbody>
@@ -65,54 +71,43 @@ function InformacoesBaseDaDisciplina(myDisciplinasStates) {
   );
 }
 
-function DisciplinasCard(myDisciplinasStates) {
+function SubjectCard(mySubjectsStates) {
   return (
     <div className="infoCard">
-      <InformacoesBaseDaDisciplina {...myDisciplinasStates} />
+      <SubjectBaseInfo {...mySubjectsStates} />
+      {/* <SubjectClasses {...myDisciplinasStates} /> */}
+      {/* <SubjectRequirements {...myDisciplinasStates} /> */}
+      {/* <SubjectDemandees {...myDisciplinasStates} /> */}
     </div>
   );
 }
 
-function Disciplinas() {
-  // let disciplinasFromJB = await readData(options.JBVars.bins.infoDisciplinasCC);
-  // let disciplinas_RS = disciplinasFromJB.map(disciplinaDBtoRS);
-  // let disciplinas_RS = allLocalJsonData.static.infoDisciplinasCC;
-  let disciplinas_RS = allLocalJsonData.SQL.disciplinas;
+function Subjects() {
+  const [subjects, setSubjects] = useState(allLocalJsonData.SQL.disciplinas);
+  const [subject, setSubject] = useState(subjects[36]);
 
-  const [disciplinas, setDisciplinas] = useState(disciplinas_RS);
-  const [disciplina, setDisciplina] = useState(disciplinas[36]);
-
-  let myDisciplinasStates = {
-    disciplinas,
-    setDisciplinas,
-    disciplina,
-    setDisciplina,
-  };
+  let mySubjectsStates = { subjects, setSubjects, subject, setSubject };
 
   return (
     <div className="CRUDContainComponents">
-      <DisciplinasSelection
-        disciplina={disciplina}
-        disciplinas={disciplinas}
-        setDisciplina={setDisciplina}
-      />
-      <DisciplinasCard {...myDisciplinasStates} />
+      <SubjectSelection {...mySubjectsStates} />
+      <SubjectCard {...mySubjectsStates} />
     </div>
   );
 }
 
-function CRUDDisciplinas() {
+function CRUDSubjects() {
   return (
     <div className="background">
       <CRUDPageSelection
         defaultValue={options.constantValues.pageSelection.subjects}
       />
-      <Disciplinas />
+      <Subjects />
     </div>
   );
 }
 
-export default CRUDDisciplinas;
+export default CRUDSubjects;
 
 /* O que esta página deve fazer?
 

@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from "react";
+import "./professores.css";
+import React, { useState } from "react";
 import CRUDPageSelection from "../../../components/PageSelect";
 import options from "../../../DB/local/options";
 import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
+import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
+// import { scrollThroughProfessores } from "../functions/firulas/minhasFirulas";
 import {
-  ProfessorItemSelection,
-  SelectCurso,
+  SelectProfessorItem,
   SelectLaboratorio,
+  SelectCurso,
+  SelectProfessorCourse,
 } from "../../../components/mySelects";
 import {
   safeCreateProfessores,
@@ -13,15 +17,11 @@ import {
   safeUpdateProfessores,
   safeDeleteProfessores,
 } from "../../../DB/AWS/cleanCodeFromAxios";
-
-import "./professores.css";
 import {
-  TextInputApelidoProfessor,
-  TextInputIdProfessor,
-  TextInputNomeProfessor,
+  TextInputProfessorId,
+  TextInputProfessorName,
+  TextinputProfessorAlias,
 } from "../../../components/MyTextFields";
-import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
-// import { scrollThroughProfessores } from "../functions/firulas/minhasFirulas";
 
 function ProfessorSelection(professorStates) {
   let crudFunctions = {
@@ -41,7 +41,7 @@ function ProfessorSelection(professorStates) {
   return (
     <div className="SelectionBar">
       <CRUDButtonsContainer {...crudFunctions} />
-      <ProfessorItemSelection {...professorStates} />
+      <SelectProfessorItem {...professorStates} />
     </div>
   );
 }
@@ -67,25 +67,26 @@ function BaseProfessorData(professorStates) {
           <tr>
             <th>Curso</th>
             <td>
+              <SelectProfessorCourse {...professorStates} />
               <SelectCurso {...professorStates} />
             </td>
           </tr>
           <tr>
             <th>Nome</th>
             <td>
-              <TextInputNomeProfessor {...professorStates} />
+              <TextInputProfessorName {...professorStates} />
             </td>
           </tr>
           <tr>
             <th>Apelido</th>
             <td>
-              <TextInputApelidoProfessor {...professorStates} />
+              <TextinputProfessorAlias {...professorStates} />
             </td>
           </tr>
           <tr>
             <th>ID</th>
             <td>
-              <TextInputIdProfessor {...professorStates} />
+              <TextInputProfessorId {...professorStates} />
             </td>
           </tr>
         </tbody>
@@ -107,17 +108,10 @@ function ProfessorCard(professorStates) {
 function Professors() {
   let defaultProfessors = allLocalJsonData.SQL.professores;
 
-  const [professores, setProfessores] = useState(defaultProfessors);
-  const [professor, setProfessor] = useState(
-    defaultProfessors[professores.length - 1]
-  );
+  const [professors, setProfessors] = useState(defaultProfessors);
+  const [professor, setProfessor] = useState(professors[professors.length - 1]);
 
-  let professorStates = {
-    professores,
-    setProfessores,
-    professor,
-    setProfessor,
-  };
+  let professorStates = { professors, setProfessors, professor, setProfessor };
 
   return (
     <div className="CRUDContainComponents">

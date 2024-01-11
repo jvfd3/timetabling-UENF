@@ -1,6 +1,8 @@
+import "./turmas.css";
 import React, { useRef, useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
+import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 import {
   SelectDia,
   SelectDisciplina,
@@ -12,7 +14,6 @@ import {
   SelectSemestreTurma,
   TurmaItemSelection,
 } from "../../../components/mySelects";
-import "./turmas.css";
 import {
   getFullHorarios,
   splittedToUnified2,
@@ -21,7 +22,6 @@ import {
   SmartCreateHora,
   SmartDeleteHora,
 } from "../../../components/Buttons/Smart/Smart";
-import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
 
 function TurmaSelection(myTurmaStates) {
   /* It just contains the selection an maybe allows scrolling selection */

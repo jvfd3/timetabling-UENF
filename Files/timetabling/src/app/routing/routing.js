@@ -6,12 +6,12 @@ import options from "../../DB/local/options";
 /* Isso poderia ser trocado pro valor do options */
 
 import Main from "../timetabling-UENF/main/main";
-import Turmas from "../timetabling-UENF//turmas/turmas";
-import MultiTurmas from "../timetabling-UENF//multiturmas/multiTurmas";
-import Alunos from "../timetabling-UENF//alunos/alunos";
-import Professores from "../timetabling-UENF//professores/professores";
-import Disciplinas from "../timetabling-UENF//disciplinas/disciplinas";
-import Salas from "../timetabling-UENF//salas/salas";
+import Classes from "../timetabling-UENF//turmas/turmas";
+import MultiClasses from "../timetabling-UENF//multiturmas/multiTurmas";
+import Students from "../timetabling-UENF//alunos/alunos";
+import Professors from "../timetabling-UENF//professores/professores";
+import Subjects from "../timetabling-UENF//disciplinas/disciplinas";
+import Rooms from "../timetabling-UENF//salas/salas";
 import NoMatch from "../timetabling-UENF//notFound/notFound";
 import CCTable from "../timetabling-UENF//cctable/ccTable";
 import { ToastContainer } from "react-toastify";
@@ -20,7 +20,7 @@ import "react-toastify/dist/ReactToastify.css";
 function MyRouting() {
   let basePath = options.constantValues.routing.urlPath; //"/timetabling-uenf/";
   let mainPath = basePath + options.constantValues.pageSelection.main.value;
-  let multiTurmasPath =
+  let multiClassesPath =
     basePath + options.constantValues.pageSelection.multiClasses.value;
   let turmasPath =
     basePath + options.constantValues.pageSelection.classes.value;
@@ -46,13 +46,13 @@ function MyRouting() {
         <Route element={<Main />} path={"/"} />
         <Route element={<Main />} path={basePath} />
         <Route element={<Main />} path={mainPath} />
-        <Route element={<MultiTurmas />} path={multiTurmasPath} />
+        <Route element={<MultiClasses />} path={multiClassesPath} />
         <Route element={<CCTable />} path={ccTablePath} />
-        <Route element={<Turmas />} path={turmasPath} />
-        <Route element={<Professores />} path={professoresPath} />
-        <Route element={<Salas />} path={salasPath} />
-        <Route element={<Disciplinas />} path={disciplinasPath} />
-        <Route element={<Alunos />} path={alunosPath} />
+        <Route element={<Classes />} path={turmasPath} />
+        <Route element={<Professors />} path={professoresPath} />
+        <Route element={<Rooms />} path={salasPath} />
+        <Route element={<Subjects />} path={disciplinasPath} />
+        <Route element={<Students />} path={alunosPath} />
         <Route element={<NoMatch />} path={notFoundPath} />
         <Route element={<NoMatch />} path="*" />
       </Routes>{" "}
