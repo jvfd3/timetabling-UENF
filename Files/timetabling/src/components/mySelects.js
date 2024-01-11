@@ -3,8 +3,7 @@ import React, { useEffect, useState } from "react";
 import options from "../DB/local/options";
 import { allLocalJsonData } from "../DB/local/dataFromJSON";
 import Select, { components } from "react-select";
-import CreatableSelect from "react-select/creatable";
-import { updateProfessorFromList } from "../helpers/auxFunctions";
+// import { updateProfessorFromList } from "../helpers/auxFunctions";
 import { LockedProp, UnlockedProp } from "./Buttons/Dumb/Dumb";
 
 let styleWidthFix = options.SelectStyles.fullItem;
@@ -691,30 +690,6 @@ function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
   );
 }
 
-function SelectTesting() {
-  let dummyOptions = allLocalJsonData.SQL.professores;
-  const [dummySelectedValue, setDummySelectedValue] = useState(dummyOptions[0]);
-  const [isLocked, setIsLocked] = useState(true);
-  let lockStates = {
-    isLocked,
-    setIsLocked,
-    title: "Testando select deletável",
-  };
-
-  return (
-    <LockableSelect
-      placeholder={"Testando"}
-      options={dummyOptions}
-      value={dummySelectedValue}
-      onChange={setDummySelectedValue}
-      getOptionValue={({ nome }) => nome}
-      getOptionLabel={({ nome }) => nome}
-      formatOptionLabel={({ nome }) => nome}
-      lockStates={lockStates}
-    />
-  );
-}
-
 /* /\ /\ /\ /\ /\ /\ /\ /\ MULTITURMAS /\ /\ /\ /\ /\ /\ /\ /\ */
 
 /* \/ \/ \/ \/ \/ \/ \/ \/ Item Selections \/ \/ \/ \/ \/ \/ \/ \/ */
@@ -1086,7 +1061,6 @@ export {
   SelectSemestre,
   SelectProfessor,
   SelectDisciplina,
-  SelectTesting,
 
   /* MTT: Horario */
   SelectSala,
