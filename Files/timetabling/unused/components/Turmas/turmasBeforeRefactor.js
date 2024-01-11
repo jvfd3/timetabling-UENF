@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
-import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
+import {
+  allLocalJsonData,
+  sqlDataFromJson,
+} from "../../../DB/local/dataFromJSON";
 import {
   SelectDia,
   SelectDisciplina,

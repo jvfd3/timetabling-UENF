@@ -16,7 +16,10 @@ import {
 } from "@/components/mySelects";
 
 import options from "@/helpers/options";
-import { allLocalJsonData } from "@/helpers/localDB/dataFromJSON";
+import {
+  allLocalJsonData,
+  sqlDataFromJson,
+} from "@/helpers/localDB/dataFromJSON";
 // import { getNomeDisciplina } from "@/helpers/auxFunctions";
 
 function Turmas() {

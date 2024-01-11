@@ -1,5 +1,5 @@
 import options from "../../DB/local/options";
-// import { allLocalJsonData } from "../../../DB/dataFromJSON";
+// import { allLocalJsonData, sqlDataFromJson } from "../../../DB/dataFromJSON";
 
 function testingTurmas2022_1(turmas) {
   let anos = options.constantValues.years;
@@ -199,7 +199,7 @@ function flattenTurma(classData, classTime) {
 function splitTurmas(turmas) {
   let newSplittedTurmas = [];
   turmas.forEach((turma) => {
-    if ((turma.horarios !== null) && (turma.horarios.length > 0)) {
+    if (turma.horarios !== null && turma.horarios.length > 0) {
       turma.horarios.forEach((horario) => {
         let newTurma = flattenTurma(turma, horario);
         newSplittedTurmas.push(newTurma);

@@ -1,7 +1,7 @@
 import React from "react";
 // import options from "../temp/options";
 import "../CSS/defaultStyle.css";
-import { allLocalJsonData } from "../../DB/dataFromJSON";
+import { allLocalJsonData, sqlDataFromJson } from "../../DB/dataFromJSON";
 // import Tabela from "./Timetable";
 import {
   testingTurmas2022_1,
@@ -131,36 +131,45 @@ function ConflitosDeCapacidadesDeSala() {
     let salaPorHorarioPorDisciplina = getSalaPorHorarioPorDisciplina(
       atendimentoDeDemandas
     );
-    console.log("salaPorHorarioPorDisciplina", salaPorHorarioPorDisciplina)
+    console.log("salaPorHorarioPorDisciplina", salaPorHorarioPorDisciplina);
     let capacidades = convertToCapacidades(salaPorHorarioPorDisciplina);
     checarConflitos(capacidades, atendimentoDeDemandas);
 
-    function checarConflitos(capacidades, atendimentoDeDemandas, salaPorHorarioPorDisciplina) {
+    function checarConflitos(
+      capacidades,
+      atendimentoDeDemandas,
+      salaPorHorarioPorDisciplina
+    ) {
       function plural(numero) {
         return numero > 1 ? "s" : "";
       }
       let conflitos = [];
       // console.log("capacidades", capacidades);
       // console.log("atendimentoDeDemandas", atendimentoDeDemandas);
-      for(let codigoDisciplina in capacidades) {
+      for (let codigoDisciplina in capacidades) {
         let demandaDaDisciplina = atendimentoDeDemandas[codigoDisciplina];
-        let numeroDeAlunosDemandando = demandaDaDisciplina.alunosDemandando.length;
+        let numeroDeAlunosDemandando =
+          demandaDaDisciplina.alunosDemandando.length;
         // console.log("numeroDeAlunosDemandando", numeroDeAlunosDemandando)
         // console.log("capacidades[codigoDisciplina]", capacidades[codigoDisciplina])
-        for(let periodo in capacidades[codigoDisciplina]) {
+        for (let periodo in capacidades[codigoDisciplina]) {
           let capacidade = capacidades[codigoDisciplina][periodo];
           // console.log("capacidade", capacidade)
-          if(numeroDeAlunosDemandando > capacidade) {
-            let msg = ""
-            msg += `A disciplina ${codigoDisciplina} `
-            msg += `tem demanda de ${numeroDeAlunosDemandando} aluno` + plural(numeroDeAlunosDemandando)
-            msg += ` mas apenas está comportando ${capacidade} aluno` + plural(capacidade)
-            msg += ` na sala ${salaEscolhida.blocoSala}`
-            conflitos.push(msg)
+          if (numeroDeAlunosDemandando > capacidade) {
+            let msg = "";
+            msg += `A disciplina ${codigoDisciplina} `;
+            msg +=
+              `tem demanda de ${numeroDeAlunosDemandando} aluno` +
+              plural(numeroDeAlunosDemandando);
+            msg +=
+              ` mas apenas está comportando ${capacidade} aluno` +
+              plural(capacidade);
+            msg += ` na sala ${salaEscolhida.blocoSala}`;
+            conflitos.push(msg);
           }
         }
       }
-      console.log(conflitos)
+      console.log(conflitos);
     }
 
     function convertToCapacidades(salaPorHorarioPorDisciplina) {

@@ -2,7 +2,10 @@ import "./turmas.css";
 import React, { useRef, useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
-import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
+import {
+  allLocalJsonData,
+  sqlDataFromJson,
+} from "../../../DB/local/dataFromJSON";
 import {
   SelectDia,
   SelectDisciplina,

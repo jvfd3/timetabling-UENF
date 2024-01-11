@@ -1,6 +1,9 @@
 import React from "react";
 import options from "../../../temp/options";
-import { allLocalJsonData } from "../../../../src/DB/local/dataFromJSON";
+import {
+  allLocalJsonData,
+  sqlDataFromJson,
+} from "../../../../src/DB/local/dataFromJSON";
 
 function PreferencesTable(props) {
   const { preferencia1, setPreferencia1 } = props;

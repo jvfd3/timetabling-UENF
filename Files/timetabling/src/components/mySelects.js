@@ -1,7 +1,7 @@
 import "./mySelects.css";
 import React, { useEffect, useState } from "react";
 import options from "../DB/local/options";
-import { allLocalJsonData } from "../DB/local/dataFromJSON";
+import { allLocalJsonData, sqlDataFromJson } from "../DB/local/dataFromJSON";
 import Select, { components } from "react-select";
 // import { updateProfessorFromList } from "../helpers/auxFunctions";
 import { LockedProp, UnlockedProp } from "./Buttons/Dumb/Dumb";

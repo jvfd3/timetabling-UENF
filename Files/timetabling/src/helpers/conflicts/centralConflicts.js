@@ -4,7 +4,7 @@ import {
   removeSameId,
   splitTurmas,
 } from "./auxiliarConflictsFunctions";
-import { allLocalJsonData } from "../../DB/local/dataFromJSON";
+import { allLocalJsonData, sqlDataFromJson } from "../../DB/local/dataFromJSON";
 import {
   getSingleClassDemandConflict,
   searchSameDayAndHour,

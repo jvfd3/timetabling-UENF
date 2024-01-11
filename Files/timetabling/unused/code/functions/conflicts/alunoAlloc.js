@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import options from "../temp/options";
 import "../CSS/defaultStyle.css";
-import { allLocalJsonData } from "../../DB/dataFromJSON";
+import { allLocalJsonData, sqlDataFromJson } from "../../DB/dataFromJSON";
 import Tabela from "./Timetable";
 import {
   getTurmasPorAnoESemestre,
@@ -54,13 +54,13 @@ function TabelaDeConflitos() {
   let alunos = allLocalJsonData.dynamic.andamentoAlunos;
   let matriculasDeAlunos = getMatriculasAlunos(alunos);
   let matricula = matriculasDeAlunos[93];
-  
+
   let disciplinasDoAluno = alunos[matricula].cursando;
   let turmasDoAluno = getTurmasDoAluno(turmasDesseSemestre, disciplinasDoAluno);
   let tabelaDeOcupacao = getTabelaDeOcupacao(turmasDoAluno);
   let conflitosEncontrados = getConflitos(tabelaDeOcupacao);
   let numeroDeConflitos = getNumeroDeConflitos(conflitosEncontrados);
-  
+
   console.log("Checando conflitos de:", ano, semestre, matricula);
   // console.log("Turmas desse semestre: ", turmasDesseSemestre);
   // console.log("disciplinas do aluno: ", disciplinasDoAluno)
@@ -84,7 +84,6 @@ function TabelaDeConflitos() {
     });
     return turmasDoAluno;
   }
-
 
   function getTabelaDeOcupacao(turmas) {
     let tabelaDeOcupacao = {};

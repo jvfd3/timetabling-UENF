@@ -2,7 +2,10 @@ import "./alunos.css";
 import React, { useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
-import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
+import {
+  allLocalJsonData,
+  sqlDataFromJson,
+} from "../../../DB/local/dataFromJSON";
 // import { scrollThroughAlunos } from "../functions/firulas/minhasFirulas";
 import {
   SelectStudentItem,

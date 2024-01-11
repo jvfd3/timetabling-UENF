@@ -4,7 +4,10 @@
 import React, { useState } from "react";
 import Select from "react-select";
 // import options from "@/helpers/options";
-import { allLocalJsonData } from "@/helpers/localDB/dataFromJSON";
+import {
+  allLocalJsonData,
+  sqlDataFromJson,
+} from "@/helpers/localDB/dataFromJSON";
 import { getNomesDasDisciplinas } from "@/helpers/auxFunctions";
 import options from "@/helpers/options";
 

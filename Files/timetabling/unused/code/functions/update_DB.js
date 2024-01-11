@@ -1,4 +1,4 @@
-import { allLocalJsonData } from "../../DB/dataFromJSON";
+import { allLocalJsonData, sqlDataFromJson } from "../../DB/dataFromJSON";
 import options from "../temp/options";
 import { updateData } from "./CRUD_JSONBIN";
 
@@ -8,18 +8,31 @@ function updateDB(bin) {
   let data;
   switch (bin) {
     // PROFESORES
-    case options.JBVars.bins.infoProfessores:         data = allLocalJsonData.static.infoProfessores;          break;
+    case options.JBVars.bins.infoProfessores:
+      data = allLocalJsonData.static.infoProfessores;
+      break;
     // SALAS
-    case options.JBVars.bins.infoSalas:               data = allLocalJsonData.static.infoSalas;                break;
+    case options.JBVars.bins.infoSalas:
+      data = allLocalJsonData.static.infoSalas;
+      break;
     // DISCIPLINAS
-    case options.JBVars.bins.infoDisciplinasCC:       data = allLocalJsonData.static.infoDisciplinasCC;        break;
+    case options.JBVars.bins.infoDisciplinasCC:
+      data = allLocalJsonData.static.infoDisciplinasCC;
+      break;
     // ALUNOS
-    case options.JBVars.bins.infoAlunos:              data = allLocalJsonData.static.infoAlunos;               break;
+    case options.JBVars.bins.infoAlunos:
+      data = allLocalJsonData.static.infoAlunos;
+      break;
     // ANDAMENTO ALUNOS
-    case options.JBVars.bins.andamentoAlunos:         data = allLocalJsonData.dynamic.andamentoAlunos;         break;
+    case options.JBVars.bins.andamentoAlunos:
+      data = allLocalJsonData.dynamic.andamentoAlunos;
+      break;
     // PREFERENCIA DE PROFESSORES
-    case options.JBVars.bins.preferenciasProfessores: data = allLocalJsonData.dynamic.preferenciasProfessores; break;
-    default: break;
+    case options.JBVars.bins.preferenciasProfessores:
+      data = allLocalJsonData.dynamic.preferenciasProfessores;
+      break;
+    default:
+      break;
   }
   updateData(data, bin);
 }
@@ -39,4 +52,4 @@ import { updateDB } from "../functions/update_DB";
 updateDB(options.JBVars.bins.aBinQueTuTáQuerendoAtualizar);
 */
 
-export {updateDB};
+export { updateDB };

@@ -1,7 +1,7 @@
 import React from "react";
 // import options from "../temp/options";
 import "../CSS/defaultStyle.css";
-import { allLocalJsonData } from "../../DB/dataFromJSON";
+import { allLocalJsonData, sqlDataFromJson } from "../../DB/dataFromJSON";
 // import Tabela from "./Timetable";
 import {
   testingTurmas2022_1,

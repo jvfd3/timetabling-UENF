@@ -5,7 +5,10 @@ import Select from "react-select";
 import options from "@/helpers/options";
 // import "../CSS/professores.css";
 // import "../CSS/defaultStyle.css";
-import { allLocalJsonData } from "@/helpers/localDB/dataFromJSON";
+import {
+  allLocalJsonData,
+  sqlDataFromJson,
+} from "@/helpers/localDB/dataFromJSON";
 import { SelectCurso, SelectLaboratorio } from "@/components/mySelects";
 import { scrollThroughProfessores } from "@/helpers/firulas/minhasFirulas";
 import {

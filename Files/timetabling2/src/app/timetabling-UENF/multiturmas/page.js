@@ -3,7 +3,10 @@
 // import "../CSS/defaultStyle.css";
 import options from "@/helpers/options";
 import React, { useState, useEffect } from "react";
-import { allLocalJsonData } from "@/helpers/localDB/dataFromJSON";
+import {
+  allLocalJsonData,
+  sqlDataFromJson,
+} from "@/helpers/localDB/dataFromJSON";
 import {
   SelectDisciplina,
   SelectProfessor,

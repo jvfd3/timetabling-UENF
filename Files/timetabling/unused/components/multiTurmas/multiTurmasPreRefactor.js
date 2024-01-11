@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import options from "../../../DB/local/options";
-import { allLocalJsonData } from "../../../DB/local/dataFromJSON";
+import {
+  allLocalJsonData,
+  sqlDataFromJson,
+} from "../../../DB/local/dataFromJSON";
 import {
   SelectDisciplina,
   SelectProfessor,
