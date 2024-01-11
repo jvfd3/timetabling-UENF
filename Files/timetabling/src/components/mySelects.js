@@ -9,7 +9,7 @@ import { LockedProp, UnlockedProp } from "./Buttons/Dumb/Dumb";
 
 let styleWidthFix = options.SelectStyles.fullItem;
 
-/* Internal-use Selects \/ */
+/* \\ Internal-use Selects // */
 
 function LockableSelect(extProps) {
   const {
@@ -92,9 +92,12 @@ function DefaultSelect(defaultProps) {
   }
 
   useEffect(() => {
-    let correnctObject = findCorrectObject(value);
+    let correctObject = value;
+    if (findCorrectObject !== undefined) {
+      correctObject = findCorrectObject(value);
+    }
     // console.log(value);
-    setCurrentValue(correnctObject);
+    setCurrentValue(correctObject);
   }, [value]);
 
   return (
@@ -111,9 +114,9 @@ function DefaultSelect(defaultProps) {
   );
 }
 
-function SelectYear({ outerYear, setOuterYear }) {
-  let years = options.constantValues.years;
+/* \ SubDefault Selects / */
 
+function SelectYear({ outerYear, setOuterYear }) {
   function findYearObject(year) {
     let yearObject = options.constantValues.years.find(
       (iterYear) => iterYear.value == year
@@ -121,52 +124,77 @@ function SelectYear({ outerYear, setOuterYear }) {
     return yearObject;
   }
 
-  return (
-    <DefaultSelect
-      placeHolderText="Ano"
-      isClearable={false}
-      options={years}
-      setOuterValue={setOuterYear}
-      findCorrectObject={findYearObject}
-      value={outerYear}
-    />
-  );
+  const SelectYearStates = {
+    placeHolderText: "Ano",
+    isClearable: false,
+    options: options.constantValues.years,
+    setOuterValue: setOuterYear,
+    value: outerYear,
+    findCorrectObject: findYearObject,
+  };
+
+  return <DefaultSelect {...SelectYearStates} />;
 }
 
-function SelectCourse({ outerCourse, setOuterCourse }) {
-  let courses = options.constantValues.courses;
-
-  function findCourseObject(course) {
-    let courseObject = options.constantValues.courses.find(
-      (iterCourse) => iterCourse.nome == course
+function SelectLab({ outerLab, setOuterLab }) {
+  function findLabObject(labAlias) {
+    let labObject = options.constantValues.laboratorios.find(
+      (iterLab) => iterLab.apelido === labAlias
     );
-    return courseObject;
+    return labObject ?? null;
   }
 
-  let customProps = {
-    getOptionLabel: ({ nome, apelido }) => `${nome} - ${apelido}`,
-    getOptionValue: ({ nome, apelido }) => `${nome} - ${apelido}`,
-    formatOptionLabel: ({ nome, apelido }, { context }) => {
-      return context === "value" ? `${apelido}` : `${nome}`;
+  const SelectLabStates = {
+    placeHolderText: "Laboratório",
+    isClearable: true,
+    options: options.constantValues.laboratorios,
+    setOuterValue: setOuterLab,
+    value: outerLab,
+    findCorrectObject: findLabObject,
+    customProps: {
+      getOptionValue: (lab) => lab.apelido,
+      getOptionLabel: (lab) => `${lab.centro} -${lab.apelido} - ${lab.nome}`,
+      formatOptionLabel: ({ centro, apelido, nome }, { context }) => {
+        let isOpened = context === "value";
+        let message = isOpened ? `${apelido}` : `${centro} - ${nome}`;
+        return message;
+      },
     },
   };
 
-  return (
-    <DefaultSelect
-      placeHolderText="Curso"
-      isClearable={false}
-      options={courses}
-      setOuterValue={setOuterCourse}
-      findCorrectObject={findCourseObject}
-      value={outerCourse}
-      customProps={customProps}
-    />
-  );
+  return <DefaultSelect {...SelectLabStates} />;
+}
+
+function SelectCourse({ outerCourse, setOuterCourse }) {
+  function findCourseObject(course) {
+    let courseObject = options.constantValues.courses.find(
+      (iterCourse) => iterCourse.apelido === course
+    );
+    return courseObject ?? null;
+  }
+
+  const SelectCourseStates = {
+    placeHolderText: "Curso",
+    isClearable: true,
+    options: options.constantValues.courses,
+    setOuterValue: setOuterCourse,
+    value: outerCourse,
+    findCorrectObject: findCourseObject,
+    customProps: {
+      getOptionLabel: ({ nome, apelido }) => `${nome} - ${apelido}`,
+      getOptionValue: ({ nome, apelido }) => `${nome} - ${apelido}`,
+      formatOptionLabel: ({ nome, apelido }, { context }) => {
+        let isOpened = context === "value";
+        let message = isOpened ? `${apelido}` : `${nome}`;
+        return message;
+      },
+    },
+  };
+
+  return <DefaultSelect {...SelectCourseStates} />;
 }
 
 function SelectBlock({ outerBlock, setOuterBlock }) {
-  let blocks = options.constantValues.blocks;
-
   function findBlockObject(block) {
     let blockObject = options.constantValues.blocks.find(
       (iterBlock) => iterBlock.id == block
@@ -174,39 +202,35 @@ function SelectBlock({ outerBlock, setOuterBlock }) {
     return blockObject;
   }
 
-  let customProps = {
-    getOptionValue: ({ id }) => id,
-    getOptionLabel: ({ id, code, alias, name }) =>
-      `(${code}) ` + alias === code ? `${name}` : `${alias}`,
-    formatOptionLabel: ({ id, code, alias, name }, { context }) => {
-      let isMenuLabel = context === "menu";
-      let msg = `(${code}) `;
-      let sameCodigoAndApelido = alias === code;
-      msg += sameCodigoAndApelido ? `${name}` : `${alias}`;
-      let finalMessage = isMenuLabel ? msg : `${code}`;
-      return finalMessage;
+  const SelectBlockStates = {
+    placeHolderText: "Bloco",
+    isClearable: false,
+    options: options.constantValues.blocks,
+    setOuterValue: setOuterBlock,
+    value: outerBlock,
+    findCorrectObject: findBlockObject,
+    customProps: {
+      getOptionValue: ({ id }) => id,
+      getOptionLabel: ({ id, code, alias, name }) =>
+        `(${code}) ` + alias === code ? `${name}` : `${alias}`,
+      formatOptionLabel: ({ id, code, alias, name }, { context }) => {
+        let isMenuLabel = context === "menu";
+        let msg = `(${code}) `;
+        let sameCodigoAndApelido = alias === code;
+        msg += sameCodigoAndApelido ? `${name}` : `${alias}`;
+        let finalMessage = isMenuLabel ? msg : `${code}`;
+        return finalMessage;
+      },
     },
   };
 
-  return (
-    <DefaultSelect
-      placeHolderText="Bloco"
-      isClearable={false}
-      options={blocks}
-      setOuterValue={setOuterBlock}
-      findCorrectObject={findBlockObject}
-      value={outerBlock}
-      customProps={customProps}
-    />
-  );
+  return <DefaultSelect {...SelectBlockStates} />;
 }
 
 function SelectExpectedSemester({
   outerExpectedSemester,
   setOuterExpectedSemester,
 }) {
-  let expectedSemesters = options.constantValues.expectedSemester;
-
   function findExpectedSemesterObject(expectedSemester) {
     let expectedSemesterObject = options.constantValues.expectedSemester.find(
       (iterExpectedSemester) => iterExpectedSemester.value == expectedSemester
@@ -214,16 +238,16 @@ function SelectExpectedSemester({
     return expectedSemesterObject;
   }
 
-  return (
-    <DefaultSelect
-      placeHolderText="Semestre esperado"
-      isClearable={false}
-      options={expectedSemesters}
-      setOuterValue={setOuterExpectedSemester}
-      findCorrectObject={findExpectedSemesterObject}
-      value={outerExpectedSemester}
-    />
-  );
+  const SelectExpectedSemesterStates = {
+    placeHolderText: "Semestre esperado",
+    isClearable: false,
+    options: options.constantValues.expectedSemester,
+    setOuterValue: setOuterExpectedSemester,
+    value: outerExpectedSemester,
+    findCorrectObject: findExpectedSemesterObject,
+  };
+
+  return <DefaultSelect {...SelectExpectedSemesterStates} />;
 }
 
 /* \ Others: I'm not even sure if are still used / */
@@ -285,70 +309,6 @@ function SelectSemestreTurma({ lTurma, setLTurma }) {
       placeholder="Semestre"
       options={semestres}
       value={semestre}
-    />
-  );
-}
-
-function SelectProfessorC(props) {
-  const {
-    professorAtual,
-    setNewProfessor,
-    professoresAtuais,
-    setNewProfessores,
-  } = props;
-
-  const [professores, setProfessores] = useState(professoresAtuais);
-  let professorSelecionado = professorAtual;
-  // let professorSelecionado = professores.find(
-  //   (professor) => professor.nome === lTurma.professor
-  // );
-  const [professor, setProfessor] = useState(professorSelecionado);
-  const [isLoading, setIsLoading] = useState(false);
-
-  function updateOuterTurma(novoProfessor) {
-    if (novoProfessor === null) {
-      novoProfessor = { nome: "" };
-    }
-    setProfessor(novoProfessor);
-    setNewProfessor(novoProfessor);
-  }
-
-  function createOption(newValue) {
-    let newOption = {
-      laboratorio: null,
-      curso: null,
-      nome: newValue,
-      disciplinas: [],
-    };
-    return newOption;
-  }
-  function handleCreate(newValue) {
-    setIsLoading(true);
-    setTimeout(() => {
-      const newOption = createOption(newValue);
-      setIsLoading(false);
-      setNewProfessores((prev) => [...prev, newOption]);
-      setProfessores((prev) => [...prev, newOption]);
-      setProfessor(newOption);
-      setNewProfessor(newOption);
-    }, 1000);
-  }
-
-  return (
-    <CreatableSelect
-      onChange={updateOuterTurma}
-      className="mySelectList"
-      styles={styleWidthFix}
-      isClearable={true}
-      onCreateOption={handleCreate}
-      isDisabled={isLoading}
-      isLoading={isLoading}
-      isSearchable
-      options={professores}
-      value={professor}
-      getOptionValue={(option) => option.nome}
-      getOptionLabel={(option) => option.nome}
-      placeholder="Professor"
     />
   );
 }
@@ -909,142 +869,71 @@ function SelectFilterExpectedSemester(outerExpectedSemesterStates) {
 /* \ Professor / */
 
 function SelectProfessorItem(professorStates) {
-  const { professores, /* setProfessores, */ professor, setProfessor } =
+  const { professors, /* setProfessors, */ professor, setProfessor } =
     professorStates;
-  return (
-    <Select
-      className="itemSelectionBar"
-      styles={styleWidthFix}
-      isClearable={false}
-      onChange={setProfessor}
-      options={professores}
-      value={professor}
-      getOptionValue={(option) => option.id}
-      getOptionLabel={({ laboratorio, curso, apelido }) => {
+
+  const SelectProfessorItemStates = {
+    placeHolderText: "Selecione um professor",
+    isClearable: false,
+    options: professors,
+    setOuterValue: setProfessor,
+    value: professor,
+    customProps: {
+      getOptionValue: ({ id }) => id,
+      getOptionLabel: ({ nome, apelido, laboratorio, curso }) => {
+        let message = "";
+        message += `${nome} - `;
+        message += `${apelido} - `;
+        message += `${laboratorio} - `;
+        message += `${curso}`;
+        return message;
+      },
+      formatOptionLabel: ({ laboratorio, curso, apelido }) => {
         let message = "";
         message += `(`;
         message += `${laboratorio || "lab indef."} - `;
         message += `${curso || "cur indef."}) - `;
         message += `${apelido || "Apelido indef."}`;
         return message;
-      }}
-    />
-  );
+      },
+    },
+  };
+
+  return <DefaultSelect {...SelectProfessorItemStates} />;
 }
 
-function SelectLaboratorio(professorStates) {
-  const { professores, setProfessores, professor, setProfessor } =
-    professorStates;
-  let laboratorios = options.constantValues.laboratorios;
-  let selectedLab = professor.laboratorio;
-  let labSelecionado = getLab(selectedLab);
-  const [laboratorio, setLaboratorio] = useState(labSelecionado);
-
-  useEffect(() => {
-    setLaboratorio(labSelecionado);
-  }, [professor.laboratorio]);
-
-  function getLab(apelidoLab) {
-    let foundLab = laboratorios.find(
-      (labOption) => labOption.apelido === apelidoLab
-    );
-    let returnedLab = foundLab ?? null;
-    return returnedLab;
-  }
-
-  function updateOuterProfessorLab(selectedLab) {
-    let newLabValue = null;
-    if (selectedLab) {
-      newLabValue = selectedLab.apelido;
-    }
-    let newProfessor = {
-      ...professor,
-      laboratorio: newLabValue,
-    };
-    setLaboratorio(selectedLab);
+function SelectProfessorLab({
+  professors,
+  setProfessors,
+  professor,
+  setProfessor,
+}) {
+  function updateProfessorLab(newLab) {
+    let newProfessor = { ...professore, laboratorio: newLab?.apelido ?? null };
     setProfessor(newProfessor);
-    let newProfessores = updateProfessorFromList(professores, newProfessor);
-    setProfessores(newProfessores);
+    // let newProfessors = updateProfessorFromList(professors, newProfessor);
+    // setProfessors(newProfessors);
   }
 
-  return (
-    <Select
-      value={laboratorio}
-      options={laboratorios}
-      onChange={updateOuterProfessorLab}
-      className="mySelectList"
-      placeholder="Laboratório"
-      styles={styleWidthFix}
-      isClearable={true}
-      getOptionValue={(lab) => lab.apelido}
-      getOptionLabel={(lab) => `${lab.centro} -${lab.apelido} - ${lab.nome}`}
-      formatOptionLabel={({ centro, apelido, nome }, { context }) => {
-        let isOpened = context === "value";
-        let message = isOpened ? `${apelido}` : `${apelido} - ${nome}`;
-        return message;
-      }}
-    />
-  );
+  let labStates = {
+    outerLab: professor.laboratorio,
+    setOuterLab: updateProfessorLab,
+  };
+
+  return <SelectLab {...labStates} />;
 }
 
-function SelectCurso(professorStates) {
-  const { professores, setProfessores, professor, setProfessor } =
-    professorStates;
-  let cursos = options.constantValues.courses;
-
-  let selectedCurso = professor.curso;
-  let cursoSelecionado = getCurso(selectedCurso);
-  const [curso, setCurso] = useState(cursoSelecionado);
-
-  useEffect(() => {
-    setCurso(cursoSelecionado);
-  }, [professor.curso]);
-
-  function getCurso(apelidoCurso) {
-    let foundCurso = cursos.find((curso) => curso.apelido === apelidoCurso);
-    let returnedCurso = foundCurso ?? null;
-    return returnedCurso;
-  }
-
-  function updateCurso(selectedCurso) {
-    let newCursoValue = null;
-    if (selectedCurso) {
-      newCursoValue = selectedCurso.apelido;
-    }
-    let newProfessor = {
-      ...professor,
-      curso: newCursoValue,
-    };
-    setCurso(selectedCurso);
-    setProfessor(newProfessor);
-    let newProfessores = updateProfessorFromList(professores, newProfessor);
-    setProfessores(newProfessores);
-  }
-
-  return (
-    <Select
-      value={curso}
-      options={cursos}
-      onChange={updateCurso}
-      className="mySelectList"
-      placeholder="Curso"
-      styles={styleWidthFix}
-      isClearable={true}
-      getOptionValue={(curso) => curso.apelido}
-      getOptionLabel={(curso) => `${curso.apelido} - ${curso.nome}`}
-      formatOptionLabel={({ apelido, nome }, { context }) => {
-        let isOpened = context === "value";
-        let message = isOpened ? `${apelido}` : `${nome}`;
-        return message;
-      }}
-    />
-  );
-}
-
-function SelectProfessorCourse({ professor, setProfessor }) {
+function SelectProfessorCourse({
+  professors,
+  setProfessors,
+  professor,
+  setProfessor,
+}) {
   function updateProfessorCourse(newCourse) {
-    let newProfessor = { ...professor, curso: newCourse.apelido };
+    let newProfessor = { ...professor, curso: newCourse?.apelido ?? null };
     setProfessor(newProfessor);
+    // let newProfessors = updateProfessorFromList(professors, newProfessor);
+    // setProfessors(newProfessors);
   }
 
   let courseStates = {
@@ -1057,27 +946,29 @@ function SelectProfessorCourse({ professor, setProfessor }) {
 
 /* \ Rooms / */
 
-function SelectRoomItem(mySalasStates) {
-  const { rooms, setRooms, room, setRoom } = mySalasStates;
-  return (
-    <Select
-      className="itemSelectionBar"
-      styles={styleWidthFix}
-      isClearable={false}
-      onChange={setRoom}
-      options={rooms}
-      value={room}
-      getOptionValue={(option) => option.id}
-      getOptionLabel={(option) => option.capacidade}
-      formatOptionLabel={({ capacidade, bloco, codigo }) => {
+function SelectRoomItem({ rooms, /* setRooms, */ room, setRoom }) {
+  const SelectRoomItemStates = {
+    placeHolderText: "Selecione uma sala",
+    isClearable: false,
+    options: rooms,
+    setOuterValue: setRoom,
+    value: room,
+    // findCorrectObject: ,
+    customProps: {
+      getOptionValue: (option) => option.id,
+      getOptionLabel: (option) =>
+        `${option.capacidade} ${option.bloco} ${option.codigo}`,
+      formatOptionLabel: ({ capacidade, bloco, codigo }) => {
         let msg = "";
         msg += capacidade ? `(${capacidade})` : "(Cap. indef.)";
         msg += bloco ? ` ${bloco}` : "(Bloco indef.)";
         msg += codigo ? ` - ${codigo}` : " (Cod. indef.)";
         return msg;
-      }}
-    />
-  );
+      },
+    },
+  };
+
+  return <DefaultSelect {...SelectRoomItemStates} />;
 }
 
 function SelectRoomBlock(myRoomStates) {
@@ -1105,33 +996,27 @@ function SelectRoomBlock(myRoomStates) {
 
 /* \\ Subjects // */
 
-function SelectSubjectItem(subjectsStates) {
-  const { subjects, setSubjects, subject, setSubject } = subjectsStates;
+function SelectSubjectItem({ subjects, setSubjects, subject, setSubject }) {
+  const SelectSubjectItemStates = {
+    placeHolderText: "Selecione uma disciplina",
+    isClearable: false,
+    options: subjects,
+    setOuterValue: setSubject,
+    value: subject,
+    // findCorrectObject: ,
+    customProps: {
+      getOptionValue: (option) => option.codigo,
+      getOptionLabel: (option) => `${option.codigo} - ${option.nome}`,
+      formatOptionLabel: ({ codigo, nome }) => {
+        let msg = "";
+        msg += codigo ? `(${codigo})` : "(Cod. indef.)";
+        msg += nome ? ` ${nome}` : " (Nome indef.)";
+        return msg;
+      },
+    },
+  };
 
-  return (
-    <div
-      className="SelectionBar"
-      onWheel={(event) => {
-        // let itemStates = [disciplinas, setDisciplina, disciplina];
-        // scrollThroughDisciplinas(event, itemStates);
-      }}
-    >
-      <Select
-        className="itemSelectionBar"
-        styles={styleWidthFix}
-        isClearable={false}
-        onChange={setSubject}
-        placeholder={"Disciplina"}
-        value={subject}
-        options={subjects}
-        getOptionValue={(disciplina) => disciplina.codigo}
-        getOptionLabel={(disciplina) => disciplina.nome}
-        formatOptionLabel={({ periodo, codigo, nome }) =>
-          `(${periodo}) ${codigo}: ${nome}`
-        }
-      />
-    </div>
-  );
+  return <DefaultSelect {...SelectSubjectItemStates} />;
 }
 
 function SelectSubjectExpectedSemester({ subject, setSubject }) {
@@ -1150,32 +1035,22 @@ function SelectSubjectExpectedSemester({ subject, setSubject }) {
 
 /* \ Students / */
 
-function SelectStudentItem(studentStates) {
-  const { students, setStudents, student, setStudent } = studentStates;
-  return (
-    <div
-      className="SelectionBar"
-      onWheel={(event) => {
-        // let itemStates = [dados_agrupados, setAluno, aluno];
-        // scrollThroughAlunos(event, itemStates);
-      }}
-    >
-      <Select
-        onChange={setStudent}
-        className="itemSelectionBar"
-        styles={styleWidthFix}
-        isClearable={false}
-        value={student}
-        placeholder={"Nome do aluno"}
-        isSearchable={true}
-        options={students}
-        getOptionValue={(student) => student.matricula}
-        getOptionLabel={(student) => student.nome}
-        formatOptionLabel={({ matricula, nome }) => `${matricula}: ${nome}`}
-        // formatOptionLabel={(student) => `${student.matricula}: ${student.nome}`}
-      />
-    </div>
-  );
+function SelectStudentItem({ students, setStudents, student, setStudent }) {
+  const SelectStudentItemStates = {
+    placeHolderText: "Selecione um aluno",
+    isClearable: false,
+    options: students,
+    setOuterValue: setStudent,
+    value: student,
+    // findCorrectObject: ,
+    customProps: {
+      getOptionValue: (option) => option.matricula,
+      getOptionLabel: ({ matricula, nome }) => `${matricula}: ${nome}`,
+      formatOptionLabel: ({ matricula, nome }) => `${matricula}: ${nome}`,
+    },
+  };
+
+  return <DefaultSelect {...SelectStudentItemStates} />;
 }
 
 function SelectStudentYear({ student, setStudent }) {
@@ -1231,7 +1106,6 @@ export {
   /* Outros */
   SelectPeriodoEsperado,
   SelectAnoTurma,
-  SelectProfessorC,
   SelectAnoSemestre,
   SelectSemestreTurma,
 
@@ -1242,8 +1116,7 @@ export {
 
   /* \ Professor / */
   SelectProfessorItem,
-  SelectLaboratorio,
-  SelectCurso,
+  SelectProfessorLab,
   SelectProfessorCourse,
 
   /* Room */

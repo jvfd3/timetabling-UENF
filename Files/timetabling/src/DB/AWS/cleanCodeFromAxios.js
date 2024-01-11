@@ -6,7 +6,7 @@ import {
 } from "./axiosConnection";
 
 function safeCreateProfessores(professorStates) {
-  const { professores, setProfessores, professor, setProfessor } =
+  const { professors, setProfessors, professor, setProfessor } =
     professorStates;
   console.log("professor", professor);
   createProfessores(professor)
@@ -14,19 +14,19 @@ function safeCreateProfessores(professorStates) {
       if (newId) {
         let newProfessor = { ...professor, id: newId };
         setProfessor(newProfessor);
-        setProfessores([...professores, newProfessor]);
+        setProfessors([...professors, newProfessor]);
       }
     })
     .catch((error) => console.error(error));
 }
 
 function safeReadProfessores(professorStates) {
-  const { /* professores, */ setProfessores, /* professor, */ setProfessor } =
+  const { /* professores, */ setProfessors, /* professor, */ setProfessor } =
     professorStates;
   readProfessores()
     .then((professoresFromDB) => {
       // console.log("professoresFromDB", professoresFromDB);
-      setProfessores(professoresFromDB);
+      setProfessors(professoresFromDB);
       let lastProfessor = professoresFromDB[professoresFromDB.length - 1];
       // console.log("lastProfessor", lastProfessor);
       setProfessor(lastProfessor);
@@ -35,7 +35,7 @@ function safeReadProfessores(professorStates) {
 }
 
 function safeUpdateProfessores(professorStates) {
-  const { professores, setProfessores, professor /* , setProfessor */ } =
+  const { professors, setProfessors, professor /* , setProfessor */ } =
     professorStates;
   function updateProfessorFromList(oldArray, newProfessor) {
     const newArray = oldArray.map((professorAntigo) => {
@@ -49,14 +49,14 @@ function safeUpdateProfessores(professorStates) {
     .then((newProfessor) => {
       // console.log("professores", professores[professores.length - 2]);
       const updatedProfessores = updateProfessorFromList(
-        professores,
+        professors,
         newProfessor
       );
       // console.log(
       //   "updatedProfessores",
       //   updatedProfessores[updatedProfessores.length - 2]
       // );
-      setProfessores(updatedProfessores);
+      setProfessors(updatedProfessores);
     })
     .catch((error) => {
       console.error(error);
@@ -64,7 +64,7 @@ function safeUpdateProfessores(professorStates) {
 }
 
 function safeDeleteProfessores(professorStates) {
-  const { professores, setProfessores, professor, setProfessor } =
+  const { professors, setProfessors, professor, setProfessor } =
     professorStates;
   function deleteProfessorFromList(oldArray, deletedProfessor) {
     const newArray = oldArray.filter((oldProfessor) => {
@@ -78,14 +78,12 @@ function safeDeleteProfessores(professorStates) {
     .then((deletedProfessor) => {
       if (deletedProfessor) {
         let deletedProfessorList = deleteProfessorFromList(
-          professores,
+          professors,
           deletedProfessor
         );
 
-        setProfessores(deletedProfessorList);
-        const index = professores.findIndex(
-          (p) => p.id === deletedProfessor.id
-        );
+        setProfessors(deletedProfessorList);
+        const index = professors.findIndex((p) => p.id === deletedProfessor.id);
         if (index > 0) {
           setProfessor(deletedProfessorList[index - 1]); // continua do anterior
         } else if (deletedProfessorList.length > 0) {

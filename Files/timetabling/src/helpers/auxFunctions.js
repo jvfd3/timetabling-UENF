@@ -211,9 +211,9 @@ function getNomesDasDisciplinas(listaDeCodigos) {
 
 function updateProfessorFromList(oldArray, newProfessor) {
   const newArray = oldArray.map((professorAntigo) => {
-    return professorAntigo.id === newProfessor.id
-      ? newProfessor
-      : professorAntigo;
+    let hasSameId = professorAntigo?.id === newProfessor?.id;
+    let returnedValue = hasSameId ? newProfessor : professorAntigo;
+    return returnedValue;
   });
   return newArray;
 }

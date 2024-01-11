@@ -7,9 +7,8 @@ import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
 // import { scrollThroughProfessores } from "../functions/firulas/minhasFirulas";
 import {
   SelectProfessorItem,
-  SelectLaboratorio,
-  SelectCurso,
   SelectProfessorCourse,
+  SelectProfessorLab,
 } from "../../../components/mySelects";
 import {
   safeCreateProfessores,
@@ -61,14 +60,13 @@ function BaseProfessorData(professorStates) {
           <tr>
             <th>laboratório</th>
             <td>
-              <SelectLaboratorio {...professorStates} />
+              <SelectProfessorLab {...professorStates} />
             </td>
           </tr>
           <tr>
             <th>Curso</th>
             <td>
               <SelectProfessorCourse {...professorStates} />
-              <SelectCurso {...professorStates} />
             </td>
           </tr>
           <tr>
