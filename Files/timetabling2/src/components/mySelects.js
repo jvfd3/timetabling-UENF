@@ -504,7 +504,7 @@ function SelectCurso({ professorStates }) {
 }
 
 function SelectLaboratorio({ professorStates }) {
-  let laboratorios = options.constantValues.laboratorios;
+  let laboratorios = options.constantValues.labs;
   const { professores, setProfessores, professor, setProfessor } =
     professorStates;
 

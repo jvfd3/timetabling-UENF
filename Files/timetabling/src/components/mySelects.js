@@ -137,7 +137,7 @@ function SelectYear({ outerYear, setOuterYear }) {
 
 function SelectLab({ outerLab, setOuterLab }) {
   function findLabObject(labAlias) {
-    let labObject = options.constantValues.laboratorios.find(
+    let labObject = options.constantValues.labs.find(
       (iterLab) => iterLab.apelido === labAlias
     );
     return labObject ?? null;
@@ -146,7 +146,7 @@ function SelectLab({ outerLab, setOuterLab }) {
   const SelectLabStates = {
     placeHolderText: "Laboratório",
     isClearable: true,
-    options: options.constantValues.laboratorios,
+    options: options.constantValues.labs,
     setOuterValue: setOuterLab,
     value: outerLab,
     findCorrectObject: findLabObject,

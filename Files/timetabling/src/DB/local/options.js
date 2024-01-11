@@ -123,7 +123,7 @@ const options = {
       },
       { apelido: "Outro", nome: "Outro" },
     ],
-    laboratorios: [
+    labs: [
       {
         centro: "CCT",
         apelido: "LCMAT",
