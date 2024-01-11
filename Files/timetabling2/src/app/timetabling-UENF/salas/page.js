@@ -3,10 +3,7 @@
 // import "../CSS/CRUD_salas.css";
 // import assets from "../../assets/imagesImport";
 // import options from "@/helpers/options";
-import {
-  allLocalJsonData,
-  sqlDataFromJson,
-} from "@/helpers/localDB/dataFromJSON";
+import { sqlDataFromJson } from "@/helpers/localDB/dataFromJSON";
 import { useState } from "react";
 import Select from "react-select";
 

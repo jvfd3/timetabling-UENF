@@ -1,8 +1,5 @@
 // import "../CSS/defaultStyle.css";
-import {
-  allLocalJsonData,
-  sqlDataFromJson,
-} from "@/helpers/localDB/dataFromJSON";
+import { sqlDataFromJson } from "@/helpers/localDB/dataFromJSON";
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";

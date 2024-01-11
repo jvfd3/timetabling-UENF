@@ -21,10 +21,7 @@
 import React, { useState } from "react";
 import Select from "react-select";
 import options from "@/helpers/options";
-import {
-  allLocalJsonData,
-  sqlDataFromJson,
-} from "@/helpers/localDB/dataFromJSON";
+import { sqlDataFromJson } from "@/helpers/localDB/dataFromJSON";
 
 function Disciplinas() {
   let disciplinas_RS = allLocalJsonData.static.infoDisciplinasCC;

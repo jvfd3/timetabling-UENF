@@ -25,10 +25,7 @@ import {
 } from "../../../components/Buttons/Smart/Smart";
 import { getTurmasData } from "../../../DB/retrieveData";
 import { baseTurmaConflicts } from "../../../helpers/conflicts/centralConflicts";
-import {
-  allLocalJsonData,
-  sqlDataFromJson,
-} from "../../../DB/local/dataFromJSON";
+import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
 import { InputDisciplina } from "../../../components/Buttons/Dumb/Dumb";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
 

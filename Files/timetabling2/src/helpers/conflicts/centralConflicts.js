@@ -1,8 +1,5 @@
 import { flattenTurma, splitTurmas } from "./auxiliarConflictsFunctions";
-import {
-  allLocalJsonData,
-  sqlDataFromJson,
-} from "@/helpers/localDB/dataFromJSON";
+import { sqlDataFromJson } from "@/helpers/localDB/dataFromJSON";
 /*
 ## Visualizar conflitos impeditivos #30
 

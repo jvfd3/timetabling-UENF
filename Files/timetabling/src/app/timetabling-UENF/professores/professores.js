@@ -2,10 +2,7 @@ import "./professores.css";
 import React, { useState } from "react";
 import CRUDPageSelection from "../../../components/PageSelect";
 import options from "../../../DB/local/options";
-import {
-  allLocalJsonData,
-  sqlDataFromJson,
-} from "../../../DB/local/dataFromJSON";
+import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
 import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
 // import { scrollThroughProfessores } from "../functions/firulas/minhasFirulas";
 import {

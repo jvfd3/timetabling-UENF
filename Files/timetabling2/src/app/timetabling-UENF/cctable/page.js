@@ -29,10 +29,7 @@ import {
 } from "@/helpers/auxFunctions";
 import React, { useState, useEffect } from "react";
 import { SelectAnoSemestre } from "@/components/mySelects";
-import {
-  allLocalJsonData,
-  sqlDataFromJson,
-} from "@/helpers/localDB/dataFromJSON";
+import { sqlDataFromJson } from "@/helpers/localDB/dataFromJSON";
 import { splitTurmas } from "@/helpers/conflicts/auxiliarConflictsFunctions";
 import options from "@/helpers/options";
 import style from "@/app/timetabling-UENF/cctable/ccTable.module.css";
