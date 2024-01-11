@@ -11,7 +11,7 @@
 - [X] O que preciso fazer para finalizar o estágio com Annabell?
 - [X] Conferir com Tang qual é a sequência das ações
 - [X] O que é o mínimo que eu preciso pra poder apresentar?
-- [ ] Entrar na disciplina de verão
+- [X] Entrar na disciplina de verão
   - Semestre de verão:
     - Monografia, optativa: padrões de software
     - Semana que vem tem lá pra janeiro
