@@ -4,33 +4,33 @@ import options from "../local/options";
 
 const url = options.AWS.fullEndpoint;
 const debuggingLocal = ">newAxios.js";
-const isDebugging = true;
+const isDebugging = false;
 
 function getAxios() {
   function testing(itemToSend = null, itemName = null, action = "test") {
     const message = `Axios>testing>${action}ing>${itemName}>`;
-    console.log(message, itemToSend);
+    isDebugging && console.log(message, itemToSend);
   }
 
   async function createTest(itemName = null, itemToSend = null) {
-    isDebugging && testing(itemToSend, itemName, "creat");
+    testing(itemToSend, itemName, "creat");
     const localUrl = url + itemName; // I may need to change this slash
     const dataToSend = { newItem: itemToSend };
     return await axios.post(localUrl, dataToSend);
   }
   async function readTest(itemName = null, itemToSend = null) {
-    isDebugging && testing(itemToSend, itemName, "read");
+    testing(itemToSend, itemName, "read");
     const localUrl = url + itemName; // I may need to change this slash
     return await axios.get(localUrl, itemToSend);
   }
   async function updateTest(itemName = null, itemToSend = null) {
-    isDebugging && testing(itemToSend, itemName, "updat");
+    testing(itemToSend, itemName, "updat");
     const localUrl = url + itemName; // I may need to change this slash
     const dataToSend = { newItem: itemToSend };
     return await axios.put(localUrl, dataToSend);
   }
   async function deleteTest(itemName = null, itemToSend = null) {
-    isDebugging && testing(itemToSend, itemName, "delet");
+    testing(itemToSend, itemName, "delet");
     const localUrl = url + itemName + "/" + itemToSend?.id; // I may need to change this slash
     return await axios.delete(localUrl);
   }
@@ -49,12 +49,12 @@ const myAxios = getAxios();
 /* Create a function for default debugging messages? */
 
 function defaultHandleError(error) {
-  console.error("Default error handling", error);
+  isDebugging && console.error("Default error handling", error);
 }
 
 function debugPayload(payload) {
   const local = debuggingLocal + ">debugPayload";
-  console.log(`${local}>payload:`, payload);
+  isDebugging && console.log(`${local}>payload:`, payload);
 }
 
 async function defaultDBCreate(itemName, itemToSend) {
@@ -67,7 +67,7 @@ async function defaultDBCreate(itemName, itemToSend) {
   let toastToUse = toast;
   let returnedData = null;
   let localError = null;
-  console.log(toastMessages.pretty);
+  isDebugging && console.log(toastMessages.pretty);
   if (!itemToSend) {
     const debugMessage = `${localMessage}> The ${itemName} "${itemToSend}" is invalid. The request didn't even left the app.`;
     const prettyMessage = `The ${itemName} is invalid. It couldn't be ${action}ed.`;
@@ -75,7 +75,7 @@ async function defaultDBCreate(itemName, itemToSend) {
     toastMessages.pretty = prettyMessage;
     toastToUse = toast.warning;
     localError = new Error(toastMessages.debug);
-    console.error(toastMessages);
+    isDebugging && console.error(toastMessages);
   } else {
     try {
       let response = await myAxios.create(itemName, itemToSend);
@@ -107,7 +107,7 @@ async function defaultDBCreate(itemName, itemToSend) {
   }
   toastToUse(toastMessages.pretty);
   if (localError) {
-    console.error(toastMessages.debug);
+    isDebugging && console.error(toastMessages.debug);
     throw localError;
   }
   return returnedData;
@@ -123,7 +123,7 @@ async function defaultDBRead(itemName) {
   let toastToUse = toast;
   let returnedData = null;
   let localError = null;
-  console.log(toastMessages.pretty);
+  isDebugging && console.log(toastMessages.pretty);
   if (false) {
   } else {
     try {
@@ -158,7 +158,7 @@ async function defaultDBRead(itemName) {
   }
   toastToUse(toastMessages.pretty);
   if (localError) {
-    console.error(toastMessages.debug);
+    isDebugging && console.error(toastMessages.debug);
     throw localError;
   }
   return returnedData;
@@ -174,7 +174,7 @@ async function defaultDBUpdate(itemName, itemToSend) {
   let toastToUse = toast;
   let returnedData = null;
   let localError = null;
-  console.log(toastMessages.pretty);
+  isDebugging && console.log(toastMessages.pretty);
   if (!itemToSend) {
     const debugMessage = `${localMessage}> The ${itemName} "${itemToSend}" is invalid. The request didn't even left the app.`;
     const prettyMessage = `The ${itemName} is invalid. It couldn't be ${action}ed.`;
@@ -182,7 +182,7 @@ async function defaultDBUpdate(itemName, itemToSend) {
     toastMessages.pretty = prettyMessage;
     toastToUse = toast.warning;
     localError = new Error(toastMessages.debug);
-    console.error(toastMessages);
+    isDebugging && console.error(toastMessages);
   } else {
     try {
       let response = await myAxios.update(itemName, itemToSend);
@@ -226,7 +226,7 @@ async function defaultDBUpdate(itemName, itemToSend) {
   }
   toastToUse(toastMessages.pretty);
   if (localError) {
-    console.error(toastMessages.debug);
+    isDebugging && console.error(toastMessages.debug);
     throw localError;
   }
   return returnedData;
@@ -242,7 +242,7 @@ async function defaultDBDelete(itemName, itemToSend) {
   let toastToUse = toast;
   let returnedData = null;
   let localError = null;
-  console.log(toastMessages.pretty);
+  isDebugging && console.log(toastMessages.pretty);
   if (!(itemToSend && itemToSend.id)) {
     const debugMessage = `${localMessage}> The ${itemName} "${itemToSend}" is invalid. The request didn't even left the app.`;
     const prettyMessage = `The ${itemName} is invalid. It couldn't be ${action}ed.`;
@@ -250,7 +250,7 @@ async function defaultDBDelete(itemName, itemToSend) {
     toastMessages.pretty = prettyMessage;
     toastToUse = toast.warning;
     localError = new Error(toastMessages.debug);
-    console.error(toastMessages);
+    isDebugging && console.error(toastMessages);
   } else {
     try {
       let response = await myAxios.delete(itemName, itemToSend);
@@ -301,7 +301,7 @@ async function defaultDBDelete(itemName, itemToSend) {
   }
   toastToUse(toastMessages.pretty);
   if (localError) {
-    console.error(toastMessages.debug);
+    isDebugging && console.error(toastMessages.debug);
     throw localError;
   }
   return returnedData;
