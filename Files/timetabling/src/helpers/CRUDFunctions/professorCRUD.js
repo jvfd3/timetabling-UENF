@@ -1,37 +1,42 @@
 import {
-  createProfessores,
-  readProfessores,
   updateProfessores,
   deleteProfessores,
 } from "../../DB/AWS/axiosConnection";
+import {
+  defaultDBCreate,
+  defaultDBRead,
+} from "../../DB/AWS/defaultAxiosFunctions";
 
-function safeCreateProfessores(professorStates) {
-  const { professors, setProfessors, professor, setProfessor } =
-    professorStates;
-  console.log("professor", professor);
-  createProfessores(professor)
-    .then((newId) => {
-      if (newId) {
-        let newProfessor = { ...professor, id: newId };
-        setProfessor(newProfessor);
-        setProfessors([...professors, newProfessor]);
-      }
-    })
-    .catch((error) => console.error(error));
+function handleError(error) {
+  console.error("Default error handling", error);
 }
 
-function safeReadProfessores(professorStates) {
-  const { /* professores, */ setProfessors, /* professor, */ setProfessor } =
-    professorStates;
-  readProfessores()
-    .then((professoresFromDB) => {
-      // console.log("professoresFromDB", professoresFromDB);
-      setProfessors(professoresFromDB);
-      let lastProfessor = professoresFromDB[professoresFromDB.length - 1];
-      // console.log("lastProfessor", lastProfessor);
-      setProfessor(lastProfessor);
-    })
-    .catch((error) => console.error(error));
+function createProfessor({
+  professors,
+  setProfessors,
+  professor,
+  setProfessor,
+}) {
+  function insertNewProfessorFromDB(newId) {
+    let newProfessor = { ...professor, id: newId };
+    setProfessor(newProfessor);
+    setProfessors([...professors, newProfessor]);
+  }
+  defaultDBCreate("professores", professor)
+    .then(insertNewProfessorFromDB)
+    .catch(handleError);
+}
+
+function readProfessor({ setProfessors, setProfessor }) {
+  function insertNewProfessorsFromDB(professoresFromDB) {
+    setProfessors(professoresFromDB);
+    let lastProfessor = professoresFromDB[professoresFromDB.length - 1];
+    setProfessor(lastProfessor);
+  }
+
+  defaultDBRead("professores")
+    .then(insertNewProfessorsFromDB)
+    .catch(handleError);
 }
 
 function safeUpdateProfessores(professorStates) {
@@ -97,16 +102,6 @@ function safeDeleteProfessores(professorStates) {
       }
     })
     .catch((error) => console.error("internDelete>", error));
-}
-
-function createProfessor(professorStates) {
-  console.log("createProfessor", professorStates.professor.id);
-  safeCreateProfessores(professorStates);
-}
-
-function readProfessor(professorStates) {
-  console.log("readProfessor", professorStates.professor.id);
-  safeReadProfessores(professorStates);
 }
 
 function updateProfessor(professorStates) {
