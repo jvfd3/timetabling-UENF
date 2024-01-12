@@ -1,8 +1,8 @@
 import {
   defaultDBCreate,
-  defaultDBDelete,
   defaultDBRead,
   defaultDBUpdate,
+  defaultDBDelete,
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
 
@@ -24,9 +24,9 @@ function createProfessor({
 
 function readProfessor({ setProfessors, setProfessor }) {
   function insertNewProfessorsFromDB(professoresFromDB) {
-    setProfessors(professoresFromDB);
     const lastProfessor = professoresFromDB[professoresFromDB.length - 1];
     setProfessor(lastProfessor);
+    setProfessors(professoresFromDB);
   }
 
   defaultDBRead("professores")
