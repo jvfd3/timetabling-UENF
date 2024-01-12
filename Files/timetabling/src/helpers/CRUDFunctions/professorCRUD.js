@@ -72,23 +72,26 @@ function deleteProfessor({
 
   function deleteProfessorOnList(deletedProfessor) {
     if (deletedProfessor) {
-      const deletedProfessorList = deleteProfessorFromList(
+      const updatedProfessorList = deleteProfessorFromList(
         professors,
         deletedProfessor
       );
 
-      setProfessors(deletedProfessorList);
       const index = professors.findIndex((p) => p.id === deletedProfessor.id);
+      let newProfessor = null;
       if (index > 0) {
-        setProfessor(deletedProfessorList[index - 1]); // continua do anterior
-      } else if (deletedProfessorList.length > 0) {
-        setProfessor(deletedProfessorList[0]); // Se estou apagando o primeiro e ainda tem mais...
+        newProfessor = updatedProfessorList[index - 1]; // continua do anterior
+      } else if (updatedProfessorList.length > 0) {
+        newProfessor = updatedProfessorList[0];
+        // Se estou apagando o primeiro e ainda tem mais...
       } else {
-        setProfessor(null);
         console.error(
           "Uai, não tem mais professores! Como diria o Silvio Santos: 'Está certo disto?'"
         );
       }
+
+      setProfessor(newProfessor);
+      setProfessors(updatedProfessorList);
     }
   }
 
