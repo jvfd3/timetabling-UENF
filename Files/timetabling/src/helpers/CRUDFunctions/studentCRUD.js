@@ -61,9 +61,25 @@ function deleteStudent({ students, setStudents, student, setStudent }) {
   }
 
   function deleteStudentOnList(deletedStudent) {
-    const updatedStudents = deleteStudentFromList(students, deletedStudent);
-    setStudents(updatedStudents);
-    setStudent({});
+    if (deletedStudent) {
+      const updatedStudents = deleteStudentFromList(students, deletedStudent);
+
+      const index = students.findIndex(
+        (student) => student.id === deletedStudent.id
+      );
+      let newStudent = null;
+      if (index > 0) {
+        newStudent = students[index - 1];
+      } else if (updatedStudents.length > 0) {
+        newStudent = students[0];
+      } else {
+        console.error(
+          "Uai, não tem mais professores! Como diria o Silvio Santos: 'Está certo disto?'"
+        );
+      }
+      setStudent(newStudent);
+      setStudents(updatedStudents);
+    }
   }
 
   defaultDBDelete(itemName, student)
