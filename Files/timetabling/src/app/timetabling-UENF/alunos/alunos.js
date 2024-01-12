@@ -61,7 +61,7 @@ function StudentBaseInfo(studentStates) {
             <th>Curso</th>
             <td>
               {/* Debugging Purpose */}
-              {/* {curso} */}
+              {/* {studentStates.student.curso} */}
               <SelectStudentCourse {...studentStates} />
             </td>
           </tr>
