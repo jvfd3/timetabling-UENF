@@ -1,0 +1,315 @@
+import axios from "axios";
+import { toast } from "react-toastify";
+import options from "../local/options";
+
+const url = options.AWS;
+const debuggingLocal = ">newAxios.js";
+const isDebugging = true;
+
+function getAxios() {
+  function testing(itemToSend = null, itemName = null, action = "test") {
+    console.log(`Axios>testing>${action}ing>${itemName}>${itemToSend}`);
+  }
+
+  async function createTest(itemToSend = null, itemName = null) {
+    const localUrl = url + "/" + itemName; // I may need to change this slash
+    testing(itemToSend, itemName, "creat");
+    return await axios.post(localUrl);
+  }
+  async function readTest(itemToSend = null, itemName = null) {
+    const localUrl = url + "/" + itemName; // I may need to change this slash
+    testing(itemToSend, itemName, "read");
+    return await axios.get(localUrl, itemToSend);
+  }
+  async function updateTest(itemToSend = null, itemName = null) {
+    const localUrl = url + "/" + itemName; // I may need to change this slash
+    testing(itemToSend, itemName, "updat");
+    return await axios.put(localUrl), itemToSend;
+  }
+  async function deleteTest(itemToSend = null, itemName = null) {
+    const localUrl = url + "/" + itemName + "/" + itemToSend.id.toString(); // I may need to change this slash
+    testing(itemToSend, itemName, "delet");
+    return await axios.delete(localUrl);
+  }
+
+  let myAxios = {
+    create: createTest,
+    read: readTest,
+    update: updateTest,
+    delete: deleteTest,
+  };
+  return myAxios;
+}
+
+const myAxios = getAxios();
+
+/* Create a function for default debugging messages? */
+
+function debugPayload(payload) {
+  const local = debuggingLocal + ">debugPayload";
+  console.log(`${local}>payload:`, payload);
+}
+
+async function defaultDBCreate(itemName, itemToSend) {
+  const action = "creat";
+  const localMessage = `defaultDB${action}e> ${itemName}`;
+  let toastMessages = {
+    debug: [localMessage],
+    pretty: `Ready for a ${itemName} ${action}ing journey?`,
+  };
+  let toastToUse = toast;
+  let returnedData = null;
+  let localError = null;
+  console.log(toastMessages.pretty);
+  if (!itemToSend) {
+    const debugMessage = `${localMessage}> The ${itemName} "${itemToSend}" is invalid. The request didn't even left the app.`;
+    const prettyMessage = `The ${itemName} is invalid. It couldn't be ${action}ed.`;
+    toastMessages.debug.push(debugMessage);
+    toastMessages.pretty = prettyMessage;
+    toastToUse = toast.warning;
+    localError = new Error(toastMessages.debug);
+    console.error(toastMessages);
+  } else {
+    try {
+      let response = await myAxios.create(itemToSend);
+      isDebugging && debugPayload(response); // Only Executes if isDebugging is true
+      const statusCode = res.data.statusCode;
+      if (statusCode === 201) {
+        const currentId = res.data.body.queryResult.insertId;
+        returnedData = currentId;
+        const debugMessage = `${localMessage}>The ${itemName} was ${action}ed with id ${currentId}. The data is: ${itemToSend}`;
+        const prettyMessage = `The ${itemName} was successfully ${action}ed! with id ${currentId}.`;
+        toastMessages.debug.push(debugMessage);
+        toastMessages.pretty = prettyMessage;
+        toastToUse = toast.success;
+      } else {
+        const debugMessage = `${localMessage}>ServerError ${statusCode}, ${res.status} while ${action}ing the ${itemName}.\nThe error message: ${res.data.body.error}`;
+        const prettyMessage = `Error while ${action}ing the ${itemName}.`;
+        toastMessages.debug.push(debugMessage);
+        toastMessages.pretty = prettyMessage;
+        toastToUse = toast.error;
+        localError = new Error(toastMessages.debug);
+      }
+    } catch (error) {
+      const debugMessage = `${localMessage}>CatchedServerError> ${error}}`;
+      const prettyMessage = `Error while ${action}ing the ${itemName}.`;
+      toastMessages.debug.push(debugMessage);
+      toastMessages.pretty = prettyMessage;
+      toastToUse = toast.error;
+      localError = new Error(toastMessages.debug);
+    }
+  }
+  toastToUse(toastMessages.pretty);
+  if (localError) {
+    console.error(toastMessages.debug);
+    throw localError;
+  }
+  return returnedData;
+}
+
+async function defaultDBRead(itemName) {
+  const action = "read";
+  const localMessage = `defaultDB${action}> ${itemName}`;
+  let toastMessages = {
+    debug: [localMessage],
+    pretty: `Ready for a ${itemName} ${action}ing journey?`,
+  };
+  let toastToUse = toast;
+  let returnedData = null;
+  let localError = null;
+  console.log(toastMessages.pretty);
+  if (!itemToSend) {
+    const debugMessage = `${localMessage}> The ${itemName} "${itemToSend}" is invalid. The request didn't even left the app.`;
+    const prettyMessage = `The ${itemName} is invalid. It couldn't be ${action}.`;
+    toastMessages.debug.push(debugMessage);
+    toastMessages.pretty = prettyMessage;
+    toastToUse = toast.warning;
+    localError = new Error(toastMessages.debug);
+    console.error(toastMessages);
+  } else {
+    try {
+      let response = await myAxios.read(itemToSend);
+      isDebugging && debugPayload(response); // Only Executes if isDebugging is true
+      const statusCode = res.data.statusCode;
+      if (statusCode === 200) {
+        //Everything is OK
+        returnedData = itemToSend;
+        const currentId = res.data.body.queryResult.insertId;
+        const debugMessage = `${localMessage}>The ${itemName} was ${action}ed with id ${currentId}. The data is: ${itemToSend}`;
+        const prettyMessage = `The ${itemName} was successfully ${action}ed! with id ${currentId}.`;
+        toastMessages.debug.push(debugMessage);
+        toastMessages.pretty = prettyMessage;
+        toastToUse = toast.success;
+      } else {
+        const debugMessage = `${localMessage}>ServerError ${statusCode}, ${res.status} while ${action}ing the ${itemName}.\nThe error message: ${res.data.body.error}`;
+        const prettyMessage = `Error while ${action}ing the ${itemName}.`;
+        toastMessages.debug.push(debugMessage);
+        toastMessages.pretty = prettyMessage;
+        toastToUse = toast.error;
+        localError = new Error(toastMessages.debug);
+      }
+    } catch (error) {
+      const debugMessage = `${localMessage}>CatchedServerError> ${error}}`;
+      const prettyMessage = `Error while ${action}ing the ${itemName}.`;
+      toastMessages.debug.push(debugMessage);
+      toastMessages.pretty = prettyMessage;
+      toastToUse = toast.error;
+      localError = new Error(toastMessages.debug);
+    }
+  }
+  toastToUse(toastMessages.pretty);
+  if (localError) {
+    console.error(toastMessages.debug);
+    throw localError;
+  }
+  return returnedData;
+}
+
+async function defaultDBUpdate(itemName, itemToSend) {
+  const action = "updat";
+  const localMessage = `defaultDB${action}e> ${itemName}`;
+  let toastMessages = {
+    debug: [localMessage],
+    pretty: `Ready for a ${itemName} ${action}ing journey?`,
+  };
+  let toastToUse = toast;
+  let returnedData = null;
+  let localError = null;
+  console.log(toastMessages.pretty);
+  if (!itemToSend) {
+    const debugMessage = `${localMessage}> The ${itemName} "${itemToSend}" is invalid. The request didn't even left the app.`;
+    const prettyMessage = `The ${itemName} is invalid. It couldn't be ${action}ed.`;
+    toastMessages.debug.push(debugMessage);
+    toastMessages.pretty = prettyMessage;
+    toastToUse = toast.warning;
+    localError = new Error(toastMessages.debug);
+    console.error(toastMessages);
+  } else {
+    try {
+      let response = await myAxios.update(itemToSend);
+      isDebugging && debugPayload(response); // Only Executes if isDebugging is true
+      const statusCode = res.data.statusCode;
+      if (statusCode === 201) {
+        // Everything is OK
+        returnedData = itemToSend;
+        const debugMessage = `${localMessage}>The ${itemName} was ${action}ed with values ${JSON.stringify(
+          itemToSend
+        )}. The data is: ${itemToSend}`;
+        const prettyMessage = `The ${itemName} was successfully ${action}ed! with values ${JSON.stringify(
+          itemToSend
+        )}.`;
+        toastMessages.debug.push(debugMessage);
+        toastMessages.pretty = prettyMessage;
+        toastToUse = toast.success;
+      } else if (statusCode === 404) {
+        // Not found
+        const debugMessage = `${localMessage}>ServerError ${statusCode}, ${res.status} while ${action}ing the ${itemName}.\nThe error message: ${res.data.body.error}`;
+        const prettyMessage = `Error while ${action}ing the ${itemName}.`;
+        toastMessages.debug.push(debugMessage);
+        toastMessages.pretty = prettyMessage;
+        toastToUse = toast.warning;
+        localError = new Error(toastMessages.debug);
+      } else {
+        // Other cases
+        const debugMessage = `${localMessage}>ServerError ${statusCode}, ${res.status} while ${action}ing the ${itemName}.\nThe error message: ${res.data.body.error}`;
+        const prettyMessage = `Error while ${action}ing the ${itemName}.`;
+        toastMessages.debug.push(debugMessage);
+        toastMessages.pretty = prettyMessage;
+        toastToUse = toast.error;
+        localError = new Error(toastMessages.debug);
+      }
+    } catch (error) {
+      const debugMessage = `${localMessage}>CatchedServerError> ${error}}`;
+      const prettyMessage = `Error while ${action}ing the ${itemName}.`;
+      toastMessages.debug.push(debugMessage);
+      toastMessages.pretty = prettyMessage;
+      toastToUse = toast.error;
+      localError = new Error(toastMessages.debug);
+    }
+  }
+  toastToUse(toastMessages.pretty);
+  if (localError) {
+    console.error(toastMessages.debug);
+    throw localError;
+  }
+  return returnedData;
+}
+
+async function defaultDBDelete(itemName, itemToSend) {
+  const action = "delet";
+  const localMessage = `defaultDB${action}e> ${itemName}`;
+  let toastMessages = {
+    debug: [localMessage],
+    pretty: `Ready for a ${itemName} ${action}ing journey?`,
+  };
+  let toastToUse = toast;
+  let returnedData = null;
+  let localError = null;
+  console.log(toastMessages.pretty);
+  if (!(itemToSend && itemToSend.id)) {
+    const debugMessage = `${localMessage}> The ${itemName} "${itemToSend}" is invalid. The request didn't even left the app.`;
+    const prettyMessage = `The ${itemName} is invalid. It couldn't be ${action}ed.`;
+    toastMessages.debug.push(debugMessage);
+    toastMessages.pretty = prettyMessage;
+    toastToUse = toast.warning;
+    localError = new Error(toastMessages.debug);
+    console.error(toastMessages);
+  } else {
+    try {
+      let response = await myAxios.delete(itemToSend);
+      isDebugging && debugPayload(response); // Only Executes if isDebugging is true
+      const statusCode = res.data.statusCode;
+      const body = res.data.body;
+      if (statusCode === 200) {
+        // Everything is OK
+        returnedData = itemToSend;
+        const debugMessage = `${localMessage}>The ${itemName} was ${action}ed with values ${JSON.stringify(
+          itemToSend
+        )}. The data is: ${itemToSend}. The response body is: ${JSON.stringify(
+          body
+        )}`;
+        const prettyMessage = `The ${itemName} was successfully ${action}ed! with values ${JSON.stringify(
+          itemToSend
+        )}.`;
+        toastMessages.debug.push(debugMessage);
+        toastMessages.pretty = prettyMessage;
+        toastToUse = toast.success;
+      } else if (statusCode === 404) {
+        // Not found
+        const debugMessage = `${localMessage}>ServerError ${statusCode}, ${res.status} while ${action}ing the ${itemName}.\nThe error message: ${res.data.body.error}`;
+        const prettyMessage = `Error while ${action}ing the ${itemName}.`;
+        toastMessages.debug.push(debugMessage);
+        toastMessages.pretty = prettyMessage;
+        toastToUse = toast.warning;
+        localError = new Error(toastMessages.debug);
+      } else {
+        // Other cases
+        const debugMessage = `${localMessage}>ServerError ${statusCode}, ${
+          res.status
+        } while ${action}ing the ${itemName}.\nThe error message: ${
+          res.data.body.error
+        }. The response body is: ${JSON.stringify(body)}`;
+        const prettyMessage = `Error while ${action}ing the ${itemName}.`;
+        toastMessages.debug.push(debugMessage);
+        toastMessages.pretty = prettyMessage;
+        toastToUse = toast.error;
+        localError = new Error(toastMessages.debug);
+      }
+    } catch (error) {
+      const debugMessage = `${localMessage}>CatchedServerError> ${error}}`;
+      const prettyMessage = `Error while ${action}ing the ${itemName}.`;
+      toastMessages.debug.push(debugMessage);
+      toastMessages.pretty = prettyMessage;
+      toastToUse = toast.error;
+      localError = new Error(toastMessages.debug);
+    }
+  }
+  toastToUse(toastMessages.pretty);
+  if (localError) {
+    console.error(toastMessages.debug);
+    throw localError;
+  }
+  return returnedData;
+}
+
+export { defaultDBCreate, defaultDBRead, defaultDBUpdate, defaultDBDelete };
