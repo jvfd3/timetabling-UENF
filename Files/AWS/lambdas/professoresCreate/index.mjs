@@ -6,7 +6,7 @@ let local = "";
 async function handler(event) {
   local = "aws>lambda>professores>Create>handler";
   console.log(local + ">{event: ", event, "}");
-  let newProfessor = event.newProfessor;
+  let newProfessor = event.newItem;
   return await createProfessor(newProfessor);
 }
 
