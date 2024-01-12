@@ -8,15 +8,14 @@ const isDebugging = true;
 
 function getAxios() {
   function testing(itemToSend = null, itemName = null, action = "test") {
-    console.log(
-      `Axios>testing>${action}ing>${itemName}>${JSON.stringify(itemToSend)}`
-    );
+    const message = `Axios>testing>${action}ing>${itemName}>`;
+    console.log(message, itemToSend);
   }
 
   async function createTest(itemName = null, itemToSend = null) {
     const localUrl = url + itemName; // I may need to change this slash
-    let dataToSend = { newItem: itemToSend };
     testing(itemToSend, itemName, "creat");
+    const dataToSend = { newItem: itemToSend };
     return await axios.post(localUrl, dataToSend);
   }
   async function readTest(itemName = null, itemToSend = null) {
@@ -24,10 +23,11 @@ function getAxios() {
     testing(itemToSend, itemName, "read");
     return await axios.get(localUrl, itemToSend);
   }
-  async function updateTest(itemToSend = null, itemName = null) {
+  async function updateTest(itemName = null, itemToSend = null) {
     const localUrl = url + itemName; // I may need to change this slash
     testing(itemToSend, itemName, "updat");
-    return await axios.put(localUrl), itemToSend;
+    const dataToSend = { newItem: itemToSend };
+    return await axios.put(localUrl, dataToSend);
   }
   async function deleteTest(itemToSend = null, itemName = null) {
     const localUrl = url + itemName + "/" + itemToSend.id.toString(); // I may need to change this slash
@@ -181,18 +181,16 @@ async function defaultDBUpdate(itemName, itemToSend) {
     console.error(toastMessages);
   } else {
     try {
-      let response = await myAxios.update(itemToSend);
+      let response = await myAxios.update(itemName, itemToSend);
       isDebugging && debugPayload(response); // Only Executes if isDebugging is true
       const statusCode = response.data.statusCode;
-      if (statusCode === 201) {
+      if (statusCode === 200) {
         // Everything is OK
         returnedData = itemToSend;
         const debugMessage = `${localMessage}>The ${itemName} was ${action}ed with values ${JSON.stringify(
           itemToSend
         )}. The data is: ${itemToSend}`;
-        const prettyMessage = `The ${itemName} was successfully ${action}ed! with values ${JSON.stringify(
-          itemToSend
-        )}.`;
+        const prettyMessage = `The ${itemName} was successfully ${action}ed!`;
         toastMessages.debug.push(debugMessage);
         toastMessages.pretty = prettyMessage;
         toastToUse = toast.success;

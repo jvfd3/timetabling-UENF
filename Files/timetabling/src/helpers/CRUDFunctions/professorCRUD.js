@@ -5,6 +5,7 @@ import {
 import {
   defaultDBCreate,
   defaultDBRead,
+  defaultDBUpdate,
 } from "../../DB/AWS/defaultAxiosFunctions";
 
 function handleError(error) {
@@ -39,33 +40,23 @@ function readProfessor({ setProfessors, setProfessor }) {
     .catch(handleError);
 }
 
-function safeUpdateProfessores(professorStates) {
-  const { professors, setProfessors, professor /* , setProfessor */ } =
-    professorStates;
+function updateProfessor({ professors, setProfessors, professor }) {
   function updateProfessorFromList(oldArray, newProfessor) {
-    const newArray = oldArray.map((professorAntigo) => {
-      return professorAntigo.id === newProfessor.id
-        ? newProfessor
-        : professorAntigo;
+    const newArray = oldArray.map((oldProfessor) => {
+      const hasSameId = oldProfessor.id === newProfessor.id;
+      return hasSameId ? newProfessor : oldProfessor;
     });
     return newArray;
   }
-  updateProfessores(professor)
-    .then((newProfessor) => {
-      // console.log("professores", professores[professores.length - 2]);
-      const updatedProfessores = updateProfessorFromList(
-        professors,
-        newProfessor
-      );
-      // console.log(
-      //   "updatedProfessores",
-      //   updatedProfessores[updatedProfessores.length - 2]
-      // );
-      setProfessors(updatedProfessores);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+
+  function updateProfessorOnList(newProfessor) {
+    const updatedProfessors = updateProfessorFromList(professors, newProfessor);
+    setProfessors(updatedProfessors);
+  }
+
+  defaultDBUpdate("professores", professor)
+    .then(updateProfessorOnList)
+    .catch(handleError);
 }
 
 function safeDeleteProfessores(professorStates) {
@@ -102,11 +93,6 @@ function safeDeleteProfessores(professorStates) {
       }
     })
     .catch((error) => console.error("internDelete>", error));
-}
-
-function updateProfessor(professorStates) {
-  console.log("updateProfessor", professorStates.professor.id);
-  safeUpdateProfessores(professorStates);
 }
 
 function deleteProfessor(professorStates) {
