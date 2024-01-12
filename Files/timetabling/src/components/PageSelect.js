@@ -1,12 +1,11 @@
 // import "../defaultStyle.css";
 import Select from "react-select";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import options from "../DB/local/options";
 import { changePageByScrolling } from "../helpers/firulas/minhasFirulas";
 // import { changePageByScrolling } from "../functions/firulas/minhasFirulas";
 
-const CRUDPageSelection = (props) => {
+function CRUDPageSelection(props) {
   let pages = options.constantValues.pageSelection;
   const navigate = useNavigate();
 
@@ -69,6 +68,6 @@ const CRUDPageSelection = (props) => {
       </div>
     </div>
   );
-};
+}
 
 export default CRUDPageSelection;
