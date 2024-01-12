@@ -1,16 +1,10 @@
 import {
-  updateProfessores,
-  deleteProfessores,
-} from "../../DB/AWS/axiosConnection";
-import {
   defaultDBCreate,
+  defaultDBDelete,
   defaultDBRead,
   defaultDBUpdate,
+  defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
-
-function handleError(error) {
-  console.error("Default error handling", error);
-}
 
 function createProfessor({
   professors,
@@ -25,7 +19,7 @@ function createProfessor({
   }
   defaultDBCreate("professores", professor)
     .then(insertNewProfessorFromDB)
-    .catch(handleError);
+    .catch(defaultHandleError);
 }
 
 function readProfessor({ setProfessors, setProfessor }) {
@@ -37,7 +31,7 @@ function readProfessor({ setProfessors, setProfessor }) {
 
   defaultDBRead("professores")
     .then(insertNewProfessorsFromDB)
-    .catch(handleError);
+    .catch(defaultHandleError);
 }
 
 function updateProfessor({ professors, setProfessors, professor }) {
@@ -56,12 +50,15 @@ function updateProfessor({ professors, setProfessors, professor }) {
 
   defaultDBUpdate("professores", professor)
     .then(updateProfessorOnList)
-    .catch(handleError);
+    .catch(defaultHandleError);
 }
 
-function safeDeleteProfessores(professorStates) {
-  const { professors, setProfessors, professor, setProfessor } =
-    professorStates;
+function deleteProfessor({
+  professors,
+  setProfessors,
+  professor,
+  setProfessor,
+}) {
   function deleteProfessorFromList(oldArray, deletedProfessor) {
     const newArray = oldArray.filter((oldProfessor) => {
       let oldId = oldProfessor.id;
@@ -70,34 +67,32 @@ function safeDeleteProfessores(professorStates) {
     });
     return newArray;
   }
-  deleteProfessores(professor)
-    .then((deletedProfessor) => {
-      if (deletedProfessor) {
-        let deletedProfessorList = deleteProfessorFromList(
-          professors,
-          deletedProfessor
+
+  function deleteProfessorOnList(deletedProfessor) {
+    if (deletedProfessor) {
+      let deletedProfessorList = deleteProfessorFromList(
+        professors,
+        deletedProfessor
+      );
+
+      setProfessors(deletedProfessorList);
+      const index = professors.findIndex((p) => p.id === deletedProfessor.id);
+      if (index > 0) {
+        setProfessor(deletedProfessorList[index - 1]); // continua do anterior
+      } else if (deletedProfessorList.length > 0) {
+        setProfessor(deletedProfessorList[0]); // Se estou apagando o primeiro e ainda tem mais...
+      } else {
+        setProfessor(null);
+        console.error(
+          "Uai, não tem mais professores! Como diria o Silvio Santos: 'Está certo disto?'"
         );
-
-        setProfessors(deletedProfessorList);
-        const index = professors.findIndex((p) => p.id === deletedProfessor.id);
-        if (index > 0) {
-          setProfessor(deletedProfessorList[index - 1]); // continua do anterior
-        } else if (deletedProfessorList.length > 0) {
-          setProfessor(deletedProfessorList[0]); // Se estou apagando o primeiro e ainda tem mais...
-        } else {
-          setProfessor(null);
-          console.error(
-            "Uai, não tem mais professores! Como diria o Silvio Santos: 'Está certo disto?'"
-          );
-        }
       }
-    })
-    .catch((error) => console.error("internDelete>", error));
-}
+    }
+  }
 
-function deleteProfessor(professorStates) {
-  console.log("deleteProfessor", professorStates.professor.id);
-  safeDeleteProfessores(professorStates);
+  defaultDBDelete("professores", professor)
+    .then(deleteProfessorOnList)
+    .catch(defaultHandleError);
 }
 
 export { createProfessor, readProfessor, updateProfessor, deleteProfessor };

@@ -29,8 +29,8 @@ function getAxios() {
     const dataToSend = { newItem: itemToSend };
     return await axios.put(localUrl, dataToSend);
   }
-  async function deleteTest(itemToSend = null, itemName = null) {
-    const localUrl = url + itemName + "/" + itemToSend.id.toString(); // I may need to change this slash
+  async function deleteTest(itemName = null, itemToSend = null) {
+    const localUrl = url + itemName + "/" + itemToSend?.id; // I may need to change this slash
     testing(itemToSend, itemName, "delet");
     return await axios.delete(localUrl);
   }
@@ -47,6 +47,10 @@ function getAxios() {
 const myAxios = getAxios();
 
 /* Create a function for default debugging messages? */
+
+function defaultHandleError(error) {
+  console.error("Default error handling", error);
+}
 
 function debugPayload(payload) {
   const local = debuggingLocal + ">debugPayload";
@@ -249,7 +253,7 @@ async function defaultDBDelete(itemName, itemToSend) {
     console.error(toastMessages);
   } else {
     try {
-      let response = await myAxios.delete(itemToSend);
+      let response = await myAxios.delete(itemName, itemToSend);
       isDebugging && debugPayload(response); // Only Executes if isDebugging is true
       const statusCode = response.data.statusCode;
       const body = response.data.body;
@@ -261,9 +265,7 @@ async function defaultDBDelete(itemName, itemToSend) {
         )}. The data is: ${itemToSend}. The response body is: ${JSON.stringify(
           body
         )}`;
-        const prettyMessage = `The ${itemName} was successfully ${action}ed! with values ${JSON.stringify(
-          itemToSend
-        )}.`;
+        const prettyMessage = `The ${itemName} was successfully ${action}ed!`;
         toastMessages.debug.push(debugMessage);
         toastMessages.pretty = prettyMessage;
         toastToUse = toast.success;
@@ -305,4 +307,10 @@ async function defaultDBDelete(itemName, itemToSend) {
   return returnedData;
 }
 
-export { defaultDBCreate, defaultDBRead, defaultDBUpdate, defaultDBDelete };
+export {
+  defaultDBCreate,
+  defaultDBRead,
+  defaultDBUpdate,
+  defaultDBDelete,
+  defaultHandleError,
+};
