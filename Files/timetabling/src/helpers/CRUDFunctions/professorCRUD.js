@@ -13,7 +13,7 @@ function createProfessor({
   setProfessor,
 }) {
   function insertNewProfessorFromDB(newId) {
-    let newProfessor = { ...professor, id: newId };
+    const newProfessor = { ...professor, id: newId };
     setProfessor(newProfessor);
     setProfessors([...professors, newProfessor]);
   }
@@ -25,7 +25,7 @@ function createProfessor({
 function readProfessor({ setProfessors, setProfessor }) {
   function insertNewProfessorsFromDB(professoresFromDB) {
     setProfessors(professoresFromDB);
-    let lastProfessor = professoresFromDB[professoresFromDB.length - 1];
+    const lastProfessor = professoresFromDB[professoresFromDB.length - 1];
     setProfessor(lastProfessor);
   }
 
@@ -61,8 +61,8 @@ function deleteProfessor({
 }) {
   function deleteProfessorFromList(oldArray, deletedProfessor) {
     const newArray = oldArray.filter((oldProfessor) => {
-      let oldId = oldProfessor.id;
-      let idToDelete = deletedProfessor.id;
+      const oldId = oldProfessor.id;
+      const idToDelete = deletedProfessor.id;
       return oldId !== idToDelete;
     });
     return newArray;
@@ -70,7 +70,7 @@ function deleteProfessor({
 
   function deleteProfessorOnList(deletedProfessor) {
     if (deletedProfessor) {
-      let deletedProfessorList = deleteProfessorFromList(
+      const deletedProfessorList = deleteProfessorFromList(
         professors,
         deletedProfessor
       );

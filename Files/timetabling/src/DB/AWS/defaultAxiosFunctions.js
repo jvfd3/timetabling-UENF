@@ -13,25 +13,25 @@ function getAxios() {
   }
 
   async function createTest(itemName = null, itemToSend = null) {
+    isDebugging && testing(itemToSend, itemName, "creat");
     const localUrl = url + itemName; // I may need to change this slash
-    testing(itemToSend, itemName, "creat");
     const dataToSend = { newItem: itemToSend };
     return await axios.post(localUrl, dataToSend);
   }
   async function readTest(itemName = null, itemToSend = null) {
+    isDebugging && testing(itemToSend, itemName, "read");
     const localUrl = url + itemName; // I may need to change this slash
-    testing(itemToSend, itemName, "read");
     return await axios.get(localUrl, itemToSend);
   }
   async function updateTest(itemName = null, itemToSend = null) {
+    isDebugging && testing(itemToSend, itemName, "updat");
     const localUrl = url + itemName; // I may need to change this slash
-    testing(itemToSend, itemName, "updat");
     const dataToSend = { newItem: itemToSend };
     return await axios.put(localUrl, dataToSend);
   }
   async function deleteTest(itemName = null, itemToSend = null) {
+    isDebugging && testing(itemToSend, itemName, "delet");
     const localUrl = url + itemName + "/" + itemToSend?.id; // I may need to change this slash
-    testing(itemToSend, itemName, "delet");
     return await axios.delete(localUrl);
   }
 
