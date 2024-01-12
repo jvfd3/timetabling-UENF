@@ -213,11 +213,10 @@ function Rooms() {
 }
 
 function CRUDrooms() {
+  let defaultPageValue = options.constantValues.pageSelection.classrooms;
   return (
     <div className="background">
-      <CRUDPageSelection
-        defaultValue={options.constantValues.pageSelection.classrooms}
-      />
+      <CRUDPageSelection defaultValue={defaultPageValue} />
       <Rooms />
     </div>
   );

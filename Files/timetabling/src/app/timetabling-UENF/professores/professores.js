@@ -112,11 +112,10 @@ function Professors() {
 }
 
 function CRUDprofessors() {
+  let defaultPageValue = options.constantValues.pageSelection.professors;
   return (
     <div className="background">
-      <CRUDPageSelection
-        defaultValue={options.constantValues.pageSelection.professors}
-      />
+      <CRUDPageSelection defaultValue={defaultPageValue} />
       <Professors />
     </div>
   );

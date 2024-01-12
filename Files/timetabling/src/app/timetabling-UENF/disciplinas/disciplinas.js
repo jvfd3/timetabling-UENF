@@ -114,11 +114,10 @@ function Subjects() {
 }
 
 function CRUDSubjects() {
+  let defaultPageValue = options.constantValues.pageSelection.subjects;
   return (
     <div className="background">
-      <CRUDPageSelection
-        defaultValue={options.constantValues.pageSelection.subjects}
-      />
+      <CRUDPageSelection defaultValue={defaultPageValue} />
       <Subjects />
     </div>
   );
