@@ -6,6 +6,8 @@ import {
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
 
+const itemName = "alunos";
+
 function createStudent({ students, setStudents, student, setStudent }) {
   function insertNewStudentFromDB(newId) {
     const newStudent = { ...student, id: newId };
@@ -13,7 +15,7 @@ function createStudent({ students, setStudents, student, setStudent }) {
     setStudents([...students, newStudent]);
   }
 
-  defaultDBCreate("alunos", student)
+  defaultDBCreate(itemName, student)
     .then(insertNewStudentFromDB)
     .catch(defaultHandleError);
 }
@@ -25,7 +27,7 @@ function readStudent({ setStudents, setStudent }) {
     setStudents(studentsFromDB);
   }
 
-  defaultDBRead("alunos")
+  defaultDBRead(itemName)
     .then(insertNewStudentsFromDB)
     .catch(defaultHandleError);
 }
@@ -44,7 +46,7 @@ function updateStudent({ students, setStudents, student }) {
     setStudents(updatedStudents);
   }
 
-  defaultDBUpdate("alunos", student)
+  defaultDBUpdate(itemName, student)
     .then(updateStudentOnList)
     .catch(defaultHandleError);
 }
@@ -64,7 +66,7 @@ function deleteStudent({ students, setStudents, student, setStudent }) {
     setStudent({});
   }
 
-  defaultDBDelete("alunos", student)
+  defaultDBDelete(itemName, student)
     .then(deleteStudentOnList)
     .catch(defaultHandleError);
 }
