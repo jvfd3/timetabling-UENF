@@ -15,7 +15,11 @@ function getPayloadResponse(
   };
   const payloadResponse = {
     statusCode: statusCode ?? null,
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*", // Permite que qualquer origem acesse
+      "Access-Control-Allow-Credentials": true, // Permite o envio de cookies
+    },
     body: JSON.stringify(myBody ?? null),
   };
   console.log(payloadResponse);
