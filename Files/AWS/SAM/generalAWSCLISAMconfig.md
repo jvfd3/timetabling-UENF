@@ -2,7 +2,6 @@
 
 ## API Gateway
 
-
 - O objetivo é utilizar o SAM para criar uma API Gateway
 - Desejo ter um arquivo `APIGateway.yml` que contenha a descrição da API Gateway
 - O arquivo yml conterá as seguintes informações:
