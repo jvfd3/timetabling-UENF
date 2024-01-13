@@ -29,7 +29,7 @@ Resources:
   MyApi:
     Type: AWS::Serverless::Api
     Properties:
-      StageName: customStage
+      StageName: timetabling
       EndpointConfiguration: REGIONAL
 
   # LAMBDA FUNCTIONS
