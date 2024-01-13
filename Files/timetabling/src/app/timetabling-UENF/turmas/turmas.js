@@ -184,7 +184,7 @@ function HorariosTable(myStates) {
   );
 }
 
-function Turmas() {
+function Classes() {
   const classIndex = useRef(sqlDataFromJson.classes.length);
   const classTimeIndex = useRef(sqlDataFromJson.classtimes.length);
 
@@ -214,7 +214,7 @@ function CRUDclass() {
   return (
     <div className="background">
       <CRUDPageSelection defaultValue={defaultPageValue} />
-      <Turmas />
+      <Classes />
     </div>
   );
 }
