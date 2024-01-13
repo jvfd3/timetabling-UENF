@@ -1,0 +1,56 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: My SAM template for the OurClass timetabling project
+Resources:
+  createSubject:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: createSubject
+      Runtime: nodejs14.x
+      Role: arn:aws:iam::375423677214:role/LambdaRole
+      Handler: index.handler
+      CodeUri: createSubject
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+    Metadata:
+      SamResourceId: createSubject
+  readSubject:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: readSubject
+      Runtime: nodejs14.x
+      Role: arn:aws:iam::375423677214:role/LambdaRole
+      Handler: index.handler
+      CodeUri: readSubject
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+    Metadata:
+      SamResourceId: readSubject
+  updateSubject:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: updateSubject
+      Runtime: nodejs14.x
+      Role: arn:aws:iam::375423677214:role/LambdaRole
+      Handler: index.handler
+      CodeUri: updateSubject
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+    Metadata:
+      SamResourceId: updateSubject
+  deleteSubject:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: deleteSubject
+      Runtime: nodejs14.x
+      Role: arn:aws:iam::375423677214:role/LambdaRole
+      Handler: index.handler
+      CodeUri: deleteSubject
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+    Metadata:
+      SamResourceId: deleteSubject

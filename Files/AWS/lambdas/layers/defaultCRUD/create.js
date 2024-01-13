@@ -9,8 +9,6 @@ async function defaultCreate(query, queryValues) {
   let localError = null;
 
   if (false) {
-    
-    
   } else {
     try {
       queryResult = await dbExecute(query, queryValues);
