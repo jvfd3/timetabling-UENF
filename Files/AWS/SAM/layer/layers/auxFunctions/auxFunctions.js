@@ -1,14 +1,22 @@
-function getPayloadResponse(message, query, queryValues, queryResult, error, statusCode) {
-  let myBody = {
+function getPayloadResponse(
+  message,
+  query,
+  queryValues,
+  queryResult,
+  error,
+  statusCode
+) {
+  const myBody = {
     message: message ?? null,
     query: query ?? null,
     queryValues: queryValues ?? null,
     queryResult: queryResult?.[0] ?? null,
     error: error ?? null,
   };
-  let payloadResponse = {
+  const payloadResponse = {
     statusCode: statusCode ?? null,
-    body: myBody ?? null,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(myBody ?? null),
   };
   console.log(payloadResponse);
   return payloadResponse;

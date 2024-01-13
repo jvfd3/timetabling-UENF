@@ -1,0 +1,61 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: "OurClass>SAM>General>"
+
+Resources:
+  # LAYERS
+  dbFunctionLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: dbFunctionSAM
+      Description: connect to db
+      ContentUri: ./layer/layers/dbConnection
+      CompatibleRuntimes:
+        - nodejs14.x
+        - nodejs16.x
+        - nodejs18.x
+  auxFunctionLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: auxFunctionsSAM
+      Description: getPayload
+      ContentUri: ./layer/layers/auxFunctions
+      CompatibleRuntimes:
+        - nodejs14.x
+        - nodejs16.x
+        - nodejs18.x
+
+  # API GATEWAY
+  MyApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: customStage
+      EndpointConfiguration: REGIONAL
+
+  # LAMBDA FUNCTIONS
+  readSubject:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: readSubject
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambda/lambdas/subject/readSubject
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+          DB_HOST: "dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com"
+          DB_USER: "tang"
+          DB_PASSWORD: "annabell"
+          DB_NAME: "timetabling"
+      Layers:
+        - !Ref dbFunctionLayer
+        - !Ref auxFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /subject
+            Method: get
+            RestApiId: !Ref MyApi

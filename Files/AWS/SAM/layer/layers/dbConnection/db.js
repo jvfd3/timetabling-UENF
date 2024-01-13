@@ -24,7 +24,7 @@ async function dbExecute(query, values = null) {
     await dbConnection.end();
     return queryResult;
   } catch (err) {
-    console.log("Edited?");
+    console.log("v6?");
     let error = new Error(["db.js>dbExecute", err]);
     console.error(error);
     throw error;
