@@ -6,7 +6,7 @@ import {
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
 
-const itemName = "disciplinas";
+const itemName = "subject";
 
 function createSubject({ subjects, setSubjects, subject, setSubject }) {
   function insertNewSubjectFromDB(newId) {

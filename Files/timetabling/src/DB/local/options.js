@@ -422,7 +422,7 @@ const options = {
   },
   AWS: {
     fullEndpoint:
-      "https://p0uw7pe2ve.execute-api.us-east-2.amazonaws.com/timetabling",
+      "https://p0uw7pe2ve.execute-api.us-east-2.amazonaws.com/timetabling/",
     endpoint: "https://p0uw7pe2ve.execute-api.us-east-2.amazonaws.com",
     stage: "timetabling",
     region: "us-east-2",
