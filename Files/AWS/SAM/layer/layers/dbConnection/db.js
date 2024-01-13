@@ -1,14 +1,23 @@
+const AWS = require("aws-sdk");
 const mysql = require("mysql2/promise");
 
-const dbConfig = {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-};
+const secretsManager = new AWS.SecretsManager();
+
+async function getDbConfig() {
+  const data = await secretsManager
+    .getSecretValue({ SecretId: process.env.SECRET_NAME })
+    .promise();
+  if ("SecretString" in data) {
+    return JSON.parse(data.SecretString);
+  } else {
+    let buff = new Buffer(data.SecretBinary, "base64");
+    return JSON.parse(buff.toString("ascii"));
+  }
+}
 
 async function createDbConnection() {
   try {
+    const dbConfig = await getDbConfig();
     return await mysql.createConnection(dbConfig);
   } catch (err) {
     let error = new Error(["db.js>createDbConnection", err]);
@@ -24,7 +33,6 @@ async function dbExecute(query, values = null) {
     await dbConnection.end();
     return queryResult;
   } catch (err) {
-    console.log("v6?");
     let error = new Error(["db.js>dbExecute", err]);
     console.error(error);
     throw error;

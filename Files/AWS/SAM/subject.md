@@ -18,7 +18,7 @@
 | -------------------- | ------------------------------------------------------- |
 | username             | tang                                                    |
 | password             | annabell                                                |
-| englne               | mysql                                                   |
+| engine               | mysql                                                   |
 | host                 | ddbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com |
 | port                 | 3306                                                    |
 | dbname               | timetabling                                             |

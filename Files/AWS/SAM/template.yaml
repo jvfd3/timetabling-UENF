@@ -49,10 +49,6 @@ Resources:
       Environment:
         Variables:
           SECRET_NAME: timetablingSecrets
-          DB_HOST: "dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com"
-          DB_USER: "tang"
-          DB_PASSWORD: "annabell"
-          DB_NAME: "timetabling"
       Layers:
         - !Ref dbFunctionLayer
         - !Ref auxFunctionLayer
