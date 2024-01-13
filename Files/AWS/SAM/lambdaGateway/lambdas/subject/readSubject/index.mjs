@@ -1,19 +1,19 @@
-// professoresRead->index.js
+// SubjectsRead->index.js
 import { dbExecute } from "/opt/db.js";
 import { getPayloadResponse } from "/opt/auxFunctions.js";
-let local = "Atualizou?";
+let local = "";
 
 async function handler(event) {
-  local = "aws>lambda>professores>Read>handler";
+  local = "aws>lambda>Subjects>Read>handler";
   console.log(local + ">{event: ", event, "}");
 
-  return await readProfessores();
+  return await readSubjects();
 }
 
-async function readProfessores() {
-  local += ">readProfessores";
-  let readProfessoresQuery = "SELECT * FROM professores";
-  return await defaultRead(readProfessoresQuery, null);
+async function readSubjects() {
+  local += ">readSubjects";
+  let readSubjectsQuery = "SELECT * FROM Subjects";
+  return await defaultRead(readSubjectsQuery, null);
 }
 
 async function defaultRead(query, queryValues) {
