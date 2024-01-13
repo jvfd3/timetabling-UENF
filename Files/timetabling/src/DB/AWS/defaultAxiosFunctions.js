@@ -80,9 +80,9 @@ async function defaultDBCreate(itemName, itemToSend) {
     try {
       let response = await myAxios.create(itemName, itemToSend);
       isDebugging && debugPayload(response); // Only Executes if isDebugging is true
-      const statusCode = response.data.statusCode;
+      const statusCode = response.status;
       if (statusCode === 201) {
-        returnedData = response.data.body.queryResult.insertId;
+        returnedData = response.data.queryResult.insertId;
         const debugMessage = `${localMessage}>The ${itemName} was ${action}ed with id ${returnedData}. The data is: ${itemToSend}`;
         const prettyMessage = `The ${itemName} was successfully ${action}ed! with id ${returnedData}.`;
         toastMessages.debug.push(debugMessage);
@@ -129,11 +129,11 @@ async function defaultDBRead(itemName) {
     try {
       let response = await myAxios.read(itemName);
       isDebugging && debugPayload(response); // Only Executes if isDebugging is true
-      returnedData = response.data.body.queryResult;
-      const statusCode = response.data.statusCode;
+      returnedData = response.data.queryResult;
+      const statusCode = response.status;
       if (statusCode === 200) {
         //Everything is OK
-        const currentId = response.data.body.queryResult.insertId;
+        const currentId = response.data.queryResult.insertId;
         const debugMessage = `${localMessage}>The ${itemName} was ${action}ed The data is: ${returnedData}`;
         const prettyMessage = `The ${itemName} was successfully ${action}ed!`;
         toastMessages.debug.push(debugMessage);
@@ -187,7 +187,7 @@ async function defaultDBUpdate(itemName, itemToSend) {
     try {
       let response = await myAxios.update(itemName, itemToSend);
       isDebugging && debugPayload(response); // Only Executes if isDebugging is true
-      const statusCode = response.data.statusCode;
+      const statusCode = response.status;
       if (statusCode === 200) {
         // Everything is OK
         returnedData = itemToSend;
@@ -255,7 +255,7 @@ async function defaultDBDelete(itemName, itemToSend) {
     try {
       let response = await myAxios.delete(itemName, itemToSend);
       isDebugging && debugPayload(response); // Only Executes if isDebugging is true
-      const statusCode = response.data.statusCode;
+      const statusCode = response.status;
       const body = response.data.body;
       if (statusCode === 200) {
         // Everything is OK
