@@ -26,7 +26,7 @@ Resources:
           DB_NAME: "timetabling"
       Layers:
         - Fn::Sub: arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:auxFunctions:5
-        - Fn::Sub: arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:dbFunction:1
+        - Fn::Sub: arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:dbFunctionSAM:1
       Events:
         ApiEvent:
           Type: Api

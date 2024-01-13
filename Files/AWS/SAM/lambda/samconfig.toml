@@ -1,6 +1,6 @@
 version = 0.1
 [default.deploy.parameters]
-stack_name = "LambdaGatewaySAM1"
+stack_name = "LambdaSAM1"
 region = "us-east-2"
 confirm_changeset = false
 capabilities = "CAPABILITY_IAM"
