@@ -9,7 +9,7 @@ Resources:
     Properties:
       LayerName: dbFunctionSAM
       Description: connect to db
-      ContentUri: ./layer/layers/dbConnection
+      ContentUri: ./layers/dbConnection
       CompatibleRuntimes:
         - nodejs14.x
         - nodejs16.x
@@ -19,7 +19,7 @@ Resources:
     Properties:
       LayerName: auxFunctionsSAM
       Description: getPayload
-      ContentUri: ./layer/layers/auxFunctions
+      ContentUri: ./layers/auxFunctions
       CompatibleRuntimes:
         - nodejs14.x
         - nodejs16.x
@@ -45,7 +45,7 @@ Resources:
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
       Handler: index.handler
-      CodeUri: ./lambda/lambdas/professor/createProfessor
+      CodeUri: ./lambdas/professor/createProfessor
       Environment:
         Variables:
           SECRET_NAME: timetablingSecrets
@@ -67,7 +67,7 @@ Resources:
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
       Handler: index.handler
-      CodeUri: ./lambda/lambdas/subject/readSubject
+      CodeUri: ./lambdas/subject/readSubject
       Environment:
         Variables:
           SECRET_NAME: timetablingSecrets
@@ -89,7 +89,7 @@ Resources:
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
       Handler: index.handler
-      CodeUri: ./lambda/lambdas/professor/readProfessor
+      CodeUri: ./lambdas/professor/readProfessor
       Environment:
         Variables:
           SECRET_NAME: timetablingSecrets
@@ -111,7 +111,7 @@ Resources:
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
       Handler: index.handler
-      CodeUri: ./lambda/lambdas/room/readRoom
+      CodeUri: ./lambdas/room/readRoom
       Environment:
         Variables:
           SECRET_NAME: timetablingSecrets
@@ -133,7 +133,7 @@ Resources:
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
       Handler: index.handler
-      CodeUri: ./lambda/lambdas/student/readStudent
+      CodeUri: ./lambdas/student/readStudent
       Environment:
         Variables:
           SECRET_NAME: timetablingSecrets

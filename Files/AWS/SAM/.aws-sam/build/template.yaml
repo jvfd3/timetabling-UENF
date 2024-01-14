@@ -7,7 +7,7 @@ Resources:
     Properties:
       LayerName: dbFunctionSAM
       Description: connect to db
-      ContentUri: ..\..\layer\layers\dbConnection
+      ContentUri: ..\..\layers\dbConnection
       CompatibleRuntimes:
       - nodejs14.x
       - nodejs16.x
@@ -17,7 +17,7 @@ Resources:
     Properties:
       LayerName: auxFunctionsSAM
       Description: getPayload
-      ContentUri: ..\..\layer\layers\auxFunctions
+      ContentUri: ..\..\layers\auxFunctions
       CompatibleRuntimes:
       - nodejs14.x
       - nodejs16.x
