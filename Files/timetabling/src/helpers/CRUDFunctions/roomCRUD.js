@@ -6,7 +6,7 @@ import {
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
 
-const itemName = "salas";
+const itemName = "room";
 
 function createRoom({ rooms, setRooms, room, setRoom }) {
   function insertNewRoomFromDB(newId) {

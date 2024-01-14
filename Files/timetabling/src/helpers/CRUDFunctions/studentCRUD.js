@@ -6,7 +6,7 @@ import {
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
 
-const itemName = "alunos";
+const itemName = "student";
 
 function createStudent({ students, setStudents, student, setStudent }) {
   function insertNewStudentFromDB(newId) {

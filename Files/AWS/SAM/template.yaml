@@ -37,6 +37,28 @@ Resources:
         AllowOrigin: "'*'"
 
   # LAMBDA FUNCTIONS
+  createProfessor:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: createProfessor
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambda/lambdas/professor/createProfessor
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+        - !Ref auxFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /professor
+            Method: post
+            RestApiId: !Ref MyApi
   readSubject:
     Type: AWS::Serverless::Function
     Properties:
@@ -57,5 +79,71 @@ Resources:
           Type: Api
           Properties:
             Path: /subject
+            Method: get
+            RestApiId: !Ref MyApi
+  readProfessor:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: readProfessor
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambda/lambdas/professor/readProfessor
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+        - !Ref auxFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /professor
+            Method: get
+            RestApiId: !Ref MyApi
+  readRoom:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: readRoom
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambda/lambdas/room/readRoom
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+        - !Ref auxFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /room
+            Method: get
+            RestApiId: !Ref MyApi
+  readStudent:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: readStudent
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambda/lambdas/student/readStudent
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+        - !Ref auxFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /student
             Method: get
             RestApiId: !Ref MyApi

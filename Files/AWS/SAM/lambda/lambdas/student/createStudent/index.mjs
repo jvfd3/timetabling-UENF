@@ -2,7 +2,7 @@
 import { dbExecute } from "/opt/db.js";
 import { getPayloadResponse } from "/opt/auxFunctions.js";
 let local = "";
-const itemName = "disciplina";
+const itemName = "aluno";
 
 async function handler(event) {
   local = `aws>lambda>${itemName}>Create>handler`;
@@ -14,17 +14,17 @@ async function handler(event) {
 async function createItem(newItem) {
   local += `>create${itemName}`;
   let createItemQuery =
-    "INSERT INTO disciplinas(`periodo`, `codigo`, `apelido`, `nome`) VALUES(?, ?, ?, ?)";
+    "INSERT INTO alunos(`anoEntrada`, `curso`, `matricula`, `nome`) VALUES(?, ?, ?, ?)";
   return await defaultCreate(createItemQuery, convertToList(newItem));
 }
 
-function convertToList(disciplina) {
+function convertToList(aluno) {
   const values = [
     /* Vai ser nulo se algum item não for definido */
-    disciplina.periodo ?? null,
-    disciplina.codigo ?? null,
-    disciplina.apelido ?? null,
-    disciplina.nome ?? null,
+    aluno.anoEntrada ?? null,
+    aluno.curso ?? null,
+    aluno.matricula ?? null,
+    aluno.nome ?? null,
   ];
   return values;
 }

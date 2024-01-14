@@ -2,7 +2,7 @@
 import { dbExecute } from "/opt/db.js";
 import { getPayloadResponse } from "/opt/auxFunctions.js";
 let local = "";
-const itemName = "disciplina";
+const itemName = "sala";
 
 async function handler(event) {
   local = `aws>lambda>${itemName}>Create>handler`;
@@ -14,17 +14,18 @@ async function handler(event) {
 async function createItem(newItem) {
   local += `>create${itemName}`;
   let createItemQuery =
-    "INSERT INTO disciplinas(`periodo`, `codigo`, `apelido`, `nome`) VALUES(?, ?, ?, ?)";
+    "INSERT INTO salas(`capacidade`, `idBlock`, `bloco`, `codigo`, `descricao`) VALUES(?, ?, ?, ?, ?)";
   return await defaultCreate(createItemQuery, convertToList(newItem));
 }
 
-function convertToList(disciplina) {
+function convertToList(room) {
   const values = [
     /* Vai ser nulo se algum item não for definido */
-    disciplina.periodo ?? null,
-    disciplina.codigo ?? null,
-    disciplina.apelido ?? null,
-    disciplina.nome ?? null,
+    room.capacidade ?? null,
+    room.idBlock ?? null,
+    room.bloco ?? null,
+    room.codigo ?? null,
+    room.descricao ?? null,
   ];
   return values;
 }

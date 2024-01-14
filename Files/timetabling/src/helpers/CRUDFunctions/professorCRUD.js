@@ -6,7 +6,7 @@ import {
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
 
-const itemName = "professores";
+const itemName = "professor";
 
 function createProfessor({
   professors,

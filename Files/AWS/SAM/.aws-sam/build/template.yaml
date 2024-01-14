@@ -31,6 +31,31 @@ Resources:
         AllowMethods: '''GET,POST,OPTIONS'''
         AllowHeaders: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'''
         AllowOrigin: '''*'''
+  createProfessor:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: createProfessor
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: createProfessor
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+      - Ref: dbFunctionLayer
+      - Ref: auxFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /professor
+            Method: post
+            RestApiId:
+              Ref: MyApi
+    Metadata:
+      SamResourceId: createProfessor
   readSubject:
     Type: AWS::Serverless::Function
     Properties:
@@ -56,3 +81,78 @@ Resources:
               Ref: MyApi
     Metadata:
       SamResourceId: readSubject
+  readProfessor:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: readProfessor
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: readProfessor
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+      - Ref: dbFunctionLayer
+      - Ref: auxFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /professor
+            Method: get
+            RestApiId:
+              Ref: MyApi
+    Metadata:
+      SamResourceId: readProfessor
+  readRoom:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: readRoom
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: readRoom
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+      - Ref: dbFunctionLayer
+      - Ref: auxFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /room
+            Method: get
+            RestApiId:
+              Ref: MyApi
+    Metadata:
+      SamResourceId: readRoom
+  readStudent:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: readStudent
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: readStudent
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+      - Ref: dbFunctionLayer
+      - Ref: auxFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /student
+            Method: get
+            RestApiId:
+              Ref: MyApi
+    Metadata:
+      SamResourceId: readStudent

@@ -4,7 +4,7 @@ import options from "../local/options";
 
 const url = options.AWS.fullEndpoint;
 const debuggingLocal = ">newAxios.js";
-const isDebugging = false;
+const isDebugging = true;
 
 function getAxios() {
   function testing(itemToSend = null, itemName = null, action = "test") {
@@ -16,6 +16,8 @@ function getAxios() {
     testing(itemToSend, itemName, "creat");
     const localUrl = url + itemName; // I may need to change this slash
     const dataToSend = { newItem: itemToSend };
+    console.log("dataToSend", dataToSend);
+    console.log("localUrl", localUrl);
     return await axios.post(localUrl, dataToSend);
   }
   async function readTest(itemName = null, itemToSend = null) {

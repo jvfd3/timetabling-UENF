@@ -2,30 +2,33 @@
 import { dbExecute } from "/opt/db.js";
 import { getPayloadResponse } from "/opt/auxFunctions.js";
 let local = "";
-const itemName = "disciplina";
+const itemName = "professor";
 
 async function handler(event) {
   local = `aws>lambda>${itemName}>Create>handler`;
   console.log(local + ">{event: ", event, "}");
-  let newItem = event.newItem;
+  let newItem = event?.newItem ?? JSON.parse(event?.body)?.newItem;
+  console.log(">>>", newItem, "<<<");
   return await createItem(newItem);
 }
 
 async function createItem(newItem) {
   local += `>create${itemName}`;
   let createItemQuery =
-    "INSERT INTO disciplinas(`periodo`, `codigo`, `apelido`, `nome`) VALUES(?, ?, ?, ?)";
+    "INSERT INTO professores(`apelido`, `curso`, `laboratorio`, `nome`) VALUES(?, ?, ?, ?)";
   return await defaultCreate(createItemQuery, convertToList(newItem));
 }
 
-function convertToList(disciplina) {
+function convertToList(professor) {
+  console.log(professor);
   const values = [
     /* Vai ser nulo se algum item não for definido */
-    disciplina.periodo ?? null,
-    disciplina.codigo ?? null,
-    disciplina.apelido ?? null,
-    disciplina.nome ?? null,
+    professor?.apelido ?? null,
+    professor?.curso ?? null,
+    professor?.laboratorio ?? null,
+    professor?.nome ?? null,
   ];
+  console.log(">>>", values, "<<<");
   return values;
 }
 
