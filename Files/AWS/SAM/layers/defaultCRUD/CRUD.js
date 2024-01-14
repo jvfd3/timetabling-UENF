@@ -1,22 +1,20 @@
-async function defaultRead(query, queryValues) {
-  let action = "READ";
-  let statusCode = 200;
-  
-  let successMessage = ">itens lidos com sucesso: ";
-  let local = ">default " + action;
-  let errorMessage = ">Erro ao executar a operação " + action;
+// const { dbExecute } = require("./dbExecute.js");
+
+async function defaultCreate(query, queryValues) {
+  const action = "CREAT";
+  const errorMessage = ">Error while " + action + "ING";
+  const successMessage = `>Item ${action}ED successfully: ${queryValues}`;
+  const local = ">default " + action + "E";
   let message = local;
   let queryResult = null;
   let localError = null;
+  let statusCode = 201;
 
   if (false) {
-
-
   } else {
     try {
       queryResult = await dbExecute(query, queryValues);
-      queryResult[1] = null; // remove excessive metadata
-      message += successMessage + `${queryResult.length}`;
+      message += successMessage;
       console.log(message, statusCode, queryResult);
     } catch (error) {
       statusCode = 500;
@@ -32,5 +30,7 @@ async function defaultRead(query, queryValues) {
     queryResult,
     localError,
     statusCode
-    );
+  );
 }
+
+module.exports = { defaultCreate };

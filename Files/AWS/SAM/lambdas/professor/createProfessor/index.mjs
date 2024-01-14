@@ -1,12 +1,12 @@
 // professoresCreate->index.js
-import { dbExecute } from "/opt/db.js";
-import { getPayloadResponse } from "/opt/auxFunctions.js";
-let local = "";
+import { defaultCreate } from "/opt/db.js";
+
 const itemName = "professor";
+let local = `aws>lambda>Create>${itemName}>handler`;
 
 async function handler(event) {
-  local = `aws>lambda>${itemName}>Create>handler`;
   console.log(local + ">{event: ", event, "}");
+  // For some reason the event payload for Create is built different.
   let newItem = event?.newItem ?? JSON.parse(event?.body)?.newItem;
   console.log(">>>", newItem, "<<<");
   return await createItem(newItem);
@@ -14,9 +14,11 @@ async function handler(event) {
 
 async function createItem(newItem) {
   local += `>create${itemName}`;
-  let createItemQuery =
+  const createItemQuery =
     "INSERT INTO professores(`apelido`, `curso`, `laboratorio`, `nome`) VALUES(?, ?, ?, ?)";
-  return await defaultCreate(createItemQuery, convertToList(newItem));
+  const itemList = convertToList(newItem);
+  const exists = true;
+  return await defaultCreate(createItemQuery, itemList, exists);
 }
 
 function convertToList(professor) {
@@ -30,34 +32,6 @@ function convertToList(professor) {
   ];
   console.log(">>>", values, "<<<");
   return values;
-}
-
-async function defaultCreate(query, queryValues) {
-  local += ">defaultCreate";
-  let message = local;
-  let queryResult = null;
-  let localError = null;
-  let statusCode = 500;
-  try {
-    queryResult = await dbExecute(query, queryValues);
-
-    message += `>Item: ${queryValues} criado com sucesso.`;
-    statusCode = 201;
-    console.log(message, statusCode, queryResult);
-  } catch (error) {
-    statusCode = 500;
-    localError = error;
-    message = local + ">Erro ao executar a leitura.";
-    console.error(message, statusCode, error);
-  }
-  return getPayloadResponse(
-    message,
-    query,
-    queryValues,
-    queryResult,
-    localError,
-    statusCode
-  );
 }
 
 export { handler };

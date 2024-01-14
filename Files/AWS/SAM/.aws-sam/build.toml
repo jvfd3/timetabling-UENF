@@ -46,4 +46,22 @@ manifest_hash = ""
 packagetype = "Zip"
 functions = ["readStudent"]
 
+[function_build_definitions.418845b5-d41f-4d86-bf74-12af3ec95e73]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\professor\\updateProfessor"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["updateProfessor"]
+
+[function_build_definitions.c362a779-a98a-4675-a2f1-86266672cf7a]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\professor\\deleteProfessor"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["deleteProfessor"]
+
 [layer_build_definitions]

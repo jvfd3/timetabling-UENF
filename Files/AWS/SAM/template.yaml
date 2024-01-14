@@ -24,6 +24,16 @@ Resources:
         - nodejs14.x
         - nodejs16.x
         - nodejs18.x
+  # defaultCRUDFunctionLayer:
+  #   Type: AWS::Serverless::LayerVersion
+  #   Properties:
+  #     LayerName: defaultCRUDSAM
+  #     Description: default CRUD functions
+  #     ContentUri: ./layers/defaultCRUD
+  #     CompatibleRuntimes:
+  #       - nodejs14.x
+  #       - nodejs16.x
+  #       - nodejs18.x
 
   # API GATEWAY
   MyApi:
@@ -32,7 +42,7 @@ Resources:
       StageName: timetabling
       EndpointConfiguration: REGIONAL
       Cors:
-        AllowMethods: "'GET,POST,OPTIONS'"
+        AllowMethods: "'GET,POST,PUT,DELETE,OPTIONS'"
         AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
         AllowOrigin: "'*'"
 
@@ -52,6 +62,7 @@ Resources:
       Layers:
         - !Ref dbFunctionLayer
         - !Ref auxFunctionLayer
+        # - !Ref defaultCRUDFunctionLayer
       Events:
         ApiEvent:
           Type: Api
@@ -146,4 +157,48 @@ Resources:
           Properties:
             Path: /student
             Method: get
+            RestApiId: !Ref MyApi
+  updateProfessor:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: updateProfessor
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambdas/professor/updateProfessor
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+        - !Ref auxFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /professor
+            Method: put
+            RestApiId: !Ref MyApi
+  deleteProfessor:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: deleteProfessor
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambdas/professor/deleteProfessor
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+        - !Ref auxFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /professor/{id}
+            Method: delete
             RestApiId: !Ref MyApi
