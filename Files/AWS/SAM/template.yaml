@@ -314,7 +314,6 @@ Resources:
           SECRET_NAME: timetablingSecrets
       Layers:
         - !Ref dbFunctionLayer
-        # - !Ref defaultCRUDFunctionLayer
       Events:
         ApiEvent:
           Type: Api
@@ -337,7 +336,6 @@ Resources:
           SECRET_NAME: timetablingSecrets
       Layers:
         - !Ref dbFunctionLayer
-        # - !Ref defaultCRUDFunctionLayer
       Events:
         ApiEvent:
           Type: Api
@@ -360,7 +358,6 @@ Resources:
           SECRET_NAME: timetablingSecrets
       Layers:
         - !Ref dbFunctionLayer
-        # - !Ref defaultCRUDFunctionLayer
       Events:
         ApiEvent:
           Type: Api
@@ -383,11 +380,193 @@ Resources:
           SECRET_NAME: timetablingSecrets
       Layers:
         - !Ref dbFunctionLayer
-        # - !Ref defaultCRUDFunctionLayer
       Events:
         ApiEvent:
           Type: Api
           Properties:
             Path: /room/{id}
+            Method: delete
+            RestApiId: !Ref TimetablingAPI
+  createClassData:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: createClassData
+      Runtime: nodejs14.x
+      Timeout: 30
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambdas/classData/createClassData
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /classData
+            Method: post
+            RestApiId: !Ref TimetablingAPI
+  readClassData:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: readClassData
+      Runtime: nodejs14.x
+      Timeout: 30
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambdas/classData/readClassData
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+        - !Ref auxFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /classData
+            Method: get
+            RestApiId: !Ref TimetablingAPI
+  updateClassData:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: updateClassData
+      Runtime: nodejs14.x
+      Timeout: 30
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambdas/classData/updateClassData
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+        - !Ref auxFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /classData
+            Method: put
+            RestApiId: !Ref TimetablingAPI
+  deleteClassData:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: deleteClassData
+      Runtime: nodejs14.x
+      Timeout: 30
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambdas/classData/deleteClassData
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+        - !Ref auxFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /classData/{id}
+            Method: delete
+            RestApiId: !Ref TimetablingAPI
+  createClassTime:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: createClassTime
+      Runtime: nodejs14.x
+      Timeout: 30
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambdas/classTime/createClassTime
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+        - !Ref auxFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /classTime
+            Method: post
+            RestApiId: !Ref TimetablingAPI
+  readClassTime:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: readClassTime
+      Runtime: nodejs14.x
+      Timeout: 30
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambdas/classTime/readClassTime
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+        - !Ref auxFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /classTime
+            Method: get
+            RestApiId: !Ref TimetablingAPI
+  updateClassTime:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: updateClassTime
+      Runtime: nodejs14.x
+      Timeout: 30
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambdas/classTime/updateClassTime
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+        - !Ref auxFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /classTime
+            Method: put
+            RestApiId: !Ref TimetablingAPI
+  deleteClassTime:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: deleteClassTime
+      Runtime: nodejs14.x
+      Timeout: 30
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambdas/classTime/deleteClassTime
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+        - !Ref auxFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /classTime/{id}
             Method: delete
             RestApiId: !Ref TimetablingAPI

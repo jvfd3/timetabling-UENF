@@ -145,4 +145,76 @@ manifest_hash = ""
 packagetype = "Zip"
 functions = ["deleteRoom"]
 
+[function_build_definitions.deb7336d-3ef9-463d-9fb0-48c947e3f38d]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\classData\\createClassData"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["createClassData"]
+
+[function_build_definitions.5b3d7377-948b-4353-b26f-ff9eb7466ffc]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\classData\\readClassData"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["readClassData"]
+
+[function_build_definitions.05dd6316-f277-40b5-8825-6c8d94930353]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\classData\\updateClassData"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["updateClassData"]
+
+[function_build_definitions.51c9e83a-c8ff-4627-b97a-f3b5ab042551]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\classData\\deleteClassData"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["deleteClassData"]
+
+[function_build_definitions.b6bb579f-eadb-43ad-912b-364801a940d1]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\classTime\\createClassTime"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["createClassTime"]
+
+[function_build_definitions.36c94458-6710-4ce8-b87f-1a2d26b10497]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\classTime\\readClassTime"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["readClassTime"]
+
+[function_build_definitions.0824da38-39ae-4a78-8bd9-f0c493e11904]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\classTime\\updateClassTime"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["updateClassTime"]
+
+[function_build_definitions.002fd252-7d78-40a5-a0ad-b604f4bc606c]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\classTime\\deleteClassTime"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["deleteClassTime"]
+
 [layer_build_definitions]
