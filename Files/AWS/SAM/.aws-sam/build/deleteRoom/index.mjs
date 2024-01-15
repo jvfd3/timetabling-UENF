@@ -1,8 +1,8 @@
 import { defaultDelete, checkExistance } from "/opt/db.js";
 
-const deleteItemQuery = "DELETE FROM `disciplinas` WHERE `id` = ?";
-const checkQuery = "SELECT * FROM `disciplinas` WHERE `id` = ?";
-const itemName = "Subject";
+const deleteItemQuery = "DELETE FROM `salas` WHERE `id` = ?";
+const checkQuery = "SELECT * FROM `salas` WHERE `id` = ?";
+const itemName = "Room";
 let local = `aws>lambda>Delete>${itemName}>handler`;
 const isDebugging = false;
 

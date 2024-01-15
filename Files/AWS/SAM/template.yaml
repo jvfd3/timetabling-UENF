@@ -215,47 +215,179 @@ Resources:
             Path: /subject/{id}
             Method: delete
             RestApiId: !Ref TimetablingAPI
-  # readRoom:
-  #   Type: AWS::Serverless::Function
-  #   Properties:
-  #     FunctionName: readRoom
-  #     Runtime: nodejs14.x
-  #     Role:
-  #       Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-  #     Handler: index.handler
-  #     CodeUri: ./lambdas/room/readRoom
-  #     Environment:
-  #       Variables:
-  #         SECRET_NAME: timetablingSecrets
-  #     Layers:
-  #       - !Ref dbFunctionLayer
-  #       - !Ref auxFunctionLayer
-  #     Events:
-  #       ApiEvent:
-  #         Type: Api
-  #         Properties:
-  #           Path: /room
-  #           Method: get
-  #           RestApiId: !Ref TimetablingAPI
-  # readStudent:
-  #   Type: AWS::Serverless::Function
-  #   Properties:
-  #     FunctionName: readStudent
-  #     Runtime: nodejs14.x
-  #     Role:
-  #       Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-  #     Handler: index.handler
-  #     CodeUri: ./lambdas/student/readStudent
-  #     Environment:
-  #       Variables:
-  #         SECRET_NAME: timetablingSecrets
-  #     Layers:
-  #       - !Ref dbFunctionLayer
-  #       - !Ref auxFunctionLayer
-  #     Events:
-  #       ApiEvent:
-  #         Type: Api
-  #         Properties:
-  #           Path: /student
-  #           Method: get
-  #           RestApiId: !Ref TimetablingAPI
+  createStudent:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: createStudent
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambdas/student/createStudent
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /student
+            Method: post
+            RestApiId: !Ref TimetablingAPI
+  readStudent:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: readStudent
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambdas/student/readStudent
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /student
+            Method: get
+            RestApiId: !Ref TimetablingAPI
+  updateStudent:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: updateStudent
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambdas/student/updateStudent
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /student
+            Method: put
+            RestApiId: !Ref TimetablingAPI
+  deleteStudent:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: deleteStudent
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambdas/student/deleteStudent
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /student/{id}
+            Method: delete
+            RestApiId: !Ref TimetablingAPI
+  createRoom:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: createRoom
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Timeout: 30
+      Handler: index.handler
+      CodeUri: ./lambdas/room/createRoom
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+        # - !Ref defaultCRUDFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /room
+            Method: post
+            RestApiId: !Ref TimetablingAPI
+  readRoom:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: readRoom
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Timeout: 30
+      Handler: index.handler
+      CodeUri: ./lambdas/room/readRoom
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+        # - !Ref defaultCRUDFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /room
+            Method: get
+            RestApiId: !Ref TimetablingAPI
+  updateRoom:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: updateRoom
+      Runtime: nodejs14.x
+      Timeout: 30
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambdas/room/updateRoom
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+        # - !Ref defaultCRUDFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /room
+            Method: put
+            RestApiId: !Ref TimetablingAPI
+  deleteRoom:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: deleteRoom
+      Runtime: nodejs14.x
+      Timeout: 30
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: ./lambdas/room/deleteRoom
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+        - !Ref dbFunctionLayer
+        # - !Ref defaultCRUDFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /room/{id}
+            Method: delete
+            RestApiId: !Ref TimetablingAPI

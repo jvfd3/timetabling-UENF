@@ -1,11 +1,25 @@
 import { defaultUpdate, checkExistance } from "/opt/db.js";
 
 const updateItemQuery =
-  "UPDATE `professores` SET `apelido` = ?, `curso` = ?, `laboratorio` = ?, `nome` = ? WHERE `id` = ?";
+  "UPDATE `professores` SET  `nome` = ?, `apelido` = ?, `curso` = ?, `laboratorio` = ? WHERE `id` = ?";
 const checkQuery = "SELECT * FROM `professores` WHERE `id` = ?";
 const itemName = "Professor";
 let local = `aws>lambda>Update>${itemName}>handler`;
 const isDebugging = false;
+
+function convertToList(professor) {
+  isDebugging && console.log(local, professor);
+  /* Vai ser nulo se algum item não for definido */
+  const values = [
+    professor?.nome ?? null,
+    professor?.apelido ?? null,
+    professor?.curso ?? null,
+    professor?.laboratorio ?? null,
+    professor?.id ?? null,
+  ];
+  isDebugging && console.log(local + ">{newValues: ", values, "}");
+  return values;
+}
 
 async function handler(event) {
   isDebugging && console.log(local + ">{event: ", event, "}");
@@ -20,18 +34,6 @@ async function updateItem(itemToUpdate) {
   const itemList = convertToList(itemToUpdate);
   const exists = await checkExistance(checkQuery, [itemToUpdate.id]);
   return await defaultUpdate(updateItemQuery, itemList, exists);
-}
-
-function convertToList(professor) {
-  /* Vai ser nulo se algum item não for definido */
-  const values = [
-    professor?.apelido ?? null,
-    professor?.curso ?? null,
-    professor?.laboratorio ?? null,
-    professor?.nome ?? null,
-    professor?.id ?? null,
-  ];
-  return values;
 }
 
 export { handler };

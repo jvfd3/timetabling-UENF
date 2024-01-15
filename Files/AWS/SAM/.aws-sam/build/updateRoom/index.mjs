@@ -1,21 +1,22 @@
 import { defaultUpdate, checkExistance } from "/opt/db.js";
 
 const updateItemQuery =
-  "UPDATE `disciplinas` SET `nome` = ?, `apelido` = ?, `periodo` = ?, `codigo` = ? WHERE `id` = ?";
-const checkQuery = "SELECT * FROM `disciplinas` WHERE `id` = ?";
-const itemName = "Subject";
+  "UPDATE `salas` SET  `capacidade` = ?, `idBlock` = ?, `bloco` = ?, `codigo` = ?, `descricao` = ? WHERE `id` = ?";
+const checkQuery = "SELECT * FROM `salas` WHERE `id` = ?";
+const itemName = "Room";
 let local = `aws>lambda>Update>${itemName}>handler`;
 const isDebugging = false;
 
-function convertToList(subject) {
-  isDebugging && console.log(local, subject);
+function convertToList(room) {
+  isDebugging && console.log(local, room);
   /* Vai ser nulo se algum item não for definido */
   const values = [
-    subject?.nome ?? null,
-    subject?.apelido ?? null,
-    subject?.periodo ?? null,
-    subject?.codigo ?? null,
-    subject?.id ?? null,
+    room?.capacidade ?? null,
+    room?.idBlock ?? null,
+    room?.bloco ?? null,
+    room?.codigo ?? null,
+    room?.descricao ?? null,
+    room?.id ?? null,
   ];
   isDebugging && console.log(local + ">{newValues: ", values, "}");
   return values;

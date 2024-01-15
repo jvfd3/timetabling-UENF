@@ -3,7 +3,7 @@ import { defaultDelete, checkExistance } from "/opt/db.js";
 const deleteItemQuery = "DELETE FROM `disciplinas` WHERE `id` = ?";
 const checkQuery = "SELECT * FROM `disciplinas` WHERE `id` = ?";
 const itemName = "Subject";
-let local = `aws>lambda>${itemName}>Delete>handler`;
+let local = `aws>lambda>Delete>${itemName}>handler`;
 const isDebugging = false;
 
 async function handler(event) {

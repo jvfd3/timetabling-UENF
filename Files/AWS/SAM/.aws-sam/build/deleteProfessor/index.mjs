@@ -2,8 +2,8 @@ import { defaultDelete, checkExistance } from "/opt/db.js";
 
 const deleteItemQuery = "DELETE FROM `professores` WHERE `id` = ?";
 const checkQuery = "SELECT * FROM `professores` WHERE `id` = ?";
-const itemName = "professor";
-let local = `aws>lambda>${itemName}>Delete>handler`;
+const itemName = "Professor";
+let local = `aws>lambda>Delete>${itemName}>handler`;
 const isDebugging = false;
 
 async function handler(event) {

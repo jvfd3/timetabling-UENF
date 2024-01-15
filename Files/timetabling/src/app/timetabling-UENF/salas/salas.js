@@ -197,10 +197,8 @@ function RoomCard(myRoomsStates) {
 }
 
 function Rooms() {
-  let roomsFromJSON = sqlDataFromJson.rooms;
-
-  const [rooms, setRooms] = useState(roomsFromJSON);
-  const [room, setRoom] = useState(roomsFromJSON[3]);
+  const [rooms, setRooms] = useState(sqlDataFromJson.salas);
+  const [room, setRoom] = useState(rooms[3]);
 
   let myRoomsStates = { rooms, setRooms, room, setRoom };
 

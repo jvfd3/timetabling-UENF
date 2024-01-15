@@ -1,7 +1,8 @@
 import { defaultRead } from "/opt/db.js";
 
 const readItemsQuery = "SELECT * FROM professores";
-const itemName = "professor";
+
+const itemName = "Professor";
 let local = `aws>lambda>Read>${itemName}>handler`;
 const isDebugging = false;
 

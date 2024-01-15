@@ -60,7 +60,7 @@ function deleteRoom({ rooms, setRooms, room, setRoom }) {
 
   function deleteRoomOnList(deletedRoom) {
     if (deletedRoom) {
-      const deletedRoomList = rooms;
+      let deletedRoomList = rooms;
       deletedRoomList = deleteRoomFromList(rooms, deletedRoom);
       setRooms(deletedRoomList);
       const index = rooms.findIndex((room) => room.id === deletedRoom.id);

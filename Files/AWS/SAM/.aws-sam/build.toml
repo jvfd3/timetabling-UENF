@@ -73,4 +73,76 @@ manifest_hash = ""
 packagetype = "Zip"
 functions = ["deleteProfessor"]
 
+[function_build_definitions.8ec4d36e-ff6a-46d8-ad99-5900d5e51c83]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\student\\createStudent"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["createStudent"]
+
+[function_build_definitions.dd494beb-a60a-473a-8d33-6a1229f70678]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\student\\readStudent"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["readStudent"]
+
+[function_build_definitions.0cfcdd39-e0f4-46f8-9d69-dae4b1051a0a]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\student\\updateStudent"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["updateStudent"]
+
+[function_build_definitions.192bd650-4fe6-4fa6-ab63-d02d9650332f]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\student\\deleteStudent"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["deleteStudent"]
+
+[function_build_definitions.b728f8ed-1aab-455d-882b-3b81e1801ba3]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\room\\createRoom"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["createRoom"]
+
+[function_build_definitions.594ff690-507c-4c48-b20f-ffb6d45bf5b5]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\room\\readRoom"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["readRoom"]
+
+[function_build_definitions.ef07b597-e762-485f-9fb7-894bb86a019a]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\room\\updateRoom"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["updateRoom"]
+
+[function_build_definitions.4ccbf38b-c4e2-4de2-87a9-459c18f84169]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\room\\deleteRoom"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["deleteRoom"]
+
 [layer_build_definitions]
