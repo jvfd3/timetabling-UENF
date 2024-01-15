@@ -22,10 +22,10 @@ Resources:
       - nodejs14.x
       - nodejs16.x
       - nodejs18.x
-  MyApi:
+  TimetablingAPI:
     Type: AWS::Serverless::Api
     Properties:
-      StageName: timetabling
+      StageName: timetablingStage
       EndpointConfiguration: REGIONAL
       Cors:
         AllowMethods: '''GET,POST,PUT,DELETE,OPTIONS'''
@@ -45,7 +45,6 @@ Resources:
           SECRET_NAME: timetablingSecrets
       Layers:
       - Ref: dbFunctionLayer
-      - Ref: auxFunctionLayer
       Events:
         ApiEvent:
           Type: Api
@@ -53,34 +52,9 @@ Resources:
             Path: /professor
             Method: post
             RestApiId:
-              Ref: MyApi
+              Ref: TimetablingAPI
     Metadata:
       SamResourceId: createProfessor
-  readSubject:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: readSubject
-      Runtime: nodejs14.x
-      Role:
-        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: readSubject
-      Environment:
-        Variables:
-          SECRET_NAME: timetablingSecrets
-      Layers:
-      - Ref: dbFunctionLayer
-      - Ref: auxFunctionLayer
-      Events:
-        ApiEvent:
-          Type: Api
-          Properties:
-            Path: /subject
-            Method: get
-            RestApiId:
-              Ref: MyApi
-    Metadata:
-      SamResourceId: readSubject
   readProfessor:
     Type: AWS::Serverless::Function
     Properties:
@@ -95,7 +69,6 @@ Resources:
           SECRET_NAME: timetablingSecrets
       Layers:
       - Ref: dbFunctionLayer
-      - Ref: auxFunctionLayer
       Events:
         ApiEvent:
           Type: Api
@@ -103,59 +76,9 @@ Resources:
             Path: /professor
             Method: get
             RestApiId:
-              Ref: MyApi
+              Ref: TimetablingAPI
     Metadata:
       SamResourceId: readProfessor
-  readRoom:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: readRoom
-      Runtime: nodejs14.x
-      Role:
-        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: readRoom
-      Environment:
-        Variables:
-          SECRET_NAME: timetablingSecrets
-      Layers:
-      - Ref: dbFunctionLayer
-      - Ref: auxFunctionLayer
-      Events:
-        ApiEvent:
-          Type: Api
-          Properties:
-            Path: /room
-            Method: get
-            RestApiId:
-              Ref: MyApi
-    Metadata:
-      SamResourceId: readRoom
-  readStudent:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: readStudent
-      Runtime: nodejs14.x
-      Role:
-        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: readStudent
-      Environment:
-        Variables:
-          SECRET_NAME: timetablingSecrets
-      Layers:
-      - Ref: dbFunctionLayer
-      - Ref: auxFunctionLayer
-      Events:
-        ApiEvent:
-          Type: Api
-          Properties:
-            Path: /student
-            Method: get
-            RestApiId:
-              Ref: MyApi
-    Metadata:
-      SamResourceId: readStudent
   updateProfessor:
     Type: AWS::Serverless::Function
     Properties:
@@ -170,7 +93,6 @@ Resources:
           SECRET_NAME: timetablingSecrets
       Layers:
       - Ref: dbFunctionLayer
-      - Ref: auxFunctionLayer
       Events:
         ApiEvent:
           Type: Api
@@ -178,7 +100,7 @@ Resources:
             Path: /professor
             Method: put
             RestApiId:
-              Ref: MyApi
+              Ref: TimetablingAPI
     Metadata:
       SamResourceId: updateProfessor
   deleteProfessor:
@@ -195,7 +117,6 @@ Resources:
           SECRET_NAME: timetablingSecrets
       Layers:
       - Ref: dbFunctionLayer
-      - Ref: auxFunctionLayer
       Events:
         ApiEvent:
           Type: Api
@@ -203,6 +124,102 @@ Resources:
             Path: /professor/{id}
             Method: delete
             RestApiId:
-              Ref: MyApi
+              Ref: TimetablingAPI
     Metadata:
       SamResourceId: deleteProfessor
+  createSubject:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: createSubject
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: createSubject
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+      - Ref: dbFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /subject
+            Method: post
+            RestApiId:
+              Ref: TimetablingAPI
+    Metadata:
+      SamResourceId: createSubject
+  readSubject:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: readSubject
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: readSubject
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+      - Ref: dbFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /subject
+            Method: get
+            RestApiId:
+              Ref: TimetablingAPI
+    Metadata:
+      SamResourceId: readSubject
+  updateSubject:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: updateSubject
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: updateSubject
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+      - Ref: dbFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /subject
+            Method: put
+            RestApiId:
+              Ref: TimetablingAPI
+    Metadata:
+      SamResourceId: updateSubject
+  deleteSubject:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: deleteSubject
+      Runtime: nodejs14.x
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Handler: index.handler
+      CodeUri: deleteSubject
+      Environment:
+        Variables:
+          SECRET_NAME: timetablingSecrets
+      Layers:
+      - Ref: dbFunctionLayer
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /subject/{id}
+            Method: delete
+            RestApiId:
+              Ref: TimetablingAPI
+    Metadata:
+      SamResourceId: deleteSubject

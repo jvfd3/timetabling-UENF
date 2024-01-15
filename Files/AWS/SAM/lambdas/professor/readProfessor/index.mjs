@@ -1,21 +1,21 @@
-// professoresRead->index.js
 import { defaultRead } from "/opt/db.js";
 
+const readItemsQuery = "SELECT * FROM professores";
 const itemName = "professor";
 let local = `aws>lambda>Read>${itemName}>handler`;
+const isDebugging = false;
 
 async function handler(event) {
-  console.log(local + ">{event: ", event, "}");
+  isDebugging && console.log(local + ">{event: ", event, "}");
 
-  return await readItem();
+  return await readItems();
 }
 
-async function readItem() {
+async function readItems() {
   local += `>read${itemName}`;
-  const readItemQuery = "SELECT * FROM professores";
   const itemList = null;
   const exists = true;
-  return await defaultRead(readItemQuery, itemList, exists);
+  return await defaultRead(readItemsQuery, itemList, exists);
 }
 
 export { handler };

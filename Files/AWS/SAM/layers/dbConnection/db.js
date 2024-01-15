@@ -41,6 +41,20 @@ async function dbExecute(query, values = null) {
   }
 }
 
+async function checkExistance(checkQuery, idInList) {
+  local += ">checkExistance";
+  let message = local;
+  try {
+    const queryResult = await dbExecute(checkQuery, idInList);
+    const rows = queryResult[0] ?? [];
+    return rows.length > 0;
+  } catch (error) {
+    message = `>Erro ao executar a {query: ${checkQuery}}`;
+    console.error(message, error);
+    return false;
+  }
+}
+
 function getPayloadResponse(
   message,
   query,
@@ -215,6 +229,7 @@ async function defaultDelete(query, queryValues, exists) {
 
 module.exports = {
   dbExecute,
+  checkExistance,
   getPayloadResponse,
   defaultCreate,
   defaultRead,

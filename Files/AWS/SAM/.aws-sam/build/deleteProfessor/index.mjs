@@ -1,11 +1,13 @@
-// professoresDelete->index.js
-import { defaultDelete, dbExecute } from "/opt/db.js";
+import { defaultDelete, checkExistance } from "/opt/db.js";
 
+const deleteItemQuery = "DELETE FROM `professores` WHERE `id` = ?";
+const checkQuery = "SELECT * FROM `professores` WHERE `id` = ?";
 const itemName = "professor";
 let local = `aws>lambda>${itemName}>Delete>handler`;
+const isDebugging = false;
 
 async function handler(event) {
-  console.log(local + ">{event: ", event, "}");
+  isDebugging && console.log(local + ">{event: ", event, "}");
 
   const idToDelete = event.pathParameters.id;
   return await deleteItem(idToDelete);
@@ -13,26 +15,9 @@ async function handler(event) {
 
 async function deleteItem(itemIdToDelete) {
   local += ">deleteItem";
-  const deleteItemQuery = "DELETE FROM professores WHERE id = ?";
-
   const itemList = [itemIdToDelete];
-  const exists = await checkExistance(itemList);
+  const exists = await checkExistance(checkQuery, itemList);
   return await defaultDelete(deleteItemQuery, itemList, exists);
-}
-
-async function checkExistance(idInList) {
-  local += ">checkExistance";
-  let message = local;
-  const checkQuery = "SELECT * FROM professores WHERE id = ?";
-  try {
-    let queryResult = await dbExecute(checkQuery, idInList);
-    const rows = queryResult[0] ?? [];
-    return rows.length > 0;
-  } catch (error) {
-    message = `>Erro ao executar a {query: ${checkQuery}}`;
-    console.error(message, error);
-    return false;
-  }
 }
 
 export { handler };

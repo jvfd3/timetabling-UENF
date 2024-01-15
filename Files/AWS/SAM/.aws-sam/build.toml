@@ -10,15 +10,6 @@ manifest_hash = ""
 packagetype = "Zip"
 functions = ["createProfessor"]
 
-[function_build_definitions.b972ff6e-9fe7-4d80-9b04-368330a8b3cd]
-codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\subject\\readSubject"
-runtime = "nodejs14.x"
-architecture = "x86_64"
-handler = "index.handler"
-manifest_hash = ""
-packagetype = "Zip"
-functions = ["readSubject"]
-
 [function_build_definitions.07222778-7af7-43c1-b62c-7543659c3bd2]
 codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\professor\\readProfessor"
 runtime = "nodejs14.x"
@@ -27,24 +18,6 @@ handler = "index.handler"
 manifest_hash = ""
 packagetype = "Zip"
 functions = ["readProfessor"]
-
-[function_build_definitions.c61b441c-6130-414e-bd03-36fbfb930d4c]
-codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\room\\readRoom"
-runtime = "nodejs14.x"
-architecture = "x86_64"
-handler = "index.handler"
-manifest_hash = ""
-packagetype = "Zip"
-functions = ["readRoom"]
-
-[function_build_definitions.b67fd19d-8da9-4fea-9ae7-402af0017277]
-codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\student\\readStudent"
-runtime = "nodejs14.x"
-architecture = "x86_64"
-handler = "index.handler"
-manifest_hash = ""
-packagetype = "Zip"
-functions = ["readStudent"]
 
 [function_build_definitions.418845b5-d41f-4d86-bf74-12af3ec95e73]
 codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\professor\\updateProfessor"
@@ -55,7 +28,43 @@ manifest_hash = ""
 packagetype = "Zip"
 functions = ["updateProfessor"]
 
-[function_build_definitions.c362a779-a98a-4675-a2f1-86266672cf7a]
+[function_build_definitions.d9b2d684-2d21-4320-ac7b-b40294effd04]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\subject\\createSubject"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["createSubject"]
+
+[function_build_definitions.121f9c4e-aa26-4d3e-9a0c-cf6f528ffcd6]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\subject\\readSubject"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["readSubject"]
+
+[function_build_definitions.f358b5fb-db4f-4f85-80a8-66930dcb6b60]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\subject\\updateSubject"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["updateSubject"]
+
+[function_build_definitions.857ee485-8219-46a4-9a04-e39624a787a0]
+codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\subject\\deleteSubject"
+runtime = "nodejs14.x"
+architecture = "x86_64"
+handler = "index.handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["deleteSubject"]
+
+[function_build_definitions.54102f11-4dec-4818-8a67-f904e2af9b20]
 codeuri = "B:\\timetabling-UENF\\Files\\AWS\\SAM\\lambdas\\professor\\deleteProfessor"
 runtime = "nodejs14.x"
 architecture = "x86_64"
