@@ -459,7 +459,6 @@ Resources:
           SECRET_NAME: timetablingSecrets
       Layers:
       - Ref: dbFunctionLayer
-      - Ref: auxFunctionLayer
       Events:
         ApiEvent:
           Type: Api
@@ -485,7 +484,6 @@ Resources:
           SECRET_NAME: timetablingSecrets
       Layers:
       - Ref: dbFunctionLayer
-      - Ref: auxFunctionLayer
       Events:
         ApiEvent:
           Type: Api
@@ -511,7 +509,6 @@ Resources:
           SECRET_NAME: timetablingSecrets
       Layers:
       - Ref: dbFunctionLayer
-      - Ref: auxFunctionLayer
       Events:
         ApiEvent:
           Type: Api
@@ -537,7 +534,6 @@ Resources:
           SECRET_NAME: timetablingSecrets
       Layers:
       - Ref: dbFunctionLayer
-      - Ref: auxFunctionLayer
       Events:
         ApiEvent:
           Type: Api
@@ -563,7 +559,6 @@ Resources:
           SECRET_NAME: timetablingSecrets
       Layers:
       - Ref: dbFunctionLayer
-      - Ref: auxFunctionLayer
       Events:
         ApiEvent:
           Type: Api
@@ -589,7 +584,6 @@ Resources:
           SECRET_NAME: timetablingSecrets
       Layers:
       - Ref: dbFunctionLayer
-      - Ref: auxFunctionLayer
       Events:
         ApiEvent:
           Type: Api
@@ -615,7 +609,6 @@ Resources:
           SECRET_NAME: timetablingSecrets
       Layers:
       - Ref: dbFunctionLayer
-      - Ref: auxFunctionLayer
       Events:
         ApiEvent:
           Type: Api
