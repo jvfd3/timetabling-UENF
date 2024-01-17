@@ -34,8 +34,45 @@ Tenho o seguinte banco de dados:
   - ordem (INT)
   - idTurma (INT, FK)
   - idSala (INT, FK)
-*/
 
+
+*/
+SELECT
+  t.id AS 'id',
+  t.ano AS 'ano',
+  t.semestre AS 'semestre',
+  t.demandaEstimada AS 'demandaEstimada',
+  JSON_OBJECT(
+    'id', d.id,
+    'nome', d.nome,
+    'apelido', d.apelido,
+    'periodo', d.periodo,
+    'codigo', d.codigo
+  ) as 'disciplina',
+  JSON_OBJECT(
+    'id', p.id,
+    'nome', p.nome,
+    'apelido', p.apelido,
+    'curso', p.curso,
+    'laboratorio', p.laboratorio
+  ) as 'professor',
+  (
+    SELECT JSON_ARRAYAGG(
+      JSON_OBJECT(
+        'id', h.id,
+        'dia', h.dia,
+        'horaInicio', h.horaInicio,
+        'duracao', h.duracao,
+        'ordem', h.ordem,
+        'idSala', h.idSala
+      )
+    )
+    FROM horarios as h
+    WHERE h.idTurma = t.id
+  ) as 'horarios'
+FROM turmas as t
+INNER JOIN disciplinas as d ON t.idDisciplina = d.id
+INNER JOIN professores as p ON t.idProfessor = p.id;
 
 /* Selecionar dados de turma' */
 SELECT
