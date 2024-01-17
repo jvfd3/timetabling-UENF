@@ -153,12 +153,12 @@ function HorariosTable({ createClassTimeProps, classesStates }) {
       <tbody>
         {classItem.horarios.map((horario, index) => {
           return (
-            <tr key={`Linha Horário: ${horario.idHorario}-${index}`}>
+            <tr key={`Linha Horário: ${horario.id}-${index}`}>
               <td>
                 <SmartDeleteHora
                   turma={classItem}
                   setTurma={setClassItem}
-                  idHorario={horario.idHorario}
+                  idHorario={horario.id}
                   // {...smartDeleteProps}
                 />
               </td>
@@ -202,23 +202,24 @@ function Classes() {
   const classIndex = useRef(sqlDataFromJson.classes.length);
   const classTimeIndex = useRef(sqlDataFromJson.classtimes.length);
 
-  let unifiedHorarios = getFullHorarios();
+  // let defaultClasses = getFullHorarios();
+  const defaultClasses = [options.emptyObjects.turma];
 
-  const [classes, setClasses] = useState(unifiedHorarios);
+  const [classes, setClasses] = useState(defaultClasses);
   const [classItem, setClassItem] = useState(classes[0]);
 
   const classesStates = { classes, setClasses, classItem, setClassItem };
   const indexes = { classIndex, classTimeIndex };
   const myStates = { classesStates, indexes };
 
-  useEffect(() => {
+  /* useEffect(() => {
     updateClass(classesStates);
   }, [
     classItem?.ano,
     classItem?.semestre,
     classItem?.disciplina?.id,
     classItem?.professor?.id,
-  ]);
+  ]); */
 
   return (
     <div className="CRUDContainComponents">
