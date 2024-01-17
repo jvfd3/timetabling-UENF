@@ -23,6 +23,7 @@ function getQuery() {
   const bigSelectQuery =
     "\
     SELECT\
+    t.id AS 'id',\
     t.id AS 'idTurma',\
     t.ano AS 'ano',\
     t.semestre AS 'semestre',\
@@ -49,10 +50,18 @@ function getQuery() {
           'horaInicio', h.horaInicio,\
           'duracao', h.duracao,\
           'ordem', h.ordem,\
-          'idSala', h.idSala\
+          'sala', JSON_OBJECT(\
+            'id', s.id,\
+            'capacidade', s.capacidade,\
+            'idBlock', s.idBlock,\
+            'bloco', s.bloco,\
+            'codigo', s.codigo,\
+            'descricao', s.descricao\
+          )\
         )\
       )\
       FROM horarios as h\
+      JOIN salas as s ON h.idSala = s.id\
       WHERE h.idTurma = t.id\
     ) as 'horarios'\
   FROM turmas as t\
