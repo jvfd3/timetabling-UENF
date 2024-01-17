@@ -23,7 +23,7 @@ function getQuery() {
   const bigSelectQuery =
     "\
     SELECT\
-    t.id AS 'id',\
+    t.id AS 'idTurma',\
     t.ano AS 'ano',\
     t.semestre AS 'semestre',\
     t.demandaEstimada AS 'demandaEstimada',\
