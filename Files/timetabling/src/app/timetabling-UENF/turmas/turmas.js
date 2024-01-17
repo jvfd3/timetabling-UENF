@@ -37,10 +37,6 @@ import {
 } from "../../../helpers/CRUDFunctions/classTimeCRUD";
 import { TextInputClassExpectedDemand, TextInputClassId } from "../../../components/MyTextFields";
 
-function TurmaSelection(myTurmaStates) {
-  const newClassesStates = {
-    classes: myTurmaStates.turmas,
-    setClasses: myTurmaStates.setTurmas,
 function TurmaSelection(classStates) {
   /* It just contains the selection an maybe allows scrolling selection */
   const turmaCRUDFunctions = {
@@ -213,16 +209,16 @@ function Classes() {
   const [turmas, setTurmas] = useState(unifiedHorarios);
   const [turma, setTurma] = useState(turmas[0]);
 
-  let indexes = { classIndex, classTimeIndex };
-  let myTurmaStates = { turmas, setTurmas, turma, setTurma };
-  let myStates = { indexes, myTurmaStates };
+  const classes = turmas;
+  const setClasses = setTurmas;
+  const classItem = turma;
+  const setClassItem = setTurma;
 
-  const classesStates = {
-    classes: turmas,
-    setClasses: setTurmas,
-    classItem: turma,
-    setClassItem: setTurma,
-  };
+  const indexes = { classIndex, classTimeIndex };
+  const myTurmaStates = { turmas, setTurmas, turma, setTurma };
+  const classesStates = { classes, setClasses, classItem, setClassItem };
+  const myStates = { indexes, myTurmaStates };
+
 
   useEffect(() => {
     console.log("useEffect, updated turmas");
@@ -249,6 +245,7 @@ function Classes() {
           style={{ cursor: "pointer", backgroundColor: "#226699" }}
           onClick={() => {
             console.log("turma", turma);
+            console.log("turmas", turmas);
           }}
         >
           Como tá agora?
