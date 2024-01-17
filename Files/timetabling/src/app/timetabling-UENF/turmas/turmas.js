@@ -35,7 +35,10 @@ import {
   updateClassTime,
   deleteClassTime,
 } from "../../../helpers/CRUDFunctions/classTimeCRUD";
-import { TextInputClassExpectedDemand, TextInputClassId } from "../../../components/MyTextFields";
+import {
+  TextInputClassExpectedDemand,
+  TextInputClassId,
+} from "../../../components/MyTextFields";
 
 function TurmaSelection(classStates) {
   /* It just contains the selection an maybe allows scrolling selection */
@@ -100,51 +103,46 @@ function DadosTurma(classesStates) {
 }
 
 function HorariosTurma(myStates) {
-  const { myTurmaStates, indexes } = myStates;
-  const { turma, setTurma, turmas, setTurmas } = myTurmaStates;
+  const { classesStates, indexes } = myStates;
+  const { classes, setClasses, classItem, setClassItem } = classesStates;
   const { /* classIndex, */ classTimeIndex } = indexes;
-  console.log("turma", turma);
-  if (turma.horarios == null) {
-    turma.horarios = [];
+  console.log("classItem", classItem);
+  if (classItem.horarios == null) {
+    classItem.horarios = [];
   }
-  let quantidadeHorarios = turma.horarios.length;
+  let quantidadeHorarios = classItem.horarios.length;
   // console.log("quantidadeHorarios", quantidadeHorarios);
-  let createClassTimeStates = {
-    turmas,
-    setTurmas,
-    rowTurma: turma,
-    setRowTurma: setTurma,
+  let createClassTimeProps = {
+    classes,
+    setClasses,
+    currentClass: classItem,
+    setCurrentClass: setClassItem,
     classTimeIndex,
   };
-
+  const hourTableProps = { createClassTimeProps, classesStates };
   return (
     <div className="showBasicDataCard">
       <h3>
         {quantidadeHorarios > 0 ? "" : "Sem "}
         Horários
       </h3>
-
       {quantidadeHorarios > 0 ? (
-        <HorariosTable
-          {...myStates}
-          createClassTimeStates={createClassTimeStates}
-        />
+        <HorariosTable {...hourTableProps} />
       ) : (
-        <SmartCreateHora {...createClassTimeStates} />
+        <SmartCreateHora {...createClassTimeProps} />
       )}
     </div>
   );
 }
 
-function HorariosTable(myStates) {
-  const { myTurmaStates, createClassTimeStates } = myStates;
-  const { turma, setTurma } = myTurmaStates;
+function HorariosTable({ createClassTimeProps, classesStates }) {
+  const { classItem, setClassItem } = classesStates;
   return (
     <table className="showBasicDataTable">
       <thead>
         <tr>
           <th>
-            <SmartCreateHora {...createClassTimeStates} />
+            <SmartCreateHora {...createClassTimeProps} />
           </th>
           <th>Sala</th>
           <th>Dia</th>
@@ -153,42 +151,42 @@ function HorariosTable(myStates) {
         </tr>
       </thead>
       <tbody>
-        {turma.horarios.map((horario, index) => {
+        {classItem.horarios.map((horario, index) => {
           return (
             <tr key={`Linha Horário: ${horario.idHorario}-${index}`}>
               <td>
                 <SmartDeleteHora
-                  turma={turma}
-                  setTurma={setTurma}
+                  turma={classItem}
+                  setTurma={setClassItem}
                   idHorario={horario.idHorario}
                   // {...smartDeleteProps}
                 />
               </td>
               <td>
                 <SelectSala
-                  lTurma={turma}
-                  setLTurma={setTurma}
+                  lTurma={classItem}
+                  setLTurma={setClassItem}
                   indexHorario={index}
                 />
               </td>
               <td>
                 <SelectDia
-                  lTurma={turma}
-                  setLTurma={setTurma}
+                  lTurma={classItem}
+                  setLTurma={setClassItem}
                   indexHorario={index}
                 />
               </td>
               <td>
                 <SelectHoraTang
-                  lTurma={turma}
-                  setLTurma={setTurma}
+                  lTurma={classItem}
+                  setLTurma={setClassItem}
                   indexHorario={index}
                 />
               </td>
               <td>
                 <SelectDuracao
-                  lTurma={turma}
-                  setLTurma={setTurma}
+                  lTurma={classItem}
+                  setLTurma={setClassItem}
                   indexHorario={index}
                 />
               </td>
@@ -206,35 +204,20 @@ function Classes() {
 
   let unifiedHorarios = getFullHorarios();
 
-  const [turmas, setTurmas] = useState(unifiedHorarios);
-  const [turma, setTurma] = useState(turmas[0]);
+  const [classes, setClasses] = useState(unifiedHorarios);
+  const [classItem, setClassItem] = useState(classes[0]);
 
-  const classes = turmas;
-  const setClasses = setTurmas;
-  const classItem = turma;
-  const setClassItem = setTurma;
-
-  const indexes = { classIndex, classTimeIndex };
-  const myTurmaStates = { turmas, setTurmas, turma, setTurma };
   const classesStates = { classes, setClasses, classItem, setClassItem };
-  const myStates = { indexes, myTurmaStates };
-
-
-  useEffect(() => {
-    console.log("useEffect, updated turmas");
-  }, [turmas]);
-
-  useEffect(() => {
-    console.log("Updated Turma", turma);
-  }, [turma]);
+  const indexes = { classIndex, classTimeIndex };
+  const myStates = { classesStates, indexes };
 
   useEffect(() => {
     updateClass(classesStates);
   }, [
-    turma?.ano,
-    turma?.semestre,
-    turma?.disciplina?.id,
-    turma?.professor?.id,
+    classItem?.ano,
+    classItem?.semestre,
+    classItem?.disciplina?.id,
+    classItem?.professor?.id,
   ]);
 
   return (
@@ -244,12 +227,12 @@ function Classes() {
         <button
           style={{ cursor: "pointer", backgroundColor: "#226699" }}
           onClick={() => {
-            console.log("turma", turma);
-            console.log("turmas", turmas);
+            console.log("turma", classItem);
+            console.log("turmas", classes);
           }}
         >
           Como tá agora?
-          {JSON.stringify(turma)}
+          {JSON.stringify(classItem)}
         </button>
         <DadosTurma {...classesStates} />
         <HorariosTurma {...myStates} />
