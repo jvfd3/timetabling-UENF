@@ -276,7 +276,7 @@ function SelectSubject({ outerSubject, setOuterSubject }) {
       (iterSubject) => iterSubject?.id == subject?.id
     );
     // console.log("foundSubjectObject", subjectObject);
-    return subjectObject;
+    return subjectObject ? subjectObject : null;
   }
 
   const SelectSubjectStates = {
@@ -308,7 +308,7 @@ function DefaultSelectProfessor({ outerProfessor, setOuterProfessor }) {
     let professorObject = sqlDataFromJson.professors.find(
       (iterProfessor) => iterProfessor?.id == professor?.id
     );
-    return professorObject;
+    return professorObject ? professorObject : null;
   }
 
   const SelectProfessorStates = {
