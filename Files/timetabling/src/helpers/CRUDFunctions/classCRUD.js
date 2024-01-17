@@ -9,18 +9,17 @@ import options from "../../DB/local/options";
 
 const itemName = "classData";
 
-function createClass({ turmas, setTurmas, turma, setTurma }) {
-  console.log("createClass", turma.idTurma);
+function createClass({ classes, setClasses, classItem, setClassItem }) {
   function insertNewClass(newId) {
     let newClass = {
       ...options.emptyObjects.turma,
-      ano: turma.ano,
-      semestre: turma.semestre,
+      ano: classItem.ano,
+      semestre: classItem.semestre,
       id: newId,
       idTurma: newId,
     };
-    setTurma(newClass);
-    setTurmas([...turmas, newClass]);
+    setClassItem(newClass);
+    setClasses([...classes, newClass]);
   }
   insertNewClass(123);
   // defaultDBCreate(itemName, turma)
@@ -28,21 +27,21 @@ function createClass({ turmas, setTurmas, turma, setTurma }) {
   //   .catch(defaultHandleError);
 }
 
-function readClass({ setTurma, setTurmas, turma, turmas }) {
+function readClass({ classes, setClasses, classItem, setClassItem }) {
   function insertNewClassesFromDB(dataFromDB) {
     function getIndexFromCurrentClass(currentClass) {
-      /* percorra a lista de salas, encontre a sala que tenha o mesmo id, e retorne o índice dessa turma */
-      const index = turmas.findIndex(
-        (turma) => turma.idTurma === currentClass.idTurma
+      /* percorra a lista de salas, encontre a sala que tenha o mesmo id, e retorne o índice dessa classItem */
+      const index = classes.findIndex(
+        (iterClassItem) => iterClassItem.idTurma === currentClass.idTurma
       );
 
       return index == -1 ? 0 : index;
     }
-    const index = getIndexFromCurrentClass(turma);
+    const index = getIndexFromCurrentClass(classItem);
     const lastItem = dataFromDB[dataFromDB.length - 1];
     const currentClass = dataFromDB?.[index] ?? lastItem;
-    setTurma(currentClass);
-    setTurmas(dataFromDB);
+    setClassItem(currentClass);
+    setClasses(dataFromDB);
   }
 
   defaultDBRead(itemName)
