@@ -21,10 +21,10 @@ function createClass({ classes, setClasses, classItem, setClassItem }) {
     setClassItem(newClass);
     setClasses([...classes, newClass]);
   }
-  insertNewClass(123);
-  // defaultDBCreate(itemName, turma)
-  //   .then(insertNewClass)
-  //   .catch(defaultHandleError);
+  // insertNewClass(123);
+  defaultDBCreate(itemName, classItem)
+    .then(insertNewClass)
+    .catch(defaultHandleError);
 }
 
 function readClass({ classes, setClasses, classItem, setClassItem }) {
@@ -50,12 +50,31 @@ function readClass({ classes, setClasses, classItem, setClassItem }) {
 }
 
 function updateClass(classStates) {
-  console.log("updateClass", classStates.turma.idTurma);
+  const { classes, setClasses, classItem, setClassItem } = classStates;
+  function updateClassFromList(oldArray, newClass) {
+    const newArray = oldArray.map((iterClass) => {
+      // const hasSameId = iterClass?.id ?? iterClass?.idTurma === newClass?.id ?? newClass?.idTurma;
+      const hasSameId = iterClass.idTurma === newClass.idTurma;
+      return hasSameId ? newClass : iterClass;
+    });
+    return newArray;
+  }
+
+  function updateClassOnList(newClass) {
+    const updatedClasses = updateClassFromList(classes, newClass);
+    setClassItem(newClass);
+    setClasses(updatedClasses);
+  }
+
+  // updateClassOnList(classItem);
+  console.log("updateClass: Atualizei prusinhô");
+  defaultDBUpdate(itemName, classItem)
+    .then(updateClassOnList)
+    .catch(defaultHandleError);
 }
 
 function deleteClass(classStates) {
   const { classes, setClasses, classItem, setClassItem } = classStates;
-  const idToDelete = classItem?.id ?? classItem?.idTurma;
 
   function getListWithItemRemoved(oldList, idToDelete) {
     const newArray = oldList.filter((iterOldItem) => {
@@ -75,7 +94,8 @@ function deleteClass(classStates) {
     return index;
   }
 
-  function deleteItemOnList(itemToDelete, itemsToDeleteFrom) {
+  function deleteItemOnList(itemToDelete, itemsToDeleteFrom = classes) {
+    const idToDelete = itemToDelete?.id ?? itemToDelete?.idTurma;
     if (itemToDelete) {
       // let index = findIndexFromList(itemsToDeleteFrom, idToDelete);
       const newItemList = getListWithItemRemoved(itemsToDeleteFrom, idToDelete);
@@ -108,11 +128,11 @@ function deleteClass(classStates) {
     }
   }
 
-  deleteItemOnList(classItem, classes);
-
-  /* defaultDBDelete(itemName, classItem)
+  // deleteItemOnList(classItem, classes);
+  classItem.id = classItem.idTurma;
+  defaultDBDelete(itemName, classItem)
     .then(deleteItemOnList)
-    .catch(defaultHandleError); */
+    .catch(defaultHandleError);
 }
 
 export { createClass, readClass, updateClass, deleteClass };
