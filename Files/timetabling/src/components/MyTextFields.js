@@ -85,6 +85,45 @@ function NumberInputMultiClassesExpectedDemand(myClassStates) {
 
 /* \\ CRUD // */
 
+/* \ Classes / */
+
+function TextInputClassId({ classes, setClasses, classItem, setClassItem }) {
+  const generalStates = {
+    items: classes,
+    setItems: setClasses,
+    item: classItem,
+    setItem: setClassItem,
+  };
+  const specificValues = {
+    mainValue: classItem.idTurma,
+    getNewItemObject: (newValue) => ({ ...classItem, idTurma: newValue }),
+    title: "ID",
+    isNumeric: true,
+  };
+  const idStates = { generalStates, specificValues };
+
+  return <TextInputDefault {...idStates} />;
+}
+
+function TextInputClassExpectedDemand({ classes, setClasses, classItem, setClassItem }) {
+  const generalStates = {
+    items: classes,
+    setItems: setClasses,
+    item: classItem,
+    setItem: setClassItem,
+  };
+  const specificValues = {
+    mainValue: classItem.demandaEstimada,
+    getNewItemObject: (newValue) => ({ ...classItem, demandaEstimada: newValue }),
+    title: "Demanda Estimada",
+    isNumeric: true,
+  };
+  const demandStates = { generalStates, specificValues };
+
+  return <TextInputDefault {...demandStates} />;
+}
+
+
 /* \ Professor / */
 
 function TextInputProfessorName({
@@ -357,6 +396,9 @@ export {
   /* \ MultiClasses / */
   NumberInputMultiClassesExpectedDemand,
   /* \\ CRUD // */
+  /* \ Classes / */
+  TextInputClassExpectedDemand,
+  TextInputClassId,
   /* \ Professor / */
   TextInputProfessorName,
   TextinputProfessorAlias,

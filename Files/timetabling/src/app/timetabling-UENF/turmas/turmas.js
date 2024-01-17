@@ -35,6 +35,7 @@ import {
   updateClassTime,
   deleteClassTime,
 } from "../../../helpers/CRUDFunctions/classTimeCRUD";
+import { TextInputClassExpectedDemand, TextInputClassId } from "../../../components/MyTextFields";
 
 function TurmaSelection(myTurmaStates) {
   const newClassesStates = {
@@ -82,6 +83,18 @@ function DadosTurma(classesStates) {
             <th>Professor</th>
             <td>
               <SelectClassProfessor {...classesStates} />
+            </td>
+          </tr>
+          <tr>
+            <th>Demanda Estimada</th>
+            <td>
+              <TextInputClassExpectedDemand {...classesStates} />
+            </td>
+          </tr>
+          <tr>
+            <th>Id</th>
+            <td>
+              <TextInputClassId {...classesStates} />
             </td>
           </tr>
         </tbody>
