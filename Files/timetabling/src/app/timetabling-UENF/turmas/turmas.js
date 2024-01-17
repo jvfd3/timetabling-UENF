@@ -1,18 +1,18 @@
 import "./turmas.css";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
 import {
   SelectDia,
-  SelectDisciplina,
   SelectDuracao,
   SelectHoraTang,
-  SelectProfessor,
   SelectSala,
-  SelectAnoTurma,
-  SelectSemestreTurma,
-  TurmaItemSelection,
+  SelectClassItem,
+  SelectClassYear,
+  SelectClassSemester,
+  SelectClassSubject,
+  SelectClassProfessor,
 } from "../../../components/mySelects";
 import {
   getFullHorarios,
@@ -37,23 +37,28 @@ import {
 } from "../../../helpers/CRUDFunctions/classTimeCRUD";
 
 function TurmaSelection(myTurmaStates) {
+  const newClassesStates = {
+    classes: myTurmaStates.turmas,
+    setClasses: myTurmaStates.setTurmas,
+    classItem: myTurmaStates.turma,
+    setClassItem: myTurmaStates.setTurma,
+  };
   /* It just contains the selection an maybe allows scrolling selection */
   const turmaCRUDFunctions = {
     createFunc: () => createClass(myTurmaStates),
     readFunc: () => readClass(myTurmaStates),
     updateFunc: () => updateClass(myTurmaStates),
-    deleteFunc: () => deleteClass(myTurmaStates),
+    deleteFunc: () => deleteClass(newClassesStates),
   };
   return (
     <div className="SelectionBar">
       <CRUDButtonsContainer {...turmaCRUDFunctions} />
-      <TurmaItemSelection {...myTurmaStates} />
+      <SelectClassItem {...newClassesStates} />
     </div>
   );
 }
 
-function DadosTurma(myTurmaStates) {
-  const { turma, setTurma /* turmas, setTurmas  */ } = myTurmaStates;
+function DadosTurma(classesStates) {
   return (
     <div className="showBasicDataCard">
       <h3>INFORMAÇÕES DA TURMA</h3>
@@ -64,21 +69,21 @@ function DadosTurma(myTurmaStates) {
             <th>Ano/Semestre</th>
             <td>
               <div className="SelectAnoSemestre">
-                <SelectAnoTurma lTurma={turma} setLTurma={setTurma} />
-                <SelectSemestreTurma lTurma={turma} setLTurma={setTurma} />
+                <SelectClassYear {...classesStates} />
+                <SelectClassSemester {...classesStates} />
               </div>
             </td>
           </tr>
           <tr>
             <th>Disciplina</th>
             <td>
-              <SelectDisciplina lTurma={turma} setLTurma={setTurma} />
+              <SelectClassSubject {...classesStates} />
             </td>
           </tr>
           <tr>
             <th>Professor</th>
             <td>
-              <SelectProfessor lTurma={turma} setLTurma={setTurma} />
+              <SelectClassProfessor {...classesStates} />
             </td>
           </tr>
         </tbody>
@@ -197,11 +202,35 @@ function Classes() {
   let myTurmaStates = { turmas, setTurmas, turma, setTurma };
   let myStates = { indexes, myTurmaStates };
 
+  const classesStates = {
+    classes: turmas,
+    setClasses: setTurmas,
+    classItem: turma,
+    setClassItem: setTurma,
+  };
+
+  useEffect(() => {
+    console.log("useEffect, turmas updated");
+  }, [turmas]);
+
+  useEffect(() => {
+    console.log("Updated Disciplina");
+  }, [turma?.disciplina?.id]);
+
+  useEffect(() => {
+    // updateClass(myTurmaStates);
+  }, [
+    turma?.ano,
+    turma?.semestre,
+    turma?.disciplina?.id,
+    turma?.professor?.id,
+  ]);
+
   return (
     <div className="CRUDContainComponents">
       <TurmaSelection {...myTurmaStates} />
       <div className="infoCard">
-        <DadosTurma {...myTurmaStates} />
+        <DadosTurma {...classesStates} />
         <HorariosTurma {...myStates} />
         {/* <Participants {...myTurmaStates} /> */}
       </div>
