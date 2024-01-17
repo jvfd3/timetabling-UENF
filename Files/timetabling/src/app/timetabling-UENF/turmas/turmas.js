@@ -107,6 +107,10 @@ function HorariosTurma(myStates) {
   const { myTurmaStates, indexes } = myStates;
   const { turma, setTurma, turmas, setTurmas } = myTurmaStates;
   const { /* classIndex, */ classTimeIndex } = indexes;
+  console.log("turma", turma);
+  if (turma.horarios == null) {
+    turma.horarios = [];
+  }
   let quantidadeHorarios = turma.horarios.length;
   // console.log("quantidadeHorarios", quantidadeHorarios);
   let createClassTimeStates = {
