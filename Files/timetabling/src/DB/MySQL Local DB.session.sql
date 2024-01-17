@@ -79,8 +79,8 @@ SELECT
     WHERE h.idTurma = t.id
   ) as 'horarios'
 FROM turmas as t
-INNER JOIN disciplinas as d ON t.idDisciplina = d.id
-INNER JOIN professores as p ON t.idProfessor = p.id;
+LEFT JOIN disciplinas as d ON t.idDisciplina = d.id
+LEFT JOIN professores as p ON t.idProfessor = p.id;
 
 /* Selecionar dados de turma' */
 SELECT
