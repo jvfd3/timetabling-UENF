@@ -14,8 +14,8 @@ function convertToList(classData) {
   const values = [
     classData?.ano ?? null,
     classData?.semestre ?? null,
-    classData?.idDisciplina ?? null,
-    classData?.idProfessor ?? null,
+    classData?.disciplina?.id ?? null,
+    classData?.professor?.id ?? null,
     classData?.demandaEstimada ?? null,
     classData?.id ?? null,
   ];
