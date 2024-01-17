@@ -40,20 +40,18 @@ function TurmaSelection(myTurmaStates) {
   const newClassesStates = {
     classes: myTurmaStates.turmas,
     setClasses: myTurmaStates.setTurmas,
-    classItem: myTurmaStates.turma,
-    setClassItem: myTurmaStates.setTurma,
-  };
+function TurmaSelection(classStates) {
   /* It just contains the selection an maybe allows scrolling selection */
   const turmaCRUDFunctions = {
-    createFunc: () => createClass(myTurmaStates),
-    readFunc: () => readClass(myTurmaStates),
-    updateFunc: () => updateClass(myTurmaStates),
-    deleteFunc: () => deleteClass(newClassesStates),
+    createFunc: () => createClass(classStates),
+    readFunc: () => readClass(classStates),
+    updateFunc: () => updateClass(classStates),
+    deleteFunc: () => deleteClass(classStates),
   };
   return (
     <div className="SelectionBar">
       <CRUDButtonsContainer {...turmaCRUDFunctions} />
-      <SelectClassItem {...newClassesStates} />
+      <SelectClassItem {...classStates} />
     </div>
   );
 }
@@ -135,9 +133,9 @@ function HorariosTable(myStates) {
           <th>
             <SmartCreateHora {...createClassTimeStates} />
           </th>
+          <th>Sala</th>
           <th>Dia</th>
           <th>Hora de início</th>
-          <th>Sala</th>
           <th>Duração</th>
         </tr>
       </thead>
@@ -154,14 +152,14 @@ function HorariosTable(myStates) {
                 />
               </td>
               <td>
-                <SelectDia
+                <SelectSala
                   lTurma={turma}
                   setLTurma={setTurma}
                   indexHorario={index}
                 />
               </td>
               <td>
-                <SelectSala
+                <SelectDia
                   lTurma={turma}
                   setLTurma={setTurma}
                   indexHorario={index}
@@ -210,15 +208,15 @@ function Classes() {
   };
 
   useEffect(() => {
-    console.log("useEffect, turmas updated");
+    console.log("useEffect, updated turmas");
   }, [turmas]);
 
   useEffect(() => {
-    console.log("Updated Disciplina");
-  }, [turma?.disciplina?.id]);
+    console.log("Updated Turma", turma);
+  }, [turma]);
 
   useEffect(() => {
-    // updateClass(myTurmaStates);
+    updateClass(classesStates);
   }, [
     turma?.ano,
     turma?.semestre,
@@ -228,8 +226,17 @@ function Classes() {
 
   return (
     <div className="CRUDContainComponents">
-      <TurmaSelection {...myTurmaStates} />
+      <TurmaSelection {...classesStates} />
       <div className="infoCard">
+        <button
+          style={{ cursor: "pointer", backgroundColor: "#226699" }}
+          onClick={() => {
+            console.log("turma", turma);
+          }}
+        >
+          Como tá agora?
+          {JSON.stringify(turma)}
+        </button>
         <DadosTurma {...classesStates} />
         <HorariosTurma {...myStates} />
         {/* <Participants {...myTurmaStates} /> */}
