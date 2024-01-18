@@ -53,8 +53,9 @@ function updateClass(classStates) {
   const { classes, setClasses, classItem, setClassItem } = classStates;
   function updateClassFromList(oldArray, newClass) {
     const newArray = oldArray.map((iterClass) => {
-      // const hasSameId = iterClass?.id ?? iterClass?.idTurma === newClass?.id ?? newClass?.idTurma;
-      const hasSameId = iterClass.idTurma === newClass.idTurma;
+      const idIterClass = iterClass?.id ?? iterClass?.idTurma;
+      const idNewClass = newClass?.id ?? newClass?.idTurma;
+      const hasSameId = idIterClass === idNewClass;
       return hasSameId ? newClass : iterClass;
     });
     return newArray;

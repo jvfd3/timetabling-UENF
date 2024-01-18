@@ -152,13 +152,14 @@ function HorariosTable({ createClassTimeProps, classesStates }) {
       </thead>
       <tbody>
         {classItem.horarios.map((horario, index) => {
+          const currentId = horario?.id ?? horario?.idHorario ?? null;
           return (
-            <tr key={`Linha Horário: ${horario.id}-${index}`}>
+            <tr key={`Linha Horário: ${currentId}-${index}`}>
               <td>
                 <SmartDeleteHora
                   turma={classItem}
                   setTurma={setClassItem}
-                  idHorario={horario.id}
+                  idHorario={currentId}
                   // {...smartDeleteProps}
                 />
               </td>
