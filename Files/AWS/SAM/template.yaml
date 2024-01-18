@@ -58,7 +58,10 @@ Resources:
       CodeUri: ./lambdas/professor/createProfessor
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
       Events:
@@ -79,7 +82,10 @@ Resources:
       CodeUri: ./lambdas/professor/readProfessor
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
       Events:
@@ -100,7 +106,10 @@ Resources:
       CodeUri: ./lambdas/professor/updateProfessor
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
       Events:
@@ -121,7 +130,10 @@ Resources:
       CodeUri: ./lambdas/professor/deleteProfessor
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
       Events:
@@ -142,7 +154,10 @@ Resources:
       CodeUri: ./lambdas/subject/createSubject
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
       Events:
@@ -163,7 +178,10 @@ Resources:
       CodeUri: ./lambdas/subject/readSubject
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
       Events:
@@ -184,7 +202,10 @@ Resources:
       CodeUri: ./lambdas/subject/updateSubject
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
       Events:
@@ -205,7 +226,10 @@ Resources:
       CodeUri: ./lambdas/subject/deleteSubject
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
       Events:
@@ -226,7 +250,10 @@ Resources:
       CodeUri: ./lambdas/student/createStudent
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
       Events:
@@ -247,7 +274,10 @@ Resources:
       CodeUri: ./lambdas/student/readStudent
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
       Events:
@@ -268,7 +298,10 @@ Resources:
       CodeUri: ./lambdas/student/updateStudent
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
       Events:
@@ -289,7 +322,10 @@ Resources:
       CodeUri: ./lambdas/student/deleteStudent
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
       Events:
@@ -311,7 +347,10 @@ Resources:
       CodeUri: ./lambdas/room/createRoom
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
       Events:
@@ -333,7 +372,10 @@ Resources:
       CodeUri: ./lambdas/room/readRoom
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
       Events:
@@ -355,7 +397,10 @@ Resources:
       CodeUri: ./lambdas/room/updateRoom
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
       Events:
@@ -377,7 +422,10 @@ Resources:
       CodeUri: ./lambdas/room/deleteRoom
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
       Events:
@@ -399,7 +447,10 @@ Resources:
       CodeUri: ./lambdas/classData/createClassData
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
       Events:
@@ -421,7 +472,10 @@ Resources:
       CodeUri: ./lambdas/classData/readClassData
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
         # - !Ref auxFunctionLayer
@@ -444,7 +498,10 @@ Resources:
       CodeUri: ./lambdas/classData/updateClassData
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
         # - !Ref auxFunctionLayer
@@ -467,7 +524,10 @@ Resources:
       CodeUri: ./lambdas/classData/deleteClassData
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
         # - !Ref auxFunctionLayer
@@ -490,7 +550,10 @@ Resources:
       CodeUri: ./lambdas/classTime/createClassTime
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
         # - !Ref auxFunctionLayer
@@ -513,7 +576,10 @@ Resources:
       CodeUri: ./lambdas/classTime/readClassTime
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
         # - !Ref auxFunctionLayer
@@ -536,7 +602,10 @@ Resources:
       CodeUri: ./lambdas/classTime/updateClassTime
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
         # - !Ref auxFunctionLayer
@@ -559,7 +628,10 @@ Resources:
       CodeUri: ./lambdas/classTime/deleteClassTime
       Environment:
         Variables:
-          SECRET_NAME: timetablingSecrets
+          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_USER: tang
+          DB_PASSWORD: annabell
+          DB_NAME: timetabling
       Layers:
         - !Ref dbFunctionLayer
         # - !Ref auxFunctionLayer
