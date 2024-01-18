@@ -1,5 +1,10 @@
 /* A ideia é que seja um trocadilho com hourglass */
 import options from "../DB/local/options";
+import {
+  getId,
+  removeItemInListById,
+  replaceNewItemInListById,
+} from "./auxCRUD";
 
 function createTurma(myProps) {
   const { ano, semestre, turmas, setTurmas, classIndex, classTimeIndex } =
@@ -48,61 +53,54 @@ function deleteTurma(turmas, setTurmas, turma) {
   setTurmas(newTurmas);
 }
 
-function createHorario(classesStates) {
-  const { classes, setClasses, currentClass, setCurrentClass, classTimeIndex } =
-    classesStates;
+function createClassTime(classTimeStates) {
+  const {
+    classes,
+    setClasses,
+    classItem,
+    setClassItem,
+    classTimeIndex,
+    classIndex,
+  } = classTimeStates;
+
+  const currentClassId = getId(classItem) ?? classIndex.current ?? null;
+
   classTimeIndex.current += 1;
-  // console.log("Classtime", classTimeIndex.current);
-  console.log("states", classesStates);
-  console.log("Turma", currentClass);
-  let blankHorario = options.emptyObjects.horario;
-  let newHorario = {
-    ...blankHorario,
+  console.log("Turma", classItem);
+  const blankClassTime = options.emptyObjects.classTime;
+  const newClassTime = {
+    ...blankClassTime,
+    id: classTimeIndex.current,
     idHorario: classTimeIndex.current,
-    idTurma: currentClass.idTurma,
+    idTurma: currentClassId,
     duracao: 2,
   };
-  let newTurma = {
-    ...currentClass,
-    horarios: [newHorario, ...currentClass.horarios],
+  const newClassItem = {
+    ...classItem,
+    horarios: [newClassTime, ...classItem.horarios],
   };
-  setCurrentClass(newTurma);
+  setClassItem(newClassItem);
   if (classes !== undefined && setClasses !== undefined) {
-    // setClasses(newTurmas);
-    updateClassInClasses(classes, setClasses, newTurma);
+    const newClasses = replaceNewItemInListById(newClassItem, classes);
+    setClasses(newClasses);
   }
 }
 
-function updateClassInClasses(classesData, setClassesData, updatedClassData) {
-  let currentId = updatedClassData.idTurma;
-  let newClassesData = [...classesData];
-  newClassesData = classesData.map((iterClass) => {
-    let hasSameId = iterClass.idTurma === currentId;
-    // console.log("Has same id:", iterClass.idTurma, currentId);
-    // if (hasSameId) {
-    // console.log("Updated class:", updatedClassData);
-    // console.log("Iter class:", iterClass);
-    // }
-    return hasSameId ? updatedClassData : iterClass;
-  });
-  setClassesData(newClassesData);
-}
+function deleteHorario(classTimeRowStates) {
+  const { classItem, setClassItem, classTimes, classTime, index } =
+    classTimeRowStates;
 
-function deleteHorario(myProps) {
-  const { turma, setTurma, idHorario } = myProps;
-  let newTurma = { ...turma };
-  let newHorarios = newTurma.horarios.filter((horario) => {
-    let hasSameId = horario.idHorario === idHorario;
-    return !hasSameId;
-  });
-  newTurma.horarios = newHorarios;
-  setTurma(newTurma);
+  const newClassTimes = removeItemInListById(classTime, classTimes);
+  const newClassItem = { ...classItem, horarios: newClassTimes };
+  setClassItem(newClassItem);
+  console.log("Deleted class time:", classTime);
+  console.log("New class item:", newClassItem);
 }
 
 export {
   createTurma,
   deleteTurma,
-  createHorario,
+  createClassTime,
   deleteHorario,
-  // updateClassInClasses,
+  // getUpdatedClasses,
 };

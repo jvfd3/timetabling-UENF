@@ -259,6 +259,15 @@ const options = {
       ordem: null, //INT
       sala: null, //OBJ
     },
+    classTime: {
+      dia: null, //STR
+      duracao: null, //INT
+      horaInicio: null, //INT
+      idHorario: null, //INT
+      idTurma: null, //INT
+      ordem: null, //INT
+      sala: null, //OBJ
+    },
     sala: {
       bloco: null, //STR
       capacidade: null, //INT

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
+import { getId } from "../helpers/auxCRUD";
 
 /* DEFAULT TEXTINPUT */
 
@@ -50,8 +51,8 @@ function TextInputDefault(myStates) {
       fullWidth
       {...specificIDProps}
       {...specificNumericProps}
-      id={`TextField ID: ${title}-${item?.id || item?.idTurma}`}
-      key={`TextField Key: ${title}-${item?.id || item?.idTurma}`}
+      id={`TextField ID: ${title}-${getId(item)}`}
+      key={`TextField Key: ${title}-${getId(item)}`}
       label={`${title}`}
       variant="outlined"
       value={mainProp || ""}
@@ -105,7 +106,12 @@ function TextInputClassId({ classes, setClasses, classItem, setClassItem }) {
   return <TextInputDefault {...idStates} />;
 }
 
-function TextInputClassExpectedDemand({ classes, setClasses, classItem, setClassItem }) {
+function TextInputClassExpectedDemand({
+  classes,
+  setClasses,
+  classItem,
+  setClassItem,
+}) {
   const generalStates = {
     items: classes,
     setItems: setClasses,
@@ -114,7 +120,10 @@ function TextInputClassExpectedDemand({ classes, setClasses, classItem, setClass
   };
   const specificValues = {
     mainValue: classItem.demandaEstimada,
-    getNewItemObject: (newValue) => ({ ...classItem, demandaEstimada: newValue }),
+    getNewItemObject: (newValue) => ({
+      ...classItem,
+      demandaEstimada: newValue,
+    }),
     title: "Demanda Estimada",
     isNumeric: true,
   };
@@ -122,7 +131,6 @@ function TextInputClassExpectedDemand({ classes, setClasses, classItem, setClass
 
   return <TextInputDefault {...demandStates} />;
 }
-
 
 /* \ Professor / */
 

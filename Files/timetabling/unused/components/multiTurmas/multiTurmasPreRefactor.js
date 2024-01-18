@@ -16,8 +16,8 @@ import { readTurmas } from "../../../DB/AWS/axiosConnection";
 import { splittedToUnified } from "../../../helpers/auxFunctions";
 import {
   SmartDeleteTurma,
-  SmartCreateHora,
-  SmartDeleteHora,
+  SmartCreateClassTime,
+  SmartDeleteClassTime,
 } from "../../../components/Buttons/Smart/Smart";
 
 function Turmas3() {
@@ -275,7 +275,7 @@ function Turmas3() {
                     ></input>
                   </td>
                   <td>
-                    <SmartCreateHora
+                    <SmartCreateClassTime
                       turma={currentTurma}
                       setTurma={setLTurma}
                     />
@@ -318,7 +318,7 @@ function Turmas3() {
                                 key={`${id}-${horario.sala}-${horario.dia}-${horario.horaInicio}-${index}`}
                               >
                                 <td>
-                                  <SmartDeleteHora
+                                  <SmartDeleteClassTime
                                     turma={currentTurma}
                                     setTurma={setLTurma}
                                     indexHorario={index}

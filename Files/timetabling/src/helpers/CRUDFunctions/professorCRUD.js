@@ -5,6 +5,11 @@ import {
   defaultDBDelete,
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
+import {
+  getItemIndexInListById,
+  removeItemInListById,
+  replaceNewItemInListById,
+} from "../auxCRUD";
 
 const itemName = "professor";
 
@@ -37,16 +42,11 @@ function readProfessor({ setProfessors, setProfessor }) {
 }
 
 function updateProfessor({ professors, setProfessors, professor }) {
-  function updateProfessorFromList(oldArray, newProfessor) {
-    const newArray = oldArray.map((oldProfessor) => {
-      const hasSameId = oldProfessor.id === newProfessor.id;
-      return hasSameId ? newProfessor : oldProfessor;
-    });
-    return newArray;
-  }
-
   function updateProfessorOnList(newProfessor) {
-    const updatedProfessors = updateProfessorFromList(professors, newProfessor);
+    const updatedProfessors = replaceNewItemInListById(
+      newProfessor,
+      professors
+    );
     setProfessors(updatedProfessors);
   }
 
@@ -61,23 +61,14 @@ function deleteProfessor({
   professor,
   setProfessor,
 }) {
-  function deleteProfessorFromList(oldArray, deletedProfessor) {
-    const newArray = oldArray.filter((oldProfessor) => {
-      const oldId = oldProfessor.id;
-      const idToDelete = deletedProfessor.id;
-      return oldId !== idToDelete;
-    });
-    return newArray;
-  }
-
   function deleteProfessorOnList(deletedProfessor) {
     if (deletedProfessor) {
-      const updatedProfessorList = deleteProfessorFromList(
-        professors,
-        deletedProfessor
+      const updatedProfessorList = removeItemInListById(
+        deletedProfessor,
+        professors
       );
 
-      const index = professors.findIndex((p) => p.id === deletedProfessor.id);
+      const index = getItemIndexInListById(deletedProfessor, professors);
       let newProfessor = null;
       if (index > 0) {
         newProfessor = updatedProfessorList[index - 1]; // continua do anterior

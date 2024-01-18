@@ -1,4 +1,5 @@
 import { sqlDataFromJson } from "../DB/local/dataFromJSON";
+import { getId, replaceNewItemInListById } from "./auxCRUD";
 
 function debugFunc(debugClasses, message) {
   let debug = [];
@@ -206,11 +207,7 @@ function getNomesDasDisciplinas(listaDeCodigos) {
 }
 
 function updateProfessorFromList(oldArray, newProfessor) {
-  const newArray = oldArray.map((professorAntigo) => {
-    let hasSameId = professorAntigo?.id === newProfessor?.id;
-    let returnedValue = hasSameId ? newProfessor : professorAntigo;
-    return returnedValue;
-  });
+  const newArray = replaceNewItemInListById(newProfessor, oldArray);
   return newArray;
 }
 

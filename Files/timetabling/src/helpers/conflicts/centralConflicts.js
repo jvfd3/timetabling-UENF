@@ -306,7 +306,6 @@ function getDemandNeededData(turma) {
   classTimes.forEach((classTime) => {
     // console.log("classTime", classTime);
     // console.log("classTime.sala", classTime.sala);
-    // console.log("classTime.sala.id", classTime.sala?.id);
     let newFlattenedData = {
       idRoom: classTime.sala?.id,
       idClassTime: classTime.idHorario,

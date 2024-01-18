@@ -5,6 +5,11 @@ import {
   defaultDBDelete,
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
+import {
+  getItemIndexInListById,
+  removeItemInListById,
+  replaceNewItemInListById,
+} from "../auxCRUD";
 
 const itemName = "student";
 
@@ -33,16 +38,8 @@ function readStudent({ setStudents, setStudent }) {
 }
 
 function updateStudent({ students, setStudents, student }) {
-  function updateStudentFromList(oldArray, newStudent) {
-    const newArray = oldArray.map((oldStudent) => {
-      const hasSameId = oldStudent.id === newStudent.id;
-      return hasSameId ? newStudent : oldStudent;
-    });
-    return newArray;
-  }
-
   function updateStudentOnList(newStudent) {
-    const updatedStudents = updateStudentFromList(students, newStudent);
+    const updatedStudents = replaceNewItemInListById(newStudent, students);
     setStudents(updatedStudents);
   }
 
@@ -52,21 +49,11 @@ function updateStudent({ students, setStudents, student }) {
 }
 
 function deleteStudent({ students, setStudents, student, setStudent }) {
-  function deleteStudentFromList(oldArray, deletedStudent) {
-    const newArray = oldArray.filter((oldStudent) => {
-      const hasSameId = oldStudent.id === deletedStudent.id;
-      return !hasSameId;
-    });
-    return newArray;
-  }
-
   function deleteStudentOnList(deletedStudent) {
     if (deletedStudent) {
-      const updatedStudents = deleteStudentFromList(students, deletedStudent);
+      const updatedStudents = removeItemInListById(deletedStudent, students);
 
-      const index = students.findIndex(
-        (student) => student.id === deletedStudent.id
-      );
+      const index = getItemIndexInListById(deletedStudent, students);
       let newStudent = null;
       if (index > 0) {
         newStudent = students[index - 1];

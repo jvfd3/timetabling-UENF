@@ -20,8 +20,8 @@ import { NumberInputMultiClassesExpectedDemand } from "../../../components/MyTex
 import {
   SmartCreateTurma,
   SmartDeleteTurma,
-  SmartCreateHora,
-  SmartDeleteHora,
+  SmartCreateClassTime,
+  SmartDeleteClassTime,
 } from "../../../components/Buttons/Smart/Smart";
 import { getTurmasData } from "../../../DB/retrieveData";
 import { baseTurmaConflicts } from "../../../helpers/conflicts/centralConflicts";
@@ -47,9 +47,9 @@ import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctio
             - SelectProfessor
             - NumberInputDemandaEstimada
             - HorariosTable
-              - SmartCreateHora
+              - SmartCreateClassTime
               - HorariosTableRow
-                - SmartDeleteHora
+                - SmartDeleteClassTime
                 - SelectSala
                 - SelectDia
                 - SelectHoraTang
@@ -178,7 +178,7 @@ function HorariosTableRow(myProps) {
       key={`HorariosTableRow>tr: ${currentIdHorario}-${horario.ordem}-${indexHorario}`}
     >
       <td>
-        <SmartDeleteHora
+        <SmartDeleteClassTime
           turma={turma}
           setTurma={setTurma}
           idHorario={currentIdHorario}
@@ -232,7 +232,7 @@ function HorariosTable(myProps) {
       <thead>
         <tr key={`LinhaHorarios-${rowTurma.idTurma}`}>
           <th>
-            <SmartCreateHora {...createHourProps} />
+            <SmartCreateClassTime {...createHourProps} />
           </th>
           <th>Sala</th>
           <th>Dia</th>
@@ -328,7 +328,7 @@ function TableRow(myProps) {
       </td>
       <td>
         {rowTurma.horarios === null || rowTurma.horarios.length === 0 ? (
-          <SmartCreateHora {...createHourProps} />
+          <SmartCreateClassTime {...createHourProps} />
         ) : (
           <HorariosTable
             rowStates={rowStates}

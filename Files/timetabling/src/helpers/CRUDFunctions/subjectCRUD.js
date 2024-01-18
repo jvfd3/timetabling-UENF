@@ -5,6 +5,11 @@ import {
   defaultDBDelete,
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
+import {
+  getItemIndexInListById,
+  removeItemInListById,
+  replaceNewItemInListById,
+} from "../auxCRUD";
 
 const itemName = "subject";
 
@@ -32,16 +37,8 @@ function readSubject({ setSubjects, setSubject }) {
 }
 
 function updateSubject({ subjects, setSubjects, subject }) {
-  function updateSubjectFromList(oldArray, newSubject) {
-    const newArray = oldArray.map((oldSubject) => {
-      const hasSameId = oldSubject.id === newSubject.id;
-      return hasSameId ? newSubject : oldSubject;
-    });
-    return newArray;
-  }
-
   function updateSubjectOnList(newSubject) {
-    const updatedSubjects = updateSubjectFromList(subjects, newSubject);
+    const updatedSubjects = replaceNewItemInListById(newSubject, subjects);
     setSubjects(updatedSubjects);
   }
 
@@ -51,21 +48,11 @@ function updateSubject({ subjects, setSubjects, subject }) {
 }
 
 function deleteSubject({ subjects, setSubjects, subject, setSubject }) {
-  function deleteSubjectFromList(oldArray, deletedSubject) {
-    const newArray = oldArray.filter((oldSubject) => {
-      const hasSameId = oldSubject.id === deletedSubject.id;
-      return !hasSameId;
-    });
-    return newArray;
-  }
-
   function deleteSubjectOnList(deletedSubject) {
     if (deletedSubject) {
-      const updatedSubjects = deleteSubjectFromList(subjects, deletedSubject);
+      const updatedSubjects = removeItemInListById(deletedSubject, subjects);
       setSubjects(updatedSubjects);
-      const index = subjects.findIndex(
-        (subject) => subject.id === deletedSubject.id
-      );
+      const index = getItemIndexInListById(deletedSubject, subjects);
       let newSubject = null;
       if (index > 0) {
         newSubject = subjects[index - 1];

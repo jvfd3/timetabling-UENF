@@ -6,6 +6,13 @@ import {
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
 import options from "../../DB/local/options";
+import {
+  getId,
+  getItemFromListById,
+  getItemIndexInListById,
+  removeItemInListById,
+  replaceNewItemInListById,
+} from "../auxCRUD";
 
 const itemName = "classData";
 
@@ -51,18 +58,9 @@ function readClass({ classes, setClasses, classItem, setClassItem }) {
 
 function updateClass(classStates) {
   const { classes, setClasses, classItem, setClassItem } = classStates;
-  function updateClassFromList(oldArray, newClass) {
-    const newArray = oldArray.map((iterClass) => {
-      const idIterClass = iterClass?.id ?? iterClass?.idTurma;
-      const idNewClass = newClass?.id ?? newClass?.idTurma;
-      const hasSameId = idIterClass === idNewClass;
-      return hasSameId ? newClass : iterClass;
-    });
-    return newArray;
-  }
 
   function updateClassOnList(newClass) {
-    const updatedClasses = updateClassFromList(classes, newClass);
+    const updatedClasses = replaceNewItemInListById(newClass, classes);
     setClassItem(newClass);
     setClasses(updatedClasses);
   }
@@ -77,29 +75,15 @@ function updateClass(classStates) {
 function deleteClass(classStates) {
   const { classes, setClasses, classItem, setClassItem } = classStates;
 
-  function getListWithItemRemoved(oldList, idToDelete) {
-    const newArray = oldList.filter((iterOldItem) => {
-      const oldId = iterOldItem?.id ?? iterOldItem?.idTurma;
-      const isEqual = oldId == idToDelete;
-      return !isEqual;
-    });
-    return newArray;
-  }
-
   function findIndexFromList(list, idToFind) {
-    const index = list.findIndex((iterClass) => {
-      const iterId = iterClass?.id ?? iterClass?.idTurma;
-      const isEqual = iterId == idToFind;
-      return isEqual;
-    });
+    const index = getItemIndexInListById(idToFind, list);
     return index;
   }
 
   function deleteItemOnList(itemToDelete, itemsToDeleteFrom = classes) {
-    const idToDelete = itemToDelete?.id ?? itemToDelete?.idTurma;
     if (itemToDelete) {
       // let index = findIndexFromList(itemsToDeleteFrom, idToDelete);
-      const newItemList = getListWithItemRemoved(itemsToDeleteFrom, idToDelete);
+      const newItemList = removeItemInListById(itemToDelete, itemsToDeleteFrom);
       // let newItem = null;
 
       /*

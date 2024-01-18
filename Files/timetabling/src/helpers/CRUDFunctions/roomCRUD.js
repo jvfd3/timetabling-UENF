@@ -5,6 +5,11 @@ import {
   defaultDBDelete,
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
+import {
+  getItemIndexInListById,
+  removeItemInListById,
+  replaceNewItemInListById,
+} from "../auxCRUD";
 
 const itemName = "room";
 
@@ -31,16 +36,8 @@ function readRoom({ setRooms, setRoom }) {
 }
 
 function updateRoom({ rooms, setRooms, room }) {
-  function updateRoomFromList(oldArray, newRoom) {
-    const newArray = oldArray.map((oldRoom) => {
-      const hasSameId = oldRoom.id === newRoom.id;
-      return hasSameId ? newRoom : oldRoom;
-    });
-    return newArray;
-  }
-
   function updateRoomOnList(newRoom) {
-    const updatedRooms = updateRoomFromList(rooms, newRoom);
+    const updatedRooms = replaceNewItemInListById(newRoom, rooms);
     setRooms(updatedRooms);
   }
 
@@ -50,20 +47,12 @@ function updateRoom({ rooms, setRooms, room }) {
 }
 
 function deleteRoom({ rooms, setRooms, room, setRoom }) {
-  function deleteRoomFromList(oldArray, deletedRoom) {
-    const newArray = oldArray.filter((oldRoom) => {
-      const hasSameId = oldRoom.id === deletedRoom.id;
-      return !hasSameId;
-    });
-    return newArray;
-  }
-
   function deleteRoomOnList(deletedRoom) {
     if (deletedRoom) {
       let deletedRoomList = rooms;
-      deletedRoomList = deleteRoomFromList(rooms, deletedRoom);
+      deletedRoomList = removeItemInListById(deletedRoom, rooms);
       setRooms(deletedRoomList);
-      const index = rooms.findIndex((room) => room.id === deletedRoom.id);
+      const index = getItemIndexInListById(deletedRoom, rooms);
       let newRoom = null;
       if (index > 0) {
         newRoom = rooms[index - 1];

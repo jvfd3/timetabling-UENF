@@ -1,27 +1,15 @@
 import "./turmas.css";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
 import {
-  SelectDia,
-  SelectDuracao,
-  SelectHoraTang,
-  SelectSala,
   SelectClassItem,
   SelectClassYear,
   SelectClassSemester,
   SelectClassSubject,
   SelectClassProfessor,
 } from "../../../components/mySelects";
-import {
-  getFullHorarios,
-  splittedToUnified2,
-} from "../../../helpers/auxFunctions";
-import {
-  SmartCreateHora,
-  SmartDeleteHora,
-} from "../../../components/Buttons/Smart/Smart";
 import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
 import {
   createClass,
@@ -30,15 +18,10 @@ import {
   deleteClass,
 } from "../../../helpers/CRUDFunctions/classCRUD";
 import {
-  createClassTime,
-  readClassTime,
-  updateClassTime,
-  deleteClassTime,
-} from "../../../helpers/CRUDFunctions/classTimeCRUD";
-import {
   TextInputClassExpectedDemand,
   TextInputClassId,
 } from "../../../components/MyTextFields";
+import ClassTimeTable from "../../../components/ClassTimeTable/ClassTimeTable";
 
 function TurmaSelection(classStates) {
   /* It just contains the selection an maybe allows scrolling selection */
@@ -102,109 +85,17 @@ function DadosTurma(classesStates) {
   );
 }
 
-function HorariosTurma(myStates) {
-  const { classesStates, indexes } = myStates;
-  const { classes, setClasses, classItem, setClassItem } = classesStates;
-  const { /* classIndex, */ classTimeIndex } = indexes;
-  console.log("classItem", classItem);
-  if (classItem.horarios == null) {
-    classItem.horarios = [];
-  }
-  let quantidadeHorarios = classItem.horarios.length;
-  // console.log("quantidadeHorarios", quantidadeHorarios);
-  let createClassTimeProps = {
-    classes,
-    setClasses,
-    currentClass: classItem,
-    setCurrentClass: setClassItem,
-    classTimeIndex,
-  };
-  const hourTableProps = { createClassTimeProps, classesStates };
-  return (
-    <div className="showBasicDataCard">
-      <h3>
-        {quantidadeHorarios > 0 ? "" : "Sem "}
-        Horários
-      </h3>
-      {quantidadeHorarios > 0 ? (
-        <HorariosTable {...hourTableProps} />
-      ) : (
-        <SmartCreateHora {...createClassTimeProps} />
-      )}
-    </div>
-  );
-}
-
-function HorariosTable({ createClassTimeProps, classesStates }) {
-  const { classItem, setClassItem } = classesStates;
-  return (
-    <table className="showBasicDataTable">
-      <thead>
-        <tr>
-          <th>
-            <SmartCreateHora {...createClassTimeProps} />
-          </th>
-          <th>Sala</th>
-          <th>Dia</th>
-          <th>Hora de início</th>
-          <th>Duração</th>
-        </tr>
-      </thead>
-      <tbody>
-        {classItem.horarios.map((horario, index) => {
-          const currentId = horario?.id ?? horario?.idHorario ?? null;
-          return (
-            <tr key={`Linha Horário: ${currentId}-${index}`}>
-              <td>
-                <SmartDeleteHora
-                  turma={classItem}
-                  setTurma={setClassItem}
-                  idHorario={currentId}
-                  // {...smartDeleteProps}
-                />
-              </td>
-              <td>
-                <SelectSala
-                  lTurma={classItem}
-                  setLTurma={setClassItem}
-                  indexHorario={index}
-                />
-              </td>
-              <td>
-                <SelectDia
-                  lTurma={classItem}
-                  setLTurma={setClassItem}
-                  indexHorario={index}
-                />
-              </td>
-              <td>
-                <SelectHoraTang
-                  lTurma={classItem}
-                  setLTurma={setClassItem}
-                  indexHorario={index}
-                />
-              </td>
-              <td>
-                <SelectDuracao
-                  lTurma={classItem}
-                  setLTurma={setClassItem}
-                  indexHorario={index}
-                />
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-  );
-}
-
 function Classes() {
   const classIndex = useRef(sqlDataFromJson.classes.length);
   const classTimeIndex = useRef(sqlDataFromJson.classtimes.length);
-
   // let defaultClasses = getFullHorarios();
-  const defaultClasses = [options.emptyObjects.turma];
+
+  const defaultClassItem = {
+    ...options.emptyObjects.turma,
+    id: classIndex.current,
+    idTurma: classIndex.current,
+  };
+  const defaultClasses = [defaultClassItem];
 
   const [classes, setClasses] = useState(defaultClasses);
   const [classItem, setClassItem] = useState(classes[0]);
@@ -237,7 +128,7 @@ function Classes() {
           {JSON.stringify(classItem)}
         </button>
         <DadosTurma {...classesStates} />
-        <HorariosTurma {...myStates} />
+        <ClassTimeTable {...myStates} />
         {/* <Participants {...myTurmaStates} /> */}
       </div>
     </div>

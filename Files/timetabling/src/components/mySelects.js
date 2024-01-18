@@ -5,6 +5,10 @@ import { sqlDataFromJson } from "../DB/local/dataFromJSON";
 import Select, { components } from "react-select";
 // import { updateProfessorFromList } from "../helpers/auxFunctions";
 import { LockedProp, UnlockedProp } from "./Buttons/Dumb/Dumb";
+import {
+  getItemFromListById,
+  replaceNewItemInListById,
+} from "../helpers/auxCRUD";
 
 let styleWidthFix = options.SelectStyles.fullItem;
 
@@ -114,6 +118,23 @@ function DefaultSelect(defaultProps) {
 }
 
 /* \ SubDefault Selects / */
+
+/*
+Where each Select is used:
+
+- SelectYear
+- SelectSemester
+- SelectLab               - CRUD: Professor
+- SelectCourse            - CRUD: Professor, Student
+- SelectBlock             - CRUD: Room
+- SelectExpectedSemester  - CRUD: Subject
+- SelectSubject           - CRUD: ClassItem
+- DefaultSelectProfessor  - CRUD: ClassItem
+- SelectRoom              - CRUD: ClassTime
+- SelectDay               - CRUD: ClassTime
+- SelectStartHour         - CRUD: ClassTime
+- SelectDuration          - CRUD: ClassTime
+*/
 
 function SelectYear({ outerYear, setOuterYear }) {
   function findYearObject(year) {
@@ -271,11 +292,8 @@ function SelectExpectedSemester({
 
 function SelectSubject({ outerSubject, setOuterSubject }) {
   function findSubjectObject(subject) {
-    // console.log("findSubjectObject", subject);
-    let subjectObject = sqlDataFromJson.subjects.find(
-      (iterSubject) => iterSubject?.id == subject?.id
-    );
-    // console.log("foundSubjectObject", subjectObject);
+    const subjectsList = sqlDataFromJson.subjects;
+    const subjectObject = getItemFromListById(subject, subjectsList);
     return subjectObject ? subjectObject : null;
   }
 
@@ -305,9 +323,8 @@ function SelectSubject({ outerSubject, setOuterSubject }) {
 
 function DefaultSelectProfessor({ outerProfessor, setOuterProfessor }) {
   function findProfessorObject(professor) {
-    let professorObject = sqlDataFromJson.professors.find(
-      (iterProfessor) => iterProfessor?.id == professor?.id
-    );
+    const professorsList = sqlDataFromJson.professors; // get from DB
+    const professorObject = getItemFromListById(professor, professorsList);
     return professorObject ? professorObject : null;
   }
 
@@ -333,157 +350,105 @@ function DefaultSelectProfessor({ outerProfessor, setOuterProfessor }) {
   return <DefaultSelect {...SelectProfessorStates} />;
 }
 
-/* \ Classes / */
+function SelectRoom({ outerRoom, setOuterRoom }) {
+  function findRoomObject(room) {
+    const roomsList = sqlDataFromJson.salas;
+    const roomObject = getItemFromListById(room, roomsList);
+    return roomObject ?? null;
+  }
 
-function SelectClassItem(classStates) {
-  const { classes, setClasses, classItem, setClassItem } = classStates;
-
-  const SelectClassItemStates = {
-    placeHolderText: "Selecione uma turma",
-    isClearable: false,
-    options: classes,
-    setOuterValue: setClassItem,
-    value: classItem,
+  const SelectRoomStates = {
+    placeHolderText: "Sala",
+    isClearable: true,
+    options: sqlDataFromJson.salas,
+    setOuterValue: setOuterRoom,
+    value: outerRoom,
+    findCorrectObject: findRoomObject,
     customProps: {
-      getOptionValue: (classItem) =>
-        `id: ${classItem?.id ?? classItem?.idTurma}`,
-      getOptionLabel: ({ ano, semestre, disciplina, professor }) => {
+      getOptionValue: (room) => room.id,
+      getOptionLabel: ({ capacidade, bloco, codigo }) =>
+        `${capacidade} - ${bloco} - ${codigo}`,
+      formatOptionLabel: ({ capacidade, bloco, codigo }, { context }) => {
+        const isOpened = context === "value";
         let message = "";
-        message += `${ano}.${semestre} - `;
-        message += `${disciplina?.apelido ?? "disc. indef."} - `;
-        message += `${professor?.apelido ?? "prof. indef."}`;
-        return message;
-      },
-      formatOptionLabel: (
-        { id, idTurma, ano, semestre, disciplina, professor },
-        { context }
-      ) => {
-        let message = "";
-        message += `(id: ${id ?? idTurma}) `;
-        message += `${ano}.${semestre} - `;
-        message += `${disciplina?.apelido ?? "disc. indef."} - `;
-        message += `${professor?.apelido ?? "prof. indef."}`;
+        message += capacidade ? `(${capacidade})` : "(Cap. indef.)";
+        message += bloco ? ` ${bloco}` : "(Bloco indef.)";
+        message += codigo ? ` - ${codigo}` : " (Cod. indef.)";
         return message;
       },
     },
   };
 
-  return <DefaultSelect {...SelectClassItemStates} />;
+  return <DefaultSelect {...SelectRoomStates} />;
 }
 
-function SelectClassYear(classStates) {
-  const { classes, setClasses, classItem, setClassItem } = classStates;
-
-  function updateClassYear(newYear) {
-    let newClass = { ...classItem, ano: newYear?.value ?? null };
-    setClassItem(newClass);
-    // let newClasses = updateClassFromList(classes, newClass);
-    // setClasses(newClasses);
+function SelectDay({ outerDay, setOuterDay }) {
+  function findDayObject(day) {
+    const daysList = options.constantValues.days;
+    const dayObject = daysList.find((iterDay) => iterDay?.value == day);
+    return dayObject ?? null;
   }
 
-  let yearStates = {
-    outerYear: classItem.ano,
-    setOuterYear: updateClassYear,
+  const SelectDayStates = {
+    placeHolderText: "Dia",
+    isClearable: true,
+    value: outerDay,
+    setOuterValue: setOuterDay,
+    options: options.constantValues.days,
+    findCorrectObject: findDayObject,
   };
 
-  return <SelectYear {...yearStates} />;
+  return <DefaultSelect {...SelectDayStates} />;
 }
 
-function SelectClassSemester(classStates) {
-  const { classes, setClasses, classItem, setClassItem } = classStates;
-
-  function updateClassSemester(newSemester) {
-    let newClass = { ...classItem, semestre: newSemester?.value ?? null };
-    setClassItem(newClass);
-    // let newClasses = updateClassFromList(classes, newClass);
-    // setClasses(newClasses);
+function SelectStartHour({ outerStartHour, setOuterStartHour }) {
+  function findHourObject(hour) {
+    const hoursList = options.constantValues.hours;
+    const hourObject = hoursList.find((iterHour) => iterHour?.hora == hour);
+    return hourObject ?? null;
   }
 
-  let semesterStates = {
-    outerSemester: classItem.semestre,
-    setOuterSemester: updateClassSemester,
+  const SelectStartHourStates = {
+    placeHolderText: "Hora",
+    isClearable: true,
+    value: outerStartHour,
+    setOuterValue: setOuterStartHour,
+    options: options.constantValues.hours,
+    findCorrectObject: findHourObject,
+    customProps: {
+      getOptionValue: (hour) => hour.hora,
+      getOptionLabel: ({ hora, turno }) => `${hora} (${turno})`,
+      formatOptionLabel: ({ hora, turno }, { context }) => {
+        const isOpened = context === "value";
+        let message = isOpened ? `${hora}` : `${hora} (${turno})`;
+        return message;
+      },
+    },
   };
 
-  return <SelectSemester {...semesterStates} />;
+  return <DefaultSelect {...SelectStartHourStates} />;
 }
 
-function SelectClassSubject(classStates) {
-  const { classes, setClasses, classItem, setClassItem } = classStates;
-
-  function updateClassSubject(newSubject) {
-    let newClass = { ...classItem, disciplina: newSubject ?? null };
-    setClassItem(newClass);
-    console.log("updateClassSubject -> It's updating");
-    // let newClasses = updateClassFromList(classes, newClass);
-    // setClasses(newClasses);
-  }
-
-  let subjectStates = {
-    outerSubject: classItem.disciplina,
-    setOuterSubject: updateClassSubject,
-  };
-
-  // console.log("SelectClassSubject", classItem?.disciplina?.apelido);
-
-  return <SelectSubject {...subjectStates} />;
-}
-
-function SelectClassProfessor(classStates) {
-  const { classes, setClasses, classItem, setClassItem } = classStates;
-
-  function updateClassProfessor(newProfessor) {
-    let newClass = { ...classItem, professor: newProfessor ?? null };
-    setClassItem(newClass);
-    // let newClasses = updateClassFromList(classes, newClass);
-    // setClasses(newClasses);
-  }
-
-  let professorStates = {
-    outerProfessor: classItem.professor,
-    setOuterProfessor: updateClassProfessor,
-  };
-
-  return <DefaultSelectProfessor {...professorStates} />;
-}
-
-/* \ Others: I'm not even sure if are still used / */
-
-function SelectPeriodoEsperado(myDisciplinasStates) {
-  const { /* disciplinas, setDisciplinas, */ disciplina, setDisciplina } =
-    myDisciplinasStates;
-  let periodos = options.constantValues.expectedSemester;
-  function findPeriodo(periodoValue) {
-    let periodoSelecionado = periodos.find(
-      (periodo) => periodo.value === periodoValue
+function SelectDuration({ outerDuration, setOuterDuration }) {
+  function findDurationObject(duration) {
+    const durationsList = options.constantValues.durations;
+    const durationObject = durationsList.find(
+      (iterDuration) => iterDuration?.value == duration
     );
-    return periodoSelecionado;
-  }
-  const [periodo, setPeriodo] = useState(findPeriodo(disciplina.periodo));
-
-  useEffect(() => {
-    setPeriodo(findPeriodo(disciplina.periodo));
-  }, [disciplina.periodo]);
-
-  function outerUpdate(newPeriodo) {
-    setPeriodo(newPeriodo);
-    let novaDisciplina = { ...disciplina };
-    novaDisciplina.periodo = newPeriodo.value;
-    setDisciplina(novaDisciplina);
+    return durationObject ?? null;
   }
 
-  return (
-    <Select
-      placeholder="Período Esperado"
-      className="mySelectList"
-      styles={styleWidthFix}
-      isClearable={false}
-      options={periodos}
-      value={periodo}
-      onChange={outerUpdate}
-    />
-  );
+  const SelectDurationStates = {
+    placeHolderText: "Duração",
+    isClearable: true,
+    value: outerDuration,
+    setOuterValue: setOuterDuration,
+    options: options.constantValues.durations,
+    findCorrectObject: findDurationObject,
+  };
+
+  return <DefaultSelect {...SelectDurationStates} />;
 }
-/* / Are they used? \ */
 
 /* \/ \/ \/ \/ \/ \/ \/ \/ MULTITURMAS \/ \/ \/ \/ \/ \/ \/ \/ */
 
@@ -946,6 +911,213 @@ function SelectFilterExpectedSemester(outerExpectedSemesterStates) {
 
 /* \\ CRUD // */
 
+/* \ ClassTimes / */
+
+function SelectClassTimeRoom(classTimeStates) {
+  const { classes, setClasses, classItem, setClassItem, classTime } =
+    classTimeStates;
+
+  function updateClassTimeRoom(newRoom) {
+    const newClassTime = { ...classTime, sala: newRoom ?? null };
+    const classTimes = classItem.horarios;
+    const newClassTimes = replaceNewItemInListById(newClassTime, classTimes);
+    const newClassItem = { ...classItem, horarios: newClassTimes };
+    setClassItem(newClassItem);
+    const newClasses = replaceNewItemInListById(newClassItem, classes);
+    setClasses(newClasses);
+  }
+
+  const roomStates = {
+    outerRoom: classTime.sala,
+    setOuterRoom: updateClassTimeRoom,
+  };
+
+  return <SelectRoom {...roomStates} />;
+}
+
+function SelectClassTimeDay(classTimeStates) {
+  const { classes, setClasses, classItem, setClassItem, classTime } =
+    classTimeStates;
+
+  function updateClassTimeDay(newDay) {
+    console.log("updateClassTimeDay", newDay);
+    const newClassTime = { ...classTime, dia: newDay?.value ?? null };
+    const classTimes = classItem.horarios;
+    const newClassTimes = replaceNewItemInListById(newClassTime, classTimes);
+    const newClassItem = { ...classItem, horarios: newClassTimes };
+    setClassItem(newClassItem);
+    const newClasses = replaceNewItemInListById(newClassItem, classes);
+    setClasses(newClasses);
+  }
+
+  const dayStates = {
+    outerDay: classTime.dia,
+    setOuterDay: updateClassTimeDay,
+  };
+
+  return <SelectDay {...dayStates} />;
+}
+
+function SelectClassTimeStartHour(classTimeStates) {
+  const { classes, setClasses, classItem, setClassItem, classTime } =
+    classTimeStates;
+
+  function updateClassTimeStartHour(newStartHour) {
+    const newClassTime = {
+      ...classTime,
+      horaInicio: newStartHour?.value ?? null,
+    };
+    const classTimes = classItem.horarios;
+    const newClassTimes = replaceNewItemInListById(newClassTime, classTimes);
+    const newClassItem = { ...classItem, horarios: newClassTimes };
+    setClassItem(newClassItem);
+    const newClasses = replaceNewItemInListById(newClassItem, classes);
+    setClasses(newClasses);
+  }
+
+  const startHourStates = {
+    outerStartHour: classTime.horaInicio,
+    setOuterStartHour: updateClassTimeStartHour,
+  };
+
+  return <SelectStartHour {...startHourStates} />;
+}
+
+function SelectClassTimeDuration(classTimeStates) {
+  const { classes, setClasses, classItem, setClassItem, classTime } =
+    classTimeStates;
+
+  function updateClassTimeDuration(newDuration) {
+    const newClassTime = { ...classTime, duracao: newDuration?.value ?? null };
+    const classTimes = classItem.horarios;
+    const newClassTimes = replaceNewItemInListById(newClassTime, classTimes);
+    const newClassItem = { ...classItem, horarios: newClassTimes };
+    setClassItem(newClassItem);
+    const newClasses = replaceNewItemInListById(newClassItem, classes);
+    setClasses(newClasses);
+  }
+
+  const durationStates = {
+    outerDuration: classTime.duracao,
+    setOuterDuration: updateClassTimeDuration,
+  };
+
+  return <SelectDuration {...durationStates} />;
+}
+
+/* \ Classes / */
+
+function SelectClassItem(classStates) {
+  const { classes, setClasses, classItem, setClassItem } = classStates;
+
+  const SelectClassItemStates = {
+    placeHolderText: "Selecione uma turma",
+    isClearable: false,
+    options: classes,
+    setOuterValue: setClassItem,
+    value: classItem,
+    customProps: {
+      getOptionValue: (classItem) =>
+        `id: ${classItem?.id ?? classItem?.idTurma}`,
+      getOptionLabel: ({ ano, semestre, disciplina, professor }) => {
+        let message = "";
+        message += `${ano}.${semestre} - `;
+        message += `${disciplina?.apelido ?? "disc. indef."} - `;
+        message += `${professor?.apelido ?? "prof. indef."}`;
+        return message;
+      },
+      formatOptionLabel: (
+        { id, idTurma, ano, semestre, disciplina, professor },
+        { context }
+      ) => {
+        let message = "";
+        message += `(id: ${id ?? idTurma}) `;
+        message += `${ano}.${semestre} - `;
+        message += `${disciplina?.apelido ?? "disc. indef."} - `;
+        message += `${professor?.apelido ?? "prof. indef."}`;
+        return message;
+      },
+    },
+  };
+
+  return <DefaultSelect {...SelectClassItemStates} />;
+}
+
+function SelectClassYear(classStates) {
+  const { classes, setClasses, classItem, setClassItem } = classStates;
+
+  function updateClassYear(newYear) {
+    let newClass = { ...classItem, ano: newYear?.value ?? null };
+    setClassItem(newClass);
+    // let newClasses = updateClassFromList(classes, newClass);
+    // setClasses(newClasses);
+  }
+
+  let yearStates = {
+    outerYear: classItem.ano,
+    setOuterYear: updateClassYear,
+  };
+
+  return <SelectYear {...yearStates} />;
+}
+
+function SelectClassSemester(classStates) {
+  const { classes, setClasses, classItem, setClassItem } = classStates;
+
+  function updateClassSemester(newSemester) {
+    let newClass = { ...classItem, semestre: newSemester?.value ?? null };
+    setClassItem(newClass);
+    // let newClasses = updateClassFromList(classes, newClass);
+    // setClasses(newClasses);
+  }
+
+  let semesterStates = {
+    outerSemester: classItem.semestre,
+    setOuterSemester: updateClassSemester,
+  };
+
+  return <SelectSemester {...semesterStates} />;
+}
+
+function SelectClassSubject(classStates) {
+  const { classes, setClasses, classItem, setClassItem } = classStates;
+
+  function updateClassSubject(newSubject) {
+    let newClass = { ...classItem, disciplina: newSubject ?? null };
+    setClassItem(newClass);
+    console.log("updateClassSubject -> It's updating");
+    // let newClasses = updateClassFromList(classes, newClass);
+    // setClasses(newClasses);
+  }
+
+  let subjectStates = {
+    outerSubject: classItem.disciplina,
+    setOuterSubject: updateClassSubject,
+  };
+
+  // console.log("SelectClassSubject", classItem?.disciplina?.apelido);
+
+  return <SelectSubject {...subjectStates} />;
+}
+
+function SelectClassProfessor(classStates) {
+  const { classes, setClasses, classItem, setClassItem } = classStates;
+
+  function updateClassProfessor(newProfessor) {
+    let newClass = { ...classItem, professor: newProfessor ?? null };
+    setClassItem(newClass);
+    // let newClasses = updateClassFromList(classes, newClass);
+    // setClasses(newClasses);
+  }
+
+  let professorStates = {
+    outerProfessor: classItem.professor,
+    setOuterProfessor: updateClassProfessor,
+  };
+
+  return <DefaultSelectProfessor {...professorStates} />;
+}
+
 /* \ Professors / */
 
 function SelectProfessorItem(professorStates) {
@@ -1166,6 +1338,7 @@ export {
   /* Multiturmas (MTT) */
   SelectAno,
   SelectSemestre,
+  SelectAnoSemestre,
   SelectProfessor,
   SelectDisciplina,
 
@@ -1182,16 +1355,17 @@ export {
   SelectFilterRoom,
   SelectFilterExpectedSemester,
 
-  /* Outros */
-  SelectPeriodoEsperado,
-  SelectAnoSemestre,
   /* \\ CRUD // */
 
-  /* \ Classes / */
-  // TurmaItemSelection,
+  /* \ ClassTimes / */
+  SelectClassTimeRoom,
+  SelectClassTimeDay,
+  SelectClassTimeStartHour,
+  SelectClassTimeDuration,
+
+  /* \ ClassItem / */
   SelectClassItem,
   SelectClassYear,
-  // SelectAnoTurma,
   SelectClassSemester,
   SelectClassSubject,
   SelectClassProfessor,

@@ -6,6 +6,11 @@ import {
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
 import options from "../../DB/local/options";
+import {
+  getItemIndexInListById,
+  removeItemInListById,
+  replaceNewItemInListById,
+} from "../auxCRUD";
 
 const itemName = "classTime";
 
@@ -37,11 +42,7 @@ function readClassTime(classTimeStates) {
   const { classTimes, setClassTimes, classTime, setClassTime } =
     classTimeStates;
   function getIndexFromCurrentClassTime(currentClassTime) {
-    /* percorra a lista de salas, encontre a sala que tenha o mesmo id, e retorne o índice dessa classTime */
-    const index = classTimes.findIndex(
-      (iterClassTime) =>
-        iterClassTime.idClassTime === currentClassTime.idClassTime
-    );
+    const index = getItemIndexInListById(currentClassTime, classTimes);
     return index == -1 ? 0 : index;
   }
   function insertNewClassTimesFromDB(dataFromDB) {
@@ -61,18 +62,8 @@ function updateClassTime(classTimeStates) {
   const { classTimes, setClassTimes, classTime, setClassTime } =
     classTimeStates;
 
-  function updateClassTimeFromList(oldArray, newClassTime) {
-    const newArray = oldArray.map((iterClassTime) => {
-      const idIterClassTime = iterClassTime?.id ?? iterClassTime?.idHorario;
-      const idNewClassTime = newClassTime?.id ?? newClassTime?.idHorario;
-      const hasSameId = idIterClassTime === idNewClassTime;
-      return hasSameId ? newClassTime : iterClassTime;
-    });
-    return newArray;
-  }
-
   function updateClassTimeFromDB() {
-    const updatedClassTimes = updateClassTimeFromList(classTimes, classTime);
+    const updatedClassTimes = replaceNewItemInListById(classTimes, classTime);
     setClassTimes(updatedClassTimes);
   }
 
@@ -85,18 +76,8 @@ function deleteClassTime(classTimeStates) {
   const { classTimes, setClassTimes, classTime, setClassTime } =
     classTimeStates;
 
-  function deleteClassTimeFromList(oldArray, newClassTime) {
-    const newArray = oldArray.filter((iterClassTime) => {
-      const idIterClassTime = iterClassTime?.id ?? iterClassTime?.idHorario;
-      const idNewClassTime = newClassTime?.id ?? newClassTime?.idHorario;
-      const hasSameId = idIterClassTime === idNewClassTime;
-      return !hasSameId;
-    });
-    return newArray;
-  }
-
   function deleteClassTimeFromDB() {
-    const updatedClassTimes = deleteClassTimeFromList(classTimes, classTime);
+    const updatedClassTimes = removeItemInListById(classTime, classTimes);
     setClassTimes(updatedClassTimes);
   }
 

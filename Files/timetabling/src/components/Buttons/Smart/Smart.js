@@ -12,14 +12,15 @@ import options from "../../../DB/local/options";
 import {
   createTurma,
   deleteTurma,
-  createHorario,
+  createClassTime,
   deleteHorario,
 } from "../../../helpers/hourclassMagic";
+import { getId } from "../../../helpers/auxCRUD";
 
-let compactBuild = options.config.iconButtons;
+const compactBuild = options.config.iconButtons;
 
 function SmartCreateTurma(myProps) {
-  let titleText = "Adicionar turma";
+  const titleText = "Adicionar turma";
   function addTurma() {
     createTurma(myProps);
   }
@@ -31,7 +32,7 @@ function SmartCreateTurma(myProps) {
 }
 
 function SmartDeleteTurma({ turmas, setTurmas, turma }) {
-  let titleText = `Remover turma ${turma.idTurma}`;
+  const titleText = `Remover turma ${turma.idTurma}`;
   function delTurma() {
     deleteTurma(turmas, setTurmas, turma);
   }
@@ -42,14 +43,14 @@ function SmartDeleteTurma({ turmas, setTurmas, turma }) {
   );
 }
 
-function SmartCreateHora(myProps) {
+function SmartCreateClassTime(classTimeStates) {
   /* Should receive these props:
-  const { turmas, setTurmas, rowTurma, setRowTurma, classTimeIndex } = turmasStates;
+  const { classes, setClasses, classItem, setClassItem, classTimeIndex } = classTimeStates;
   */
 
-  let titleText = "Adicionar horário";
+  const titleText = "Adicionar horário";
   function addHour() {
-    createHorario(myProps);
+    createClassTime(classTimeStates);
   }
   return compactBuild ? (
     <CreateHora createFunc={addHour} text={titleText} />
@@ -58,11 +59,14 @@ function SmartCreateHora(myProps) {
   );
 }
 
-function SmartDeleteHora(myProps) {
-  let titleText = `Remover horário ${myProps.idHorario} da turma ${myProps.turma.idTurma}`;
-  // console.log("SmartDeleteHora", horaIndex);
+function SmartDeleteClassTime(classTimeRowStates) {
+  const { classTime } = classTimeRowStates;
+  let titleText = `Remover  horário:\n`;
+  titleText += `  - idTurma ${classTime?.idTurma}\n`;
+  titleText += `  - idHorario: ${getId(classTime)}`;
+
   function removeHour() {
-    deleteHorario(myProps);
+    deleteHorario(classTimeRowStates);
   }
   return compactBuild ? (
     <DeleteHora deleteFunc={removeHour} text={titleText} />
@@ -73,7 +77,7 @@ function SmartDeleteHora(myProps) {
 
 function AddTurmaWithDisciplinaButton({ turmas, setTurmas, disciplina }) {
   function addTurmaWithDisciplina() {
-    let newTurma = {
+    const newTurma = {
       id: turmas.length + 1,
       disciplina: disciplina,
     };
@@ -90,7 +94,7 @@ function AddTurmaWithDisciplinaButton({ turmas, setTurmas, disciplina }) {
 export {
   SmartCreateTurma,
   SmartDeleteTurma,
-  SmartCreateHora,
-  SmartDeleteHora,
+  SmartCreateClassTime,
+  SmartDeleteClassTime,
   AddTurmaWithDisciplinaButton,
 };
