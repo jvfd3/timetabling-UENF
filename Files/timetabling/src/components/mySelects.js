@@ -965,7 +965,7 @@ function SelectClassTimeStartHour(classTimeStates) {
   function updateClassTimeStartHour(newStartHour) {
     const newClassTime = {
       ...classTime,
-      horaInicio: newStartHour?.value ?? null,
+      horaInicio: newStartHour?.hora ?? null,
     };
     const classTimes = classItem.horarios;
     const newClassTimes = replaceNewItemInListById(newClassTime, classTimes);
