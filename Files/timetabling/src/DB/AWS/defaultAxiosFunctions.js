@@ -3,8 +3,8 @@ import { toast } from "react-toastify";
 import options from "../local/options";
 
 const url = options.AWS.fullEndpoint;
-const debuggingLocal = ">newAxios.js";
-const isDebugging = true;
+const debuggingLocal = "newAxios.js>";
+const isDebugging = false;
 
 function getAxios() {
   function testing(itemToSend = null, itemName = null, action = "test") {
@@ -55,8 +55,8 @@ function defaultHandleError(error) {
 }
 
 function debugPayload(payload) {
-  const local = debuggingLocal + ">debugPayload";
-  isDebugging && console.log(`${local}>payload:`, payload);
+  const local = debuggingLocal + "debugPayload>";
+  console.log(`${local}payload: \n\n{\n\n`, payload, "\n\n}\n\n");
 }
 
 async function defaultDBCreate(itemName, itemToSend) {
@@ -117,7 +117,7 @@ async function defaultDBCreate(itemName, itemToSend) {
 
 async function defaultDBRead(itemName) {
   const action = "read";
-  const localMessage = `defaultDB${action}> ${itemName}`;
+  const localMessage = `defaultDB${action}_${itemName}>`;
   let toastMessages = {
     debug: [localMessage],
     pretty: `Ready for a ${itemName} ${action}ing journey?`,
@@ -135,7 +135,7 @@ async function defaultDBRead(itemName) {
       const statusCode = response.status;
       if (statusCode === 200) {
         //Everything is OK
-        const currentId = response.data.queryResult.insertId;
+        // const currentId = response.data.queryResult.insertId;
         const debugMessage = `${localMessage}>The ${itemName} was ${action}ed The data is: ${returnedData}`;
         const prettyMessage = `The ${itemName} was successfully ${action}ed!`;
         toastMessages.debug.push(debugMessage);

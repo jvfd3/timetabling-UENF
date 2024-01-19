@@ -12,16 +12,6 @@ Resources:
       - nodejs14.x
       - nodejs16.x
       - nodejs18.x
-  auxFunctionLayer:
-    Type: AWS::Serverless::LayerVersion
-    Properties:
-      LayerName: auxFunctionsSAM
-      Description: getPayload
-      ContentUri: ..\..\layers\auxFunctions
-      CompatibleRuntimes:
-      - nodejs14.x
-      - nodejs16.x
-      - nodejs18.x
   TimetablingAPI:
     Type: AWS::Serverless::Api
     Properties:
@@ -44,7 +34,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -71,7 +61,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -98,7 +88,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -125,7 +115,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -152,7 +142,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -179,7 +169,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -206,7 +196,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -233,7 +223,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -260,7 +250,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -287,7 +277,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -314,7 +304,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -341,7 +331,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -369,7 +359,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -397,7 +387,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -425,7 +415,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -453,7 +443,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -481,7 +471,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -509,7 +499,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -537,7 +527,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -565,7 +555,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -593,7 +583,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -621,7 +611,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -649,7 +639,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
@@ -677,7 +667,7 @@ Resources:
         Variables:
           DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_USER: tang
-          DB_PASSWORD: annabell
+          DB_PSWD: annabell
           DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer

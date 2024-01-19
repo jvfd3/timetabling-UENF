@@ -2,49 +2,53 @@ const mysql = require("mysql2/promise");
 
 let local = "db.js>";
 
-async function getDbConfig() {
+function getDbConfig() {
   const dbConfig = {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
+    password: process.env.DB_PSWD,
     database: process.env.DB_NAME,
   };
   return dbConfig;
 }
 
 async function createDbConnection() {
+  local += "createDbConnection>";
   try {
     const dbConfig = getDbConfig();
     return await mysql.createConnection(dbConfig);
   } catch (err) {
-    let error = new Error(["db.js>createDbConnection", err]);
+    const errorMessage = local + err;
+    const error = new Error(errorMessage);
     console.error(error);
     throw error;
   }
 }
 
 async function dbExecute(query, values = null) {
+  local += "dbExecute>";
   try {
     let dbConnection = await createDbConnection();
     let queryResult = await dbConnection.execute(query, values);
     await dbConnection.end();
     return queryResult;
   } catch (err) {
-    let error = new Error(["db.js>dbExecute", err]);
+    const errorMessage = local + err;
+    let error = new Error(errorMessage);
     console.error(error);
     throw error;
   }
 }
 
 async function checkExistance(checkQuery, idInList) {
-  local += ">checkExistance";
+  local += "checkExistance>";
   let message = local;
   try {
     const queryResult = await dbExecute(checkQuery, idInList);
     const rows = queryResult[0] ?? [];
     return rows.length > 0;
   } catch (error) {
-    message = `>Erro ao executar a {query: ${checkQuery}}`;
+    message += `Catch>Erro ao executar a {query: ${checkQuery}}`;
     console.error(message, error);
     return false;
   }
@@ -82,7 +86,7 @@ async function defaultCreate(query, queryValues, exists) {
   const action = "CREAT";
   const errorMessage = `>Error while ${action}ING`;
   const successMessage = `>Item ${action}ED successfully: ${queryValues}`;
-  local += ">default " + action + "E";
+  local += `default${action}E>`;
   let message = local;
   let queryResult = null;
   let localError = null;
@@ -115,7 +119,7 @@ async function defaultRead(query, queryValues, exists) {
   const action = "READ";
   const errorMessage = `>Error while ${action}ING`;
   const successMessage = `>Items ${action} successfully: `;
-  local += ">default " + action;
+  local += `default${action}>`;
   let message = local;
   let queryResult = null;
   let localError = null;
@@ -146,14 +150,14 @@ async function defaultRead(query, queryValues, exists) {
 
 async function defaultUpdate(query, queryValues, exists) {
   const action = "UPDAT";
-  local += `>default ${action}E`;
-  let message = local;
   const notFoundMessage =
     local + `>Exists?>Not found item with id ${queryValues[4]}.`;
   const successMessage =
     local +
     `>Item ${action}ED successfully: Item with id ${queryValues[4]} now has the values: ${queryValues}.`;
   const errorMessage = local + `>Error while ${action}ING`;
+  local += `default ${action}E>`;
+  let message = local;
   let queryResult = null;
   let localError = null;
   let statusCode = 404;
@@ -184,15 +188,15 @@ async function defaultUpdate(query, queryValues, exists) {
 }
 
 async function defaultDelete(query, queryValues, exists) {
-  let action = "DELET";
-  local += `>default ${action}E`;
-  let message = local;
+  const action = "DELET";
   const notFoundMessage =
     local + `>Exists?>Not found item with id ${queryValues[0]}.`;
   const successMessage =
     local +
     `>Item ${action}ED successfully: there is no more item with id ${queryValues[4]}.`;
   const errorMessage = local + `>Error while ${action}ING`;
+  local += `default ${action}E>`;
+  let message = local;
   let queryResult = null;
   let localError = null;
   let statusCode = 404;
