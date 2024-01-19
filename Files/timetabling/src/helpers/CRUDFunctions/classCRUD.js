@@ -30,8 +30,9 @@ function createClass({ classes, setClasses, classItem, setClassItem }) {
 
   function insertNewClass(newId) {
     const newClass = getNewClassItem(newId);
+    const newClasses = [...classes, newClass];
     setClassItem(newClass);
-    setClasses([...classes, newClass]);
+    setClasses(newClasses);
   }
   // insertNewClass(123);
   defaultDBCreate(itemName, classItem)
