@@ -9,8 +9,8 @@ import {
 function createTurma(myProps) {
   const { ano, semestre, turmas, setTurmas, classIndex, classTimeIndex } =
     myProps;
-  let blankTurma = options.emptyObjects.turma;
-  let blankHorario = options.emptyObjects.horario;
+  let blankTurma = options.emptyObjects.classItem;
+  let blankHorario = options.emptyObjects.classTime;
   let year = ano.value;
   let semester = semestre.value;
   blankHorario.duracao = 2;

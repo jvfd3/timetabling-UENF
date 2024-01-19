@@ -205,7 +205,7 @@ function splitTurmas(turmas) {
       });
     } else {
       let newTurma = {
-        ...options.emptyObjects.horario,
+        ...options.emptyObjects.classTime,
         /* when I do that, the idHorario is null and it shouldn't. Check it later. */
         ...turma,
       };

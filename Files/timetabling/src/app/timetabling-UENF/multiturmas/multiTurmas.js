@@ -447,8 +447,8 @@ function NotOfferedSubjects(props) {
     // console.log("subjects", subjects);
     let turmasToAdd = subjects.map((subject) => {
       classIndex.current += 1;
-      let blankClass = options.emptyObjects.turma;
-      let newTurma = {
+      const blankClass = options.emptyObjects.classItem;
+      const newTurma = {
         ...blankClass,
         idTurma: `${year}0${semester}-${classIndex.current}`,
         disciplina: subject,

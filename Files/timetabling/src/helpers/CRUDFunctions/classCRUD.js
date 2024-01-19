@@ -19,7 +19,7 @@ const itemName = "classData";
 function createClass({ classes, setClasses, classItem, setClassItem }) {
   function getNewClassItem(newId) {
     const newClass = {
-      ...options.emptyObjects.turma,
+      ...options.emptyObjects.classItem,
       ano: classItem.ano,
       semestre: classItem.semestre,
       id: newId,
@@ -85,7 +85,7 @@ function deleteClass({ classes, setClasses, classItem, setClassItem }) {
           "deleteClass: Não há mais classes para serem exibidas na lista"
         );
       }
-      // const newItem = options.emptyObjects.turma;
+      // const newItem = options.emptyObjects.classItem;
       setClassItem(newItem);
       setClasses(newItemList);
     }

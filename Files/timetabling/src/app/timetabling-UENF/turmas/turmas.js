@@ -91,7 +91,7 @@ function Classes() {
   // let defaultClasses = getFullHorarios();
 
   const defaultClassItem = {
-    ...options.emptyObjects.turma,
+    ...options.emptyObjects.classItem,
     id: classIndex.current,
     idTurma: classIndex.current,
   };

@@ -227,7 +227,8 @@ const options = {
     ],
   },
   emptyObjects: {
-    turma: {
+    classItem: {
+      id: null, //INT
       idTurma: null, //INT
       ano: null, //INT
       semestre: null, //INT
@@ -236,6 +237,17 @@ const options = {
       disciplina: null, //OBJ
       horarios: [], //ARRAY
     },
+    classTime: {
+      id: null, //INT
+      dia: null, //STR
+      duracao: null, //INT
+      horaInicio: null, //INT
+      idHorario: null, //INT
+      idTurma: null, //INT
+      ordem: null, //INT
+      sala: null, //OBJ
+    },
+    /* Items Below are still unused */
     professor: {
       apelido: null, //STR
       curso: null, //STR
@@ -243,44 +255,26 @@ const options = {
       laboratorio: null, //STR
       nome: null, //STR
     },
-    disciplina: {
+    subject: {
       apelido: null, //STR
       codigo: null, //INT
       id: null, //INT
       nome: null, //STR
       periodo: null, //INT
     },
-    horario: {
-      dia: null, //STR
-      duracao: null, //INT
-      horaInicio: null, //INT
-      idHorario: null, //INT
-      idTurma: null, //INT
-      ordem: null, //INT
-      sala: null, //OBJ
-    },
-    classTime: {
-      dia: null, //STR
-      duracao: null, //INT
-      horaInicio: null, //INT
-      idHorario: null, //INT
-      idTurma: null, //INT
-      ordem: null, //INT
-      sala: null, //OBJ
-    },
-    sala: {
+    room: {
       bloco: null, //STR
       capacidade: null, //INT
       codigo: null, //STR
       descricao: null, //STR
       id: null, //INT
     },
-    laboratorio: {
+    laboratory: {
       centro: null, //STR
       apelido: null, //STR
       nome: null, //STR
     },
-    cursos: {
+    courses: {
       apelido: null, //STR
       nome: null, //STR
     },
