@@ -16,7 +16,7 @@ function convertToList(classTime) {
     classTime?.duracao ?? null,
     classTime?.ordem ?? null,
     classTime?.idTurma ?? null,
-    classTime?.idSala ?? null,
+    classTime?.idSala ?? classTime?.sala?.id ?? null,
   ];
   isDebugging && console.log(local + ">{newValues: ", values, "}");
   return values;
