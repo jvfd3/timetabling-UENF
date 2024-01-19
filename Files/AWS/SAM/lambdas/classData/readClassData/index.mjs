@@ -61,6 +61,7 @@ function getQuery() {
             'horaInicio', h.horaInicio,\
             'duracao', h.duracao,\
             'ordem', h.ordem,\
+            'idTurma', h.idTurma,\
             'sala', JSON_OBJECT(\
               'id', s.id,\
               'capacidade', s.capacidade,\
