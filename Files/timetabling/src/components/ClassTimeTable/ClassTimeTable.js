@@ -11,6 +11,12 @@ import {
   SmartDeleteClassTime,
 } from "../Buttons/Smart/Smart";
 import { getId } from "../../helpers/auxCRUD";
+import {
+  createClassTime,
+  // readClassTime,
+  updateClassTime,
+  deleteClassTime,
+} from "../../helpers/CRUDFunctions/classTimeCRUD";
 
 function ClassTimeRow(classTimeRowStates) {
   /*
@@ -45,10 +51,29 @@ function ClassTimeRow(classTimeRowStates) {
 
 function ClassTimeTable(classTimeTableProps) {
   const { classesStates, indexes } = classTimeTableProps;
-  const { classItem, setClassItem } = classesStates;
-  const createClassTimeProps = { ...classesStates, ...indexes };
+  const { classItem, setClassItem, classes, setClasses } = classesStates;
 
-  const classTimes = classItem?.horarios ?? [];
+  // const classTimes = classItem?.horarios ?? [];
+  const [classTimes, setClassTimes] = useState(classItem?.horarios ?? []);
+
+  const createClassTimeProps = {
+    // ...classesStates,
+    // ...indexes,
+    // ...classTimeStates,
+    createClassTimeDB: () => createClassTime(classesStates),
+  };
+
+  console.log("ClassTimeTable", classTimes);
+
+  useEffect(() => {
+    setClassTimes(classItem?.horarios ?? []);
+  }, [classItem.horarios]);
+
+  // useEffect(() => {
+  //   const newClassItem = { ...classItem, horarios: classTimes };
+  //   setClassItem(newClassItem);
+  //   setClasses([...classes, newClassItem]);
+  // }, [classTimes]);
 
   return (
     <div className="showBasicDataCard">

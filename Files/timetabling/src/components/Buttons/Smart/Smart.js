@@ -32,7 +32,7 @@ function SmartCreateTurma(myProps) {
 }
 
 function SmartDeleteTurma({ turmas, setTurmas, turma }) {
-  const titleText = `Remover turma ${turma.idTurma}`;
+  const titleText = `Remover turma ${getId(turma)}`;
   function delTurma() {
     deleteTurma(turmas, setTurmas, turma);
   }
@@ -43,19 +43,17 @@ function SmartDeleteTurma({ turmas, setTurmas, turma }) {
   );
 }
 
-function SmartCreateClassTime(classTimeStates) {
+function SmartCreateClassTime(createClassTimeProps) {
   /* Should receive these props:
   const { classes, setClasses, classItem, setClassItem, classTimeIndex } = classTimeStates;
   */
-
+  const { createClassTimeDB } = createClassTimeProps;
   const titleText = "Adicionar horário";
-  function addHour() {
-    createClassTime(classTimeStates);
-  }
+
   return compactBuild ? (
-    <CreateHora createFunc={addHour} text={titleText} />
+    <CreateHora createFunc={createClassTimeDB} text={titleText} />
   ) : (
-    <CustomCreateButton createFunc={addHour} text={titleText} />
+    <CustomCreateButton createFunc={createClassTimeDB} text={titleText} />
   );
 }
 

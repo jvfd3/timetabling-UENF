@@ -7,6 +7,7 @@ import {
 } from "../../DB/AWS/defaultAxiosFunctions";
 import options from "../../DB/local/options";
 import {
+  getId,
   getItemIndexInListById,
   removeItemInListById,
   replaceNewItemInListById,
@@ -15,11 +16,17 @@ import {
 const itemName = "classTime";
 
 function createClassTime(classTimeStates) {
-  const { classTimes, setClassTimes, classTime, setClassTime } =
-    classTimeStates;
+  const { classes, setClasses, classItem, setClassItem } = classTimeStates;
+
+  const baseClassTime = {
+    ...options.emptyObjects.classTime,
+    idTurma: getId(classItem),
+    duracao: 2,
+  };
+
   function getNewClassTime(newId) {
     const newClassTime = {
-      ...options.emptyObjects.classTime,
+      ...baseClassTime,
       id: newId,
       idClassTime: newId,
       idHorario: newId,
@@ -29,11 +36,14 @@ function createClassTime(classTimeStates) {
 
   function insertNewClassTime(newId) {
     const newClassTime = getNewClassTime(newId);
-    setClassTime(newClassTime);
-    setClassTimes([...classTimes, newClassTime]);
+    const newClassTimes = [newClassTime, ...classItem.horarios];
+    const newClassItem = { ...classItem, horarios: newClassTimes };
+    const newClasses = replaceNewItemInListById(newClassItem, classes);
+    setClassItem(newClassItem);
+    setClasses(newClasses);
   }
 
-  defaultDBCreate(itemName, classTime)
+  defaultDBCreate(itemName, baseClassTime)
     .then(insertNewClassTime)
     .catch(defaultHandleError);
 }
