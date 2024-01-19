@@ -26,12 +26,21 @@ function ClassTimeRow(classTimeRowStates) {
     index,
   };
   */
+
+  const { classItem, classTime } = classTimeRowStates;
+
+  const deleteClassTimeProps = {
+    classTime,
+    classItem,
+    deleteClassTimeDB: () => deleteClassTime(classTimeRowStates),
+  };
+
   const { index, currentId } = classTimeRowStates;
 
   return (
     <tr key={`ClassTimeRow: ${currentId}-${index}`}>
       <td>
-        <SmartDeleteClassTime {...classTimeRowStates} />
+        <SmartDeleteClassTime {...deleteClassTimeProps} />
       </td>
       <td>
         <SelectClassTimeRoom {...classTimeRowStates} />
@@ -56,10 +65,13 @@ function ClassTimeTable(classTimeTableProps) {
   // const classTimes = classItem?.horarios ?? [];
   const [classTimes, setClassTimes] = useState(classItem?.horarios ?? []);
 
+  const classTimesProps = {
+    ...classesStates,
+    ...indexes,
+  };
+
   const createClassTimeProps = {
-    // ...classesStates,
-    // ...indexes,
-    // ...classTimeStates,
+    classItem,
     createClassTimeDB: () => createClassTime(classesStates),
   };
 
@@ -97,7 +109,7 @@ function ClassTimeTable(classTimeTableProps) {
             {classTimes.map((iterClassTime, index) => {
               const currentId = getId(iterClassTime);
               const classTimeRowStates = {
-                ...createClassTimeProps,
+                ...classTimesProps,
                 classTime: iterClassTime,
                 index,
               };

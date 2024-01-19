@@ -40,7 +40,6 @@ function filterHour(classes, hour) {
     filteredClasses = generalFilter(classes, ["horaInicio"], hour);
   }
   // console.log("hour", hour);
-  // console.log("hourClasses", filteredClasses);
   return filteredClasses;
 }
 

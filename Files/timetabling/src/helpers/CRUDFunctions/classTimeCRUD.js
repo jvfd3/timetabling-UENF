@@ -83,12 +83,19 @@ function updateClassTime(classTimeStates) {
 }
 
 function deleteClassTime(classTimeStates) {
-  const { classTimes, setClassTimes, classTime, setClassTime } =
+  const { classes, setClasses, classItem, setClassItem, classTime } =
     classTimeStates;
 
-  function deleteClassTimeFromDB() {
-    const updatedClassTimes = removeItemInListById(classTime, classTimes);
-    setClassTimes(updatedClassTimes);
+  function deleteClassTimeFromDB(deletedClassTime) {
+    const classTimes = classItem?.horarios ?? [];
+    const updatedClassTimes = removeItemInListById(
+      deletedClassTime,
+      classTimes
+    );
+    const newClassItem = { ...classItem, horarios: updatedClassTimes };
+    const updatedClasses = replaceNewItemInListById(newClassItem, classes);
+    setClassItem(newClassItem);
+    setClasses(updatedClasses);
   }
 
   defaultDBDelete(itemName, classTime)

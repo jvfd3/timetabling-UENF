@@ -1,6 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import options from "../local/options";
+import { getId } from "../../helpers/auxCRUD";
 
 const url = options.AWS.fullEndpoint;
 const debuggingLocal = "newAxios.js>";
@@ -267,7 +268,9 @@ async function defaultDBDelete(itemName, itemToSend) {
         )}. The data is: ${itemToSend}. The response body is: ${JSON.stringify(
           body
         )}`;
-        const prettyMessage = `The ${itemName} was successfully ${action}ed!`;
+        const prettyMessage = `The ${itemName} (id: ${getId(
+          itemToSend
+        )}) was successfully ${action}ed!`;
         toastMessages.debug.push(debugMessage);
         toastMessages.pretty = prettyMessage;
         toastToUse = toast.success;

@@ -9,12 +9,6 @@ import {
   InputDisciplina,
 } from "../Dumb/Dumb";
 import options from "../../../DB/local/options";
-import {
-  createTurma,
-  deleteTurma,
-  createClassTime,
-  deleteHorario,
-} from "../../../helpers/hourclassMagic";
 import { getId } from "../../../helpers/auxCRUD";
 
 const compactBuild = options.config.iconButtons;
@@ -44,11 +38,9 @@ function SmartDeleteTurma({ turmas, setTurmas, turma }) {
 }
 
 function SmartCreateClassTime(createClassTimeProps) {
-  /* Should receive these props:
-  const { classes, setClasses, classItem, setClassItem, classTimeIndex } = classTimeStates;
-  */
-  const { createClassTimeDB } = createClassTimeProps;
-  const titleText = "Adicionar horário";
+  const { classItem, createClassTimeDB } = createClassTimeProps;
+
+  const titleText = `Adicionar horário à turma id: ${getId(classItem)}`;
 
   return compactBuild ? (
     <CreateHora createFunc={createClassTimeDB} text={titleText} />
@@ -57,19 +49,16 @@ function SmartCreateClassTime(createClassTimeProps) {
   );
 }
 
-function SmartDeleteClassTime(classTimeRowStates) {
-  const { classTime } = classTimeRowStates;
+function SmartDeleteClassTime(deleteClassTimeProps) {
+  const { classTime, deleteClassTimeDB } = deleteClassTimeProps;
   let titleText = `Remover  horário:\n`;
   titleText += `  - idTurma ${classTime?.idTurma}\n`;
   titleText += `  - idHorario: ${getId(classTime)}`;
 
-  function removeHour() {
-    deleteHorario(classTimeRowStates);
-  }
   return compactBuild ? (
-    <DeleteHora deleteFunc={removeHour} text={titleText} />
+    <DeleteHora deleteFunc={deleteClassTimeDB} text={titleText} />
   ) : (
-    <CustomDeleteButton deleteFunc={removeHour} text={titleText} />
+    <CustomDeleteButton deleteFunc={deleteClassTimeDB} text={titleText} />
   );
 }
 
