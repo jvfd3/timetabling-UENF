@@ -14,20 +14,29 @@ import {
 const itemName = "subject";
 
 function createSubject({ subjects, setSubjects, subject, setSubject }) {
-  function insertNewSubjectFromDB(newId) {
+  function getNewSubject(newId) {
     const newSubject = { ...subject, id: newId };
+    return newSubject;
+  }
+
+  function insertNewSubjectFromDB(newId) {
+    const newSubject = getNewSubject(newId);
     setSubject(newSubject);
     setSubjects([...subjects, newSubject]);
   }
+
   defaultDBCreate(itemName, subject)
     .then(insertNewSubjectFromDB)
     .catch(defaultHandleError);
 }
 
-function readSubject({ setSubjects, setSubject }) {
+function readSubject({ setSubjects, setSubject, subject }) {
   function insertNewSubjectsFromDB(subjectsFromDB) {
+    const index = getItemIndexInListById(subject, subjectsFromDB);
+    const keepCurrentSubject = subjectsFromDB?.[index];
     const lastSubject = subjectsFromDB[subjectsFromDB.length - 1];
-    setSubject(lastSubject);
+    const showedSubject = keepCurrentSubject ?? lastSubject;
+    setSubject(showedSubject);
     setSubjects(subjectsFromDB);
   }
 
@@ -51,7 +60,6 @@ function deleteSubject({ subjects, setSubjects, subject, setSubject }) {
   function deleteSubjectOnList(deletedSubject) {
     if (deletedSubject) {
       const updatedSubjects = removeItemInListById(deletedSubject, subjects);
-      setSubjects(updatedSubjects);
       const index = getItemIndexInListById(deletedSubject, subjects);
       let newSubject = null;
       if (index > 0) {
@@ -64,6 +72,7 @@ function deleteSubject({ subjects, setSubjects, subject, setSubject }) {
         );
       }
       setSubject(newSubject);
+      setSubjects(updatedSubjects);
     }
   }
 

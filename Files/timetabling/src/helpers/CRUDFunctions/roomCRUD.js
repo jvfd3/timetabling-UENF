@@ -14,8 +14,13 @@ import {
 const itemName = "room";
 
 function createRoom({ rooms, setRooms, room, setRoom }) {
-  function insertNewRoomFromDB(newId) {
+  function getNewRoom(newId) {
     const newRoom = { ...room, id: newId };
+    return newRoom;
+  }
+
+  function insertNewRoomFromDB(newId) {
+    const newRoom = getNewRoom(newId);
     setRoom(newRoom);
     setRooms([...rooms, newRoom]);
   }
@@ -25,10 +30,13 @@ function createRoom({ rooms, setRooms, room, setRoom }) {
     .catch(defaultHandleError);
 }
 
-function readRoom({ setRooms, setRoom }) {
+function readRoom({ setRooms, setRoom, room }) {
   function insertNewRoomsFromDB(roomsFromDB) {
+    const index = getItemIndexInListById(room, roomsFromDB);
+    const keepCurrentRoom = roomsFromDB?.[index];
     const lastRoom = roomsFromDB[roomsFromDB.length - 1];
-    setRoom(lastRoom);
+    const showedRoom = keepCurrentRoom ?? lastRoom;
+    setRoom(showedRoom);
     setRooms(roomsFromDB);
   }
 
@@ -49,9 +57,7 @@ function updateRoom({ rooms, setRooms, room }) {
 function deleteRoom({ rooms, setRooms, room, setRoom }) {
   function deleteRoomOnList(deletedRoom) {
     if (deletedRoom) {
-      let deletedRoomList = rooms;
-      deletedRoomList = removeItemInListById(deletedRoom, rooms);
-      setRooms(deletedRoomList);
+      const deletedRoomList = removeItemInListById(deletedRoom, rooms);
       const index = getItemIndexInListById(deletedRoom, rooms);
       let newRoom = null;
       if (index > 0) {
@@ -64,6 +70,7 @@ function deleteRoom({ rooms, setRooms, room, setRoom }) {
         );
       }
       setRoom(newRoom);
+      setRooms(deletedRoomList);
     }
   }
 

@@ -5,7 +5,6 @@ import {
   defaultDBDelete,
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
-import options from "../../DB/local/options";
 import {
   getId,
   getItemFromListById,
@@ -13,18 +12,24 @@ import {
   removeItemInListById,
   replaceNewItemInListById,
 } from "../auxCRUD";
+import options from "../../DB/local/options";
 
 const itemName = "classData";
 
 function createClass({ classes, setClasses, classItem, setClassItem }) {
-  function insertNewClass(newId) {
-    let newClass = {
+  function getNewClassItem(newId) {
+    const newClass = {
       ...options.emptyObjects.turma,
       ano: classItem.ano,
       semestre: classItem.semestre,
       id: newId,
       idTurma: newId,
     };
+    return newClass;
+  }
+
+  function insertNewClass(newId) {
+    const newClass = getNewClassItem(newId);
     setClassItem(newClass);
     setClasses([...classes, newClass]);
   }
@@ -34,20 +39,13 @@ function createClass({ classes, setClasses, classItem, setClassItem }) {
     .catch(defaultHandleError);
 }
 
-function readClass({ classes, setClasses, classItem, setClassItem }) {
+function readClass({ setClasses, classItem, setClassItem }) {
   function insertNewClassesFromDB(dataFromDB) {
-    function getIndexFromCurrentClass(currentClass) {
-      /* percorra a lista de salas, encontre a sala que tenha o mesmo id, e retorne o índice dessa classItem */
-      const index = classes.findIndex(
-        (iterClassItem) => iterClassItem.idTurma === currentClass.idTurma
-      );
-
-      return index == -1 ? 0 : index;
-    }
-    const index = getIndexFromCurrentClass(classItem);
+    const index = getItemIndexInListById(classItem, dataFromDB);
     const lastItem = dataFromDB[dataFromDB.length - 1];
-    const currentClass = dataFromDB?.[index] ?? lastItem;
-    setClassItem(currentClass);
+    const keepCurrentClass = dataFromDB?.[index];
+    const showedClass = keepCurrentClass ?? lastItem;
+    setClassItem(showedClass);
     setClasses(dataFromDB);
   }
 
@@ -72,42 +70,22 @@ function updateClass(classStates) {
     .catch(defaultHandleError);
 }
 
-function deleteClass(classStates) {
-  const { classes, setClasses, classItem, setClassItem } = classStates;
-
-  function findIndexFromList(list, idToFind) {
-    const index = getItemIndexInListById(idToFind, list);
-    return index;
-  }
-
-  function deleteItemOnList(itemToDelete, itemsToDeleteFrom = classes) {
-    if (itemToDelete) {
-      // let index = findIndexFromList(itemsToDeleteFrom, idToDelete);
-      const newItemList = removeItemInListById(itemToDelete, itemsToDeleteFrom);
-      // let newItem = null;
-
-      /*
-      [0, 1]
-      [A, B] OLD
-      [B] CASO 1
-      [A] CASO 2
-
-      [0]
-      [A] OLD
-      [] CASO 1
-      */
-
-      // console.log("index1", index);
-      // index = index > newItemList.length - 1 ? newItemList.length : index;
-      // console.log("index2", index);
-      // index = index < 0 ? null : index;
-      // console.log("index3", index);
-      // if (index == null) {
-      //  newItem = options.emptyObjects.turma;
-      // } else {
-      //   newItem = newItemList[index];
-      // }
-      const newItem = options.emptyObjects.turma;
+function deleteClass({ classes, setClasses, classItem, setClassItem }) {
+  function deleteClassOnList(classToDelete) {
+    if (classToDelete) {
+      const filteredClasses = removeItemInListById(classToDelete, classes);
+      const index = getItemIndexInListById(classToDelete, classes);
+      let newItem = null;
+      if (index > 0) {
+        newItem = classes[index - 1];
+      } else if (filteredClasses.length > 0) {
+        newItem = classes[0];
+      } else {
+        console.error(
+          "deleteClass: Não há mais classes para serem exibidas na lista"
+        );
+      }
+      // const newItem = options.emptyObjects.turma;
       setClassItem(newItem);
       setClasses(newItemList);
     }
@@ -116,7 +94,7 @@ function deleteClass(classStates) {
   // deleteItemOnList(classItem, classes);
   classItem.id = classItem.idTurma;
   defaultDBDelete(itemName, classItem)
-    .then(deleteItemOnList)
+    .then(deleteClassOnList)
     .catch(defaultHandleError);
 }
 

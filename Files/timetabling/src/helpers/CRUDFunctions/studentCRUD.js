@@ -14,8 +14,13 @@ import {
 const itemName = "student";
 
 function createStudent({ students, setStudents, student, setStudent }) {
-  function insertNewStudentFromDB(newId) {
+  function getNewStudent(newId) {
     const newStudent = { ...student, id: newId };
+    return newStudent;
+  }
+
+  function insertNewStudentFromDB(newId) {
+    const newStudent = getNewStudent(newId);
     setStudent(newStudent);
     setStudents([...students, newStudent]);
   }
@@ -25,10 +30,13 @@ function createStudent({ students, setStudents, student, setStudent }) {
     .catch(defaultHandleError);
 }
 
-function readStudent({ setStudents, setStudent }) {
+function readStudent({ setStudents, setStudent, student }) {
   function insertNewStudentsFromDB(studentsFromDB) {
+    const index = getItemIndexInListById(student, studentsFromDB);
+    const keepCurrentStudent = studentsFromDB?.[index];
     const lastStudent = studentsFromDB[studentsFromDB.length - 1];
-    setStudent(lastStudent);
+    const showedStudent = keepCurrentStudent ?? lastStudent;
+    setStudent(showedStudent);
     setStudents(studentsFromDB);
   }
 
@@ -52,7 +60,6 @@ function deleteStudent({ students, setStudents, student, setStudent }) {
   function deleteStudentOnList(deletedStudent) {
     if (deletedStudent) {
       const updatedStudents = removeItemInListById(deletedStudent, students);
-
       const index = getItemIndexInListById(deletedStudent, students);
       let newStudent = null;
       if (index > 0) {

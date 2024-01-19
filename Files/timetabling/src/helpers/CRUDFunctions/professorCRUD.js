@@ -29,10 +29,13 @@ function createProfessor({
     .catch(defaultHandleError);
 }
 
-function readProfessor({ setProfessors, setProfessor }) {
+function readProfessor({ setProfessors, setProfessor, professor }) {
   function insertNewProfessorsFromDB(professoresFromDB) {
+    const index = getItemIndexInListById(professor, professoresFromDB);
+    const keepCurrentProfessor = professoresFromDB?.[index];
     const lastProfessor = professoresFromDB[professoresFromDB.length - 1];
-    setProfessor(lastProfessor);
+    const showedProfessor = keepCurrentProfessor ?? lastProfessor;
+    setProfessor(showedProfessor);
     setProfessors(professoresFromDB);
   }
 
