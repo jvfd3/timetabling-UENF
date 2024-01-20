@@ -78,7 +78,6 @@ function updateClassTime(classTimeStates) {
     );
     const newClassItem = { ...classItem, horarios: updatedClassTimes };
     const updatedClasses = replaceNewItemInListById(newClassItem, classes);
-    console.log("UUUUUPDATED WITH VALUES: ", newClassTime);
     setClassItem(newClassItem);
     setClasses(updatedClasses);
   }
