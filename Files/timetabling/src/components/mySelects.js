@@ -922,8 +922,8 @@ function SelectClassTimeRoom(classTimeStates) {
     const classTimes = classItem.horarios;
     const newClassTimes = replaceNewItemInListById(newClassTime, classTimes);
     const newClassItem = { ...classItem, horarios: newClassTimes };
-    setClassItem(newClassItem);
     const newClasses = replaceNewItemInListById(newClassItem, classes);
+    setClassItem(newClassItem);
     setClasses(newClasses);
   }
 
@@ -940,7 +940,6 @@ function SelectClassTimeDay(classTimeStates) {
     classTimeStates;
 
   function updateClassTimeDay(newDay) {
-    console.log("updateClassTimeDay", newDay);
     const newClassTime = { ...classTime, dia: newDay?.value ?? null };
     const classTimes = classItem.horarios;
     const newClassTimes = replaceNewItemInListById(newClassTime, classTimes);
@@ -1085,7 +1084,7 @@ function SelectClassSubject(classStates) {
   function updateClassSubject(newSubject) {
     let newClass = { ...classItem, disciplina: newSubject ?? null };
     setClassItem(newClass);
-    console.log("updateClassSubject -> It's updating");
+    // console.log("updateClassSubject -> It's updating");
     // let newClasses = updateClassFromList(classes, newClass);
     // setClasses(newClasses);
   }
@@ -1182,13 +1181,13 @@ function SelectProfessorCourse({
   setProfessor,
 }) {
   function updateProfessorCourse(newCourse) {
-    let newProfessor = { ...professor, curso: newCourse?.apelido ?? null };
+    const newProfessor = { ...professor, curso: newCourse?.apelido ?? null };
     setProfessor(newProfessor);
-    // let newProfessors = updateProfessorFromList(professors, newProfessor);
+    // const newProfessors = updateProfessorFromList(professors, newProfessor);
     // setProfessors(newProfessors);
   }
 
-  let courseStates = {
+  const courseStates = {
     outerCourse: professor.curso,
     setOuterCourse: updateProfessorCourse,
   };

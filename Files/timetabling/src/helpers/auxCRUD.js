@@ -6,9 +6,9 @@
 function getId(item) {
   const id =
     item?.id ?? item?.idHorario ?? item?.idTurma ?? item?.idClassTime ?? null;
-  if (id === null) {
-    console.log("No id found:", item);
-  }
+  // if (id === null) {
+  //   console.log("No id found:", item);
+  // }
   return id;
 }
 

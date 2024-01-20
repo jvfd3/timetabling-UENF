@@ -240,12 +240,11 @@ const options = {
     classTime: {
       id: null, //INT
       dia: null, //STR
-      duracao: null, //INT
-      horaInicio: null, //INT
-      idHorario: null, //INT
-      idTurma: null, //INT
-      ordem: null, //INT
       sala: null, //OBJ
+      ordem: null, //INT
+      duracao: null, //INT
+      idTurma: null, //INT
+      horaInicio: null, //INT
     },
     /* Items Below are still unused */
     professor: {

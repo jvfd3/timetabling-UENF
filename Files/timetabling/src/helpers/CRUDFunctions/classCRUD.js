@@ -64,8 +64,6 @@ function updateClass(classStates) {
     setClasses(updatedClasses);
   }
 
-  // updateClassOnList(classItem);
-  console.log("updateClass: Atualizei prusinhô");
   defaultDBUpdate(itemName, classItem)
     .then(updateClassOnList)
     .catch(defaultHandleError);

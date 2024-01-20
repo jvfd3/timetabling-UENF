@@ -4,6 +4,7 @@ import {
   BsDatabaseDown as ReadDBIcon,
 } from "react-icons/bs";
 import {
+  MdOutlineUpdate as UpdateClassTimeIcon, // Circle arrow with clock hands
   MdAddCircleOutline as CreateInfoIcon, // Plus sign with circle around it
   MdRefresh as ReadInfoIcon, // Two arrows in a circle
   MdEdit as UpdateInfoIcon, // Pencil
@@ -109,6 +110,17 @@ function CreateHora({ createFunc, text = "Create", size = "2em" }) {
   );
 }
 
+function UpdateClassTime({ updateFunc, text = "Update", size = "2em" }) {
+  return (
+    <UpdateClassTimeIcon
+      className="iconUpdate"
+      onClick={updateFunc}
+      title={text}
+      size={size}
+    />
+  );
+}
+
 function DeleteHora({ deleteFunc, text = "Delete", size = "2em" }) {
   return (
     <DeleteHoraIcon
@@ -172,6 +184,7 @@ function CustomDeleteButton({ deleteFunc, text = "Delete" }) {
 }
 
 export {
+  UpdateClassTime,
   CreateDBButton,
   ReadDBButton,
   CreateInfo,

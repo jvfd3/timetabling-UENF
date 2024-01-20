@@ -34,7 +34,7 @@ function createClassTime(classTimeStates) {
 
   function insertNewClassTime(newId) {
     const newClassTime = getNewClassTime(newId);
-    const newClassTimes = [newClassTime, ...classItem.horarios];
+    const newClassTimes = [...classItem.horarios, newClassTime];
     const newClassItem = { ...classItem, horarios: newClassTimes };
     const newClasses = replaceNewItemInListById(newClassItem, classes);
     setClassItem(newClassItem);
@@ -67,13 +67,23 @@ function readClassTime(classTimeStates) {
 }
 
 function updateClassTime(classTimeStates) {
-  const { classTimes, setClassTimes, classTime, setClassTime } =
+  const { classes, setClasses, classItem, setClassItem, classTime } =
     classTimeStates;
 
-  function updateClassTimeFromDB() {
-    const updatedClassTimes = replaceNewItemInListById(classTimes, classTime);
-    setClassTimes(updatedClassTimes);
+  function updateClassTimeFromDB(newClassTime) {
+    const classTimes = classItem?.horarios ?? [];
+    const updatedClassTimes = replaceNewItemInListById(
+      newClassTime,
+      classTimes
+    );
+    const newClassItem = { ...classItem, horarios: updatedClassTimes };
+    const updatedClasses = replaceNewItemInListById(newClassItem, classes);
+    console.log("UUUUUPDATED WITH VALUES: ", newClassTime);
+    setClassItem(newClassItem);
+    setClasses(updatedClasses);
   }
+
+  // updateClassTimeFromDB(classTime);
 
   defaultDBUpdate(itemName, classTime)
     .then(updateClassTimeFromDB)

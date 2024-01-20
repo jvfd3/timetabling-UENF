@@ -9,6 +9,7 @@ import {
 import {
   SmartCreateClassTime,
   SmartDeleteClassTime,
+  SmartUpdateClassTime,
 } from "../Buttons/Smart/Smart";
 import { getId } from "../../helpers/auxCRUD";
 import {
@@ -19,28 +20,25 @@ import {
 } from "../../helpers/CRUDFunctions/classTimeCRUD";
 
 function ClassTimeRow(classTimeRowStates) {
-  /*
-  const classTimeRowStates = {
-    ...createClassTimeProps,
-    classTime: iterClassTime,
-    index,
-  };
-  */
-
-  const { classItem, classTime } = classTimeRowStates;
-
+  const { classItem, classTime, index } = classTimeRowStates;
+  const currentId = getId(classTime);
   const deleteClassTimeProps = {
     classTime,
     classItem,
     deleteClassTimeDB: () => deleteClassTime(classTimeRowStates),
   };
 
-  const { index, currentId } = classTimeRowStates;
+  const updateClassTimeProps = {
+    classTime,
+    classItem,
+    updateClassTimeDB: () => updateClassTime(classTimeRowStates),
+  };
 
   return (
     <tr key={`ClassTimeRow: ${currentId}-${index}`}>
       <td>
         <SmartDeleteClassTime {...deleteClassTimeProps} />
+        <SmartUpdateClassTime {...updateClassTimeProps} />
       </td>
       <td>
         <SelectClassTimeRoom {...classTimeRowStates} />
@@ -59,33 +57,22 @@ function ClassTimeRow(classTimeRowStates) {
 }
 
 function ClassTimeTable(classTimeTableProps) {
-  const { classesStates, indexes } = classTimeTableProps;
-  const { classItem, setClassItem, classes, setClasses } = classesStates;
+  const { classesStates } = classTimeTableProps;
+  const { classItem } = classesStates;
 
   // const classTimes = classItem?.horarios ?? [];
   const [classTimes, setClassTimes] = useState(classItem?.horarios ?? []);
-
-  const classTimesProps = {
-    ...classesStates,
-    ...indexes,
-  };
 
   const createClassTimeProps = {
     classItem,
     createClassTimeDB: () => createClassTime(classesStates),
   };
 
-  console.log("ClassTimeTable", classTimes);
+  // const shouldUpdate = useRef(false);
 
   useEffect(() => {
     setClassTimes(classItem?.horarios ?? []);
   }, [classItem.horarios]);
-
-  // useEffect(() => {
-  //   const newClassItem = { ...classItem, horarios: classTimes };
-  //   setClassItem(newClassItem);
-  //   setClasses([...classes, newClassItem]);
-  // }, [classTimes]);
 
   return (
     <div className="showBasicDataCard">
@@ -109,8 +96,9 @@ function ClassTimeTable(classTimeTableProps) {
             {classTimes.map((iterClassTime, index) => {
               const currentId = getId(iterClassTime);
               const classTimeRowStates = {
-                ...classTimesProps,
+                ...classesStates,
                 classTime: iterClassTime,
+                // shouldUpdate,
                 index,
               };
               return <ClassTimeRow {...classTimeRowStates} key={currentId} />;
