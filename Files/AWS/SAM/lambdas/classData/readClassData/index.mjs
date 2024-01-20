@@ -22,7 +22,7 @@ async function readItems() {
 function getQuery() {
   const bigSelectQuery =
     "\
-    SELECT\
+  SELECT\
     t.id AS 'id',\
     t.id AS 'idTurma',\
     t.ano AS 'ano',\
@@ -62,25 +62,29 @@ function getQuery() {
             'duracao', h.duracao,\
             'ordem', h.ordem,\
             'idTurma', h.idTurma,\
-            'sala', JSON_OBJECT(\
-              'id', s.id,\
-              'capacidade', s.capacidade,\
-              'idBlock', s.idBlock,\
-              'bloco', s.bloco,\
-              'codigo', s.codigo,\
-              'descricao', s.descricao\
-            )\
+            'sala', CASE\
+              WHEN h.idSala IS NOT NULL THEN JSON_OBJECT(\
+                'id', s.id,\
+                'capacidade', s.capacidade,\
+                'idBlock', s.idBlock,\
+                'bloco', s.bloco,\
+                'codigo', s.codigo,\
+                'descricao', s.descricao\
+              )\
+              ELSE NULL\
+            END\
           )\
         )\
         FROM horarios as h\
-        JOIN salas as s ON h.idSala = s.id\
+        LEFT JOIN salas as s ON h.idSala = s.id\
         WHERE h.idTurma = t.id\
       )\
       ELSE JSON_ARRAY()\
     END as 'horarios'\
   FROM turmas as t\
   LEFT JOIN disciplinas as d ON t.idDisciplina = d.id\
-  LEFT JOIN professores as p ON t.idProfessor = p.id;";
+  LEFT JOIN professores as p ON t.idProfessor = p.id;\
+  ";
   return bigSelectQuery;
 }
 
