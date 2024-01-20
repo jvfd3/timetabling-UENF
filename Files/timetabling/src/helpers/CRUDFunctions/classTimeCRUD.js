@@ -28,8 +28,6 @@ function createClassTime(classTimeStates) {
     const newClassTime = {
       ...baseClassTime,
       id: newId,
-      idClassTime: newId,
-      idHorario: newId,
     };
     return newClassTime;
   }
