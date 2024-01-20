@@ -110,13 +110,19 @@ function CreateHora({ createFunc, text = "Create", size = "2em" }) {
   );
 }
 
-function UpdateClassTime({ updateFunc, text = "Update", size = "2em" }) {
+function UpdateClassTime({
+  updateFunc,
+  text = "Update",
+  size = "2em",
+  color = "black",
+}) {
   return (
     <UpdateClassTimeIcon
       className="iconUpdate"
       onClick={updateFunc}
       title={text}
       size={size}
+      color={color}
     />
   );
 }

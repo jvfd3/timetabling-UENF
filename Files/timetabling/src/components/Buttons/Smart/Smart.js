@@ -67,11 +67,20 @@ function SmartCreateClassTime(createClassTimeProps) {
 }
 
 function SmartUpdateClassTime(updateClassTimeProps) {
-  const { classTime, updateClassTimeDB } = updateClassTimeProps;
+  const { classTime, updateClassTimeDB, iconColor, message } =
+    updateClassTimeProps;
+
   let titleText = `Atualizar horário (id: ${getId(classTime)}):\n`;
   titleText += `  - idTurma ${classTime?.idTurma}`;
+  titleText = message ? message : titleText;
 
-  return <UpdateClassTime updateFunc={updateClassTimeDB} text={titleText} />;
+  return (
+    <UpdateClassTime
+      updateFunc={updateClassTimeDB}
+      text={titleText}
+      color={iconColor}
+    />
+  );
 }
 
 function SmartDeleteClassTime(deleteClassTimeProps) {
