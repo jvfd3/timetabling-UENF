@@ -34,8 +34,6 @@ Tenho o seguinte banco de dados:
   - ordem (INT)
   - idTurma (INT, FK)
   - idSala (INT, FK)
-
-
 */
 
 /* GIGA QUERY TO GET ALL CLASSES WITH PROFESSOR, SUBJECT CLASSTIMES AND ROOMS */
