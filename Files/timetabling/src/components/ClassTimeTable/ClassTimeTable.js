@@ -1,5 +1,5 @@
 import "./ClassTimeTable.css";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   SelectClassTimeDay,
   SelectClassTimeDuration,
@@ -21,64 +21,21 @@ import {
 
 function ClassTimeRow(classTimeRowStates) {
   const { classItem, classTime, index } = classTimeRowStates;
-  const currentId = getId(classTime);
+
   const deleteClassTimeProps = {
     classTime,
     classItem,
     deleteClassTimeDB: () => deleteClassTime(classTimeRowStates),
   };
 
-  const [needsUpdate, setNeedsUpdate] = useState(false);
-  const [message, setMessage] = useState("");
-  const initialValue = useRef(classTime);
-  let currentMessage = `Atualizar horário (id: ${getId(
-    classTime
-  )}, idTurma: ${getId(classItem)}):\n`;
-
-  useEffect(() => {
-    const baseClassTime = initialValue.current;
-
-    const sameRoom = classTime?.sala?.id === baseClassTime?.sala?.id;
-    const sameDay = classTime?.dia === baseClassTime?.dia;
-    const sameStartHour = classTime?.horaInicio === baseClassTime?.horaInicio;
-    const sameDuration = classTime?.duracao === baseClassTime?.duracao;
-
-    currentMessage += sameRoom
-      ? ``
-      : `sala: ${baseClassTime?.sala?.id} -> ${classTime?.sala?.id ?? null}\n`;
-    currentMessage += sameDay
-      ? ``
-      : `dia: ${baseClassTime?.dia} -> ${classTime?.dia}\n`;
-    currentMessage += sameStartHour
-      ? ``
-      : `horaInicio: ${baseClassTime?.horaInicio} -> ${classTime?.horaInicio}\n`;
-    currentMessage += sameDuration
-      ? ``
-      : `duracao: ${baseClassTime?.duracao} -> ${classTime?.duracao}\n`;
-
-    const needsChange =
-      !sameRoom || !sameDay || !sameStartHour || !sameDuration;
-
-    setMessage(currentMessage);
-    setNeedsUpdate(needsChange);
-
-    console.log(`shouldUpdate ${classTime.id}?`, needsChange);
-  }, [classTime]);
-
   const updateClassTimeProps = {
     classTime,
     classItem,
-    updateClassTimeDB: () => {
-      updateClassTime(classTimeRowStates);
-      setNeedsUpdate(false);
-      initialValue.current = classTime;
-    },
-    iconColor: needsUpdate ? "yellow" : "",
-    message,
+    updateClassTimeDB: () => updateClassTime(classTimeRowStates),
   };
 
   return (
-    <tr key={`ClassTimeRow: ${currentId}-${index}`}>
+    <tr key={`ClassTimeRow: ${getId(classTime)}-${index}`}>
       <td>
         <SmartDeleteClassTime {...deleteClassTimeProps} />
         <SmartUpdateClassTime {...updateClassTimeProps} />

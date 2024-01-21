@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   CreateHora,
   CreateInfo,
@@ -67,17 +67,72 @@ function SmartCreateClassTime(createClassTimeProps) {
 }
 
 function SmartUpdateClassTime(updateClassTimeProps) {
-  const { classTime, updateClassTimeDB, iconColor, message } =
-    updateClassTimeProps;
+  const { classTime, updateClassTimeDB } = updateClassTimeProps;
 
-  let titleText = `Atualizar horário (id: ${getId(classTime)}):\n`;
-  titleText += `  - idTurma ${classTime?.idTurma}`;
-  titleText = message ? message : titleText;
+  let baseMessage = `Atualizar horário `;
+  baseMessage += `(id: ${getId(classTime)}, `;
+  baseMessage += `idTurma: ${classTime?.idTurma})\n`;
+
+  const oldClassTime = useRef(classTime);
+
+  const [modifiedMessage, setModifiedMessage] = useState(baseMessage);
+  const [needsUpdateStatus, setNeedsUpdateStatus] = useState(false);
+
+  useEffect(() => {
+    const modProps = getModificationsProps(oldClassTime.current, classTime);
+
+    setModifiedMessage(baseMessage + modProps.updateText);
+    setNeedsUpdateStatus(modProps.updateStatus);
+
+    // console.log(classTime.id, modProps);
+    // console.log("int: ", oldClassTime.current?.dia);
+    // console.log("new: ", classTime?.dia);
+
+    // console.log("// SmartUpdateClassTime \\");
+  }, [classTime]);
+
+  const iconColor = needsUpdateStatus ? "yellow" : "";
+
+  function getModificationsProps(oldClassTime, newClassTime) {
+    let modifications = "";
+    const sameRoom = newClassTime?.sala?.id === oldClassTime?.sala?.id;
+    const sameDay = newClassTime?.dia === oldClassTime?.dia;
+    const sameStartHour = newClassTime?.horaInicio === oldClassTime?.horaInicio;
+    const sameDuration = newClassTime?.duracao === oldClassTime?.duracao;
+
+    modifications += sameRoom
+      ? ""
+      : `sala: ${oldClassTime?.sala?.id} -> ${
+          newClassTime?.sala?.id ?? null
+        }\n`;
+    modifications += sameDay
+      ? ""
+      : `dia: ${oldClassTime?.dia} -> ${newClassTime?.dia}\n`;
+    modifications += sameStartHour
+      ? ""
+      : `horaInicio: ${oldClassTime?.horaInicio} -> ${newClassTime?.horaInicio}\n`;
+    modifications += sameDuration
+      ? ""
+      : `duracao: ${oldClassTime?.duracao} -> ${newClassTime?.duracao}\n`;
+
+    const modificationsObject = {
+      updateStatus: !sameRoom || !sameDay || !sameStartHour || !sameDuration,
+      updateText: modifications,
+    };
+
+    return modificationsObject;
+  }
+
+  function smartUpdateClassTime() {
+    setNeedsUpdateStatus(false);
+    oldClassTime.current = classTime;
+    updateClassTimeDB();
+  }
 
   return (
     <UpdateClassTime
-      updateFunc={updateClassTimeDB}
-      text={titleText}
+      updateFunc={smartUpdateClassTime}
+      text={modifiedMessage}
       color={iconColor}
     />
   );
