@@ -169,6 +169,17 @@
   {"id": 20280207, "ano": 2028, "semestre": 2, "idDisciplina": null, "idProfessor": null, "demandaEstimada":   41, "comment": "Demanda X Capacidade Sala" },
   {"id": 20280208, "ano": 2028, "semestre": 2, "idDisciplina": null, "idProfessor": null, "demandaEstimada":   66, "comment": "Demanda X Capacidade Sala" },
 
+
+  {"id": 20280301, "ano": 2028, "semestre": 3, "idDisciplina": null, "idProfessor": null, "demandaEstimada": null, "comment": "conflitos: alocação múltipla de salas" },
+  {"id": 20280302, "ano": 2028, "semestre": 3, "idDisciplina": null, "idProfessor": null, "demandaEstimada": null, "comment": "conflitos: alocação múltipla de salas" },
+  {"id": 20280303, "ano": 2028, "semestre": 3, "idDisciplina": null, "idProfessor": null, "demandaEstimada": null, "comment": "conflitos: alocação múltipla de salas" },
+  {"id": 20280304, "ano": 2028, "semestre": 3, "idDisciplina": null, "idProfessor": null, "demandaEstimada": null, "comment": "conflitos: alocação múltipla de salas" },
+  {"id": 20280305, "ano": 2028, "semestre": 3, "idDisciplina": null, "idProfessor": null, "demandaEstimada": null, "comment": "conflitos: alocação múltipla de salas" },
+  {"id": 20280306, "ano": 2028, "semestre": 3, "idDisciplina": null, "idProfessor": null, "demandaEstimada": null, "comment": "conflitos: alocação múltipla de salas" },
+  {"id": 20280307, "ano": 2028, "semestre": 3, "idDisciplina": null, "idProfessor": null, "demandaEstimada": null, "comment": "conflitos: alocação múltipla de salas" },
+  {"id": 20280308, "ano": 2028, "semestre": 3, "idDisciplina": null, "idProfessor": null, "demandaEstimada": null, "comment": "conflitos: alocação múltipla de salas" },
+
+
   {"id": 20290100, "ano": 2029, "semestre": 1, "idDisciplina": null, "idProfessor": null, "demandaEstimada": null, "comment": "Cenário: disciplinas em período ímpar" },
   {"id": 20290101, "ano": 2029, "semestre": 1, "idDisciplina":   64, "idProfessor": null, "demandaEstimada": null, "comment": "Cenário: disciplinas em período ímpar" },
   {"id": 20290102, "ano": 2029, "semestre": 1, "idDisciplina":    2, "idProfessor": null, "demandaEstimada": null, "comment": "Cenário: disciplinas em período ímpar" },
