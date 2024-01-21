@@ -33,8 +33,8 @@ import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctio
 - CRUDclass
   - CRUDPageSelection
   - Turmas
-    - SemTurmas
-    - TurmasCard
+    - NoOfferedClasses
+    - MultiClassesCard
       - MultiTurmasTitle
         - h2
         - SelectAnoSemestre
@@ -362,7 +362,7 @@ function TurmasTable(myProps) {
   );
 }
 
-function SemTurmas(myProps) {
+function NoOfferedClasses(myProps) {
   const { myTurmasProps, myCurrentSemestreProps } = myProps;
   const { turmas, setTurmas, classIndex, classTimeIndex } = myTurmasProps;
   const { semestre, ano } = myCurrentSemestreProps;
@@ -386,8 +386,10 @@ function SemTurmas(myProps) {
   );
 }
 
-function TurmasCard(myProps) {
   const { myTurmasProps, myCurrentSemestreProps } = myProps;
+function MultiClassesCardHeader(myProps) {
+function MultiClassesCard(myProps) {
+  const { myTurmasProps, myCurrentSemestreProps, classesStates } = myProps;
   // const { turmas, setTurmas, turma, setTurma, allSplittedClasses } =
   //   myTurmasProps;
   // const filteringProps = { allSplittedClasses, setCurrentClasses: setTurmas };
@@ -400,7 +402,7 @@ function TurmasCard(myProps) {
         {/* <FilteringSelects {...filteringProps} /> */}
       </div>
       {myTurmasProps.turmas.length === 0 ? (
-        <SemTurmas {...myProps} />
+        <NoOfferedClasses {...myProps} />
       ) : (
         <TurmasTable {...myProps} />
       )}
@@ -595,7 +597,7 @@ function Turmas() {
 
   return (
     <div className="CRUDContainComponents">
-      <TurmasCard {...myProps} />
+      <MultiClassesCard {...myProps} />
       <NotOfferedSubjects {...myProps} />
     </div>
   );
