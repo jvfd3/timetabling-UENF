@@ -1,3 +1,4 @@
+import "./multiTurmas.css";
 import React, { useState, useEffect, useRef } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
@@ -9,8 +10,8 @@ import {
   SelectHoraTang,
   SelectDuracao,
   SelectAnoSemestre,
+  SelectFilterYear,
 } from "../../../components/mySelects";
-import "./multiTurmas.css";
 import {
   getTurmasDoAnoSemestre,
   splittedToUnified2,
@@ -28,6 +29,8 @@ import { baseTurmaConflicts } from "../../../helpers/conflicts/centralConflicts"
 import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
 import { InputDisciplina } from "../../../components/Buttons/Dumb/Dumb";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
+import { readClass } from "../../../helpers/CRUDFunctions/classCRUD";
+import { MultiClassesFilters } from "../../../components/Filters/Filters";
 
 /* ESTRUTURA DOS COMPONENTES
 - CRUDclass
@@ -386,8 +389,22 @@ function NoOfferedClasses(myProps) {
   );
 }
 
-  const { myTurmasProps, myCurrentSemestreProps } = myProps;
 function MultiClassesCardHeader(myProps) {
+  const { classesStates, myTurmasProps, myCurrentSemestreProps } = myProps;
+  // const { classes, setClasses, classItem, setClassItem } = classesStates;
+  const englishStates = {
+    classes: myTurmasProps.turmas,
+    setClasses: myTurmasProps.setTurmas,
+  };
+  return (
+    <div className="MultiTurmasTitle">
+      <h2>MultiTurmas</h2>
+      <SelectAnoSemestre {...myCurrentSemestreProps} />
+      {/* <MultiClassesFilters {...englishStates} /> */}
+    </div>
+  );
+}
+
 function MultiClassesCard(myProps) {
   const { myTurmasProps, myCurrentSemestreProps, classesStates } = myProps;
   // const { turmas, setTurmas, turma, setTurma, allSplittedClasses } =
@@ -396,11 +413,7 @@ function MultiClassesCard(myProps) {
 
   return (
     <div className="infoCard">
-      <div className="MultiTurmasTitle">
-        <h2>MultiTurmas</h2>
-        <SelectAnoSemestre {...myCurrentSemestreProps} />
-        {/* <FilteringSelects {...filteringProps} /> */}
-      </div>
+      <MultiClassesCardHeader {...myProps} />
       {myTurmasProps.turmas.length === 0 ? (
         <NoOfferedClasses {...myProps} />
       ) : (
@@ -567,8 +580,8 @@ function Turmas() {
   const [turmas, setTurmas] = useState(filteredTurmas);
   const [turma, setTurma] = useState(filteredTurmas[0]);
 
-  let classes = unifiedHorarios;
-  let allSplittedClasses = splitTurmas(classes);
+  let unifiedClasses = unifiedHorarios;
+  let allSplittedClasses = splitTurmas(unifiedClasses);
   // let newReunitedClasses = splittedToUnified3(allSplittedClasses);
 
   useEffect(() => {
@@ -594,6 +607,25 @@ function Turmas() {
     allSplittedClasses,
   };
   let myProps = { myTurmasProps, myCurrentSemestreProps };
+
+  /* \ POST REFACTOR / */
+
+  const blankClass = options.emptyObjects.classItem;
+  const [classes, setClasses] = useState([blankClass]);
+  const [classItem, setClassItem] = useState(classes?.[0] ?? blankClass);
+
+  const classesStates = { classes, setClasses, classItem, setClassItem };
+  const baseClasses = useRef(sqlDataFromJson.classes);
+
+  useEffect(() => {
+    readClass(classesStates);
+  }, []);
+
+  useEffect(() => {
+    console.log("classes", classes.length);
+  }, [classes]);
+
+  myProps.classesStates = classesStates;
 
   return (
     <div className="CRUDContainComponents">

@@ -136,7 +136,7 @@ Where each Select is used:
 - SelectDuration          - CRUD: ClassTime
 */
 
-function SelectYear({ outerYear, setOuterYear }) {
+function SelectYear({ outerYear, setOuterYear, outerIsClearable = false }) {
   function findYearObject(year) {
     let yearObject = options.constantValues.years.find(
       (iterYear) => iterYear.value == year
@@ -146,7 +146,7 @@ function SelectYear({ outerYear, setOuterYear }) {
 
   const SelectYearStates = {
     placeHolderText: "Ano",
-    isClearable: false,
+    isClearable: outerIsClearable,
     options: options.constantValues.years,
     setOuterValue: setOuterYear,
     value: outerYear,
@@ -156,7 +156,11 @@ function SelectYear({ outerYear, setOuterYear }) {
   return <DefaultSelect {...SelectYearStates} />;
 }
 
-function SelectSemester({ outerSemester, setOuterSemester }) {
+function SelectSemester({
+  outerSemester,
+  setOuterSemester,
+  outerIsClearable = false,
+}) {
   function findSemesterObject(semester) {
     let semesterObject = options.constantValues.semesters.find(
       (iterSemester) => iterSemester.value == semester
@@ -166,7 +170,7 @@ function SelectSemester({ outerSemester, setOuterSemester }) {
 
   const SelectSemesterStates = {
     placeHolderText: "Semestre",
-    isClearable: false,
+    isClearable: outerIsClearable,
     options: options.constantValues.semesters,
     setOuterValue: setOuterSemester,
     value: outerSemester,
@@ -270,6 +274,7 @@ function SelectBlock({ outerBlock, setOuterBlock }) {
 function SelectExpectedSemester({
   outerExpectedSemester,
   setOuterExpectedSemester,
+  outerIsClearable = false,
 }) {
   function findExpectedSemesterObject(expectedSemester) {
     let expectedSemesterObject = options.constantValues.expectedSemester.find(
@@ -280,7 +285,7 @@ function SelectExpectedSemester({
 
   const SelectExpectedSemesterStates = {
     placeHolderText: "Semestre esperado",
-    isClearable: false,
+    isClearable: outerIsClearable,
     options: options.constantValues.expectedSemester,
     setOuterValue: setOuterExpectedSemester,
     value: outerExpectedSemester,
@@ -321,7 +326,11 @@ function SelectSubject({ outerSubject, setOuterSubject }) {
   return <DefaultSelect {...SelectSubjectStates} />;
 }
 
-function DefaultSelectProfessor({ outerProfessor, setOuterProfessor }) {
+function DefaultSelectProfessor({
+  outerProfessor,
+  setOuterProfessor,
+  outerIsClearable = true,
+}) {
   function findProfessorObject(professor) {
     const professorsList = sqlDataFromJson.professors; // get from DB
     const professorObject = getItemFromListById(professor, professorsList);
@@ -330,7 +339,7 @@ function DefaultSelectProfessor({ outerProfessor, setOuterProfessor }) {
 
   const SelectProfessorStates = {
     placeHolderText: "Professor",
-    isClearable: true,
+    isClearable: outerIsClearable,
     options: sqlDataFromJson.professors,
     setOuterValue: setOuterProfessor,
     value: outerProfessor,
@@ -350,7 +359,7 @@ function DefaultSelectProfessor({ outerProfessor, setOuterProfessor }) {
   return <DefaultSelect {...SelectProfessorStates} />;
 }
 
-function SelectRoom({ outerRoom, setOuterRoom }) {
+function SelectRoom({ outerRoom, setOuterRoom, outerIsClearable = true }) {
   function findRoomObject(room) {
     const roomsList = sqlDataFromJson.salas;
     const roomObject = getItemFromListById(room, roomsList);
@@ -359,7 +368,7 @@ function SelectRoom({ outerRoom, setOuterRoom }) {
 
   const SelectRoomStates = {
     placeHolderText: "Sala",
-    isClearable: true,
+    isClearable: outerIsClearable,
     options: sqlDataFromJson.salas,
     setOuterValue: setOuterRoom,
     value: outerRoom,
@@ -792,6 +801,85 @@ function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
 }
 
 /* /\ /\ /\ /\ /\ /\ /\ /\ MULTITURMAS /\ /\ /\ /\ /\ /\ /\ /\ */
+
+function SelectFilterV2Year({ year, setYear }) {
+  function updateOuterYear(newYear) {
+    const newYearValue = newYear?.value ?? null;
+    setYear(newYearValue);
+  }
+
+  const yearStates = {
+    outerYear: year,
+    setOuterYear: updateOuterYear,
+    outerIsClearable: true,
+  };
+
+  return <SelectYear {...yearStates} />;
+}
+
+function SelectFilterV2Semester({ semester, setSemester }) {
+  function updateOuterSemester(newSemester) {
+    const newSemesterValue = newSemester?.value ?? null;
+    setSemester(newSemesterValue);
+  }
+  const semesterStates = {
+    outerSemester: semester,
+    setOuterSemester: updateOuterSemester,
+    outerIsClearable: true,
+  };
+
+  return <SelectSemester {...semesterStates} />;
+}
+
+function SelectFilterV2Professor({ professor, setProfessor }) {
+  function updateOuterProfessor(newProfessor) {
+    const newProfessorValue = newProfessor ?? null;
+    setProfessor(newProfessorValue);
+  }
+
+  const professorStates = {
+    outerProfessor: professor,
+    setOuterProfessor: updateOuterProfessor,
+    outerIsClearable: true,
+  };
+
+  return <DefaultSelectProfessor {...professorStates} />;
+}
+
+function SelectFilterV2Room({ room, setRoom }) {
+  function updateOuterRoom(newRoom) {
+    const newRoomValue = newRoom ?? null;
+    setRoom(newRoomValue);
+  }
+
+  const roomStates = {
+    outerRoom: room,
+    setOuterRoom: updateOuterRoom,
+    outerIsClearable: true,
+  };
+
+  return <SelectRoom {...roomStates} />;
+}
+
+function SelectFilterV2ExpectedSemester({
+  expectedSemester,
+  setExpectedSemester,
+}) {
+  function updateOuterExpectedSemester(newExpectedSemester) {
+    const newExpectedSemesterValue = newExpectedSemester?.value ?? null;
+    setExpectedSemester(newExpectedSemesterValue);
+  }
+
+  const expectedSemesterStates = {
+    outerExpectedSemester: expectedSemester,
+    setOuterExpectedSemester: updateOuterExpectedSemester,
+    outerIsClearable: true,
+  };
+
+  return <SelectExpectedSemester {...expectedSemesterStates} />;
+}
+
+/* /\ /\ /\ /\ /\ /\ /\ /\ NEW FILTER GENERATION /\ /\ /\ /\ /\ /\ /\ /\ */
 
 function SelectFilterAno(outerAnoStates) {
   let years = options.constantValues.years;
@@ -1334,6 +1422,13 @@ function SelectStudentCourse({ student, setStudent }) {
 }
 
 export {
+  /* Filters */
+  SelectFilterV2Year,
+  SelectFilterV2Semester,
+  SelectFilterV2Professor,
+  SelectFilterV2Room,
+  SelectFilterV2ExpectedSemester,
+
   /* Multiturmas (MTT) */
   SelectAno,
   SelectSemestre,

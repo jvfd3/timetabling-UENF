@@ -4,8 +4,11 @@ import CRUDPageSelection from "../../../components/PageSelect";
 import "./ccTable.css";
 import { getTurmasData } from "../../../DB/retrieveData";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
-import { filterDay, filterHour } from "../../../helpers/filters";
-import { FilteringSelects } from "../../../components/filteringSelects";
+import { filterDay, filterHour } from "../../../helpers/filteringFunc";
+import {
+  FilteringSelects,
+  // CCTableFilters,
+} from "../../../components/Filters/Filters";
 
 function VisualizacaoCC() {
   let turmas = getTurmasData();
@@ -136,10 +139,16 @@ function VisualizacaoCC() {
     );
   }
 
+  // const newFilterStates = {
+  //   classes: allSplittedClasses,
+  //   setClasses: setCurrentClasses,
+  // };
+
   return (
     <div className="CRUDContainComponents">
       <div className="infoCard">
         <FilteringSelects {...classesStates} />
+        {/* <CCTableFilters {...newFilterStates} /> */}
         <TabelaCC curClasses={currentClasses} />
       </div>
     </div>

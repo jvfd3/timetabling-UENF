@@ -22,16 +22,42 @@ function generalFilter(originData, originPropArray, propValueToFind) {
   // console.log("originPropArray", originPropArray);
   // console.log("propValueToFind", propValueToFind);
 
-  let filteredData = originData.filter((data) => {
-    let propValue = getValueFromDataWithPropArray(data, originPropArray);
+  const filteredData = originData.filter((data) => {
+    const propValue = getValueFromDataWithPropArray(data, originPropArray);
     // console.log("propValue", propValue);
     if (propValue === undefined) {
       // console.log("data", data);
     }
-    let found = propValue === propValueToFind;
+    const found = propValue === propValueToFind;
     return found;
   });
   return filteredData;
+}
+
+function filterYear(classes, year) {
+  let filteredClasses = classes;
+  if (year) {
+    filteredClasses = generalFilter(classes, ["ano"], year?.value ?? year);
+  }
+  // console.log("year", year);
+  // console.log("yearClasses", yearClasses);
+  // console.log("yearClasses", filteredClasses);
+  return filteredClasses;
+}
+
+function filterSemester(classes, semester) {
+  let filteredClasses = classes;
+  if (semester) {
+    filteredClasses = generalFilter(
+      classes,
+      ["semestre"],
+      semester?.value ?? semester
+    );
+  }
+  // console.log("semester", semester);
+  // console.log("semesterClasses", semesterClasses);
+  // console.log("semesterClasses", filteredClasses);
+  return filteredClasses;
 }
 
 function filterHour(classes, hour) {
@@ -50,28 +76,6 @@ function filterDay(classes, day) {
   }
   // console.log("day", day);
   // console.log("dayClasses", filteredClasses);
-  return filteredClasses;
-}
-
-function filterYear(classes, year) {
-  let filteredClasses = classes;
-  if (year) {
-    filteredClasses = generalFilter(classes, ["ano"], year?.value);
-  }
-  // console.log("year", year);
-  // console.log("yearClasses", yearClasses);
-  // console.log("yearClasses", filteredClasses);
-  return filteredClasses;
-}
-
-function filterSemester(classes, semester) {
-  let filteredClasses = classes;
-  if (semester) {
-    filteredClasses = generalFilter(classes, ["semestre"], semester?.value);
-  }
-  // console.log("semester", semester);
-  // console.log("semesterClasses", semesterClasses);
-  // console.log("semesterClasses", filteredClasses);
   return filteredClasses;
 }
 
@@ -119,13 +123,18 @@ function filterExpectedSemester(classes, expectedSemester) {
 }
 
 export {
-  filterYear,
-  filterSemester,
+  /* Internal Use Only ? */
+  // getValueFromDataWithPropArray,
+  // generalFilter,
+
+  /* CCTurmas */
   filterHour,
   filterDay,
   filterProfessor,
   filterRoom,
   filterExpectedSemester,
-  getValueFromDataWithPropArray,
-  generalFilter,
+
+  /* MultiTurmas too */
+  filterYear,
+  filterSemester,
 };

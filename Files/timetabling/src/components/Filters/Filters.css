@@ -1,0 +1,14 @@
+.MultiTurmasFilters,
+.CCTableFilters {
+  display: flex;
+  gap: 20px;
+}
+
+.defaultFilterStyle {
+  display: flex;
+  /* flex-direction: column; */
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
