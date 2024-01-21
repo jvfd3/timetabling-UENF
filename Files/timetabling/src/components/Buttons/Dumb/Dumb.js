@@ -5,23 +5,23 @@ import {
 } from "react-icons/bs";
 import {
   MdOutlineUpdate as UpdateClassTimeIcon, // Circle arrow with clock hands
-  MdAddCircleOutline as CreateInfoIcon, // Plus sign with circle around it
+  MdAddCircleOutline as CreateItemIcon, // Plus sign with circle around it
   MdRefresh as ReadInfoIcon, // Two arrows in a circle
   MdEdit as UpdateInfoIcon, // Pencil
-  MdDelete as DeleteInfoIcon, // Trash can
-  MdAddAlarm as CreateHoraIcon, // Clock with plus sign
-  MdAutoDelete as DeleteHoraIcon, // Trash Can with clock
+  MdDelete as DeleteItemIcon, // Trash can
+  MdAddAlarm as CreateClassTimeIcon, // Clock with plus sign
+  MdAutoDelete as DeleteClassTimeIcon, // Trash Can with clock
   MdLockOutline as LockedPropIcon, // Lock
   MdLockOpen as UnlockedPropIcon, // Unlocked lock
   MdInput as InputDisciplinaIcon, // Arrow pointing into a box
 } from "react-icons/md";
 // import {
-//   AddCircleOutlineIcon as CreateInfoIcon,
+//   AddCircleOutlineIcon as CreateItemIcon,
 //   Refresh as ReadInfoIcon,
 //   Edit as UpdateInfoIcon,
-//   Delete as DeleteInfoIcon,
-//   AddAlarm as CreateHoraIcon,
-//   AutoDelete as DeleteHoraIcon,
+//   Delete as DeleteItemIcon,
+//   AddAlarm as CreateClassTimeIcon,
+//   AutoDelete as DeleteClassTimeIcon,
 //   LockRounded as LockedPropIcon,
 //   LockOpenRounded as UnlockedPropIcon,
 //   Input as InputDisciplinaIcon,
@@ -53,9 +53,9 @@ function ReadDBButton({ readFunc, text = "Read", size = "2em" }) {
 
 /* Default Info Buttons */
 
-function CreateInfo({ createFunc, text = "Create", size = "2em" }) {
+function CreateItem({ createFunc, text = "Create", size = "2em" }) {
   return (
-    <CreateInfoIcon
+    <CreateItemIcon
       className="iconCreate"
       onClick={createFunc}
       title={text}
@@ -86,9 +86,9 @@ function UpdateInfo({ updateFunc, text = "Update", size = "2em" }) {
   );
 }
 
-function DeleteInfo({ deleteFunc, text = "Delete", size = "2em" }) {
+function DeleteItem({ deleteFunc, text = "Delete", size = "2em" }) {
   return (
-    <DeleteInfoIcon
+    <DeleteItemIcon
       className="iconDelete"
       onClick={deleteFunc}
       title={text}
@@ -99,9 +99,9 @@ function DeleteInfo({ deleteFunc, text = "Delete", size = "2em" }) {
 
 /* Specific Icon buttons */
 
-function CreateHora({ createFunc, text = "Create", size = "2em" }) {
+function CreateClassTime({ createFunc, text = "Create", size = "2em" }) {
   return (
-    <CreateHoraIcon
+    <CreateClassTimeIcon
       className="iconCreate"
       onClick={createFunc}
       title={text}
@@ -127,9 +127,9 @@ function UpdateClassTime({
   );
 }
 
-function DeleteHora({ deleteFunc, text = "Delete", size = "2em" }) {
+function DeleteClassTime({ deleteFunc, text = "Delete", size = "2em" }) {
   return (
-    <DeleteHoraIcon
+    <DeleteClassTimeIcon
       className="iconDelete"
       onClick={deleteFunc}
       title={text}
@@ -171,37 +171,17 @@ function InputDisciplina({ insertDiscFunc, text = "Input", size = "2em" }) {
   );
 }
 
-/* Custom Buttons */
-
-function CustomCreateButton({ createFunc, text = "Create" }) {
-  return (
-    <button className="AdicionarHorario" onClick={createFunc}>
-      {text}
-    </button>
-  );
-}
-
-function CustomDeleteButton({ deleteFunc, text = "Delete" }) {
-  return (
-    <button className="TurmaHorarioRemove" onClick={deleteFunc}>
-      {text}
-    </button>
-  );
-}
-
 export {
   UpdateClassTime,
   CreateDBButton,
   ReadDBButton,
-  CreateInfo,
+  CreateItem,
   ReadInfo,
   UpdateInfo,
-  DeleteInfo,
-  CreateHora,
-  DeleteHora,
+  DeleteItem,
+  CreateClassTime,
+  DeleteClassTime,
   LockedProp,
   UnlockedProp,
   InputDisciplina,
-  CustomCreateButton,
-  CustomDeleteButton,
 };

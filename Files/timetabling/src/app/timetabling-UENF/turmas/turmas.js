@@ -87,7 +87,6 @@ function ClassData(classesStates) {
 
 function Classes() {
   const classIndex = useRef(sqlDataFromJson.classes.length);
-  const classTimeIndex = useRef(sqlDataFromJson.classtimes.length);
   // let defaultClasses = getFullHorarios();
 
   const defaultClassItem = {
@@ -101,8 +100,6 @@ function Classes() {
   const [classItem, setClassItem] = useState(classes[0]);
 
   const classesStates = { classes, setClasses, classItem, setClassItem };
-  const indexes = { classIndex, classTimeIndex };
-  const myStates = { classesStates, indexes };
 
   /* useEffect(() => {
     updateClass(classesStates);
@@ -118,7 +115,7 @@ function Classes() {
       <TurmaSelection {...classesStates} />
       <div className="infoCard">
         <ClassData {...classesStates} />
-        <ClassTimeTable {...myStates} />
+        <ClassTimeTable {...classesStates} />
         {/* <Participants {...myTurmaStates} /> */}
       </div>
     </div>

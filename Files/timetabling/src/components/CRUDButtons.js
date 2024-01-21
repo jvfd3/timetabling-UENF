@@ -2,7 +2,7 @@ import {
   CreateDBButton,
   ReadDBButton,
   UpdateInfo,
-  DeleteInfo,
+  DeleteItem,
 } from "./Buttons/Dumb/Dumb";
 
 function CRUDButtonsContainer(crudFunctions) {
@@ -12,7 +12,7 @@ function CRUDButtonsContainer(crudFunctions) {
       <CreateDBButton createFunc={createFunc} />
       <ReadDBButton readFunc={readFunc} />
       <UpdateInfo updateFunc={updateFunc} />
-      <DeleteInfo deleteFunc={deleteFunc} />
+      <DeleteItem deleteFunc={deleteFunc} />
     </div>
   );
 }

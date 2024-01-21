@@ -56,8 +56,7 @@ function ClassTimeRow(classTimeRowStates) {
   );
 }
 
-function ClassTimeTable(classTimeTableProps) {
-  const { classesStates } = classTimeTableProps;
+function ClassTimeTable(classesStates) {
   const { classItem } = classesStates;
 
   // const classTimes = classItem?.horarios ?? [];

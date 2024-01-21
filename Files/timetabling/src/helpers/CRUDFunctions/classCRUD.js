@@ -14,12 +14,14 @@ import options from "../../DB/local/options";
 
 const itemName = "classData";
 
-function createClass({ classes, setClasses, classItem, setClassItem }) {
+function createClass(createClassStates) {
+  const { classes, setClasses, classItem, setClassItem, year, semester } =
+    createClassStates;
   function getNewClassItem(newId) {
     const newClass = {
       ...options.emptyObjects.classItem,
-      ano: classItem.ano,
-      semestre: classItem.semestre,
+      ano: year ?? classItem?.ano,
+      semestre: semester ?? classItem?.semestre,
       id: newId,
       idTurma: newId,
     };

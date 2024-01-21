@@ -19,8 +19,8 @@ import {
 } from "../../../helpers/auxFunctions";
 import { NumberInputMultiClassesExpectedDemand } from "../../../components/MyTextFields";
 import {
-  SmartCreateTurma,
-  SmartDeleteTurma,
+  SmartCreateClassItem,
+  SmartDeleteClassItem,
   SmartCreateClassTime,
   SmartDeleteClassTime,
 } from "../../../components/Buttons/Smart/Smart";
@@ -29,8 +29,13 @@ import { baseTurmaConflicts } from "../../../helpers/conflicts/centralConflicts"
 import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
 import { InputDisciplina } from "../../../components/Buttons/Dumb/Dumb";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
-import { readClass } from "../../../helpers/CRUDFunctions/classCRUD";
-import { MultiClassesFilters } from "../../../components/Filters/Filters";
+import {
+  createClass,
+  readClass,
+  updateClass,
+  deleteClass,
+} from "../../../helpers/CRUDFunctions/classCRUD";
+// import { MultiClassesFilters } from "../../../components/Filters/Filters";
 
 /* ESTRUTURA DOS COMPONENTES
 - CRUDclass
@@ -45,7 +50,7 @@ import { MultiClassesFilters } from "../../../components/Filters/Filters";
         - TableHeader
         - tbody
           - TableRow
-            - SmartDeleteTurma
+            - SmartDeleteClassItem
             - SelectDisciplina
             - SelectProfessor
             - NumberInputDemandaEstimada
@@ -59,24 +64,17 @@ import { MultiClassesFilters } from "../../../components/Filters/Filters";
                 - SelectDuracao
 */
 
-function TableHeader(myProps) {
-  const { myTurmasProps, myCurrentSemestreProps } = myProps;
-  const { turmas, setTurmas, classIndex, classTimeIndex } = myTurmasProps;
-  const { semestre, ano } = myCurrentSemestreProps;
-  const createStates = {
-    turmas,
-    setTurmas,
-    semestre,
-    ano,
-    classIndex,
-    classTimeIndex,
+function TableHeader({ myTurmasProps, myCurrentSemestreProps }) {
+  const createClassProps = {
+    ...myTurmasProps,
+    ...myCurrentSemestreProps,
+    createClassDB: createClass,
   };
-  // console.log("TableHeader>2", classIndex);
   return (
     <thead>
       <tr>
         <th>
-          <SmartCreateTurma {...createStates} />
+          <SmartCreateClassItem {...createClassProps} />
         </th>
         <th>Código - Nome</th>
         <th>Professor</th>
@@ -314,7 +312,7 @@ function TableRow(myProps) {
       key={`TableRow>tr: ${lTurma.idTurma}-${lTurma.disciplina?.codigoDisciplina}-${lTurma?.professor?.nome}`}
     >
       <td>
-        <SmartDeleteTurma
+        <SmartDeleteClassItem
           turmas={turmas}
           setTurmas={setTurmas}
           turma={rowTurma}
@@ -383,7 +381,7 @@ function NoOfferedClasses(myProps) {
       style={{ display: "flex", flexDirection: "row", textAlignLast: "center" }}
     >
       <p>Ainda não há turmas cadastradas. Clique Aqui</p>
-      <SmartCreateTurma {...createStates} />
+      <SmartCreateClassItem {...createStates} />
       <p>para criar uma turma</p>
     </div>
   );

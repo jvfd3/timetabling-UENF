@@ -1,42 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
-  CreateHora,
-  CreateInfo,
-  CustomCreateButton,
-  CustomDeleteButton,
-  DeleteHora,
-  DeleteInfo,
+  CreateClassTime,
+  DeleteClassTime,
+  CreateItem,
+  DeleteItem,
   InputDisciplina,
   UpdateClassTime,
 } from "../Dumb/Dumb";
-import options from "../../../DB/local/options";
 import { getId } from "../../../helpers/auxCRUD";
-
-const compactBuild = options.config.iconButtons;
-
-function SmartCreateTurma(myProps) {
-  const titleText = "Adicionar turma";
-  function addTurma() {
-    createTurma(myProps);
-  }
-  return compactBuild ? (
-    <CreateInfo createFunc={addTurma} text={titleText} />
-  ) : (
-    <CustomCreateButton createFunc={addTurma} text={titleText} />
-  );
-}
-
-function SmartDeleteTurma({ turmas, setTurmas, turma }) {
-  const titleText = `Remover turma ${getId(turma)}`;
-  function delTurma() {
-    deleteTurma(turmas, setTurmas, turma);
-  }
-  return compactBuild ? (
-    <DeleteInfo deleteFunc={delTurma} text={titleText} />
-  ) : (
-    <CustomDeleteButton deleteFunc={delTurma} text={titleText} />
-  );
-}
+import options from "../../../DB/local/options";
 
 function AddTurmaWithDisciplinaButton({ turmas, setTurmas, disciplina }) {
   function addTurmaWithDisciplina() {
@@ -54,16 +26,36 @@ function AddTurmaWithDisciplinaButton({ turmas, setTurmas, disciplina }) {
   );
 }
 
-function SmartCreateClassTime(createClassTimeProps) {
-  const { classItem, createClassTimeDB } = createClassTimeProps;
+function SmartCreateClassItem(createStates) {
+  const { turmas, setTurmas, setTurma, ano, semestre, createClassDB } =
+    createStates;
+  function createClassItemInDB() {
+    const newClass = options.emptyObjects.classItem;
+    newClass.ano = ano?.value ?? ano;
+    newClass.semestre = semestre?.value ?? semestre;
 
+    const createClassStates = {
+      classes: turmas,
+      setClasses: setTurmas,
+      classItem: newClass,
+      setClassItem: setTurma,
+    };
+    createClassDB(createClassStates);
+  }
+
+  const titleText = `Adicionar turma`;
+  return <CreateItem createFunc={createClassItemInDB} text={titleText} />;
+}
+
+function SmartDeleteClassItem({ classItem, deleteClassDB }) {
+  const titleText = `Remover turma (id: ${getId(classItem)})`;
+  return <DeleteItem deleteFunc={deleteClassDB} text={titleText} />;
+}
+
+function SmartCreateClassTime({ classItem, createClassTimeDB }) {
   const titleText = `Adicionar horário à turma id: ${getId(classItem)}`;
 
-  return compactBuild ? (
-    <CreateHora createFunc={createClassTimeDB} text={titleText} />
-  ) : (
-    <CustomCreateButton createFunc={createClassTimeDB} text={titleText} />
-  );
+  return <CreateClassTime createFunc={createClassTimeDB} text={titleText} />;
 }
 
 function SmartUpdateClassTime(updateClassTimeProps) {
@@ -143,16 +135,12 @@ function SmartDeleteClassTime(deleteClassTimeProps) {
   let titleText = `Remover horário (id: ${getId(classTime)}):\n`;
   titleText += `  - idTurma ${classTime?.idTurma}`;
 
-  return compactBuild ? (
-    <DeleteHora deleteFunc={deleteClassTimeDB} text={titleText} />
-  ) : (
-    <CustomDeleteButton deleteFunc={deleteClassTimeDB} text={titleText} />
-  );
+  return <DeleteClassTime deleteFunc={deleteClassTimeDB} text={titleText} />;
 }
 
 export {
-  SmartCreateTurma,
-  SmartDeleteTurma,
+  SmartCreateClassItem,
+  SmartDeleteClassItem,
   SmartCreateClassTime,
   SmartUpdateClassTime,
   SmartDeleteClassTime,

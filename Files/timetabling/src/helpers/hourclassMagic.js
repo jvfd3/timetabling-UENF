@@ -86,7 +86,7 @@ function createClassTime(classTimeStates) {
   }
 }
 
-function deleteHorario(classTimeRowStates) {
+function DeleteClassTimerio(classTimeRowStates) {
   const { classItem, setClassItem, classTimes, classTime, index } =
     classTimeRowStates;
 
@@ -101,6 +101,6 @@ export {
   createTurma,
   deleteTurma,
   createClassTime,
-  deleteHorario,
+  DeleteClassTimerio,
   // getUpdatedClasses,
 };
