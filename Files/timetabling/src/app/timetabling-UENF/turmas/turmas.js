@@ -39,7 +39,7 @@ function TurmaSelection(classStates) {
   );
 }
 
-function DadosTurma(classesStates) {
+function ClassData(classesStates) {
   return (
     <div className="showBasicDataCard">
       <h3>INFORMAÇÕES DA TURMA</h3>
@@ -117,7 +117,7 @@ function Classes() {
     <div className="CRUDContainComponents">
       <TurmaSelection {...classesStates} />
       <div className="infoCard">
-        <DadosTurma {...classesStates} />
+        <ClassData {...classesStates} />
         <ClassTimeTable {...myStates} />
         {/* <Participants {...myTurmaStates} /> */}
       </div>
