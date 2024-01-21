@@ -592,7 +592,7 @@ function SelectProfessor({ lTurma, setLTurma }) {
 
 function SelectSala({ lTurma, setLTurma, indexHorario }) {
   const [sala, setSala] = useState(lTurma.horarios[indexHorario].sala);
-  let salas = sqlDataFromJson.rooms;
+  let salas = sqlDataFromJson.salas;
 
   function updateOuterTurmaSala(novaSala) {
     let salaAtualizada = novaSala ? novaSala : null;
@@ -858,7 +858,7 @@ function SelectFilterProfessor(outerProfessorStates) {
 
 function SelectFilterRoom(outerRoomStates) {
   const { room, setRoom } = outerRoomStates;
-  let rooms = sqlDataFromJson.rooms;
+  let rooms = sqlDataFromJson.salas;
 
   return (
     <Select
