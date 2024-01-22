@@ -10,7 +10,7 @@ import {
   replaceNewItemInListById,
 } from "../helpers/auxCRUD";
 
-let styleWidthFix = options.SelectStyles.fullItem;
+const styleWidthFix = options.SelectStyles.fullItem;
 
 /* \\ Internal-use Selects // */
 
@@ -26,7 +26,7 @@ function LockableSelect(extProps) {
     lockStates,
   } = extProps;
 
-  let { isLocked, setIsLocked, title } = lockStates;
+  const { isLocked, setIsLocked, title } = lockStates;
 
   function LockSelect() {
     function toggleLock() {
@@ -138,7 +138,7 @@ Where each Select is used:
 
 function SelectYear({ outerYear, setOuterYear, outerIsClearable = false }) {
   function findYearObject(year) {
-    let yearObject = options.constantValues.years.find(
+    const yearObject = options.constantValues.years.find(
       (iterYear) => iterYear.value == year
     );
     return yearObject;
@@ -162,7 +162,7 @@ function SelectSemester({
   outerIsClearable = false,
 }) {
   function findSemesterObject(semester) {
-    let semesterObject = options.constantValues.semesters.find(
+    const semesterObject = options.constantValues.semesters.find(
       (iterSemester) => iterSemester.value == semester
     );
     return semesterObject;
@@ -182,7 +182,7 @@ function SelectSemester({
 
 function SelectLab({ outerLab, setOuterLab }) {
   function findLabObject(labAlias) {
-    let labObject = options.constantValues.labs.find(
+    const labObject = options.constantValues.labs.find(
       (iterLab) => iterLab.apelido === labAlias
     );
     return labObject ?? null;
@@ -199,8 +199,8 @@ function SelectLab({ outerLab, setOuterLab }) {
       getOptionValue: (lab) => lab.apelido,
       getOptionLabel: (lab) => `${lab.centro} -${lab.apelido} - ${lab.nome}`,
       formatOptionLabel: ({ centro, apelido, nome }, { context }) => {
-        let isOpened = context === "value";
-        let message = isOpened ? `${apelido}` : `${centro} - ${nome}`;
+        const isOpened = context === "value";
+        const message = isOpened ? `${apelido}` : `${centro} - ${nome}`;
         return message;
       },
     },
@@ -211,7 +211,7 @@ function SelectLab({ outerLab, setOuterLab }) {
 
 function SelectCourse({ outerCourse, setOuterCourse }) {
   function findCourseObject(course) {
-    let courseObject = options.constantValues.courses.find(
+    const courseObject = options.constantValues.courses.find(
       (iterCourse) => iterCourse.apelido === course
     );
     return courseObject ?? null;
@@ -228,8 +228,8 @@ function SelectCourse({ outerCourse, setOuterCourse }) {
       getOptionLabel: ({ nome, apelido }) => `${nome} - ${apelido}`,
       getOptionValue: ({ nome, apelido }) => `${nome} - ${apelido}`,
       formatOptionLabel: ({ nome, apelido }, { context }) => {
-        let isOpened = context === "value";
-        let message = isOpened ? `${apelido}` : `${nome}`;
+        const isOpened = context === "value";
+        const message = isOpened ? `${apelido}` : `${nome}`;
         return message;
       },
     },
@@ -240,7 +240,7 @@ function SelectCourse({ outerCourse, setOuterCourse }) {
 
 function SelectBlock({ outerBlock, setOuterBlock }) {
   function findBlockObject(block) {
-    let blockObject = options.constantValues.blocks.find(
+    const blockObject = options.constantValues.blocks.find(
       (iterBlock) => iterBlock.id == block
     );
     return blockObject;
@@ -258,11 +258,11 @@ function SelectBlock({ outerBlock, setOuterBlock }) {
       getOptionLabel: ({ id, code, alias, name }) =>
         `(${code}) ` + alias === code ? `${name}` : `${alias}`,
       formatOptionLabel: ({ id, code, alias, name }, { context }) => {
-        let isMenuLabel = context === "menu";
+        const isMenuLabel = context === "menu";
         let msg = `(${code}) `;
-        let sameCodigoAndApelido = alias === code;
+        const sameCodigoAndApelido = alias === code;
         msg += sameCodigoAndApelido ? `${name}` : `${alias}`;
-        let finalMessage = isMenuLabel ? msg : `${code}`;
+        const finalMessage = isMenuLabel ? msg : `${code}`;
         return finalMessage;
       },
     },
@@ -277,7 +277,7 @@ function SelectExpectedSemester({
   outerIsClearable = false,
 }) {
   function findExpectedSemesterObject(expectedSemester) {
-    let expectedSemesterObject = options.constantValues.expectedSemester.find(
+    const expectedSemesterObject = options.constantValues.expectedSemester.find(
       (iterExpectedSemester) => iterExpectedSemester.value == expectedSemester
     );
     return expectedSemesterObject;
@@ -350,7 +350,7 @@ function DefaultSelectProfessor({
         `${nome} - ${apelido} - ${laboratorio} - ${curso}`,
       formatOptionLabel: ({ nome, apelido }, { context }) => {
         const isOpened = context === "value";
-        let message = isOpened ? `${apelido}` : `${nome}`;
+        const message = isOpened ? `${apelido}` : `${nome}`;
         return message;
       },
     },
@@ -429,7 +429,7 @@ function SelectStartHour({ outerStartHour, setOuterStartHour }) {
       getOptionLabel: ({ hora, turno }) => `${hora} (${turno})`,
       formatOptionLabel: ({ hora, turno }, { context }) => {
         const isOpened = context === "value";
-        let message = isOpened ? `${hora}` : `${hora} (${turno})`;
+        const message = isOpened ? `${hora}` : `${hora} (${turno})`;
         return message;
       },
     },
@@ -462,9 +462,9 @@ function SelectDuration({ outerDuration, setOuterDuration }) {
 /* \/ \/ \/ \/ \/ \/ \/ \/ MULTITURMAS \/ \/ \/ \/ \/ \/ \/ \/ */
 
 function SelectAno({ outerAno, setOuterAno }) {
-  let anos = options.constantValues.years;
+  const anos = options.constantValues.years;
 
-  let anoSelecionado = anos.find(
+  const anoSelecionado = anos.find(
     (ano) => ano.value === parseInt(outerAno.value)
   );
 
@@ -489,9 +489,9 @@ function SelectAno({ outerAno, setOuterAno }) {
 }
 
 function SelectSemestre({ outerSemestre, setOuterSemestre }) {
-  let semestres = options.constantValues.semesters;
+  const semestres = options.constantValues.semesters;
 
-  let semestreSelecionado = semestres.find(
+  const semestreSelecionado = semestres.find(
     (semestre) => semestre.value === parseInt(outerSemestre.value)
   );
 
@@ -605,12 +605,12 @@ function SelectMultiClassesProfessor({ classItem, setClassItem }) {
 
 function SelectSala({ lTurma, setLTurma, indexHorario }) {
   const [sala, setSala] = useState(lTurma.horarios[indexHorario].sala);
-  let salas = sqlDataFromJson.salas;
+  const salas = sqlDataFromJson.salas;
 
   function updateOuterTurmaSala(novaSala) {
-    let salaAtualizada = novaSala ? novaSala : null;
+    const salaAtualizada = novaSala ? novaSala : null;
     setSala(salaAtualizada);
-    let novaTurma = { ...lTurma };
+    const novaTurma = { ...lTurma };
     novaTurma.horarios[indexHorario].sala = salaAtualizada;
     setLTurma(novaTurma);
   }
@@ -647,17 +647,17 @@ function SelectSala({ lTurma, setLTurma, indexHorario }) {
 }
 
 function SelectDia({ lTurma, setLTurma, indexHorario }) {
-  let dias = options.constantValues.days;
+  const dias = options.constantValues.days;
 
-  let horarios = lTurma.horarios;
-  let horario = horarios[indexHorario];
-  let selectedDia = horario.dia;
+  const horarios = lTurma.horarios;
+  const horario = horarios[indexHorario];
+  const selectedDia = horario.dia;
 
-  let diaSelecionado = dias.find((dia) => dia.value === selectedDia);
+  const diaSelecionado = dias.find((dia) => dia.value === selectedDia);
   const [dia, setDia] = useState(diaSelecionado);
 
   function updateOuterTurma(novoDia) {
-    let blankDia = { value: null, label: null };
+    const blankDia = { value: null, label: null };
     let diaAtualizado = null;
     if (!novoDia) {
       diaAtualizado = blankDia;
@@ -666,10 +666,10 @@ function SelectDia({ lTurma, setLTurma, indexHorario }) {
       diaAtualizado = novoDia;
       setDia(diaAtualizado);
     }
-    let novosHorarios = [...horarios];
+    const novosHorarios = [...horarios];
     novosHorarios[indexHorario].dia = diaAtualizado.value;
 
-    let novaTurma = {
+    const novaTurma = {
       ...lTurma,
       horarios: novosHorarios,
     };
@@ -702,18 +702,18 @@ function SelectDia({ lTurma, setLTurma, indexHorario }) {
 }
 
 function SelectHoraTang({ lTurma, setLTurma, indexHorario }) {
-  let horarios = lTurma.horarios;
-  let horario = horarios[indexHorario];
+  const horarios = lTurma.horarios;
+  const horario = horarios[indexHorario];
 
-  let selectedHora = horario.horaInicio;
-  let horasTang = options.constantValues.hoursTang;
-  let horaSelecionada = horasTang.find(
+  const selectedHora = horario.horaInicio;
+  const horasTang = options.constantValues.hoursTang;
+  const horaSelecionada = horasTang.find(
     (hora) => parseInt(hora.hora) === parseInt(selectedHora)
   );
   const [hora, setHora] = useState(horaSelecionada);
 
   function updateOuterTurma(novaHoraTang) {
-    let blankHora = { hora: null, turno: null };
+    const blankHora = { hora: null, turno: null };
     let novaHoraTangAtualizada = null;
     if (!novaHoraTang) {
       novaHoraTangAtualizada = blankHora;
@@ -722,10 +722,10 @@ function SelectHoraTang({ lTurma, setLTurma, indexHorario }) {
       novaHoraTangAtualizada = novaHoraTang;
       setHora(novaHoraTangAtualizada);
     }
-    let novosHorarios = [...horarios];
+    const novosHorarios = [...horarios];
     novosHorarios[indexHorario].horaInicio = novaHoraTangAtualizada.hora;
 
-    let novaTurma = {
+    const novaTurma = {
       ...lTurma,
       horarios: novosHorarios,
     };
@@ -756,19 +756,19 @@ function SelectHoraTang({ lTurma, setLTurma, indexHorario }) {
 }
 
 function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
-  let horarios = lTurma.horarios;
-  let horario = horarios[indexHorario];
+  const horarios = lTurma.horarios;
+  const horario = horarios[indexHorario];
 
-  let selectedDuracao = horario.duracao;
-  let duracoes = options.constantValues.durations;
-  let duracaoSelecionada = duracoes.find(
+  const selectedDuracao = horario.duracao;
+  const duracoes = options.constantValues.durations;
+  const duracaoSelecionada = duracoes.find(
     (duracao) => duracao.value === selectedDuracao
   );
 
   const [duracao, setDuracao] = useState(duracaoSelecionada);
 
   function updateOuterTurma(novaDuracao) {
-    let blankDuracao = { value: null, label: null };
+    const blankDuracao = { value: null, label: null };
     let novaDuracaoAtualizada = null;
     if (!novaDuracao) {
       novaDuracaoAtualizada = blankDuracao;
@@ -778,10 +778,10 @@ function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
       setDuracao(novaDuracaoAtualizada);
     }
 
-    let novosHorarios = [...horarios];
+    const novosHorarios = [...horarios];
     novosHorarios[indexHorario].duracao = novaDuracaoAtualizada.value;
 
-    let novaTurma = {
+    const novaTurma = {
       ...lTurma,
       horarios: novosHorarios,
     };
@@ -886,7 +886,7 @@ function SelectFilterV2ExpectedSemester({
 /* /\ /\ /\ /\ /\ /\ /\ /\ NEW FILTER GENERATION /\ /\ /\ /\ /\ /\ /\ /\ */
 
 function SelectFilterAno(outerAnoStates) {
-  let years = options.constantValues.years;
+  const years = options.constantValues.years;
   const { ano, setAno } = outerAnoStates;
 
   return (
@@ -906,7 +906,7 @@ function SelectFilterAno(outerAnoStates) {
 }
 
 function SelectFilterSemester(outerSemesterStates) {
-  let semesters = options.constantValues.semesters;
+  const semesters = options.constantValues.semesters;
   const { semestre, setSemestre } = outerSemesterStates;
 
   return (
@@ -950,7 +950,7 @@ function SelectFilterProfessor(outerProfessorStates) {
 
 function SelectFilterRoom(outerRoomStates) {
   const { room, setRoom } = outerRoomStates;
-  let rooms = sqlDataFromJson.salas;
+  const rooms = sqlDataFromJson.salas;
 
   return (
     <Select
@@ -978,7 +978,7 @@ function SelectFilterRoom(outerRoomStates) {
 
 function SelectFilterExpectedSemester(outerExpectedSemesterStates) {
   const { expectedSemester, setExpectedSemester } = outerExpectedSemesterStates;
-  let expectedSemesters = options.constantValues.expectedSemester;
+  const expectedSemesters = options.constantValues.expectedSemester;
 
   return (
     <Select
@@ -1111,7 +1111,7 @@ function SelectClassItem(classStates) {
       getOptionValue: (classItem) =>
         `id: ${classItem?.id ?? classItem?.idTurma}`,
       getOptionLabel: ({ ano, semestre, disciplina, professor }) => {
-        let message = "";
+        const message = "";
         message += `${ano}.${semestre} - `;
         message += `${disciplina?.apelido ?? "disc. indef."} - `;
         message += `${professor?.apelido ?? "prof. indef."}`;
@@ -1138,13 +1138,13 @@ function SelectClassYear(classStates) {
   const { classes, setClasses, classItem, setClassItem } = classStates;
 
   function updateClassYear(newYear) {
-    let newClass = { ...classItem, ano: newYear?.value ?? null };
+    const newClass = { ...classItem, ano: newYear?.value ?? null };
     setClassItem(newClass);
-    // let newClasses = updateClassFromList(classes, newClass);
+    // const newClasses = updateClassFromList(classes, newClass);
     // setClasses(newClasses);
   }
 
-  let yearStates = {
+  const yearStates = {
     outerYear: classItem.ano,
     setOuterYear: updateClassYear,
   };
@@ -1156,13 +1156,13 @@ function SelectClassSemester(classStates) {
   const { classes, setClasses, classItem, setClassItem } = classStates;
 
   function updateClassSemester(newSemester) {
-    let newClass = { ...classItem, semestre: newSemester?.value ?? null };
+    const newClass = { ...classItem, semestre: newSemester?.value ?? null };
     setClassItem(newClass);
-    // let newClasses = updateClassFromList(classes, newClass);
+    // const newClasses = updateClassFromList(classes, newClass);
     // setClasses(newClasses);
   }
 
-  let semesterStates = {
+  const semesterStates = {
     outerSemester: classItem.semestre,
     setOuterSemester: updateClassSemester,
   };
@@ -1174,14 +1174,14 @@ function SelectClassSubject(classStates) {
   const { classes, setClasses, classItem, setClassItem } = classStates;
 
   function updateClassSubject(newSubject) {
-    let newClass = { ...classItem, disciplina: newSubject ?? null };
+    const newClass = { ...classItem, disciplina: newSubject ?? null };
     setClassItem(newClass);
     // console.log("updateClassSubject -> It's updating");
-    // let newClasses = updateClassFromList(classes, newClass);
+    // const newClasses = updateClassFromList(classes, newClass);
     // setClasses(newClasses);
   }
 
-  let subjectStates = {
+  const subjectStates = {
     outerSubject: classItem.disciplina,
     setOuterSubject: updateClassSubject,
   };
@@ -1195,13 +1195,13 @@ function SelectClassProfessor(classStates) {
   const { classes, setClasses, classItem, setClassItem } = classStates;
 
   function updateClassProfessor(newProfessor) {
-    let newClass = { ...classItem, professor: newProfessor ?? null };
+    const newClass = { ...classItem, professor: newProfessor ?? null };
     setClassItem(newClass);
-    // let newClasses = updateClassFromList(classes, newClass);
+    // const newClasses = updateClassFromList(classes, newClass);
     // setClasses(newClasses);
   }
 
-  let professorStates = {
+  const professorStates = {
     outerProfessor: classItem.professor,
     setOuterProfessor: updateClassProfessor,
   };
@@ -1224,7 +1224,7 @@ function SelectProfessorItem(professorStates) {
     customProps: {
       getOptionValue: ({ id }) => id,
       getOptionLabel: ({ nome, apelido, laboratorio, curso }) => {
-        let message = "";
+        const message = "";
         message += `${nome} - `;
         message += `${apelido} - `;
         message += `${laboratorio} - `;
@@ -1252,13 +1252,13 @@ function SelectProfessorLab({
   setProfessor,
 }) {
   function updateProfessorLab(newLab) {
-    let newProfessor = { ...professor, laboratorio: newLab?.apelido ?? null };
+    const newProfessor = { ...professor, laboratorio: newLab?.apelido ?? null };
     setProfessor(newProfessor);
-    // let newProfessors = updateProfessorFromList(professors, newProfessor);
+    // const newProfessors = updateProfessorFromList(professors, newProfessor);
     // setProfessors(newProfessors);
   }
 
-  let labStates = {
+  const labStates = {
     outerLab: professor.laboratorio,
     setOuterLab: updateProfessorLab,
   };
@@ -1319,16 +1319,16 @@ function SelectRoomBlock(myRoomStates) {
 
   function updateRoomBlock(newBlock) {
     const { id, code, alias, name } = newBlock;
-    // let sameCodeAlias = code === alias;
-    // let description = sameCodeAlias ? name : alias;
-    // let newBlockValue = `(${code}) ${description}`
-    let newRoom = { ...room, idBlock: id, bloco: code };
+    // const sameCodeAlias = code === alias;
+    // const description = sameCodeAlias ? name : alias;
+    // const newBlockValue = `(${code}) ${description}`
+    const newRoom = { ...room, idBlock: id, bloco: code };
     setRoom(newRoom);
   }
 
   // console.log(room.bloco);
 
-  let blockStates = {
+  const blockStates = {
     // outerBlock: room.bloco,
     outerBlock: room.idBlock,
     setOuterBlock: updateRoomBlock,
@@ -1364,11 +1364,11 @@ function SelectSubjectItem({ subjects, setSubjects, subject, setSubject }) {
 
 function SelectSubjectExpectedSemester({ subject, setSubject }) {
   function updateDisciplinaExpectedSemester(newExpectedSemester) {
-    let newDisciplina = { ...subject, periodo: newExpectedSemester.value };
+    const newDisciplina = { ...subject, periodo: newExpectedSemester.value };
     setSubject(newDisciplina);
   }
 
-  let expectedSemesterStates = {
+  const expectedSemesterStates = {
     outerExpectedSemester: subject.periodo,
     setOuterExpectedSemester: updateDisciplinaExpectedSemester,
   };
@@ -1399,11 +1399,11 @@ function SelectStudentItem({ students, setStudents, student, setStudent }) {
 function SelectStudentYear({ student, setStudent }) {
   function updateStudentYear(newYear) {
     // console.log(newYear);
-    let newStudent = { ...student, anoEntrada: newYear.value };
+    const newStudent = { ...student, anoEntrada: newYear.value };
     setStudent(newStudent);
   }
 
-  let yearStates = {
+  const yearStates = {
     outerYear: student.anoEntrada,
     setOuterYear: updateStudentYear,
   };
@@ -1417,7 +1417,7 @@ function SelectStudentCourse({ student, setStudent }) {
     setStudent(newStudent);
   }
 
-  let courseStates = {
+  const courseStates = {
     outerCourse: student.curso,
     setOuterCourse: updateStudentCourse,
   };
