@@ -3,20 +3,15 @@ import React, { useState, useEffect, useRef } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import {
-  SelectMultiClassesSubject,
-  SelectMultiClassesProfessor,
   SelectSala,
   SelectDia,
   SelectHoraTang,
   SelectDuracao,
   SelectAnoSemestre,
-  SelectFilterYear,
+  SelectClassSubject,
+  SelectClassProfessor,
 } from "../../../components/mySelects";
-import {
-  getTurmasDoAnoSemestre,
-  splittedToUnified2,
-  splittedToUnified3,
-} from "../../../helpers/auxFunctions";
+import { getTurmasDoAnoSemestre } from "../../../helpers/auxFunctions";
 import { NumberInputMultiClassesExpectedDemand } from "../../../components/MyTextFields";
 import {
   SmartCreateClassItem,
@@ -267,7 +262,7 @@ function ClassItemTableRow(classTableRowProps) {
     semester.value
   );
 
-  const englishProps = {
+  const rowClassStates = {
     classes,
     setClasses,
     classItem: classItemRow,
@@ -301,26 +296,28 @@ function ClassItemTableRow(classTableRowProps) {
   // console.log("classItemRow", classItemRow);
   // console.log("conflicts", conflicts);
 
+  console.log(classTableRowProps);
+
   return (
     <tr key={classItemRowKey}>
       <td>
         <SmartDeleteClassItem />
       </td>
       <td {...conflicts.styled.disciplina}>
-        <SelectMultiClassesSubject {...englishProps} />
+        <SelectClassSubject {...rowClassStates} />
       </td>
       <td {...conflicts.styled.professor}>
-        <SelectMultiClassesProfessor {...englishProps} />
+        <SelectClassProfessor {...rowClassStates} />
       </td>
       <td {...conflicts.styled.demand}>
-        <NumberInputMultiClassesExpectedDemand {...englishProps} />
+        <NumberInputMultiClassesExpectedDemand {...rowClassStates} />
       </td>
       <td>
         {classItemRow.horarios === null ||
         classItemRow.horarios.length === 0 ? (
           <SmartCreateClassTime />
         ) : (
-          <ClassTimeTable {...englishProps} />
+          <ClassTimeTable {...rowClassStates} />
         )}
       </td>
     </tr>

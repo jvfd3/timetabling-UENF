@@ -126,7 +126,7 @@ Where each Select is used:
 - SelectBlock             - CRUD: Room
 - SelectExpectedSemester  - CRUD: Subject
 - SelectSubject           - CRUD: ClassItem
-- DefaultSelectProfessor  - CRUD: ClassItem
+- SelectProfessor  - CRUD: ClassItem
 - SelectRoom              - CRUD: ClassTime
 - SelectDay               - CRUD: ClassTime
 - SelectStartHour         - CRUD: ClassTime
@@ -323,7 +323,7 @@ function SelectSubject({ outerSubject, setOuterSubject }) {
   return <DefaultSelect {...SelectSubjectStates} />;
 }
 
-function DefaultSelectProfessor({
+function SelectProfessor({
   outerProfessor,
   setOuterProfessor,
   outerIsClearable = true,
@@ -520,83 +520,6 @@ function SelectAnoSemestre({ year, setYear, semester, setSemester }) {
       Semestre:
       <SelectSemestre outerSemestre={semester} setOuterSemestre={setSemester} />
     </div>
-  );
-}
-
-function SelectMultiClassesSubject({ classItem, setClassItem }) {
-  const [subject, setSubject] = useState(classItem.disciplina);
-  const subjects = sqlDataFromJson.subjects;
-
-  function updateOuterClassItemSubject(newSubject) {
-    const updatedSubject = newSubject ? newSubject : null;
-    setSubject(updatedSubject);
-    const newClassItem = {
-      ...classItem,
-      disciplina: updatedSubject,
-    };
-    setClassItem(newClassItem);
-  }
-
-  const [isLocked, setIsLocked] = useState(false);
-
-  return (
-    <LockableSelect
-      onChange={updateOuterClassItemSubject}
-      isClearable={true}
-      placeholder="Disciplina"
-      options={subjects}
-      value={subject}
-      getOptionValue={(subject) => subject?.codigo}
-      formatOptionLabel={({ codigo, apelido, nome }, { context }) => {
-        const isOpened = context === "value";
-        let editedLabel = `${codigo} - `;
-        editedLabel += isOpened ? `${apelido}` : `${nome}`;
-        return editedLabel;
-      }}
-      lockStates={{
-        isLocked: isLocked,
-        setIsLocked: setIsLocked,
-        title: "Fixar disciplina",
-      }}
-    />
-  );
-}
-
-function SelectMultiClassesProfessor({ classItem, setClassItem }) {
-  const [professor, setProfessor] = useState(classItem.professor);
-  const professors = sqlDataFromJson.professors;
-
-  function updateOuterClassItemProfessor(newProfessor) {
-    const updatedProfessor = newProfessor ?? null;
-    const novaTurma = { ...classItem, professor: updatedProfessor };
-    setProfessor(updatedProfessor);
-    setClassItem(novaTurma);
-  }
-
-  const [isLocked, setIsLocked] = useState(false);
-
-  return (
-    <LockableSelect
-      onChange={updateOuterClassItemProfessor}
-      isClearable={true}
-      placeholder="Professor"
-      options={professors}
-      value={professor}
-      getOptionValue={(professor) => professor?.nome}
-      getOptionLabel={({ nome, apelido, laboratorio, curso }) =>
-        `${nome} - ${apelido} - ${laboratorio} - ${curso}`
-      }
-      formatOptionLabel={({ apelido, nome }, { context }) => {
-        const isOpened = context === "value";
-        const message = isOpened ? `${apelido}` : `${nome}`;
-        return message;
-      }}
-      lockStates={{
-        isLocked: isLocked,
-        setIsLocked: setIsLocked,
-        title: "Fixar professor",
-      }}
-    />
   );
 }
 
@@ -844,7 +767,7 @@ function SelectFilterV2Professor({ professor, setProfessor }) {
     outerIsClearable: true,
   };
 
-  return <DefaultSelectProfessor {...professorStates} />;
+  return <SelectProfessor {...professorStates} />;
 }
 
 function SelectFilterV2Room({ room, setRoom }) {
@@ -1136,9 +1059,9 @@ function SelectClassYear(classStates) {
 
   function updateClassYear(newYear) {
     const newClass = { ...classItem, ano: newYear?.value ?? null };
+    const newClasses = replaceNewItemInListById(newClass, classes);
     setClassItem(newClass);
-    // const newClasses = updateClassFromList(classes, newClass);
-    // setClasses(newClasses);
+    setClasses(newClasses);
   }
 
   const yearStates = {
@@ -1154,9 +1077,9 @@ function SelectClassSemester(classStates) {
 
   function updateClassSemester(newSemester) {
     const newClass = { ...classItem, semestre: newSemester?.value ?? null };
+    const newClasses = replaceNewItemInListById(newClass, classes);
     setClassItem(newClass);
-    // const newClasses = updateClassFromList(classes, newClass);
-    // setClasses(newClasses);
+    setClasses(newClasses);
   }
 
   const semesterStates = {
@@ -1172,14 +1095,13 @@ function SelectClassSubject(classStates) {
 
   function updateClassSubject(newSubject) {
     const newClass = { ...classItem, disciplina: newSubject ?? null };
+    const newClasses = replaceNewItemInListById(newClass, classes);
     setClassItem(newClass);
-    // console.log("updateClassSubject -> It's updating");
-    // const newClasses = updateClassFromList(classes, newClass);
-    // setClasses(newClasses);
+    setClasses(newClasses);
   }
 
   const subjectStates = {
-    outerSubject: classItem.disciplina,
+    outerSubject: classItem?.disciplina,
     setOuterSubject: updateClassSubject,
   };
 
@@ -1193,9 +1115,9 @@ function SelectClassProfessor(classStates) {
 
   function updateClassProfessor(newProfessor) {
     const newClass = { ...classItem, professor: newProfessor ?? null };
+    const newClasses = replaceNewItemInListById(newClass, classes);
     setClassItem(newClass);
-    // const newClasses = updateClassFromList(classes, newClass);
-    // setClasses(newClasses);
+    setClasses(newClasses);
   }
 
   const professorStates = {
@@ -1203,7 +1125,7 @@ function SelectClassProfessor(classStates) {
     setOuterProfessor: updateClassProfessor,
   };
 
-  return <DefaultSelectProfessor {...professorStates} />;
+  return <SelectProfessor {...professorStates} />;
 }
 
 /* \ Professors / */
@@ -1286,7 +1208,7 @@ function SelectProfessorCourse({
 
 /* \ Rooms / */
 
-function SelectRoomItem({ rooms, /* setRooms, */ room, setRoom }) {
+function SelectRoomItem({ rooms, setRooms, room, setRoom }) {
   const SelectRoomItemStates = {
     placeHolderText: "Selecione uma sala",
     isClearable: false,
@@ -1434,8 +1356,6 @@ export {
   SelectAno,
   SelectSemestre,
   SelectAnoSemestre,
-  SelectMultiClassesProfessor,
-  SelectMultiClassesSubject,
 
   /* MTT: Horario */
   SelectSala,
