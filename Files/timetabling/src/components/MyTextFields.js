@@ -5,9 +5,9 @@ import { getId } from "../helpers/auxCRUD";
 /* DEFAULT TEXTINPUT */
 
 function TextInputDefault(myStates) {
-  let { generalStates, specificValues } = myStates;
-  let { /* items, setItems,*/ item, setItem } = generalStates;
-  let { mainValue, getNewItemObject, title, isNumeric } = specificValues;
+  const { generalStates, specificValues } = myStates;
+  const { items, setItems, item, setItem } = generalStates;
+  const { mainValue, getNewItemObject, title, isNumeric } = specificValues;
 
   const [mainProp, setMainProp] = useState(mainValue);
 
@@ -31,13 +31,14 @@ function TextInputDefault(myStates) {
     if (isNumeric) {
       newValue = numericValueFilter(newValue);
     }
+    const newItem = getNewItemObject(newValue);
     setMainProp(newValue);
-    setItem(getNewItemObject(newValue));
+    setItem(newItem);
   }
 
-  let isId = title === "ID";
-  let specificIDProps = isId ? { disabled: true } : {};
-  let specificNumericProps = isNumeric
+  const isId = title === "ID";
+  const specificIDProps = isId ? { disabled: true } : {};
+  const specificNumericProps = isNumeric
     ? {
         type: "number",
         inputProps: { min: 0, max: 999, step: 1 },
@@ -67,21 +68,22 @@ function TextInputDefault(myStates) {
 
 function NumberInputMultiClassesExpectedDemand(currentClassStates) {
   const { classes, setClasses, classItem, setClassItem } = currentClassStates;
-  let generalStates = {
+  const generalStates = {
     items: classes,
     setItems: setClasses,
     item: classItem,
     setItem: setClassItem,
   };
-  let specificValues = {
+  const specificValues = {
     mainValue: classItem.demandaEstimada,
     getNewItemObject: (newValue) => {
-      return { ...classItem, demandaEstimada: newValue };
+      const newClassItem = { ...classItem, demandaEstimada: newValue };
+      return newClassItem;
     },
     title: "Demanda Estimada",
     isNumeric: true,
   };
-  let capacityStates = { generalStates, specificValues };
+  const capacityStates = { generalStates, specificValues };
   return <TextInputDefault {...capacityStates} />;
 }
 
