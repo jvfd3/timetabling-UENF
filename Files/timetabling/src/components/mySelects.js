@@ -95,10 +95,7 @@ function DefaultSelect(defaultProps) {
   }
 
   useEffect(() => {
-    let correctObject = value;
-    if (findCorrectObject !== undefined) {
-      correctObject = findCorrectObject(value);
-    }
+    const correctObject = findCorrectObject ? findCorrectObject(value) : value;
     // console.log(value);
     setCurrentValue(correctObject);
   }, [value]);
@@ -1413,7 +1410,7 @@ function SelectStudentYear({ student, setStudent }) {
 
 function SelectStudentCourse({ student, setStudent }) {
   function updateStudentCourse(newCourse) {
-    let newStudent = { ...student, curso: newCourse.apelido };
+    const newStudent = { ...student, curso: newCourse?.apelido ?? null };
     setStudent(newStudent);
   }
 
