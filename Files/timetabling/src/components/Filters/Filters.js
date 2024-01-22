@@ -14,25 +14,10 @@ import {
   SelectFilterV2Professor,
   SelectFilterV2Room,
   SelectFilterV2ExpectedSemester,
-  SelectFilterAno,
-  SelectFilterSemester,
-  SelectFilterProfessor,
-  SelectFilterRoom,
-  SelectFilterExpectedSemester,
 } from "../mySelects";
 
-function FilterYear({ classes, setClasses }) {
-  const [year, setYear] = useState(options.constantValues.years[14]);
-  const filterYearStates = { year, setYear };
-
-  useEffect(() => {
-    let newClasses = classes;
-    newClasses = filterYear(classes, year);
-    setClasses(newClasses);
-    // console.log("changedYear", year);
-    // console.log("newClasses", newClasses.length);
-  }, [year]);
-
+function FilterYear(filterYearStates) {
+  // console.log("filterYearStates", filterYearStates);
   return (
     <div className="defaultFilterStyle">
       Ano:
@@ -41,17 +26,7 @@ function FilterYear({ classes, setClasses }) {
   );
 }
 
-function FilterSemester({ classes, setClasses }) {
-  const [semester, setSemester] = useState(options.constantValues.semesters[0]);
-  const filterSemesterStates = { semester, setSemester };
-
-  useEffect(() => {
-    const newClasses = filterSemester(classes, semester);
-    setClasses(newClasses);
-    // console.log("changedSemester", semester);
-    // console.log("newClasses", newClasses.length);
-  }, [semester]);
-
+function FilterSemester(filterSemesterStates) {
   return (
     <div className="defaultFilterStyle">
       Semestre:
@@ -60,17 +35,7 @@ function FilterSemester({ classes, setClasses }) {
   );
 }
 
-function FilterProfessor({ classes, setClasses }) {
-  const [professor, setProfessor] = useState(null);
-  const filterProfessorStates = { professor, setProfessor };
-
-  useEffect(() => {
-    const newClasses = filterProfessor(classes, professor);
-    setClasses(newClasses);
-    // console.log("changedProfessor", professor);
-    // console.log("newClasses", newClasses.length);
-  }, [professor]);
-
+function FilterProfessor(filterProfessorStates) {
   return (
     <div className="defaultFilterStyle">
       Professor:
@@ -79,17 +44,7 @@ function FilterProfessor({ classes, setClasses }) {
   );
 }
 
-function FilterRoom({ classes, setClasses }) {
-  const [room, setRoom] = useState(null);
-  const filterRoomStates = { room, setRoom };
-
-  useEffect(() => {
-    const newClasses = filterRoom(classes, room);
-    setClasses(newClasses);
-    // console.log("changedRoom", room);
-    // console.log("newClasses", newClasses.length);
-  }, [room]);
-
+function FilterRoom(filterRoomStates) {
   return (
     <div className="defaultFilterStyle">
       Sala:
@@ -98,20 +53,7 @@ function FilterRoom({ classes, setClasses }) {
   );
 }
 
-function FilterExpectedSemester({ classes, setClasses }) {
-  const [expectedSemester, setExpectedSemester] = useState(null);
-  const filterExpectedSemesterStates = {
-    expectedSemester,
-    setExpectedSemester,
-  };
-
-  useEffect(() => {
-    const newClasses = filterExpectedSemester(classes, expectedSemester);
-    setClasses(newClasses);
-    // console.log("changedExpectedSemester", expectedSemester);
-    // console.log("newClasses", newClasses.length);
-  }, [expectedSemester]);
-
+function FilterExpectedSemester(filterExpectedSemesterStates) {
   return (
     <div className="defaultFilterStyle">
       Semestre Esperado:
@@ -120,82 +62,70 @@ function FilterExpectedSemester({ classes, setClasses }) {
   );
 }
 
-function MultiClassesFilters(classesStates) {
+function MultiClassesFilters({ setCurrentClasses, allSplittedClasses }) {
+  const years = options.constantValues.years;
+  const semesters = options.constantValues.semesters;
+
+  const [year, setYear] = useState(years[10]);
+  const [semester, setSemester] = useState(semesters[0]);
+
+  const props = {
+    year: { year, setYear },
+    semester: { semester, setSemester },
+  };
+
+  useEffect(() => {
+    let filtering = allSplittedClasses;
+    filtering = filterYear(filtering, year);
+    filtering = filterSemester(filtering, semester);
+    setCurrentClasses(filtering);
+  }, [year, semester]);
+
   return (
     <div className="MultiTurmasFilters">
-      <FilterYear {...classesStates} />
-      <FilterSemester {...classesStates} />
+      <FilterYear {...props.year} />
+      <FilterSemester {...props.semester} />
     </div>
   );
 }
 
-function CCTableFilters(classesStates) {
-  return (
-    <div className="CCTableFilters">
-      <FilterYear {...classesStates} />
-      <FilterSemester {...classesStates} />
-      <FilterProfessor {...classesStates} />
-      <FilterRoom {...classesStates} />
-      <FilterExpectedSemester {...classesStates} />
-    </div>
-  );
-}
+function CCTableFilters({ setCurrentClasses, allSplittedClasses }) {
+  const years = options.constantValues.years;
+  const semesters = options.constantValues.semesters;
 
-function FilteringSelects({ setCurrentClasses, allSplittedClasses }) {
-  let years = options.constantValues.years;
-  let semesters = options.constantValues.semesters;
-
-  const [ano, setAno] = useState(years[10]);
-  const [semestre, setSemestre] = useState(semesters[0]);
+  const [year, setYear] = useState(years[10]);
+  const [semester, setSemester] = useState(semesters[0]);
   const [professor, setProfessor] = useState(null);
   const [room, setRoom] = useState(null);
   const [expectedSemester, setExpectedSemester] = useState(null);
 
+  const props = {
+    year: { year, setYear },
+    semester: { semester, setSemester },
+    professor: { professor, setProfessor },
+    room: { room, setRoom },
+    expectedSemester: { expectedSemester, setExpectedSemester },
+  };
+
   useEffect(() => {
     let filtering = allSplittedClasses;
-    filtering = filterYear(filtering, ano);
-    filtering = filterSemester(filtering, semestre);
+    filtering = filterYear(filtering, year);
+    filtering = filterSemester(filtering, semester);
     filtering = filterProfessor(filtering, professor);
     filtering = filterRoom(filtering, room);
     filtering = filterExpectedSemester(filtering, expectedSemester);
     setCurrentClasses(filtering);
-  }, [ano, semestre, professor, room, expectedSemester]);
-
-  let anoProps = {
-    ano,
-    setAno,
-  };
-  let semestreProps = {
-    semestre,
-    setSemestre,
-  };
-  let professorProps = {
-    professor,
-    setProfessor,
-  };
-  let roomProps = {
-    room,
-    setRoom,
-  };
-  let expectedSemesterProps = {
-    expectedSemester,
-    setExpectedSemester,
-  };
+  }, [year, semester, professor, room, expectedSemester]);
 
   return (
-    <div className="filterHeader">
-      Ano:
-      <SelectFilterAno {...anoProps} />
-      Semestre:
-      <SelectFilterSemester {...semestreProps} />
-      Professor:
-      <SelectFilterProfessor {...professorProps} />
-      Sala:
-      <SelectFilterRoom {...roomProps} />
-      Período esperado:
-      <SelectFilterExpectedSemester {...expectedSemesterProps} />
+    <div className="CCTableFilters">
+      <FilterYear {...props.year} />
+      <FilterSemester {...props.semester} />
+      <FilterProfessor {...props.professor} />
+      <FilterRoom {...props.room} />
+      <FilterExpectedSemester {...props.expectedSemester} />
     </div>
   );
 }
 
-export { MultiClassesFilters, CCTableFilters, FilteringSelects };
+export { MultiClassesFilters, CCTableFilters };

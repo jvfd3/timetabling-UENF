@@ -35,7 +35,7 @@ import {
   updateClass,
   deleteClass,
 } from "../../../helpers/CRUDFunctions/classCRUD";
-// import { MultiClassesFilters } from "../../../components/Filters/Filters";
+import { MultiClassesFilters } from "../../../components/Filters/Filters";
 
 /* ESTRUTURA DOS COMPONENTES
 - CRUDclass
@@ -609,14 +609,24 @@ function Turmas() {
   /* \ POST REFACTOR / */
 
   const blankClass = options.emptyObjects.classItem;
+  const [unfilteredClasses, setUnfilteredClasses] = useState([blankClass]);
   const [classes, setClasses] = useState([blankClass]);
   const [classItem, setClassItem] = useState(classes?.[0] ?? blankClass);
 
-  const classesStates = { classes, setClasses, classItem, setClassItem };
-  const baseClasses = useRef(sqlDataFromJson.classes);
+  const defaultClasses = sqlDataFromJson.classes;
+  const baseClasses = useRef(defaultClasses);
+  const classesStates = {
+    classes,
+    setClasses,
+    classItem,
+    setClassItem,
+    defaultClasses,
+    baseClasses,
+  };
 
   useEffect(() => {
     readClass(classesStates);
+    setUnfilteredClasses();
   }, []);
 
   useEffect(() => {

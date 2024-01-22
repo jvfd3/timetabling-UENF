@@ -1,25 +1,16 @@
+import "./ccTable.css";
 import React, { useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
-import "./ccTable.css";
 import { getTurmasData } from "../../../DB/retrieveData";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
 import { filterDay, filterHour } from "../../../helpers/filteringFunc";
-import {
-  FilteringSelects,
-  // CCTableFilters,
-} from "../../../components/Filters/Filters";
+import { CCTableFilters } from "../../../components/Filters/Filters";
 
 function VisualizacaoCC() {
   let turmas = getTurmasData();
   let allSplittedClasses = splitTurmas(turmas);
   const [currentClasses, setCurrentClasses] = useState(allSplittedClasses);
-
-  let classesStates = {
-    currentClasses,
-    setCurrentClasses,
-    allSplittedClasses,
-  };
 
   function TabelaCC({ curClasses }) {
     function Header() {
@@ -139,16 +130,15 @@ function VisualizacaoCC() {
     );
   }
 
-  // const newFilterStates = {
-  //   classes: allSplittedClasses,
-  //   setClasses: setCurrentClasses,
-  // };
+  const filterStates = {
+    allSplittedClasses,
+    setCurrentClasses,
+  };
 
   return (
     <div className="CRUDContainComponents">
       <div className="infoCard">
-        <FilteringSelects {...classesStates} />
-        {/* <CCTableFilters {...newFilterStates} /> */}
+        <CCTableFilters {...filterStates} />
         <TabelaCC curClasses={currentClasses} />
       </div>
     </div>

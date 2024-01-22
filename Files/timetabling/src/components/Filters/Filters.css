@@ -2,6 +2,7 @@
 .CCTableFilters {
   display: flex;
   gap: 20px;
+  padding: 10px;
 }
 
 .defaultFilterStyle {
