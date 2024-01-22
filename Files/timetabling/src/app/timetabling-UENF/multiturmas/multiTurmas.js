@@ -177,8 +177,10 @@ function ClassTimeTableRow(classTimeTableRowProps) {
     }
   }
 
+  const classTimeTableRowKey = `ClassTimeTableRow: ${currentClassTimeId}-${classTimeIndex}`;
+
   return (
-    <tr key={`ClassTimeTableRow>tr: ${currentClassTimeId}-${classTimeIndex}`}>
+    <tr key={classTimeTableRowKey}>
       <td>
         <SmartDeleteClassTime
           turma={classItem}
@@ -220,10 +222,11 @@ function ClassTimeTableRow(classTimeTableRowProps) {
 
 /* Remaining SmartCreateClassTime props */
 function ClassTimeTable({ classes, classItem, setClassItem, conflicts }) {
+  const classTimeTableHeaderKey = `ClassTimeTableHeader: ${classItem.idTurma}`;
   return (
     <table>
       <thead>
-        <tr key={`LinhaHorarios-${classItem.idTurma}`}>
+        <tr key={classTimeTableHeaderKey}>
           <th>
             <SmartCreateClassTime />
           </th>
@@ -253,7 +256,9 @@ function ClassTimeTable({ classes, classItem, setClassItem, conflicts }) {
   );
 }
 
-function ClassItemTableRow({ iterClassItem, classes, setClasses, semester }) {
+function ClassItemTableRow(classTableRowProps) {
+  const { iterClassItem, classes, setClasses, semester } = classTableRowProps;
+
   const [classItemRow, setClassItemRow] = useState(iterClassItem);
 
   const conflicts = baseClassItemConflicts(
@@ -393,8 +398,8 @@ function MultiClassesCard(ClassesTableProps) {
 function NotOfferedSubjects({ classesStates, currentSemesterProps }) {
   const { classes, setClasses, classIndex } = classesStates;
   const { year, semester } = currentSemesterProps;
-  const yearValue = year.value;
-  const semesterValue = semester.value;
+  const yearValue = year?.value;
+  const semesterValue = semester?.value;
   // console.log(semesterValue);
   // console.log("classes", classes);
   // Percorra cada turma em classes e preencha uma lista dos códigos das disciplinas oferecidas pelas classes
