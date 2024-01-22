@@ -64,10 +64,10 @@ import { MultiClassesFilters } from "../../../components/Filters/Filters";
                 - SelectDuracao
 */
 
-function TableHeader({ myTurmasProps, myCurrentSemestreProps }) {
+function ClassTableHeader({ classesProps, currentSemesterProps }) {
   const createClassProps = {
-    ...myTurmasProps,
-    ...myCurrentSemestreProps,
+    classesProps,
+    ...currentSemesterProps,
     createClassDB: createClass,
   };
   return (
@@ -344,9 +344,21 @@ function TableRow(myProps) {
 
 function TurmasTable(myProps) {
   const { myTurmasProps, myCurrentSemestreProps } = myProps;
+  const englishProps = {
+    classesProps: {
+      classes: myTurmasProps.turmas,
+      setClasses: myTurmasProps.setTurmas,
+      classItem: myTurmasProps.turma,
+      setClassItem: myTurmasProps.setTurma,
+    },
+    currentSemesterProps: {
+      semester: myCurrentSemestreProps.semestre,
+      year: myCurrentSemestreProps.ano,
+    },
+  };
   return (
     <table className="showBasicDataTable">
-      <TableHeader {...myProps} />
+      <ClassTableHeader {...englishProps} />
       <tbody>
         {myTurmasProps.turmas.map((lTurma, index) => {
           return (
@@ -388,7 +400,13 @@ function NoOfferedClasses(myProps) {
 }
 
 function MultiClassesCardHeader(myProps) {
-  const { classesStates, myTurmasProps, myCurrentSemestreProps } = myProps;
+  const {
+    classesStates,
+    myTurmasProps,
+    myCurrentSemestreProps,
+    defaultClasses,
+    baseClasses,
+  } = myProps;
   // const { classes, setClasses, classItem, setClassItem } = classesStates;
   const englishStates = {
     classes: myTurmasProps.turmas,

@@ -27,18 +27,15 @@ function AddTurmaWithDisciplinaButton({ turmas, setTurmas, disciplina }) {
 }
 
 function SmartCreateClassItem(createStates) {
-  const { turmas, setTurmas, setTurma, ano, semestre, createClassDB } =
-    createStates;
+  const { classesProps, year, semester, createClassDB } = createStates;
   function createClassItemInDB() {
     const newClass = options.emptyObjects.classItem;
-    newClass.ano = ano?.value ?? ano;
-    newClass.semestre = semestre?.value ?? semestre;
+    newClass.ano = year?.value ?? year;
+    newClass.semestre = semester?.value ?? semester;
 
     const createClassStates = {
-      classes: turmas,
-      setClasses: setTurmas,
+      ...classesProps,
       classItem: newClass,
-      setClassItem: setTurma,
     };
     createClassDB(createClassStates);
   }
