@@ -2,17 +2,17 @@ import "./ccTable.css";
 import React, { useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
-import { getTurmasData } from "../../../DB/retrieveData";
+import { getClassesData } from "../../../DB/retrieveData";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
 import { filterDay, filterHour } from "../../../helpers/filteringFunc";
 import { CCTableFilters } from "../../../components/Filters/Filters";
 
-function VisualizacaoCC() {
-  let turmas = getTurmasData();
+function CCTableView() {
+  let turmas = getClassesData();
   let allSplittedClasses = splitTurmas(turmas);
   const [currentClasses, setCurrentClasses] = useState(allSplittedClasses);
 
-  function TabelaCC({ curClasses }) {
+  function CCTable2({ curClasses }) {
     function Header() {
       function TopLeft() {
         return <th className="TopLeftCorner"></th>;
@@ -139,7 +139,7 @@ function VisualizacaoCC() {
     <div className="CRUDContainComponents">
       <div className="infoCard">
         <CCTableFilters {...filterStates} />
-        <TabelaCC curClasses={currentClasses} />
+        <CCTable2 curClasses={currentClasses} />
       </div>
     </div>
   );
@@ -150,7 +150,7 @@ function CCTable() {
   return (
     <div className="background">
       <CRUDPageSelection defaultValue={defaultPageValue} />
-      <VisualizacaoCC />
+      <CCTableView />
     </div>
   );
 }

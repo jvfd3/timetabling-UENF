@@ -4,7 +4,7 @@ import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
 import { SelectRoomItem, SelectRoomBlock } from "../../../components/mySelects";
-import { getTurmasData } from "../../../DB/retrieveData";
+import { getClassesData } from "../../../DB/retrieveData";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
 import {
   TextInputRoomCapacity,
@@ -129,7 +129,7 @@ function ClassesInRoom(room) {
         });
         return fullInfoFromTurmasNaSala;
       } */
-  let classes = getTurmasData();
+  let classes = getClassesData();
   let splittedClasses = splitTurmas(classes);
   let turmasNestaSala = splittedClasses.filter((splittedClass) => {
     let found = splittedClass.sala?.id === id;

@@ -14,7 +14,7 @@ function processRawData(rawData) {
   return processedData;
 }
 
-function getTurmasData(setTurmas) {
+function getClassesData(setTurmas) {
   let nodeEnv = process.env.NODE_ENV;
   let readyForDB = false;
   if (nodeEnv !== "development" && readyForDB) {
@@ -31,4 +31,4 @@ function getTurmasData(setTurmas) {
   return unified;
 }
 
-export { getTurmasData };
+export { getClassesData };

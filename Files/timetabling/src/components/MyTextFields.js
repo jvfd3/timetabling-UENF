@@ -65,17 +65,18 @@ function TextInputDefault(myStates) {
 
 /* \\ MultiClasses // */
 
-function NumberInputMultiClassesExpectedDemand(myClassStates) {
+function NumberInputMultiClassesExpectedDemand(currentClassStates) {
+  const { classes, setClasses, classItem, setClassItem } = currentClassStates;
   let generalStates = {
-    items: myClassStates.classes,
-    setItems: myClassStates.setClasses,
-    item: myClassStates.class,
-    setItem: myClassStates.setClass,
+    items: classes,
+    setItems: setClasses,
+    item: classItem,
+    setItem: setClassItem,
   };
   let specificValues = {
-    mainValue: myClassStates.class.demandaEstimada,
+    mainValue: classItem.demandaEstimada,
     getNewItemObject: (newValue) => {
-      return { ...myClassStates.class, demandaEstimada: newValue };
+      return { ...classItem, demandaEstimada: newValue };
     },
     title: "Demanda Estimada",
     isNumeric: true,

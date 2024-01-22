@@ -341,7 +341,7 @@ function conflictDemand(turmas, classData) {
   return demandConflicts;
 }
 
-function baseTurmaConflicts(turmas, turma, semestre) {
+function baseClassItemConflicts(turmas, turma, semestre) {
   let myClassConflicts = {};
   let cleanedTurmas = cleanTurmas(turmas, turma);
   myClassConflicts.professor = conflictsProfessor(cleanedTurmas, turma);
@@ -357,4 +357,4 @@ function baseTurmaConflicts(turmas, turma, semestre) {
   return conflicts;
 }
 
-export { centralConflicts, conflictsDisciplinaPeriodo, baseTurmaConflicts };
+export { centralConflicts, conflictsDisciplinaPeriodo, baseClassItemConflicts };

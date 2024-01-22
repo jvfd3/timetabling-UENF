@@ -3,8 +3,8 @@ import React, { useState, useEffect, useRef } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import {
-  SelectDisciplina,
-  SelectProfessor,
+  SelectMultiClassesSubject,
+  SelectMultiClassesProfessor,
   SelectSala,
   SelectDia,
   SelectHoraTang,
@@ -24,8 +24,8 @@ import {
   SmartCreateClassTime,
   SmartDeleteClassTime,
 } from "../../../components/Buttons/Smart/Smart";
-import { getTurmasData } from "../../../DB/retrieveData";
-import { baseTurmaConflicts } from "../../../helpers/conflicts/centralConflicts";
+import { getClassesData } from "../../../DB/retrieveData";
+import { baseClassItemConflicts } from "../../../helpers/conflicts/centralConflicts";
 import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
 import { InputDisciplina } from "../../../components/Buttons/Dumb/Dumb";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
@@ -37,7 +37,7 @@ import {
 } from "../../../helpers/CRUDFunctions/classCRUD";
 import { MultiClassesFilters } from "../../../components/Filters/Filters";
 
-/* ESTRUTURA DOS COMPONENTES
+/* COMPONENTS STRUCTURE
 - CRUDclass
   - CRUDPageSelection
   - Turmas
@@ -46,17 +46,17 @@ import { MultiClassesFilters } from "../../../components/Filters/Filters";
       - MultiTurmasTitle
         - h2
         - SelectAnoSemestre
-      - TurmasTable
+      - ClassesTable
         - TableHeader
         - tbody
           - TableRow
             - SmartDeleteClassItem
-            - SelectDisciplina
-            - SelectProfessor
+            - SelectMultiClassesSubject
+            - SelectMultiClassesProfessor
             - NumberInputDemandaEstimada
-            - HorariosTable
+            - ClassTimeTable
               - SmartCreateClassTime
-              - HorariosTableRow
+              - ClassTimeTableRow
                 - SmartDeleteClassTime
                 - SelectSala
                 - SelectDia
@@ -64,9 +64,9 @@ import { MultiClassesFilters } from "../../../components/Filters/Filters";
                 - SelectDuracao
 */
 
-function ClassTableHeader({ classesProps, currentSemesterProps }) {
+function ClassTableHeader({ classesStates, currentSemesterProps }) {
   const createClassProps = {
-    classesProps,
+    classesStates,
     ...currentSemesterProps,
     createClassDB: createClass,
   };
@@ -85,15 +85,17 @@ function ClassTableHeader({ classesProps, currentSemesterProps }) {
   );
 }
 
-function HorariosTableRow(myProps) {
-  const { turmas, turma, setTurma, horario, indexHorario, conflicts } = myProps;
-  // console.log(indexHorario);
-  let currentIdHorario = horario.idHorario;
-  let professorConflicts = conflicts.raw.professor.alloc;
-  let singleDemandConflicts = conflicts.raw.expectedDemand.singleTurmaCapacity;
+/* Remaining selects, but should be removed later */
+function ClassTimeTableRow(classTimeTableRowProps) {
+  const { classItem, setClassItem, classTime, classTimeIndex, conflicts } =
+    classTimeTableRowProps;
+  const currentClassTimeId = classTime.idHorario;
+  const professorConflicts = conflicts.raw.professor.alloc;
+  const singleDemandConflicts =
+    conflicts.raw.expectedDemand.singleTurmaCapacity;
   // console.log("singleDemandConflicts", singleDemandConflicts);
 
-  let conflictStyles = {
+  const conflictStyles = {
     day: {},
     hour: {},
     classRoom: {
@@ -101,50 +103,51 @@ function HorariosTableRow(myProps) {
       style: { backgroundColor: "" },
     },
   };
-  /*
-  professorConflicts é uma lista de conflitos podendo ter 0 ou mais conflitos.
-  cada conflito é um objeto com a seguinte estrutura:
-  {
-    from: {
-      idTurma: "T01",
-      idHorario: "H01",
-    },
-    time: {
-      day: "SEGUNDA",
-      hour: "8",
-    },
-    to: [
-      {
-        idTurma: "T02",
-        idHorario: "H01",
-      },
-      {
-        idTurma: "T03",
-        idHorario: "H01",
-      },
-    ],
-    type: {
-      name: "Conflito de alocação múltipla",
-      weight: 3,
-    },
-  }
-  a turma recebida nas props é a turma que está sendo renderizada.
-  ela tem a seguinte estrutura relevante:
-  {
-    idTurma: "T01",
-    horarios: [
-      {
-      idHorario: "H01",
-      dia: "SEG",
-      horaInicio: 8,
-      duracao: 2,
-      idTurma: T01
-      },
-    ]
-  }
-  e horário é o horário que está sendo renderizado.
 
-  O que eu desejo é que, caso o horário que está sendo renderizado esteja em conflito com algum outro horário, ele seja colorido. Para isso, deve-se comprar o idHorario do horário que está sendo renderizado cada um dos idHorario do professorConflicts.to. Caso haja um match, o horário deve ser colorido.
+  /*
+    professorConflicts é uma lista de conflitos podendo ter 0 ou mais conflitos.
+    cada conflito é um objeto com a seguinte estrutura:
+    {
+      from: {
+        idTurma: "T01",
+        idHorario: "H01",
+      },
+      time: {
+        day: "SEGUNDA",
+        hour: "8",
+      },
+      to: [
+        {
+          idTurma: "T02",
+          idHorario: "H01",
+        },
+        {
+          idTurma: "T03",
+          idHorario: "H01",
+        },
+      ],
+      type: {
+        name: "Conflito de alocação múltipla",
+        weight: 3,
+      },
+    }
+    a turma recebida nas props é a turma que está sendo renderizada.
+    ela tem a seguinte estrutura relevante:
+    {
+      idTurma: "T01",
+      horarios: [
+        {
+        idHorario: "H01",
+        dia: "SEG",
+        horaInicio: 8,
+        duracao: 2,
+        idTurma: T01
+        },
+      ]
+    }
+    e horário é o horário que está sendo renderizado.
+
+    O que eu desejo é que, caso o horário que está sendo renderizado esteja em conflito com algum outro horário, ele seja colorido. Para isso, deve-se comprar o idHorario do horário que está sendo renderizado cada um dos idHorario do professorConflicts.to. Caso haja um match, o horário deve ser colorido.
   */
 
   // console.log(classDay, classHour + "h");
@@ -157,8 +160,8 @@ function HorariosTableRow(myProps) {
 
   function isConflict(conflicts) {
     if (conflicts.length > 0) {
-      for (let conflict of professorConflicts) {
-        if (conflict.from.idHorario === horario.idHorario) {
+      for (const conflict of professorConflicts) {
+        if (conflict.from.idHorario === classTime.idHorario) {
           return true;
         }
       }
@@ -167,7 +170,7 @@ function HorariosTableRow(myProps) {
   }
 
   if (singleDemandConflicts.length > 0) {
-    for (let conflict of singleDemandConflicts) {
+    for (const conflict of singleDemandConflicts) {
       if (conflict.idClassTime === horario.idHorario) {
         conflictStyles.classRoom = conflicts.styled.demand;
       }
@@ -175,65 +178,54 @@ function HorariosTableRow(myProps) {
   }
 
   return (
-    <tr
-      key={`HorariosTableRow>tr: ${currentIdHorario}-${horario.ordem}-${indexHorario}`}
-    >
+    <tr key={`ClassTimeTableRow>tr: ${currentClassTimeId}-${classTimeIndex}`}>
       <td>
         <SmartDeleteClassTime
-          turma={turma}
-          setTurma={setTurma}
-          idHorario={currentIdHorario}
+          turma={classItem}
+          setTurma={setClassItem}
+          idHorario={currentClassTimeId}
         />
       </td>
       <td {...conflictStyles.classRoom}>
         <SelectSala
-          lTurma={turma}
-          setLTurma={setTurma}
-          indexHorario={indexHorario}
+          lTurma={classItem}
+          setLTurma={setClassItem}
+          indexHorario={classTimeIndex}
         />
       </td>
       <td {...conflictStyles.day}>
         <SelectDia
-          lTurma={turma}
-          setLTurma={setTurma}
-          indexHorario={indexHorario}
+          lTurma={classItem}
+          setLTurma={setClassItem}
+          indexHorario={classTimeIndex}
         />
       </td>
       <td {...conflictStyles.hour}>
         <SelectHoraTang
-          lTurma={turma}
-          setLTurma={setTurma}
-          indexHorario={indexHorario}
+          lTurma={classItem}
+          setLTurma={setClassItem}
+          indexHorario={classTimeIndex}
         />
       </td>
       <td>
         <SelectDuracao
-          lTurma={turma}
-          setLTurma={setTurma}
-          indexHorario={indexHorario}
+          lTurma={classItem}
+          setLTurma={setClassItem}
+          indexHorario={classTimeIndex}
         />
       </td>
     </tr>
   );
 }
 
-function HorariosTable(myProps) {
-  const { rowStates, myTurmasProps, conflicts } = myProps;
-  const { rowTurma, setRowTurma } = rowStates;
-  const { turmas, setTurmas, turma, setTurma, classTimeIndex } = myTurmasProps;
-  const createHourProps = {
-    turmas,
-    setTurmas,
-    rowTurma,
-    setRowTurma,
-    classTimeIndex,
-  };
+/* Remaining SmartCreateClassTime props */
+function ClassTimeTable({ classes, classItem, setClassItem, conflicts }) {
   return (
     <table>
       <thead>
-        <tr key={`LinhaHorarios-${rowTurma.idTurma}`}>
+        <tr key={`LinhaHorarios-${classItem.idTurma}`}>
           <th>
-            <SmartCreateClassTime {...createHourProps} />
+            <SmartCreateClassTime />
           </th>
           <th>Sala</th>
           <th>Dia</th>
@@ -242,45 +234,43 @@ function HorariosTable(myProps) {
         </tr>
       </thead>
       <tbody>
-        {rowTurma.horarios.map((horario, index) => (
-          <HorariosTableRow
-            key={`HorariosTable>HorariosTableRow: ${horario.idHorario}-${horario.ordem}-${index}`}
-            turmas={turmas}
-            turma={rowTurma}
-            setTurma={setRowTurma}
-            horario={horario}
-            conflicts={conflicts}
-            indexHorario={index}
-          />
-        ))}
+        {classItem.horarios.map((iterClassTime, classTimeIndex) => {
+          const classTimeTableRowProps = {
+            classes,
+            classItem,
+            setClassItem,
+            classTime: iterClassTime,
+            classTimeIndex,
+            conflicts,
+          };
+          const keyValue = `ClassTimeTable>ClassTimeTableRow: ${iterClassTime.idHorario}-${classTimeIndex}`;
+          return (
+            <ClassTimeTableRow {...classTimeTableRowProps} key={keyValue} />
+          );
+        })}
       </tbody>
     </table>
   );
 }
 
-function TableRow(myProps) {
-  const { lTurma, myTurmasProps, myCurrentSemestreProps } = myProps;
-  const { turmas, setTurmas, turma, setTurma, classTimeIndex } = myTurmasProps;
+function ClassItemTableRow({ iterClassItem, classes, setClasses, semester }) {
+  const [classItemRow, setClassItemRow] = useState(iterClassItem);
 
-  const { semestre, ano } = myCurrentSemestreProps;
-
-  const [rowTurma, setRowTurma] = useState(lTurma);
-  const rowStates = { rowTurma, setRowTurma };
-  const createHourProps = {
-    turmas,
-    setTurmas,
-    rowTurma,
-    setRowTurma,
-    classTimeIndex,
-  };
+  const conflicts = baseClassItemConflicts(
+    classes,
+    classItemRow,
+    semester.value
+  );
 
   const englishProps = {
-    classes: turmas,
-    setClasses: setTurmas,
-    class: rowTurma,
-    setClass: setRowTurma,
-    classTimeIndex,
+    classes,
+    setClasses,
+    classItem: classItemRow,
+    setClassItem: setClassItemRow,
+    conflicts,
   };
+
+  const classItemRowKey = `ClassItemTableRow: ${classItemRow?.idTurma}-${classItemRow?.disciplina?.codigoDisciplina}-${classItemRow?.professor?.nome}`;
 
   /*
   Pretendo percorrer todas as turmas e verificar se há conflitos entre elas.
@@ -303,70 +293,55 @@ function TableRow(myProps) {
     },
   }
   */
-  let conflicts = baseTurmaConflicts(turmas, rowTurma, semestre.value);
-  // console.log("rowTurma", rowTurma);
+  // console.log("classItemRow", classItemRow);
   // console.log("conflicts", conflicts);
 
   return (
-    <tr
-      key={`TableRow>tr: ${lTurma.idTurma}-${lTurma.disciplina?.codigoDisciplina}-${lTurma?.professor?.nome}`}
-    >
+    <tr key={classItemRowKey}>
       <td>
-        <SmartDeleteClassItem
-          turmas={turmas}
-          setTurmas={setTurmas}
-          turma={rowTurma}
-        />
+        <SmartDeleteClassItem />
       </td>
       <td {...conflicts.styled.disciplina}>
-        <SelectDisciplina lTurma={rowTurma} setLTurma={setRowTurma} />
+        <SelectMultiClassesSubject {...englishProps} />
       </td>
       <td {...conflicts.styled.professor}>
-        <SelectProfessor lTurma={rowTurma} setLTurma={setRowTurma} />
+        <SelectMultiClassesProfessor {...englishProps} />
       </td>
       <td {...conflicts.styled.demand}>
         <NumberInputMultiClassesExpectedDemand {...englishProps} />
       </td>
       <td>
-        {rowTurma.horarios === null || rowTurma.horarios.length === 0 ? (
-          <SmartCreateClassTime {...createHourProps} />
+        {classItemRow.horarios === null ||
+        classItemRow.horarios.length === 0 ? (
+          <SmartCreateClassTime />
         ) : (
-          <HorariosTable
-            rowStates={rowStates}
-            myTurmasProps={myTurmasProps}
-            conflicts={conflicts}
-          />
+          <ClassTimeTable {...englishProps} />
         )}
       </td>
     </tr>
   );
 }
 
-function TurmasTable(myProps) {
-  const { myTurmasProps, myCurrentSemestreProps } = myProps;
-  const englishProps = {
-    classesProps: {
-      classes: myTurmasProps.turmas,
-      setClasses: myTurmasProps.setTurmas,
-      classItem: myTurmasProps.turma,
-      setClassItem: myTurmasProps.setTurma,
-    },
-    currentSemesterProps: {
-      semester: myCurrentSemestreProps.semestre,
-      year: myCurrentSemestreProps.ano,
-    },
-  };
+function ClassesTable(ClassesTableProps) {
+  const { classesStates, currentSemesterProps } = ClassesTableProps;
+  const { classes, setClasses } = classesStates;
+  const { semester } = currentSemesterProps;
   return (
     <table className="showBasicDataTable">
-      <ClassTableHeader {...englishProps} />
+      <ClassTableHeader {...ClassesTableProps} />
       <tbody>
-        {myTurmasProps.turmas.map((lTurma, index) => {
+        {classes.map((iterClassItem, iterClassItemIndex) => {
+          const classItemTableRowProps = {
+            iterClassItem,
+            classes,
+            setClasses,
+            semester,
+          };
+          const classItemTableRowKey = `ClassItemTableRow: ${iterClassItem?.idTurma}-${iterClassItem?.disciplina?.codigo}-${iterClassItem?.professor?.nome}-${iterClassItemIndex}`;
           return (
-            <TableRow
-              lTurma={lTurma}
-              myTurmasProps={myTurmasProps}
-              myCurrentSemestreProps={myCurrentSemestreProps}
-              key={`TableRow: ${lTurma.idTurma}-${lTurma.disciplina?.codigoDisciplina}-${lTurma?.professor?.nome}-${index}`}
+            <ClassItemTableRow
+              {...classItemTableRowProps}
+              key={classItemTableRowKey}
             />
           );
         })}
@@ -375,147 +350,125 @@ function TurmasTable(myProps) {
   );
 }
 
-function NoOfferedClasses(myProps) {
-  const { myTurmasProps, myCurrentSemestreProps } = myProps;
-  const { turmas, setTurmas, classIndex, classTimeIndex } = myTurmasProps;
-  const { semestre, ano } = myCurrentSemestreProps;
-  const createStates = {
-    turmas,
-    setTurmas,
-    semestre,
-    ano,
-    classIndex,
-    classTimeIndex,
-  };
+/* Remaining Create Item props */
+function NoOfferedClasses() {
   return (
     <div
       className="infoCard"
       style={{ display: "flex", flexDirection: "row", textAlignLast: "center" }}
     >
       <p>Ainda não há turmas cadastradas. Clique Aqui</p>
-      <SmartCreateClassItem {...createStates} />
+      <SmartCreateClassItem />
       <p>para criar uma turma</p>
     </div>
   );
 }
 
-function MultiClassesCardHeader(myProps) {
-  const {
-    classesStates,
-    myTurmasProps,
-    myCurrentSemestreProps,
-    defaultClasses,
-    baseClasses,
-  } = myProps;
+function MultiClassesCardHeader(currentSemesterProps) {
   // const { classes, setClasses, classItem, setClassItem } = classesStates;
-  const englishStates = {
-    classes: myTurmasProps.turmas,
-    setClasses: myTurmasProps.setTurmas,
-  };
   return (
     <div className="MultiTurmasTitle">
       <h2>MultiTurmas</h2>
-      <SelectAnoSemestre {...myCurrentSemestreProps} />
+      <SelectAnoSemestre {...currentSemesterProps} />
       {/* <MultiClassesFilters {...englishStates} /> */}
     </div>
   );
 }
 
-function MultiClassesCard(myProps) {
-  const { myTurmasProps, myCurrentSemestreProps, classesStates } = myProps;
-  // const { turmas, setTurmas, turma, setTurma, allSplittedClasses } =
-  //   myTurmasProps;
-  // const filteringProps = { allSplittedClasses, setCurrentClasses: setTurmas };
-
+function MultiClassesCard(ClassesTableProps) {
+  const { classesStates, currentSemesterProps } = ClassesTableProps;
+  const hasClasses = classesStates.classes.length > 0;
   return (
     <div className="infoCard">
-      <MultiClassesCardHeader {...myProps} />
-      {myTurmasProps.turmas.length === 0 ? (
-        <NoOfferedClasses {...myProps} />
+      <MultiClassesCardHeader {...currentSemesterProps} />
+      {hasClasses ? (
+        <ClassesTable {...ClassesTableProps} />
       ) : (
-        <TurmasTable {...myProps} />
+        <NoOfferedClasses />
       )}
     </div>
   );
 }
 
-function NotOfferedSubjects(props) {
-  const { myTurmasProps, myCurrentSemestreProps } = props;
-  const { turmas, setTurmas, turma, setTurma, classIndex } = myTurmasProps;
-  const { semestre, ano } = myCurrentSemestreProps;
-  let year = ano.value;
-  let semester = semestre.value;
-  // console.log(semester);
-  // console.log("turmas", turmas);
-  // Percorra cada turma em turmas e preencha uma lista dos códigos das disciplinas oferecidas pelas turmas
-  let disciplinasOferecidas = turmas
-    .map((turma) => turma.disciplina?.codigo)
+function NotOfferedSubjects({ classesStates, currentSemesterProps }) {
+  const { classes, setClasses, classIndex } = classesStates;
+  const { year, semester } = currentSemesterProps;
+  const yearValue = year.value;
+  const semesterValue = semester.value;
+  // console.log(semesterValue);
+  // console.log("classes", classes);
+  // Percorra cada turma em classes e preencha uma lista dos códigos das disciplinas oferecidas pelas classes
+  const disciplinasOferecidas = classes
+    .map((iterClassItem) => iterClassItem?.disciplina?.codigo)
     .filter(Boolean);
   // Neste código, filter(Boolean) remove todos os valores falsy do array, incluindo null e undefined.
   // console.log("disciplinasOferecidas", disciplinasOferecidas);
 
-  let TodasDisciplinas = sqlDataFromJson.subjects;
+  const allSubjects = sqlDataFromJson.subjects;
 
   // Listar todas os código-nomes de disciplinas que são de semestre ímpar
   // Filtrar todas que são de periodoEsperado%2 == 1
-  let DisciplinasDoSemestre = TodasDisciplinas;
-  if (semester !== 3) {
-    DisciplinasDoSemestre = TodasDisciplinas.filter(
-      (disciplina) => disciplina.periodo % 2 === semester % 2
-    );
+
+  function checkParity(subject, semester) {
+    const subjectParity = subject?.periodo % 2;
+    const semesterParity = semester % 2;
+    const sameParity = subjectParity === semesterParity;
+    return sameParity;
   }
+  const isSummerSemester = semesterValue === 3;
+  const semesterSubject = !isSummerSemester
+    ? allSubjects.filter((subject) => checkParity(subject, semesterValue))
+    : allSubjects;
 
-  // Percorrer cada disciplina em DisciplinasDoSemestre e, caso o código da disciplina esteja na lista de disciplinas oferecidas, remover da lista.
-  let DisciplinasAindaNaoOferecidas = DisciplinasDoSemestre.filter(
-    (disciplina) => {
-      return !disciplinasOferecidas.includes(disciplina.codigo);
-    }
-  );
+  // Percorrer cada disciplina em semesterSubject e, caso o código da disciplina esteja na lista de disciplinas oferecidas, remover da lista.
+  const nonOfferedSubjects = semesterSubject.filter((disciplina) => {
+    return !disciplinasOferecidas.includes(disciplina.codigo);
+  });
 
-  // console.log("DisciplinasAindaNaoOferecidas", DisciplinasAindaNaoOferecidas);
+  // console.log("nonOfferedSubjects", nonOfferedSubjects);
 
   function addSubjectsToClasses(subjects) {
     // console.log("subjects", subjects);
-    let turmasToAdd = subjects.map((subject) => {
+    const classesToAdd = subjects.map((subject) => {
       classIndex.current += 1;
       const blankClass = options.emptyObjects.classItem;
-      const newTurma = {
+      const newClassItem = {
         ...blankClass,
-        idTurma: `${year}0${semester}-${classIndex.current}`,
+        idTurma: `${yearValue}0${semesterValue}-${classIndex.current}`,
         disciplina: subject,
-        ano: year,
-        semestre: semester,
+        ano: yearValue,
+        semestre: semesterValue,
       };
-      return newTurma;
+      return newClassItem;
     });
-    // console.log("turmasToAdd", turmasToAdd);
-    setTurmas([...turmas, ...turmasToAdd]);
+    // console.log("classesToAdd", classesToAdd);
+    setClasses([...classes, ...classesToAdd]);
   }
 
   // Se o período da disciplina for 1, aplicar o className EnfasePrimeiroPeriodo
   function SubjectsTableBody() {
     return (
       <tbody>
-        {DisciplinasAindaNaoOferecidas.map((disciplina) => (
-          <tr key={disciplina.codigo}>
+        {nonOfferedSubjects.map((iterSubject) => (
+          <tr key={iterSubject.codigo}>
             <td
               className={
-                disciplina.periodo === 1 ? "EnfasePrimeiroPeriodo" : ""
+                iterSubject.periodo === 1 ? "EnfasePrimeiroPeriodo" : ""
               }
             >
               <InputDisciplina
-                text={`Criar uma turma para a disciplina ${disciplina.codigo}`}
+                text={`Criar uma turma para a disciplina ${iterSubject.codigo}`}
                 insertDiscFunc={() => {
-                  addSubjectsToClasses([disciplina]);
+                  addSubjectsToClasses([iterSubject]);
                 }}
               />
             </td>
             <td
               className={
-                disciplina.periodo === 1 ? "EnfasePrimeiroPeriodo" : ""
+                iterSubject.periodo === 1 ? "EnfasePrimeiroPeriodo" : ""
               }
             >
-              {`${disciplina.periodo} - (${disciplina.codigo}) ${disciplina.nome}`}
+              {`${iterSubject.periodo} - (${iterSubject.codigo}) ${iterSubject.nome}`}
             </td>
           </tr>
         ))}
@@ -530,10 +483,10 @@ function NotOfferedSubjects(props) {
           Disciplinas ainda não oferecidas do
           {
             // Disciplinas do período{" "}
-            // {semester === 1 ? "ím" : ""}par ainda não oferecidas
-            semester === 1
+            // {semesterValue === 1 ? "ím" : ""}par ainda não oferecidas
+            semesterValue === 1
               ? " período ímpar "
-              : semester === 2
+              : semesterValue === 2
               ? " período par "
               : "s períodos "
           }
@@ -546,7 +499,7 @@ function NotOfferedSubjects(props) {
                   size="4em"
                   text="Adicionar todas as turmas pendentes"
                   insertDiscFunc={() =>
-                    addSubjectsToClasses(DisciplinasAindaNaoOferecidas)
+                    addSubjectsToClasses(nonOfferedSubjects)
                   }
                 />
               </th>
@@ -569,7 +522,7 @@ function NotOfferedSubjects(props) {
 
   return (
     <div>
-      {DisciplinasAindaNaoOferecidas.length === 0 ? (
+      {nonOfferedSubjects.length === 0 ? (
         <DisciplinasMínimasForamOferecidas />
       ) : (
         <TabelaDeDisciplinasASereOferecidas />
@@ -578,97 +531,65 @@ function NotOfferedSubjects(props) {
   );
 }
 
-function Turmas() {
+function MultiClasses() {
   const classIndex = useRef(sqlDataFromJson.classes.length);
   const classTimeIndex = useRef(sqlDataFromJson.classtimes.length);
 
-  let unifiedHorarios = getTurmasData();
+  const [year, setYear] = useState(options.constantValues.years[14]);
+  const [semester, setSemester] = useState(options.constantValues.semesters[0]);
 
-  const [ano, setAno] = useState(options.constantValues.years[14]);
-  const [semestre, setSemestre] = useState(options.constantValues.semesters[0]);
-
-  let filteredTurmas = getTurmasDoAnoSemestre(
-    unifiedHorarios,
-    ano.value,
-    semestre.value
+  const unifiedClassTimes = getClassesData();
+  const filteredClasses = getTurmasDoAnoSemestre(
+    unifiedClassTimes,
+    year.value,
+    semester.value
   );
 
-  const [turmas, setTurmas] = useState(filteredTurmas);
-  const [turma, setTurma] = useState(filteredTurmas[0]);
+  const [classes, setClasses] = useState(filteredClasses);
+  const [classItem, setClassItem] = useState(classes[0]);
 
-  let unifiedClasses = unifiedHorarios;
-  let allSplittedClasses = splitTurmas(unifiedClasses);
-  // let newReunitedClasses = splittedToUnified3(allSplittedClasses);
+  const unifiedClasses = unifiedClassTimes;
+  const allSplittedClasses = splitTurmas(unifiedClasses);
 
   useEffect(() => {
-    // console.log("ano", ano.value, "semestre", semestre.value);
-    // console.log(unifiedHorarios[unifiedHorarios.length - 1]);
-    let newFilteredTurmas = getTurmasDoAnoSemestre(
-      unifiedHorarios,
-      ano.value,
-      semestre.value
+    const newFilteredTurmas = getTurmasDoAnoSemestre(
+      unifiedClassTimes,
+      year.value,
+      semester.value
     );
-    setTurmas(newFilteredTurmas);
-    setTurma(newFilteredTurmas[0]);
-  }, [ano, semestre]);
+    setClassItem(newFilteredTurmas[0]);
+    setClasses(newFilteredTurmas);
+  }, [year, semester]);
 
-  let myCurrentSemestreProps = { ano, setAno, semestre, setSemestre };
-  let myTurmasProps = {
-    turmas,
-    setTurmas,
-    turma,
-    setTurma,
-    classIndex,
-    classTimeIndex,
-    allSplittedClasses,
-  };
-  let myProps = { myTurmasProps, myCurrentSemestreProps };
-
-  /* \ POST REFACTOR / */
-
-  const blankClass = options.emptyObjects.classItem;
-  const [unfilteredClasses, setUnfilteredClasses] = useState([blankClass]);
-  const [classes, setClasses] = useState([blankClass]);
-  const [classItem, setClassItem] = useState(classes?.[0] ?? blankClass);
-
-  const defaultClasses = sqlDataFromJson.classes;
-  const baseClasses = useRef(defaultClasses);
+  const currentSemesterProps = { year, setYear, semester, setSemester };
   const classesStates = {
     classes,
     setClasses,
     classItem,
     setClassItem,
-    defaultClasses,
-    baseClasses,
+    classIndex,
+    classTimeIndex,
+    allSplittedClasses,
   };
 
-  useEffect(() => {
-    readClass(classesStates);
-    setUnfilteredClasses();
-  }, []);
-
-  useEffect(() => {
-    console.log("classes", classes.length);
-  }, [classes]);
-
-  myProps.classesStates = classesStates;
+  const baseProps = { classesStates, currentSemesterProps };
 
   return (
     <div className="CRUDContainComponents">
-      <MultiClassesCard {...myProps} />
-      <NotOfferedSubjects {...myProps} />
+      <MultiClassesCard {...baseProps} />
+      <NotOfferedSubjects {...baseProps} />
     </div>
   );
 }
 
-function CRUDclass() {
-  let defaultPageValue = options.constantValues.pageSelection.multiClasses;
+function CRUDMultiClasses() {
+  const defaultPageValue = options.constantValues.pageSelection.multiClasses;
   return (
     <div className="background">
       <CRUDPageSelection defaultValue={defaultPageValue} />
-      <Turmas />
+      <MultiClasses />
     </div>
   );
 }
 
-export default CRUDclass;
+export default CRUDMultiClasses;

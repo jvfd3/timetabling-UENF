@@ -515,44 +515,45 @@ function SelectSemestre({ outerSemestre, setOuterSemestre }) {
   );
 }
 
-function SelectAnoSemestre({ ano, setAno, semestre, setSemestre }) {
+function SelectAnoSemestre({ year, setYear, semester, setSemester }) {
   return (
     <div className="GlobalSelects">
       Ano:
-      <SelectAno outerAno={ano} setOuterAno={setAno} />
+      <SelectAno outerAno={year} setOuterAno={setYear} />
       Semestre:
-      <SelectSemestre outerSemestre={semestre} setOuterSemestre={setSemestre} />
+      <SelectSemestre outerSemestre={semester} setOuterSemestre={setSemester} />
     </div>
   );
 }
 
-function SelectDisciplina({ lTurma, setLTurma }) {
-  const [disciplina, setDisciplina] = useState(lTurma.disciplina);
-  let disciplinas = sqlDataFromJson.subjects;
-  // console.log("SelectDisciplina", lTurma?.disciplina?.apelido);
-  function updateOuterTurmaDisciplina(novaDisciplina) {
-    let disciplinaAtualizada = novaDisciplina ? novaDisciplina : null;
-    setDisciplina(disciplinaAtualizada);
-    let novaTurma = {
-      ...lTurma,
-      disciplina: disciplinaAtualizada,
+function SelectMultiClassesSubject({ classItem, setClassItem }) {
+  const [subject, setSubject] = useState(classItem.disciplina);
+  const subjects = sqlDataFromJson.subjects;
+
+  function updateOuterClassItemSubject(newSubject) {
+    const updatedSubject = newSubject ? newSubject : null;
+    setSubject(updatedSubject);
+    const newClassItem = {
+      ...classItem,
+      disciplina: updatedSubject,
     };
-    setLTurma(novaTurma);
+    setClassItem(newClassItem);
   }
 
   const [isLocked, setIsLocked] = useState(false);
 
   return (
     <LockableSelect
-      onChange={updateOuterTurmaDisciplina}
+      onChange={updateOuterClassItemSubject}
       isClearable={true}
       placeholder="Disciplina"
-      options={disciplinas}
-      value={disciplina}
-      getOptionValue={(disciplina) => disciplina.codigo}
+      options={subjects}
+      value={subject}
+      getOptionValue={(subject) => subject?.codigo}
       formatOptionLabel={({ codigo, apelido, nome }, { context }) => {
+        const isOpened = context === "value";
         let editedLabel = `${codigo} - `;
-        editedLabel += context === "value" ? `${apelido}` : `${nome}`;
+        editedLabel += isOpened ? `${apelido}` : `${nome}`;
         return editedLabel;
       }}
       lockStates={{
@@ -564,31 +565,34 @@ function SelectDisciplina({ lTurma, setLTurma }) {
   );
 }
 
-function SelectProfessor({ lTurma, setLTurma }) {
-  const [professor, setProfessor] = useState(lTurma.professor);
+function SelectMultiClassesProfessor({ classItem, setClassItem }) {
+  const [professor, setProfessor] = useState(classItem.professor);
+  const professors = sqlDataFromJson.professors;
 
-  function updateOuterTurmaProfessor(novoProfessor) {
-    let professorAtualizado = novoProfessor ? novoProfessor : null;
-    setProfessor(professorAtualizado);
-    let novaTurma = { ...lTurma, professor: professorAtualizado };
-    setLTurma(novaTurma);
+  function updateOuterClassItemProfessor(newProfessor) {
+    const updatedProfessor = newProfessor ?? null;
+    const novaTurma = { ...classItem, professor: updatedProfessor };
+    setProfessor(updatedProfessor);
+    setClassItem(novaTurma);
   }
 
   const [isLocked, setIsLocked] = useState(false);
 
   return (
     <LockableSelect
-      onChange={updateOuterTurmaProfessor}
+      onChange={updateOuterClassItemProfessor}
       isClearable={true}
       placeholder="Professor"
-      options={sqlDataFromJson.professors}
+      options={professors}
       value={professor}
-      getOptionValue={(option) => option.nome}
+      getOptionValue={(professor) => professor?.nome}
       getOptionLabel={({ nome, apelido, laboratorio, curso }) =>
         `${nome} - ${apelido} - ${laboratorio} - ${curso}`
       }
       formatOptionLabel={({ apelido, nome }, { context }) => {
-        return context === "value" ? `${apelido}` : `${nome}`;
+        const isOpened = context === "value";
+        const message = isOpened ? `${apelido}` : `${nome}`;
+        return message;
       }}
       lockStates={{
         isLocked: isLocked,
@@ -1433,8 +1437,8 @@ export {
   SelectAno,
   SelectSemestre,
   SelectAnoSemestre,
-  SelectProfessor,
-  SelectDisciplina,
+  SelectMultiClassesProfessor,
+  SelectMultiClassesSubject,
 
   /* MTT: Horario */
   SelectSala,
