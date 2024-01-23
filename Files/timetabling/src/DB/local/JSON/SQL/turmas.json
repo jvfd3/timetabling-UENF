@@ -30,7 +30,9 @@
   {"id": 20220229, "ano": 2022, "semestre": 2, "idDisciplina":   59, "idProfessor":    3, "demandaEstimada": null, "comment": ""},
   {"id": 20220230, "ano": 2022, "semestre": 2, "idDisciplina":   65, "idProfessor":    1, "demandaEstimada":    9, "comment": ""},
 
+
   {"id": 20230103, "ano": 2023, "semestre": 1, "idDisciplina":    3, "idProfessor":   51, "demandaEstimada":   35, "comment": ""},
+
   {"id": 20230109, "ano": 2023, "semestre": 1, "idDisciplina":    7, "idProfessor":   42, "demandaEstimada": null, "comment": ""},
   {"id": 20230110, "ano": 2023, "semestre": 1, "idDisciplina":   16, "idProfessor":   36, "demandaEstimada":    4, "comment": ""},
   {"id": 20230111, "ano": 2023, "semestre": 1, "idDisciplina":   18, "idProfessor":   36, "demandaEstimada":    5, "comment": ""},
@@ -48,14 +50,18 @@
   {"id": 20230123, "ano": 2023, "semestre": 1, "idDisciplina":   27, "idProfessor":    3, "demandaEstimada":   16, "comment": ""},
   {"id": 20230124, "ano": 2023, "semestre": 1, "idDisciplina":   28, "idProfessor":    8, "demandaEstimada":   30, "comment": ""},
   {"id": 20230125, "ano": 2023, "semestre": 1, "idDisciplina":   34, "idProfessor":   10, "demandaEstimada":   11, "comment": ""},
+
   {"id": 20230127, "ano": 2023, "semestre": 1, "idDisciplina":   36, "idProfessor":    5, "demandaEstimada":   13, "comment": ""},
   {"id": 20230128, "ano": 2023, "semestre": 1, "idDisciplina":   37, "idProfessor":    2, "demandaEstimada":   10, "comment": ""},
+
   {"id": 20230131, "ano": 2023, "semestre": 1, "idDisciplina":   48, "idProfessor":    1, "demandaEstimada":   12, "comment": ""},
   {"id": 20230132, "ano": 2023, "semestre": 1, "idDisciplina":   54, "idProfessor":   29, "demandaEstimada": null, "comment": ""},
   {"id": 20230133, "ano": 2023, "semestre": 1, "idDisciplina":   57, "idProfessor":   39, "demandaEstimada": null, "comment": ""},
   {"id": 20230134, "ano": 2023, "semestre": 1, "idDisciplina":   58, "idProfessor":    3, "demandaEstimada": null, "comment": ""},
   {"id": 20230135, "ano": 2023, "semestre": 1, "idDisciplina":   59, "idProfessor":    3, "demandaEstimada": null, "comment": ""},
+
   {"id": 20230137, "ano": 2023, "semestre": 1, "idDisciplina":   69, "idProfessor":    4, "demandaEstimada":   10, "comment": ""},
+
 
   {"id": 20230201, "ano": 2023, "semestre": 2, "idDisciplina":    2, "idProfessor": null, "demandaEstimada": null, "comment": ""},
   {"id": 20230202, "ano": 2023, "semestre": 2, "idDisciplina":    7, "idProfessor": null, "demandaEstimada": null, "comment": ""},
