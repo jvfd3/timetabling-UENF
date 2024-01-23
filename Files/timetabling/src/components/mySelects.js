@@ -1031,7 +1031,7 @@ function SelectClassItem(classStates) {
       getOptionValue: (classItem) =>
         `id: ${classItem?.id ?? classItem?.idTurma}`,
       getOptionLabel: ({ ano, semestre, disciplina, professor }) => {
-        const message = "";
+        let message = "";
         message += `${ano}.${semestre} - `;
         message += `${disciplina?.apelido ?? "disc. indef."} - `;
         message += `${professor?.apelido ?? "prof. indef."}`;
@@ -1143,7 +1143,7 @@ function SelectProfessorItem(professorStates) {
     customProps: {
       getOptionValue: ({ id }) => id,
       getOptionLabel: ({ nome, apelido, laboratorio, curso }) => {
-        const message = "";
+        let message = "";
         message += `${nome} - `;
         message += `${apelido} - `;
         message += `${laboratorio} - `;
