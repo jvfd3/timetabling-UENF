@@ -82,7 +82,7 @@ function searchSameDayAndHour(flatTurmas, horario) {
     if (sameTime) {
       const iterConflict = {
         idTurma: iterClasstime.idTurma,
-        idHorario: iterClasstime.idHorario,
+        idHorario: getId(iterClasstime),
       };
       hourAllocConflicts.push(iterConflict);
     }

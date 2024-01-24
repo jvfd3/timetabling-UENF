@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import options from "../temp/options";
 import "../CSS/defaultStyle.css";
-import { sqlDataFromJson } from "../../DB/dataFromJSON";
-import Tabela from "./Timetable";
 
 function TabelaDeConflitos() {
   let anos = options.constantValues.years;

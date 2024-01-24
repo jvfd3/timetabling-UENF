@@ -144,29 +144,6 @@ function getAtendimentoDeDemandas(turmas, disciplinasDemandadas) {
 
 /* Post refactor \/ */
 
-// 5
-
-// 4
-/* function getTurmasDoProfessor(turmas, professor) {
-  let outrasTurmasDoProfessor = [];
-  turmas.forEach((iterTurma) => {
-    let profIgual = iterTurma.professor === professor;
-    let profNaoNulo = professor !== null;
-    let profNaoVazio = professor !== "";
-    let profNaoUndefined = professor !== undefined;
-    let profValido =
-      profIgual && profNaoNulo && profNaoVazio && profNaoUndefined;
-    if (profValido) {
-      outrasTurmasDoProfessor.push(iterTurma);
-    }
-  });
-  return outrasTurmasDoProfessor;
-} */
-
-function getTurmasDoProfessor(turmas, professor) {
-  return turmas.filter((turma) => turma.professor === professor);
-}
-
 // 3
 function removeSameId(turmas, turma) {
   // console.log("Quantidade de Turmas", turmas.length);
@@ -226,7 +203,6 @@ export {
   getNumeroDeConflitos,
   getAtendimentoDeDemandas,
   /* Refactored: */
-  getTurmasDoProfessor, // 4
   removeSameId, // 3
   flattenTurma, // 2
   splitTurmas, // 1

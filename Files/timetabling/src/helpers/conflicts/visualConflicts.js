@@ -1,3 +1,5 @@
+import { getId } from "../auxCRUD";
+
 let baseStyle = {
   title: "Conflitos Professor",
   style: { backgroundColor: "#84d47d" },
@@ -28,15 +30,17 @@ function getColorByLevel(conflictLevel) {
 /* Professor \/ */
 
 function getProfessorAllocConflictMessage(profConflicts) {
-  let mensagem = "";
+  console.log(profConflicts);
+  let message = "";
   profConflicts.forEach((conflito) => {
-    mensagem += `"${conflito.type.name}", `;
-    mensagem += `${conflito.time.day} às ${conflito.time.hour}h, com as turmas:\n`;
+    message += `"${conflito.type.name}", `;
+    message += `${conflito.time.day} às ${conflito.time.hour}h, com as turmas:\n`;
     conflito.to.forEach((turmaConflituosa) => {
-      mensagem += `--- Turma: ${turmaConflituosa.idTurma}, horário: ${turmaConflituosa.idHorario}\n`;
+      message += `--- Turma: ${turmaConflituosa.idTurma}, `;
+      message += `horário: ${getId(turmaConflituosa)}\n`;
     });
   });
-  return mensagem;
+  return message;
 }
 
 function getProfessorStyledConflict(conflicts) {
