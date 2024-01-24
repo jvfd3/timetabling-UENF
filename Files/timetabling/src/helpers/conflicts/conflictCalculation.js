@@ -1,4 +1,5 @@
 import options from "../../DB/local/options";
+import { getId } from "../auxCRUD";
 
 function searchSameDayAndHour(flatTurmas, horario) {
   /* flatTurmas tem a seguinte estrutura:
@@ -64,12 +65,16 @@ function searchSameDayAndHour(flatTurmas, horario) {
   const hourAllocConflicts = [];
   // console.log(`(${horario.dia}, ${horario.horaInicio})`, flatTurmas);
   flatTurmas.forEach((iterClasstime) => {
-    let dayNotNull = horario.dia !== null || iterClasstime.dia !== null;
-    let hourNotNull =
-      horario.horaInicio !== null || iterClasstime.horaInicio !== null;
-    let dayTimeNotNull = dayNotNull && hourNotNull;
     const sameDay = horario.dia === iterClasstime.dia;
+    const notNullDay =
+      (horario && horario.dia !== null) ||
+      (iterClasstime && iterClasstime.dia !== null);
+    const notNullStartHour =
+      (horario && horario.horaInicio !== null) ||
+      (iterClasstime && iterClasstime.horaInicio !== null);
+    const NotNullDayTime = notNullDay && notNullStartHour;
     const sameHour = horario.horaInicio === iterClasstime.horaInicio;
+    /* Is this duration conflict right? */
     const duracaoConflito =
       horario.horaInicio < iterClasstime.horaInicio + iterClasstime.duracao &&
       horario.horaInicio + horario.duracao > iterClasstime.horaInicio;
@@ -95,7 +100,7 @@ function searchSameDayAndHour(flatTurmas, horario) {
       },
       from: {
         idTurma: horario.idTurma,
-        idHorario: horario.idHorario,
+        idHorario: getId(horario),
       },
       to: hourAllocConflicts,
     };
@@ -113,8 +118,6 @@ function getSingleClassDemandConflict(demandClassData) {
       and also if there is a demand and a capacity.
       If there is, add it to the list of conflicts.
     */
-    let conflictObject = null;
-
     // Checking if there is a conflict
     const expectedDemand = iterClass.expectedDemand;
     const capacity = iterClass.roomCapacity;
@@ -127,7 +130,7 @@ function getSingleClassDemandConflict(demandClassData) {
 
     const hasConflict = hasDemandAndCapacity && hasRoomSmallerThanDemand;
     if (hasConflict) {
-      conflictObject = {
+      const conflictObject = {
         expectedDemand: expectedDemand,
         capacity: capacity,
         type: options.conflicts.roomCapacity,
