@@ -252,6 +252,8 @@ function ClassItemTableRow(classTableRowProps) {
     semester.value
   );
 
+  // console.log("OldConflicts", conflicts);
+
   const rowClassStates = {
     classes,
     setClasses,
@@ -577,7 +579,7 @@ function CRUDMultiClasses() {
     <div className="background">
       <CRUDPageSelection defaultValue={defaultPageValue} />
       <MultiClassesRefactor />
-      <MultiClasses />
+      {/* <MultiClasses /> */}
     </div>
   );
 }

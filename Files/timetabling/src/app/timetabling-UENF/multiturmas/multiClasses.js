@@ -55,14 +55,9 @@ function ClassItemTableRow(classTableRowProps) {
 
   const [classItemRow, setClassItemRow] = useState(iterClassItem);
 
-  let test = {
-    classItem: classItemRow,
-  };
-  // console.log(test);
-
   const conflicts = baseClassItemConflicts(classes, classItemRow, semester);
 
-  // console.log("conflicts", conflicts);
+  // console.log("NewConflicts", conflicts);
 
   const rowClassStates = {
     classes,
