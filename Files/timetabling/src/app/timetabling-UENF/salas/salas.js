@@ -96,39 +96,6 @@ function RoomBaseInfo(myRoomsStates) {
 
 function ClassesInRoom(room) {
   const { id } = room;
-  /* function getTurmas(id) {
-        let horarios = sqlDataFromJson.classtimes;
-        let horariosNestaSala = [];
-        for (const chaveTurma in horarios) {
-          let horario = horarios[chaveTurma];
-          if (horario.idSala === id) {
-            horariosNestaSala.push(horario);
-          }
-        }
-        let fullInfoFromTurmasNaSala =
-          appendInfoFromTurmasUsingHorarios(horariosNestaSala);
-
-        let dias = options.constantValues.days;
-
-        fullInfoFromTurmasNaSala.sort((a, b) => {
-          let diaA = dias.find((dia) => dia.value === a.dia);
-          let diaB = dias.find((dia) => dia.value === b.dia);
-          if (dias.indexOf(diaA) < dias.indexOf(diaB)) {
-            return -1;
-          }
-          if (dias.indexOf(diaA) > dias.indexOf(diaB)) {
-            return 1;
-          }
-          if (a.horaInicio < b.horaInicio) {
-            return -1;
-          }
-          if (a.horaInicio > b.horaInicio) {
-            return 1;
-          }
-          return 0;
-        });
-        return fullInfoFromTurmasNaSala;
-      } */
   let classes = getClassesData();
   let splittedClasses = splitTurmas(classes);
   let turmasNestaSala = splittedClasses.filter((splittedClass) => {
