@@ -43,7 +43,7 @@ function getProfessorAllocConflictMessage(profConflicts) {
   return message;
 }
 
-function getProfessorStyledConflict(conflicts) {
+function getProfessorStyledConflict(conflicts, classItem) {
   /*  Posso fazer isso de algumas formas:
 - Mais simples:
   - Se a lista de conflitos existir: vermelho.
@@ -77,6 +77,12 @@ function getProfessorStyledConflict(conflicts) {
         Ex.: "com as turmas: ${JSON.stringify(conflito.to)}."
   - definir o currentStyle.title como mensagem
 */
+
+  const hasProfessor = classItem.professor !== null;
+  if (!hasProfessor) {
+    currentStyle.title = "Professor não definido";
+    currentStyle.style = { backgroundColor: "#8090A0" };
+  }
 
   let mensagem = getProfessorAllocConflictMessage(profConflicts);
   if (mensagem !== "") {
@@ -218,7 +224,7 @@ function getStyledConflict(conflicts, classItem, semester) {
     style: { backgroundColor: "#d9b57c" },
   };
   myClassConflicts.disciplina = getSubjectStyledConflict(classItem, semester);
-  myClassConflicts.professor = getProfessorStyledConflict(conflicts);
+  myClassConflicts.professor = getProfessorStyledConflict(conflicts, classItem);
   myClassConflicts.demand = getDemandStyledConflict(conflicts);
   return myClassConflicts;
 }
