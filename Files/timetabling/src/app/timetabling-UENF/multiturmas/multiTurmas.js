@@ -153,14 +153,14 @@ function ClassTimeTableRow(classTimeTableRowProps) {
     return false;
   }
 
-  if (singleDemandConflicts.length > 0) {
-    for (const conflict of singleDemandConflicts) {
-      if (conflict?.idClassTime === horario?.idHorario) {
-        // The line above was causing a bug for some reason
-        conflictStyles.classRoom = conflicts.styled.demand;
-      }
-    }
-  }
+  // if (singleDemandConflicts.length > 0) {
+  //   for (const conflict of singleDemandConflicts) {
+  //     if (conflict?.idClassTime === horario?.idHorario) {
+  //       // The line above was causing a bug for some reason
+  //       conflictStyles.classRoom = conflicts.styled.demand;
+  //     }
+  //   }
+  // }
 
   const classTimeTableRowKey = `ClassTimeTableRow: ${currentClassTimeId}-${classTimeIndex}`;
 
