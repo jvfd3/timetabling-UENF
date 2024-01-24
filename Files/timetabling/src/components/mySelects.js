@@ -38,7 +38,9 @@ function LockableSelect(extProps) {
         onClick={toggleLock}
         style={{
           pointerEvents: "auto",
-          color: isLocked ? "black" : "#708090",
+          color: isLocked
+            ? options.config.colors.locker.locked
+            : options.config.colors.locker.unlocked,
           cursor: "pointer",
         }}
       >

@@ -428,6 +428,36 @@ const options = {
   },
   config: {
     iconButtons: true,
+    colors: {
+      conflicts: {
+        notSet: {
+          subject: "#708090",
+          professor: "#8090A0",
+          demand: "#90A0B0",
+        },
+        noProblem: {
+          subject: "#000000",
+          professor: "#84D47D",
+          demand: "#008B45",
+        },
+        hasConflict: {
+          subject: "#000000",
+          professor: "#000000",
+          demand: "#D9B57C",
+        },
+        levels: {
+          level0: "#708090",
+          level1: "#008B45",
+          level2: "#D7B740",
+          level3: "#D77A61",
+          level4: "#8B0000",
+        },
+      },
+      locker: {
+        locked: "#000000",
+        unlocked: "#708090",
+      },
+    },
   },
   SelectStyles: {
     fullWidth: {

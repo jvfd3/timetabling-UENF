@@ -1,27 +1,30 @@
+import options from "../../DB/local/options";
 import { getId } from "../auxCRUD";
 
 let baseStyle = {
   title: "Conflitos Professor",
-  style: { backgroundColor: "#84d47d" },
+  style: {
+    backgroundColor: options.config.colors.conflicts.noProblem.professor,
+  },
 };
 
 function getColorByLevel(conflictLevel) {
   let color = "";
   switch (conflictLevel) {
     case 0:
-      color = "#008B45";
+      color = options.config.colors.conflicts.levels.level0;
       break;
     case 1:
-      color = "#D7B740";
+      color = options.config.colors.conflicts.levels.level1;
       break;
     case 2:
-      color = "#D77A61";
+      color = options.config.colors.conflicts.levels.level2;
       break;
     case 3:
-      color = "#8B0000";
+      color = options.config.colors.conflicts.levels.level3;
       break;
     default:
-      color = "#708090";
+      color = options.config.colors.conflicts.levels.level4;
       break;
   }
   return color;
@@ -81,7 +84,9 @@ function getProfessorStyledConflict(conflicts, classItem) {
   const hasProfessor = classItem.professor !== null;
   if (!hasProfessor) {
     currentStyle.title = "Professor não definido";
-    currentStyle.style = { backgroundColor: "#8090A0" };
+    currentStyle.style = {
+      backgroundColor: options.config.colors.notSetProfessor,
+    };
   }
 
   let mensagem = getProfessorAllocConflictMessage(profConflicts);
@@ -154,7 +159,7 @@ function getSubjectStyledConflict(turma, semestreAtual) {
   let titleMessage = "";
   if (expectedSemester === undefined) {
     titleMessage = "Disciplina ainda não definida";
-    newColor = "#708090";
+    newColor = options.config.colors.notSetSubject;
   } else {
     newColor = getColorGradient(expectedSemester, semestreAtual);
     if (expectedSemester === 0) {
@@ -180,9 +185,10 @@ function getSubjectStyledConflict(turma, semestreAtual) {
 
 /* Disciplina /\ */
 
-function getDemandStyledConflict(conflicts) {
+function getDemandStyledConflict(conflicts, classItem) {
+  console.log("classItem", classItem);
   let demandConflicts = conflicts.expectedDemand.singleTurmaCapacity;
-  let newColor = "#008B45";
+  let newColor = options.config.colors.conflicts.noProblem.demand;
   let titleMessage = "Não foi identificado conflitos de demanda";
   let demandStyle = {
     title: newColor,
@@ -191,7 +197,7 @@ function getDemandStyledConflict(conflicts) {
   // console.log("demandConflicts", demandConflicts); //idRoom Undefined
   let numberOfConflicts = demandConflicts.length;
   if (numberOfConflicts > 0) {
-    newColor = "#DD3333";
+    newColor = options.config.colors.conflicts.hasConflict.demand;
     titleMessage = `Há ${numberOfConflicts} conflitos de demanda.`;
     let surplus = 0;
     demandConflicts.forEach((iterConflict) => {
@@ -210,6 +216,13 @@ function getDemandStyledConflict(conflicts) {
     });
     // titleMessage += `\nNo pior caso ${surplus} alunos ficam de fora`;
   }
+
+  const hasDemand = classItem.demandaEstimada !== null;
+  if (!hasDemand) {
+    titleMessage = "Demanda não definida";
+    newColor = options.config.colors.notSetDemand;
+  }
+
   demandStyle.title = titleMessage;
   demandStyle.style = { backgroundColor: newColor };
   return demandStyle;
@@ -221,11 +234,13 @@ function getStyledConflict(conflicts, classItem, semester) {
   let myClassConflicts = {};
   myClassConflicts.demanda = {
     title: "Conflitos Demanda",
-    style: { backgroundColor: "#d9b57c" },
+    style: {
+      backgroundColor: options.config.colors.conflicts.hasConflict.demand,
+    },
   };
   myClassConflicts.disciplina = getSubjectStyledConflict(classItem, semester);
   myClassConflicts.professor = getProfessorStyledConflict(conflicts, classItem);
-  myClassConflicts.demand = getDemandStyledConflict(conflicts);
+  myClassConflicts.demand = getDemandStyledConflict(conflicts, classItem);
   return myClassConflicts;
 }
 
