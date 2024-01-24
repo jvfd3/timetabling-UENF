@@ -34,17 +34,17 @@ import { getStyledConflict } from "./visualConflicts";
 
 // Discarded (?)
 function centralConflicts(turmasListadas, turmaLinear) {
-  let encounteredConflicts = {};
-  let filteredTurmas = removeSameId(
+  const encounteredConflicts = {};
+  const filteredTurmas = removeSameId(
     splittedTurmas,
     turmaLinear.id,
     turmaLinear.idHorario
   );
-  let splittedTurmas = splitTurmas(turmasListadas);
+  const splittedTurmas = splitTurmas(turmasListadas);
   // console.log("splittedTurmas", splittedTurmas);
   // console.log("filteredTurmas", filteredTurmas);
-  // let filteredTurmas = turmasListadas;
-  let conflitosProfessor = conflictsProfessor(filteredTurmas, turmaLinear);
+  // const filteredTurmas = turmasListadas;
+  const conflitosProfessor = conflictsProfessor(filteredTurmas, turmaLinear);
   encounteredConflicts.professor = conflitosProfessor;
   // console.log(conflitosProfessor);
   return encounteredConflicts;
@@ -93,33 +93,35 @@ function conflictsDisciplinaPeriodo(turmasListadas, turma) {
 
   */
 
-  let disciplinaDaTurma = turma.disciplina.codigo;
-  let disciplinas = sqlDataFromJson.subjects;
+  const disciplinaDaTurma = turma.disciplina.codigo;
+  const disciplinas = sqlDataFromJson.subjects;
 
   // console.log("disciplinaDaTurma", disciplinaDaTurma);
 
   /* Obter lista de disciplinas que tenham o mesmo período da disciplinaDaTurma */
-  let periodoEsperado = "";
+  const periodoEsperado = "";
   disciplinas.forEach((disciplina) => {
     if (disciplina.codigo === disciplinaDaTurma) {
       periodoEsperado = disciplina.periodo;
     }
   });
   // console.log("periodoEsperado", periodoEsperado);
-  let disciplinasDoMesmoPeriodo = [];
+  const disciplinasDoMesmoPeriodo = [];
   disciplinas.forEach((disciplina) => {
     if (disciplina.periodo === periodoEsperado) {
       disciplinasDoMesmoPeriodo.push(disciplina.codigo);
     }
   });
   // console.log("disciplinasDoMesmoPeriodo", disciplinasDoMesmoPeriodo);
-  let turmasListadasSemTurmaOriginal = turmasListadas.filter((turmaListada) => {
-    return turmaListada.id !== turma.id;
-  });
+  const turmasListadasSemTurmaOriginal = turmasListadas.filter(
+    (turmaListada) => {
+      return turmaListada.id !== turma.id;
+    }
+  );
   // console.log("turmasListadasSemTurmaOriginal", turmasListadasSemTurmaOriginal);
 
   /* Filtrar de turmasListadasSemTurmaOriginal todas todas as turmas que possuem seu disciplina.codigo percencente à lista "disciplinasDoMesmoPeriodo" */
-  let turmasDoMesmoPeriodo = [];
+  const turmasDoMesmoPeriodo = [];
   turmasListadasSemTurmaOriginal.forEach((turmaListada) => {
     if (disciplinasDoMesmoPeriodo.includes(turmaListada.disciplina.codigo)) {
       turmasDoMesmoPeriodo.push(turmaListada);
@@ -127,28 +129,28 @@ function conflictsDisciplinaPeriodo(turmasListadas, turma) {
   });
   // console.log("turmasDoMesmoPeriodo", turmasDoMesmoPeriodo);
 
-  let splittedTurmas = splitTurmas(turmasDoMesmoPeriodo);
+  const splittedTurmas = splitTurmas(turmasDoMesmoPeriodo);
   // console.log("disciplinas", disciplinas);
   // console.log("splittedTurmas", splittedTurmas);
 
-  let flattenedTurma = [];
+  const flattenedTurma = [];
   turma.horarios.forEach((_, index) => {
     flattenedTurma.push(flattenTurma(turma, index));
   });
-  let conflitosDisciplinaPeriodo = { disciplinaPeriodo: {} };
+  const conflitosDisciplinaPeriodo = { disciplinaPeriodo: {} };
 
   // console.log("flattenedTurma", flattenedTurma);
   flattenedTurma.forEach((turma, indexHorario) => {
-    let maxConflito = 0;
+    const maxConflito = 0;
     splittedTurmas.forEach((turmaDoMesmoPeriodo, index) => {
       // console.log("(DiaHora, ", turma.dia, turma.horaInicio,")", "(DiaHora, ", turmaDoMesmoPeriodo.dia, turmaDoMesmoPeriodo.horaInicio,")");
-      let mesmoDia = turma.dia === turmaDoMesmoPeriodo.dia;
-      let mesmaHora = turma.horaInicio === turmaDoMesmoPeriodo.horaInicio;
-      let nivelDeConflito = mesmoDia && mesmaHora ? 2 : 0;
+      const mesmoDia = turma.dia === turmaDoMesmoPeriodo.dia;
+      const mesmaHora = turma.horaInicio === turmaDoMesmoPeriodo.horaInicio;
+      const nivelDeConflito = mesmoDia && mesmaHora ? 2 : 0;
       maxConflito =
         nivelDeConflito > maxConflito ? nivelDeConflito : maxConflito;
     });
-    let newConflitos = {
+    const newConflitos = {
       nivelConflitoDia: maxConflito,
       nivelConflitoHora: maxConflito,
     };
@@ -156,11 +158,11 @@ function conflictsDisciplinaPeriodo(turmasListadas, turma) {
     conflitosDisciplinaPeriodo.disciplinaPeriodo[indexHorario] = newConflitos;
   });
   function maxConflito(conflitosDisciplina) {
-    let maxConflito = 0;
-    for (let index in conflitosDisciplina.disciplinaPeriodo) {
-      let conflito = conflitosDisciplina.disciplinaPeriodo[index];
-      let conflitoHora = conflito.nivelConflitoHora;
-      let conflitoDia = conflito.nivelConflitoDia;
+    const maxConflito = 0;
+    for (const index in conflitosDisciplina.disciplinaPeriodo) {
+      const conflito = conflitosDisciplina.disciplinaPeriodo[index];
+      const conflitoHora = conflito.nivelConflitoHora;
+      const conflitoDia = conflito.nivelConflitoDia;
       if (conflitoHora > maxConflito) {
         maxConflito = conflitoHora;
       }
@@ -198,13 +200,13 @@ function cleanTurmas(turmas, turma) {
 }
 
 function conflictsProfessor(turmas, turma) {
-  let conflictsList = [];
-  let professorConflicts = {};
-  let flattenedTurma = splitTurmas([turma]);
-  let cleanFlatTurma = cleanNotUsedForNow(flattenedTurma);
+  const conflictsList = [];
+  const professorConflicts = {};
+  const flattenedTurma = splitTurmas([turma]);
+  const cleanFlatTurma = cleanNotUsedForNow(flattenedTurma);
 
   cleanFlatTurma.forEach((cleanedClassTime) => {
-    let foundConflicts = searchSameDayAndHour(turmas, cleanedClassTime);
+    const foundConflicts = searchSameDayAndHour(turmas, cleanedClassTime);
 
     if (foundConflicts !== null) {
       conflictsList.push(foundConflicts);
@@ -220,18 +222,18 @@ function cleanNotUsedForNow(turmas) {
   let cleanedTurmas = [];
   /*
     turmas.forEach((turma) => {
-      delete turma.ano;
-      delete turma.demandaEstimada;
-      // delete turma.dia;
-      delete turma.disciplina;
-      // delete turma.duracao;
-      // delete turma.horaInicio;
-      // delete turma.idHorario;
-      // delete turma.idTurma;
-      // delete turma.ordem;
-      delete turma.professor;
-      delete turma.sala;
-      delete turma.semestre;
+      deconste turma.ano;
+      deconste turma.demandaEstimada;
+      // deconste turma.dia;
+      deconste turma.disciplina;
+      // deconste turma.duracao;
+      // deconste turma.horaInicio;
+      // deconste turma.idHorario;
+      // deconste turma.idTurma;
+      // deconste turma.ordem;
+      deconste turma.professor;
+      deconste turma.sala;
+      deconste turma.semestre;
       cleanedTurmas.push(turma);
     });
     */
@@ -274,7 +276,7 @@ function cleanBaseTurmas(turmas) {
 
 function removeUnecessaryDataForDemandCalculation(turmas) {
   // console.log("turmas", turmas[0]);
-  let cleanedTurmas = turmas.map(
+  const cleanedTurmas = turmas.map(
     ({
       ano,
       comment,
@@ -297,16 +299,16 @@ function removeUnecessaryDataForDemandCalculation(turmas) {
 }
 
 function getDemandNeededData(turma) {
-  let classTimes = turma.horarios;
-  let cleanedTurma = {
+  const classTimes = turma.horarios;
+  const cleanedTurma = {
     idClass: turma.idTurma,
     expectedDemand: turma.demandaEstimada,
   };
-  let neededData = [];
+  const neededData = [];
   classTimes.forEach((classTime) => {
     // console.log("classTime", classTime);
     // console.log("classTime.sala", classTime.sala);
-    let newFlattenedData = {
+    const newFlattenedData = {
       idRoom: classTime.sala?.id,
       idClassTime: classTime.idHorario,
       ...cleanedTurma,
@@ -333,24 +335,24 @@ function conflictDemand(turmas, classData) {
       ...
     ]
   */
-  let demandConflictData = getDemandNeededData(classData);
-  let singleClassDemandConflicts =
+  const demandConflictData = getDemandNeededData(classData);
+  const singleClassDemandConflicts =
     getSingleClassDemandConflict(demandConflictData);
-  let demandConflicts = {};
+  const demandConflicts = {};
   demandConflicts.singleTurmaCapacity = singleClassDemandConflicts;
   return demandConflicts;
 }
 
 function baseClassItemConflicts(turmas, turma, semestre) {
-  let myClassConflicts = {};
-  let cleanedTurmas = cleanTurmas(turmas, turma);
+  const myClassConflicts = {};
+  const cleanedTurmas = cleanTurmas(turmas, turma);
   myClassConflicts.professor = conflictsProfessor(cleanedTurmas, turma);
 
   myClassConflicts.expectedDemand = conflictDemand(turmas, turma);
 
   // console.log("myClassConflicts", myClassConflicts.professor);
-  let styledConflict = getStyledConflict(myClassConflicts, turma, semestre);
-  let conflicts = {
+  const styledConflict = getStyledConflict(myClassConflicts, turma, semestre);
+  const conflicts = {
     raw: myClassConflicts,
     styled: styledConflict,
   };
