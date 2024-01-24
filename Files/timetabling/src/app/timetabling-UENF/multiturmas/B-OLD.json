@@ -1,0 +1,85 @@
+{
+  "raw": {
+    "professor": {
+      "alloc": [
+        {
+          "type": {
+            "weight": 1,
+            "name": "Alocação simultânea de professores"
+          },
+          "time": {
+            "day": "SEG",
+            "hour": 8
+          },
+          "from": {
+            "idTurma": 20280101,
+            "idHorario": 2028010101
+          },
+          "to": [
+            {
+              "idTurma": 20280102,
+              "idHorario": 2028010203
+            },
+            {
+              "idTurma": 20280102,
+              "idHorario": 2028010204
+            }
+          ]
+        },
+        {
+          "type": {
+            "weight": 1,
+            "name": "Alocação simultânea de professores"
+          },
+          "time": {
+            "day": "SEG",
+            "hour": 8
+          },
+          "from": {
+            "idTurma": 20280101,
+            "idHorario": 2028010102
+          },
+          "to": [
+            {
+              "idTurma": 20280102,
+              "idHorario": 2028010203
+            },
+            {
+              "idTurma": 20280102,
+              "idHorario": 2028010204
+            }
+          ]
+        }
+      ]
+    },
+    "expectedDemand": {
+      "singleTurmaCapacity": []
+    }
+  },
+  "styled": {
+    "demanda": {
+      "title": "Conflitos Demanda",
+      "style": {
+        "backgroundColor": "#d9b57c"
+      }
+    },
+    "disciplina": {
+      "title": "Disciplina ainda não definida",
+      "style": {
+        "backgroundColor": "#708090"
+      }
+    },
+    "professor": {
+      "title": "\"Alocação simultânea de professores\", SEG às 8h, com as turmas:\n--- Turma: 20280102, horário: 2028010203\n--- Turma: 20280102, horário: 2028010204\n\"Alocação simultânea de professores\", SEG às 8h, com as turmas:\n--- Turma: 20280102, horário: 2028010203\n--- Turma: 20280102, horário: 2028010204\n",
+      "style": {
+        "backgroundColor": "#8B0000"
+      }
+    },
+    "demand": {
+      "title": "Não foi identificado conflitos de demanda",
+      "style": {
+        "backgroundColor": "#008B45"
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "raw": {
+    "professor": {
+      "alloc": []
+    },
+    "expectedDemand": {
+      "singleTurmaCapacity": []
+    }
+  },
+  "styled": {
+    "demanda": {
+      "title": "Conflitos Demanda",
+      "style": {
+        "backgroundColor": "#d9b57c"
+      }
+    },
+    "disciplina": {
+      "title": "Disciplina ainda não definida",
+      "style": {
+        "backgroundColor": "#708090"
+      }
+    },
+    "professor": {
+      "title": "Sem conflitos de alocação múltipla de professor",
+      "style": {
+        "backgroundColor": "#008B45"
+      }
+    },
+    "demand": {
+      "title": "Não foi identificado conflitos de demanda",
+      "style": {
+        "backgroundColor": "#008B45"
+      }
+    }
+  }
+}
