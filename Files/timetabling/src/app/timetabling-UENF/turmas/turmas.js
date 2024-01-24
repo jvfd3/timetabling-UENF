@@ -110,12 +110,17 @@ function Classes() {
     classItem?.professor?.id,
   ]); */
 
+  const classTimes = classItem?.horarios ?? [];
+
   return (
     <div className="CRUDContainComponents">
       <TurmaSelection {...classesStates} />
       <div className="infoCard">
         <ClassData {...classesStates} />
-        <ClassTimeTable {...classesStates} />
+        <div className="showBasicDataCard">
+          <h3>{classTimes.length > 0 ? "Horários" : "Adicione um horário"}</h3>
+          <ClassTimeTable {...classesStates} />
+        </div>
         {/* <Participants {...myTurmaStates} /> */}
       </div>
     </div>

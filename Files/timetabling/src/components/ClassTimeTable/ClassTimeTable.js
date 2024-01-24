@@ -73,39 +73,34 @@ function ClassTimeTable(classesStates) {
     setClassTimes(classItem?.horarios ?? []);
   }, [classItem.horarios]);
 
-  return (
-    <div className="showBasicDataCard">
-      <h3>{classTimes.length > 0 ? "Horários" : "Adicione um horário"}</h3>
-      {classTimes.length == 0 ? (
-        <SmartCreateClassTime {...createClassTimeProps} />
-      ) : (
-        <table className="showBasicDataTable">
-          <thead>
-            <tr key={`ClassTime Header: ${getId(classItem)}`}>
-              <th>
-                <SmartCreateClassTime {...createClassTimeProps} />
-              </th>
-              <th>Sala</th>
-              <th>Dia</th>
-              <th>Hora de início</th>
-              <th>Duração</th>
-            </tr>
-          </thead>
-          <tbody>
-            {classTimes.map((iterClassTime, index) => {
-              const currentId = getId(iterClassTime);
-              const classTimeRowStates = {
-                ...classesStates,
-                classTime: iterClassTime,
-                // shouldUpdate,
-                index,
-              };
-              return <ClassTimeRow {...classTimeRowStates} key={currentId} />;
-            })}
-          </tbody>
-        </table>
-      )}
-    </div>
+  return classTimes.length == 0 ? (
+    <SmartCreateClassTime {...createClassTimeProps} />
+  ) : (
+    <table className="showBasicDataTable">
+      <thead>
+        <tr key={`ClassTime Header: ${getId(classItem)}`}>
+          <th>
+            <SmartCreateClassTime {...createClassTimeProps} />
+          </th>
+          <th>Sala</th>
+          <th>Dia</th>
+          <th>Hora de início</th>
+          <th>Duração</th>
+        </tr>
+      </thead>
+      <tbody>
+        {classTimes.map((iterClassTime, index) => {
+          const currentId = getId(iterClassTime);
+          const classTimeRowStates = {
+            ...classesStates,
+            classTime: iterClassTime,
+            // shouldUpdate,
+            index,
+          };
+          return <ClassTimeRow {...classTimeRowStates} key={currentId} />;
+        })}
+      </tbody>
+    </table>
   );
 }
 
