@@ -1,0 +1,37 @@
+{
+  "classItem": {
+    "id": 20280108,
+    "idTurma": 20280108,
+    "ano": 2028,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "disciplina": null,
+    "professor": {
+      "id": 4,
+      "nome": "Ausberto Silverio Castro Vera",
+      "curso": "CC",
+      "apelido": "Ausberto",
+      "laboratorio": "LCMAT"
+    },
+    "horarios": [
+      {
+        "id": 2028010815,
+        "dia": "QUA",
+        "sala": null,
+        "ordem": null,
+        "duracao": 2,
+        "idTurma": 20280108,
+        "horaInicio": 8
+      },
+      {
+        "id": 2028010816,
+        "dia": "QUI",
+        "sala": null,
+        "ordem": null,
+        "duracao": 2,
+        "idTurma": 20280108,
+        "horaInicio": 8
+      }
+    ]
+  }
+}
