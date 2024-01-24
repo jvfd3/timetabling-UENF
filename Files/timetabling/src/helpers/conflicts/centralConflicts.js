@@ -196,14 +196,14 @@ function cleanClasses(classes, classItem) {
 
   // console.log("pre-removeSameId", currentClasses.length); //OK
   currentClasses = removeSameId(currentClasses, classItem);
-  console.log("removeSameId", currentClasses.length); // OK
+  // console.log("removeSameId", currentClasses.length); // OK
   currentClasses = filterProfessor(currentClasses, classItem.professor);
   /* this function above shouldn't even be here */
-  console.log("filterProfessor", currentClasses.length);
+  // console.log("filterProfessor", currentClasses.length);
   currentClasses = splitTurmas(currentClasses);
-  console.log("splitTurmas", currentClasses.length);
+  // console.log("splitTurmas", currentClasses.length);
   currentClasses = cleanBaseTurmas(currentClasses);
-  console.log("cleanBaseTurmas", currentClasses.length);
+  // console.log("cleanBaseTurmas", currentClasses.length);
   return currentClasses;
 }
 

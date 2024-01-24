@@ -18,9 +18,12 @@ import {
   updateClassTime,
   deleteClassTime,
 } from "../../helpers/CRUDFunctions/classTimeCRUD";
+import { classTimeConflicts } from "../../helpers/conflicts/visualConflicts";
 
 function ClassTimeRow(classTimeRowStates) {
-  const { classItem, classTime, index } = classTimeRowStates;
+  const { classItem, classTime, index, conflicts } = classTimeRowStates;
+
+  const classTimeVisualConflicts = classTimeConflicts(conflicts, classTime);
 
   const deleteClassTimeProps = {
     classTime,
@@ -34,22 +37,26 @@ function ClassTimeRow(classTimeRowStates) {
     updateClassTimeDB: () => updateClassTime(classTimeRowStates),
   };
 
+  const classTimeTableRowKey = `ClassTimeTableRow: ${getId(
+    classTime
+  )}-${index}`;
+
   return (
-    <tr key={`ClassTimeRow: ${getId(classTime)}-${index}`}>
+    <tr key={classTimeTableRowKey}>
       <td>
         <SmartDeleteClassTime {...deleteClassTimeProps} />
         <SmartUpdateClassTime {...updateClassTimeProps} />
       </td>
-      <td>
+      <td {...classTimeVisualConflicts.classRoom}>
         <SelectClassTimeRoom {...classTimeRowStates} />
       </td>
-      <td>
+      <td {...classTimeVisualConflicts.day}>
         <SelectClassTimeDay {...classTimeRowStates} />
       </td>
-      <td>
+      <td {...classTimeVisualConflicts.hour}>
         <SelectClassTimeStartHour {...classTimeRowStates} />
       </td>
-      <td>
+      <td {...classTimeVisualConflicts.duration}>
         <SelectClassTimeDuration {...classTimeRowStates} />
       </td>
     </tr>
@@ -57,7 +64,7 @@ function ClassTimeRow(classTimeRowStates) {
 }
 
 function ClassTimeTable(classesStates) {
-  const { classItem } = classesStates;
+  const { classItem, conflicts } = classesStates;
 
   // const classTimes = classItem?.horarios ?? [];
   const [classTimes, setClassTimes] = useState(classItem?.horarios ?? []);
@@ -90,14 +97,16 @@ function ClassTimeTable(classesStates) {
       </thead>
       <tbody>
         {classTimes.map((iterClassTime, index) => {
-          const currentId = getId(iterClassTime);
           const classTimeRowStates = {
             ...classesStates,
             classTime: iterClassTime,
             // shouldUpdate,
             index,
+            conflicts,
           };
-          return <ClassTimeRow {...classTimeRowStates} key={currentId} />;
+          const currentId = getId(iterClassTime);
+          const classTimeRowKey = `ClassTimeRow: ${currentId}-${index}`;
+          return <ClassTimeRow {...classTimeRowStates} key={classTimeRowKey} />;
         })}
       </tbody>
     </table>

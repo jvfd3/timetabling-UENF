@@ -205,16 +205,49 @@ function getDemandStyledConflict(conflicts) {
 
 /* Demand /\ */
 
-function getStyledConflict(conflicts, turma, semestre) {
+function getStyledConflict(conflicts, classItem, semester) {
   let myClassConflicts = {};
   myClassConflicts.demanda = {
     title: "Conflitos Demanda",
     style: { backgroundColor: "#d9b57c" },
   };
-  myClassConflicts.disciplina = getSubjectStyledConflict(turma, semestre);
+  myClassConflicts.disciplina = getSubjectStyledConflict(classItem, semester);
   myClassConflicts.professor = getProfessorStyledConflict(conflicts);
   myClassConflicts.demand = getDemandStyledConflict(conflicts);
   return myClassConflicts;
 }
 
-export { getStyledConflict };
+function classTimeConflicts(conflicts, classTime) {
+  const conflictStyles = {
+    day: {},
+    hour: {},
+    classRoom: {
+      title: "Sala",
+      style: { backgroundColor: "" },
+    },
+    duration: {
+      title: "Conflito de duração ainda não implementado",
+    },
+  };
+
+  const professorConflicts = conflicts.raw.professor.alloc;
+
+  if (isConflict(professorConflicts)) {
+    conflictStyles.day = conflicts.styled.professor;
+    conflictStyles.hour = conflicts.styled.professor;
+  }
+
+  function isConflict(conflicts) {
+    if (conflicts.length > 0) {
+      for (const conflict of professorConflicts) {
+        if (conflict?.from?.idHorario === getId(classTime)) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  return conflictStyles;
+}
+
+export { getStyledConflict, classTimeConflicts };
