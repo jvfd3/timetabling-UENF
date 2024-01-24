@@ -179,7 +179,7 @@ function MultiClassesRefactor() {
     setClassItem,
   };
 
-  const states = { classTimeStates, classStates };
+  const globalStates = { classTimeStates, classStates };
 
   useEffect(() => {
     readClassTime(classTimeStates);
@@ -191,19 +191,9 @@ function MultiClassesRefactor() {
     // console.log("filteredClasses", filteredClasses);
   }, [filteredClassTimes, filteredClasses]);
 
-  const conversion = {
-    classesStates: {
-      classes: filteredClasses,
-      setClasses: setFilteredClasses,
-    },
-    currentSemesterProps: {
-      semester: { value: 1 },
-    },
-  };
-
   return (
     <div className="CRUDContainComponents">
-      <MultiClassesCard {...states} />
+      <MultiClassesCard {...globalStates} />
     </div>
   );
 }
