@@ -421,49 +421,49 @@ WHERE
 */
 
 SELECT 
-    t.ano AS 'ano',
-    -- t.comment AS 'comment',
-    t.demandaEstimada AS 'demandaEstimada',
-    h.dia,
-    IF(t.idDisciplina IS NULL, NULL, JSON_OBJECT(
-        'id', d.id,
-        'periodo', d.periodo,
-        'codigo', d.codigo,
-        'apelido', d.apelido,
-        'nome', d.nome
-    )) AS 'disciplina',
-    h.duracao AS 'duracao',
-    h.horaInicio AS 'horaInicio',
-    h.id AS 'idHorario',
-    t.id AS 'idTurma',
-    IF(t.idProfessor IS NULL, NULL, JSON_OBJECT(
-        'id', p.id,
-        'laboratorio', p.laboratorio,
-        'curso', p.curso,
-        'apelido', p.apelido,
-        'nome', p.nome
-    )) AS 'professor',
-    IF(h.idSala IS NULL, NULL, JSON_OBJECT(
-        'id', s.id,
-        'idBlock', s.idBlock,
-        'capacidade', s.capacidade,
-        'bloco', s.bloco,
-        'codigo', s.codigo,
-        'descricao', s.descricao
-    )) AS sala,
-    t.semestre AS 'semestre'
+  t.ano AS 'ano',
+  -- t.comment AS 'comment',
+  t.demandaEstimada AS 'demandaEstimada',
+  h.dia,
+  IF(t.idDisciplina IS NULL, NULL, JSON_OBJECT(
+      'id', d.id,
+      'periodo', d.periodo,
+      'codigo', d.codigo,
+      'apelido', d.apelido,
+      'nome', d.nome
+  )) AS 'disciplina',
+  h.duracao AS 'duracao',
+  h.horaInicio AS 'horaInicio',
+  h.id AS 'idHorario',
+  t.id AS 'idTurma',
+  IF(t.idProfessor IS NULL, NULL, JSON_OBJECT(
+      'id', p.id,
+      'laboratorio', p.laboratorio,
+      'curso', p.curso,
+      'apelido', p.apelido,
+      'nome', p.nome
+  )) AS 'professor',
+  IF(h.idSala IS NULL, NULL, JSON_OBJECT(
+      'id', s.id,
+      'idBlock', s.idBlock,
+      'capacidade', s.capacidade,
+      'bloco', s.bloco,
+      'codigo', s.codigo,
+      'descricao', s.descricao
+  )) AS sala,
+  t.semestre AS 'semestre'
 FROM
-    turmas t
+  turmas t
 LEFT JOIN
-    horarios h ON h.idTurma = t.id
+  horarios h ON h.idTurma = t.id
 LEFT JOIN
-    disciplinas d ON t.idDisciplina = d.id
+  disciplinas d ON t.idDisciplina = d.id
 LEFT JOIN
-    professores p ON t.idProfessor = p.id
+  professores p ON t.idProfessor = p.id
 LEFT JOIN
-    salas s ON h.idSala = s.id
+  salas s ON h.idSala = s.id
 WHERE
-    t.id IS NOT NULL;
+  t.id IS NOT NULL;
 
 /* COUNTING */
 
