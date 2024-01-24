@@ -24,13 +24,7 @@ import { baseClassItemConflicts } from "../../../helpers/conflicts/centralConfli
 import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
 import { InputDisciplina } from "../../../components/Buttons/Dumb/Dumb";
 import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
-import {
-  createClass,
-  readClass,
-  updateClass,
-  deleteClass,
-} from "../../../helpers/CRUDFunctions/classCRUD";
-import { MultiClassesFilters } from "../../../components/Filters/Filters";
+import { MultiClassesRefactor } from "./multiClasses";
 
 /* COMPONENTS STRUCTURE
 - CRUDclass
@@ -59,17 +53,12 @@ import { MultiClassesFilters } from "../../../components/Filters/Filters";
                 - SelectDuracao
 */
 
-function ClassTableHeader({ classesStates, currentSemesterProps }) {
-  const createClassProps = {
-    classesStates,
-    ...currentSemesterProps,
-    createClassDB: createClass,
-  };
+function ClassTableHeader(globalStates) {
   return (
     <thead>
       <tr>
         <th>
-          <SmartCreateClassItem {...createClassProps} />
+          <SmartCreateClassItem />
         </th>
         <th>Código - Nome</th>
         <th>Professor</th>
@@ -156,7 +145,7 @@ function ClassTimeTableRow(classTimeTableRowProps) {
   function isConflict(conflicts) {
     if (conflicts.length > 0) {
       for (const conflict of professorConflicts) {
-        if (conflict.from.idHorario === classTime.idHorario) {
+        if (conflict?.from?.idHorario === classTime?.idHorario) {
           return true;
         }
       }
@@ -166,7 +155,8 @@ function ClassTimeTableRow(classTimeTableRowProps) {
 
   if (singleDemandConflicts.length > 0) {
     for (const conflict of singleDemandConflicts) {
-      if (conflict.idClassTime === horario.idHorario) {
+      if (conflict?.idClassTime === horario?.idHorario) {
+        // The line above was causing a bug for some reason
         conflictStyles.classRoom = conflicts.styled.demand;
       }
     }
@@ -293,10 +283,6 @@ function ClassItemTableRow(classTableRowProps) {
     },
   }
   */
-  // console.log("classItemRow", classItemRow);
-  // console.log("conflicts", conflicts);
-
-  console.log(classTableRowProps);
 
   return (
     <tr key={classItemRowKey}>
@@ -328,6 +314,7 @@ function ClassesTable(ClassesTableProps) {
   const { classesStates, currentSemesterProps } = ClassesTableProps;
   const { classes, setClasses } = classesStates;
   const { semester } = currentSemesterProps;
+  // console.log("classes", classes);
   return (
     <table className="showBasicDataTable">
       <ClassTableHeader {...ClassesTableProps} />
@@ -589,6 +576,7 @@ function CRUDMultiClasses() {
   return (
     <div className="background">
       <CRUDPageSelection defaultValue={defaultPageValue} />
+      <MultiClassesRefactor />
       <MultiClasses />
     </div>
   );
