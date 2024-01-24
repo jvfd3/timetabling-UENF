@@ -218,7 +218,8 @@ function conflictsProfessor(classes, classItem) {
   cleanFlatClassItem.forEach((iterCleanedClassTime) => {
     const foundConflicts = searchSameDayAndHour(classes, iterCleanedClassTime);
     // console.log("foundConflicts", foundConflicts);
-    if (foundConflicts !== null) {
+    const hasProfessor = iterCleanedClassTime.professor !== null;
+    if (foundConflicts !== null && hasProfessor) {
       conflictsList.push(foundConflicts);
     }
   });
@@ -252,7 +253,7 @@ function cleanNotUsedForNow(classes) {
       ano,
       demandaEstimada,
       disciplina,
-      professor,
+      // professor,
       sala,
       semestre,
       ...rest
