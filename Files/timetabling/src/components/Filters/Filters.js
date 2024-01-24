@@ -62,11 +62,14 @@ function FilterExpectedSemester(filterExpectedSemesterStates) {
   );
 }
 
-function MultiClassesFilters({ setCurrentClasses, allSplittedClasses }) {
+function MultiClassesFilters({ classTimeStates, classStates }) {
+  const { classTimes, setFilteredClassTimes, setClassTime } = classTimeStates;
+  const { classes, setFilteredClasses, setClassItem } = classStates;
+
   const years = options.constantValues.years;
   const semesters = options.constantValues.semesters;
 
-  const [year, setYear] = useState(years[10]);
+  const [year, setYear] = useState(years[14]);
   const [semester, setSemester] = useState(semesters[0]);
 
   const props = {
@@ -74,11 +77,36 @@ function MultiClassesFilters({ setCurrentClasses, allSplittedClasses }) {
     semester: { semester, setSemester },
   };
 
+  function filterList(list, year, semester) {
+    let filteredList = list;
+    filteredList = filterYear(filteredList, year);
+    filteredList = filterSemester(filteredList, semester);
+    return filteredList;
+  }
+
+  function updateOuterStates() {
+    const filteredClassTimes = filterList(classTimes, year, semester);
+    const filteredClasses = filterList(classes, year, semester);
+    const newClassTime = filteredClassTimes?.[0];
+    const newClassItem = filteredClasses?.[0];
+    const message = `Turmas: ${filteredClasses.length}`;
+    const yearValue = year?.value ?? year;
+    const semesterValue = semester?.value ?? semester;
+    const finalMessage = `${yearValue}-${semesterValue}: ${message}`;
+    // console.log(finalMessage);
+
+    setFilteredClassTimes(filteredClassTimes);
+    setFilteredClasses(filteredClasses);
+    setClassTime(newClassTime);
+    setClassItem(newClassItem);
+  }
+
   useEffect(() => {
-    let filtering = allSplittedClasses;
-    filtering = filterYear(filtering, year);
-    filtering = filterSemester(filtering, semester);
-    setCurrentClasses(filtering);
+    updateOuterStates();
+  }, []);
+
+  useEffect(() => {
+    updateOuterStates();
   }, [year, semester]);
 
   return (
