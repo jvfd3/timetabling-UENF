@@ -1,0 +1,8077 @@
+[
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 9,
+    "comment": "",
+    "idTurma": 20220201,
+    "disciplina": {
+      "id": 2,
+      "nome": "Cálculo Diferencial e Integral I",
+      "codigo": "MAT01101",
+      "apelido": "Calc 1",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 45,
+      "nome": "Bruna",
+      "curso": "Lic Mat",
+      "apelido": "Bolsista - Bruna",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2022020101,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 9,
+    "comment": "",
+    "idTurma": 20220201,
+    "disciplina": {
+      "id": 2,
+      "nome": "Cálculo Diferencial e Integral I",
+      "codigo": "MAT01101",
+      "apelido": "Calc 1",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 45,
+      "nome": "Bruna",
+      "curso": "Lic Mat",
+      "apelido": "Bolsista - Bruna",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2022020102,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 9,
+    "comment": "",
+    "idTurma": 20220201,
+    "disciplina": {
+      "id": 2,
+      "nome": "Cálculo Diferencial e Integral I",
+      "codigo": "MAT01101",
+      "apelido": "Calc 1",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 45,
+      "nome": "Bruna",
+      "curso": "Lic Mat",
+      "apelido": "Bolsista - Bruna",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 12,
+    "duracao": 2,
+    "idHorario": 2022020103,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 9,
+    "comment": "",
+    "idTurma": 20220201,
+    "disciplina": {
+      "id": 2,
+      "nome": "Cálculo Diferencial e Integral I",
+      "codigo": "MAT01101",
+      "apelido": "Calc 1",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 45,
+      "nome": "Bruna",
+      "curso": "Lic Mat",
+      "apelido": "Bolsista - Bruna",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEX",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2022020104,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 6,
+    "comment": "",
+    "idTurma": 20220202,
+    "disciplina": {
+      "id": 2,
+      "nome": "Cálculo Diferencial e Integral I",
+      "codigo": "MAT01101",
+      "apelido": "Calc 1",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 46,
+      "nome": "Niander Aguiar Cerqueira",
+      "curso": "Lic Mat",
+      "apelido": "Bolsista - Niander",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2022020205,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 6,
+    "comment": "",
+    "idTurma": 20220202,
+    "disciplina": {
+      "id": 2,
+      "nome": "Cálculo Diferencial e Integral I",
+      "codigo": "MAT01101",
+      "apelido": "Calc 1",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 46,
+      "nome": "Niander Aguiar Cerqueira",
+      "curso": "Lic Mat",
+      "apelido": "Bolsista - Niander",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2022020206,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 6,
+    "comment": "",
+    "idTurma": 20220202,
+    "disciplina": {
+      "id": 2,
+      "nome": "Cálculo Diferencial e Integral I",
+      "codigo": "MAT01101",
+      "apelido": "Calc 1",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 46,
+      "nome": "Niander Aguiar Cerqueira",
+      "curso": "Lic Mat",
+      "apelido": "Bolsista - Niander",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2022020207,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 28,
+    "comment": "",
+    "idTurma": 20220203,
+    "disciplina": {
+      "id": 9,
+      "nome": "Álgebra Linear",
+      "codigo": "MAT01204",
+      "apelido": "Álgebra Lin",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 7,
+      "nome": "Elba Orocia Bravo Asenjo",
+      "curso": "Lic Mat",
+      "apelido": "Elba",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2022020308,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 28,
+    "comment": "",
+    "idTurma": 20220203,
+    "disciplina": {
+      "id": 9,
+      "nome": "Álgebra Linear",
+      "codigo": "MAT01204",
+      "apelido": "Álgebra Lin",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 7,
+      "nome": "Elba Orocia Bravo Asenjo",
+      "curso": "Lic Mat",
+      "apelido": "Elba",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2022020309,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 25,
+    "comment": "",
+    "idTurma": 20220204,
+    "disciplina": {
+      "id": 10,
+      "nome": "Cálculo Diferencial e Integral II",
+      "codigo": "MAT01203",
+      "apelido": "Calc 2",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2022020410,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 25,
+    "comment": "",
+    "idTurma": 20220204,
+    "disciplina": {
+      "id": 10,
+      "nome": "Cálculo Diferencial e Integral II",
+      "codigo": "MAT01203",
+      "apelido": "Calc 2",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2022020411,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 25,
+    "comment": "",
+    "idTurma": 20220204,
+    "disciplina": {
+      "id": 10,
+      "nome": "Cálculo Diferencial e Integral II",
+      "codigo": "MAT01203",
+      "apelido": "Calc 2",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2022020412,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 35,
+    "comment": null,
+    "idTurma": 20220205,
+    "disciplina": {
+      "id": 11,
+      "nome": "Lógica Digital",
+      "codigo": "INF01104",
+      "apelido": "Lógic Dig",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 48,
+      "nome": "Sânya Carvalho dos Santos",
+      "curso": "CC",
+      "apelido": "Bolsista - Sânya",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 40,
+    "comment": "",
+    "idTurma": 20220206,
+    "disciplina": {
+      "id": 12,
+      "nome": "Estruturas Discretas",
+      "codigo": "INF01207",
+      "apelido": "Estrut Disc",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 10,
+      "nome": "Luis Humberto Guillermo Felipe",
+      "curso": "Lic Mat",
+      "apelido": "Guillermo",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2022020613,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 40,
+    "comment": "",
+    "idTurma": 20220206,
+    "disciplina": {
+      "id": 12,
+      "nome": "Estruturas Discretas",
+      "codigo": "INF01207",
+      "apelido": "Estrut Disc",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 10,
+      "nome": "Luis Humberto Guillermo Felipe",
+      "curso": "Lic Mat",
+      "apelido": "Guillermo",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2022020614,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 12,
+    "comment": null,
+    "idTurma": 20220207,
+    "disciplina": {
+      "id": 13,
+      "nome": "Programação II",
+      "codigo": "INF01209",
+      "apelido": "Prog 2",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 2,
+      "nome": "Annabell Del Real Tamariz",
+      "curso": "CC",
+      "apelido": "Annabell",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 37,
+    "comment": "",
+    "idTurma": 20220208,
+    "disciplina": {
+      "id": 13,
+      "nome": "Programação II",
+      "codigo": "INF01209",
+      "apelido": "Prog 2",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2022020815,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 37,
+    "comment": "",
+    "idTurma": 20220208,
+    "disciplina": {
+      "id": 13,
+      "nome": "Programação II",
+      "codigo": "INF01209",
+      "apelido": "Prog 2",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2022020816,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 37,
+    "comment": "",
+    "idTurma": 20220208,
+    "disciplina": {
+      "id": 13,
+      "nome": "Programação II",
+      "codigo": "INF01209",
+      "apelido": "Prog 2",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2022020817,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 24,
+    "comment": "",
+    "idTurma": 20220209,
+    "disciplina": {
+      "id": 14,
+      "nome": "Inglês Instrumental II",
+      "codigo": "LEL04206",
+      "apelido": "Inglês 2",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 43,
+      "nome": "Bolsista CCH",
+      "curso": "Outro",
+      "apelido": "Bolsista CCH 2",
+      "laboratorio": "CCH"
+    },
+    "dia": "SEX",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2022020918,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 24,
+    "comment": "",
+    "idTurma": 20220209,
+    "disciplina": {
+      "id": 14,
+      "nome": "Inglês Instrumental II",
+      "codigo": "LEL04206",
+      "apelido": "Inglês 2",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 43,
+      "nome": "Bolsista CCH",
+      "curso": "Outro",
+      "apelido": "Bolsista CCH 2",
+      "laboratorio": "CCH"
+    },
+    "dia": "SEX",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2022020919,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 21,
+    "comment": "",
+    "idTurma": 20220210,
+    "disciplina": {
+      "id": 15,
+      "nome": "Física Geral I",
+      "codigo": "FIS01202",
+      "apelido": "Fís G 1",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 36,
+      "nome": "Bolsista LCFIS",
+      "curso": "Outro",
+      "apelido": "Bolsista LCFIS 1",
+      "laboratorio": "LCFIS"
+    },
+    "dia": "SEG",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2022021020,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 21,
+    "comment": "",
+    "idTurma": 20220210,
+    "disciplina": {
+      "id": 15,
+      "nome": "Física Geral I",
+      "codigo": "FIS01202",
+      "apelido": "Fís G 1",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 36,
+      "nome": "Bolsista LCFIS",
+      "curso": "Outro",
+      "apelido": "Bolsista LCFIS 1",
+      "laboratorio": "LCFIS"
+    },
+    "dia": "QUA",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2022021021,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 15,
+    "comment": "",
+    "idTurma": 20220211,
+    "disciplina": {
+      "id": 17,
+      "nome": "Laboratório de Física Geral I",
+      "codigo": "FIS01204",
+      "apelido": "Lab Fís G 1",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 37,
+      "nome": "Bolsista LCFIS",
+      "curso": "Outro",
+      "apelido": "Bolsista LCFIS 2",
+      "laboratorio": "LCFIS"
+    },
+    "dia": "QUI",
+    "horaInicio": 18,
+    "duracao": 2,
+    "idHorario": 2022021122,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 15,
+    "comment": "",
+    "idTurma": 20220211,
+    "disciplina": {
+      "id": 17,
+      "nome": "Laboratório de Física Geral I",
+      "codigo": "FIS01204",
+      "apelido": "Lab Fís G 1",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 37,
+      "nome": "Bolsista LCFIS",
+      "curso": "Outro",
+      "apelido": "Bolsista LCFIS 2",
+      "laboratorio": "LCFIS"
+    },
+    "dia": "QUA",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2022021123,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 15,
+    "comment": "",
+    "idTurma": 20220211,
+    "disciplina": {
+      "id": 17,
+      "nome": "Laboratório de Física Geral I",
+      "codigo": "FIS01204",
+      "apelido": "Lab Fís G 1",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 37,
+      "nome": "Bolsista LCFIS",
+      "curso": "Outro",
+      "apelido": "Bolsista LCFIS 2",
+      "laboratorio": "LCFIS"
+    },
+    "dia": "SEX",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2022021124,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 15,
+    "comment": "",
+    "idTurma": 20220212,
+    "disciplina": {
+      "id": 23,
+      "nome": "Métodos Matemáticos",
+      "codigo": "MAT01106",
+      "apelido": "Met Mat",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 47,
+      "nome": "Rebeca",
+      "curso": "Lic Mat",
+      "apelido": "Bolsista - Rebeca",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2022021225,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 15,
+    "comment": "",
+    "idTurma": 20220212,
+    "disciplina": {
+      "id": 23,
+      "nome": "Métodos Matemáticos",
+      "codigo": "MAT01106",
+      "apelido": "Met Mat",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 47,
+      "nome": "Rebeca",
+      "curso": "Lic Mat",
+      "apelido": "Bolsista - Rebeca",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2022021226,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 3,
+    "comment": "",
+    "idTurma": 20220213,
+    "disciplina": {
+      "id": 28,
+      "nome": "Cálculo Numérico",
+      "codigo": "MAT01208",
+      "apelido": "Calc Num",
+      "periodo": 4
+    },
+    "professor": {
+      "id": 12,
+      "nome": "Wilma Dora Huacasi Mamani",
+      "curso": "Lic Mat",
+      "apelido": "Wilma",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2022021327,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 3,
+    "comment": "",
+    "idTurma": 20220213,
+    "disciplina": {
+      "id": 28,
+      "nome": "Cálculo Numérico",
+      "codigo": "MAT01208",
+      "apelido": "Calc Num",
+      "periodo": 4
+    },
+    "professor": {
+      "id": 12,
+      "nome": "Wilma Dora Huacasi Mamani",
+      "curso": "Lic Mat",
+      "apelido": "Wilma",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2022021328,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 3,
+    "comment": "",
+    "idTurma": 20220213,
+    "disciplina": {
+      "id": 28,
+      "nome": "Cálculo Numérico",
+      "codigo": "MAT01208",
+      "apelido": "Calc Num",
+      "periodo": 4
+    },
+    "professor": {
+      "id": 12,
+      "nome": "Wilma Dora Huacasi Mamani",
+      "curso": "Lic Mat",
+      "apelido": "Wilma",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2022021329,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 3,
+    "comment": "",
+    "idTurma": 20220213,
+    "disciplina": {
+      "id": 28,
+      "nome": "Cálculo Numérico",
+      "codigo": "MAT01208",
+      "apelido": "Calc Num",
+      "periodo": 4
+    },
+    "professor": {
+      "id": 12,
+      "nome": "Wilma Dora Huacasi Mamani",
+      "curso": "Lic Mat",
+      "apelido": "Wilma",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2022021330,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 12,
+    "comment": "",
+    "idTurma": 20220214,
+    "disciplina": {
+      "id": 29,
+      "nome": "Estatística e Probabilidade",
+      "codigo": "MAT01201",
+      "apelido": "Estatística",
+      "periodo": 4
+    },
+    "professor": {
+      "id": 11,
+      "nome": "Nelson Machado Barbosa",
+      "curso": "Lic Mat",
+      "apelido": "Nelson",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 18,
+    "duracao": 2,
+    "idHorario": 2022021431,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 12,
+    "comment": "",
+    "idTurma": 20220214,
+    "disciplina": {
+      "id": 29,
+      "nome": "Estatística e Probabilidade",
+      "codigo": "MAT01201",
+      "apelido": "Estatística",
+      "periodo": 4
+    },
+    "professor": {
+      "id": 11,
+      "nome": "Nelson Machado Barbosa",
+      "curso": "Lic Mat",
+      "apelido": "Nelson",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 18,
+    "duracao": 2,
+    "idHorario": 2022021432,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 10,
+    "comment": "",
+    "idTurma": 20220215,
+    "disciplina": {
+      "id": 30,
+      "nome": "Sistema Operacional",
+      "codigo": "INF01204",
+      "apelido": "Sist Op",
+      "periodo": 4
+    },
+    "professor": {
+      "id": 6,
+      "nome": "João Luiz de Almeida Filho",
+      "curso": "CC",
+      "apelido": "João Luiz",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2022021533,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 10,
+    "comment": "",
+    "idTurma": 20220215,
+    "disciplina": {
+      "id": 30,
+      "nome": "Sistema Operacional",
+      "codigo": "INF01204",
+      "apelido": "Sist Op",
+      "periodo": 4
+    },
+    "professor": {
+      "id": 6,
+      "nome": "João Luiz de Almeida Filho",
+      "curso": "CC",
+      "apelido": "João Luiz",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEX",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2022021534,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 14,
+    "comment": "",
+    "idTurma": 20220216,
+    "disciplina": {
+      "id": 31,
+      "nome": "Estrutura de dados II",
+      "codigo": "INF01202",
+      "apelido": "ED2",
+      "periodo": 4
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2022021635,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 14,
+    "comment": "",
+    "idTurma": 20220216,
+    "disciplina": {
+      "id": 31,
+      "nome": "Estrutura de dados II",
+      "codigo": "INF01202",
+      "apelido": "ED2",
+      "periodo": 4
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2022021636,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 10,
+    "comment": "",
+    "idTurma": 20220217,
+    "disciplina": {
+      "id": 37,
+      "nome": "Linguagens formais e teoria da computação",
+      "codigo": "INF01117",
+      "apelido": "Ling Form",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 4,
+      "nome": "Ausberto Silverio Castro Vera",
+      "curso": "CC",
+      "apelido": "Ausberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2022021737,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 10,
+    "comment": "",
+    "idTurma": 20220217,
+    "disciplina": {
+      "id": 37,
+      "nome": "Linguagens formais e teoria da computação",
+      "codigo": "INF01117",
+      "apelido": "Ling Form",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 4,
+      "nome": "Ausberto Silverio Castro Vera",
+      "curso": "CC",
+      "apelido": "Ausberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2022021738,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 14,
+    "comment": "",
+    "idTurma": 20220218,
+    "disciplina": {
+      "id": 39,
+      "nome": "Computação e Sociedade",
+      "codigo": "LES04536",
+      "apelido": "Comp Soc",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 42,
+      "nome": "Bolsista CCH",
+      "curso": "Outro",
+      "apelido": "Bolsista CCH 1",
+      "laboratorio": "CCH"
+    },
+    "dia": "SEX",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2022021839,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 3,
+    "comment": "",
+    "idTurma": 20220219,
+    "disciplina": {
+      "id": 40,
+      "nome": "Pesquisa Operacional",
+      "codigo": "INF01211",
+      "apelido": "Pesq Op",
+      "periodo": 6
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2022021940,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 3,
+    "comment": "",
+    "idTurma": 20220219,
+    "disciplina": {
+      "id": 40,
+      "nome": "Pesquisa Operacional",
+      "codigo": "INF01211",
+      "apelido": "Pesq Op",
+      "periodo": 6
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2022021941,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 14,
+    "comment": "",
+    "idTurma": 20220220,
+    "disciplina": {
+      "id": 42,
+      "nome": "Compiladores",
+      "codigo": "INF01212",
+      "apelido": "Compiladores",
+      "periodo": 6
+    },
+    "professor": {
+      "id": 36,
+      "nome": "Bolsista LCFIS",
+      "curso": "Outro",
+      "apelido": "Bolsista LCFIS 1",
+      "laboratorio": "LCFIS"
+    },
+    "dia": "TER",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2022022042,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 14,
+    "comment": "",
+    "idTurma": 20220220,
+    "disciplina": {
+      "id": 42,
+      "nome": "Compiladores",
+      "codigo": "INF01212",
+      "apelido": "Compiladores",
+      "periodo": 6
+    },
+    "professor": {
+      "id": 36,
+      "nome": "Bolsista LCFIS",
+      "curso": "Outro",
+      "apelido": "Bolsista LCFIS 1",
+      "laboratorio": "LCFIS"
+    },
+    "dia": "QUI",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2022022043,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 13,
+    "comment": "",
+    "idTurma": 20220221,
+    "disciplina": {
+      "id": 43,
+      "nome": "Banco de Dados II",
+      "codigo": "INF01206",
+      "apelido": "BD2",
+      "periodo": 6
+    },
+    "professor": {
+      "id": 48,
+      "nome": "Sânya Carvalho dos Santos",
+      "curso": "CC",
+      "apelido": "Bolsista - Sânya",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2022022144,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 13,
+    "comment": "",
+    "idTurma": 20220221,
+    "disciplina": {
+      "id": 43,
+      "nome": "Banco de Dados II",
+      "codigo": "INF01206",
+      "apelido": "BD2",
+      "periodo": 6
+    },
+    "professor": {
+      "id": 48,
+      "nome": "Sânya Carvalho dos Santos",
+      "curso": "CC",
+      "apelido": "Bolsista - Sânya",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEX",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2022022145,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 8,
+    "comment": "",
+    "idTurma": 20220222,
+    "disciplina": {
+      "id": 43,
+      "nome": "Banco de Dados II",
+      "codigo": "INF01206",
+      "apelido": "BD2",
+      "periodo": 6
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2022022246,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 8,
+    "comment": "",
+    "idTurma": 20220222,
+    "disciplina": {
+      "id": 43,
+      "nome": "Banco de Dados II",
+      "codigo": "INF01206",
+      "apelido": "BD2",
+      "periodo": 6
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2022022247,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 12,
+    "comment": "",
+    "idTurma": 20220223,
+    "disciplina": {
+      "id": 44,
+      "nome": "Inteligência Artificial",
+      "codigo": "INF01205",
+      "apelido": "IA",
+      "periodo": 6
+    },
+    "professor": {
+      "id": 2,
+      "nome": "Annabell Del Real Tamariz",
+      "curso": "CC",
+      "apelido": "Annabell",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2022022348,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 12,
+    "comment": "",
+    "idTurma": 20220223,
+    "disciplina": {
+      "id": 44,
+      "nome": "Inteligência Artificial",
+      "codigo": "INF01205",
+      "apelido": "IA",
+      "periodo": 6
+    },
+    "professor": {
+      "id": 2,
+      "nome": "Annabell Del Real Tamariz",
+      "curso": "CC",
+      "apelido": "Annabell",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2022022349,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 10,
+    "comment": "",
+    "idTurma": 20220224,
+    "disciplina": {
+      "id": 45,
+      "nome": "Paradigmas OO para Desenvolvimento de Software",
+      "codigo": "INF01210",
+      "apelido": "POODS",
+      "periodo": 6
+    },
+    "professor": {
+      "id": 4,
+      "nome": "Ausberto Silverio Castro Vera",
+      "curso": "CC",
+      "apelido": "Ausberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2022022450,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 10,
+    "comment": "",
+    "idTurma": 20220224,
+    "disciplina": {
+      "id": 45,
+      "nome": "Paradigmas OO para Desenvolvimento de Software",
+      "codigo": "INF01210",
+      "apelido": "POODS",
+      "periodo": 6
+    },
+    "professor": {
+      "id": 4,
+      "nome": "Ausberto Silverio Castro Vera",
+      "curso": "CC",
+      "apelido": "Ausberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEX",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2022022451,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 7,
+    "comment": null,
+    "idTurma": 20220225,
+    "disciplina": {
+      "id": 46,
+      "nome": "Teste de Software",
+      "codigo": "INF01121",
+      "apelido": "Test Soft",
+      "periodo": 7
+    },
+    "professor": {
+      "id": 30,
+      "nome": "Bolsista LCMAT CC",
+      "curso": "CC",
+      "apelido": "Bolsista CC 1",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 20,
+    "comment": "",
+    "idTurma": 20220226,
+    "disciplina": {
+      "id": 47,
+      "nome": "Sistemas Distribuídos",
+      "codigo": "INF01122",
+      "apelido": "Sist Dist",
+      "periodo": 7
+    },
+    "professor": {
+      "id": 6,
+      "nome": "João Luiz de Almeida Filho",
+      "curso": "CC",
+      "apelido": "João Luiz",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEX",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2022022653,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": "",
+    "idTurma": 20220227,
+    "disciplina": {
+      "id": 56,
+      "nome": "Projeto de Monografia",
+      "codigo": "INF01130",
+      "apelido": "Proj Monog",
+      "periodo": 9
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEX",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2022022754,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": "",
+    "idTurma": 20220228,
+    "disciplina": {
+      "id": 58,
+      "nome": "Estágio Supervisionado",
+      "codigo": "INF01127",
+      "apelido": "Estágio",
+      "periodo": 10
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEX",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2022022855,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": "",
+    "idTurma": 20220229,
+    "disciplina": {
+      "id": 59,
+      "nome": "Monografia",
+      "codigo": "INF01131",
+      "apelido": "Monog",
+      "periodo": 10
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEX",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2022022956,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": "",
+    "idTurma": 20220229,
+    "disciplina": {
+      "id": 59,
+      "nome": "Monografia",
+      "codigo": "INF01131",
+      "apelido": "Monog",
+      "periodo": 10
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2022022957,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 9,
+    "comment": "",
+    "idTurma": 20220230,
+    "disciplina": {
+      "id": 65,
+      "nome": "Fundamentos de Processamento de Imagens",
+      "codigo": "INF01220",
+      "apelido": "Fund Proces Img",
+      "periodo": 0
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2022023059,
+    "sala": null
+  },
+  {
+    "ano": 2022,
+    "semestre": 2,
+    "demandaEstimada": 9,
+    "comment": "",
+    "idTurma": 20220230,
+    "disciplina": {
+      "id": 65,
+      "nome": "Fundamentos de Processamento de Imagens",
+      "codigo": "INF01220",
+      "apelido": "Fund Proces Img",
+      "periodo": 0
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2022023060,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": "",
+    "idTurma": 20230109,
+    "disciplina": {
+      "id": 7,
+      "nome": "Inglês Instrumental I",
+      "codigo": "LEL04102",
+      "apelido": "Inglês 1",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 42,
+      "nome": "Bolsista CCH",
+      "curso": "Outro",
+      "apelido": "Bolsista CCH 1",
+      "laboratorio": "CCH"
+    },
+    "dia": "TER",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2023010908,
+    "sala": {
+      "id": 26,
+      "bloco": "P3",
+      "codigo": "106",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 65
+    }
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": "",
+    "idTurma": 20230109,
+    "disciplina": {
+      "id": 7,
+      "nome": "Inglês Instrumental I",
+      "codigo": "LEL04102",
+      "apelido": "Inglês 1",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 42,
+      "nome": "Bolsista CCH",
+      "curso": "Outro",
+      "apelido": "Bolsista CCH 1",
+      "laboratorio": "CCH"
+    },
+    "dia": "QUI",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2023010909,
+    "sala": {
+      "id": 23,
+      "bloco": "P3",
+      "codigo": "207",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 40
+    }
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": 4,
+    "comment": "",
+    "idTurma": 20230110,
+    "disciplina": {
+      "id": 16,
+      "nome": "Física 1",
+      "codigo": "FIS01272",
+      "apelido": "Fís 1",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 36,
+      "nome": "Bolsista LCFIS",
+      "curso": "Outro",
+      "apelido": "Bolsista LCFIS 1",
+      "laboratorio": "LCFIS"
+    },
+    "dia": "SEG",
+    "horaInicio": 18,
+    "duracao": 2,
+    "idHorario": 2023011010,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": 5,
+    "comment": "",
+    "idTurma": 20230111,
+    "disciplina": {
+      "id": 18,
+      "nome": "Física Experimental 1",
+      "codigo": "FIS01273",
+      "apelido": "Fís Exp 1",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 36,
+      "nome": "Bolsista LCFIS",
+      "curso": "Outro",
+      "apelido": "Bolsista LCFIS 1",
+      "laboratorio": "LCFIS"
+    },
+    "dia": "SEX",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2023011111,
+    "sala": {
+      "id": 6,
+      "bloco": "P3",
+      "codigo": "Bcct",
+      "idBlock": 5,
+      "descricao": "Bancada do CCT",
+      "capacidade": 30
+    }
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": 5,
+    "comment": "",
+    "idTurma": 20230112,
+    "disciplina": {
+      "id": 20,
+      "nome": "Física 2",
+      "codigo": "FIS01170",
+      "apelido": "Fís 2",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 38,
+      "nome": "Bolsista LCFIS",
+      "curso": "Outro",
+      "apelido": "Bolsista LCFIS 3",
+      "laboratorio": "LCFIS"
+    },
+    "dia": "SEG",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2023011212,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": 3,
+    "comment": "",
+    "idTurma": 20230113,
+    "disciplina": {
+      "id": 22,
+      "nome": "Física Experimental 2",
+      "codigo": "FIS01171",
+      "apelido": "Fís Exp 2",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 36,
+      "nome": "Bolsista LCFIS",
+      "curso": "Outro",
+      "apelido": "Bolsista LCFIS 1",
+      "laboratorio": "LCFIS"
+    },
+    "dia": "TER",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2023011313,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230114,
+    "disciplina": {
+      "id": 22,
+      "nome": "Física Experimental 2",
+      "codigo": "FIS01171",
+      "apelido": "Fís Exp 2",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 37,
+      "nome": "Bolsista LCFIS",
+      "curso": "Outro",
+      "apelido": "Bolsista LCFIS 2",
+      "laboratorio": "LCFIS"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": "",
+    "idTurma": 20230115,
+    "disciplina": {
+      "id": 22,
+      "nome": "Física Experimental 2",
+      "codigo": "FIS01171",
+      "apelido": "Fís Exp 2",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 38,
+      "nome": "Bolsista LCFIS",
+      "curso": "Outro",
+      "apelido": "Bolsista LCFIS 3",
+      "laboratorio": "LCFIS"
+    },
+    "dia": "QUA",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2023011514,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": "",
+    "idTurma": 20230115,
+    "disciplina": {
+      "id": 22,
+      "nome": "Física Experimental 2",
+      "codigo": "FIS01171",
+      "apelido": "Fís Exp 2",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 38,
+      "nome": "Bolsista LCFIS",
+      "curso": "Outro",
+      "apelido": "Bolsista LCFIS 3",
+      "laboratorio": "LCFIS"
+    },
+    "dia": "SEG",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2023011515,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": 13,
+    "comment": null,
+    "idTurma": 20230116,
+    "disciplina": {
+      "id": 23,
+      "nome": "Métodos Matemáticos",
+      "codigo": "MAT01106",
+      "apelido": "Met Mat",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 13,
+      "nome": "Paulo Cesar Beggio",
+      "curso": "Lic Mat",
+      "apelido": "Paulo Beggio",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": 12,
+    "comment": "",
+    "idTurma": 20230117,
+    "disciplina": {
+      "id": 24,
+      "nome": "Cálculo Diferencial e Integral III",
+      "codigo": "MAT01105",
+      "apelido": "Calc 3",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 8,
+      "nome": "Oscar Alfredo Paz La Torre",
+      "curso": "Lic Mat",
+      "apelido": "Oscar",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2023011716,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": 12,
+    "comment": "",
+    "idTurma": 20230117,
+    "disciplina": {
+      "id": 24,
+      "nome": "Cálculo Diferencial e Integral III",
+      "codigo": "MAT01105",
+      "apelido": "Calc 3",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 8,
+      "nome": "Oscar Alfredo Paz La Torre",
+      "curso": "Lic Mat",
+      "apelido": "Oscar",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2023011717,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": 45,
+    "comment": "",
+    "idTurma": 20230118,
+    "disciplina": {
+      "id": 25,
+      "nome": "Arquitetura de Computadores",
+      "codigo": "INF01112",
+      "apelido": "Arq Comp",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 51,
+      "nome": "Átila Carvalho Junior",
+      "curso": "CC",
+      "apelido": "Bolsista - Átila",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2023011818,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": 35,
+    "comment": null,
+    "idTurma": 20230119,
+    "disciplina": {
+      "id": 26,
+      "nome": "Paradigmas de Linguagens de Programação",
+      "codigo": "INF01113",
+      "apelido": "Parad Ling Prog",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 4,
+      "nome": "Ausberto Silverio Castro Vera",
+      "curso": "CC",
+      "apelido": "Ausberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": 45,
+    "comment": "",
+    "idTurma": 20230120,
+    "disciplina": {
+      "id": 27,
+      "nome": "Estruturas de Dados I",
+      "codigo": "INF01114",
+      "apelido": "ED1",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2023012019,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": 45,
+    "comment": "",
+    "idTurma": 20230120,
+    "disciplina": {
+      "id": 27,
+      "nome": "Estruturas de Dados I",
+      "codigo": "INF01114",
+      "apelido": "ED1",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2023012020,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": 45,
+    "comment": "",
+    "idTurma": 20230121,
+    "disciplina": {
+      "id": 27,
+      "nome": "Estruturas de Dados I",
+      "codigo": "INF01114",
+      "apelido": "ED1",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2023012121,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": 16,
+    "comment": "",
+    "idTurma": 20230122,
+    "disciplina": {
+      "id": 27,
+      "nome": "Estruturas de Dados I",
+      "codigo": "INF01114",
+      "apelido": "ED1",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2023012222,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": 16,
+    "comment": "",
+    "idTurma": 20230123,
+    "disciplina": {
+      "id": 27,
+      "nome": "Estruturas de Dados I",
+      "codigo": "INF01114",
+      "apelido": "ED1",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2023012323,
+    "sala": {
+      "id": 26,
+      "bloco": "P3",
+      "codigo": "106",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 65
+    }
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": 30,
+    "comment": null,
+    "idTurma": 20230124,
+    "disciplina": {
+      "id": 28,
+      "nome": "Cálculo Numérico",
+      "codigo": "MAT01208",
+      "apelido": "Calc Num",
+      "periodo": 4
+    },
+    "professor": {
+      "id": 8,
+      "nome": "Oscar Alfredo Paz La Torre",
+      "curso": "Lic Mat",
+      "apelido": "Oscar",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": 11,
+    "comment": "",
+    "idTurma": 20230125,
+    "disciplina": {
+      "id": 34,
+      "nome": "Processos Estocásticos",
+      "codigo": "MAT01107",
+      "apelido": "Estocásticos",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 10,
+      "nome": "Luis Humberto Guillermo Felipe",
+      "curso": "Lic Mat",
+      "apelido": "Guillermo",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2023012524,
+    "sala": {
+      "id": 8,
+      "bloco": "P3",
+      "codigo": "105",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 35
+    }
+  },
+  {
+    "ano": 2023,
+    "semestre": 1,
+    "demandaEstimada": 11,
+    "comment": "",
+    "idTurma": 20230125,
+    "disciplina": {
+      "id": 34,
+      "nome": "Processos Estocásticos",
+      "codigo": "MAT01107",
+      "apelido": "Estocásticos",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 10,
+      "nome": "Luis Humberto Guillermo Felipe",
+      "curso": "Lic Mat",
+      "apelido": "Guillermo",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2023012525,
+    "sala": {
+      "id": 26,
+      "bloco": "P3",
+      "codigo": "106",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 65
+    }
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230201,
+    "disciplina": {
+      "id": 2,
+      "nome": "Cálculo Diferencial e Integral I",
+      "codigo": "MAT01101",
+      "apelido": "Calc 1",
+      "periodo": 1
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230202,
+    "disciplina": {
+      "id": 7,
+      "nome": "Inglês Instrumental I",
+      "codigo": "LEL04102",
+      "apelido": "Inglês 1",
+      "periodo": 1
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230203,
+    "disciplina": {
+      "id": 8,
+      "nome": "Álgebra Linear",
+      "codigo": "MAT01212",
+      "apelido": "Álgebra Lin",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 7,
+      "nome": "Elba Orocia Bravo Asenjo",
+      "curso": "Lic Mat",
+      "apelido": "Elba",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230204,
+    "disciplina": {
+      "id": 10,
+      "nome": "Cálculo Diferencial e Integral II",
+      "codigo": "MAT01203",
+      "apelido": "Calc 2",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 9,
+      "nome": "Rigoberto Gregorio Sanabria Castro",
+      "curso": "Lic Mat",
+      "apelido": "Rigoberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230205,
+    "disciplina": {
+      "id": 11,
+      "nome": "Lógica Digital",
+      "codigo": "INF01104",
+      "apelido": "Lógic Dig",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 49,
+      "nome": "André",
+      "curso": "CC",
+      "apelido": "Bolsista - André",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230206,
+    "disciplina": {
+      "id": 12,
+      "nome": "Estruturas Discretas",
+      "codigo": "INF01207",
+      "apelido": "Estrut Disc",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 8,
+      "nome": "Oscar Alfredo Paz La Torre",
+      "curso": "Lic Mat",
+      "apelido": "Oscar",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230207,
+    "disciplina": {
+      "id": 13,
+      "nome": "Programação II",
+      "codigo": "INF01209",
+      "apelido": "Prog 2",
+      "periodo": 2
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230208,
+    "disciplina": {
+      "id": 14,
+      "nome": "Inglês Instrumental II",
+      "codigo": "LEL04206",
+      "apelido": "Inglês 2",
+      "periodo": 2
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230209,
+    "disciplina": {
+      "id": 16,
+      "nome": "Física 1",
+      "codigo": "FIS01272",
+      "apelido": "Fís 1",
+      "periodo": 2
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230210,
+    "disciplina": {
+      "id": 16,
+      "nome": "Física 1",
+      "codigo": "FIS01272",
+      "apelido": "Fís 1",
+      "periodo": 2
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230211,
+    "disciplina": {
+      "id": 18,
+      "nome": "Física Experimental 1",
+      "codigo": "FIS01273",
+      "apelido": "Fís Exp 1",
+      "periodo": 2
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230212,
+    "disciplina": {
+      "id": 28,
+      "nome": "Cálculo Numérico",
+      "codigo": "MAT01208",
+      "apelido": "Calc Num",
+      "periodo": 4
+    },
+    "professor": {
+      "id": 8,
+      "nome": "Oscar Alfredo Paz La Torre",
+      "curso": "Lic Mat",
+      "apelido": "Oscar",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230213,
+    "disciplina": {
+      "id": 29,
+      "nome": "Estatística e Probabilidade",
+      "codigo": "MAT01201",
+      "apelido": "Estatística",
+      "periodo": 4
+    },
+    "professor": {
+      "id": 28,
+      "nome": "José Ramón Arica Chavez",
+      "curso": "Outro",
+      "apelido": "Arica",
+      "laboratorio": "LEPROD"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230214,
+    "disciplina": {
+      "id": 30,
+      "nome": "Sistema Operacional",
+      "codigo": "INF01204",
+      "apelido": "Sist Op",
+      "periodo": 4
+    },
+    "professor": {
+      "id": 50,
+      "nome": "Eduardo",
+      "curso": "CC",
+      "apelido": "Bolsista - Eduardo",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230215,
+    "disciplina": {
+      "id": 31,
+      "nome": "Estrutura de dados II",
+      "codigo": "INF01202",
+      "apelido": "ED2",
+      "periodo": 4
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230216,
+    "disciplina": {
+      "id": 32,
+      "nome": "Programação Orientado a Objetos",
+      "codigo": "INF01203",
+      "apelido": "POO",
+      "periodo": 4
+    },
+    "professor": {
+      "id": 2,
+      "nome": "Annabell Del Real Tamariz",
+      "curso": "CC",
+      "apelido": "Annabell",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230217,
+    "disciplina": {
+      "id": 33,
+      "nome": "Análise e Projeto de Sistemas",
+      "codigo": "INF01201",
+      "apelido": "Análise Proj Sist",
+      "periodo": 4
+    },
+    "professor": {
+      "id": 4,
+      "nome": "Ausberto Silverio Castro Vera",
+      "curso": "CC",
+      "apelido": "Ausberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230218,
+    "disciplina": {
+      "id": 39,
+      "nome": "Computação e Sociedade",
+      "codigo": "LES04536",
+      "apelido": "Comp Soc",
+      "periodo": 5
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230219,
+    "disciplina": {
+      "id": 40,
+      "nome": "Pesquisa Operacional",
+      "codigo": "INF01211",
+      "apelido": "Pesq Op",
+      "periodo": 6
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230220,
+    "disciplina": {
+      "id": 41,
+      "nome": "Introdução à computação gráfica",
+      "codigo": "INF01124",
+      "apelido": "Intro CG",
+      "periodo": 6
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230221,
+    "disciplina": {
+      "id": 42,
+      "nome": "Compiladores",
+      "codigo": "INF01212",
+      "apelido": "Compiladores",
+      "periodo": 6
+    },
+    "professor": {
+      "id": 5,
+      "nome": "Luis Mariano del Val Cura",
+      "curso": "CC",
+      "apelido": "Luis Mariano",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230222,
+    "disciplina": {
+      "id": 43,
+      "nome": "Banco de Dados II",
+      "codigo": "INF01206",
+      "apelido": "BD2",
+      "periodo": 6
+    },
+    "professor": {
+      "id": 5,
+      "nome": "Luis Mariano del Val Cura",
+      "curso": "CC",
+      "apelido": "Luis Mariano",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230223,
+    "disciplina": {
+      "id": 44,
+      "nome": "Inteligência Artificial",
+      "codigo": "INF01205",
+      "apelido": "IA",
+      "periodo": 6
+    },
+    "professor": {
+      "id": 2,
+      "nome": "Annabell Del Real Tamariz",
+      "curso": "CC",
+      "apelido": "Annabell",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230224,
+    "disciplina": {
+      "id": 45,
+      "nome": "Paradigmas OO para Desenvolvimento de Software",
+      "codigo": "INF01210",
+      "apelido": "POODS",
+      "periodo": 6
+    },
+    "professor": {
+      "id": 4,
+      "nome": "Ausberto Silverio Castro Vera",
+      "curso": "CC",
+      "apelido": "Ausberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230225,
+    "disciplina": {
+      "id": 56,
+      "nome": "Projeto de Monografia",
+      "codigo": "INF01130",
+      "apelido": "Proj Monog",
+      "periodo": 9
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230226,
+    "disciplina": {
+      "id": 58,
+      "nome": "Estágio Supervisionado",
+      "codigo": "INF01127",
+      "apelido": "Estágio",
+      "periodo": 10
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230227,
+    "disciplina": {
+      "id": 59,
+      "nome": "Monografia",
+      "codigo": "INF01131",
+      "apelido": "Monog",
+      "periodo": 10
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230228,
+    "disciplina": {
+      "id": 67,
+      "nome": "Tópicos Especiais em Inteligência Artificial: Engenharia de Dados",
+      "codigo": "INF01232",
+      "apelido": "Engen Dados",
+      "periodo": 0
+    },
+    "professor": {
+      "id": 2,
+      "nome": "Annabell Del Real Tamariz",
+      "curso": "CC",
+      "apelido": "Annabell",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230229,
+    "disciplina": {
+      "id": 68,
+      "nome": "Tópicos Especiais em Programação: Programação Concorrente",
+      "codigo": "INF01250",
+      "apelido": "Prog Concor",
+      "periodo": 0
+    },
+    "professor": {
+      "id": 5,
+      "nome": "Luis Mariano del Val Cura",
+      "curso": "CC",
+      "apelido": "Luis Mariano",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2023,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20230230,
+    "disciplina": {
+      "id": 70,
+      "nome": "Tópicos Especiais em Gestão Computacional Ambiental: Sistemas Computacionais",
+      "codigo": "INF01242",
+      "apelido": "Comp Ambiental",
+      "periodo": 0
+    },
+    "professor": {
+      "id": 50,
+      "nome": "Eduardo",
+      "curso": "CC",
+      "apelido": "Bolsista - Eduardo",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 30,
+    "comment": "",
+    "idTurma": 20240101,
+    "disciplina": {
+      "id": 4,
+      "nome": "Lógica Matemática",
+      "codigo": "MAT01104",
+      "apelido": "Lógic Mat",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2024010101,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 30,
+    "comment": "",
+    "idTurma": 20240101,
+    "disciplina": {
+      "id": 4,
+      "nome": "Lógica Matemática",
+      "codigo": "MAT01104",
+      "apelido": "Lógic Mat",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2024010102,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 35,
+    "comment": "",
+    "idTurma": 20240102,
+    "disciplina": {
+      "id": 2,
+      "nome": "Cálculo Diferencial e Integral I",
+      "codigo": "MAT01101",
+      "apelido": "Calc 1",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 9,
+      "nome": "Rigoberto Gregorio Sanabria Castro",
+      "curso": "Lic Mat",
+      "apelido": "Rigoberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2024010203,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 35,
+    "comment": "",
+    "idTurma": 20240102,
+    "disciplina": {
+      "id": 2,
+      "nome": "Cálculo Diferencial e Integral I",
+      "codigo": "MAT01101",
+      "apelido": "Calc 1",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 9,
+      "nome": "Rigoberto Gregorio Sanabria Castro",
+      "curso": "Lic Mat",
+      "apelido": "Rigoberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2024010204,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 35,
+    "comment": "",
+    "idTurma": 20240102,
+    "disciplina": {
+      "id": 2,
+      "nome": "Cálculo Diferencial e Integral I",
+      "codigo": "MAT01101",
+      "apelido": "Calc 1",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 9,
+      "nome": "Rigoberto Gregorio Sanabria Castro",
+      "curso": "Lic Mat",
+      "apelido": "Rigoberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEX",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2024010205,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 27,
+    "comment": "",
+    "idTurma": 20240103,
+    "disciplina": {
+      "id": 3,
+      "nome": "Organização de Computadores",
+      "codigo": "INF01105",
+      "apelido": "Org Comp",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 30,
+      "nome": "Bolsista LCMAT CC",
+      "curso": "CC",
+      "apelido": "Bolsista CC 1",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2024010306,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 27,
+    "comment": "",
+    "idTurma": 20240103,
+    "disciplina": {
+      "id": 3,
+      "nome": "Organização de Computadores",
+      "codigo": "INF01105",
+      "apelido": "Org Comp",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 30,
+      "nome": "Bolsista LCMAT CC",
+      "curso": "CC",
+      "apelido": "Bolsista CC 1",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEX",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2024010307,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 27,
+    "comment": "",
+    "idTurma": 20240104,
+    "disciplina": {
+      "id": 5,
+      "nome": "Programação I",
+      "codigo": "INF01106",
+      "apelido": "Prog 1",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 2,
+      "nome": "Annabell Del Real Tamariz",
+      "curso": "CC",
+      "apelido": "Annabell",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2024010408,
+    "sala": {
+      "id": 6,
+      "bloco": "P3",
+      "codigo": "Bcct",
+      "idBlock": 5,
+      "descricao": "Bancada do CCT",
+      "capacidade": 30
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 27,
+    "comment": "",
+    "idTurma": 20240104,
+    "disciplina": {
+      "id": 5,
+      "nome": "Programação I",
+      "codigo": "INF01106",
+      "apelido": "Prog 1",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 2,
+      "nome": "Annabell Del Real Tamariz",
+      "curso": "CC",
+      "apelido": "Annabell",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2024010409,
+    "sala": {
+      "id": 6,
+      "bloco": "P3",
+      "codigo": "Bcct",
+      "idBlock": 5,
+      "descricao": "Bancada do CCT",
+      "capacidade": 30
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 35,
+    "comment": "",
+    "idTurma": 20240105,
+    "disciplina": {
+      "id": 1,
+      "nome": "Geometria Analítica e Vetores",
+      "codigo": "MAT01117",
+      "apelido": "Geom Analít",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 7,
+      "nome": "Elba Orocia Bravo Asenjo",
+      "curso": "Lic Mat",
+      "apelido": "Elba",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2024010510,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 35,
+    "comment": "",
+    "idTurma": 20240105,
+    "disciplina": {
+      "id": 1,
+      "nome": "Geometria Analítica e Vetores",
+      "codigo": "MAT01117",
+      "apelido": "Geom Analít",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 7,
+      "nome": "Elba Orocia Bravo Asenjo",
+      "curso": "Lic Mat",
+      "apelido": "Elba",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2024010511,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 27,
+    "comment": "",
+    "idTurma": 20240106,
+    "disciplina": {
+      "id": 6,
+      "nome": "Introdução à Ciência da Computação",
+      "codigo": "INF01101",
+      "apelido": "Intro CC",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2024010612,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 30,
+    "comment": "",
+    "idTurma": 20240107,
+    "disciplina": {
+      "id": 7,
+      "nome": "Inglês Instrumental I",
+      "codigo": "LEL04102",
+      "apelido": "Inglês 1",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 42,
+      "nome": "Bolsista CCH",
+      "curso": "Outro",
+      "apelido": "Bolsista CCH 1",
+      "laboratorio": "CCH"
+    },
+    "dia": "SEX",
+    "horaInicio": 14,
+    "duracao": 3,
+    "idHorario": 2024010713,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 25,
+    "comment": "",
+    "idTurma": 20240108,
+    "disciplina": {
+      "id": 23,
+      "nome": "Métodos Matemáticos",
+      "codigo": "MAT01106",
+      "apelido": "Met Mat",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 13,
+      "nome": "Paulo Cesar Beggio",
+      "curso": "Lic Mat",
+      "apelido": "Paulo Beggio",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2024010814,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 25,
+    "comment": "",
+    "idTurma": 20240108,
+    "disciplina": {
+      "id": 23,
+      "nome": "Métodos Matemáticos",
+      "codigo": "MAT01106",
+      "apelido": "Met Mat",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 13,
+      "nome": "Paulo Cesar Beggio",
+      "curso": "Lic Mat",
+      "apelido": "Paulo Beggio",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2024010815,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 15,
+    "comment": "",
+    "idTurma": 20240109,
+    "disciplina": {
+      "id": 24,
+      "nome": "Cálculo Diferencial e Integral III",
+      "codigo": "MAT01105",
+      "apelido": "Calc 3",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 8,
+      "nome": "Oscar Alfredo Paz La Torre",
+      "curso": "Lic Mat",
+      "apelido": "Oscar",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2024010916,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 15,
+    "comment": "",
+    "idTurma": 20240109,
+    "disciplina": {
+      "id": 24,
+      "nome": "Cálculo Diferencial e Integral III",
+      "codigo": "MAT01105",
+      "apelido": "Calc 3",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 8,
+      "nome": "Oscar Alfredo Paz La Torre",
+      "curso": "Lic Mat",
+      "apelido": "Oscar",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2024010917,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 9,
+    "comment": "",
+    "idTurma": 20240110,
+    "disciplina": {
+      "id": 20,
+      "nome": "Física 2",
+      "codigo": "FIS01170",
+      "apelido": "Fís 2",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 22,
+      "nome": "Roberto Weider de Assis Franco",
+      "curso": "Lic Fis",
+      "apelido": "Roberto Franco",
+      "laboratorio": "LCFIS"
+    },
+    "dia": "SEG",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2024011018,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 9,
+    "comment": "",
+    "idTurma": 20240110,
+    "disciplina": {
+      "id": 20,
+      "nome": "Física 2",
+      "codigo": "FIS01170",
+      "apelido": "Fís 2",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 22,
+      "nome": "Roberto Weider de Assis Franco",
+      "curso": "Lic Fis",
+      "apelido": "Roberto Franco",
+      "laboratorio": "LCFIS"
+    },
+    "dia": "QUA",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2024011019,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 9,
+    "comment": "",
+    "idTurma": 20240111,
+    "disciplina": {
+      "id": 22,
+      "nome": "Física Experimental 2",
+      "codigo": "FIS01171",
+      "apelido": "Fís Exp 2",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 23,
+      "nome": "Delson Ubiratan da Silva Schramm",
+      "curso": "Lic Fis",
+      "apelido": "Delson",
+      "laboratorio": "LCFIS"
+    },
+    "dia": "SEG",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2024011120,
+    "sala": {
+      "id": 11,
+      "bloco": "P3",
+      "codigo": "203A",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 35
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 30,
+    "comment": "",
+    "idTurma": 20240112,
+    "disciplina": {
+      "id": 25,
+      "nome": "Arquitetura de Computadores",
+      "codigo": "INF01112",
+      "apelido": "Arq Comp",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 31,
+      "nome": "Bolsista LCMAT CC",
+      "curso": "CC",
+      "apelido": "Bolsista CC 2",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2024011221,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 30,
+    "comment": "",
+    "idTurma": 20240112,
+    "disciplina": {
+      "id": 25,
+      "nome": "Arquitetura de Computadores",
+      "codigo": "INF01112",
+      "apelido": "Arq Comp",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 31,
+      "nome": "Bolsista LCMAT CC",
+      "curso": "CC",
+      "apelido": "Bolsista CC 2",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEX",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2024011222,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 25,
+    "comment": "",
+    "idTurma": 20240113,
+    "disciplina": {
+      "id": 26,
+      "nome": "Paradigmas de Linguagens de Programação",
+      "codigo": "INF01113",
+      "apelido": "Parad Ling Prog",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 4,
+      "nome": "Ausberto Silverio Castro Vera",
+      "curso": "CC",
+      "apelido": "Ausberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2024011323,
+    "sala": {
+      "id": 3,
+      "bloco": "P5",
+      "codigo": "inf2",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 25,
+    "comment": "",
+    "idTurma": 20240113,
+    "disciplina": {
+      "id": 26,
+      "nome": "Paradigmas de Linguagens de Programação",
+      "codigo": "INF01113",
+      "apelido": "Parad Ling Prog",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 4,
+      "nome": "Ausberto Silverio Castro Vera",
+      "curso": "CC",
+      "apelido": "Ausberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2024011324,
+    "sala": {
+      "id": 3,
+      "bloco": "P5",
+      "codigo": "inf2",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 25,
+    "comment": "",
+    "idTurma": 20240114,
+    "disciplina": {
+      "id": 27,
+      "nome": "Estruturas de Dados I",
+      "codigo": "INF01114",
+      "apelido": "ED1",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2024011425,
+    "sala": {
+      "id": 6,
+      "bloco": "P3",
+      "codigo": "Bcct",
+      "idBlock": 5,
+      "descricao": "Bancada do CCT",
+      "capacidade": 30
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 25,
+    "comment": "",
+    "idTurma": 20240114,
+    "disciplina": {
+      "id": 27,
+      "nome": "Estruturas de Dados I",
+      "codigo": "INF01114",
+      "apelido": "ED1",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2024011426,
+    "sala": {
+      "id": 6,
+      "bloco": "P3",
+      "codigo": "Bcct",
+      "idBlock": 5,
+      "descricao": "Bancada do CCT",
+      "capacidade": 30
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 10,
+    "comment": "",
+    "idTurma": 20240115,
+    "disciplina": {
+      "id": 34,
+      "nome": "Processos Estocásticos",
+      "codigo": "MAT01107",
+      "apelido": "Estocásticos",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 10,
+      "nome": "Luis Humberto Guillermo Felipe",
+      "curso": "Lic Mat",
+      "apelido": "Guillermo",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2024011527,
+    "sala": {
+      "id": 3,
+      "bloco": "P5",
+      "codigo": "inf2",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 10,
+    "comment": "",
+    "idTurma": 20240115,
+    "disciplina": {
+      "id": 34,
+      "nome": "Processos Estocásticos",
+      "codigo": "MAT01107",
+      "apelido": "Estocásticos",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 10,
+      "nome": "Luis Humberto Guillermo Felipe",
+      "curso": "Lic Mat",
+      "apelido": "Guillermo",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2024011528,
+    "sala": {
+      "id": 3,
+      "bloco": "P5",
+      "codigo": "inf2",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 30,
+    "comment": "",
+    "idTurma": 20240116,
+    "disciplina": {
+      "id": 35,
+      "nome": "Redes de Computadores",
+      "codigo": "INF01115",
+      "apelido": "Redes",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 6,
+      "nome": "João Luiz de Almeida Filho",
+      "curso": "CC",
+      "apelido": "João Luiz",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2024011629,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 30,
+    "comment": "",
+    "idTurma": 20240116,
+    "disciplina": {
+      "id": 35,
+      "nome": "Redes de Computadores",
+      "codigo": "INF01115",
+      "apelido": "Redes",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 6,
+      "nome": "João Luiz de Almeida Filho",
+      "curso": "CC",
+      "apelido": "João Luiz",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2024011630,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 20,
+    "comment": "",
+    "idTurma": 20240117,
+    "disciplina": {
+      "id": 37,
+      "nome": "Linguagens formais e teoria da computação",
+      "codigo": "INF01117",
+      "apelido": "Ling Form",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 2,
+      "nome": "Annabell Del Real Tamariz",
+      "curso": "CC",
+      "apelido": "Annabell",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2024011731,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 20,
+    "comment": "",
+    "idTurma": 20240117,
+    "disciplina": {
+      "id": 37,
+      "nome": "Linguagens formais e teoria da computação",
+      "codigo": "INF01117",
+      "apelido": "Ling Form",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 2,
+      "nome": "Annabell Del Real Tamariz",
+      "curso": "CC",
+      "apelido": "Annabell",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2024011732,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 27,
+    "comment": "",
+    "idTurma": 20240118,
+    "disciplina": {
+      "id": 36,
+      "nome": "Banco de Dados I",
+      "codigo": "INF01116",
+      "apelido": "BD1",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 5,
+      "nome": "Luis Mariano del Val Cura",
+      "curso": "CC",
+      "apelido": "Luis Mariano",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2024011833,
+    "sala": {
+      "id": 6,
+      "bloco": "P3",
+      "codigo": "Bcct",
+      "idBlock": 5,
+      "descricao": "Bancada do CCT",
+      "capacidade": 30
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 27,
+    "comment": "",
+    "idTurma": 20240118,
+    "disciplina": {
+      "id": 36,
+      "nome": "Banco de Dados I",
+      "codigo": "INF01116",
+      "apelido": "BD1",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 5,
+      "nome": "Luis Mariano del Val Cura",
+      "curso": "CC",
+      "apelido": "Luis Mariano",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2024011834,
+    "sala": {
+      "id": 6,
+      "bloco": "P3",
+      "codigo": "Bcct",
+      "idBlock": 5,
+      "descricao": "Bancada do CCT",
+      "capacidade": 30
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 28,
+    "comment": "",
+    "idTurma": 20240119,
+    "disciplina": {
+      "id": 38,
+      "nome": "Engenharia de Software",
+      "codigo": "INF01119",
+      "apelido": "Eng Soft",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 4,
+      "nome": "Ausberto Silverio Castro Vera",
+      "curso": "CC",
+      "apelido": "Ausberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2024011935,
+    "sala": {
+      "id": 6,
+      "bloco": "P3",
+      "codigo": "Bcct",
+      "idBlock": 5,
+      "descricao": "Bancada do CCT",
+      "capacidade": 30
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 28,
+    "comment": "",
+    "idTurma": 20240119,
+    "disciplina": {
+      "id": 38,
+      "nome": "Engenharia de Software",
+      "codigo": "INF01119",
+      "apelido": "Eng Soft",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 4,
+      "nome": "Ausberto Silverio Castro Vera",
+      "curso": "CC",
+      "apelido": "Ausberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2024011936,
+    "sala": {
+      "id": 6,
+      "bloco": "P3",
+      "codigo": "Bcct",
+      "idBlock": 5,
+      "descricao": "Bancada do CCT",
+      "capacidade": 30
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 30,
+    "comment": "",
+    "idTurma": 20240120,
+    "disciplina": {
+      "id": 39,
+      "nome": "Computação e Sociedade",
+      "codigo": "LES04536",
+      "apelido": "Comp Soc",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 43,
+      "nome": "Bolsista CCH",
+      "curso": "Outro",
+      "apelido": "Bolsista CCH 2",
+      "laboratorio": "CCH"
+    },
+    "dia": "SEX",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2024012037,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 10,
+    "comment": "",
+    "idTurma": 20240121,
+    "disciplina": {
+      "id": 48,
+      "nome": "Interface Homem-Máquina",
+      "codigo": "INF01123",
+      "apelido": "Interface HM",
+      "periodo": 7
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2024012138,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 10,
+    "comment": "",
+    "idTurma": 20240121,
+    "disciplina": {
+      "id": 48,
+      "nome": "Interface Homem-Máquina",
+      "codigo": "INF01123",
+      "apelido": "Interface HM",
+      "periodo": 7
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2024012139,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 6,
+    "comment": "",
+    "idTurma": 20240122,
+    "disciplina": {
+      "id": 47,
+      "nome": "Sistemas Distribuídos",
+      "codigo": "INF01122",
+      "apelido": "Sist Dist",
+      "periodo": 7
+    },
+    "professor": {
+      "id": 6,
+      "nome": "João Luiz de Almeida Filho",
+      "curso": "CC",
+      "apelido": "João Luiz",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2024012240,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 6,
+    "comment": "",
+    "idTurma": 20240122,
+    "disciplina": {
+      "id": 47,
+      "nome": "Sistemas Distribuídos",
+      "codigo": "INF01122",
+      "apelido": "Sist Dist",
+      "periodo": 7
+    },
+    "professor": {
+      "id": 6,
+      "nome": "João Luiz de Almeida Filho",
+      "curso": "CC",
+      "apelido": "João Luiz",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2024012241,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 12,
+    "comment": "",
+    "idTurma": 20240123,
+    "disciplina": {
+      "id": 49,
+      "nome": "Metodologia de Trabalho Científico",
+      "codigo": "PRO01122",
+      "apelido": "Metod Trab Cien",
+      "periodo": 7
+    },
+    "professor": {
+      "id": 29,
+      "nome": "Manuel Antonio Molina Palma",
+      "curso": "Outro",
+      "apelido": "Molina",
+      "laboratorio": "LEPROD"
+    },
+    "dia": "TER",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2024012342,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 12,
+    "comment": "",
+    "idTurma": 20240123,
+    "disciplina": {
+      "id": 49,
+      "nome": "Metodologia de Trabalho Científico",
+      "codigo": "PRO01122",
+      "apelido": "Metod Trab Cien",
+      "periodo": 7
+    },
+    "professor": {
+      "id": 29,
+      "nome": "Manuel Antonio Molina Palma",
+      "curso": "Outro",
+      "apelido": "Molina",
+      "laboratorio": "LEPROD"
+    },
+    "dia": "QUI",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2024012343,
+    "sala": null
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 5,
+    "comment": "",
+    "idTurma": 20240124,
+    "disciplina": {
+      "id": 46,
+      "nome": "Teste de Software",
+      "codigo": "INF01121",
+      "apelido": "Test Soft",
+      "periodo": 7
+    },
+    "professor": {
+      "id": 32,
+      "nome": "Bolsista LCMAT CC",
+      "curso": "CC",
+      "apelido": "Bolsista CC 3",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2024012444,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 5,
+    "comment": "",
+    "idTurma": 20240124,
+    "disciplina": {
+      "id": 46,
+      "nome": "Teste de Software",
+      "codigo": "INF01121",
+      "apelido": "Test Soft",
+      "periodo": 7
+    },
+    "professor": {
+      "id": 32,
+      "nome": "Bolsista LCMAT CC",
+      "curso": "CC",
+      "apelido": "Bolsista CC 3",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2024012445,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 10,
+    "comment": "",
+    "idTurma": 20240125,
+    "disciplina": {
+      "id": 64,
+      "nome": "Tópicos Especiais em Simulação Computacional: Algoritmos em Grafos",
+      "codigo": "INF01219",
+      "apelido": "Grafos",
+      "periodo": 0
+    },
+    "professor": {
+      "id": 5,
+      "nome": "Luis Mariano del Val Cura",
+      "curso": "CC",
+      "apelido": "Luis Mariano",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2024012546,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 10,
+    "comment": "",
+    "idTurma": 20240125,
+    "disciplina": {
+      "id": 64,
+      "nome": "Tópicos Especiais em Simulação Computacional: Algoritmos em Grafos",
+      "codigo": "INF01219",
+      "apelido": "Grafos",
+      "periodo": 0
+    },
+    "professor": {
+      "id": 5,
+      "nome": "Luis Mariano del Val Cura",
+      "curso": "CC",
+      "apelido": "Luis Mariano",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2024012547,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 7,
+    "comment": "",
+    "idTurma": 20240126,
+    "disciplina": {
+      "id": 65,
+      "nome": "Fundamentos de Processamento de Imagens",
+      "codigo": "INF01220",
+      "apelido": "Fund Proces Img",
+      "periodo": 0
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2024012648,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 7,
+    "comment": "",
+    "idTurma": 20240126,
+    "disciplina": {
+      "id": 65,
+      "nome": "Fundamentos de Processamento de Imagens",
+      "codigo": "INF01220",
+      "apelido": "Fund Proces Img",
+      "periodo": 0
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2024012649,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 5,
+    "comment": "",
+    "idTurma": 20240127,
+    "disciplina": {
+      "id": 56,
+      "nome": "Projeto de Monografia",
+      "codigo": "INF01130",
+      "apelido": "Proj Monog",
+      "periodo": 9
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEX",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2024012750,
+    "sala": {
+      "id": 3,
+      "bloco": "P5",
+      "codigo": "inf2",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 5,
+    "comment": "",
+    "idTurma": 20240128,
+    "disciplina": {
+      "id": 58,
+      "nome": "Estágio Supervisionado",
+      "codigo": "INF01127",
+      "apelido": "Estágio",
+      "periodo": 10
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEX",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2024012851,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2024,
+    "semestre": 1,
+    "demandaEstimada": 4,
+    "comment": "",
+    "idTurma": 20240129,
+    "disciplina": {
+      "id": 59,
+      "nome": "Monografia",
+      "codigo": "INF01131",
+      "apelido": "Monog",
+      "periodo": 10
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEX",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2024012952,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 35,
+    "comment": null,
+    "idTurma": 20250101,
+    "disciplina": {
+      "id": 1,
+      "nome": "Geometria Analítica e Vetores",
+      "codigo": "MAT01117",
+      "apelido": "Geom Analít",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 7,
+      "nome": "Elba Orocia Bravo Asenjo",
+      "curso": "Lic Mat",
+      "apelido": "Elba",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 35,
+    "comment": null,
+    "idTurma": 20250102,
+    "disciplina": {
+      "id": 2,
+      "nome": "Cálculo Diferencial e Integral I",
+      "codigo": "MAT01101",
+      "apelido": "Calc 1",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 9,
+      "nome": "Rigoberto Gregorio Sanabria Castro",
+      "curso": "Lic Mat",
+      "apelido": "Rigoberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 27,
+    "comment": null,
+    "idTurma": 20250103,
+    "disciplina": {
+      "id": 3,
+      "nome": "Organização de Computadores",
+      "codigo": "INF01105",
+      "apelido": "Org Comp",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 30,
+      "nome": "Bolsista LCMAT CC",
+      "curso": "CC",
+      "apelido": "Bolsista CC 1",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 30,
+    "comment": null,
+    "idTurma": 20250104,
+    "disciplina": {
+      "id": 4,
+      "nome": "Lógica Matemática",
+      "codigo": "MAT01104",
+      "apelido": "Lógic Mat",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 27,
+    "comment": null,
+    "idTurma": 20250105,
+    "disciplina": {
+      "id": 5,
+      "nome": "Programação I",
+      "codigo": "INF01106",
+      "apelido": "Prog 1",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 2,
+      "nome": "Annabell Del Real Tamariz",
+      "curso": "CC",
+      "apelido": "Annabell",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 27,
+    "comment": null,
+    "idTurma": 20250106,
+    "disciplina": {
+      "id": 6,
+      "nome": "Introdução à Ciência da Computação",
+      "codigo": "INF01101",
+      "apelido": "Intro CC",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 30,
+    "comment": null,
+    "idTurma": 20250107,
+    "disciplina": {
+      "id": 7,
+      "nome": "Inglês Instrumental I",
+      "codigo": "LEL04102",
+      "apelido": "Inglês 1",
+      "periodo": 1
+    },
+    "professor": {
+      "id": 42,
+      "nome": "Bolsista CCH",
+      "curso": "Outro",
+      "apelido": "Bolsista CCH 1",
+      "laboratorio": "CCH"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 9,
+    "comment": null,
+    "idTurma": 20250108,
+    "disciplina": {
+      "id": 20,
+      "nome": "Física 2",
+      "codigo": "FIS01170",
+      "apelido": "Fís 2",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 22,
+      "nome": "Roberto Weider de Assis Franco",
+      "curso": "Lic Fis",
+      "apelido": "Roberto Franco",
+      "laboratorio": "LCFIS"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 9,
+    "comment": null,
+    "idTurma": 20250109,
+    "disciplina": {
+      "id": 22,
+      "nome": "Física Experimental 2",
+      "codigo": "FIS01171",
+      "apelido": "Fís Exp 2",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 23,
+      "nome": "Delson Ubiratan da Silva Schramm",
+      "curso": "Lic Fis",
+      "apelido": "Delson",
+      "laboratorio": "LCFIS"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 25,
+    "comment": null,
+    "idTurma": 20250110,
+    "disciplina": {
+      "id": 23,
+      "nome": "Métodos Matemáticos",
+      "codigo": "MAT01106",
+      "apelido": "Met Mat",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 13,
+      "nome": "Paulo Cesar Beggio",
+      "curso": "Lic Mat",
+      "apelido": "Paulo Beggio",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 15,
+    "comment": null,
+    "idTurma": 20250111,
+    "disciplina": {
+      "id": 24,
+      "nome": "Cálculo Diferencial e Integral III",
+      "codigo": "MAT01105",
+      "apelido": "Calc 3",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 8,
+      "nome": "Oscar Alfredo Paz La Torre",
+      "curso": "Lic Mat",
+      "apelido": "Oscar",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 30,
+    "comment": null,
+    "idTurma": 20250112,
+    "disciplina": {
+      "id": 25,
+      "nome": "Arquitetura de Computadores",
+      "codigo": "INF01112",
+      "apelido": "Arq Comp",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 31,
+      "nome": "Bolsista LCMAT CC",
+      "curso": "CC",
+      "apelido": "Bolsista CC 2",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 25,
+    "comment": null,
+    "idTurma": 20250113,
+    "disciplina": {
+      "id": 26,
+      "nome": "Paradigmas de Linguagens de Programação",
+      "codigo": "INF01113",
+      "apelido": "Parad Ling Prog",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 4,
+      "nome": "Ausberto Silverio Castro Vera",
+      "curso": "CC",
+      "apelido": "Ausberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 25,
+    "comment": null,
+    "idTurma": 20250114,
+    "disciplina": {
+      "id": 27,
+      "nome": "Estruturas de Dados I",
+      "codigo": "INF01114",
+      "apelido": "ED1",
+      "periodo": 3
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 10,
+    "comment": null,
+    "idTurma": 20250115,
+    "disciplina": {
+      "id": 34,
+      "nome": "Processos Estocásticos",
+      "codigo": "MAT01107",
+      "apelido": "Estocásticos",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 10,
+      "nome": "Luis Humberto Guillermo Felipe",
+      "curso": "Lic Mat",
+      "apelido": "Guillermo",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 30,
+    "comment": null,
+    "idTurma": 20250116,
+    "disciplina": {
+      "id": 35,
+      "nome": "Redes de Computadores",
+      "codigo": "INF01115",
+      "apelido": "Redes",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 6,
+      "nome": "João Luiz de Almeida Filho",
+      "curso": "CC",
+      "apelido": "João Luiz",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 27,
+    "comment": null,
+    "idTurma": 20250117,
+    "disciplina": {
+      "id": 36,
+      "nome": "Banco de Dados I",
+      "codigo": "INF01116",
+      "apelido": "BD1",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 5,
+      "nome": "Luis Mariano del Val Cura",
+      "curso": "CC",
+      "apelido": "Luis Mariano",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 20,
+    "comment": null,
+    "idTurma": 20250118,
+    "disciplina": {
+      "id": 37,
+      "nome": "Linguagens formais e teoria da computação",
+      "codigo": "INF01117",
+      "apelido": "Ling Form",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 2,
+      "nome": "Annabell Del Real Tamariz",
+      "curso": "CC",
+      "apelido": "Annabell",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 28,
+    "comment": null,
+    "idTurma": 20250119,
+    "disciplina": {
+      "id": 38,
+      "nome": "Engenharia de Software",
+      "codigo": "INF01119",
+      "apelido": "Eng Soft",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 4,
+      "nome": "Ausberto Silverio Castro Vera",
+      "curso": "CC",
+      "apelido": "Ausberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 30,
+    "comment": null,
+    "idTurma": 20250120,
+    "disciplina": {
+      "id": 39,
+      "nome": "Computação e Sociedade",
+      "codigo": "LES04536",
+      "apelido": "Comp Soc",
+      "periodo": 5
+    },
+    "professor": {
+      "id": 43,
+      "nome": "Bolsista CCH",
+      "curso": "Outro",
+      "apelido": "Bolsista CCH 2",
+      "laboratorio": "CCH"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 5,
+    "comment": null,
+    "idTurma": 20250121,
+    "disciplina": {
+      "id": 46,
+      "nome": "Teste de Software",
+      "codigo": "INF01121",
+      "apelido": "Test Soft",
+      "periodo": 7
+    },
+    "professor": {
+      "id": 32,
+      "nome": "Bolsista LCMAT CC",
+      "curso": "CC",
+      "apelido": "Bolsista CC 3",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 6,
+    "comment": null,
+    "idTurma": 20250122,
+    "disciplina": {
+      "id": 47,
+      "nome": "Sistemas Distribuídos",
+      "codigo": "INF01122",
+      "apelido": "Sist Dist",
+      "periodo": 7
+    },
+    "professor": {
+      "id": 6,
+      "nome": "João Luiz de Almeida Filho",
+      "curso": "CC",
+      "apelido": "João Luiz",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 10,
+    "comment": null,
+    "idTurma": 20250123,
+    "disciplina": {
+      "id": 48,
+      "nome": "Interface Homem-Máquina",
+      "codigo": "INF01123",
+      "apelido": "Interface HM",
+      "periodo": 7
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 12,
+    "comment": null,
+    "idTurma": 20250124,
+    "disciplina": {
+      "id": 49,
+      "nome": "Metodologia de Trabalho Científico",
+      "codigo": "PRO01122",
+      "apelido": "Metod Trab Cien",
+      "periodo": 7
+    },
+    "professor": {
+      "id": 29,
+      "nome": "Manuel Antonio Molina Palma",
+      "curso": "Outro",
+      "apelido": "Molina",
+      "laboratorio": "LEPROD"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 5,
+    "comment": null,
+    "idTurma": 20250125,
+    "disciplina": {
+      "id": 56,
+      "nome": "Projeto de Monografia",
+      "codigo": "INF01130",
+      "apelido": "Proj Monog",
+      "periodo": 9
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 5,
+    "comment": null,
+    "idTurma": 20250126,
+    "disciplina": {
+      "id": 58,
+      "nome": "Estágio Supervisionado",
+      "codigo": "INF01127",
+      "apelido": "Estágio",
+      "periodo": 10
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 4,
+    "comment": null,
+    "idTurma": 20250127,
+    "disciplina": {
+      "id": 59,
+      "nome": "Monografia",
+      "codigo": "INF01131",
+      "apelido": "Monog",
+      "periodo": 10
+    },
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 10,
+    "comment": null,
+    "idTurma": 20250128,
+    "disciplina": {
+      "id": 64,
+      "nome": "Tópicos Especiais em Simulação Computacional: Algoritmos em Grafos",
+      "codigo": "INF01219",
+      "apelido": "Grafos",
+      "periodo": 0
+    },
+    "professor": {
+      "id": 5,
+      "nome": "Luis Mariano del Val Cura",
+      "curso": "CC",
+      "apelido": "Luis Mariano",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2025,
+    "semestre": 1,
+    "demandaEstimada": 7,
+    "comment": null,
+    "idTurma": 20250129,
+    "disciplina": {
+      "id": 65,
+      "nome": "Fundamentos de Processamento de Imagens",
+      "codigo": "INF01220",
+      "apelido": "Fund Proces Img",
+      "periodo": 0
+    },
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Professor multi alloc - Prof 1",
+    "idTurma": 20280101,
+    "disciplina": null,
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028010101,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Professor multi alloc - Prof 1",
+    "idTurma": 20280101,
+    "disciplina": null,
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028010102,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Professor multi alloc - Prof 1",
+    "idTurma": 20280102,
+    "disciplina": null,
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028010203,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Professor multi alloc - Prof 1",
+    "idTurma": 20280102,
+    "disciplina": null,
+    "professor": {
+      "id": 1,
+      "nome": "Luis Antonio Rivera Escriba",
+      "curso": "CC",
+      "apelido": "Rivera",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028010204,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Professor multi alloc - Prof 2",
+    "idTurma": 20280103,
+    "disciplina": null,
+    "professor": {
+      "id": 2,
+      "nome": "Annabell Del Real Tamariz",
+      "curso": "CC",
+      "apelido": "Annabell",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028010305,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Professor multi alloc - Prof 2",
+    "idTurma": 20280103,
+    "disciplina": null,
+    "professor": {
+      "id": 2,
+      "nome": "Annabell Del Real Tamariz",
+      "curso": "CC",
+      "apelido": "Annabell",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028010306,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Professor multi alloc - Prof 2",
+    "idTurma": 20280104,
+    "disciplina": null,
+    "professor": {
+      "id": 2,
+      "nome": "Annabell Del Real Tamariz",
+      "curso": "CC",
+      "apelido": "Annabell",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028010407,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Professor multi alloc - Prof 2",
+    "idTurma": 20280104,
+    "disciplina": null,
+    "professor": {
+      "id": 2,
+      "nome": "Annabell Del Real Tamariz",
+      "curso": "CC",
+      "apelido": "Annabell",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEX",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028010408,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Professor multi alloc - Prof 3",
+    "idTurma": 20280105,
+    "disciplina": null,
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028010509,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Professor multi alloc - Prof 3",
+    "idTurma": 20280105,
+    "disciplina": null,
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2028010510,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Professor multi alloc - Prof 3",
+    "idTurma": 20280106,
+    "disciplina": null,
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2028010611,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Professor multi alloc - Prof 3",
+    "idTurma": 20280106,
+    "disciplina": null,
+    "professor": {
+      "id": 3,
+      "nome": "Fermín Alfredo Tang Montané",
+      "curso": "CC",
+      "apelido": "Tang",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2028010612,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Professor multi alloc - Prof 4",
+    "idTurma": 20280107,
+    "disciplina": null,
+    "professor": {
+      "id": 4,
+      "nome": "Ausberto Silverio Castro Vera",
+      "curso": "CC",
+      "apelido": "Ausberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "SEG",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028010713,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Professor multi alloc - Prof 4",
+    "idTurma": 20280107,
+    "disciplina": null,
+    "professor": {
+      "id": 4,
+      "nome": "Ausberto Silverio Castro Vera",
+      "curso": "CC",
+      "apelido": "Ausberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "TER",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028010714,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Professor multi alloc - Prof 4",
+    "idTurma": 20280108,
+    "disciplina": null,
+    "professor": {
+      "id": 4,
+      "nome": "Ausberto Silverio Castro Vera",
+      "curso": "CC",
+      "apelido": "Ausberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUA",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028010815,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Professor multi alloc - Prof 4",
+    "idTurma": 20280108,
+    "disciplina": null,
+    "professor": {
+      "id": 4,
+      "nome": "Ausberto Silverio Castro Vera",
+      "curso": "CC",
+      "apelido": "Ausberto",
+      "laboratorio": "LCMAT"
+    },
+    "dia": "QUI",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028010816,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (null, 20)",
+    "idTurma": 20280201,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020101,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (null, 24)",
+    "idTurma": 20280201,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020102,
+    "sala": {
+      "id": 5,
+      "bloco": "P5",
+      "codigo": "112",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (null, 30)",
+    "idTurma": 20280201,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020103,
+    "sala": {
+      "id": 6,
+      "bloco": "P3",
+      "codigo": "Bcct",
+      "idBlock": 5,
+      "descricao": "Bancada do CCT",
+      "capacidade": 30
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (null, 35)",
+    "idTurma": 20280201,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020104,
+    "sala": {
+      "id": 7,
+      "bloco": "P3",
+      "codigo": "104",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 35
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (null, 40)",
+    "idTurma": 20280201,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020105,
+    "sala": {
+      "id": 25,
+      "bloco": "P10",
+      "codigo": "2",
+      "idBlock": 12,
+      "descricao": "P10",
+      "capacidade": 40
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (null, 65)",
+    "idTurma": 20280201,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020106,
+    "sala": {
+      "id": 26,
+      "bloco": "P3",
+      "codigo": "106",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 65
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (null, undef)",
+    "idTurma": 20280201,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020107,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 19,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (19, 20)",
+    "idTurma": 20280202,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020201,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 19,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (19, 24)",
+    "idTurma": 20280202,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020202,
+    "sala": {
+      "id": 5,
+      "bloco": "P5",
+      "codigo": "112",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 19,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (19, 30)",
+    "idTurma": 20280202,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020203,
+    "sala": {
+      "id": 6,
+      "bloco": "P3",
+      "codigo": "Bcct",
+      "idBlock": 5,
+      "descricao": "Bancada do CCT",
+      "capacidade": 30
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 19,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (19, 35)",
+    "idTurma": 20280202,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020204,
+    "sala": {
+      "id": 7,
+      "bloco": "P3",
+      "codigo": "104",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 35
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 19,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (19, 40)",
+    "idTurma": 20280202,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020205,
+    "sala": {
+      "id": 25,
+      "bloco": "P10",
+      "codigo": "2",
+      "idBlock": 12,
+      "descricao": "P10",
+      "capacidade": 40
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 19,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (19, 65)",
+    "idTurma": 20280202,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020206,
+    "sala": {
+      "id": 26,
+      "bloco": "P3",
+      "codigo": "106",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 65
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 19,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (19, undef)",
+    "idTurma": 20280202,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020207,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 21,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (21, 20)",
+    "idTurma": 20280203,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020301,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 21,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (21, 24)",
+    "idTurma": 20280203,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020302,
+    "sala": {
+      "id": 5,
+      "bloco": "P5",
+      "codigo": "112",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 21,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (21, 30)",
+    "idTurma": 20280203,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020303,
+    "sala": {
+      "id": 6,
+      "bloco": "P3",
+      "codigo": "Bcct",
+      "idBlock": 5,
+      "descricao": "Bancada do CCT",
+      "capacidade": 30
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 21,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (21, 35)",
+    "idTurma": 20280203,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020304,
+    "sala": {
+      "id": 7,
+      "bloco": "P3",
+      "codigo": "104",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 35
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 21,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (21, 40)",
+    "idTurma": 20280203,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020305,
+    "sala": {
+      "id": 25,
+      "bloco": "P10",
+      "codigo": "2",
+      "idBlock": 12,
+      "descricao": "P10",
+      "capacidade": 40
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 21,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (21, 65)",
+    "idTurma": 20280203,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020306,
+    "sala": {
+      "id": 26,
+      "bloco": "P3",
+      "codigo": "106",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 65
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 21,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (21, undef)",
+    "idTurma": 20280203,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020307,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 29,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (29, 20)",
+    "idTurma": 20280204,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020401,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 29,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (29, 24)",
+    "idTurma": 20280204,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020402,
+    "sala": {
+      "id": 5,
+      "bloco": "P5",
+      "codigo": "112",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 29,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (29, 30)",
+    "idTurma": 20280204,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020403,
+    "sala": {
+      "id": 6,
+      "bloco": "P3",
+      "codigo": "Bcct",
+      "idBlock": 5,
+      "descricao": "Bancada do CCT",
+      "capacidade": 30
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 29,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (29, 35)",
+    "idTurma": 20280204,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020404,
+    "sala": {
+      "id": 7,
+      "bloco": "P3",
+      "codigo": "104",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 35
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 29,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (29, 40)",
+    "idTurma": 20280204,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020405,
+    "sala": {
+      "id": 25,
+      "bloco": "P10",
+      "codigo": "2",
+      "idBlock": 12,
+      "descricao": "P10",
+      "capacidade": 40
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 29,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (29, 65)",
+    "idTurma": 20280204,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020406,
+    "sala": {
+      "id": 26,
+      "bloco": "P3",
+      "codigo": "106",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 65
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 29,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (29, undef)",
+    "idTurma": 20280204,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020407,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 31,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (31, 20)",
+    "idTurma": 20280205,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020501,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 31,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (31, 24)",
+    "idTurma": 20280205,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020502,
+    "sala": {
+      "id": 5,
+      "bloco": "P5",
+      "codigo": "112",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 31,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (31, 30)",
+    "idTurma": 20280205,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020503,
+    "sala": {
+      "id": 6,
+      "bloco": "P3",
+      "codigo": "Bcct",
+      "idBlock": 5,
+      "descricao": "Bancada do CCT",
+      "capacidade": 30
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 31,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (31, 35)",
+    "idTurma": 20280205,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020504,
+    "sala": {
+      "id": 7,
+      "bloco": "P3",
+      "codigo": "104",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 35
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 31,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (31, 40)",
+    "idTurma": 20280205,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020505,
+    "sala": {
+      "id": 25,
+      "bloco": "P10",
+      "codigo": "2",
+      "idBlock": 12,
+      "descricao": "P10",
+      "capacidade": 40
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 31,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (31, 65)",
+    "idTurma": 20280205,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020506,
+    "sala": {
+      "id": 26,
+      "bloco": "P3",
+      "codigo": "106",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 65
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 31,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (31, undef)",
+    "idTurma": 20280205,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020507,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 39,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (39, 20)",
+    "idTurma": 20280206,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020601,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 39,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (39, 24)",
+    "idTurma": 20280206,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020602,
+    "sala": {
+      "id": 5,
+      "bloco": "P5",
+      "codigo": "112",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 39,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (39, 30)",
+    "idTurma": 20280206,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020603,
+    "sala": {
+      "id": 6,
+      "bloco": "P3",
+      "codigo": "Bcct",
+      "idBlock": 5,
+      "descricao": "Bancada do CCT",
+      "capacidade": 30
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 39,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (39, 35)",
+    "idTurma": 20280206,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020604,
+    "sala": {
+      "id": 7,
+      "bloco": "P3",
+      "codigo": "104",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 35
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 39,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (39, 40)",
+    "idTurma": 20280206,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020605,
+    "sala": {
+      "id": 25,
+      "bloco": "P10",
+      "codigo": "2",
+      "idBlock": 12,
+      "descricao": "P10",
+      "capacidade": 40
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 39,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (39, 65)",
+    "idTurma": 20280206,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020606,
+    "sala": {
+      "id": 26,
+      "bloco": "P3",
+      "codigo": "106",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 65
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 39,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (39, undef)",
+    "idTurma": 20280206,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020607,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 41,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (41, 20)",
+    "idTurma": 20280207,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020701,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 41,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (41, 24)",
+    "idTurma": 20280207,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020702,
+    "sala": {
+      "id": 5,
+      "bloco": "P5",
+      "codigo": "112",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 41,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (41, 30)",
+    "idTurma": 20280207,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020703,
+    "sala": {
+      "id": 6,
+      "bloco": "P3",
+      "codigo": "Bcct",
+      "idBlock": 5,
+      "descricao": "Bancada do CCT",
+      "capacidade": 30
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 41,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (41, 35)",
+    "idTurma": 20280207,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020704,
+    "sala": {
+      "id": 7,
+      "bloco": "P3",
+      "codigo": "104",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 35
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 41,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (41, 40)",
+    "idTurma": 20280207,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020705,
+    "sala": {
+      "id": 25,
+      "bloco": "P10",
+      "codigo": "2",
+      "idBlock": 12,
+      "descricao": "P10",
+      "capacidade": 40
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 41,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (41, 65)",
+    "idTurma": 20280207,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020706,
+    "sala": {
+      "id": 26,
+      "bloco": "P3",
+      "codigo": "106",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 65
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 41,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (41, undef)",
+    "idTurma": 20280207,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020707,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 66,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (66, 20)",
+    "idTurma": 20280208,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020801,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 66,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (66, 24)",
+    "idTurma": 20280208,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020802,
+    "sala": {
+      "id": 5,
+      "bloco": "P5",
+      "codigo": "112",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 66,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (66, 30)",
+    "idTurma": 20280208,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020803,
+    "sala": {
+      "id": 6,
+      "bloco": "P3",
+      "codigo": "Bcct",
+      "idBlock": 5,
+      "descricao": "Bancada do CCT",
+      "capacidade": 30
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 66,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (66, 35)",
+    "idTurma": 20280208,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020804,
+    "sala": {
+      "id": 7,
+      "bloco": "P3",
+      "codigo": "104",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 35
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 66,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (66, 40)",
+    "idTurma": 20280208,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020805,
+    "sala": {
+      "id": 25,
+      "bloco": "P10",
+      "codigo": "2",
+      "idBlock": 12,
+      "descricao": "P10",
+      "capacidade": 40
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 66,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (66, 65)",
+    "idTurma": 20280208,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020806,
+    "sala": {
+      "id": 26,
+      "bloco": "P3",
+      "codigo": "106",
+      "idBlock": 5,
+      "descricao": "Prédio do CCT",
+      "capacidade": 65
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 66,
+    "comment": "Scene: Conflicts: Demand x Room Capacity - (D, C): (66, undef)",
+    "idTurma": 20280208,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": 2028020807,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 2,
+    "demandaEstimada": 66,
+    "comment": null,
+    "idTurma": 20280209,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280301,
+    "disciplina": null,
+    "professor": null,
+    "dia": "SEG",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028030101,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280301,
+    "disciplina": null,
+    "professor": null,
+    "dia": "SEG",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2028030102,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280301,
+    "disciplina": null,
+    "professor": null,
+    "dia": "SEG",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2028030103,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280301,
+    "disciplina": null,
+    "professor": null,
+    "dia": "SEG",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2028030104,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280302,
+    "disciplina": null,
+    "professor": null,
+    "dia": "SEG",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028030205,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280302,
+    "disciplina": null,
+    "professor": null,
+    "dia": "SEG",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2028030206,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280302,
+    "disciplina": null,
+    "professor": null,
+    "dia": "SEG",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2028030207,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280302,
+    "disciplina": null,
+    "professor": null,
+    "dia": "TER",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2028030208,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280303,
+    "disciplina": null,
+    "professor": null,
+    "dia": "SEG",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028030309,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280303,
+    "disciplina": null,
+    "professor": null,
+    "dia": "SEG",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2028030310,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280303,
+    "disciplina": null,
+    "professor": null,
+    "dia": "TER",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2028030311,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280303,
+    "disciplina": null,
+    "professor": null,
+    "dia": "TER",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2028030312,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280304,
+    "disciplina": null,
+    "professor": null,
+    "dia": "SEG",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028030413,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280304,
+    "disciplina": null,
+    "professor": null,
+    "dia": "TER",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2028030414,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280304,
+    "disciplina": null,
+    "professor": null,
+    "dia": "TER",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2028030415,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280304,
+    "disciplina": null,
+    "professor": null,
+    "dia": "TER",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2028030416,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280305,
+    "disciplina": null,
+    "professor": null,
+    "dia": "QUA",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028030517,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280305,
+    "disciplina": null,
+    "professor": null,
+    "dia": "QUA",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2028030518,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280305,
+    "disciplina": null,
+    "professor": null,
+    "dia": "QUA",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2028030519,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280305,
+    "disciplina": null,
+    "professor": null,
+    "dia": "QUA",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2028030520,
+    "sala": {
+      "id": 1,
+      "bloco": "E1",
+      "codigo": "217",
+      "idBlock": 1,
+      "descricao": "E1 (DESENHO) Prédio da reitoria",
+      "capacidade": 20
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280306,
+    "disciplina": null,
+    "professor": null,
+    "dia": "SEG",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028030621,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280306,
+    "disciplina": null,
+    "professor": null,
+    "dia": "SEG",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2028030622,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280306,
+    "disciplina": null,
+    "professor": null,
+    "dia": "SEG",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2028030623,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280306,
+    "disciplina": null,
+    "professor": null,
+    "dia": "SEG",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2028030624,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280307,
+    "disciplina": null,
+    "professor": null,
+    "dia": "TER",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028030725,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280307,
+    "disciplina": null,
+    "professor": null,
+    "dia": "TER",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2028030726,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280307,
+    "disciplina": null,
+    "professor": null,
+    "dia": "TER",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2028030727,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280307,
+    "disciplina": null,
+    "professor": null,
+    "dia": "TER",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2028030728,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280308,
+    "disciplina": null,
+    "professor": null,
+    "dia": "QUA",
+    "horaInicio": 8,
+    "duracao": 2,
+    "idHorario": 2028030829,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280308,
+    "disciplina": null,
+    "professor": null,
+    "dia": "QUA",
+    "horaInicio": 10,
+    "duracao": 2,
+    "idHorario": 2028030830,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280308,
+    "disciplina": null,
+    "professor": null,
+    "dia": "QUA",
+    "horaInicio": 14,
+    "duracao": 2,
+    "idHorario": 2028030831,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2028,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": "Scene: Conflicts: Room multi alloc",
+    "idTurma": 20280308,
+    "disciplina": null,
+    "professor": null,
+    "dia": "QUA",
+    "horaInicio": 16,
+    "duracao": 2,
+    "idHorario": 2028030832,
+    "sala": {
+      "id": 2,
+      "bloco": "P5",
+      "codigo": "inf1",
+      "idBlock": 7,
+      "descricao": "P5",
+      "capacidade": 24
+    }
+  },
+  {
+    "ano": 2029,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290100,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290101,
+    "disciplina": {
+      "id": 64,
+      "nome": "Tópicos Especiais em Simulação Computacional: Algoritmos em Grafos",
+      "codigo": "INF01219",
+      "apelido": "Grafos",
+      "periodo": 0
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290102,
+    "disciplina": {
+      "id": 2,
+      "nome": "Cálculo Diferencial e Integral I",
+      "codigo": "MAT01101",
+      "apelido": "Calc 1",
+      "periodo": 1
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290103,
+    "disciplina": {
+      "id": 10,
+      "nome": "Cálculo Diferencial e Integral II",
+      "codigo": "MAT01203",
+      "apelido": "Calc 2",
+      "periodo": 2
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290104,
+    "disciplina": {
+      "id": 24,
+      "nome": "Cálculo Diferencial e Integral III",
+      "codigo": "MAT01105",
+      "apelido": "Calc 3",
+      "periodo": 3
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290105,
+    "disciplina": {
+      "id": 28,
+      "nome": "Cálculo Numérico",
+      "codigo": "MAT01208",
+      "apelido": "Calc Num",
+      "periodo": 4
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290106,
+    "disciplina": {
+      "id": 35,
+      "nome": "Redes de Computadores",
+      "codigo": "INF01115",
+      "apelido": "Redes",
+      "periodo": 5
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290107,
+    "disciplina": {
+      "id": 44,
+      "nome": "Inteligência Artificial",
+      "codigo": "INF01205",
+      "apelido": "IA",
+      "periodo": 6
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290108,
+    "disciplina": {
+      "id": 47,
+      "nome": "Sistemas Distribuídos",
+      "codigo": "INF01122",
+      "apelido": "Sist Dist",
+      "periodo": 7
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290109,
+    "disciplina": {
+      "id": 57,
+      "nome": "Empreendedorismo",
+      "codigo": "PRO01540",
+      "apelido": "Empreend",
+      "periodo": 8
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290110,
+    "disciplina": {
+      "id": 56,
+      "nome": "Projeto de Monografia",
+      "codigo": "INF01130",
+      "apelido": "Proj Monog",
+      "periodo": 9
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 1,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290111,
+    "disciplina": {
+      "id": 59,
+      "nome": "Monografia",
+      "codigo": "INF01131",
+      "apelido": "Monog",
+      "periodo": 10
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290200,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290201,
+    "disciplina": {
+      "id": 64,
+      "nome": "Tópicos Especiais em Simulação Computacional: Algoritmos em Grafos",
+      "codigo": "INF01219",
+      "apelido": "Grafos",
+      "periodo": 0
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290202,
+    "disciplina": {
+      "id": 2,
+      "nome": "Cálculo Diferencial e Integral I",
+      "codigo": "MAT01101",
+      "apelido": "Calc 1",
+      "periodo": 1
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290203,
+    "disciplina": {
+      "id": 10,
+      "nome": "Cálculo Diferencial e Integral II",
+      "codigo": "MAT01203",
+      "apelido": "Calc 2",
+      "periodo": 2
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290204,
+    "disciplina": {
+      "id": 24,
+      "nome": "Cálculo Diferencial e Integral III",
+      "codigo": "MAT01105",
+      "apelido": "Calc 3",
+      "periodo": 3
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290205,
+    "disciplina": {
+      "id": 28,
+      "nome": "Cálculo Numérico",
+      "codigo": "MAT01208",
+      "apelido": "Calc Num",
+      "periodo": 4
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290206,
+    "disciplina": {
+      "id": 35,
+      "nome": "Redes de Computadores",
+      "codigo": "INF01115",
+      "apelido": "Redes",
+      "periodo": 5
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290207,
+    "disciplina": {
+      "id": 44,
+      "nome": "Inteligência Artificial",
+      "codigo": "INF01205",
+      "apelido": "IA",
+      "periodo": 6
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290208,
+    "disciplina": {
+      "id": 47,
+      "nome": "Sistemas Distribuídos",
+      "codigo": "INF01122",
+      "apelido": "Sist Dist",
+      "periodo": 7
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290209,
+    "disciplina": {
+      "id": 57,
+      "nome": "Empreendedorismo",
+      "codigo": "PRO01540",
+      "apelido": "Empreend",
+      "periodo": 8
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290210,
+    "disciplina": {
+      "id": 56,
+      "nome": "Projeto de Monografia",
+      "codigo": "INF01130",
+      "apelido": "Proj Monog",
+      "periodo": 9
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 2,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290211,
+    "disciplina": {
+      "id": 59,
+      "nome": "Monografia",
+      "codigo": "INF01131",
+      "apelido": "Monog",
+      "periodo": 10
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290300,
+    "disciplina": null,
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290301,
+    "disciplina": {
+      "id": 64,
+      "nome": "Tópicos Especiais em Simulação Computacional: Algoritmos em Grafos",
+      "codigo": "INF01219",
+      "apelido": "Grafos",
+      "periodo": 0
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290302,
+    "disciplina": {
+      "id": 2,
+      "nome": "Cálculo Diferencial e Integral I",
+      "codigo": "MAT01101",
+      "apelido": "Calc 1",
+      "periodo": 1
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290303,
+    "disciplina": {
+      "id": 10,
+      "nome": "Cálculo Diferencial e Integral II",
+      "codigo": "MAT01203",
+      "apelido": "Calc 2",
+      "periodo": 2
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290304,
+    "disciplina": {
+      "id": 24,
+      "nome": "Cálculo Diferencial e Integral III",
+      "codigo": "MAT01105",
+      "apelido": "Calc 3",
+      "periodo": 3
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290305,
+    "disciplina": {
+      "id": 28,
+      "nome": "Cálculo Numérico",
+      "codigo": "MAT01208",
+      "apelido": "Calc Num",
+      "periodo": 4
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290306,
+    "disciplina": {
+      "id": 35,
+      "nome": "Redes de Computadores",
+      "codigo": "INF01115",
+      "apelido": "Redes",
+      "periodo": 5
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290307,
+    "disciplina": {
+      "id": 44,
+      "nome": "Inteligência Artificial",
+      "codigo": "INF01205",
+      "apelido": "IA",
+      "periodo": 6
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290308,
+    "disciplina": {
+      "id": 47,
+      "nome": "Sistemas Distribuídos",
+      "codigo": "INF01122",
+      "apelido": "Sist Dist",
+      "periodo": 7
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290309,
+    "disciplina": {
+      "id": 57,
+      "nome": "Empreendedorismo",
+      "codigo": "PRO01540",
+      "apelido": "Empreend",
+      "periodo": 8
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290310,
+    "disciplina": {
+      "id": 56,
+      "nome": "Projeto de Monografia",
+      "codigo": "INF01130",
+      "apelido": "Proj Monog",
+      "periodo": 9
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  },
+  {
+    "ano": 2029,
+    "semestre": 3,
+    "demandaEstimada": null,
+    "comment": null,
+    "idTurma": 20290311,
+    "disciplina": {
+      "id": 59,
+      "nome": "Monografia",
+      "codigo": "INF01131",
+      "apelido": "Monog",
+      "periodo": 10
+    },
+    "professor": null,
+    "dia": null,
+    "horaInicio": null,
+    "duracao": null,
+    "idHorario": null,
+    "sala": null
+  }
+]

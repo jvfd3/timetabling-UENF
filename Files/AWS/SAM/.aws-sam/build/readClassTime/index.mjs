@@ -24,8 +24,10 @@ function getQuery() {
     "\
   SELECT\
     t.ano AS 'ano',\
+    t.semestre AS 'semestre',\
     t.demandaEstimada AS 'demandaEstimada',\
-    h.dia,\
+    h.comment AS 'comment',\
+    t.id AS 'idTurma',\
     IF(t.idDisciplina IS NULL, NULL, JSON_OBJECT(\
         'id', d.id,\
         'periodo', d.periodo,\
@@ -33,10 +35,6 @@ function getQuery() {
         'apelido', d.apelido,\
         'nome', d.nome\
     )) AS 'disciplina',\
-    h.duracao AS 'duracao',\
-    h.horaInicio AS 'horaInicio',\
-    h.id AS 'idHorario',\
-    t.id AS 'idTurma',\
     IF(t.idProfessor IS NULL, NULL, JSON_OBJECT(\
         'id', p.id,\
         'laboratorio', p.laboratorio,\
@@ -44,6 +42,10 @@ function getQuery() {
         'apelido', p.apelido,\
         'nome', p.nome\
     )) AS 'professor',\
+    h.dia,\
+    h.horaInicio AS 'horaInicio',\
+    h.duracao AS 'duracao',\
+    h.id AS 'idHorario',\
     IF(h.idSala IS NULL, NULL, JSON_OBJECT(\
         'id', s.id,\
         'idBlock', s.idBlock,\
@@ -51,8 +53,7 @@ function getQuery() {
         'bloco', s.bloco,\
         'codigo', s.codigo,\
         'descricao', s.descricao\
-    )) AS sala,\
-    t.semestre AS 'semestre'\
+    )) AS sala\
   FROM\
     turmas t\
   LEFT JOIN\
