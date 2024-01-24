@@ -30,7 +30,7 @@ function getColorByLevel(conflictLevel) {
 /* Professor \/ */
 
 function getProfessorAllocConflictMessage(profConflicts) {
-  console.log(profConflicts);
+  // console.log(profConflicts);
   let message = "";
   profConflicts.forEach((conflito) => {
     message += `"${conflito.type.name}", `;
@@ -91,14 +91,17 @@ function getProfessorStyledConflict(conflicts) {
 
 /* Disciplina \/ */
 
-function checkCorrectPeriodParity(periodoEsperado, semestreAtual) {
-  let evenSubjectOnEvenSemester =
-    semestreAtual === 1 && periodoEsperado % 2 === 1;
-  let oddSubjectOnOddSemester =
-    semestreAtual === 2 && periodoEsperado % 2 === 0;
-  let correctPeriodParity =
+function checkCorrectPeriodParity(expectedSemester, currentSemester) {
+  const evenSubjectOnEvenSemester =
+    currentSemester === 1 && expectedSemester % 2 === 1;
+  const oddSubjectOnOddSemester =
+    currentSemester === 2 && expectedSemester % 2 === 0;
+  const correctPeriodParity =
     evenSubjectOnEvenSemester || oddSubjectOnOddSemester;
-  return correctPeriodParity;
+  const isSummerSemester = currentSemester === 3;
+  const rightOrWrongParity = correctPeriodParity ? 1 : -1;
+  const returnedParity = isSummerSemester ? 0 : rightOrWrongParity;
+  return returnedParity;
 }
 
 function getColorGradient(periodoEsperado, semestreAtual) {
@@ -122,14 +125,14 @@ function getColorGradient(periodoEsperado, semestreAtual) {
     } else {
       let percentile = Math.ceil(periodoEsperado / 2) / 5;
       let colorValue = getColorValue(baseColor, percentile);
-      let evenSubjectOnEvenSemester =
-        semestreAtual === 1 && periodoEsperado % 2 === 1;
-      let oddSubjectOnOddSemester =
-        semestreAtual === 2 && periodoEsperado % 2 === 0;
-      if (checkCorrectPeriodParity(periodoEsperado, semestreAtual)) {
+      const parityCheck = checkCorrectPeriodParity(
+        periodoEsperado,
+        semestreAtual
+      );
+      if (parityCheck == 1) {
         //Semestres no período correto
         color = `rgb(0, ${colorValue}, 0)`;
-      } else {
+      } else if (parityCheck == -1) {
         //Semestres no período errado
         color = `rgb(${colorValue}, 0, 0)`;
       }
@@ -139,25 +142,28 @@ function getColorGradient(periodoEsperado, semestreAtual) {
 }
 
 function getSubjectStyledConflict(turma, semestreAtual) {
+  const expectedSemester = turma.disciplina?.periodo;
   let subjectStyle = {};
-  let periodoEsperado = turma.disciplina?.periodo;
   let newColor = "";
   let titleMessage = "";
-  if (periodoEsperado === undefined) {
+  if (expectedSemester === undefined) {
     titleMessage = "Disciplina ainda não definida";
     newColor = "#708090";
   } else {
-    newColor = getColorGradient(periodoEsperado, semestreAtual);
-    if (periodoEsperado === 0) {
+    newColor = getColorGradient(expectedSemester, semestreAtual);
+    if (expectedSemester === 0) {
       titleMessage = "Disciplina não-obrigatória";
     } else {
-      titleMessage = `Disciplina do período ${periodoEsperado}\n`;
-      let periodoCerto = checkCorrectPeriodParity(
-        periodoEsperado,
-        semestreAtual
-      );
-      titleMessage += periodoCerto ? "Está" : "Não está";
-      titleMessage += " na paridade esperada";
+      titleMessage = `Disciplina do período ${expectedSemester}\n`;
+      const parity = checkCorrectPeriodParity(expectedSemester, semestreAtual);
+      if (parity === 0) {
+        titleMessage += "Não há";
+      } else if (parity === 1) {
+        titleMessage += "Está na";
+      } else if (parity === -1) {
+        titleMessage += "Não está na";
+      }
+      titleMessage += " paridade esperada";
     }
   }
 
@@ -217,6 +223,10 @@ function getStyledConflict(conflicts, classItem, semester) {
   return myClassConflicts;
 }
 
+function isConflict(conflicts, classTimeId) {
+  return;
+}
+
 function classTimeConflicts(conflicts, classTime) {
   const conflictStyles = {
     day: {},
@@ -230,23 +240,27 @@ function classTimeConflicts(conflicts, classTime) {
     },
   };
 
-  const professorConflicts = conflicts.raw.professor.alloc;
+  const classTimeId = getId(classTime);
 
-  if (isConflict(professorConflicts)) {
+  const professorConflicts = conflicts.raw.professor.alloc;
+  const hasProfessorConflict = professorConflicts.some(
+    (conflict) => conflict?.from?.idHorario === classTimeId
+  );
+
+  const singleDemandConflicts =
+    conflicts.raw.expectedDemand.singleTurmaCapacity;
+  const hasDemandConflict = singleDemandConflicts.some(
+    (conflict) => conflict?.idClassTime === classTimeId
+  );
+
+  if (hasProfessorConflict) {
     conflictStyles.day = conflicts.styled.professor;
     conflictStyles.hour = conflicts.styled.professor;
   }
-
-  function isConflict(conflicts) {
-    if (conflicts.length > 0) {
-      for (const conflict of professorConflicts) {
-        if (conflict?.from?.idHorario === getId(classTime)) {
-          return true;
-        }
-      }
-    }
-    return false;
+  if (hasDemandConflict) {
+    conflictStyles.classRoom = conflicts.styled.demand;
   }
+
   return conflictStyles;
 }
 

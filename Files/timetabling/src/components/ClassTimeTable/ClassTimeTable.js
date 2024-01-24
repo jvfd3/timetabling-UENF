@@ -37,9 +37,8 @@ function ClassTimeRow(classTimeRowStates) {
     updateClassTimeDB: () => updateClassTime(classTimeRowStates),
   };
 
-  const classTimeTableRowKey = `ClassTimeTableRow: ${getId(
-    classTime
-  )}-${index}`;
+  const classTimeId = getId(classTime);
+  const classTimeTableRowKey = `ClassTimeTableRow: ${classTimeId}-${index}`;
 
   return (
     <tr key={classTimeTableRowKey}>

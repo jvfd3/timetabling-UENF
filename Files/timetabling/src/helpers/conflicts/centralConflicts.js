@@ -354,7 +354,7 @@ function conflictDemand(turmas, classData) {
   return demandConflicts;
 }
 
-function baseClassItemConflicts(classes, classItem, semester) {
+function baseClassItemConflicts(classes, classItem, semester = 3) {
   const myClassConflicts = {};
   const cleanedTurmas = cleanClasses(classes, classItem);
   // console.log("cleanedTurmas", cleanedTurmas);

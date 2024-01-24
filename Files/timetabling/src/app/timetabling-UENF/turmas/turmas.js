@@ -22,6 +22,7 @@ import {
   TextInputClassId,
 } from "../../../components/MyTextFields";
 import ClassTimeTable from "../../../components/ClassTimeTable/ClassTimeTable";
+import { baseClassItemConflicts } from "../../../helpers/conflicts/centralConflicts";
 
 function TurmaSelection(classStates) {
   /* It just contains the selection an maybe allows scrolling selection */
@@ -99,7 +100,14 @@ function Classes() {
   const [classes, setClasses] = useState(defaultClasses);
   const [classItem, setClassItem] = useState(classes[0]);
 
-  const classesStates = { classes, setClasses, classItem, setClassItem };
+  const conflicts = baseClassItemConflicts(classes, classItem);
+  const classesStates = {
+    classes,
+    setClasses,
+    classItem,
+    setClassItem,
+    conflicts,
+  };
 
   /* useEffect(() => {
     updateClass(classesStates);
