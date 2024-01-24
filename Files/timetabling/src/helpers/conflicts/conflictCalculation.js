@@ -61,21 +61,21 @@ function searchSameDayAndHour(flatTurmas, horario) {
     }
 
   */
-  let hourAllocConflicts = [];
+  const hourAllocConflicts = [];
   // console.log(`(${horario.dia}, ${horario.horaInicio})`, flatTurmas);
   flatTurmas.forEach((iterClasstime) => {
-    let sameDay = horario.dia === iterClasstime.dia;
     let dayNotNull = horario.dia !== null || iterClasstime.dia !== null;
     let hourNotNull =
       horario.horaInicio !== null || iterClasstime.horaInicio !== null;
     let dayTimeNotNull = dayNotNull && hourNotNull;
-    let sameHour = horario.horaInicio === iterClasstime.horaInicio;
-    let duracaoConflito =
+    const sameDay = horario.dia === iterClasstime.dia;
+    const sameHour = horario.horaInicio === iterClasstime.horaInicio;
+    const duracaoConflito =
       horario.horaInicio < iterClasstime.horaInicio + iterClasstime.duracao &&
       horario.horaInicio + horario.duracao > iterClasstime.horaInicio;
-    let sameTime = sameDay && (sameHour || duracaoConflito) && dayTimeNotNull;
+    const sameTime = sameDay && (sameHour || duracaoConflito) && NotNullDayTime;
     if (sameTime) {
-      let iterConflict = {
+      const iterConflict = {
         idTurma: iterClasstime.idTurma,
         idHorario: iterClasstime.idHorario,
       };
@@ -85,7 +85,7 @@ function searchSameDayAndHour(flatTurmas, horario) {
   // console.log("hourAllocConflicts", hourAllocConflicts);
   /* The part below should be apart from the upper one*/
   let conflictObject = null;
-  let hasConflicts = hourAllocConflicts.length > 0;
+  const hasConflicts = hourAllocConflicts.length > 0;
   if (hasConflicts) {
     conflictObject = {
       type: options.conflicts.professorAlloc,
@@ -116,16 +116,16 @@ function getSingleClassDemandConflict(demandClassData) {
     let conflictObject = null;
 
     // Checking if there is a conflict
-    let expectedDemand = iterClass.expectedDemand;
-    let capacity = iterClass.roomCapacity;
-    let hasRoomSmallerThanDemand = capacity < expectedDemand;
+    const expectedDemand = iterClass.expectedDemand;
+    const capacity = iterClass.roomCapacity;
+    const hasRoomSmallerThanDemand = capacity < expectedDemand;
 
     // Checking nullability
-    let hasExpectedDemand = expectedDemand !== null;
-    let hasCapacity = capacity !== null;
-    let hasDemandAndCapacity = hasExpectedDemand && hasCapacity;
+    const hasExpectedDemand = expectedDemand !== null;
+    const hasCapacity = capacity !== null;
+    const hasDemandAndCapacity = hasExpectedDemand && hasCapacity;
 
-    let hasConflict = hasDemandAndCapacity && hasRoomSmallerThanDemand;
+    const hasConflict = hasDemandAndCapacity && hasRoomSmallerThanDemand;
     if (hasConflict) {
       conflictObject = {
         expectedDemand: expectedDemand,
