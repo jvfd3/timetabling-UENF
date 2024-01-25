@@ -1,29 +1,16 @@
 import "./multiTurmas.css";
-import React, { useState, useEffect, useRef } from "react";
-import options from "../../../DB/local/options";
-import CRUDPageSelection from "../../../components/PageSelect";
+import React, { useState, useEffect } from "react";
 import {
-  SelectSala,
-  SelectDia,
-  SelectHoraTang,
-  SelectDuracao,
-  SelectAnoSemestre,
   SelectClassSubject,
   SelectClassProfessor,
 } from "../../../components/mySelects";
-import { getTurmasDoAnoSemestre } from "../../../helpers/auxFunctions";
 import { NumberInputMultiClassesExpectedDemand } from "../../../components/MyTextFields";
 import {
   SmartCreateClassItem,
   SmartDeleteClassItem,
-  SmartCreateClassTime,
-  SmartDeleteClassTime,
 } from "../../../components/Buttons/Smart/Smart";
-import { getClassesData } from "../../../DB/retrieveData";
 import { baseClassItemConflicts } from "../../../helpers/conflicts/centralConflicts";
-import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
 import { InputDisciplina } from "../../../components/Buttons/Dumb/Dumb";
-import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
 import {
   createClass,
   readClass,
