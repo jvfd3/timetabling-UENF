@@ -452,14 +452,14 @@ const options = {
         hasConflict: {
           subject: "#000000",
           professor: "#000000",
-          demand: "#D9B57C",
+          demand: "#DD3333",
         },
         levels: {
-          level0: "#708090",
-          level1: "#008B45",
-          level2: "#D7B740",
-          level3: "#D77A61",
-          level4: "#8B0000",
+          level0: "#008B45",
+          level1: "#D7B740",
+          level2: "#D77A61",
+          level3: "#8B0000",
+          levelDefault: "#708090",
         },
       },
       locker: {
