@@ -15,6 +15,7 @@ import {
   SelectFilterV2Room,
   SelectFilterV2ExpectedSemester,
 } from "../mySelects";
+import { getDefaultYearSemesterValues } from "../../helpers/auxFunctions";
 
 function FilterYear(filterYearStates) {
   // console.log("filterYearStates", filterYearStates);
@@ -66,13 +67,10 @@ function MultiClassesFilters({ classTimeStates, classStates }) {
   const { classTimes, setFilteredClassTimes, setClassTime } = classTimeStates;
   const { classes, setFilteredClasses, setClassItem } = classStates;
 
-  const years = options.constantValues.years;
-  const yearIndex = options.config.defaultIndexes.year;
-  const semesters = options.constantValues.semesters;
-  const semesterIndex = options.config.defaultIndexes.semester;
+  const defaultYearSemester = getDefaultYearSemesterValues();
 
-  const [year, setYear] = useState(years[yearIndex]);
-  const [semester, setSemester] = useState(semesters[semesterIndex]);
+  const [year, setYear] = useState(defaultYearSemester.year);
+  const [semester, setSemester] = useState(defaultYearSemester.semester);
 
   const props = {
     year: { year, setYear },

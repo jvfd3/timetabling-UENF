@@ -9,6 +9,10 @@ import {
 } from "../Dumb/Dumb";
 import { getId } from "../../../helpers/auxCRUD";
 import options from "../../../DB/local/options";
+import {
+  getDefaultYearSemesterValues,
+  getValueFromObject,
+} from "../../../helpers/auxFunctions";
 
 function AddTurmaWithDisciplinaButton({ turmas, setTurmas, disciplina }) {
   function addTurmaWithDisciplina() {
@@ -28,10 +32,16 @@ function AddTurmaWithDisciplinaButton({ turmas, setTurmas, disciplina }) {
 
 function SmartCreateClassItem(createStates) {
   const { classesStates, year, semester, createClassDB } = createStates;
+
+  const yearSemester = getDefaultYearSemesterValues();
+
+  const yearValue = getValueFromObject(year) ?? yearSemester.year;
+  const semesterValue = getValueFromObject(semester) ?? yearSemester.semester;
+
   function createClassItemInDB() {
     const newClass = options.emptyObjects.classItem;
-    newClass.ano = year?.value ?? year;
-    newClass.semestre = semester?.value ?? semester;
+    newClass.ano = yearValue;
+    newClass.semestre = semesterValue;
 
     const createClassStates = {
       ...classesStates,

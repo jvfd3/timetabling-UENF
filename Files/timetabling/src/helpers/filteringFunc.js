@@ -1,3 +1,5 @@
+import { getValueFromObject } from "./auxFunctions";
+
 function getValueFromDataWithPropArray(data, propArray) {
   // Inicializa o valor com os dados iniciais
   let value = data;
@@ -37,7 +39,7 @@ function generalFilter(originData, originPropArray, propValueToFind) {
 function filterYear(classes, year) {
   let filteredClasses = classes;
   if (year) {
-    filteredClasses = generalFilter(classes, ["ano"], year?.value ?? year);
+    filteredClasses = generalFilter(classes, ["ano"], getValueFromObject(year));
   }
   // console.log("year", year);
   // console.log("yearClasses", yearClasses);
@@ -51,7 +53,7 @@ function filterSemester(classes, semester) {
     filteredClasses = generalFilter(
       classes,
       ["semestre"],
-      semester?.value ?? semester
+      getValueFromObject(semester)
     );
   }
   // console.log("semester", semester);

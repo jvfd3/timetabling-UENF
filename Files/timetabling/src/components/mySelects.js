@@ -9,6 +9,7 @@ import {
   getItemFromListById,
   replaceNewItemInListById,
 } from "../helpers/auxCRUD";
+import { getValueFromObject } from "../helpers/auxFunctions";
 
 const styleWidthFix = options.SelectStyles.fullItem;
 
@@ -729,7 +730,7 @@ function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
 
 function SelectFilterV2Year({ year, setYear }) {
   function updateOuterYear(newYear) {
-    const newYearValue = newYear?.value ?? null;
+    const newYearValue = getValueFromObject(newYear);
     setYear(newYearValue);
   }
 
@@ -744,7 +745,7 @@ function SelectFilterV2Year({ year, setYear }) {
 
 function SelectFilterV2Semester({ semester, setSemester }) {
   function updateOuterSemester(newSemester) {
-    const newSemesterValue = newSemester?.value ?? null;
+    const newSemesterValue = getValueFromObject(newSemester);
     setSemester(newSemesterValue);
   }
   const semesterStates = {
@@ -791,7 +792,7 @@ function SelectFilterV2ExpectedSemester({
   setExpectedSemester,
 }) {
   function updateOuterExpectedSemester(newExpectedSemester) {
-    const newExpectedSemesterValue = newExpectedSemester?.value ?? null;
+    const newExpectedSemesterValue = getValueFromObject(newExpectedSemester);
     setExpectedSemester(newExpectedSemesterValue);
   }
 
@@ -951,7 +952,7 @@ function SelectClassTimeDay(classTimeStates) {
     classTimeStates;
 
   function updateClassTimeDay(newDay) {
-    const newClassTime = { ...classTime, dia: newDay?.value ?? null };
+    const newClassTime = { ...classTime, dia: getValueFromObject(newDay) };
     const classTimes = classItem.horarios;
     const newClassTimes = replaceNewItemInListById(newClassTime, classTimes);
     const newClassItem = { ...classItem, horarios: newClassTimes };
@@ -998,7 +999,10 @@ function SelectClassTimeDuration(classTimeStates) {
     classTimeStates;
 
   function updateClassTimeDuration(newDuration) {
-    const newClassTime = { ...classTime, duracao: newDuration?.value ?? null };
+    const newClassTime = {
+      ...classTime,
+      duracao: getValueFromObject(newDuration),
+    };
     const classTimes = classItem.horarios;
     const newClassTimes = replaceNewItemInListById(newClassTime, classTimes);
     const newClassItem = { ...classItem, horarios: newClassTimes };
@@ -1057,7 +1061,7 @@ function SelectClassYear(classStates) {
   const { classes, setClasses, classItem, setClassItem } = classStates;
 
   function updateClassYear(newYear) {
-    const newClass = { ...classItem, ano: newYear?.value ?? null };
+    const newClass = { ...classItem, ano: getValueFromObject(newYear) };
     const newClasses = replaceNewItemInListById(newClass, classes);
     setClassItem(newClass);
     setClasses(newClasses);
@@ -1075,7 +1079,10 @@ function SelectClassSemester(classStates) {
   const { classes, setClasses, classItem, setClassItem } = classStates;
 
   function updateClassSemester(newSemester) {
-    const newClass = { ...classItem, semestre: newSemester?.value ?? null };
+    const newClass = {
+      ...classItem,
+      semestre: getValueFromObject(newSemester),
+    };
     const newClasses = replaceNewItemInListById(newClass, classes);
     setClassItem(newClass);
     setClasses(newClasses);

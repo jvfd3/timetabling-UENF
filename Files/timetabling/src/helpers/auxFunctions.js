@@ -1,4 +1,5 @@
 import { sqlDataFromJson } from "../DB/local/dataFromJSON";
+import options from "../DB/local/options";
 import { getId, replaceNewItemInListById } from "./auxCRUD";
 
 function debugFunc(debugClasses, message) {
@@ -19,6 +20,30 @@ function getByIDturma(idTurma) {
 function getByIDhorario(idHorario) {
   let horarios = sqlDataFromJson.classtimes;
   return horarios.find((horario) => horario.id === idHorario);
+}
+
+function getValueFromObject(myObject) {
+  const objectValue = myObject?.value ?? myObject ?? null;
+  return objectValue;
+}
+
+function getDefaultYearSemesterValues() {
+  const years = options.constantValues.years;
+  const yearIndex = options.config.defaultIndexes.year;
+  const year = years[yearIndex];
+  const yearValue = getValueFromObject(year);
+
+  const semesters = options.constantValues.semesters;
+  const semesterIndex = options.config.defaultIndexes.semester;
+  const semester = semesters[semesterIndex];
+  const semesterValue = getValueFromObject(semester);
+
+  const yearSemester = {
+    year: yearValue,
+    semester: semesterValue,
+  };
+
+  return yearSemester;
 }
 
 function splittedToUnified(splittedTurmas) {
@@ -293,6 +318,8 @@ function getFullHorarios() {
 export {
   debugFunc,
   max,
+  getDefaultYearSemesterValues,
+  getValueFromObject,
   getFullHorarios,
   splittedToUnified,
   splittedToUnified2,
