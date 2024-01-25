@@ -67,10 +67,12 @@ function MultiClassesFilters({ classTimeStates, classStates }) {
   const { classes, setFilteredClasses, setClassItem } = classStates;
 
   const years = options.constantValues.years;
+  const yearIndex = options.config.defaultIndexes.year;
   const semesters = options.constantValues.semesters;
+  const semesterIndex = options.config.defaultIndexes.semester;
 
-  const [year, setYear] = useState(years[14]);
-  const [semester, setSemester] = useState(semesters[0]);
+  const [year, setYear] = useState(years[yearIndex]);
+  const [semester, setSemester] = useState(semesters[semesterIndex]);
 
   const props = {
     year: { year, setYear },
@@ -119,10 +121,12 @@ function MultiClassesFilters({ classTimeStates, classStates }) {
 
 function CCTableFilters({ setCurrentClasses, allSplittedClasses }) {
   const years = options.constantValues.years;
+  const yearIndex = options.config.defaultIndexes.year;
   const semesters = options.constantValues.semesters;
+  const semesterIndex = options.config.defaultIndexes.semester;
 
-  const [year, setYear] = useState(years[10]);
-  const [semester, setSemester] = useState(semesters[0]);
+  const [year, setYear] = useState(years[yearIndex]);
+  const [semester, setSemester] = useState(semesters[semesterIndex]);
   const [professor, setProfessor] = useState(null);
   const [room, setRoom] = useState(null);
   const [expectedSemester, setExpectedSemester] = useState(null);

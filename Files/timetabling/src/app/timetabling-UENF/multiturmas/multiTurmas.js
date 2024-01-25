@@ -480,8 +480,13 @@ function MultiClasses() {
   const classIndex = useRef(sqlDataFromJson.classes.length);
   const classTimeIndex = useRef(sqlDataFromJson.classtimes.length);
 
-  const [year, setYear] = useState(options.constantValues.years[14]);
-  const [semester, setSemester] = useState(options.constantValues.semesters[0]);
+  const years = options.constantValues.years;
+  const yearIndex = options.config.defaultIndexes.year;
+  const semesters = options.constantValues.semesters;
+  const semesterIndex = options.config.defaultIndexes.semester;
+
+  const [year, setYear] = useState(years[yearIndex]);
+  const [semester, setSemester] = useState(semesters[semesterIndex]);
 
   const unifiedClassTimes = getClassesData();
   const filteredClasses = getTurmasDoAnoSemestre(

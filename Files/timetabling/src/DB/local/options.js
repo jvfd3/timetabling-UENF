@@ -428,6 +428,15 @@ const options = {
   },
   config: {
     iconButtons: true,
+    defaultIndexes: {
+      year: 13,
+      semester: 0,
+      professor: 0,
+      student: 0,
+      subject: 0,
+      room: 0,
+      classItem: 0,
+    },
     colors: {
       conflicts: {
         notSet: {
