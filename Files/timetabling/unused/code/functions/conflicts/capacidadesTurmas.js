@@ -4,11 +4,21 @@ import "../CSS/defaultStyle.css";
 import { sqlDataFromJson } from "../../DB/dataFromJSON";
 // import Tabela from "./Timetable";
 import {
-  testingTurmas2022_1,
   andamentoToDemanda,
   getTurmasDaSalaPorValorDoHorario,
   getAtendimentoDeDemandas,
 } from "../functions/conflicts/auxiliarConflictsFunctions";
+
+function testingTurmas2022_1(turmas) {
+  let anos = options.constantValues.years;
+  let ano = anos[8].value;
+
+  let semestres = options.constantValues.semesters;
+  let semestre = semestres[0].value;
+
+  let turmas2022_1 = getTurmasPorAnoESemestre(turmas, ano, semestre);
+  return turmas2022_1;
+}
 
 /* #### Capacidade da sala
 

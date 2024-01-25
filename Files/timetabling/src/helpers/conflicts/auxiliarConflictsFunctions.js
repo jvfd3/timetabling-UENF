@@ -1,16 +1,5 @@
 import options from "../../DB/local/options";
 
-function testingTurmas2022_1(turmas) {
-  let anos = options.constantValues.years;
-  let ano = anos[8].value;
-
-  let semestres = options.constantValues.semesters;
-  let semestre = semestres[0].value;
-
-  let turmas2022_1 = getTurmasPorAnoESemestre(turmas, ano, semestre);
-  return turmas2022_1;
-}
-
 function getTurmasPorAnoESemestre(turmas, ano, semestre, splitted = false) {
   /*
     Essa função retorna um array de turmas que acontecem no ano e semestre passados como parâmetro.
@@ -196,7 +185,6 @@ function splitTurmas(turmas) {
 
 export {
   andamentoToDemanda,
-  testingTurmas2022_1,
   getTurmasDaSalaPorValorDoHorario,
   getTurmasPorAnoESemestre,
   searchListForKeyWithValue,
