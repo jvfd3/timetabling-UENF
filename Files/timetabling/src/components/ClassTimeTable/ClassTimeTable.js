@@ -33,11 +33,12 @@ function ClassTimeRow(classTimeRowStates) {
 
   const updateClassTimeProps = {
     classTime,
-    classItem,
+    // classItem,
     updateClassTimeDB: () => updateClassTime(classTimeRowStates),
   };
 
   const classTimeId = getId(classTime);
+  // I could remove this index
   const classTimeTableRowKey = `ClassTimeTableRow: ${classTimeId}-${index}`;
 
   return (

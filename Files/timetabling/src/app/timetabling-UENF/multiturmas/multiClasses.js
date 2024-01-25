@@ -1,5 +1,5 @@
 import "./multiTurmas.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   SelectClassSubject,
   SelectClassProfessor,
@@ -54,32 +54,92 @@ function ClassTableHeader(globalStates) {
 }
 
 function ClassItemTableRow(classTableRowProps) {
-  const { iterClassItem, classes, setClasses, semester } = classTableRowProps;
+  const { iterClassItem, semester, classStates } = classTableRowProps;
+  const {
+    classes,
+    setClasses,
+    classItem,
+    setClassItem,
+    filteredClasses,
+    setFilteredClasses,
+  } = classStates;
 
+  // console.log(iterClassItem.disciplina);
   const [classItemRow, setClassItemRow] = useState(iterClassItem);
 
-  const conflicts = baseClassItemConflicts(classes, classItemRow, semester);
+  const conflicts = baseClassItemConflicts(
+    filteredClasses,
+    classItemRow,
+    semester
+  );
 
   // console.log("NewConflicts", conflicts);
 
+  function customSetClassItem(newClassItem) {
+    setClassItemRow(newClassItem);
+    setClassItem(newClassItem);
+  }
+
+  function customUpdateClass() {
+    const customUpdateStates = {
+      classes,
+      setClasses,
+      classItem: classItemRow,
+      setClassItem: customSetClassItem,
+    };
+    updateClass(customUpdateStates);
+  }
+
   const rowClassStates = {
     classes,
-    setClasses,
+    setClasses: () => {},
+    // setClasses,
     classItem: classItemRow,
-    setClassItem: setClassItemRow,
+    oldClassItem: iterClassItem,
+    setClassItem: customSetClassItem,
     conflicts,
     deleteClassDB: deleteClass,
+    updateClassItemDB: customUpdateClass,
   };
 
-  /* What a cursed way of doing it... */
-  rowClassStates.updateClassItemDB = () => updateClass(rowClassStates);
+  // /* What a cursed way of doing it... */
+  // rowClassStates.updateClassItemDB = () => updateClass(rowClassStates);
+
+  function debugList() {
+    const tamanhoClasses = classes.length;
+    const ultimaClasses = classes[tamanhoClasses - 1];
+    const classesSubjectId = ultimaClasses?.disciplina?.id;
+    console.log("classes", classesSubjectId);
+
+    const tamanhoFilteredClasses = filteredClasses.length;
+    const ultimaFilteredClasses = filteredClasses[tamanhoFilteredClasses - 1];
+    const filteredClassesSubjectId = ultimaFilteredClasses?.disciplina?.id;
+    console.log("filteredClasses", filteredClassesSubjectId);
+  }
+
+  function debugItem() {
+    const subjectIter = iterClassItem?.disciplina?.id;
+    const subjectRow = classItemRow?.disciplina?.id;
+    const subjectItem = classItem?.disciplina?.id;
+    console.log("iterClassItem", subjectIter);
+    console.log("classItemRow", subjectRow);
+    console.log("classItem", subjectItem);
+  }
+
+  function debug() {
+    console.log("PIMBA");
+    // debugList();
+    debugItem();
+  }
+
+  // debug();
 
   const classItemRowKey = `ClassItemTableRow: ${classItemRow?.idTurma}-${classItemRow?.disciplina?.codigoDisciplina}-${classItemRow?.professor?.nome}`;
 
   return (
     <tr key={classItemRowKey}>
       <td>
-        <SmartDeleteClassItem {...rowClassStates} />
+        {/* <SmartDeleteClassItem {...rowClassStates} /> */}
         <SmartUpdateClassItem {...rowClassStates} />
       </td>
       <td {...conflicts.styled.disciplina}>
@@ -91,6 +151,7 @@ function ClassItemTableRow(classTableRowProps) {
       <td {...conflicts.styled.demand}>
         <NumberInputMultiClassesExpectedDemand {...rowClassStates} />
       </td>
+
       <td>
         <ClassTimeTable {...rowClassStates} />
       </td>
@@ -100,9 +161,16 @@ function ClassItemTableRow(classTableRowProps) {
 
 function ClassesTable(globalStates) {
   const { classStates } = globalStates;
-  const { filteredClasses, setClasses, classItem } = classStates;
+  const {
+    classes,
+    setClasses,
+    filteredClasses,
+    setFilteredClasses,
+    classItem,
+    setClassItem,
+  } = classStates;
   // const { semester } = currentSemesterProps;
-  // console.log("classes", classes);
+  // console.log("classStates", classStates);
   return (
     <table className="showBasicDataTable">
       <ClassTableHeader {...globalStates} />
@@ -110,9 +178,11 @@ function ClassesTable(globalStates) {
         {filteredClasses.map((iterClassItem, iterClassItemIndex) => {
           const classItemTableRowProps = {
             iterClassItem,
-            classes: filteredClasses,
-            setClasses,
-            semester: classItem.semestre,
+            // classes: filteredClasses,
+            // setClasses,
+            classStates,
+            // This could get the value from the default yearSemester just in case
+            semester: classItem?.semestre,
           };
           const classItemTableRowKey = `ClassItemTableRow: ${iterClassItem?.idTurma}-${iterClassItem?.disciplina?.codigo}-${iterClassItem?.professor?.nome}-${iterClassItemIndex}`;
           return (

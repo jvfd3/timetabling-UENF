@@ -55,7 +55,10 @@ function SmartCreateClassItem(createStates) {
   return <CreateItem createFunc={createClassItemInDB} text={titleText} />;
 }
 
-function SmartUpdateClassItem({ classItem, updateClassItemDB }) {
+function SmartUpdateClassItem_GoneWrong(classItemStates) {
+  const { classItem, updateClassItemDB, originalClassItemRow } =
+    classItemStates;
+
   const baseMessage = `Atualizar turma (id: ${getId(classItem)})\n`;
 
   const oldClassItem = useRef(classItem);
@@ -100,10 +103,13 @@ function SmartUpdateClassItem({ classItem, updateClassItemDB }) {
     modifications += sameProfessor ? "" : newProfessorText;
     modifications += sameExpectedDemand ? "" : newExpectedDemandText;
 
-    console.log(newSubjectText);
+    const originalSubject = originalClassItemRow.current?.disciplina?.id;
+    // console.log(newSubjectText + originalSubject);
 
     // const hasChanges = !sameSubject || !sameProfessor || !sameExpectedDemand;
     const hasChanges = modifications.length > 0;
+
+    console.log(testForChanges(classItemStates));
 
     const modificationsObject = {
       updateStatus: hasChanges,
@@ -115,6 +121,87 @@ function SmartUpdateClassItem({ classItem, updateClassItemDB }) {
 
   function smartUpdateClassItem() {
     setNeedsUpdateStatus(false);
+    updateClassItemDB();
+  }
+
+  return (
+    <UpdateItem
+      updateFunc={smartUpdateClassItem}
+      text={modifiedMessage}
+      color={iconColor}
+    />
+  );
+}
+
+function SmartUpdateClassItem(classItemStates) {
+  const { classItem, oldClassItem, updateClassItemDB } = classItemStates;
+
+  // const oldClassItem = useRef(classItem);
+
+  const dontUpdateMessage = `Não foram identificadas alterações na turma (id: ${getId(
+    classItem
+  )})\n`;
+  const baseMessage = `Atualizar turma (id: ${getId(classItem)})\n`;
+
+  const [modifiedMessage, setModifiedMessage] = useState(dontUpdateMessage);
+  const [needsUpdateStatus, setNeedsUpdateStatus] = useState(false);
+
+  useEffect(() => {
+    // const modProps = getModificationsProps(oldClassItem.current, classItem);
+    const modProps = getModificationsProps(oldClassItem, classItem);
+
+    const wasUpdated = modProps.updateStatus;
+    const newMessage = wasUpdated
+      ? baseMessage + modProps.updateText
+      : dontUpdateMessage;
+    setModifiedMessage(newMessage);
+    setNeedsUpdateStatus(wasUpdated);
+  }, [classItem]);
+
+  const iconColor = needsUpdateStatus
+    ? options.config.colors.CRUD.update
+    : options.config.colors.CRUD.default;
+
+  console.log(iconColor);
+
+  function getModificationsProps(oldClassItem, classItem) {
+    const oldSubject = getId(oldClassItem?.disciplina);
+    const newSubject = getId(classItem?.disciplina);
+    const oldProfessor = getId(oldClassItem?.professor);
+    const newProfessor = getId(classItem?.professor);
+    const oldExpectedDemand = oldClassItem?.demandaEstimada;
+    const newExpectedDemand = classItem?.demandaEstimada;
+
+    const sameSubject = oldSubject === newSubject;
+    const sameProfessor = oldProfessor === newProfessor;
+    const sameExpectedDemand = oldExpectedDemand === newExpectedDemand;
+
+    const newSubjectText = `disciplina: ${oldSubject} -> ${newSubject}\n`;
+    const newProfessorText = `professor: ${oldProfessor} -> ${newProfessor}\n`;
+    const newExpectedDemandText = `demandaEstimada: ${oldExpectedDemand} -> ${newExpectedDemand}\n`;
+
+    let modifications = "";
+    modifications += sameSubject ? "" : newSubjectText;
+    modifications += sameProfessor ? "" : newProfessorText;
+    modifications += sameExpectedDemand ? "" : newExpectedDemandText;
+
+    console.log(newSubjectText);
+
+    // const hasChanges = !sameSubject || !sameProfessor || !sameExpectedDemand;
+    const hasChanges = modifications.length > 0;
+
+    console.log(hasChanges);
+    const modificationsObject = {
+      updateText: modifications,
+      updateStatus: hasChanges,
+    };
+
+    return modificationsObject;
+  }
+
+  function smartUpdateClassItem() {
+    setNeedsUpdateStatus(false);
+    // oldClassItem.current = classItem;
     updateClassItemDB();
   }
 
@@ -154,14 +241,18 @@ function SmartCreateClassTime({ classItem, createClassTimeDB }) {
 function SmartUpdateClassTime(updateClassTimeProps) {
   const { classTime, updateClassTimeDB } = updateClassTimeProps;
 
+  const oldClassTime = useRef(classTime);
+
   let baseMessage = `Atualizar horário `;
   baseMessage += `(id: ${getId(classTime)}, `;
   baseMessage += `idTurma: ${classTime?.idTurma})\n`;
 
-  const oldClassTime = useRef(classTime);
-
   const [modifiedMessage, setModifiedMessage] = useState(baseMessage);
   const [needsUpdateStatus, setNeedsUpdateStatus] = useState(false);
+
+  const iconColor = needsUpdateStatus
+    ? options.config.colors.CRUD.update
+    : options.config.colors.CRUD.default;
 
   useEffect(() => {
     const modProps = getModificationsProps(oldClassTime.current, classTime);
@@ -176,9 +267,6 @@ function SmartUpdateClassTime(updateClassTimeProps) {
     // console.log("// SmartUpdateClassTime \\");
   }, [classTime]);
   // console.log(needsUpdateStatus);
-  const iconColor = needsUpdateStatus
-    ? options.config.colors.CRUD.update
-    : options.config.colors.CRUD.default;
 
   function getModificationsProps(oldClassTime, newClassTime) {
     const oldRoom = getId(oldClassTime?.sala);
@@ -195,21 +283,25 @@ function SmartUpdateClassTime(updateClassTimeProps) {
     const sameStartHour = oldStartHour === newStartHour;
     const sameDuration = oldDuration === newDuration;
 
-    let modifications = "";
-    modifications += sameRoom ? "" : `sala: ${oldRoom} -> ${newRoom}\n`;
-    modifications += sameDay ? "" : `dia: ${oldDay} -> ${newDay}\n`;
-    modifications += sameStartHour
-      ? ""
-      : `horaInicio: ${oldStartHour} -> ${newStartHour}\n`;
-    modifications += sameDuration
-      ? ""
-      : `duracao: ${oldDuration} -> ${newDuration}\n`;
+    const newRoomText = `sala: ${oldRoom} -> ${newRoom}\n`;
+    const newDayText = `dia: ${oldDay} -> ${newDay}\n`;
+    const newStartHourText = `horaInicio: ${oldStartHour} -> ${newStartHour}\n`;
+    const newDurationText = `duracao: ${oldDuration} -> ${newDuration}\n`;
 
-    const hasChanges = !sameRoom || !sameDay || !sameStartHour || !sameDuration;
+    // console.log(newRoomText);
+
+    let modifications = "";
+    modifications += sameRoom ? "" : newRoomText;
+    modifications += sameDay ? "" : newDayText;
+    modifications += sameStartHour ? "" : newStartHourText;
+    modifications += sameDuration ? "" : newDurationText;
+
+    // const hasChanges = !sameRoom || !sameDay || !sameStartHour || !sameDuration;
+    const hasChanges = modifications.length > 0;
 
     const modificationsObject = {
-      updateStatus: hasChanges,
       updateText: modifications,
+      updateStatus: hasChanges,
     };
 
     return modificationsObject;

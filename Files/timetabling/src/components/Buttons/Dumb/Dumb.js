@@ -65,13 +65,19 @@ function CreateItem({ createFunc, text = "Create", size = "2em" }) {
   );
 }
 
-function UpdateItem({ updateFunc, text = "Update", size = "2em" }) {
+function UpdateItem({
+  updateFunc,
+  text = "Update",
+  size = "2em",
+  color = "black",
+}) {
   return (
     <UpdateItemIcon
       className="iconUpdate"
       onClick={updateFunc}
       title={text}
       size={size}
+      color={color}
     />
   );
 }
