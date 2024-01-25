@@ -50,7 +50,7 @@ function SmartCreateClassItem(createStates) {
     createClassDB(createClassStates);
   }
 
-  const titleText = `Adicionar turma`;
+  const titleText = `Adicionar turma ${yearValue}.${semesterValue}`;
   return <CreateItem createFunc={createClassItemInDB} text={titleText} />;
 }
 

@@ -84,15 +84,27 @@ function MultiClassesFilters({ classTimeStates, classStates }) {
     return filteredList;
   }
 
+  const defaultClassItem = {
+    ...options.emptyObjects.classItem,
+    ano: year,
+    semestre: semester,
+  };
+  const defaultClassTime = {
+    ...options.emptyObjects.classTime,
+    ano: year,
+    semestre: semester,
+  };
+
   function updateOuterStates() {
     const filteredClassTimes = filterList(classTimes, year, semester);
     const filteredClasses = filterList(classes, year, semester);
-    const newClassTime = filteredClassTimes?.[0];
-    const newClassItem = filteredClasses?.[0];
-    const message = `Turmas: ${filteredClasses.length}`;
-    const yearValue = year?.value ?? year;
-    const semesterValue = semester?.value ?? semester;
-    const finalMessage = `${yearValue}-${semesterValue}: ${message}`;
+
+    const newClassTime = filteredClassTimes?.[0] ?? defaultClassItem;
+    const newClassItem = filteredClasses?.[0] ?? defaultClassTime;
+    // const message = `Turmas: ${filteredClasses.length}`;
+    // const yearValue = year?.value ?? year;
+    // const semesterValue = semester?.value ?? semester;
+    // const finalMessage = `${yearValue}-${semesterValue}: ${message}`;
     // console.log(finalMessage);
 
     setFilteredClassTimes(filteredClassTimes);

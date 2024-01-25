@@ -22,11 +22,19 @@ import { readClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
 import ClassTimeTable from "../../../components/ClassTimeTable/ClassTimeTable";
 
 function ClassTableHeader(globalStates) {
+  const { classStates } = globalStates;
+
+  const createStates = {
+    classesStates: classStates,
+    year: classStates.classItem.ano,
+    semester: classStates.classItem.semestre,
+    createClassDB: createClass,
+  };
   return (
     <thead>
       <tr>
         <th>
-          <SmartCreateClassItem />
+          <SmartCreateClassItem {...createStates} />
         </th>
         <th>Código - Nome</th>
         <th>Professor</th>
@@ -115,7 +123,17 @@ function MultiClassesCardHeader(globalStates) {
   );
 }
 
-function NoOfferedClasses() {
+function NoOfferedClasses(globalStates) {
+  const { classStates } = globalStates;
+  // const { classItem } = classStates;
+  console.log("item", classStates);
+
+  const createStates = {
+    classesStates: classStates,
+    year: classStates.classItem.ano,
+    semester: classStates.classItem.semestre,
+    createClassDB: createClass,
+  };
   return (
     <div
       className="infoCard"
@@ -139,7 +157,11 @@ function MultiClassesCard(globalStates) {
     <div className="infoCard">
       <MultiClassesCardHeader {...globalStates} />
       <div className="showBasicDataCard">
-        {hasClasses ? <ClassesTable {...globalStates} /> : <NoOfferedClasses />}
+        {hasClasses ? (
+          <ClassesTable {...globalStates} />
+        ) : (
+          <NoOfferedClasses {...globalStates} />
+        )}
       </div>
     </div>
   );
