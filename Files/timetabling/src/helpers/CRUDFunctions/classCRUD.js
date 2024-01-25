@@ -6,6 +6,7 @@ import {
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
 import {
+  getId,
   getItemIndexInListById,
   removeItemInListById,
   replaceNewItemInListById,
@@ -91,7 +92,7 @@ function deleteClass({ classes, setClasses, classItem, setClassItem }) {
   }
 
   // deleteItemOnList(classItem, classes);
-  classItem.id = classItem.idTurma;
+  classItem.id = getId(classItem);
   defaultDBDelete(itemName, classItem)
     .then(deleteClassOnList)
     .catch(defaultHandleError);

@@ -8,9 +8,13 @@ import { NumberInputMultiClassesExpectedDemand } from "../../../components/MyTex
 import {
   SmartCreateClassItem,
   SmartDeleteClassItem,
+  SmartUpdateClassItem,
 } from "../../../components/Buttons/Smart/Smart";
 import { baseClassItemConflicts } from "../../../helpers/conflicts/centralConflicts";
-import { InputDisciplina } from "../../../components/Buttons/Dumb/Dumb";
+import {
+  InputDisciplina,
+  UpdateInfo,
+} from "../../../components/Buttons/Dumb/Dumb";
 import {
   createClass,
   readClass,
@@ -20,6 +24,10 @@ import {
 import { MultiClassesFilters } from "../../../components/Filters/Filters";
 import { readClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
 import ClassTimeTable from "../../../components/ClassTimeTable/ClassTimeTable";
+import {
+  getDefaultClassItem,
+  getDefaultClassTime,
+} from "../../../helpers/auxCRUD";
 
 function ClassTableHeader(globalStates) {
   const { classStates } = globalStates;
@@ -60,14 +68,19 @@ function ClassItemTableRow(classTableRowProps) {
     classItem: classItemRow,
     setClassItem: setClassItemRow,
     conflicts,
+    deleteClassDB: deleteClass,
   };
+
+  /* What a cursed way of doing it... */
+  rowClassStates.updateClassItemDB = () => updateClass(rowClassStates);
 
   const classItemRowKey = `ClassItemTableRow: ${classItemRow?.idTurma}-${classItemRow?.disciplina?.codigoDisciplina}-${classItemRow?.professor?.nome}`;
 
   return (
     <tr key={classItemRowKey}>
       <td>
-        <SmartDeleteClassItem />
+        <SmartDeleteClassItem {...rowClassStates} />
+        <SmartUpdateClassItem {...rowClassStates} />
       </td>
       <td {...conflicts.styled.disciplina}>
         <SelectClassSubject {...rowClassStates} />
@@ -126,7 +139,7 @@ function MultiClassesCardHeader(globalStates) {
 function NoOfferedClasses(globalStates) {
   const { classStates } = globalStates;
   // const { classItem } = classStates;
-  console.log("item", classStates);
+  // console.log("item", classStates);
 
   const createStates = {
     classesStates: classStates,
@@ -170,10 +183,11 @@ function MultiClassesCard(globalStates) {
 function MultiClassesRefactor() {
   const [classTimes, setClassTimes] = useState([]);
   const [filteredClassTimes, setFilteredClassTimes] = useState([]);
-  const [classTime, setClassTime] = useState({});
+  const [classTime, setClassTime] = useState(getDefaultClassTime());
+
   const [classes, setClasses] = useState([]);
   const [filteredClasses, setFilteredClasses] = useState([]);
-  const [classItem, setClassItem] = useState({});
+  const [classItem, setClassItem] = useState(getDefaultClassItem());
 
   const classTimeStates = {
     classTimes,

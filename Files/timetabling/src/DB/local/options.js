@@ -430,7 +430,7 @@ const options = {
     iconButtons: true,
     defaultIndexes: {
       year: 13,
-      semester: 0,
+      semester: 2,
       professor: 0,
       student: 0,
       subject: 0,
@@ -465,6 +465,13 @@ const options = {
       locker: {
         locked: "#000000",
         unlocked: "#708090",
+      },
+      CRUD: {
+        default: "#000000",
+        create: "#008B45",
+        read: "#708090",
+        update: "#D7B740",
+        delete: "#D77A61",
       },
     },
   },

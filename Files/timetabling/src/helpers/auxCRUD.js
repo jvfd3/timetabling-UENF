@@ -3,6 +3,9 @@
 - Update classTime in ClassTimes
 */
 
+import options from "../DB/local/options";
+import { getDefaultYearSemesterValues } from "./auxFunctions";
+
 function getId(item) {
   const id =
     item?.id ?? item?.idHorario ?? item?.idTurma ?? item?.idClassTime ?? null;
@@ -55,6 +58,30 @@ function removeItemInListById(item, oldArray) {
   return newArray;
 }
 
+function getDefaultClassItem(year, semester) {
+  const defaultYearSemester = getDefaultYearSemesterValues();
+
+  const defaultClassItem = {
+    ...options.emptyObjects.classItem,
+    ano: year ?? defaultYearSemester.year,
+    semestre: semester ?? defaultYearSemester.semester,
+  };
+
+  return defaultClassItem;
+}
+
+function getDefaultClassTime(year, semester) {
+  const defaultYearSemester = getDefaultYearSemesterValues();
+
+  const defaultClassTime = {
+    ...options.emptyObjects.classTime,
+    ano: year ?? defaultYearSemester.year,
+    semestre: semester ?? defaultYearSemester.semester,
+  };
+
+  return defaultClassTime;
+}
+
 export {
   // replaceNewClassTimeInList,
   // replaceNewClassItemInList,
@@ -62,5 +89,7 @@ export {
   getItemIndexInListById, // Read
   replaceNewItemInListById, // Update
   removeItemInListById, // Delete
+  getDefaultClassItem, // CreateClass
+  getDefaultClassTime, // CreateClass
   getId, // Many places
 };

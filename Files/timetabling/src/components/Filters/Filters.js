@@ -16,6 +16,10 @@ import {
   SelectFilterV2ExpectedSemester,
 } from "../mySelects";
 import { getDefaultYearSemesterValues } from "../../helpers/auxFunctions";
+import {
+  getDefaultClassItem,
+  getDefaultClassTime,
+} from "../../helpers/auxCRUD";
 
 function FilterYear(filterYearStates) {
   // console.log("filterYearStates", filterYearStates);
@@ -84,16 +88,8 @@ function MultiClassesFilters({ classTimeStates, classStates }) {
     return filteredList;
   }
 
-  const defaultClassItem = {
-    ...options.emptyObjects.classItem,
-    ano: year,
-    semestre: semester,
-  };
-  const defaultClassTime = {
-    ...options.emptyObjects.classTime,
-    ano: year,
-    semestre: semester,
-  };
+  const defaultClassItem = getDefaultClassItem(year, semester);
+  const defaultClassTime = getDefaultClassTime(year, semester);
 
   function updateOuterStates() {
     const filteredClassTimes = filterList(classTimes, year, semester);
@@ -119,7 +115,7 @@ function MultiClassesFilters({ classTimeStates, classStates }) {
 
   useEffect(() => {
     updateOuterStates();
-  }, [year, semester]);
+  }, [year, semester, classes]);
 
   return (
     <div className="MultiTurmasFilters">

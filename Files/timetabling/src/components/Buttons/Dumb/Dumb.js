@@ -4,16 +4,17 @@ import {
   BsDatabaseDown as ReadDBIcon,
 } from "react-icons/bs";
 import {
-  MdOutlineUpdate as UpdateClassTimeIcon, // Circle arrow with clock hands
   MdAddCircleOutline as CreateItemIcon, // Plus sign with circle around it
-  MdRefresh as ReadInfoIcon, // Two arrows in a circle
-  MdEdit as UpdateInfoIcon, // Pencil
+  MdOutlineRefresh as UpdateItemIcon, // Circle arrow
   MdDelete as DeleteItemIcon, // Trash can
   MdAddAlarm as CreateClassTimeIcon, // Clock with plus sign
+  MdOutlineUpdate as UpdateClassTimeIcon, // Circle arrow with clock hands
   MdAutoDelete as DeleteClassTimeIcon, // Trash Can with clock
   MdLockOutline as LockedPropIcon, // Lock
   MdLockOpen as UnlockedPropIcon, // Unlocked lock
   MdInput as InputDisciplinaIcon, // Arrow pointing into a box
+  MdRefresh as ReadInfoIcon, // Two arrows in a circle
+  MdEdit as UpdateInfoIcon, // Pencil
 } from "react-icons/md";
 // import {
 //   AddCircleOutlineIcon as CreateItemIcon,
@@ -51,7 +52,7 @@ function ReadDBButton({ readFunc, text = "Read", size = "2em" }) {
   );
 }
 
-/* Default Info Buttons */
+/* Default CRUD ClassItem Buttons */
 
 function CreateItem({ createFunc, text = "Create", size = "2em" }) {
   return (
@@ -63,6 +64,30 @@ function CreateItem({ createFunc, text = "Create", size = "2em" }) {
     />
   );
 }
+
+function UpdateItem({ updateFunc, text = "Update", size = "2em" }) {
+  return (
+    <UpdateItemIcon
+      className="iconUpdate"
+      onClick={updateFunc}
+      title={text}
+      size={size}
+    />
+  );
+}
+
+function DeleteItem({ deleteFunc, text = "Delete", size = "2em" }) {
+  return (
+    <DeleteItemIcon
+      className="iconDelete"
+      onClick={deleteFunc}
+      title={text}
+      size={size}
+    />
+  );
+}
+
+/* Default Info Buttons */
 
 function ReadInfo({ readFunc, text = "Read", size = "2em" }) {
   return (
@@ -80,17 +105,6 @@ function UpdateInfo({ updateFunc, text = "Update", size = "2em" }) {
     <UpdateInfoIcon
       className="iconUpdate"
       onClick={updateFunc}
-      title={text}
-      size={size}
-    />
-  );
-}
-
-function DeleteItem({ deleteFunc, text = "Delete", size = "2em" }) {
-  return (
-    <DeleteItemIcon
-      className="iconDelete"
-      onClick={deleteFunc}
       title={text}
       size={size}
     />
@@ -172,16 +186,17 @@ function InputDisciplina({ insertDiscFunc, text = "Input", size = "2em" }) {
 }
 
 export {
-  UpdateClassTime,
-  CreateDBButton,
-  ReadDBButton,
   CreateItem,
-  ReadInfo,
-  UpdateInfo,
+  UpdateItem,
   DeleteItem,
   CreateClassTime,
+  UpdateClassTime,
   DeleteClassTime,
   LockedProp,
   UnlockedProp,
   InputDisciplina,
+  CreateDBButton,
+  ReadDBButton,
+  ReadInfo,
+  UpdateInfo,
 };
