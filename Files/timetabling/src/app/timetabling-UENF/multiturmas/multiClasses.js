@@ -139,7 +139,7 @@ function ClassItemTableRow(classTableRowProps) {
   return (
     <tr key={classItemRowKey}>
       <td>
-        {/* <SmartDeleteClassItem {...rowClassStates} /> */}
+        <SmartDeleteClassItem {...rowClassStates} />
         <SmartUpdateClassItem {...rowClassStates} />
       </td>
       <td {...conflicts.styled.disciplina}>
