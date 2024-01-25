@@ -459,276 +459,9 @@ function SelectDuration({ outerDuration, setOuterDuration }) {
   return <DefaultSelect {...SelectDurationStates} />;
 }
 
-/* \/ \/ \/ \/ \/ \/ \/ \/ MULTITURMAS \/ \/ \/ \/ \/ \/ \/ \/ */
+/* \/ \/ \/ \/ \/ \/ \/ \/ NEW FILTER GENERATION \/ \/ \/ \/ \/ \/ \/ \/ */
 
-function SelectAno({ outerAno, setOuterAno }) {
-  const years = options.constantValues.years;
-
-  const selectedYear = years.find(
-    (iterYear) => iterYear.value === parseInt(outerAno.value)
-  );
-
-  const [year, setYear] = useState(selectedYear);
-
-  function updateOuterValue(novoAno) {
-    setOuterAno(novoAno);
-    setYear(novoAno);
-  }
-
-  return (
-    <Select
-      onChange={updateOuterValue}
-      className="mySelectList"
-      styles={styleWidthFix}
-      isClearable={false}
-      placeholder="Ano"
-      options={years}
-      value={year}
-    />
-  );
-}
-
-function SelectSemestre({ outerSemestre, setOuterSemestre }) {
-  const semesters = options.constantValues.semesters;
-  const selectedSemester = semesters.find(
-    (iterSemester) => iterSemester.value === parseInt(outerSemestre.value)
-  );
-
-  const [semster, setSemester] = useState(selectedSemester);
-
-  function updateOuterValue(novoSemestre) {
-    setOuterSemestre(novoSemestre);
-    setSemester(novoSemestre);
-  }
-
-  return (
-    <Select
-      onChange={updateOuterValue}
-      className="mySelectList"
-      styles={styleWidthFix}
-      isClearable={false}
-      placeholder="Semestre"
-      options={semesters}
-      value={semster}
-    />
-  );
-}
-
-function SelectAnoSemestre({ year, setYear, semester, setSemester }) {
-  return (
-    <div className="GlobalSelects">
-      Ano:
-      <SelectAno outerAno={year} setOuterAno={setYear} />
-      Semestre:
-      <SelectSemestre outerSemestre={semester} setOuterSemestre={setSemester} />
-    </div>
-  );
-}
-
-function SelectSala({ lTurma, setLTurma, indexHorario }) {
-  const [sala, setSala] = useState(lTurma.horarios[indexHorario].sala);
-  const salas = sqlDataFromJson.salas;
-
-  function updateOuterTurmaSala(novaSala) {
-    const salaAtualizada = novaSala ? novaSala : null;
-    setSala(salaAtualizada);
-    const novaTurma = { ...lTurma };
-    novaTurma.horarios[indexHorario].sala = salaAtualizada;
-    setLTurma(novaTurma);
-  }
-
-  const [isLocked, setIsLocked] = useState(false);
-
-  return (
-    <LockableSelect
-      className="mySelectList"
-      styles={styleWidthFix}
-      isClearable={true}
-      onChange={updateOuterTurmaSala}
-      placeholder="Sala"
-      options={salas}
-      value={sala}
-      getOptionValue={({ bloco, codigo }) => `${bloco} - ${codigo}`}
-      getOptionLabel={({ capacidade, bloco, codigo }) =>
-        `${capacidade} - ${bloco} - ${codigo}`
-      }
-      formatOptionLabel={({ capacidade, bloco, codigo }, { context }) => {
-        let msg = "";
-        msg += capacidade ? `(${capacidade})` : "(Cap. indef.)";
-        msg += bloco ? ` ${bloco}` : "(Bloco indef.)";
-        msg += codigo ? ` - ${codigo}` : " (Cod. indef.)";
-        return context === "value" ? msg : msg;
-      }}
-      lockStates={{
-        isLocked: isLocked,
-        setIsLocked: setIsLocked,
-        title: "Fixar sala",
-      }}
-    />
-  );
-}
-
-function SelectDia({ lTurma, setLTurma, indexHorario }) {
-  const days = options.constantValues.days;
-
-  const horarios = lTurma.horarios;
-  const horario = horarios[indexHorario];
-  const selectedDia = horario.dia;
-
-  const selectedDay = days.find((dia) => dia.value === selectedDia);
-  const [day, setDay] = useState(selectedDay);
-
-  function updateOuterTurma(novoDia) {
-    const blankDia = { value: null, label: null };
-    let diaAtualizado = null;
-    if (!novoDia) {
-      diaAtualizado = blankDia;
-      setDay(null);
-    } else {
-      diaAtualizado = novoDia;
-      setDay(diaAtualizado);
-    }
-    const novosHorarios = [...horarios];
-    novosHorarios[indexHorario].dia = diaAtualizado.value;
-
-    const novaTurma = {
-      ...lTurma,
-      horarios: novosHorarios,
-    };
-    setLTurma(novaTurma);
-  }
-
-  const [isLocked, setIsLocked] = useState(false);
-
-  return (
-    <LockableSelect
-      onChange={updateOuterTurma}
-      className="mySelectList"
-      styles={styleWidthFix}
-      isClearable={true}
-      placeholder="Dia"
-      options={days}
-      value={day}
-      // getOptionValue={(option) => option.value}
-      // getOptionLabel={(option) => option.label}
-      formatOptionLabel={({ value, label }, { context }) => {
-        return context === "value" ? `${value}` : `${label}`;
-      }}
-      lockStates={{
-        isLocked: isLocked,
-        setIsLocked: setIsLocked,
-        title: "Fixar dia",
-      }}
-    />
-  );
-}
-
-function SelectHoraTang({ lTurma, setLTurma, indexHorario }) {
-  const horarios = lTurma.horarios;
-  const horario = horarios[indexHorario];
-
-  const selectedHora = horario.horaInicio;
-  const horasTang = options.constantValues.hoursTang;
-  const selectedHour = horasTang.find(
-    (iterHour) => parseInt(iterHour.hora) === parseInt(selectedHora)
-  );
-  const [hora, setHora] = useState(selectedHour);
-
-  function updateOuterTurma(novaHoraTang) {
-    const blankHora = { hora: null, turno: null };
-    let novaHoraTangAtualizada = null;
-    if (!novaHoraTang) {
-      novaHoraTangAtualizada = blankHora;
-      setHora(null);
-    } else {
-      novaHoraTangAtualizada = novaHoraTang;
-      setHora(novaHoraTangAtualizada);
-    }
-    const novosHorarios = [...horarios];
-    novosHorarios[indexHorario].horaInicio = novaHoraTangAtualizada.hora;
-
-    const novaTurma = {
-      ...lTurma,
-      horarios: novosHorarios,
-    };
-
-    setLTurma(novaTurma);
-  }
-
-  const [isLocked, setIsLocked] = useState(false);
-
-  return (
-    <LockableSelect
-      placeholder="Hora"
-      options={horasTang}
-      value={hora}
-      onChange={updateOuterTurma}
-      getOptionValue={(option) => option.hora}
-      getOptionLabel={(option) => `${option.hora} (${option.turno})`}
-      formatOptionLabel={({ hora, turno }, { context }) => {
-        return context === "value" ? `${hora}` : `${hora} (${turno})`;
-      }}
-      lockStates={{
-        isLocked: isLocked,
-        setIsLocked: setIsLocked,
-        title: "Fixar hora",
-      }}
-    />
-  );
-}
-
-function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
-  const horarios = lTurma.horarios;
-  const horario = horarios[indexHorario];
-
-  const selectedDuracao = horario.duracao;
-  const durations = options.constantValues.durations;
-  const selectedDuration = durations.find(
-    (iterDuration) => iterDuration.value === selectedDuracao
-  );
-
-  const [duration, setDuration] = useState(selectedDuration);
-
-  function updateOuterTurma(novaDuracao) {
-    const blankDuracao = { value: null, label: null };
-    let novaDuracaoAtualizada = null;
-    if (!novaDuracao) {
-      novaDuracaoAtualizada = blankDuracao;
-      setDuration(null);
-    } else {
-      novaDuracaoAtualizada = novaDuracao;
-      setDuration(novaDuracaoAtualizada);
-    }
-
-    const novosHorarios = [...horarios];
-    novosHorarios[indexHorario].duracao = novaDuracaoAtualizada.value;
-
-    const novaTurma = {
-      ...lTurma,
-      horarios: novosHorarios,
-    };
-
-    setLTurma(novaTurma);
-  }
-
-  const [isLocked, setIsLocked] = useState(true);
-  return (
-    <LockableSelect
-      placeholder="Duração"
-      options={durations}
-      value={duration}
-      onChange={updateOuterTurma}
-      getOptionValue={(option) => option.value}
-      getOptionLabel={(option) => option.label}
-      formatOptionLabel={(option) => `${option.label}`}
-      lockStates={{ isLocked, setIsLocked, title: "Fixar duração" }}
-    />
-  );
-}
-
-/* /\ /\ /\ /\ /\ /\ /\ /\ MULTITURMAS /\ /\ /\ /\ /\ /\ /\ /\ */
-
-function SelectFilterV2Year({ year, setYear }) {
+function SelectFilterYear({ year, setYear }) {
   function updateOuterYear(newYear) {
     const newYearValue = getValueFromObject(newYear);
     setYear(newYearValue);
@@ -743,7 +476,7 @@ function SelectFilterV2Year({ year, setYear }) {
   return <SelectYear {...yearStates} />;
 }
 
-function SelectFilterV2Semester({ semester, setSemester }) {
+function SelectFilterSemester({ semester, setSemester }) {
   function updateOuterSemester(newSemester) {
     const newSemesterValue = getValueFromObject(newSemester);
     setSemester(newSemesterValue);
@@ -757,7 +490,7 @@ function SelectFilterV2Semester({ semester, setSemester }) {
   return <SelectSemester {...semesterStates} />;
 }
 
-function SelectFilterV2Professor({ professor, setProfessor }) {
+function SelectFilterProfessor({ professor, setProfessor }) {
   function updateOuterProfessor(newProfessor) {
     const newProfessorValue = newProfessor ?? null;
     setProfessor(newProfessorValue);
@@ -772,7 +505,7 @@ function SelectFilterV2Professor({ professor, setProfessor }) {
   return <SelectProfessor {...professorStates} />;
 }
 
-function SelectFilterV2Room({ room, setRoom }) {
+function SelectFilterRoom({ room, setRoom }) {
   function updateOuterRoom(newRoom) {
     const newRoomValue = newRoom ?? null;
     setRoom(newRoomValue);
@@ -787,7 +520,7 @@ function SelectFilterV2Room({ room, setRoom }) {
   return <SelectRoom {...roomStates} />;
 }
 
-function SelectFilterV2ExpectedSemester({
+function SelectFilterExpectedSemester({
   expectedSemester,
   setExpectedSemester,
 }) {
@@ -806,120 +539,6 @@ function SelectFilterV2ExpectedSemester({
 }
 
 /* /\ /\ /\ /\ /\ /\ /\ /\ NEW FILTER GENERATION /\ /\ /\ /\ /\ /\ /\ /\ */
-
-function SelectFilterAno({ ano, setAno }) {
-  const years = options.constantValues.years;
-  return (
-    <Select
-      placeholder="Filtro Ano"
-      className="mySelectList"
-      styles={styleWidthFix}
-      // isClearable
-      options={years}
-      value={ano}
-      onChange={setAno}
-      getOptionValue={(option) => option.value}
-      getOptionLabel={(option) => option.label}
-      // formatOptionLabel={(option) => `${option.value}`}
-    />
-  );
-}
-
-function SelectFilterSemester(outerSemesterStates) {
-  const semesters = options.constantValues.semesters;
-  const { semestre, setSemestre } = outerSemesterStates;
-
-  return (
-    <Select
-      placeholder="Filtro Semestre"
-      className="mySelectList"
-      styles={styleWidthFix}
-      // isClearable
-      options={semesters}
-      value={semestre}
-      onChange={setSemestre}
-      getOptionValue={(option) => option.value}
-      getOptionLabel={(option) => option.label}
-      // formatOptionLabel={(option) => `${option.label}`}
-    />
-  );
-}
-
-function SelectFilterProfessor(outerProfessorStates) {
-  const { professor, setProfessor } = outerProfessorStates;
-
-  return (
-    <Select
-      placeholder="Filtro Professor"
-      className="mySelectList"
-      styles={styleWidthFix}
-      isClearable
-      options={sqlDataFromJson.professors}
-      value={professor}
-      onChange={setProfessor}
-      getOptionValue={(option) => option.nome}
-      getOptionLabel={({ nome, apelido, laboratorio, curso }) =>
-        `${nome} - ${apelido} - ${laboratorio} - ${curso}`
-      }
-      formatOptionLabel={({ apelido, nome }, { context }) => {
-        return context === "value" ? `${apelido}` : `${nome}`;
-      }}
-    />
-  );
-}
-
-function SelectFilterRoom(outerRoomStates) {
-  const { room, setRoom } = outerRoomStates;
-  const rooms = sqlDataFromJson.salas;
-
-  return (
-    <Select
-      placeholder="Filtro Sala"
-      className="mySelectList"
-      styles={styleWidthFix}
-      isClearable
-      options={rooms}
-      value={room}
-      onChange={setRoom}
-      getOptionValue={({ bloco, codigo }) => `${bloco} - ${codigo}`}
-      getOptionLabel={({ capacidade, bloco, codigo }) =>
-        `${capacidade} - ${bloco} - ${codigo}`
-      }
-      formatOptionLabel={({ capacidade, bloco, codigo }, { context }) => {
-        let msg = "";
-        msg += capacidade ? `(${capacidade})` : "(Cap. indef.)";
-        msg += bloco ? ` ${bloco}` : "(Bloco indef.)";
-        msg += codigo ? ` - ${codigo}` : " (Cod. indef.)";
-        return context === "value" ? msg : msg;
-      }}
-    />
-  );
-}
-
-function SelectFilterExpectedSemester(outerExpectedSemesterStates) {
-  const { expectedSemester, setExpectedSemester } = outerExpectedSemesterStates;
-  const expectedSemesters = options.constantValues.expectedSemester;
-
-  return (
-    <Select
-      placeholder="Filtro Período"
-      className="mySelectList"
-      styles={styleWidthFix}
-      isClearable
-      options={expectedSemesters}
-      value={expectedSemester}
-      onChange={setExpectedSemester}
-      formatOptionLabel={({ value, label }, { context }) => {
-        let message = "";
-        message += value;
-        message += "º Período";
-        return context === "value" ? `${message}` : `${message}`;
-      }}
-    />
-  );
-}
-
-/* /\ /\ /\ /\ /\ /\ /\ /\ CCTurma filtering Selects /\ /\ /\ /\ /\ /\ /\ /\ */
 
 /* \\ CRUD // */
 
@@ -1137,7 +756,7 @@ function SelectClassProfessor(classStates) {
 /* \ Professors / */
 
 function SelectProfessorItem(professorStates) {
-  const { professors, /* setProfessors, */ professor, setProfessor } =
+  const { professors, setProfessors, professor, setProfessor } =
     professorStates;
 
   const SelectProfessorItemStates = {
@@ -1170,12 +789,9 @@ function SelectProfessorItem(professorStates) {
   return <DefaultSelect {...SelectProfessorItemStates} />;
 }
 
-function SelectProfessorLab({
-  professors,
-  setProfessors,
-  professor,
-  setProfessor,
-}) {
+function SelectProfessorLab(professorStates) {
+  const { professors, setProfessors, professor, setProfessor } =
+    professorStates;
   function updateProfessorLab(newLab) {
     const newProfessor = { ...professor, laboratorio: newLab?.apelido ?? null };
     setProfessor(newProfessor);
@@ -1352,25 +968,7 @@ function SelectStudentCourse({ student, setStudent }) {
 
 export {
   /* Filters */
-  SelectFilterV2Year,
-  SelectFilterV2Semester,
-  SelectFilterV2Professor,
-  SelectFilterV2Room,
-  SelectFilterV2ExpectedSemester,
-
-  /* Multiturmas (MTT) */
-  SelectAno,
-  SelectSemestre,
-  SelectAnoSemestre,
-
-  /* MTT: Horario */
-  SelectSala,
-  SelectDia,
-  SelectHoraTang,
-  SelectDuracao,
-
-  /* CCTurma */
-  SelectFilterAno,
+  SelectFilterYear,
   SelectFilterSemester,
   SelectFilterProfessor,
   SelectFilterRoom,

@@ -9,11 +9,11 @@ import {
   filterYear,
 } from "../../helpers/filteringFunc";
 import {
-  SelectFilterV2Year,
-  SelectFilterV2Semester,
-  SelectFilterV2Professor,
-  SelectFilterV2Room,
-  SelectFilterV2ExpectedSemester,
+  SelectFilterYear,
+  SelectFilterSemester,
+  SelectFilterProfessor,
+  SelectFilterRoom,
+  SelectFilterExpectedSemester,
 } from "../mySelects";
 import { getDefaultYearSemesterValues } from "../../helpers/auxFunctions";
 import {
@@ -26,7 +26,7 @@ function FilterYear(filterYearStates) {
   return (
     <div className="defaultFilterStyle">
       Ano:
-      <SelectFilterV2Year {...filterYearStates} />
+      <SelectFilterYear {...filterYearStates} />
     </div>
   );
 }
@@ -35,7 +35,7 @@ function FilterSemester(filterSemesterStates) {
   return (
     <div className="defaultFilterStyle">
       Semestre:
-      <SelectFilterV2Semester {...filterSemesterStates} />
+      <SelectFilterSemester {...filterSemesterStates} />
     </div>
   );
 }
@@ -44,7 +44,7 @@ function FilterProfessor(filterProfessorStates) {
   return (
     <div className="defaultFilterStyle">
       Professor:
-      <SelectFilterV2Professor {...filterProfessorStates} />
+      <SelectFilterProfessor {...filterProfessorStates} />
     </div>
   );
 }
@@ -53,7 +53,7 @@ function FilterRoom(filterRoomStates) {
   return (
     <div className="defaultFilterStyle">
       Sala:
-      <SelectFilterV2Room {...filterRoomStates} />
+      <SelectFilterRoom {...filterRoomStates} />
     </div>
   );
 }
@@ -62,7 +62,7 @@ function FilterExpectedSemester(filterExpectedSemesterStates) {
   return (
     <div className="defaultFilterStyle">
       Semestre Esperado:
-      <SelectFilterV2ExpectedSemester {...filterExpectedSemesterStates} />
+      <SelectFilterExpectedSemester {...filterExpectedSemesterStates} />
     </div>
   );
 }
