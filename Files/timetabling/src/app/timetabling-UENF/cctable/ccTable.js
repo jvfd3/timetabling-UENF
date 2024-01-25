@@ -19,15 +19,16 @@ function CCTableView() {
       }
 
       function TopRow() {
-        let dias = options.constantValues.days.map((dia, index) => {
+        const daysList = options.constantValues.days;
+        const days = daysList.map((day, index) => {
           return (
             <th key={index} className="DiasHeader">
-              {dia.label}
+              {day.label}
             </th>
           );
         });
 
-        return [dias];
+        return [days];
       }
       return (
         <thead>
@@ -44,7 +45,7 @@ function CCTableView() {
         let turmasDaHora = filterHour(curClasses, hora);
         // console.log("turmasDaHora", turmasDaHora);
         // console.log("hora", hora);
-        let colunasDosDias = options.constantValues.days.map((dia) => {
+        const daysColumn = options.constantValues.days.map((dia) => {
           let turmasDoDia = filterDay(turmasDaHora, dia.value);
 
           function CellContent({ turmas }) {
@@ -108,15 +109,15 @@ function CCTableView() {
             <td className="HorariosCol" key={`Linha: ${hora}, Header: ${hora}`}>
               {hora}
             </td>
-            {colunasDosDias}
+            {daysColumn}
           </tr>
         );
       }
-
+      const hoursTangList = options.constantValues.hoursTang;
       return (
         <tbody>
-          {options.constantValues.hoursTang.map((hora, rowIndex) => (
-            <Linha key={`Linha: ${hora.hora}`} hora={hora.hora} />
+          {hoursTangList.map((iterHour, rowIndex) => (
+            <Linha key={`Linha: ${iterHour.hora}`} hora={iterHour.hora} />
           ))}
         </tbody>
       );

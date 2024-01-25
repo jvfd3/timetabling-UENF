@@ -18,24 +18,17 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function MyRouting() {
-  let basePath = options.constantValues.routing.urlPath; //"/timetabling-uenf/";
-  let mainPath = basePath + options.constantValues.pageSelection.main.value;
-  let multiClassesPath =
-    basePath + options.constantValues.pageSelection.multiClasses.value;
-  let turmasPath =
-    basePath + options.constantValues.pageSelection.classes.value;
-  let alunosPath =
-    basePath + options.constantValues.pageSelection.students.value;
-  let professoresPath =
-    basePath + options.constantValues.pageSelection.professors.value;
-  let disciplinasPath =
-    basePath + options.constantValues.pageSelection.subjects.value;
-  let salasPath =
-    basePath + options.constantValues.pageSelection.classrooms.value;
-  let notFoundPath =
-    basePath + options.constantValues.pageSelection.notFound.value;
-  let ccTablePath =
-    basePath + options.constantValues.pageSelection.CCTable.value;
+  const basePath = options.constantValues.routing.urlPath; //"/timetabling-uenf/";
+  const pageSelection = options.constantValues.pageSelection;
+  const mainPath = basePath + pageSelection.main.value;
+  const multiClassesPath = basePath + pageSelection.multiClasses.value;
+  const turmasPath = basePath + pageSelection.classes.value;
+  const alunosPath = basePath + pageSelection.students.value;
+  const professoresPath = basePath + pageSelection.professors.value;
+  const disciplinasPath = basePath + pageSelection.subjects.value;
+  const salasPath = basePath + pageSelection.classrooms.value;
+  const notFoundPath = basePath + pageSelection.notFound.value;
+  const ccTablePath = basePath + pageSelection.CCTable.value;
 
   return (
     <BrowserRouter basename="/">

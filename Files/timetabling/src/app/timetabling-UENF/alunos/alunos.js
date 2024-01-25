@@ -114,7 +114,7 @@ function Students() {
 }
 
 function CRUDStudents() {
-  let defaultPageValue = options.constantValues.pageSelection.students;
+  const defaultPageValue = options.constantValues.pageSelection.students;
   return (
     <div className="background">
       <CRUDPageSelection defaultValue={defaultPageValue} />

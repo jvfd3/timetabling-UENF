@@ -167,7 +167,7 @@ function Rooms() {
   const [rooms, setRooms] = useState(sqlDataFromJson.salas);
   const [room, setRoom] = useState(rooms[3]);
 
-  let myRoomsStates = { rooms, setRooms, room, setRoom };
+  const myRoomsStates = { rooms, setRooms, room, setRoom };
 
   return (
     <div className="CRUDContainComponents">
@@ -178,7 +178,7 @@ function Rooms() {
 }
 
 function CRUDrooms() {
-  let defaultPageValue = options.constantValues.pageSelection.classrooms;
+  const defaultPageValue = options.constantValues.pageSelection.classrooms;
   return (
     <div className="background">
       <CRUDPageSelection defaultValue={defaultPageValue} />

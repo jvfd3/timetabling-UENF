@@ -6,7 +6,7 @@ import { changePageByScrolling } from "../helpers/firulas/minhasFirulas";
 // import { changePageByScrolling } from "../functions/firulas/minhasFirulas";
 
 function CRUDPageSelection(props) {
-  let pages = options.constantValues.pageSelection;
+  const pages = options.constantValues.pageSelection;
   const navigate = useNavigate();
 
   const handleChange = (selectedOption) => {

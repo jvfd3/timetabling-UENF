@@ -137,9 +137,8 @@ Where each Select is used:
 
 function SelectYear({ outerYear, setOuterYear, outerIsClearable = false }) {
   function findYearObject(year) {
-    const yearObject = options.constantValues.years.find(
-      (iterYear) => iterYear.value == year
-    );
+    const years = options.constantValues.years;
+    const yearObject = years.find((iterYear) => iterYear.value == year);
     return yearObject;
   }
 
@@ -161,7 +160,8 @@ function SelectSemester({
   outerIsClearable = false,
 }) {
   function findSemesterObject(semester) {
-    const semesterObject = options.constantValues.semesters.find(
+    const semesters = options.constantValues.semesters;
+    const semesterObject = semesters.find(
       (iterSemester) => iterSemester.value == semester
     );
     return semesterObject;
@@ -181,9 +181,8 @@ function SelectSemester({
 
 function SelectLab({ outerLab, setOuterLab }) {
   function findLabObject(labAlias) {
-    const labObject = options.constantValues.labs.find(
-      (iterLab) => iterLab.apelido === labAlias
-    );
+    const labs = options.constantValues.labs;
+    const labObject = labs.find((iterLab) => iterLab.apelido === labAlias);
     return labObject ?? null;
   }
 
@@ -210,7 +209,8 @@ function SelectLab({ outerLab, setOuterLab }) {
 
 function SelectCourse({ outerCourse, setOuterCourse }) {
   function findCourseObject(course) {
-    const courseObject = options.constantValues.courses.find(
+    const courses = options.constantValues.courses;
+    const courseObject = courses.find(
       (iterCourse) => iterCourse.apelido === course
     );
     return courseObject ?? null;
@@ -239,9 +239,8 @@ function SelectCourse({ outerCourse, setOuterCourse }) {
 
 function SelectBlock({ outerBlock, setOuterBlock }) {
   function findBlockObject(block) {
-    const blockObject = options.constantValues.blocks.find(
-      (iterBlock) => iterBlock.id == block
-    );
+    const blocks = options.constantValues.blocks;
+    const blockObject = blocks.find((iterBlock) => iterBlock.id == block);
     return blockObject;
   }
 
@@ -276,7 +275,8 @@ function SelectExpectedSemester({
   outerIsClearable = false,
 }) {
   function findExpectedSemesterObject(expectedSemester) {
-    const expectedSemesterObject = options.constantValues.expectedSemester.find(
+    const expectedSemesters = options.constantValues.expectedSemester;
+    const expectedSemesterObject = expectedSemesters.find(
       (iterExpectedSemester) => iterExpectedSemester.value == expectedSemester
     );
     return expectedSemesterObject;
@@ -392,8 +392,8 @@ function SelectRoom({ outerRoom, setOuterRoom, outerIsClearable = true }) {
 
 function SelectDay({ outerDay, setOuterDay }) {
   function findDayObject(day) {
-    const daysList = options.constantValues.days;
-    const dayObject = daysList.find((iterDay) => iterDay?.value == day);
+    const days = options.constantValues.days;
+    const dayObject = days.find((iterDay) => iterDay?.value == day);
     return dayObject ?? null;
   }
 
@@ -411,8 +411,8 @@ function SelectDay({ outerDay, setOuterDay }) {
 
 function SelectStartHour({ outerStartHour, setOuterStartHour }) {
   function findHourObject(hour) {
-    const hoursList = options.constantValues.hours;
-    const hourObject = hoursList.find((iterHour) => iterHour?.hora == hour);
+    const hours = options.constantValues.hours;
+    const hourObject = hours.find((iterHour) => iterHour?.hora == hour);
     return hourObject ?? null;
   }
 
@@ -439,8 +439,8 @@ function SelectStartHour({ outerStartHour, setOuterStartHour }) {
 
 function SelectDuration({ outerDuration, setOuterDuration }) {
   function findDurationObject(duration) {
-    const durationsList = options.constantValues.durations;
-    const durationObject = durationsList.find(
+    const durations = options.constantValues.durations;
+    const durationObject = durations.find(
       (iterDuration) => iterDuration?.value == duration
     );
     return durationObject ?? null;
@@ -461,17 +461,17 @@ function SelectDuration({ outerDuration, setOuterDuration }) {
 /* \/ \/ \/ \/ \/ \/ \/ \/ MULTITURMAS \/ \/ \/ \/ \/ \/ \/ \/ */
 
 function SelectAno({ outerAno, setOuterAno }) {
-  const anos = options.constantValues.years;
+  const years = options.constantValues.years;
 
-  const anoSelecionado = anos.find(
-    (ano) => ano.value === parseInt(outerAno.value)
+  const selectedYear = years.find(
+    (iterYear) => iterYear.value === parseInt(outerAno.value)
   );
 
-  const [ano, setAno] = useState(anoSelecionado);
+  const [year, setYear] = useState(selectedYear);
 
   function updateOuterValue(novoAno) {
     setOuterAno(novoAno);
-    setAno(novoAno);
+    setYear(novoAno);
   }
 
   return (
@@ -481,24 +481,23 @@ function SelectAno({ outerAno, setOuterAno }) {
       styles={styleWidthFix}
       isClearable={false}
       placeholder="Ano"
-      options={anos}
-      value={ano}
+      options={years}
+      value={year}
     />
   );
 }
 
 function SelectSemestre({ outerSemestre, setOuterSemestre }) {
-  const semestres = options.constantValues.semesters;
-
-  const semestreSelecionado = semestres.find(
-    (semestre) => semestre.value === parseInt(outerSemestre.value)
+  const semesters = options.constantValues.semesters;
+  const selectedSemester = semesters.find(
+    (iterSemester) => iterSemester.value === parseInt(outerSemestre.value)
   );
 
-  const [semestre, setSemestre] = useState(semestreSelecionado);
+  const [semster, setSemester] = useState(selectedSemester);
 
   function updateOuterValue(novoSemestre) {
     setOuterSemestre(novoSemestre);
-    setSemestre(novoSemestre);
+    setSemester(novoSemestre);
   }
 
   return (
@@ -508,8 +507,8 @@ function SelectSemestre({ outerSemestre, setOuterSemestre }) {
       styles={styleWidthFix}
       isClearable={false}
       placeholder="Semestre"
-      options={semestres}
-      value={semestre}
+      options={semesters}
+      value={semster}
     />
   );
 }
@@ -569,24 +568,24 @@ function SelectSala({ lTurma, setLTurma, indexHorario }) {
 }
 
 function SelectDia({ lTurma, setLTurma, indexHorario }) {
-  const dias = options.constantValues.days;
+  const days = options.constantValues.days;
 
   const horarios = lTurma.horarios;
   const horario = horarios[indexHorario];
   const selectedDia = horario.dia;
 
-  const diaSelecionado = dias.find((dia) => dia.value === selectedDia);
-  const [dia, setDia] = useState(diaSelecionado);
+  const selectedDay = days.find((dia) => dia.value === selectedDia);
+  const [day, setDay] = useState(selectedDay);
 
   function updateOuterTurma(novoDia) {
     const blankDia = { value: null, label: null };
     let diaAtualizado = null;
     if (!novoDia) {
       diaAtualizado = blankDia;
-      setDia(null);
+      setDay(null);
     } else {
       diaAtualizado = novoDia;
-      setDia(diaAtualizado);
+      setDay(diaAtualizado);
     }
     const novosHorarios = [...horarios];
     novosHorarios[indexHorario].dia = diaAtualizado.value;
@@ -607,8 +606,8 @@ function SelectDia({ lTurma, setLTurma, indexHorario }) {
       styles={styleWidthFix}
       isClearable={true}
       placeholder="Dia"
-      options={dias}
-      value={dia}
+      options={days}
+      value={day}
       // getOptionValue={(option) => option.value}
       // getOptionLabel={(option) => option.label}
       formatOptionLabel={({ value, label }, { context }) => {
@@ -629,10 +628,10 @@ function SelectHoraTang({ lTurma, setLTurma, indexHorario }) {
 
   const selectedHora = horario.horaInicio;
   const horasTang = options.constantValues.hoursTang;
-  const horaSelecionada = horasTang.find(
-    (hora) => parseInt(hora.hora) === parseInt(selectedHora)
+  const selectedHour = horasTang.find(
+    (iterHour) => parseInt(iterHour.hora) === parseInt(selectedHora)
   );
-  const [hora, setHora] = useState(horaSelecionada);
+  const [hora, setHora] = useState(selectedHour);
 
   function updateOuterTurma(novaHoraTang) {
     const blankHora = { hora: null, turno: null };
@@ -682,22 +681,22 @@ function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
   const horario = horarios[indexHorario];
 
   const selectedDuracao = horario.duracao;
-  const duracoes = options.constantValues.durations;
-  const duracaoSelecionada = duracoes.find(
-    (duracao) => duracao.value === selectedDuracao
+  const durations = options.constantValues.durations;
+  const selectedDuration = durations.find(
+    (iterDuration) => iterDuration.value === selectedDuracao
   );
 
-  const [duracao, setDuracao] = useState(duracaoSelecionada);
+  const [duration, setDuration] = useState(selectedDuration);
 
   function updateOuterTurma(novaDuracao) {
     const blankDuracao = { value: null, label: null };
     let novaDuracaoAtualizada = null;
     if (!novaDuracao) {
       novaDuracaoAtualizada = blankDuracao;
-      setDuracao(null);
+      setDuration(null);
     } else {
       novaDuracaoAtualizada = novaDuracao;
-      setDuracao(novaDuracaoAtualizada);
+      setDuration(novaDuracaoAtualizada);
     }
 
     const novosHorarios = [...horarios];
@@ -715,8 +714,8 @@ function SelectDuracao({ lTurma, setLTurma, indexHorario }) {
   return (
     <LockableSelect
       placeholder="Duração"
-      options={duracoes}
-      value={duracao}
+      options={durations}
+      value={duration}
       onChange={updateOuterTurma}
       getOptionValue={(option) => option.value}
       getOptionLabel={(option) => option.label}
@@ -807,10 +806,8 @@ function SelectFilterV2ExpectedSemester({
 
 /* /\ /\ /\ /\ /\ /\ /\ /\ NEW FILTER GENERATION /\ /\ /\ /\ /\ /\ /\ /\ */
 
-function SelectFilterAno(outerAnoStates) {
+function SelectFilterAno({ ano, setAno }) {
   const years = options.constantValues.years;
-  const { ano, setAno } = outerAnoStates;
-
   return (
     <Select
       placeholder="Filtro Ano"

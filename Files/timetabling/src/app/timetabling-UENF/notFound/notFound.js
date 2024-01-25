@@ -3,7 +3,7 @@ import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 
 function notFound() {
-  let defaultPageValue = options.constantValues.pageSelection.notFound;
+  const defaultPageValue = options.constantValues.pageSelection.notFound;
   return (
     <div className="background">
       <CRUDPageSelection defaultValue={defaultPageValue} />

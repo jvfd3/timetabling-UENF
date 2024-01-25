@@ -13,11 +13,11 @@ function ThisDummyComponent() {
 }
 
 function Tabela() {
-  let dias = options.constantValues.days;
-  let horas = options.constantValues.hours;
+  const days = options.constantValues.days;
+  const hours = options.constantValues.hours;
 
   function DiasHeader() {
-    return dias.map((dia, i) => (
+    return days.map((dia, i) => (
       <th className="HeaderDias" key={i}>
         {dia.value}
       </th>
@@ -32,12 +32,12 @@ function Tabela() {
         </td>
       );
     }
-    return horas.map((hora, rowIndex) => (
+    return hours.map((hora, rowIndex) => (
       <tr key={rowIndex} className="TimetableRow">
         <td key={100 + rowIndex} className="HorariosSideHeader">
           {hora.hora} ~ {parseInt(hora.hora) + 1}
         </td>
-        {dias.map((dia, columnIndex) => cell(rowIndex, columnIndex))}
+        {days.map((dia, columnIndex) => cell(rowIndex, columnIndex))}
       </tr>
     ));
   }
