@@ -119,11 +119,15 @@ function NoOfferedClasses() {
   return (
     <div
       className="infoCard"
-      style={{ display: "flex", flexDirection: "row", textAlignLast: "center" }}
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        textAlignLast: "center",
+        alignItems: "center",
+      }}
     >
-      <p>Ainda não há turmas cadastradas. Clique Aqui</p>
-      <SmartCreateClassItem />
-      <p>para criar uma turma</p>
+      <p>Ainda não há turmas cadastradas. Para criar uma turma clique aqui: </p>
+      <SmartCreateClassItem {...createStates} />
     </div>
   );
 }
