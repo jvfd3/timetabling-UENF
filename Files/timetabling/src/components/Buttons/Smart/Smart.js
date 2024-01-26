@@ -32,6 +32,7 @@ function AddTurmaWithDisciplinaButton({ turmas, setTurmas, disciplina }) {
 }
 
 function SmartCreateClassItem(createStates) {
+  /* I could clean this Button */
   const { classesStates, year, semester, createClassDB } = createStates;
 
   const yearSemester = getDefaultYearSemesterValues();
@@ -55,114 +56,31 @@ function SmartCreateClassItem(createStates) {
   return <CreateItem createFunc={createClassItemInDB} text={titleText} />;
 }
 
-function SmartUpdateClassItem_GoneWrong(classItemStates) {
-  const { classItem, updateClassItemDB, originalClassItemRow } =
-    classItemStates;
+function SmartUpdateClassItem({ classItem, updateClassItemDB, oldClassItem }) {
+  const classItemId = ` (id: ${getId(classItem)})\n`;
 
-  const baseMessage = `Atualizar turma (id: ${getId(classItem)})\n`;
+  let dontUpdateMessage = `Não foram identificadas alterações na turma`;
+  dontUpdateMessage += classItemId;
 
-  const oldClassItem = useRef(classItem);
-
-  const [modifiedMessage, setModifiedMessage] = useState(baseMessage);
-  const [needsUpdateStatus, setNeedsUpdateStatus] = useState(false);
-
-  useEffect(() => {
-    const modProps = getModificationsProps(oldClassItem.current, classItem);
-
-    setModifiedMessage(baseMessage + modProps.updateText);
-    setNeedsUpdateStatus(modProps.updateStatus);
-    // console.log(classItem.id, modProps);
-    // console.log("int: ", oldClassTime.current?.dia);
-    // console.log("new: ", classTime?.dia);
-
-    // console.log("// SmartUpdateClassTime \\");
-  }, [classItem]);
-
-  const iconColor = needsUpdateStatus
-    ? options.config.colors.CRUD.update
-    : options.config.colors.CRUD.default;
-
-  function getModificationsProps(oldClassItem, classItem) {
-    const oldSubject = getId(oldClassItem?.disciplina);
-    const newSubject = getId(classItem?.disciplina);
-    const oldProfessor = getId(oldClassItem?.professor);
-    const newProfessor = getId(classItem?.professor);
-    const oldExpectedDemand = oldClassItem?.demandaEstimada;
-    const newExpectedDemand = classItem?.demandaEstimada;
-
-    const sameSubject = oldSubject === newSubject;
-    const sameProfessor = oldProfessor === newProfessor;
-    const sameExpectedDemand = oldExpectedDemand === newExpectedDemand;
-
-    const newSubjectText = `disciplina: ${oldSubject} -> ${newSubject}\n`;
-    const newProfessorText = `professor: ${oldProfessor} -> ${newProfessor}\n`;
-    const newExpectedDemandText = `demandaEstimada: ${oldExpectedDemand} -> ${newExpectedDemand}\n`;
-
-    let modifications = "";
-    modifications += sameSubject ? "" : newSubjectText;
-    modifications += sameProfessor ? "" : newProfessorText;
-    modifications += sameExpectedDemand ? "" : newExpectedDemandText;
-
-    const originalSubject = originalClassItemRow.current?.disciplina?.id;
-    // console.log(newSubjectText + originalSubject);
-
-    // const hasChanges = !sameSubject || !sameProfessor || !sameExpectedDemand;
-    const hasChanges = modifications.length > 0;
-
-    console.log(testForChanges(classItemStates));
-
-    const modificationsObject = {
-      updateStatus: hasChanges,
-      updateText: modifications,
-    };
-
-    return modificationsObject;
-  }
-
-  function smartUpdateClassItem() {
-    setNeedsUpdateStatus(false);
-    updateClassItemDB();
-  }
-
-  return (
-    <UpdateItem
-      updateFunc={smartUpdateClassItem}
-      text={modifiedMessage}
-      color={iconColor}
-    />
-  );
-}
-
-function SmartUpdateClassItem(classItemStates) {
-  const { classItem, oldClassItem, updateClassItemDB } = classItemStates;
-
-  // const oldClassItem = useRef(classItem);
-
-  const dontUpdateMessage = `Não foram identificadas alterações na turma (id: ${getId(
-    classItem
-  )})\n`;
-  const baseMessage = `Atualizar turma (id: ${getId(classItem)})\n`;
+  const baseMessage = `Atualizar turma` + classItemId;
 
   const [modifiedMessage, setModifiedMessage] = useState(dontUpdateMessage);
   const [needsUpdateStatus, setNeedsUpdateStatus] = useState(false);
 
-  useEffect(() => {
-    // const modProps = getModificationsProps(oldClassItem.current, classItem);
-    const modProps = getModificationsProps(oldClassItem, classItem);
-
-    const wasUpdated = modProps.updateStatus;
-    const newMessage = wasUpdated
-      ? baseMessage + modProps.updateText
-      : dontUpdateMessage;
-    setModifiedMessage(newMessage);
-    setNeedsUpdateStatus(wasUpdated);
-  }, [classItem]);
-
   const iconColor = needsUpdateStatus
     ? options.config.colors.CRUD.update
     : options.config.colors.CRUD.default;
 
-  console.log(iconColor);
+  useEffect(() => {
+    const modProps = getModificationsProps(oldClassItem, classItem);
+    // const modProps = getModificationsProps(oldClassItem, classItem);
+    const wasUpdated = modProps.updateStatus;
+    const newMessage = wasUpdated
+      ? baseMessage + modProps.updateText
+      : dontUpdateMessage;
+    setNeedsUpdateStatus(wasUpdated);
+    setModifiedMessage(newMessage);
+  }, [classItem]);
 
   function getModificationsProps(oldClassItem, classItem) {
     const oldSubject = getId(oldClassItem?.disciplina);
@@ -185,12 +103,11 @@ function SmartUpdateClassItem(classItemStates) {
     modifications += sameProfessor ? "" : newProfessorText;
     modifications += sameExpectedDemand ? "" : newExpectedDemandText;
 
-    console.log(newSubjectText);
+    // console.log(newSubjectText);
 
     // const hasChanges = !sameSubject || !sameProfessor || !sameExpectedDemand;
     const hasChanges = modifications.length > 0;
 
-    console.log(hasChanges);
     const modificationsObject = {
       updateText: modifications,
       updateStatus: hasChanges,
@@ -201,6 +118,7 @@ function SmartUpdateClassItem(classItemStates) {
 
   function smartUpdateClassItem() {
     setNeedsUpdateStatus(false);
+    setModifiedMessage(dontUpdateMessage);
     // oldClassItem.current = classItem;
     updateClassItemDB();
   }
@@ -214,22 +132,10 @@ function SmartUpdateClassItem(classItemStates) {
   );
 }
 
-function SmartDeleteClassItem(deleteProps) {
-  const { classes, setClasses, classItem, setClassItem, deleteClassDB } =
-    deleteProps;
-  const classStates = {
-    classes,
-    setClasses,
-    classItem,
-    setClassItem,
-  };
-
-  function deleteClassItemFromDB() {
-    deleteClassDB(classStates);
-  }
-
+function SmartDeleteClassItem({ classItem, deleteClassItemDB }) {
   const titleText = `Remover turma (id: ${getId(classItem)})`;
-  return <DeleteItem deleteFunc={deleteClassItemFromDB} text={titleText} />;
+
+  return <DeleteItem deleteFunc={deleteClassItemDB} text={titleText} />;
 }
 
 function SmartCreateClassTime({ classItem, createClassTimeDB }) {
@@ -238,16 +144,17 @@ function SmartCreateClassTime({ classItem, createClassTimeDB }) {
   return <CreateClassTime createFunc={createClassTimeDB} text={titleText} />;
 }
 
-function SmartUpdateClassTime(updateClassTimeProps) {
-  const { classTime, updateClassTimeDB } = updateClassTimeProps;
-
+function SmartUpdateClassTime({ classTime, updateClassTimeDB }) {
   const oldClassTime = useRef(classTime);
+  const classTimeId = ` (id: ${getId(classTime)})\n`;
+
+  let dontUpdateMessage = `Não foram identificadas alterações no horário `;
+  dontUpdateMessage += classTimeId;
 
   let baseMessage = `Atualizar horário `;
-  baseMessage += `(id: ${getId(classTime)}, `;
-  baseMessage += `idTurma: ${classTime?.idTurma})\n`;
+  baseMessage += classTimeId + `  -- idTurma: ${classTime?.idTurma})\n`;
 
-  const [modifiedMessage, setModifiedMessage] = useState(baseMessage);
+  const [modifiedMessage, setModifiedMessage] = useState(dontUpdateMessage);
   const [needsUpdateStatus, setNeedsUpdateStatus] = useState(false);
 
   const iconColor = needsUpdateStatus
@@ -257,16 +164,14 @@ function SmartUpdateClassTime(updateClassTimeProps) {
   useEffect(() => {
     const modProps = getModificationsProps(oldClassTime.current, classTime);
 
-    setModifiedMessage(baseMessage + modProps.updateText);
-    setNeedsUpdateStatus(modProps.updateStatus);
+    const wasUpdated = modProps.updateStatus;
+    const newMessage = wasUpdated
+      ? baseMessage + modProps.updateText
+      : dontUpdateMessage;
 
-    // console.log(classTime.id, modProps);
-    // console.log("int: ", oldClassTime.current?.dia);
-    // console.log("new: ", classTime?.dia);
-
-    // console.log("// SmartUpdateClassTime \\");
+    setNeedsUpdateStatus(wasUpdated);
+    setModifiedMessage(newMessage);
   }, [classTime]);
-  // console.log(needsUpdateStatus);
 
   function getModificationsProps(oldClassTime, newClassTime) {
     const oldRoom = getId(oldClassTime?.sala);
@@ -287,8 +192,6 @@ function SmartUpdateClassTime(updateClassTimeProps) {
     const newDayText = `dia: ${oldDay} -> ${newDay}\n`;
     const newStartHourText = `horaInicio: ${oldStartHour} -> ${newStartHour}\n`;
     const newDurationText = `duracao: ${oldDuration} -> ${newDuration}\n`;
-
-    // console.log(newRoomText);
 
     let modifications = "";
     modifications += sameRoom ? "" : newRoomText;
@@ -322,8 +225,7 @@ function SmartUpdateClassTime(updateClassTimeProps) {
   );
 }
 
-function SmartDeleteClassTime(deleteClassTimeProps) {
-  const { classTime, deleteClassTimeDB } = deleteClassTimeProps;
+function SmartDeleteClassTime({ classTime, deleteClassTimeDB }) {
   let titleText = `Remover horário (id: ${getId(classTime)}):\n`;
   titleText += `  - idTurma ${classTime?.idTurma}`;
 

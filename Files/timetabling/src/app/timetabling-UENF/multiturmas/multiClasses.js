@@ -1,29 +1,12 @@
 import "./multiTurmas.css";
 import React, { useState, useEffect, useRef } from "react";
-import {
-  SelectClassSubject,
-  SelectClassProfessor,
-} from "../../../components/mySelects";
-import { NumberInputMultiClassesExpectedDemand } from "../../../components/MyTextFields";
-import {
-  SmartCreateClassItem,
-  SmartDeleteClassItem,
-  SmartUpdateClassItem,
-} from "../../../components/Buttons/Smart/Smart";
-import { baseClassItemConflicts } from "../../../helpers/conflicts/centralConflicts";
-import {
-  InputDisciplina,
-  UpdateInfo,
-} from "../../../components/Buttons/Dumb/Dumb";
+import { SmartCreateClassItem } from "../../../components/Buttons/Smart/Smart";
 import {
   createClass,
   readClass,
-  updateClass,
-  deleteClass,
 } from "../../../helpers/CRUDFunctions/classCRUD";
 import { MultiClassesFilters } from "../../../components/Filters/Filters";
 import { readClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
-import ClassTimeTable from "../../../components/ClassTimeTable/ClassTimeTable";
 import {
   getDefaultClassItem,
   getDefaultClassTime,
@@ -39,11 +22,7 @@ function MultiClassesCardHeader(globalStates) {
   );
 }
 
-function NoOfferedClasses(globalStates) {
-  const { classStates } = globalStates;
-  // const { classItem } = classStates;
-  // console.log("item", classStates);
-
+function NoOfferedClasses(classStates) {
   const createStates = {
     classesStates: classStates,
     year: classStates.classItem.ano,
@@ -74,9 +53,9 @@ function MultiClassesCard(globalStates) {
       <MultiClassesCardHeader {...globalStates} />
       <div className="showBasicDataCard">
         {hasClasses ? (
-          <ClassesTable {...globalStates} />
+          <ClassesTable {...classStates} />
         ) : (
-          <NoOfferedClasses {...globalStates} />
+          <NoOfferedClasses {...classStates} />
         )}
       </div>
     </div>
