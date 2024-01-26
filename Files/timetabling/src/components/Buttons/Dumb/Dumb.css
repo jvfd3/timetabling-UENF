@@ -10,7 +10,7 @@
 .iconRead:hover,
 .iconUpdate:hover,
 .iconDelete:hover,
-.iconInputDisciplina:hover {
+.iconInputSubject:hover {
   transform: scale(1.2);
   cursor: pointer;
 }
@@ -24,7 +24,7 @@
 }
 
 .iconCreate:active,
-.iconInputDisciplina:active {
+.iconInputSubject:active {
   color: #28a745;
 }
 
@@ -54,12 +54,12 @@
 
 /* ICON INPUT DISCIPLINA */
 
-.iconInputDisciplina {
+.iconInputSubject {
   color: #007bff;
   transition: transform 0.5s;
 }
 
-.iconInputDisciplina:active {
+.iconInputSubject:active {
   /* transform: translateX(500px); */
   /* transform: translateX(50px); */
 }

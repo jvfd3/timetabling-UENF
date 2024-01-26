@@ -4,7 +4,7 @@ import {
   DeleteClassTime,
   CreateItem,
   DeleteItem,
-  InputDisciplina,
+  InputSubject,
   UpdateClassTime,
   UpdateItem,
 } from "../Dumb/Dumb";
@@ -15,20 +15,52 @@ import {
   getValueFromObject,
 } from "../../../helpers/auxFunctions";
 
-function AddTurmaWithDisciplinaButton({ turmas, setTurmas, disciplina }) {
-  function addTurmaWithDisciplina() {
-    const newTurma = {
-      id: turmas.length + 1,
-      disciplina: disciplina,
-    };
-    setTurmas([...turmas, newTurma]);
+function SmartInputSubject(inputSubjectProps) {
+  const { classStates, createClassDB, subjects, inputConfig } =
+    inputSubjectProps;
+
+  function getMessage() {
+    const subjectsSize = subjects.length;
+    const offerAllSubjectsMessage = `Adicionar todas as ${subjectsSize} turmas pendentes `;
+    const extraText = inputConfig?.text ?? "";
+
+    let oneSubjectClassMessage = `Adicionar turma da disciplina`;
+    let finalMessage = offerAllSubjectsMessage + extraText;
+
+    if (subjects.length === 1) {
+      oneSubjectClassMessage += ` ${subjects[0].codigo}`;
+      finalMessage = oneSubjectClassMessage;
+    }
+
+    return finalMessage;
   }
-  return (
-    <InputDisciplina
-      insertDiscFunc={addTurmaWithDisciplina}
-      text={"Adicionar turma dessa disciplina"}
-    />
-  );
+
+  function addClassWithSubject(subject) {
+    const newClass = { ...options.emptyObjects.classItem };
+    newClass.ano = classStates.classItem.ano;
+    newClass.semestre = classStates.classItem.semestre;
+    newClass.disciplina = subject;
+
+    console.log(newClass);
+
+    const createClassStates = {
+      ...classStates,
+      classItem: newClass,
+    };
+    createClassDB(createClassStates);
+  }
+
+  function addClassWithSubjects() {
+    subjects.forEach((subject) => addClassWithSubject(subject));
+  }
+
+  const inputProps = {
+    text: getMessage(),
+    size: inputConfig?.size ?? "2em",
+    createFunc: addClassWithSubjects,
+  };
+
+  return <InputSubject {...inputProps} />;
 }
 
 function SmartCreateClassItem(createStates) {
@@ -243,5 +275,5 @@ export {
   SmartCreateClassTime,
   SmartUpdateClassTime,
   SmartDeleteClassTime,
-  AddTurmaWithDisciplinaButton,
+  SmartInputSubject,
 };

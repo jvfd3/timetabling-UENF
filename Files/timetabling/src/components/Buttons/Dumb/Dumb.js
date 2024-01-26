@@ -12,7 +12,7 @@ import {
   MdAutoDelete as DeleteClassTimeIcon, // Trash Can with clock
   MdLockOutline as LockedPropIcon, // Lock
   MdLockOpen as UnlockedPropIcon, // Unlocked lock
-  MdInput as InputDisciplinaIcon, // Arrow pointing into a box
+  MdInput as InputSubjectIcon, // Arrow pointing into a box
   MdRefresh as ReadInfoIcon, // Two arrows in a circle
   MdEdit as UpdateInfoIcon, // Pencil
 } from "react-icons/md";
@@ -25,7 +25,7 @@ import {
 //   AutoDelete as DeleteClassTimeIcon,
 //   LockRounded as LockedPropIcon,
 //   LockOpenRounded as UnlockedPropIcon,
-//   Input as InputDisciplinaIcon,
+//   Input as InputSubjectIcon,
 // } from "@mui/icons-material";
 
 /* Database Buttons */
@@ -180,11 +180,11 @@ function UnlockedProp({ lockFunc, text = "Unlocked", size = "2em" }) {
   );
 }
 
-function InputDisciplina({ insertDiscFunc, text = "Input", size = "2em" }) {
+function InputSubject({ createFunc, text = "Input", size = "2em" }) {
   return (
-    <InputDisciplinaIcon
-      className="iconInputDisciplina"
-      onClick={insertDiscFunc}
+    <InputSubjectIcon
+      className="iconInputSubject"
+      onClick={createFunc}
       title={text}
       size={size}
     />
@@ -200,7 +200,7 @@ export {
   DeleteClassTime,
   LockedProp,
   UnlockedProp,
-  InputDisciplina,
+  InputSubject,
   CreateDBButton,
   ReadDBButton,
   ReadInfo,

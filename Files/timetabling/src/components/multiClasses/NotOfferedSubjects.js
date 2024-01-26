@@ -1,20 +1,6 @@
 import { sqlDataFromJson } from "../../DB/local/dataFromJSON";
-import { InputDisciplina } from "../Buttons/Dumb/Dumb";
-
-function AllSubjectsWereOffered() {
-  const mainTitle = "Todas as disciplinas do período ímpar foram oferecidas 👍";
-  const subtitle =
-    "Isso é mesmo possível? Ou o código bugou em algum lugar? 🤔";
-
-  return (
-    <div>
-      <h1>{mainTitle}</h1>
-      <p>{subtitle}</p>
-    </div>
-  );
-}
-
-function addSubjectsToClasses() {}
+import { createClass } from "../../helpers/CRUDFunctions/classCRUD";
+import { SmartInputSubject } from "../Buttons/Smart/Smart";
 
 function isSameParity(subject, semester) {
   const subjectParity = subject?.periodo % 2;
@@ -46,7 +32,20 @@ function getListOfNotOfferedSubjects(classes, semester) {
   return nonOfferedSubjects;
 }
 
-function NotOfferedSubjectRow({ iterSubject }) {
+function AllSubjectsWereOffered() {
+  const mainTitle = "Todas as disciplinas do período ímpar foram oferecidas 👍";
+  const subtitle =
+    "Isso é mesmo possível? Ou o código bugou em algum lugar? 🤔";
+
+  return (
+    <div>
+      <h1>{mainTitle}</h1>
+      <p>{subtitle}</p>
+    </div>
+  );
+}
+
+function NotOfferedSubjectRow({ iterSubject, classStates }) {
   const code = iterSubject.codigo;
   const semester = iterSubject.periodo;
 
@@ -55,14 +54,15 @@ function NotOfferedSubjectRow({ iterSubject }) {
   const firstSemesterHighlight = isFirstSemester ? "EnfasePrimeiroPeriodo" : "";
 
   const inputProps = {
-    text: `Criar uma turma para a disciplina ${code}`,
-    insertDiscFunc: () => addSubjectsToClasses([iterSubject]),
+    classStates,
+    createClassDB: createClass,
+    subjects: [iterSubject],
   };
 
   return (
     <tr key={code}>
       <td className={firstSemesterHighlight}>
-        <InputDisciplina {...inputProps} />
+        <SmartInputSubject {...inputProps} />
       </td>
       <td className={firstSemesterHighlight}>
         {`${semester} - (${code}) ${iterSubject.nome}`}
@@ -71,21 +71,24 @@ function NotOfferedSubjectRow({ iterSubject }) {
   );
 }
 
-function NonOfferedSubjectsTable(someValuesProps) {
-  const { semesterValue, nonOfferedSubjects } = someValuesProps;
+function NonOfferedSubjectsTable(unofferedSubjectsProps) {
+  const { semesterValue, nonOfferedSubjects, classStates } =
+    unofferedSubjectsProps;
 
-  let baseMessage = "Disciplinas ainda não oferecidas ";
+  const baseMessage = "Disciplinas ainda não oferecidas ";
   let semesterMessage = "";
   semesterMessage += semesterValue === 1 ? "do período ímpar" : "";
   semesterMessage += semesterValue === 2 ? "do período par" : "";
   semesterMessage += semesterValue === 3 ? "dos períodos" : "";
 
-  const inputText = `Adicionar todas as turmas pendentes ${semesterMessage}`;
-
   const inputProps = {
-    size: "4em",
-    text: inputText,
-    insertDiscFunc: () => addSubjectsToClasses(nonOfferedSubjects),
+    classStates,
+    createClassDB: createClass,
+    subjects: nonOfferedSubjects,
+    inputConfig: {
+      text: semesterMessage,
+      size: "4em",
+    },
   };
 
   const headerText = "Período - (Código) Nome";
@@ -97,7 +100,7 @@ function NonOfferedSubjectsTable(someValuesProps) {
         <thead>
           <tr>
             <th>
-              <InputDisciplina {...inputProps} />
+              <SmartInputSubject {...inputProps} />
             </th>
             <th>{headerText}</th>
           </tr>
@@ -106,6 +109,7 @@ function NonOfferedSubjectsTable(someValuesProps) {
           {nonOfferedSubjects.map((iterSubject) => {
             const NotOfferedProps = {
               iterSubject,
+              classStates,
             };
             const subjectRowKey = iterSubject.codigo;
             return (
@@ -118,7 +122,8 @@ function NonOfferedSubjectsTable(someValuesProps) {
   );
 }
 
-function NotOfferedSubjects({ filteredClasses, classItem }) {
+function NotOfferedSubjects(classStates) {
+  const { filteredClasses, classItem } = classStates;
   const semesterValue = classItem.semestre;
 
   const nonOfferedSubjects = getListOfNotOfferedSubjects(
@@ -126,10 +131,7 @@ function NotOfferedSubjects({ filteredClasses, classItem }) {
     semesterValue
   );
 
-  const someValuesProps = {
-    semesterValue,
-    nonOfferedSubjects,
-  };
+  const someValuesProps = { nonOfferedSubjects, semesterValue, classStates };
 
   return (
     <div>

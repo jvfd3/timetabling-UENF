@@ -13,8 +13,8 @@ function convertToList(classData) {
   const values = [
     classData?.ano ?? null,
     classData?.semestre ?? null,
-    classData?.idDisciplina ?? null,
-    classData?.idProfessor ?? null,
+    classData?.idDisciplina ?? classData?.disciplina?.id ?? null,
+    classData?.idProfessor ?? classData?.professor?.id ?? null,
     classData?.demandaEstimada ?? null,
   ];
   isDebugging && console.log(local + ">{newValues: ", values, "}");

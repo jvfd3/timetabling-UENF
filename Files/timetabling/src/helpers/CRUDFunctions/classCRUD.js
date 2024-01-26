@@ -23,6 +23,7 @@ function createClass(createClassStates) {
       ...options.emptyObjects.classItem,
       ano: year ?? classItem?.ano,
       semestre: semester ?? classItem?.semestre,
+      disciplina: classItem?.disciplina ?? null,
       id: newId,
       idTurma: newId,
     };
