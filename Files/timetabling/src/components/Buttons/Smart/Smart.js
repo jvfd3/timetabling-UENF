@@ -57,7 +57,8 @@ function SmartCreateClassItem(createStates) {
 }
 
 function SmartUpdateClassItem({ classItem, updateClassItemDB, oldClassItem }) {
-  const classItemId = ` (id: ${getId(classItem)})\n`;
+  const date = `${classItem?.ano}.${classItem?.semestre}`;
+  const classItemId = ` ${date} (id: ${getId(classItem)})\n`;
 
   let dontUpdateMessage = `Não foram identificadas alterações na turma`;
   dontUpdateMessage += classItemId;
@@ -133,7 +134,8 @@ function SmartUpdateClassItem({ classItem, updateClassItemDB, oldClassItem }) {
 }
 
 function SmartDeleteClassItem({ classItem, deleteClassItemDB }) {
-  const titleText = `Remover turma (id: ${getId(classItem)})`;
+  const date = `${classItem?.ano}.${classItem?.semestre}`;
+  const titleText = `Remover turma ${date} (id: ${getId(classItem)})`;
 
   return <DeleteItem deleteFunc={deleteClassItemDB} text={titleText} />;
 }
