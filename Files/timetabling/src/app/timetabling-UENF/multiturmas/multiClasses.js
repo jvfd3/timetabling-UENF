@@ -12,6 +12,7 @@ import {
   getDefaultClassTime,
 } from "../../../helpers/auxCRUD";
 import ClassesTable from "../../../components/ClassItemTable/ClassItemTable";
+import NotOfferedSubjects from "../../../components/multiClasses/NotOfferedSubjects";
 
 function MultiClassesCardHeader(globalStates) {
   return (
@@ -103,6 +104,7 @@ function MultiClassesRefactor() {
   return (
     <div className="CRUDContainComponents">
       <MultiClassesCard {...globalStates} />
+      <NotOfferedSubjects {...classStates} />
     </div>
   );
 }
