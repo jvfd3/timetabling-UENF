@@ -87,7 +87,7 @@ function deleteClass({ classes, setClasses, classItem, setClassItem }) {
       }
       // const newItem = options.emptyObjects.classItem;
       setClassItem(newItem);
-      setClasses(newItemList);
+      setClasses(filteredClasses);
     }
   }
 
