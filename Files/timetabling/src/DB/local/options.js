@@ -278,6 +278,104 @@ const options = {
       nome: null, //STR
     },
   },
+  AWS: {
+    fullEndpoint:
+      "https://ey1h94aard.execute-api.us-east-2.amazonaws.com/timetablingStage/",
+  },
+  config: {
+    iconButtons: true,
+    defaultIndexes: {
+      year: 13,
+      semester: 1,
+      professor: 0,
+      student: 0,
+      subject: 0,
+      room: 0,
+      classItem: 0,
+    },
+    colors: {
+      conflicts: {
+        notSet: {
+          subject: "#708090",
+          professor: "#8090A0",
+          demand: "#90A0B0",
+        },
+        noProblem: {
+          subject: "#000000",
+          professor: "#84D47D",
+          demand: "#008B45",
+        },
+        hasConflict: {
+          subject: "#000000",
+          professor: "#000000",
+          demand: "#DD3333",
+        },
+        levels: {
+          level0: "#008B45",
+          level1: "#D7B740",
+          level2: "#D77A61",
+          level3: "#8B0000",
+          levelDefault: "#708090",
+        },
+      },
+      locker: {
+        locked: "#000000",
+        unlocked: "#708090",
+      },
+      CRUD: {
+        default: "#000000",
+        create: "#008B45",
+        read: "#708090",
+        update: "#D7B740",
+        delete: "#D77A61",
+      },
+    },
+  },
+  SelectStyles: {
+    fullWidth: {
+      menu: ({ width, ...css }) => ({ ...css }),
+    },
+    fixedWidth: {
+      menu: ({ width, ...css }) => ({ ...css, width: 300 }),
+    },
+    fullItem: {
+      control: (css) => ({
+        ...css,
+        width: "100%",
+      }),
+      menu: (css) => ({
+        ...css,
+        minWidth: "max-content",
+        zIndex: 2,
+      }),
+      option: (css) => ({
+        ...css,
+        width: "100%",
+      }),
+    },
+  },
+  conflicts: {
+    professorAlloc: {
+      weight: 1,
+      name: "Alocação simultânea de professores",
+    },
+    roomAlloc: {
+      weight: 1,
+      name: "Alocação simultânea de Salas",
+    },
+    roomCapacity: {
+      weight: 1,
+      name: "Capacidade de sala insuficiente pra demanda",
+    },
+    professorPreferences: {
+      weight: 1,
+      name: "Preferência de Dia/Horário não atendida",
+    },
+    professorSubjectPreferences: {
+      weight: 1,
+      name: "Preferência de disciplina não atendida",
+    },
+  },
   yetUnusedValues: {
     centros: [
       { value: "CBB", label: "Centro de Biociências e Biotecnologia" },
@@ -421,104 +519,6 @@ const options = {
       },
       { centro: "CCTA", apelido: "LFIT", nome: "Laboratório de Fitotecnia" },
     ],
-  },
-  AWS: {
-    fullEndpoint:
-      "https://ey1h94aard.execute-api.us-east-2.amazonaws.com/timetablingStage/",
-  },
-  config: {
-    iconButtons: true,
-    defaultIndexes: {
-      year: 13,
-      semester: 1,
-      professor: 0,
-      student: 0,
-      subject: 0,
-      room: 0,
-      classItem: 0,
-    },
-    colors: {
-      conflicts: {
-        notSet: {
-          subject: "#708090",
-          professor: "#8090A0",
-          demand: "#90A0B0",
-        },
-        noProblem: {
-          subject: "#000000",
-          professor: "#84D47D",
-          demand: "#008B45",
-        },
-        hasConflict: {
-          subject: "#000000",
-          professor: "#000000",
-          demand: "#DD3333",
-        },
-        levels: {
-          level0: "#008B45",
-          level1: "#D7B740",
-          level2: "#D77A61",
-          level3: "#8B0000",
-          levelDefault: "#708090",
-        },
-      },
-      locker: {
-        locked: "#000000",
-        unlocked: "#708090",
-      },
-      CRUD: {
-        default: "#000000",
-        create: "#008B45",
-        read: "#708090",
-        update: "#D7B740",
-        delete: "#D77A61",
-      },
-    },
-  },
-  SelectStyles: {
-    fullWidth: {
-      menu: ({ width, ...css }) => ({ ...css }),
-    },
-    fixedWidth: {
-      menu: ({ width, ...css }) => ({ ...css, width: 300 }),
-    },
-    fullItem: {
-      control: (css) => ({
-        ...css,
-        width: "100%",
-      }),
-      menu: (css) => ({
-        ...css,
-        minWidth: "max-content",
-        zIndex: 2,
-      }),
-      option: (css) => ({
-        ...css,
-        width: "100%",
-      }),
-    },
-  },
-  conflicts: {
-    professorAlloc: {
-      weight: 1,
-      name: "Alocação simultânea de professores",
-    },
-    roomAlloc: {
-      weight: 1,
-      name: "Alocação simultânea de Salas",
-    },
-    roomCapacity: {
-      weight: 1,
-      name: "Capacidade de sala insuficiente pra demanda",
-    },
-    professorPreferences: {
-      weight: 1,
-      name: "Preferência de Dia/Horário não atendida",
-    },
-    professorSubjectPreferences: {
-      weight: 1,
-      name: "Preferência de disciplina não atendida",
-    },
   },
 };
 

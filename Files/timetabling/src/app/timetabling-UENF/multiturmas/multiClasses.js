@@ -1,18 +1,18 @@
 import "./multiTurmas.css";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { SmartCreateClassItem } from "../../../components/Buttons/Smart/Smart";
+import { MultiClassesFilters } from "../../../components/Filters/Filters";
+import { readClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
+import ClassesTable from "../../../components/ClassItemTable/ClassItemTable";
+import NotOfferedSubjects from "../../../components/multiClasses/NotOfferedSubjects";
 import {
   createClass,
   readClass,
 } from "../../../helpers/CRUDFunctions/classCRUD";
-import { MultiClassesFilters } from "../../../components/Filters/Filters";
-import { readClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
 import {
   getDefaultClassItem,
   getDefaultClassTime,
 } from "../../../helpers/auxCRUD";
-import ClassesTable from "../../../components/ClassItemTable/ClassItemTable";
-import NotOfferedSubjects from "../../../components/multiClasses/NotOfferedSubjects";
 
 function MultiClassesCardHeader(globalStates) {
   return (
