@@ -540,6 +540,8 @@ function SelectFilterExpectedSemester({
 
 /* /\ /\ /\ /\ /\ /\ /\ /\ NEW FILTER GENERATION /\ /\ /\ /\ /\ /\ /\ /\ */
 
+/* \\ MultiClasses // */
+
 /* \\ CRUD // */
 
 /* \ ClassTimes / */
