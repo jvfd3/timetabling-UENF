@@ -17,8 +17,8 @@ function getAxios() {
     testing(itemToSend, itemName, "creat");
     const localUrl = url + itemName; // I may need to change this slash
     const dataToSend = { newItem: itemToSend };
-    console.log("dataToSend", dataToSend);
-    console.log("localUrl", localUrl);
+    isDebugging && console.log("dataToSend", dataToSend);
+    isDebugging && console.log("localUrl", localUrl);
     return await axios.post(localUrl, dataToSend);
   }
   async function readTest(itemName = null, itemToSend = null) {
