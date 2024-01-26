@@ -1,5 +1,5 @@
 import "./ClassItemTable.css";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { baseClassItemConflicts } from "../../helpers/conflicts/centralConflicts";
 import { NumberInputMultiClassesExpectedDemand } from "../MyTextFields";
 import { SelectClassProfessor, SelectClassSubject } from "../mySelects";
@@ -51,6 +51,7 @@ function ClassItemTableRow(classItemRowStates) {
   const CRUDClassItemProps = {
     classItem,
     oldClassItem,
+    setOldClassItem,
     deleteClassItemDB: () => deleteClass(classItemRowStates),
     updateClassItemDB: () => updateClass(classItemRowStates),
   };

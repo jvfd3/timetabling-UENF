@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
-import { getId } from "../helpers/auxCRUD";
+import { getId, replaceNewItemInListById } from "../helpers/auxCRUD";
 
 /* DEFAULT TEXTINPUT */
 
@@ -32,8 +32,10 @@ function TextInputDefault(myStates) {
       newValue = numericValueFilter(newValue);
     }
     const newItem = getNewItemObject(newValue);
+    const newItems = replaceNewItemInListById(newItem, items);
     setMainProp(newValue);
     setItem(newItem);
+    setItems(newItems);
   }
 
   const isId = title === "ID";

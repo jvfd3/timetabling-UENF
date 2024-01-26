@@ -56,7 +56,9 @@ function SmartCreateClassItem(createStates) {
   return <CreateItem createFunc={createClassItemInDB} text={titleText} />;
 }
 
-function SmartUpdateClassItem({ classItem, updateClassItemDB, oldClassItem }) {
+function SmartUpdateClassItem(updateClassItemProps) {
+  const { classItem, updateClassItemDB, oldClassItem, setOldClassItem } =
+    updateClassItemProps;
   const date = `${classItem?.ano}.${classItem?.semestre}`;
   const classItemId = ` ${date} (id: ${getId(classItem)})\n`;
 
@@ -120,7 +122,7 @@ function SmartUpdateClassItem({ classItem, updateClassItemDB, oldClassItem }) {
   function smartUpdateClassItem() {
     setNeedsUpdateStatus(false);
     setModifiedMessage(dontUpdateMessage);
-    // oldClassItem.current = classItem;
+    setOldClassItem(classItem); // Maybe unnecessary
     updateClassItemDB();
   }
 
