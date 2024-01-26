@@ -249,16 +249,82 @@ function isConflict(conflicts, classTimeId) {
   return;
 }
 
+function getNullClassTimeConflicts(classTime) {
+  const foundNullProps = {
+    room: classTime?.sala === null,
+    day: classTime?.dia === null,
+    hour: classTime?.horaInicio === null,
+    duration: classTime?.duracao === null,
+  };
+  return foundNullProps;
+}
+
+function setNullStyles(conflictStyles, classTime) {
+  const isNull = getNullClassTimeConflicts(classTime);
+  const notSetTexts = {
+    room: "Sala não definida",
+    day: "Dia não definido",
+    hour: "Hora não definida",
+    duration: "Duração não definida",
+  };
+  if (isNull.room) {
+    conflictStyles.classRoom = {
+      title: notSetTexts.room,
+      style: { backgroundColor: options.config.colors.conflicts.notSet.room },
+    };
+  }
+  if (isNull.day) {
+    conflictStyles.day = {
+      title: notSetTexts.day,
+      style: { backgroundColor: options.config.colors.conflicts.notSet.day },
+    };
+  }
+  if (isNull.hour) {
+    conflictStyles.hour = {
+      title: notSetTexts.hour,
+      style: { backgroundColor: options.config.colors.conflicts.notSet.hour },
+    };
+  }
+  if (isNull.duration) {
+    conflictStyles.duration = {
+      title: notSetTexts.duration,
+      style: {
+        backgroundColor: options.config.colors.conflicts.notSet.duration,
+      },
+    };
+  }
+  /*
+    const keys = ['room', 'day', 'hour', 'duration'];
+
+    keys.forEach((key) => {
+      if (isNull[key]) {
+        conflictStyles[key] = {
+          title: notSetTexts[key],
+          style: { backgroundColor: options.config.colors.conflicts.notSet[key] },
+        };
+      }
+    });
+  */
+  return conflictStyles;
+}
+
 function classTimeConflicts(conflicts, classTime) {
-  const conflictStyles = {
-    day: {},
-    hour: {},
+  let conflictStyles = {
+    hour: {
+      title: "Nenhum conflito encontrado",
+      style: { backgroundColor: "" },
+    },
+    day: {
+      title: "Nenhum conflito encontrado",
+      style: { backgroundColor: "" },
+    },
     classRoom: {
-      title: "Sala",
+      title: "Nenhum conflito encontrado",
       style: { backgroundColor: "" },
     },
     duration: {
       title: "Conflito de duração ainda não implementado",
+      style: { backgroundColor: "" },
     },
   };
 
@@ -282,6 +348,8 @@ function classTimeConflicts(conflicts, classTime) {
   if (hasDemandConflict) {
     conflictStyles.classRoom = conflicts.styled.demand;
   }
+
+  conflictStyles = setNullStyles(conflictStyles, classTime);
 
   return conflictStyles;
 }

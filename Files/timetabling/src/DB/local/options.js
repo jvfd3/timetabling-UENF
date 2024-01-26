@@ -286,7 +286,7 @@ const options = {
     iconButtons: true,
     defaultIndexes: {
       year: 13,
-      semester: 1,
+      semester: 0,
       professor: 0,
       student: 0,
       subject: 0,
@@ -299,6 +299,10 @@ const options = {
           subject: "#708090",
           professor: "#8090A0",
           demand: "#90A0B0",
+          room: "#A0B0C0",
+          day: "#B0C0D0",
+          hour: "#C0D0E0",
+          duration: "#D0E0F0",
         },
         noProblem: {
           subject: "#000000",
