@@ -24,7 +24,7 @@ function ClassTimeRow(classTimeRowStates) {
   const { classTime, conflicts } = classTimeRowStates;
 
   const classTimeVisualConflicts = classTimeConflicts(conflicts, classTime);
-  console.log("classTimeVisualConflicts", classTimeVisualConflicts);
+  // console.log("classTimeVisualConflicts", classTimeVisualConflicts);
 
   const CRUDClassTimeProps = {
     classTime,
