@@ -1,6 +1,14 @@
 import options from "../../DB/local/options";
 import { getId } from "../auxCRUD";
 
+const defaultTitles = {
+  base: "Conflitos de alocação de sala avaliados:\n",
+  alloc: "✅ Sem conflitos de alocação de sala\n",
+  demand: "✅ Sem conflitos de demanda de sala\n",
+  notSet: "✅ Sem conflitos de sala não definida\n",
+  notSetConflict: "❌ Conflito: Sala não definida\n",
+};
+
 function getAllocFormat(conflictObject) {
   const { type, to } = conflictObject;
   let allocFormat = {};
@@ -25,10 +33,7 @@ function getAllocStyledConflict(conflicts, classTime) {
   const allocConflict = conflicts.raw.room.alloc;
   const classTimeId = getId(classTime);
   const hasConflict = allocConflict.length > 0;
-  const defaultAllocStyle = {
-    title: "✅ Sem conflitos de alocação múltipla de sala\n",
-    style: {},
-  };
+  const defaultAllocStyle = { title: defaultTitles.alloc, style: {} };
 
   let actualConflict = false;
   let allocConflictStyle = null;
@@ -50,14 +55,12 @@ function getAllocStyledConflict(conflicts, classTime) {
 }
 
 function getRoomDefaultStyle() {
-  const defaultTitle = "Conflitos de alocação de sala avaliados:\n";
-
   const defaultStyle = {
-    title: defaultTitle,
+    title: defaultTitles.base,
     style: {
       backgroundColor: options.config.colors.conflicts.noProblem.room,
-      borderColor: "white",
-      borderWidth: "5px",
+      // borderColor: "white",
+      // borderWidth: "5px",
     },
   };
   return defaultStyle;
@@ -72,10 +75,7 @@ function getDemandStyledConflict(conflicts, classTime) {
     (conflict) => conflict?.idClassTime === classTimeId
   );
 
-  const defaultDemandStyle = {
-    title: "✅ Sem conflitos de demanda de sala\n",
-    style: {},
-  };
+  const defaultDemandStyle = { title: defaultTitles.demand, style: {} };
 
   const conflictDemandStyle = {
     ...conflicts.styled.demand,
@@ -89,13 +89,10 @@ function getDemandStyledConflict(conflicts, classTime) {
 }
 
 function getNullStyledConflict(classTime) {
-  const defaultNullStyle = {
-    title: "✅ Sem conflitos de sala não definida\n",
-    style: {},
-  };
+  const defaultNullStyle = { title: defaultTitles.notSet, style: {} };
 
   const conflictNullStyle = {
-    title: "❌ Conflito: Sala não definida\n",
+    title: defaultTitles.notSetConflict,
     style: {
       backgroundColor: options.config.colors.conflicts.notSet.room,
     },
