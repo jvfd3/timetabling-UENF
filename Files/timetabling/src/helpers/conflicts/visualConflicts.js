@@ -1,5 +1,6 @@
 import options from "../../DB/local/options";
 import { getId } from "../auxCRUD";
+import { getRoomStyledConflict } from "./roomAllocVisual";
 
 let baseStyle = {
   title: "Conflitos Professor",
@@ -199,7 +200,7 @@ function getDemandStyledConflict(conflicts, classItem) {
   let numberOfConflicts = demandConflicts.length;
   if (numberOfConflicts > 0) {
     newColor = options.config.colors.conflicts.hasConflict.demand;
-    titleMessage = `Há ${numberOfConflicts} conflitos de demanda.`;
+    titleMessage = `❌ Conflito: demanda X capacidade.\n\t- Há ${numberOfConflicts} conflitos de demanda.`;
     let surplus = 0;
     demandConflicts.forEach((iterConflict) => {
       // console.log("iterConflict", iterConflict);
@@ -210,10 +211,10 @@ function getDemandStyledConflict(conflicts, classItem) {
       let idRoom = iterConflict.idRoom;
       let idClassTime = iterConflict.idClassTime;
       let idClass = iterConflict.idClass;
-      titleMessage += `\n\t- Sobraram ${diff} alunos `;
+      titleMessage += `\n\t-- Sobraram ${diff} alunos `;
       titleMessage += `na Sala ${idRoom} `;
       titleMessage += `do Horário ${idClassTime} `;
-      titleMessage += `da Turma ${idClass}`;
+      titleMessage += `da Turma ${idClass}\n`;
     });
     // titleMessage += `\nNo pior caso ${surplus} alunos ficam de fora`;
   }
@@ -308,17 +309,13 @@ function setNullStyles(conflictStyles, classTime) {
   return conflictStyles;
 }
 
-function classTimeConflicts(conflicts, classTime) {
+function oldClassTimeConflicts(conflicts, classTime) {
   let conflictStyles = {
     hour: {
       title: "Nenhum conflito encontrado",
       style: { backgroundColor: "" },
     },
     day: {
-      title: "Nenhum conflito encontrado",
-      style: { backgroundColor: "" },
-    },
-    classRoom: {
       title: "Nenhum conflito encontrado",
       style: { backgroundColor: "" },
     },
@@ -335,22 +332,20 @@ function classTimeConflicts(conflicts, classTime) {
     (conflict) => conflict?.from?.idHorario === classTimeId
   );
 
-  const singleDemandConflicts =
-    conflicts.raw.expectedDemand.singleTurmaCapacity;
-  const hasDemandConflict = singleDemandConflicts.some(
-    (conflict) => conflict?.idClassTime === classTimeId
-  );
-
   if (hasProfessorConflict) {
     conflictStyles.day = conflicts.styled.professor;
     conflictStyles.hour = conflicts.styled.professor;
   }
-  if (hasDemandConflict) {
-    conflictStyles.classRoom = conflicts.styled.demand;
-  }
 
   conflictStyles = setNullStyles(conflictStyles, classTime);
 
+  return conflictStyles;
+}
+
+function classTimeConflicts(conflicts, classTime) {
+  let conflictStyles = oldClassTimeConflicts(conflicts, classTime);
+  conflictStyles.room = getRoomStyledConflict(conflicts, classTime);
+  // console.log("conflictStyles", conflictStyles);
   return conflictStyles;
 }
 

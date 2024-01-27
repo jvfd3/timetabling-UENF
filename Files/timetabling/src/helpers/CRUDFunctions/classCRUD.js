@@ -82,9 +82,9 @@ function deleteClass({ classes, setClasses, classItem, setClassItem }) {
       } else if (filteredClasses.length > 0) {
         newItem = classes[0];
       } else {
-        console.error(
-          "deleteClass: Não há mais classes para serem exibidas na lista"
-        );
+        const errorMessage =
+          "deleteClass: Não há mais classes para serem exibidas na lista";
+        console.error(errorMessage);
       }
       // const newItem = options.emptyObjects.classItem;
       setClassItem(newItem);

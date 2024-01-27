@@ -10,7 +10,6 @@ function searchSameDayAndHour(flatTurmas, horario) {
       horaInicio: 8,
       idHorario: 1,
       idTurma: 1,
-      ordem: 1,
     },
     {
       dia: "QUA",
@@ -18,7 +17,6 @@ function searchSameDayAndHour(flatTurmas, horario) {
       horaInicio: 8,
       idHorario: 2,
       idTurma: 1,
-      ordem: 2,
     },
     {
       dia: "TER",
@@ -26,7 +24,6 @@ function searchSameDayAndHour(flatTurmas, horario) {
       horaInicio: 8,
       idHorario: 3,
       idTurma: 2,
-      ordem: 1,
     },
     {
       dia: "QUI",
@@ -34,7 +31,6 @@ function searchSameDayAndHour(flatTurmas, horario) {
       horaInicio: 8,
       idHorario: 4,
       idTurma: 2,
-      ordem: 2,
     },
   ]
   Essa função deve reconhecer os valores de hora início, dia e duração do horário passado como parâmetro para verificar se há conflitos com o horário de cada um dos horários da lista.

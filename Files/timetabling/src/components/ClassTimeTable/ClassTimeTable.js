@@ -24,6 +24,7 @@ function ClassTimeRow(classTimeRowStates) {
   const { classTime, conflicts } = classTimeRowStates;
 
   const classTimeVisualConflicts = classTimeConflicts(conflicts, classTime);
+  console.log("classTimeVisualConflicts", classTimeVisualConflicts);
 
   const CRUDClassTimeProps = {
     classTime,
@@ -39,7 +40,7 @@ function ClassTimeRow(classTimeRowStates) {
         <SmartDeleteClassTime {...CRUDClassTimeProps} />
         <SmartUpdateClassTime {...CRUDClassTimeProps} />
       </td>
-      <td {...classTimeVisualConflicts.classRoom}>
+      <td {...classTimeVisualConflicts.room}>
         <SelectClassTimeRoom {...classTimeRowStates} />
       </td>
       <td {...classTimeVisualConflicts.day}>

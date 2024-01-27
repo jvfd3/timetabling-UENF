@@ -11,6 +11,7 @@ import {
 import { getStyledConflict } from "./visualConflicts";
 import { getId } from "../auxCRUD";
 import { filterProfessor } from "../filteringFunc";
+import { conflictRoom } from "./roomAlloc";
 
 /*
 ## Visualizar conflitos impeditivos #30
@@ -357,11 +358,11 @@ function conflictDemand(turmas, classData) {
 
 function baseClassItemConflicts(classes, classItem, semester = 3) {
   const myClassConflicts = {};
-  const cleanedTurmas = cleanClasses(classes, classItem);
+  const cleanedTurmas = cleanClasses(classes, classItem); // This should be inside conflictsProfessor
   // console.log("cleanedTurmas", cleanedTurmas);
   myClassConflicts.professor = conflictsProfessor(cleanedTurmas, classItem);
-
   myClassConflicts.expectedDemand = conflictDemand(classes, classItem);
+  myClassConflicts.room = conflictRoom(classes, classItem);
 
   // console.log("myClassConflicts", myClassConflicts.professor);
   const styledConflict = getStyledConflict(
@@ -419,6 +420,7 @@ function baseClassItemConflicts(classes, classItem, semester = 3) {
 
     O que eu desejo é que, caso o horário que está sendo renderizado esteja em conflito com algum outro horário, ele seja colorido. Para isso, deve-se comprar o idHorario do horário que está sendo renderizado cada um dos idHorario do professorConflicts.to. Caso haja um match, o horário deve ser colorido.
   */
+
   return conflicts;
 }
 
