@@ -1,11 +1,12 @@
 import "./salas.css";
-import { useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
+import { useState } from "react";
 import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
 import { SelectRoomItem, SelectRoomBlock } from "../../../components/mySelects";
 import { getClassesData } from "../../../DB/retrieveData";
-import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
+import { splitTurmas } from "../../../helpers/conflicts/auxConflictFunctions";
+import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
 import {
   TextInputRoomCapacity,
   TextInputRoomCode,
@@ -18,7 +19,6 @@ import {
   updateRoom,
   deleteRoom,
 } from "../../../helpers/CRUDFunctions/roomCRUD";
-import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
 
 function RoomSelection(roomStates) {
   const roomCRUDFunctions = {

@@ -24,8 +24,8 @@ function getRoomAllocMessage(conflictObject) {
 }
 
 function getRoomAllocConflict(conflicts, classTime) {
+  console.log("getRoomAllocConflict", conflicts);
   const allocConflict = conflicts.raw.room.alloc;
-  // console.log("getRoomAllocConflict", allocConflict);
 
   if (allocConflict.length > 0) {
     const classTimeId = getId(classTime);

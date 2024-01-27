@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { getClassesData } from "../../../DB/retrieveData";
-import { splitTurmas } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
+import { splitTurmas } from "../../../helpers/conflicts/auxConflictFunctions";
 import { filterDay, filterHour } from "../../../helpers/filteringFunc";
 import { CCTableFilters } from "../../../components/Filters/Filters";
 

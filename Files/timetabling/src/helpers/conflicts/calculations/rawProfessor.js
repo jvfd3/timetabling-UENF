@@ -1,8 +1,11 @@
 import options from "../../../DB/local/options";
 import { getId } from "../../auxCRUD";
 import { filterProfessor } from "../../filteringFunc";
-import { splitTurmas } from "../auxiliarConflictsFunctions";
-import { filterOverlappingClasses } from "./rawRoom";
+import {
+  splitTurmas,
+  removeSameId,
+  filterOverlappingClasses,
+} from "../auxConflictFunctions";
 
 function getOnlyNeededValues(splittedClasses) {
   const cleanedClasses = splittedClasses
@@ -20,11 +23,6 @@ function getOnlyNeededValues(splittedClasses) {
       return { id, professor, dia, horaInicio, duracao, idTurma };
     }); // Get only the values needed
   return cleanedClasses;
-}
-
-function removeSameId(classes, id) {
-  const filteredClasses = classes.filter((iterClass) => iterClass.id !== id);
-  return filteredClasses;
 }
 
 function getTargetClasses(filteredClasses) {

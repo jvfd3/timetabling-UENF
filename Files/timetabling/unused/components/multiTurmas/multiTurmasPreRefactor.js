@@ -10,7 +10,7 @@ import {
   SelectDuracao,
   SelectAnoSemestre,
 } from "../../../components/mySelects";
-import { flattenTurma } from "../../../helpers/conflicts/auxiliarConflictsFunctions";
+import { flattenTurma } from "../../../helpers/conflicts/auxConflictFunctions";
 import "./multiTurmas.css";
 import { readTurmas } from "../../../DB/AWS/axiosConnection";
 import { splittedToUnified } from "../../../helpers/auxFunctions";
