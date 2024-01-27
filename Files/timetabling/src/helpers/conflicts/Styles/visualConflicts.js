@@ -1,107 +1,10 @@
-import options from "../../DB/local/options";
-import { getId } from "../auxCRUD";
-import { getRoomStyledConflict } from "./roomAllocVisual";
+import options from "../../../DB/local/options";
+import { getId } from "../../auxCRUD";
+import { getDurationStyledConflict } from "./styleDuration";
+import { getProfessorStyledConflict } from "./styleProfessor";
+import { getRoomStyledConflict } from "./styleRoom";
 
-let baseStyle = {
-  title: "Conflitos Professor",
-  style: {
-    backgroundColor: options.config.colors.conflicts.noProblem.professor,
-  },
-};
-
-function getColorByLevel(conflictLevel) {
-  let color = "";
-  switch (conflictLevel) {
-    case 0:
-      color = options.config.colors.conflicts.levels.level0;
-      break;
-    case 1:
-      color = options.config.colors.conflicts.levels.level1;
-      break;
-    case 2:
-      color = options.config.colors.conflicts.levels.level2;
-      break;
-    case 3:
-      color = options.config.colors.conflicts.levels.level3;
-      break;
-    default:
-      color = options.config.colors.conflicts.levels.levelDefault;
-      break;
-  }
-  return color;
-}
-
-/* Professor \/ */
-
-function getProfessorAllocConflictMessage(profConflicts) {
-  // console.log(profConflicts);
-  let message = "";
-  profConflicts.forEach((conflito) => {
-    message += `"${conflito.type.name}", `;
-    message += `${conflito.time.day} às ${conflito.time.hour}h, com as turmas:\n`;
-    conflito.to.forEach((turmaConflituosa) => {
-      message += `--- Turma: ${turmaConflituosa.idTurma}, `;
-      message += `horário: ${getId(turmaConflituosa)}\n`;
-    });
-  });
-  return message;
-}
-
-function getProfessorStyledConflict(conflicts, classItem) {
-  /*  Posso fazer isso de algumas formas:
-- Mais simples:
-  - Se a lista de conflitos existir: vermelho.
-- Mais preciso:
-  - Contar a quantidade de conflitos e deixar cada vez mais vermelho conforme a quantidade de conflitos aumenta.
-- Mais preciso ainda:
-  - Contar a quantidade de conflitos e multiplicar pelo peso de cada conflito.
-  */
-  let profConflicts = conflicts.professor.alloc;
-  // console.log("profConflicts", profConflicts);
-  let size = profConflicts.length;
-  let profConflictsLevel = size > 0 ? 3 : 0;
-
-  let currentStyle = { ...baseStyle };
-
-  let color = getColorByLevel(profConflictsLevel);
-  currentStyle.style = { backgroundColor: color };
-  currentStyle.title = "Sem conflitos de alocação múltipla de professor";
-
-  // console.log("profConflicts", profConflicts);
-
-  /*
-- Se hover conflitos:
-  - Para cada conflito:
-    - adicionar à mensagem de conflito o dia e hora do conflito que está em conflito.time.day e conflito.time.hour
-      - Exemplo: mensagem = `${conflito.time.day} às ${conflito.time.hour} `
-    - adicionar à mensagem de conflito o nome do conflito que está em conflito.type.name
-      - Exemplo: mensagem `há o conflito "${conflito.type.name}"`
-    - adicionar à mensagem de conflito o códigos de turma e horario que estão em conflito.
-      - Os horários de mesma turma devem estar agrupados.
-        Ex.: "com as turmas: ${JSON.stringify(conflito.to)}."
-  - definir o currentStyle.title como mensagem
-*/
-
-  const hasProfessor = classItem.professor !== null;
-  if (!hasProfessor) {
-    currentStyle.title = "Professor não definido";
-    currentStyle.style = {
-      backgroundColor: options.config.colors.conflicts.notSet.professor,
-    };
-  }
-
-  let mensagem = getProfessorAllocConflictMessage(profConflicts);
-  if (mensagem !== "") {
-    currentStyle.title = mensagem;
-  }
-
-  // console.log("currentStyle", currentStyle);
-  return currentStyle;
-}
-
-/* Professor /\ */
-
-/* Disciplina \/ */
+/* \/ Subject \/ */
 
 function checkCorrectPeriodParity(expectedSemester, currentSemester) {
   const evenSubjectOnEvenSemester =
@@ -185,7 +88,9 @@ function getSubjectStyledConflict(turma, semestreAtual) {
   return subjectStyle;
 }
 
-/* Disciplina /\ */
+/* \/ Subject /\ */
+
+/* \/ Demand \/ */
 
 function getDemandStyledConflict(conflicts, classItem) {
   // console.log("classItem", classItem);
@@ -230,24 +135,14 @@ function getDemandStyledConflict(conflicts, classItem) {
   return demandStyle;
 }
 
-/* Demand /\ */
+/* \/ Demand /\ */
 
-function getStyledConflict(conflicts, classItem, semester) {
+function getStyledItemConflict(conflicts, classItem, semester) {
   let myClassConflicts = {};
-  myClassConflicts.demanda = {
-    title: "Conflitos Demanda",
-    style: {
-      backgroundColor: options.config.colors.conflicts.hasConflict.demand,
-    },
-  };
   myClassConflicts.disciplina = getSubjectStyledConflict(classItem, semester);
   myClassConflicts.professor = getProfessorStyledConflict(conflicts, classItem);
   myClassConflicts.demand = getDemandStyledConflict(conflicts, classItem);
   return myClassConflicts;
-}
-
-function isConflict(conflicts, classTimeId) {
-  return;
 }
 
 function getNullClassTimeConflicts(classTime) {
@@ -319,10 +214,6 @@ function oldClassTimeConflicts(conflicts, classTime) {
       title: "Nenhum conflito encontrado",
       style: { backgroundColor: "" },
     },
-    duration: {
-      title: "Conflito de duração ainda não implementado",
-      style: { backgroundColor: "" },
-    },
   };
 
   const classTimeId = getId(classTime);
@@ -343,10 +234,16 @@ function oldClassTimeConflicts(conflicts, classTime) {
 }
 
 function classTimeConflicts(conflicts, classTime) {
-  let conflictStyles = oldClassTimeConflicts(conflicts, classTime);
-  conflictStyles.room = getRoomStyledConflict(conflicts, classTime);
+  let conflictStyles = {};
+  conflictStyles.old1 = conflicts;
+  conflictStyles.old2 = oldClassTimeConflicts(conflictStyles.old1, classTime);
+  conflictStyles.room = getRoomStyledConflict(conflictStyles.old1, classTime);
+  conflictStyles.duration = getDurationStyledConflict(
+    conflictStyles,
+    classTime
+  );
   // console.log("conflictStyles", conflictStyles);
   return conflictStyles;
 }
 
-export { getStyledConflict, classTimeConflicts };
+export { getStyledItemConflict, classTimeConflicts };

@@ -1,6 +1,6 @@
-import options from "../../DB/local/options";
-import { filterDay, filterRoom } from "../filteringFunc";
-import { splitTurmas } from "./auxiliarConflictsFunctions";
+import options from "../../../DB/local/options";
+import { filterDay, filterRoom } from "../../filteringFunc";
+import { splitTurmas } from "../auxiliarConflictsFunctions";
 
 function getOnlyNeededValues(splittedClasses) {
   const cleanedClasses = splittedClasses
@@ -60,26 +60,41 @@ function filterHourDuration(classes, classItem) {
   return filteredClasses;
 }
 
-function getOverlappingClasses(classes, classItem) {
+function filterOverlappingClasses(classes, classItem) {
   let filteredClasses = classes;
-  filteredClasses = removeSameId(filteredClasses, classItem.id); // Remove the classItem from the list
-  filteredClasses = filterRoom(filteredClasses, classItem.sala); // Get only classes with the same room
   filteredClasses = filterDay(filteredClasses, classItem.dia); // Get only classes with the same day
   filteredClasses = filterHourDuration(filteredClasses, classItem); // Get only classes with overlapping hours
   return filteredClasses;
 }
 
 function getAllocRoomConflictObject(classes, classItem) {
-  const overlappingClasses = getOverlappingClasses(classes, classItem);
-  const hasOverlappingClasses = overlappingClasses.length > 0;
+  let filteredClasses = classes;
+  filteredClasses = removeSameId(filteredClasses, classItem.id); // Remove the classItem from the list
+  filteredClasses = filterRoom(filteredClasses, classItem.sala); // Get only classes with the same room
+  filteredClasses = filterOverlappingClasses(filteredClasses, classItem); // Get only classes with the same day
+
+  const hasOverlappingClasses = filteredClasses.length > 0;
 
   const allocConflictObject = {
     type: options.conflicts.roomAlloc,
     from: { ...classItem },
-    to: hasOverlappingClasses ? overlappingClasses : null,
+    to: hasOverlappingClasses ? filteredClasses : null,
   };
 
   return allocConflictObject;
+}
+
+function getAllocConflictObjects(classes, classItems) {
+  let allocConflict = [];
+
+  classItems.forEach((classItem) => {
+    const allocConflictObject = getAllocRoomConflictObject(classes, classItem);
+    if (allocConflictObject.to !== null) {
+      allocConflict.push(allocConflictObject);
+    }
+  });
+
+  return allocConflict;
 }
 
 function conflictRoom(classes, classItem) {
@@ -89,17 +104,11 @@ function conflictRoom(classes, classItem) {
   const cleanClassItems = getOnlyNeededValues(splittedClassItems);
   const cleanClasses = getOnlyNeededValues(splittedClasses);
 
-  const roomConflicts = { alloc: [] };
+  const roomConflicts = {};
 
-  cleanClassItems.forEach((iterClassItem) => {
-    const roomConflictObject = getAllocRoomConflictObject(
-      cleanClasses,
-      iterClassItem
-    );
-    roomConflicts.alloc.push(roomConflictObject);
-  });
+  roomConflicts.alloc = getAllocConflictObjects(cleanClasses, cleanClassItems);
 
   return roomConflicts;
 }
 
-export { conflictRoom };
+export { conflictRoom, filterOverlappingClasses };

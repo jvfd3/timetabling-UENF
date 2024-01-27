@@ -18,7 +18,7 @@ import {
   updateClassTime,
   deleteClassTime,
 } from "../../helpers/CRUDFunctions/classTimeCRUD";
-import { classTimeConflicts } from "../../helpers/conflicts/visualConflicts";
+import { classTimeConflicts } from "../../helpers/conflicts/Styles/visualConflicts";
 
 function ClassTimeRow(classTimeRowStates) {
   const { classTime, conflicts } = classTimeRowStates;

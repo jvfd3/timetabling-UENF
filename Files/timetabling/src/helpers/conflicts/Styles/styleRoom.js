@@ -1,5 +1,5 @@
-import options from "../../DB/local/options";
-import { getId } from "../auxCRUD";
+import options from "../../../DB/local/options";
+import { getId } from "../../auxCRUD";
 
 const defaultTitles = {
   base: "Conflitos de alocação de sala avaliados:\n",
@@ -9,9 +9,8 @@ const defaultTitles = {
   notSetConflict: "❌ Conflito: Sala não definida\n",
 };
 
-function getAllocFormat(conflictObject) {
+function getRoomAllocMessage(conflictObject) {
   const { type, to } = conflictObject;
-  let allocFormat = {};
   let conflictMessage = `❌ Conflito: ${type.name}\n`;
   conflictMessage += `\t- Horários sobrepostos: ${to.length}\n`;
 
@@ -21,35 +20,44 @@ function getAllocFormat(conflictObject) {
   });
 
   // console.log("conflictObject\n", conflictMessage);
-  allocFormat.title = conflictMessage;
-  allocFormat.style = {
-    borderColor: options.config.colors.conflicts.hasConflict.room,
-    borderWidth: "10px",
-  };
-  return allocFormat;
+  return conflictMessage;
 }
 
-function getAllocStyledConflict(conflicts, classTime) {
+function getRoomAllocConflict(conflicts, classTime) {
   const allocConflict = conflicts.raw.room.alloc;
-  const classTimeId = getId(classTime);
-  const hasConflict = allocConflict.length > 0;
-  const defaultAllocStyle = { title: defaultTitles.alloc, style: {} };
+  // console.log("getRoomAllocConflict", allocConflict);
 
-  let actualConflict = false;
-  let allocConflictStyle = null;
-
-  if (hasConflict) {
+  if (allocConflict.length > 0) {
+    const classTimeId = getId(classTime);
     const conflictObject = allocConflict.find(
       (iterConflict) => iterConflict.from.id === classTimeId
     );
-    const hasConflict2 = conflictObject?.to !== null;
-    if (hasConflict2) {
-      actualConflict = true;
-      allocConflictStyle = getAllocFormat(conflictObject);
+
+    if (conflictObject?.to !== null) {
+      return conflictObject;
     }
   }
 
-  let allocStyle = actualConflict ? allocConflictStyle : defaultAllocStyle;
+  return null;
+}
+
+function getAllocStyledConflict(conflicts, classTime) {
+  const defaultAllocStyle = { title: defaultTitles.alloc, style: {} };
+  const allocConflictStyle = {
+    title: "",
+    style: {
+      borderColor: options.config.colors.conflicts.hasConflict.room,
+      borderWidth: "10px",
+    },
+  };
+
+  const roomAllocConflict = getRoomAllocConflict(conflicts, classTime);
+  // console.log("roomAllocConflict", roomAllocConflict);
+  if (roomAllocConflict) {
+    allocConflictStyle.title = getRoomAllocMessage(roomAllocConflict);
+  }
+
+  const allocStyle = roomAllocConflict ? allocConflictStyle : defaultAllocStyle;
 
   return allocStyle;
 }
@@ -105,20 +113,25 @@ function getNullStyledConflict(classTime) {
 }
 
 function mergeStyles(styles) {
-  let newTitle = styles.default.title;
-  let newStyle = { ...styles.default.style };
+  let newTitle = "";
+  let newStyle = {};
 
-  if (styles.alloc !== null) {
+  if (styles.default) {
+    newTitle += styles.default.title;
+    newStyle = { ...newStyle, ...styles.default.style };
+  }
+
+  if (styles.alloc) {
     newTitle += styles.alloc.title;
     newStyle = { ...newStyle, ...styles.alloc.style };
   }
 
-  if (styles.demand !== null) {
+  if (styles.demand) {
     newTitle += styles.demand.title;
     newStyle = { ...newStyle, ...styles.demand.style };
   }
 
-  if (styles.notSet !== null) {
+  if (styles.notSet) {
     newTitle += styles.notSet.title;
     newStyle = { ...newStyle, ...styles.notSet.style };
   }
@@ -142,4 +155,4 @@ function getRoomStyledConflict(conflicts, classTime) {
   return roomStyles.merged;
 }
 
-export { getRoomStyledConflict };
+export { getRoomStyledConflict, getAllocStyledConflict };

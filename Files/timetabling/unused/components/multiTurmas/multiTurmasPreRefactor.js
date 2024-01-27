@@ -298,21 +298,6 @@ function Turmas3() {
                               currentTurma,
                               index
                             );
-                            // let conflicts = centralConflicts(
-                            //   lTurmas,
-                            //   tempLineTurma
-                            // );
-
-                            // console.log(
-                            //   "Turma",
-                            //   currentId,
-                            //   "Horario",
-                            //   index,
-                            //   "Dia:",
-                            //   conflicts.professor.dia,
-                            //   "Hora:",
-                            //   conflicts.professor.hora
-                            // );
                             return (
                               <tr
                                 key={`${id}-${horario.sala}-${horario.dia}-${horario.horaInicio}-${index}`}
