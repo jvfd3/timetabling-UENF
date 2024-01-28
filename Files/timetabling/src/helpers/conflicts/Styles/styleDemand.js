@@ -60,7 +60,8 @@ function getNullStyledConflict(demand) {
     },
   };
 
-  const hasDemand = demand !== null;
+  // const hasDemand = demand !== null && demand !== undefined; // verboser
+  const hasDemand = demand;
   const nullRoomStyle = hasDemand ? defaultNullStyle : conflictNullStyle;
 
   return nullRoomStyle;
