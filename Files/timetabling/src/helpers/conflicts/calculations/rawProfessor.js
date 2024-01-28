@@ -4,7 +4,7 @@ import { filterProfessor } from "../../filteringFunc";
 import {
   splitTurmas,
   removeSameId,
-  filterOverlappingClasses,
+  getOverlappingClasses,
   getTargetClasses,
 } from "../auxConflictFunctions";
 
@@ -30,7 +30,7 @@ function getAllocConflictObject(classes, classItem) {
   let filteredClasses = classes;
   filteredClasses = removeSameId(filteredClasses, classItem.id);
   filteredClasses = filterProfessor(filteredClasses, classItem.professor);
-  filteredClasses = filterOverlappingClasses(filteredClasses, classItem);
+  filteredClasses = getOverlappingClasses(filteredClasses, classItem);
 
   const allocConflict = {
     type: options.conflicts.professorAlloc,

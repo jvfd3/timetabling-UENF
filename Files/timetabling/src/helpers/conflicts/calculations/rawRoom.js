@@ -2,7 +2,7 @@ import options from "../../../DB/local/options";
 import { filterRoom } from "../../filteringFunc";
 import {
   splitTurmas,
-  filterOverlappingClasses,
+  getOverlappingClasses,
   removeSameId,
   getTargetClasses,
 } from "../auxConflictFunctions";
@@ -39,7 +39,7 @@ function getAllocRoomConflictObject(classes, classTime) {
   filteredClasses = removeSameId(filteredClasses, classTime.id); // Remove the classTime from the list
   // How should I deal with null rooms? 🤔
   filteredClasses = filterRoom(filteredClasses, classTime.sala); // Get only classes with the same room
-  filteredClasses = filterOverlappingClasses(filteredClasses, classTime); // Get only classes with the same day
+  filteredClasses = getOverlappingClasses(filteredClasses, classTime); // Get only classes with the same day
 
   const allocConflictObject = {
     type: options.conflicts.roomAlloc,

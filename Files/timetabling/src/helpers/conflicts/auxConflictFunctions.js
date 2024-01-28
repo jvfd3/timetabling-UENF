@@ -7,17 +7,17 @@ function removeSameId(classes, id) {
 }
 
 function compareHourDuration(hourDurationOrigin, hourDurationTarget) {
-  const { hourOrigin, durationOrigin } = hourDurationOrigin;
-  const { hourTarget, durationTarget } = hourDurationTarget;
+  const { originHour, originDuration } = hourDurationOrigin;
+  const { targetHour, targetDuration } = hourDurationTarget;
 
-  const originFinalHour = hourOrigin + durationOrigin;
-  const targetFinalHour = hourTarget + durationTarget;
+  const originFinalHour = originHour + originDuration;
+  const targetFinalHour = targetHour + targetDuration;
 
-  // const zeroDuration = durationOrigin === 0 || durationTarget === 0;
-  const zeroDuration = durationOrigin + durationTarget === 0;
+  // const zeroDuration = originDuration === 0 || targetDuration === 0;
+  const zeroDuration = originDuration + targetDuration === 0;
 
-  const originEndsBeforeTargetStarts = originFinalHour <= hourTarget;
-  const originStartsAfterTargetEnds = targetFinalHour <= hourOrigin;
+  const originEndsBeforeTargetStarts = originFinalHour <= targetHour;
+  const originStartsAfterTargetEnds = targetFinalHour <= originHour;
 
   const isValidSchedule =
     zeroDuration || originEndsBeforeTargetStarts || originStartsAfterTargetEnds;
@@ -25,17 +25,19 @@ function compareHourDuration(hourDurationOrigin, hourDurationTarget) {
   return isValidSchedule;
 }
 
-function filterHourDuration(classes, classItem) {
-  const classItemTime = {
-    originHour: classItem.horaInicio,
-    originDuration: classItem.duracao,
+function filterHourDuration(classes, classTime) {
+  const newClassTime = {
+    originHour: classTime.horaInicio,
+    originDuration: classTime.duracao,
   };
-  const filteredClasses = classes.filter((iterClass) => {
+  let filteredClasses = classes;
+
+  filteredClasses = filteredClasses.filter((iterClass) => {
     const iterClassTime = {
       targetHour: iterClass.horaInicio,
       targetDuration: iterClass.duracao,
     };
-    const isValidSchedule = compareHourDuration(classItemTime, iterClassTime);
+    const isValidSchedule = compareHourDuration(newClassTime, iterClassTime);
     return !isValidSchedule;
   });
 
@@ -53,7 +55,7 @@ function removeNullTimes(classes, classTime) {
   return filteredClasses;
 }
 
-function filterOverlappingClasses(classes, classTime) {
+function getOverlappingClasses(classes, classTime) {
   let filteredClasses = classes;
 
   filteredClasses = removeNullTimes(filteredClasses, classTime); // Remove classes with null times
@@ -125,7 +127,7 @@ function splitTurmas(turmas) {
 }
 
 export {
-  filterOverlappingClasses,
+  getOverlappingClasses,
   filterHourDuration,
   getTargetClasses,
   removeSameId,
