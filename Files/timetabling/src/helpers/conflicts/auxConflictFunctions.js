@@ -42,10 +42,24 @@ function filterHourDuration(classes, classItem) {
   return filteredClasses;
 }
 
-function filterOverlappingClasses(classes, classItem) {
+function removeNullTimes(classes, classTime) {
+  const hasTime = classTime.dia && classTime.horaInicio && classTime.duracao;
+  let filteredClasses = hasTime ? classes : [];
+
+  filteredClasses = filteredClasses.filter(
+    (iterClass) => iterClass.dia && iterClass.horaInicio && iterClass.duracao
+  );
+
+  return filteredClasses;
+}
+
+function filterOverlappingClasses(classes, classTime) {
   let filteredClasses = classes;
-  filteredClasses = filterDay(filteredClasses, classItem.dia); // Get only classes with the same day
-  filteredClasses = filterHourDuration(filteredClasses, classItem); // Get only classes with overlapping hours
+
+  filteredClasses = removeNullTimes(filteredClasses, classTime); // Remove classes with null times
+  filteredClasses = filterDay(filteredClasses, classTime.dia); // Get only classes with the same day
+  filteredClasses = filterHourDuration(filteredClasses, classTime); // Get only classes with overlapping hours
+
   return filteredClasses;
 }
 

@@ -21,10 +21,10 @@ import {
 } from "../../helpers/CRUDFunctions/classTimeCRUD";
 
 function ClassTimeRow(classTimeRowStates) {
-  const { classTime, conflicts, classes } = classTimeRowStates;
+  const { classTime, conflicts, filteredClasses } = classTimeRowStates;
 
   const classTimeConflicts = getClassTimeConflicts(
-    classes,
+    filteredClasses,
     classTime,
     conflicts
   );

@@ -54,7 +54,7 @@ function getRawTimeConflicts(classes, classTime) {
 
 function getStyledTimeConflict(timeConflicts, classTime) {
   const classTimeStyles = {};
-  console.log(classTime);
+  // console.log(classTime);
   classTimeStyles.room = getRoomStyledConflict(timeConflicts, classTime);
 
   classTimeStyles.day = getDayStyledConflict(classTimeStyles, classTime);

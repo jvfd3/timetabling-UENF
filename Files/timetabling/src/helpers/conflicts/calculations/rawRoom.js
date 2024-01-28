@@ -8,44 +8,58 @@ import {
 
 function getOnlyNeededValues(splittedClasses) {
   const cleanedClasses = splittedClasses
-    .filter(
-      (classItem) =>
-        classItem.dia &&
-        classItem.duracao &&
-        classItem.horaInicio &&
-        classItem.id &&
-        classItem.sala
-    ) // Get only classes with all values filled
+    // .filter(
+    //   (classItem) =>
+    //     classItem.dia &&
+    //     classItem.duracao &&
+    //     classItem.horaInicio &&
+    //     classItem.id
+    //   // && classItem.sala
+    // ) // Get only classes with all values filled
     .map((classItem) => {
       const { dia, duracao, horaInicio, id, sala } = classItem;
       return { id, sala, dia, horaInicio, duracao };
     }); // Get only the values needed
+  // console.log(cleanedClasses);
   return cleanedClasses;
 }
 
-function getAllocRoomConflictObject(classes, classItem) {
-  let filteredClasses = classes;
-  filteredClasses = removeSameId(filteredClasses, classItem.id); // Remove the classItem from the list
-  filteredClasses = filterRoom(filteredClasses, classItem.sala); // Get only classes with the same room
-  filteredClasses = filterOverlappingClasses(filteredClasses, classItem); // Get only classes with the same day
+function removeNullClass(classes, classTime) {
+  // There is no conflict if there is no room
+  const room = classTime.sala;
+  const newClasses = room ? classes : [];
+  return newClasses;
+}
 
-  const hasOverlappingClasses = filteredClasses.length > 0;
+function getAllocRoomConflictObject(classes, classTime) {
+  let filteredClasses = classes;
+
+  filteredClasses = removeNullClass(filteredClasses, classTime);
+  filteredClasses = removeSameId(filteredClasses, classTime.id); // Remove the classTime from the list
+  // How should I deal with null rooms? 🤔
+  filteredClasses = filterRoom(filteredClasses, classTime.sala); // Get only classes with the same room
+  filteredClasses = filterOverlappingClasses(filteredClasses, classTime); // Get only classes with the same day
 
   const allocConflictObject = {
     type: options.conflicts.roomAlloc,
-    from: { ...classItem },
-    to: hasOverlappingClasses ? filteredClasses : null,
+    from: { ...classTime },
+    to: filteredClasses,
   };
 
   return allocConflictObject;
 }
 
-function getAllocConflictObjects(classes, classItems) {
+function getAllocConflictObjects(classes, classTime) {
+  // console.log(classTime);
   let allocConflict = [];
 
-  classItems.forEach((classItem) => {
-    const allocConflictObject = getAllocRoomConflictObject(classes, classItem);
-    if (allocConflictObject.to !== null) {
+  classTime.forEach((iterClassTime) => {
+    // this should only iterate once
+    const allocConflictObject = getAllocRoomConflictObject(
+      classes,
+      iterClassTime
+    );
+    if (allocConflictObject.to.length > 0) {
       allocConflict.push(allocConflictObject);
     }
   });
@@ -53,15 +67,22 @@ function getAllocConflictObjects(classes, classItems) {
   return allocConflict;
 }
 
+function getRoomConflicts(classes, classTime) {
+  const roomConflicts = {};
+
+  // roomConflicts.demand = getConflictObjectsDemand(classes, classTime);
+  roomConflicts.alloc = getAllocConflictObjects(classes, classTime);
+
+  return roomConflicts;
+}
+
 function getRawConflictsRoom(classes, classTime) {
   const splittedClasses = splitTurmas(classes);
 
-  const cleanClassItems = getOnlyNeededValues([classTime]);
+  const cleanClassTime = getOnlyNeededValues([classTime]); // this should always be an array with only one element
   const cleanClasses = getOnlyNeededValues(splittedClasses);
 
-  const roomConflicts = {};
-
-  roomConflicts.alloc = getAllocConflictObjects(cleanClasses, cleanClassItems);
+  const roomConflicts = getRoomConflicts(cleanClasses, cleanClassTime);
 
   return roomConflicts;
 }
