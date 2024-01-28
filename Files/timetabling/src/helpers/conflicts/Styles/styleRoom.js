@@ -11,51 +11,35 @@ const defaultTitles = {
 
 function getRoomAllocMessage(conflictObject) {
   const { type, to } = conflictObject;
-  let conflictMessage = `❌ Conflito: ${type.name}\n`;
-  conflictMessage += `\t- Horários sobrepostos: ${to.length}\n`;
+  let conflictMessage = `❌ Conflito: ${type?.name}\n`;
+  conflictMessage += `\t- Horários sobrepostos: ${to?.length}\n`;
 
   to.forEach((iterTo) => {
     const iterToId = getId(iterTo);
     conflictMessage += `\t-- id: ${iterToId}\n`;
   });
 
-  // console.log("conflictObject\n", conflictMessage);
   return conflictMessage;
 }
 
-function getRoomAllocConflict(conflicts, classTime) {
-  console.log("getRoomAllocConflict", conflicts);
-  const allocConflict = conflicts.raw.room.alloc;
+function getAllocStyledConflict(roomAlloc) {
+  // console.log("roomAlloc", roomAlloc);
+  const defaultAllocStyle = { title: defaultTitles.alloc, style: {} };
+  let newTitle = "";
 
-  if (allocConflict.length > 0) {
-    const classTimeId = getId(classTime);
-    const conflictObject = allocConflict.find(
-      (iterConflict) => iterConflict.from.id === classTimeId
-    );
+  const roomAllocConflict = roomAlloc?.to?.length > 0;
 
-    if (conflictObject?.to !== null) {
-      return conflictObject;
-    }
+  if (roomAllocConflict) {
+    newTitle = getRoomAllocMessage(roomAlloc);
   }
 
-  return null;
-}
-
-function getAllocStyledConflict(conflicts, classTime) {
-  const defaultAllocStyle = { title: defaultTitles.alloc, style: {} };
   const allocConflictStyle = {
-    title: "",
+    title: newTitle,
     style: {
       borderColor: options.config.colors.conflicts.hasConflict.room,
       borderWidth: "10px",
     },
   };
-
-  const roomAllocConflict = getRoomAllocConflict(conflicts, classTime);
-  // console.log("roomAllocConflict", roomAllocConflict);
-  if (roomAllocConflict) {
-    allocConflictStyle.title = getRoomAllocMessage(roomAllocConflict);
-  }
 
   const allocStyle = roomAllocConflict ? allocConflictStyle : defaultAllocStyle;
 
@@ -75,19 +59,17 @@ function getRoomDefaultStyle() {
 }
 
 function getDemandStyledConflict(conflicts, classTime) {
-  const classTimeId = getId(classTime);
   const singleDemandConflicts =
-    conflicts.raw.expectedDemand.singleTurmaCapacity;
+    conflicts.raw.expectedDemand.singleClassCapacity;
+  const classTimeId = getId(classTime);
+  // console.log(conflicts);
 
   const hasDemandConflict = singleDemandConflicts.some(
     (conflict) => conflict?.idClassTime === classTimeId
   );
 
+  const conflictDemandStyle = { ...conflicts.styled.expectedDemand };
   const defaultDemandStyle = { title: defaultTitles.demand, style: {} };
-
-  const conflictDemandStyle = {
-    ...conflicts.styled.demand,
-  };
 
   const demandRoomConflictStyle = hasDemandConflict
     ? conflictDemandStyle
@@ -96,7 +78,7 @@ function getDemandStyledConflict(conflicts, classTime) {
   return demandRoomConflictStyle;
 }
 
-function getNullStyledConflict(classTime) {
+function getNullStyledConflict(room) {
   const defaultNullStyle = { title: defaultTitles.notSet, style: {} };
 
   const conflictNullStyle = {
@@ -106,8 +88,8 @@ function getNullStyledConflict(classTime) {
     },
   };
 
-  const roomIsNull = classTime?.sala === null;
-  const nullRoomStyle = roomIsNull ? conflictNullStyle : defaultNullStyle;
+  const hasRoom = room !== null;
+  const nullRoomStyle = hasRoom ? defaultNullStyle : conflictNullStyle;
 
   return nullRoomStyle;
 }
@@ -146,12 +128,20 @@ function mergeStyles(styles) {
 }
 
 function getRoomStyledConflict(conflicts, classTime) {
+  // console.log("conflicts", conflicts);
+  const roomAlloc = conflicts.default.raw.room.alloc;
+  const roomDemand = conflicts.default.itemConflicts;
+
   const roomStyles = {};
+
   roomStyles.default = getRoomDefaultStyle();
-  roomStyles.alloc = getAllocStyledConflict(conflicts, classTime);
-  roomStyles.demand = getDemandStyledConflict(conflicts, classTime);
-  roomStyles.notSet = getNullStyledConflict(classTime);
+  roomStyles.alloc = getAllocStyledConflict(roomAlloc, classTime);
+  roomStyles.demand = getDemandStyledConflict(roomDemand, classTime);
+  roomStyles.notSet = getNullStyledConflict(classTime?.sala);
   roomStyles.merged = mergeStyles(roomStyles);
+
+  // console.log("roomStyles", roomStyles);
+
   return roomStyles.merged;
 }
 

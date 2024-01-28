@@ -1,4 +1,4 @@
-function getNullClassTimeConflicts(classTime) {
+function getNullgetClassTimeConflicts(classTime) {
   const foundNullProps = {
     room: classTime?.sala === null,
     day: classTime?.dia === null,
@@ -9,7 +9,7 @@ function getNullClassTimeConflicts(classTime) {
 }
 
 function setNullStyles(conflictStyles, classTime) {
-  const isNull = getNullClassTimeConflicts(classTime);
+  const isNull = getNullgetClassTimeConflicts(classTime);
   const notSetTexts = {
     room: "Sala não definida",
     day: "Dia não definido",
@@ -31,7 +31,7 @@ function setNullStyles(conflictStyles, classTime) {
   return conflictStyles;
 }
 
-function oldClassTimeConflicts(conflicts, classTime) {
+function oldgetClassTimeConflicts(conflicts, classTime) {
   let conflictStyles = {
     hour: {
       title: "Nenhum conflito encontrado",

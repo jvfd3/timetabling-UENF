@@ -53,7 +53,7 @@
       ]
     },
     "expectedDemand": {
-      "singleTurmaCapacity": []
+      "singleClassCapacity": []
     }
   },
   "styled": {

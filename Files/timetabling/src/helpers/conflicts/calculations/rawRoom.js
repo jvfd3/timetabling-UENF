@@ -1,6 +1,10 @@
 import options from "../../../DB/local/options";
 import { filterRoom } from "../../filteringFunc";
-import { splitTurmas, filterOverlappingClasses } from "../auxConflictFunctions";
+import {
+  splitTurmas,
+  filterOverlappingClasses,
+  removeSameId,
+} from "../auxConflictFunctions";
 
 function getOnlyNeededValues(splittedClasses) {
   const cleanedClasses = splittedClasses
@@ -49,11 +53,12 @@ function getAllocConflictObjects(classes, classItems) {
   return allocConflict;
 }
 
-function conflictRoom(classes, classItem) {
-  const splittedClassItems = splitTurmas([classItem]);
+function getRawConflictsRoom(classes, classTime) {
   const splittedClasses = splitTurmas(classes);
 
-  const cleanClassItems = getOnlyNeededValues(splittedClassItems);
+  // console.log(classTime);
+  const cleanClassItems = getOnlyNeededValues([classTime]);
+  // console.log(cleanClassItems);
   const cleanClasses = getOnlyNeededValues(splittedClasses);
 
   const roomConflicts = {};
@@ -63,4 +68,4 @@ function conflictRoom(classes, classItem) {
   return roomConflicts;
 }
 
-export { conflictRoom, filterOverlappingClasses };
+export { getRawConflictsRoom };

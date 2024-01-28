@@ -1,5 +1,7 @@
 import "./ClassTimeTable.css";
 import React, { useEffect, useState } from "react";
+import { getId } from "../../helpers/auxCRUD";
+import { getClassTimeConflicts } from "../../helpers/conflicts/centralConflicts";
 import {
   SelectClassTimeDay,
   SelectClassTimeDuration,
@@ -11,20 +13,22 @@ import {
   SmartDeleteClassTime,
   SmartUpdateClassTime,
 } from "../Buttons/Smart/Smart";
-import { getId } from "../../helpers/auxCRUD";
 import {
   createClassTime,
   // readClassTime,
   updateClassTime,
   deleteClassTime,
 } from "../../helpers/CRUDFunctions/classTimeCRUD";
-import { classTimeConflicts } from "../../helpers/conflicts/Styles/visualConflicts";
 
 function ClassTimeRow(classTimeRowStates) {
-  const { classTime, conflicts } = classTimeRowStates;
+  const { classTime, conflicts, classes } = classTimeRowStates;
 
-  const classTimeVisualConflicts = classTimeConflicts(conflicts, classTime);
-  // console.log("classTimeVisualConflicts", classTimeVisualConflicts);
+  const classTimeConflicts = getClassTimeConflicts(
+    classes,
+    classTime,
+    conflicts
+  );
+  const conflictStyles = classTimeConflicts.styled;
 
   const CRUDClassTimeProps = {
     classTime,
@@ -40,16 +44,16 @@ function ClassTimeRow(classTimeRowStates) {
         <SmartDeleteClassTime {...CRUDClassTimeProps} />
         <SmartUpdateClassTime {...CRUDClassTimeProps} />
       </td>
-      <td {...classTimeVisualConflicts.room}>
+      <td {...conflictStyles.room}>
         <SelectClassTimeRoom {...classTimeRowStates} />
       </td>
-      <td {...classTimeVisualConflicts.day}>
+      <td {...conflictStyles.day}>
         <SelectClassTimeDay {...classTimeRowStates} />
       </td>
-      <td {...classTimeVisualConflicts.hour}>
+      <td {...conflictStyles.hour}>
         <SelectClassTimeStartHour {...classTimeRowStates} />
       </td>
-      <td {...classTimeVisualConflicts.duration}>
+      <td {...conflictStyles.duration}>
         <SelectClassTimeDuration {...classTimeRowStates} />
       </td>
     </tr>

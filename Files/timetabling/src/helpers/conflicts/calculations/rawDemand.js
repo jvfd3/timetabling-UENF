@@ -62,25 +62,14 @@ function getDemandNeededData(classItem) {
   return neededData;
 }
 
-function conflictDemand(turmas, classData) {
-  /* First I need to filter the turma to have all flattened data to be processed:
-    classTimes: [
-      {
-        idClass: 1,
-        idClassTime: 1,
-        idRoom: 1,
-        expectedDemand: 1,
-        roomCapacity: 1,
-      },
-      ...
-    ]
-  */
+function getRawConflictsDemand(turmas, classData) {
   const demandConflictData = getDemandNeededData(classData);
-  const singleClassDemandConflicts =
-    getSingleClassDemandConflict(demandConflictData);
   const demandConflicts = {};
-  demandConflicts.singleTurmaCapacity = singleClassDemandConflicts;
+
+  demandConflicts.singleClassCapacity =
+    getSingleClassDemandConflict(demandConflictData);
+
   return demandConflicts;
 }
 
-export { conflictDemand };
+export { getRawConflictsDemand };

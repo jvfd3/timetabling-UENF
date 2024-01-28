@@ -50,7 +50,8 @@ function getColorGradient(periodoEsperado, semestreAtual) {
   return color;
 }
 
-function getSubjectStyledConflict(turma, semestreAtual) {
+function getSubjectStyledConflict(turma) {
+  let semestreAtual = turma.semestre;
   const expectedSemester = turma.disciplina?.periodo;
   let subjectStyle = {};
   let newColor = "";

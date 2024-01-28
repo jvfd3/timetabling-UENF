@@ -67,8 +67,7 @@ function getProfessorAllocMessage(profAllocConflict) {
   return conflictMessage;
 }
 
-function getProfessorAllocStyle(conflicts) {
-  const allocConflict = conflicts.professor.alloc;
+function getProfessorAllocStyle(allocConflict) {
   const defaultAllocStyle = { title: defaultTitles.alloc, style: {} };
   const allocConflictStyle = {
     title: getProfessorAllocMessage(allocConflict),
@@ -114,13 +113,15 @@ function mergeStyles(styles) {
 
 function getProfessorStyledConflict(conflicts, classItem) {
   const professorStyles = {};
+
   professorStyles.default = getProfessorDefaultStyle();
   professorStyles.notSet = getProfessorNotSetStyle(classItem);
-  professorStyles.alloc = getProfessorAllocStyle(conflicts);
+  professorStyles.alloc = getProfessorAllocStyle(conflicts.raw.professor.alloc);
 
   // professorStyles.preferences = getPreferencesStyles();
   // professorStyles.subjects = getSubjectsStyles();
   professorStyles.merged = mergeStyles(professorStyles);
+
   return professorStyles.merged;
 }
 

@@ -1,6 +1,6 @@
 import "./ClassItemTable.css";
 import React, { useState } from "react";
-import { baseClassItemConflicts } from "../../helpers/conflicts/centralConflicts";
+import { getClassItemConflicts } from "../../helpers/conflicts/centralConflicts";
 import { NumberInputMultiClassesExpectedDemand } from "../MyTextFields";
 import { SelectClassProfessor, SelectClassSubject } from "../mySelects";
 import ClassTimeTable from "../ClassTimeTable/ClassTimeTable";
@@ -37,11 +37,7 @@ function ClassItemTableRow(classItemRowStates) {
 
   const [oldClassItem, setOldClassItem] = useState(classItem);
 
-  const conflicts = baseClassItemConflicts(
-    filteredClasses,
-    classItem,
-    classItem?.semestre
-  );
+  const conflicts = getClassItemConflicts(filteredClasses, classItem);
 
   const classTimeTableProps = {
     ...classItemRowStates,
@@ -64,13 +60,13 @@ function ClassItemTableRow(classItemRowStates) {
         <SmartDeleteClassItem {...CRUDClassItemProps} />
         <SmartUpdateClassItem {...CRUDClassItemProps} />
       </td>
-      {/*       <td {...conflicts.styled.disciplina}>
+      <td {...conflicts.styled.subject}>
         <SelectClassSubject {...classItemRowStates} />
-      </td> */}
+      </td>
       <td {...conflicts.styled.professor}>
         <SelectClassProfessor {...classItemRowStates} />
       </td>
-      <td {...conflicts.styled.demand}>
+      <td {...conflicts.styled.expectedDemand}>
         <NumberInputMultiClassesExpectedDemand {...classItemRowStates} />
       </td>
       <td>

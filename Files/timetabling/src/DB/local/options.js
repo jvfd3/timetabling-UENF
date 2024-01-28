@@ -1,4 +1,162 @@
 const options = {
+  AWS: {
+    fullEndpoint:
+      "https://ey1h94aard.execute-api.us-east-2.amazonaws.com/timetablingStage/",
+  },
+  config: {
+    iconButtons: true,
+    defaultIndexes: {
+      year: 13,
+      semester: 2,
+      professor: 0,
+      student: 0,
+      subject: 0,
+      room: 0,
+      classItem: 0,
+    },
+    colors: {
+      conflicts: {
+        notSet: {
+          subject: "#708090",
+          professor: "#8090A0",
+          demand: "#90A0B0",
+          room: "#A0B0C0",
+          day: "#B0C0D0",
+          hour: "#C0D0E0",
+          duration: "#D0E0F0",
+        },
+        noProblem: {
+          professor: "#008B45",
+          demand: "#008B45",
+          subject: "##529E52",
+          room: "#13612D",
+          duration: "#237049",
+        },
+        hasConflict: {
+          subject: "#000000",
+          professor: "#8B0000",
+          demand: "#DD3333",
+          room: "#E3580E",
+          duration: "#C72508",
+        },
+        levels: {
+          level0: "#008B45",
+          level1: "#D7B740",
+          level2: "#D77A61",
+          level3: "#8B0000",
+          levelDefault: "#708090",
+        },
+      },
+      locker: {
+        locked: "#000000",
+        unlocked: "#708090",
+      },
+      CRUD: {
+        default: "#000000",
+        create: "#008B45",
+        read: "#708090",
+        update: "#D7B740",
+        delete: "#D77A61",
+      },
+    },
+  },
+  conflicts: {
+    professorAlloc: {
+      weight: 1,
+      name: "Alocação simultânea de professores",
+    },
+    roomAlloc: {
+      weight: 1,
+      name: "Alocação simultânea de Salas",
+    },
+    roomCapacity: {
+      weight: 1,
+      name: "Capacidade de sala insuficiente pra demanda",
+    },
+    professorPreferences: {
+      weight: 1,
+      name: "Preferência de Dia/Horário não atendida",
+    },
+    professorSubjectPreferences: {
+      weight: 1,
+      name: "Preferência de disciplina não atendida",
+    },
+  },
+  emptyObjects: {
+    classItem: {
+      id: null, //INT
+      idTurma: null, //INT
+      ano: null, //INT
+      semestre: null, //INT
+      demandaEstimada: null, //INT
+      professor: null, //OBJ
+      disciplina: null, //OBJ
+      horarios: [], //ARRAY
+    },
+    classTime: {
+      id: null, //INT
+      dia: null, //STR
+      sala: null, //OBJ
+      ordem: null, //INT
+      duracao: null, //INT
+      idTurma: null, //INT
+      horaInicio: null, //INT
+    },
+    /* Items Below are still unused */
+    professor: {
+      apelido: null, //STR
+      curso: null, //STR
+      id: null, //INT
+      laboratorio: null, //STR
+      nome: null, //STR
+    },
+    subject: {
+      apelido: null, //STR
+      codigo: null, //INT
+      id: null, //INT
+      nome: null, //STR
+      periodo: null, //INT
+    },
+    room: {
+      bloco: null, //STR
+      capacidade: null, //INT
+      codigo: null, //STR
+      descricao: null, //STR
+      id: null, //INT
+    },
+    laboratory: {
+      centro: null, //STR
+      apelido: null, //STR
+      nome: null, //STR
+    },
+    courses: {
+      apelido: null, //STR
+      nome: null, //STR
+    },
+  },
+  SelectStyles: {
+    fullWidth: {
+      menu: ({ width, ...css }) => ({ ...css }),
+    },
+    fixedWidth: {
+      menu: ({ width, ...css }) => ({ ...css, width: 300 }),
+    },
+    fullItem: {
+      control: (css) => ({
+        ...css,
+        width: "100%",
+      }),
+      menu: (css) => ({
+        ...css,
+        minWidth: "max-content",
+        zIndex: 2,
+      }),
+      option: (css) => ({
+        ...css,
+        width: "100%",
+      }),
+    },
+  },
   constantValues: {
     preferenceLevels: [
       { nivel: 0, cor: "#747474", descricao: "A preferência não foi coletada" },
@@ -225,164 +383,6 @@ const options = {
         name: "5º prédio atrás do hospital veterinário",
       },
     ],
-  },
-  emptyObjects: {
-    classItem: {
-      id: null, //INT
-      idTurma: null, //INT
-      ano: null, //INT
-      semestre: null, //INT
-      demandaEstimada: null, //INT
-      professor: null, //OBJ
-      disciplina: null, //OBJ
-      horarios: [], //ARRAY
-    },
-    classTime: {
-      id: null, //INT
-      dia: null, //STR
-      sala: null, //OBJ
-      ordem: null, //INT
-      duracao: null, //INT
-      idTurma: null, //INT
-      horaInicio: null, //INT
-    },
-    /* Items Below are still unused */
-    professor: {
-      apelido: null, //STR
-      curso: null, //STR
-      id: null, //INT
-      laboratorio: null, //STR
-      nome: null, //STR
-    },
-    subject: {
-      apelido: null, //STR
-      codigo: null, //INT
-      id: null, //INT
-      nome: null, //STR
-      periodo: null, //INT
-    },
-    room: {
-      bloco: null, //STR
-      capacidade: null, //INT
-      codigo: null, //STR
-      descricao: null, //STR
-      id: null, //INT
-    },
-    laboratory: {
-      centro: null, //STR
-      apelido: null, //STR
-      nome: null, //STR
-    },
-    courses: {
-      apelido: null, //STR
-      nome: null, //STR
-    },
-  },
-  AWS: {
-    fullEndpoint:
-      "https://ey1h94aard.execute-api.us-east-2.amazonaws.com/timetablingStage/",
-  },
-  config: {
-    iconButtons: true,
-    defaultIndexes: {
-      year: 13,
-      semester: 1,
-      professor: 0,
-      student: 0,
-      subject: 0,
-      room: 0,
-      classItem: 0,
-    },
-    colors: {
-      conflicts: {
-        notSet: {
-          subject: "#708090",
-          professor: "#8090A0",
-          demand: "#90A0B0",
-          room: "#A0B0C0",
-          day: "#B0C0D0",
-          hour: "#C0D0E0",
-          duration: "#D0E0F0",
-        },
-        noProblem: {
-          professor: "#008B45",
-          demand: "#008B45",
-          subject: "##529E52",
-          room: "#13612D",
-          duration: "#237049",
-        },
-        hasConflict: {
-          subject: "#000000",
-          professor: "#8B0000",
-          demand: "#DD3333",
-          room: "#E3580E",
-          duration: "#C72508",
-        },
-        levels: {
-          level0: "#008B45",
-          level1: "#D7B740",
-          level2: "#D77A61",
-          level3: "#8B0000",
-          levelDefault: "#708090",
-        },
-      },
-      locker: {
-        locked: "#000000",
-        unlocked: "#708090",
-      },
-      CRUD: {
-        default: "#000000",
-        create: "#008B45",
-        read: "#708090",
-        update: "#D7B740",
-        delete: "#D77A61",
-      },
-    },
-  },
-  SelectStyles: {
-    fullWidth: {
-      menu: ({ width, ...css }) => ({ ...css }),
-    },
-    fixedWidth: {
-      menu: ({ width, ...css }) => ({ ...css, width: 300 }),
-    },
-    fullItem: {
-      control: (css) => ({
-        ...css,
-        width: "100%",
-      }),
-      menu: (css) => ({
-        ...css,
-        minWidth: "max-content",
-        zIndex: 2,
-      }),
-      option: (css) => ({
-        ...css,
-        width: "100%",
-      }),
-    },
-  },
-  conflicts: {
-    professorAlloc: {
-      weight: 1,
-      name: "Alocação simultânea de professores",
-    },
-    roomAlloc: {
-      weight: 1,
-      name: "Alocação simultânea de Salas",
-    },
-    roomCapacity: {
-      weight: 1,
-      name: "Capacidade de sala insuficiente pra demanda",
-    },
-    professorPreferences: {
-      weight: 1,
-      name: "Preferência de Dia/Horário não atendida",
-    },
-    professorSubjectPreferences: {
-      weight: 1,
-      name: "Preferência de disciplina não atendida",
-    },
   },
   yetUnusedValues: {
     centros: [
