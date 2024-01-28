@@ -1,10 +1,10 @@
 /* A ideia é que seja um trocadilho com hourglass */
-import options from "../DB/local/options";
+import options from "../../../src/DB/local/options";
 import {
   getId,
   removeItemInListById,
   replaceNewItemInListById,
-} from "./auxCRUD";
+} from "../../../src/helpers/auxCRUD";
 
 function createTurma(myProps) {
   const { ano, semestre, turmas, setTurmas, classIndex, classTimeIndex } =
