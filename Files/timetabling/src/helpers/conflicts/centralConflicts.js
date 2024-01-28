@@ -52,11 +52,10 @@ function getRawTimeConflicts(classes, classTime) {
   return rawTimeConflicts;
 }
 
-function getStyledTimeConflict(conflicts, classTime) {
+function getStyledTimeConflict(timeConflicts, classTime) {
   const classTimeStyles = {};
-
-  classTimeStyles.default = conflicts;
-  classTimeStyles.room = getRoomStyledConflict(classTimeStyles, classTime);
+  console.log(classTime);
+  classTimeStyles.room = getRoomStyledConflict(timeConflicts, classTime);
 
   classTimeStyles.day = getDayStyledConflict(classTimeStyles, classTime);
   classTimeStyles.hour = getHourStyledConflict(classTimeStyles, classTime);

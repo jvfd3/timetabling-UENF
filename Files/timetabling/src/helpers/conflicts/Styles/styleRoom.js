@@ -5,6 +5,7 @@ const defaultTitles = {
   base: "Conflitos de alocação de sala avaliados:\n",
   alloc: "✅ Sem conflitos de alocação de sala\n",
   demand: "✅ Sem conflitos de demanda de sala\n",
+  demandConflict: "❌ Conflito: Demanda de sala\n",
   notSet: "✅ Sem conflitos de sala não definida\n",
   notSetConflict: "❌ Conflito: Sala não definida\n",
 };
@@ -23,10 +24,10 @@ function getRoomAllocMessage(conflictObject) {
 }
 
 function getAllocStyledConflict(roomAlloc) {
-  // console.log("roomAlloc", roomAlloc);
   const defaultAllocStyle = { title: defaultTitles.alloc, style: {} };
   let newTitle = "";
 
+  console.log("roomAlloc", roomAlloc);
   const roomAllocConflict = roomAlloc?.to?.length > 0;
 
   if (roomAllocConflict) {
@@ -58,24 +59,32 @@ function getRoomDefaultStyle() {
   return defaultStyle;
 }
 
-function getDemandStyledConflict(conflicts, classTime) {
-  const singleDemandConflicts =
-    conflicts.raw.expectedDemand.singleClassCapacity;
-  const classTimeId = getId(classTime);
-  // console.log(conflicts);
+function getDemandStyledConflict(singleDemandConflict, classTime) {
+  const defaultDemandStyle = { title: defaultTitles.demand, style: {} };
+  let newTitle = "";
 
-  const hasDemandConflict = singleDemandConflicts.some(
-    (conflict) => conflict?.idClassTime === classTimeId
+  const classTimeId = getId(classTime);
+  const foundConflict = singleDemandConflict.find(
+    (conflict) => conflict.idClassTime === classTimeId
   );
 
-  const conflictDemandStyle = { ...conflicts.styled.expectedDemand };
-  const defaultDemandStyle = { title: defaultTitles.demand, style: {} };
+  if (foundConflict) {
+    const remaining = foundConflict.expectedDemand - foundConflict.capacity;
+    newTitle = defaultTitles.demandConflict;
+    newTitle += `\t- Alunos sobrando: ${remaining}\n`;
+  }
 
-  const demandRoomConflictStyle = hasDemandConflict
-    ? conflictDemandStyle
-    : defaultDemandStyle;
+  const demandConflictStyle = {
+    title: newTitle,
+    style: {
+      borderColor: options.config.colors.conflicts.hasConflict.demand,
+      borderBottomWidth: "10px",
+    },
+  };
 
-  return demandRoomConflictStyle;
+  const demandStyle = foundConflict ? demandConflictStyle : defaultDemandStyle;
+
+  return demandStyle;
 }
 
 function getNullStyledConflict(room) {
@@ -127,20 +136,20 @@ function mergeStyles(styles) {
   return mergedStyles;
 }
 
-function getRoomStyledConflict(conflicts, classTime) {
-  // console.log("conflicts", conflicts);
-  const roomAlloc = conflicts.default.raw.room.alloc;
-  const roomDemand = conflicts.default.itemConflicts;
-
+function getRoomStyledConflict(timeConflicts, classTime) {
+  // console.log(timeConflicts);
+  const singleDemandConflict =
+    timeConflicts.itemConflicts.raw.expectedDemand.singleClassCapacity;
+  const allocConflict = timeConflicts.raw.room.alloc;
   const roomStyles = {};
 
   roomStyles.default = getRoomDefaultStyle();
-  roomStyles.alloc = getAllocStyledConflict(roomAlloc, classTime);
-  roomStyles.demand = getDemandStyledConflict(roomDemand, classTime);
+  roomStyles.demand = getDemandStyledConflict(singleDemandConflict, classTime);
+  roomStyles.alloc = getAllocStyledConflict(allocConflict, classTime);
   roomStyles.notSet = getNullStyledConflict(classTime?.sala);
   roomStyles.merged = mergeStyles(roomStyles);
 
-  // console.log("roomStyles", roomStyles);
+  // console.log("roomStyles", roomStyles.merged);
 
   return roomStyles.merged;
 }

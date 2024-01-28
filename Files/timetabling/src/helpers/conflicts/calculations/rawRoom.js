@@ -56,9 +56,7 @@ function getAllocConflictObjects(classes, classItems) {
 function getRawConflictsRoom(classes, classTime) {
   const splittedClasses = splitTurmas(classes);
 
-  // console.log(classTime);
   const cleanClassItems = getOnlyNeededValues([classTime]);
-  // console.log(cleanClassItems);
   const cleanClasses = getOnlyNeededValues(splittedClasses);
 
   const roomConflicts = {};

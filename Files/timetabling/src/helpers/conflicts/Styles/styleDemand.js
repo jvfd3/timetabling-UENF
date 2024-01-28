@@ -14,10 +14,12 @@ function getDemandMessage(conflicts) {
   conflicts.forEach((iterConflict) => {
     // console.log("iterConflict", iterConflict);
     const diff = iterConflict.expectedDemand - iterConflict.capacity;
-
-    titleMessage += `\t\t-- Sobraram ${diff} alunos `;
-    titleMessage += `na Sala ${iterConflict.idRoom} `;
-    titleMessage += `do Horário ${iterConflict.idClassTime} `;
+    const room = iterConflict.room;
+    const roomName = room?.bloco + " - " + room?.codigo;
+    titleMessage += `\t\t-- `;
+    titleMessage += `No horário ${iterConflict.idClassTime} `;
+    titleMessage += `na sala ${roomName} `;
+    titleMessage += `sobraram ${diff} alunos `;
     // titleMessage += `da Turma ${iterConflict.idClass}`;
     titleMessage += `\n`;
   });

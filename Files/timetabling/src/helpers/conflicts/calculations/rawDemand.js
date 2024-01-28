@@ -23,12 +23,13 @@ function getSingleClassDemandConflict(demandClassData) {
     const hasConflict = hasDemandAndCapacity && hasRoomSmallerThanDemand;
     if (hasConflict) {
       const conflictObject = {
-        expectedDemand: expectedDemand,
-        capacity: capacity,
+        expectedDemand,
+        capacity,
         type: options.conflicts.roomCapacity,
         idClass: iterClass.idClass,
         idClassTime: iterClass.idClassTime,
         idRoom: iterClass.idRoom,
+        room: iterClass.room,
       };
       singleClassDemandConflicts.push(conflictObject);
     }
@@ -38,7 +39,6 @@ function getSingleClassDemandConflict(demandClassData) {
 }
 
 function getDemandNeededData(classItem) {
-  // console.log("classItem", classItem);
   const classTimes = classItem.horarios;
   const cleanedTurma = {
     idClass: getId(classItem),
@@ -50,9 +50,10 @@ function getDemandNeededData(classItem) {
     // console.log("classTime.sala", classTime.sala);
     const newFlattenedData = {
       idRoom: classTime.sala?.id,
-      idClassTime: getId(classTime),
-      ...cleanedTurma,
       roomCapacity: classTime.sala?.capacidade,
+      idClassTime: getId(classTime),
+      room: classTime?.sala,
+      ...cleanedTurma,
     };
     // console.log("newFlattenedData.idRoom", newFlattenedData.idRoom);
     neededData.push(newFlattenedData);
@@ -62,12 +63,16 @@ function getDemandNeededData(classItem) {
   return neededData;
 }
 
-function getRawConflictsDemand(turmas, classData) {
-  const demandConflictData = getDemandNeededData(classData);
+function getRawConflictsDemand(classes, classItem) {
+  const demandConflictData = getDemandNeededData(classItem);
   const demandConflicts = {};
 
   demandConflicts.singleClassCapacity =
     getSingleClassDemandConflict(demandConflictData);
+  // demandConflicts.multiClassCapacity = getMultiClassConflict(
+  //   classes,
+  //   classItem
+  // );
 
   return demandConflicts;
 }
