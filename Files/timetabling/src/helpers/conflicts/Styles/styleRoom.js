@@ -13,7 +13,7 @@ const defaultTitles = {
 function getRoomAllocMessage(conflictObject) {
   const { type, to } = conflictObject;
   let conflictMessage = `❌ Conflito: ${type?.name}\n`;
-  conflictMessage += `\t- Sala sobreposta entre com ${to?.length} turmas\n`;
+  conflictMessage += `\t- Sala sobreposta com ${to?.length} turmas\n`;
 
   to.forEach((classTime) => {
     let classItem = `\t\t- Turma: ${classTime.idTurma}, horários: `;
