@@ -1,5 +1,5 @@
 import options from "../../../DB/local/options";
-import { getAllocStyledConflict } from "./styleRoom";
+// import { getAllocStyledConflict } from "./styleRoom";
 
 const conflictOptions = options.config.colors.conflicts;
 
@@ -91,11 +91,11 @@ function mergeStyles(styles) {
   return mergedStyles;
 }
 
-function getDurationStyledConflict(conflicts, classTime) {
+function getStyledConflictDuration(conflicts, classTime) {
   const durationStyles = {};
   durationStyles.default = getDurationDefaultStyle();
   durationStyles.notSet = getDurationNotSetStyle(classTime);
-  durationStyles.roomAlloc = getDurationRoomAllocStyle(conflicts, classTime);
+  // durationStyles.roomAlloc = getDurationRoomAllocStyle(conflicts, classTime);
   // durationStyles.professorAlloc = getDurationProfessorAllocStyle();
 
   // durationStyles.professorPreferences = getDurationProfessorPreferencesStyle();
@@ -104,4 +104,4 @@ function getDurationStyledConflict(conflicts, classTime) {
   return durationStyles.merged;
 }
 
-export { getDurationStyledConflict };
+export { getStyledConflictDuration };

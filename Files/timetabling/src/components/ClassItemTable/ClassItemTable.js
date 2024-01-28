@@ -63,6 +63,7 @@ function ClassItemTableRow(classItemRowStates) {
       <td {...conflicts.styled.subject}>
         <SelectClassSubject {...classItemRowStates} />
       </td>
+
       <td {...conflicts.styled.professor}>
         <SelectClassProfessor {...classItemRowStates} />
       </td>

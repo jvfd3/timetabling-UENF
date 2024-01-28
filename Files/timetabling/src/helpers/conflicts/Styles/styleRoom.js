@@ -13,11 +13,12 @@ const defaultTitles = {
 function getRoomAllocMessage(conflictObject) {
   const { type, to } = conflictObject;
   let conflictMessage = `❌ Conflito: ${type?.name}\n`;
-  conflictMessage += `\t- Horários sobrepostos: ${to?.length}\n`;
+  conflictMessage += `\t- Sala sobreposta entre com ${to?.length} turmas\n`;
 
-  to.forEach((iterTo) => {
-    const iterToId = getId(iterTo);
-    conflictMessage += `\t-- id: ${iterToId}\n`;
+  to.forEach((classTime) => {
+    let classItem = `\t\t- Turma: ${classTime.idTurma}, horários: `;
+    let classTimes = JSON.stringify(classTime.idHorario);
+    conflictMessage += classItem + classTimes + "\n";
   });
 
   return conflictMessage;
@@ -27,18 +28,20 @@ function getAllocStyledConflict(roomAlloc) {
   const defaultAllocStyle = { title: defaultTitles.alloc, style: {} };
   let newTitle = "";
 
-  console.log("roomAlloc", roomAlloc);
-  const roomAllocConflict = roomAlloc?.to?.length > 0;
+  const roomAllocConflict = roomAlloc.length > 0;
 
   if (roomAllocConflict) {
-    newTitle = getRoomAllocMessage(roomAlloc);
+    roomAlloc.forEach((allocConflict) => {
+      newTitle += getRoomAllocMessage(allocConflict);
+    });
   }
 
   const allocConflictStyle = {
     title: newTitle,
     style: {
-      borderColor: options.config.colors.conflicts.hasConflict.room,
-      borderWidth: "10px",
+      backgroundColor: options.config.colors.conflicts.hasConflict.room,
+      // borderColor: options.config.colors.conflicts.hasConflict.room,
+      // borderWidth: "10px",
     },
   };
 
@@ -137,10 +140,10 @@ function mergeStyles(styles) {
 }
 
 function getRoomStyledConflict(timeConflicts, classTime) {
-  // console.log(timeConflicts);
   const singleDemandConflict =
     timeConflicts.itemConflicts.raw.expectedDemand.singleClassCapacity;
   const allocConflict = timeConflicts.raw.room.alloc;
+
   const roomStyles = {};
 
   roomStyles.default = getRoomDefaultStyle();
@@ -154,4 +157,4 @@ function getRoomStyledConflict(timeConflicts, classTime) {
   return roomStyles.merged;
 }
 
-export { getRoomStyledConflict, getAllocStyledConflict };
+export { getRoomStyledConflict /* , getAllocStyledConflict */ };

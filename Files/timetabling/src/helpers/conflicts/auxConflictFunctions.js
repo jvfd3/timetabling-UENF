@@ -63,6 +63,30 @@ function filterOverlappingClasses(classes, classTime) {
   return filteredClasses;
 }
 
+function getTargetClasses(filteredClasses) {
+  /* Used by room and professor */
+  // console.log(filteredClasses);
+  let newToList = filteredClasses.reduce((acc, classTime) => {
+    let existingClassTime = acc.find(
+      (item) => item.idTurma === classTime.idTurma
+    );
+
+    if (existingClassTime) {
+      existingClassTime.idHorario.push(classTime.id);
+    } else {
+      acc.push({
+        idTurma: classTime.idTurma,
+        idHorario: [classTime.id],
+      });
+    }
+
+    return acc;
+  }, []);
+  // console.log(newToList);
+
+  return newToList;
+}
+
 function flattenTurma(classData, classTime) {
   const { horarios, ...rest } = classData;
   let newClassData = {
@@ -103,6 +127,7 @@ function splitTurmas(turmas) {
 export {
   filterOverlappingClasses,
   filterHourDuration,
+  getTargetClasses,
   removeSameId,
   flattenTurma,
   splitTurmas,

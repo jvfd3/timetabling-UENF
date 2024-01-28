@@ -5,6 +5,7 @@ import {
   splitTurmas,
   removeSameId,
   filterOverlappingClasses,
+  getTargetClasses,
 } from "../auxConflictFunctions";
 
 function getOnlyNeededValues(splittedClasses) {
@@ -23,27 +24,6 @@ function getOnlyNeededValues(splittedClasses) {
       return { id, professor, dia, horaInicio, duracao, idTurma };
     }); // Get only the values needed
   return cleanedClasses;
-}
-
-function getTargetClasses(filteredClasses) {
-  let newToList = filteredClasses.reduce((acc, classTime) => {
-    let existingClassTime = acc.find(
-      (item) => item.idTurma === classTime.idTurma
-    );
-
-    if (existingClassTime) {
-      existingClassTime.idHorario.push(classTime.id);
-    } else {
-      acc.push({
-        idTurma: classTime.idTurma,
-        idHorario: [classTime.id],
-      });
-    }
-
-    return acc;
-  }, []);
-
-  return newToList;
 }
 
 function getAllocConflictObject(classes, classItem) {

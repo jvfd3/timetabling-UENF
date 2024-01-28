@@ -6,7 +6,7 @@ import { getSubjectStyledConflict } from "./Styles/styleSubject";
 import { getProfessorStyledConflict } from "./Styles/styleProfessor";
 import { getStyledConflictDemand } from "./Styles/styleDemand";
 import { getRoomStyledConflict } from "./Styles/styleRoom";
-import { getDurationStyledConflict } from "./Styles/styleDuration";
+import { getStyledConflictDuration } from "./Styles/styleDuration";
 import { getDayStyledConflict } from "./Styles/styleDay";
 import { getHourStyledConflict } from "./Styles/styleHour";
 
@@ -60,7 +60,7 @@ function getStyledTimeConflict(timeConflicts, classTime) {
   classTimeStyles.day = getDayStyledConflict(classTimeStyles, classTime);
   classTimeStyles.hour = getHourStyledConflict(classTimeStyles, classTime);
 
-  classTimeStyles.duration = getDurationStyledConflict(
+  classTimeStyles.duration = getStyledConflictDuration(
     classTimeStyles,
     classTime
   );
@@ -70,7 +70,7 @@ function getStyledTimeConflict(timeConflicts, classTime) {
 
 function getClassTimeConflicts(classes, classTime, conflicts) {
   const timeConflicts = {};
-
+  // console.log(conflicts);
   timeConflicts.itemConflicts = conflicts;
   timeConflicts.raw = getRawTimeConflicts(classes, classTime);
   timeConflicts.styled = getStyledTimeConflict(timeConflicts, classTime);

@@ -4,6 +4,7 @@ import {
   splitTurmas,
   filterOverlappingClasses,
   removeSameId,
+  getTargetClasses,
 } from "../auxConflictFunctions";
 
 function getOnlyNeededValues(splittedClasses) {
@@ -17,8 +18,8 @@ function getOnlyNeededValues(splittedClasses) {
     //   // && classItem.sala
     // ) // Get only classes with all values filled
     .map((classItem) => {
-      const { dia, duracao, horaInicio, id, sala } = classItem;
-      return { id, sala, dia, horaInicio, duracao };
+      const { dia, duracao, horaInicio, id, sala, idTurma } = classItem;
+      return { id, sala, dia, horaInicio, duracao, idTurma };
     }); // Get only the values needed
   // console.log(cleanedClasses);
   return cleanedClasses;
@@ -43,7 +44,7 @@ function getAllocRoomConflictObject(classes, classTime) {
   const allocConflictObject = {
     type: options.conflicts.roomAlloc,
     from: { ...classTime },
-    to: filteredClasses,
+    to: getTargetClasses(filteredClasses),
   };
 
   return allocConflictObject;
