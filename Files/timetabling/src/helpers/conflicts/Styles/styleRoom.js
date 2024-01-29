@@ -39,9 +39,9 @@ function getAllocStyledConflict(roomAlloc) {
   const allocConflictStyle = {
     title: newTitle,
     style: {
-      backgroundColor: options.config.colors.conflicts.hasConflict.room,
-      // borderColor: options.config.colors.conflicts.hasConflict.room,
-      // borderWidth: "10px",
+      // backgroundColor: options.config.colors.conflicts.hasConflict.room,
+      borderColor: options.config.colors.conflicts.hasConflict.room,
+      borderWidth: "10px",
     },
   };
 
@@ -80,8 +80,9 @@ function getDemandStyledConflict(singleDemandConflict, classTime) {
   const demandConflictStyle = {
     title: newTitle,
     style: {
-      borderColor: options.config.colors.conflicts.hasConflict.demand,
-      borderBottomWidth: "10px",
+      backgroundColor: options.config.colors.conflicts.hasConflict.demand,
+      // borderColor: options.config.colors.conflicts.hasConflict.demand,
+      // borderBottomWidth: "10px",
     },
   };
 
