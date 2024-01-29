@@ -139,10 +139,11 @@ function mergeStyles(styles) {
   return mergedStyles;
 }
 
-function getRoomStyledConflict(timeConflicts, classTime) {
+function getRoomStyledConflict(conflicts, classTime) {
   const singleDemandConflict =
-    timeConflicts.itemConflicts.raw.expectedDemand.singleClassCapacity;
-  const allocConflict = timeConflicts.raw.room.alloc;
+    conflicts.timeConflicts.itemConflicts.raw.expectedDemand
+      .singleClassCapacity;
+  const allocConflict = conflicts.timeConflicts.raw.room.alloc;
 
   const roomStyles = {};
 
