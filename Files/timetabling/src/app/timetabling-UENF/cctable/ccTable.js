@@ -51,31 +51,17 @@ function CCTableView() {
           function CellContent({ turmas }) {
             function getCellMessage(turma) {
               // console.log("turma", turma.sala);
-              let subject = turma.disciplina;
-              let prof = turma.professor;
-              let room = turma.sala;
-              let subjectInfo = "";
-              let profInfo = "";
-              let roomInfo = "";
-              if (subject) {
-                subjectInfo += `${subject?.periodo} - ${subject?.apelido}`;
-              } else {
-                subjectInfo = "Discip. indef.";
-              }
-              if (prof) {
-                profInfo += `${prof.apelido}`;
-              } else {
-                profInfo = "Prof. indef.";
-              }
-
-              if (room) {
-                roomInfo += `${room?.bloco}${
-                  room?.codigo ? "-" + room?.codigo : ""
-                }`;
-              } else {
-                roomInfo = "Sala indef.";
-              }
-              let cellMessage = `${subjectInfo} (${profInfo} / ${roomInfo})`;
+              const subject = turma.disciplina;
+              const prof = turma.professor;
+              const room = turma.sala;
+              const subjectInfo = subject
+                ? `${subject?.periodo} - ${subject?.apelido}`
+                : "Discip. indef.";
+              const profInfo = prof ? `${prof.apelido}` : "Prof. indef.";
+              const roomInfo = room
+                ? `${room?.bloco}${room?.codigo ? "-" + room?.codigo : ""}`
+                : "Sala indef.";
+              const cellMessage = `${subjectInfo} (${profInfo} / ${roomInfo})`;
               return cellMessage;
             }
 
