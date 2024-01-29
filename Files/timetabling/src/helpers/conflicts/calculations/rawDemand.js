@@ -39,18 +39,18 @@ function getSingleClassDemandConflict(demandClassData) {
 }
 
 function getDemandNeededData(classItem) {
-  const classTimes = classItem.horarios;
+  const classTimes = classItem?.horarios;
   const cleanedTurma = {
     idClass: getId(classItem),
-    expectedDemand: classItem.demandaEstimada,
+    expectedDemand: classItem?.demandaEstimada,
   };
   const neededData = [];
-  classTimes.forEach((classTime) => {
+  classTimes?.forEach((classTime) => {
     // console.log("classTime", classTime);
     // console.log("classTime.sala", classTime.sala);
     const newFlattenedData = {
-      idRoom: classTime.sala?.id,
-      roomCapacity: classTime.sala?.capacidade,
+      idRoom: classTime?.sala?.id,
+      roomCapacity: classTime?.sala?.capacidade,
       idClassTime: getId(classTime),
       room: classTime?.sala,
       ...cleanedTurma,

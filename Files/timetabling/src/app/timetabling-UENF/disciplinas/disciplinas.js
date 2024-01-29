@@ -3,18 +3,18 @@ import React, { useEffect, useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
+import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
+// import { scrollThroughDisciplinas } from "../functions/firulas/minhasFirulas";
 import {
   SelectSubjectItem,
   SelectSubjectExpectedSemester,
 } from "../../../components/mySelects";
-// import { scrollThroughDisciplinas } from "../functions/firulas/minhasFirulas";
 import {
   TextInputSubjectCode,
   TextInputSubjectName,
   TextInputSubjectAlias,
   TextInputSubjectId,
 } from "../../../components/MyTextFields";
-import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
 import {
   createSubject,
   readSubject,
@@ -22,23 +22,23 @@ import {
   deleteSubject,
 } from "../../../helpers/CRUDFunctions/subjectCRUD";
 
-function SubjectSelection(mySubjectsStates) {
+function SubjectSelection(subjectStates) {
   const subjectCRUDFunctions = {
-    createFunc: () => createSubject(mySubjectsStates),
-    readFunc: () => readSubject(mySubjectsStates),
-    updateFunc: () => updateSubject(mySubjectsStates),
-    deleteFunc: () => deleteSubject(mySubjectsStates),
+    createFunc: () => createSubject(subjectStates),
+    readFunc: () => readSubject(subjectStates),
+    updateFunc: () => updateSubject(subjectStates),
+    deleteFunc: () => deleteSubject(subjectStates),
   };
 
   return (
     <div className="SelectionBar">
       <CRUDButtonsContainer {...subjectCRUDFunctions} />
-      <SelectSubjectItem {...mySubjectsStates} />
+      <SelectSubjectItem {...subjectStates} />
     </div>
   );
 }
 
-function SubjectBaseInfo(mySubjectsStates) {
+function SubjectBaseInfo(subjectStates) {
   return (
     <div className="showBasicDataCard">
       <h3>INFORMAÇÕES DA DISCIPLINA</h3>
@@ -53,31 +53,31 @@ function SubjectBaseInfo(mySubjectsStates) {
           <tr>
             <th>Código</th>
             <td>
-              <TextInputSubjectCode {...mySubjectsStates} />
+              <TextInputSubjectCode {...subjectStates} />
             </td>
           </tr>
           <tr>
             <th>Nome</th>
             <td>
-              <TextInputSubjectName {...mySubjectsStates} />
+              <TextInputSubjectName {...subjectStates} />
             </td>
           </tr>
           <tr>
             <th>Apelido</th>
             <td>
-              <TextInputSubjectAlias {...mySubjectsStates} />
+              <TextInputSubjectAlias {...subjectStates} />
             </td>
           </tr>
           <tr>
             <th>Período Esperado</th>
             <td>
-              <SelectSubjectExpectedSemester {...mySubjectsStates} />
+              <SelectSubjectExpectedSemester {...subjectStates} />
             </td>
           </tr>
           <tr>
             <th>ID</th>
             <td>
-              <TextInputSubjectId {...mySubjectsStates} />
+              <TextInputSubjectId {...subjectStates} />
             </td>
           </tr>
         </tbody>
@@ -86,10 +86,10 @@ function SubjectBaseInfo(mySubjectsStates) {
   );
 }
 
-function SubjectCard(mySubjectsStates) {
+function SubjectCard(subjectStates) {
   return (
     <div className="infoCard">
-      <SubjectBaseInfo {...mySubjectsStates} />
+      <SubjectBaseInfo {...subjectStates} />
       {/* <SubjectClasses {...myDisciplinasStates} /> */}
       {/* <SubjectRequirements {...myDisciplinasStates} /> */}
       {/* <SubjectDemandees {...myDisciplinasStates} /> */}
@@ -104,14 +104,16 @@ function Subjects() {
   const [subjects, setSubjects] = useState(defaultSubjects);
   const [subject, setSubject] = useState(subjects[36]);
 
-  const mySubjectsStates = { subjects, setSubjects, subject, setSubject };
+  const subjectStates = { subjects, setSubjects, subject, setSubject };
 
-  useEffect(() => {}), [subject?.apelido];
+  useEffect(() => {
+    readSubject(subjectStates);
+  }, []);
 
   return (
     <div className="CRUDContainComponents">
-      <SubjectSelection {...mySubjectsStates} />
-      <SubjectCard {...mySubjectsStates} />
+      <SubjectSelection {...subjectStates} />
+      <SubjectCard {...subjectStates} />
     </div>
   );
 }

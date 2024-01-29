@@ -101,7 +101,7 @@ function TextInputClassId({ classes, setClasses, classItem, setClassItem }) {
     setItem: setClassItem,
   };
   const specificValues = {
-    mainValue: classItem.idTurma,
+    mainValue: classItem?.idTurma,
     getNewItemObject: (newValue) => ({ ...classItem, idTurma: newValue }),
     title: "ID",
     isNumeric: true,
@@ -124,7 +124,7 @@ function TextInputClassExpectedDemand({
     setItem: setClassItem,
   };
   const specificValues = {
-    mainValue: classItem.demandaEstimada,
+    mainValue: classItem?.demandaEstimada,
     getNewItemObject: (newValue) => ({
       ...classItem,
       demandaEstimada: newValue,

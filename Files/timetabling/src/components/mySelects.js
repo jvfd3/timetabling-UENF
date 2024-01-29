@@ -295,9 +295,12 @@ function SelectExpectedSemester({
   return <DefaultSelect {...SelectExpectedSemesterStates} />;
 }
 
-function SelectSubject({ outerSubject, setOuterSubject }) {
+function SelectSubject({ outerSubject, setOuterSubject, subjects = [] }) {
+  const checkDB = subjects.length > 0;
+  const localSubjects = checkDB ? subjects : sqlDataFromJson.subjects;
+
   function findSubjectObject(subject) {
-    const subjectsList = sqlDataFromJson.subjects;
+    const subjectsList = localSubjects;
     const subjectObject = getItemFromListById(subject, subjectsList);
     return subjectObject ? subjectObject : null;
   }
@@ -305,7 +308,7 @@ function SelectSubject({ outerSubject, setOuterSubject }) {
   const SelectSubjectStates = {
     placeHolderText: "Disciplina",
     isClearable: true,
-    options: sqlDataFromJson.subjects,
+    options: localSubjects,
     setOuterValue: setOuterSubject,
     value: outerSubject,
     findCorrectObject: findSubjectObject,
@@ -330,9 +333,13 @@ function SelectProfessor({
   outerProfessor,
   setOuterProfessor,
   outerIsClearable = true,
+  professors = [],
 }) {
+  const checkDB = professors.length > 0;
+  const localProfessors = checkDB ? professors : sqlDataFromJson.professors;
+
   function findProfessorObject(professor) {
-    const professorsList = sqlDataFromJson.professors; // get from DB
+    const professorsList = localProfessors; // get from DB
     const professorObject = getItemFromListById(professor, professorsList);
     return professorObject ? professorObject : null;
   }
@@ -340,7 +347,7 @@ function SelectProfessor({
   const SelectProfessorStates = {
     placeHolderText: "Professor",
     isClearable: outerIsClearable,
-    options: sqlDataFromJson.professors,
+    options: localProfessors,
     setOuterValue: setOuterProfessor,
     value: outerProfessor,
     findCorrectObject: findProfessorObject,
@@ -359,9 +366,17 @@ function SelectProfessor({
   return <DefaultSelect {...SelectProfessorStates} />;
 }
 
-function SelectRoom({ outerRoom, setOuterRoom, outerIsClearable = true }) {
+function SelectRoom({
+  outerRoom,
+  setOuterRoom,
+  outerIsClearable = true,
+  rooms = [],
+}) {
+  const checkDB = rooms.length > 0;
+  const localRooms = checkDB ? rooms : sqlDataFromJson.salas;
+
   function findRoomObject(room) {
-    const roomsList = sqlDataFromJson.salas;
+    const roomsList = localRooms;
     const roomObject = getItemFromListById(room, roomsList);
     return roomObject ?? null;
   }
@@ -369,7 +384,7 @@ function SelectRoom({ outerRoom, setOuterRoom, outerIsClearable = true }) {
   const SelectRoomStates = {
     placeHolderText: "Sala",
     isClearable: outerIsClearable,
-    options: sqlDataFromJson.salas,
+    options: localRooms,
     setOuterValue: setOuterRoom,
     value: outerRoom,
     findCorrectObject: findRoomObject,
@@ -547,7 +562,7 @@ function SelectFilterExpectedSemester({
 /* \ ClassTimes / */
 
 function SelectClassTimeRoom(classTimeStates) {
-  const { classes, setClasses, classItem, setClassItem, classTime } =
+  const { classes, setClasses, classItem, setClassItem, classTime, rooms } =
     classTimeStates;
 
   function updateClassTimeRoom(newRoom) {
@@ -563,6 +578,7 @@ function SelectClassTimeRoom(classTimeStates) {
   const roomStates = {
     outerRoom: classTime.sala,
     setOuterRoom: updateClassTimeRoom,
+    rooms,
   };
 
   return <SelectRoom {...roomStates} />;
@@ -689,7 +705,7 @@ function SelectClassYear(classStates) {
   }
 
   const yearStates = {
-    outerYear: classItem.ano,
+    outerYear: classItem?.ano,
     setOuterYear: updateClassYear,
   };
 
@@ -710,7 +726,7 @@ function SelectClassSemester(classStates) {
   }
 
   const semesterStates = {
-    outerSemester: classItem.semestre,
+    outerSemester: classItem?.semestre,
     setOuterSemester: updateClassSemester,
   };
 
@@ -718,8 +734,9 @@ function SelectClassSemester(classStates) {
 }
 
 function SelectClassSubject(classStates) {
-  const { classes, setClasses, classItem, setClassItem } = classStates;
-
+  const { classes, setClasses, classItem, setClassItem, subjects } =
+    classStates;
+  // console.log("SelectClassSubject", subjects);
   function updateClassSubject(newSubject) {
     const newClass = { ...classItem, disciplina: newSubject ?? null };
     const newClasses = replaceNewItemInListById(newClass, classes);
@@ -730,6 +747,7 @@ function SelectClassSubject(classStates) {
   const subjectStates = {
     outerSubject: classItem?.disciplina,
     setOuterSubject: updateClassSubject,
+    subjects,
   };
 
   // console.log("SelectClassSubject", classItem?.disciplina?.apelido);
@@ -738,7 +756,8 @@ function SelectClassSubject(classStates) {
 }
 
 function SelectClassProfessor(classStates) {
-  const { classes, setClasses, classItem, setClassItem } = classStates;
+  const { classes, setClasses, classItem, setClassItem, professors } =
+    classStates;
 
   function updateClassProfessor(newProfessor) {
     const newClass = { ...classItem, professor: newProfessor ?? null };
@@ -748,8 +767,9 @@ function SelectClassProfessor(classStates) {
   }
 
   const professorStates = {
-    outerProfessor: classItem.professor,
+    outerProfessor: classItem?.professor,
     setOuterProfessor: updateClassProfessor,
+    professors,
   };
 
   return <SelectProfessor {...professorStates} />;

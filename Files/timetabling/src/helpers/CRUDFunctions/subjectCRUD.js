@@ -36,6 +36,7 @@ function readSubject({ setSubjects, setSubject, subject }) {
     const keepCurrentSubject = subjectsFromDB?.[index];
     const lastSubject = subjectsFromDB[subjectsFromDB.length - 1];
     const showedSubject = keepCurrentSubject ?? lastSubject;
+    // console.log("subjectsFromDB", subjectsFromDB);
     setSubject(showedSubject);
     setSubjects(subjectsFromDB);
   }

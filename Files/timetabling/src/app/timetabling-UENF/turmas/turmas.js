@@ -1,5 +1,5 @@
 import "./turmas.css";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
@@ -17,6 +17,9 @@ import {
   updateClass,
   deleteClass,
 } from "../../../helpers/CRUDFunctions/classCRUD";
+import { readSubject } from "../../../helpers/CRUDFunctions/subjectCRUD";
+import { readProfessor } from "../../../helpers/CRUDFunctions/professorCRUD";
+import { readRoom } from "../../../helpers/CRUDFunctions/roomCRUD";
 import {
   TextInputClassExpectedDemand,
   TextInputClassId,
@@ -41,6 +44,7 @@ function TurmaSelection(classStates) {
 }
 
 function ClassData(classesStates) {
+  const conflictStyles = classesStates.conflicts.styled;
   return (
     <div className="showBasicDataCard">
       <h3>INFORMAÇÕES DA TURMA</h3>
@@ -58,19 +62,19 @@ function ClassData(classesStates) {
           </tr>
           <tr>
             <th>Disciplina</th>
-            <td>
+            <td {...conflictStyles.subject}>
               <SelectClassSubject {...classesStates} />
             </td>
           </tr>
           <tr>
             <th>Professor</th>
-            <td>
+            <td {...conflictStyles.professor.merged}>
               <SelectClassProfessor {...classesStates} />
             </td>
           </tr>
           <tr>
             <th>Demanda Estimada</th>
-            <td>
+            <td {...conflictStyles.expectedDemand}>
               <TextInputClassExpectedDemand {...classesStates} />
             </td>
           </tr>
@@ -87,27 +91,53 @@ function ClassData(classesStates) {
 }
 
 function Classes() {
-  const classIndex = useRef(sqlDataFromJson.classes.length);
+  // const classIndex = useRef(sqlDataFromJson.classes.length);
   // let defaultClasses = getFullHorarios();
 
-  const defaultClassItem = {
+  /* const defaultClassItem = {
     ...options.emptyObjects.classItem,
     id: classIndex.current,
     idTurma: classIndex.current,
-  };
-  const defaultClasses = [defaultClassItem];
+  }; */
+  // const defaultClasses = [defaultClassItem];
+  const defaultClasses = [];
 
   const [classes, setClasses] = useState(defaultClasses);
   const [classItem, setClassItem] = useState(classes[0]);
+  const [professors, setProfessors] = useState([]);
+  const [subjects, setSubjects] = useState([]);
+  const [rooms, setRooms] = useState([]);
+
+  const selectStates = {
+    professors,
+    setProfessors,
+    professor: {},
+    setProfessor: () => {},
+    subjects,
+    setSubjects,
+    subject: {},
+    setSubject: () => {},
+    rooms,
+    setRooms,
+    room: {},
+    setRoom: () => {},
+  };
 
   const conflicts = getClassItemConflicts(classes, classItem);
   const classesStates = {
+    ...selectStates,
     classes,
     setClasses,
     classItem,
     setClassItem,
     conflicts,
   };
+
+  useEffect(() => {
+    // console.log("useEffect", subjects);
+  }, [subjects]);
+
+  // console.log("subjects", subjects);
 
   /* useEffect(() => {
     updateClass(classesStates);
@@ -117,6 +147,14 @@ function Classes() {
     classItem?.disciplina?.id,
     classItem?.professor?.id,
   ]); */
+
+  useEffect(() => {
+    // console.log("initialUseEffect", subjects);
+    readClass(classesStates);
+    readProfessor(selectStates);
+    readSubject(selectStates);
+    readRoom(selectStates);
+  }, []);
 
   const classTimes = classItem?.horarios ?? [];
 

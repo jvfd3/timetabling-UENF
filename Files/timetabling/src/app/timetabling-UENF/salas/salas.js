@@ -1,7 +1,7 @@
 import "./salas.css";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
 import { SelectRoomItem, SelectRoomBlock } from "../../../components/mySelects";
 import { getClassesData } from "../../../DB/retrieveData";
@@ -35,7 +35,7 @@ function RoomSelection(roomStates) {
   );
 }
 
-function RoomBaseInfo(myRoomsStates) {
+function RoomBaseInfo(roomStates) {
   return (
     <div className="showBasicDataCard">
       <h3>INFORMAÇÕES DA SALA</h3>
@@ -50,7 +50,7 @@ function RoomBaseInfo(myRoomsStates) {
           <tr>
             <th>Bloco</th>
             <td>
-              <SelectRoomBlock {...myRoomsStates} />
+              <SelectRoomBlock {...roomStates} />
             </td>
             {/* For debug purposes */}
             {/* <td>{bloco}</td> */}
@@ -58,7 +58,7 @@ function RoomBaseInfo(myRoomsStates) {
           <tr>
             <th>Descrição</th>
             <td>
-              <TextInputRoomDescription {...myRoomsStates} />
+              <TextInputRoomDescription {...roomStates} />
             </td>
             {/* For debug purposes */}
             {/* <td>{descricao}</td> */}
@@ -67,7 +67,7 @@ function RoomBaseInfo(myRoomsStates) {
             <th>Código</th>
             {/* <td>{codigo}</td> */}
             <td>
-              <TextInputRoomCode {...myRoomsStates} />
+              <TextInputRoomCode {...roomStates} />
             </td>
             {/* For debug purposes */}
             {/* <td>{codigo}</td> */}
@@ -75,7 +75,7 @@ function RoomBaseInfo(myRoomsStates) {
           <tr>
             <th>Capacidade</th>
             <td>
-              <TextInputRoomCapacity {...myRoomsStates} />
+              <TextInputRoomCapacity {...roomStates} />
             </td>
             {/* For debug purposes */}
             {/* <td>{capacidade}</td> */}
@@ -83,7 +83,7 @@ function RoomBaseInfo(myRoomsStates) {
           <tr>
             <th>ID</th>
             <td>
-              <TextInputRoomId {...myRoomsStates} />
+              <TextInputRoomId {...roomStates} />
             </td>
             {/* For debug purposes */}
             {/* <td>{id}</td> */}
@@ -154,11 +154,11 @@ function ClassesInRoom(room) {
   );
 }
 
-function RoomCard(myRoomsStates) {
+function RoomCard(roomStates) {
   return (
     <div className="infoCard">
-      <RoomBaseInfo {...myRoomsStates} />
-      <ClassesInRoom {...myRoomsStates.room} />
+      <RoomBaseInfo {...roomStates} />
+      <ClassesInRoom {...roomStates.room} />
     </div>
   );
 }
@@ -170,12 +170,16 @@ function Rooms() {
   const [rooms, setRooms] = useState(defaultRooms);
   const [room, setRoom] = useState(rooms[3]);
 
-  const myRoomsStates = { rooms, setRooms, room, setRoom };
+  const roomStates = { rooms, setRooms, room, setRoom };
+
+  useEffect(() => {
+    readRoom(roomStates);
+  }, []);
 
   return (
     <div className="CRUDContainComponents">
-      <RoomSelection {...myRoomsStates} />
-      <RoomCard {...myRoomsStates} />
+      <RoomSelection {...roomStates} />
+      <RoomCard {...roomStates} />
     </div>
   );
 }

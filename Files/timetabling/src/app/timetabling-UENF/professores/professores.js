@@ -1,5 +1,5 @@
 import "./professores.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CRUDPageSelection from "../../../components/PageSelect";
 import options from "../../../DB/local/options";
 import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
@@ -96,8 +96,8 @@ function ProfessorCard(professorStates) {
 }
 
 function Professors() {
-  // const defaultProfessors = sqlDataFromJson.professors;
-  const defaultProfessors = [];
+  const defaultProfessors = sqlDataFromJson.professors;
+  // const defaultProfessors = [];
 
   const [professors, setProfessors] = useState(defaultProfessors);
   const [professor, setProfessor] = useState(professors[0]);
@@ -108,6 +108,10 @@ function Professors() {
     professor,
     setProfessor,
   };
+
+  useEffect(() => {
+    readProfessor(professorStates);
+  }, []);
 
   return (
     <div className="CRUDContainComponents">

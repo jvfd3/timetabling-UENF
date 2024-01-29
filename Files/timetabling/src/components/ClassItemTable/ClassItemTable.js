@@ -34,15 +34,9 @@ function ClassTableHeader(createStates) {
 
 function ClassItemTableRow(classItemRowStates) {
   const { classItem, filteredClasses } = classItemRowStates;
-
   const [oldClassItem, setOldClassItem] = useState(classItem);
-
   const conflicts = getClassItemConflicts(filteredClasses, classItem);
-
-  const classTimeTableProps = {
-    ...classItemRowStates,
-    conflicts,
-  };
+  const classTimeTableProps = { ...classItemRowStates, conflicts };
 
   const CRUDClassItemProps = {
     classItem,
@@ -77,7 +71,8 @@ function ClassItemTableRow(classItemRowStates) {
   );
 }
 
-function ClassesTable(classStates) {
+function ClassesTable(globalStates) {
+  const { classStates } = globalStates;
   const { filteredClasses } = classStates;
 
   const createStates = {

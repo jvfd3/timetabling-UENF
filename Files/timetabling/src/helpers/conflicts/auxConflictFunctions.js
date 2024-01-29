@@ -106,9 +106,9 @@ function splitTurmas(turmas) {
     return splittedClasses;
   } */
   let newSplittedTurmas = [];
-  turmas.forEach((turma) => {
-    if (turma.horarios !== null && turma.horarios.length > 0) {
-      turma.horarios.forEach((horario) => {
+  turmas?.forEach((turma) => {
+    if (turma?.horarios !== null && turma?.horarios?.length > 0) {
+      turma?.horarios.forEach((horario) => {
         let newTurma = flattenTurma(turma, horario);
         newSplittedTurmas.push(newTurma);
       });
@@ -118,7 +118,7 @@ function splitTurmas(turmas) {
         /* when I do that, the idHorario is null and it shouldn't. Check it later. */
         ...turma,
       };
-      delete newTurma.horarios;
+      delete newTurma?.horarios;
       newSplittedTurmas.push(newTurma);
     }
   });

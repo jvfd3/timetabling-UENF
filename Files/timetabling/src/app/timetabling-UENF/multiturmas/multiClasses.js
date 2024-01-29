@@ -9,6 +9,9 @@ import {
   createClass,
   readClass,
 } from "../../../helpers/CRUDFunctions/classCRUD";
+import { readSubject } from "../../../helpers/CRUDFunctions/subjectCRUD";
+import { readProfessor } from "../../../helpers/CRUDFunctions/professorCRUD";
+import { readRoom } from "../../../helpers/CRUDFunctions/roomCRUD";
 import {
   getDefaultClassItem,
   getDefaultClassTime,
@@ -54,7 +57,7 @@ function MultiClassesCard(globalStates) {
       <MultiClassesCardHeader {...globalStates} />
       <div className="showBasicDataCard">
         {hasClasses ? (
-          <ClassesTable {...classStates} />
+          <ClassesTable {...globalStates} />
         ) : (
           <NoOfferedClasses {...classStates} />
         )}
@@ -72,6 +75,10 @@ function MultiClassesRefactor() {
   const [filteredClasses, setFilteredClasses] = useState([]);
   const [classItem, setClassItem] = useState(getDefaultClassItem());
 
+  const [professors, setProfessors] = useState([]);
+  const [subjects, setSubjects] = useState([]);
+  const [rooms, setRooms] = useState([]);
+
   const classTimeStates = {
     classTimes,
     setClassTimes,
@@ -80,7 +87,22 @@ function MultiClassesRefactor() {
     classTime,
     setClassTime,
   };
+  const selectStates = {
+    professors,
+    setProfessors,
+    professor: {},
+    setProfessor: () => {},
+    subjects,
+    setSubjects,
+    subject: {},
+    setSubject: () => {},
+    rooms,
+    setRooms,
+    room: {},
+    setRoom: () => {},
+  };
   const classStates = {
+    ...selectStates,
     classes,
     setClasses,
     filteredClasses,
@@ -94,12 +116,10 @@ function MultiClassesRefactor() {
   useEffect(() => {
     readClassTime(classTimeStates);
     readClass(classStates);
+    readSubject(selectStates);
+    readProfessor(selectStates);
+    readRoom(selectStates);
   }, []);
-
-  useEffect(() => {
-    // console.log("filteredClassTimes", filteredClassTimes);
-    // console.log("filteredClasses", filteredClasses);
-  }, [filteredClassTimes, filteredClasses]);
 
   return (
     <div className="CRUDContainComponents">

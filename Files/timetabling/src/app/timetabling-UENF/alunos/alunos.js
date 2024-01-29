@@ -1,5 +1,5 @@
 import "./alunos.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
@@ -107,6 +107,10 @@ function Students() {
   const [student, setStudent] = useState(students[38]); // JVFD
 
   const studentStates = { students, setStudents, student, setStudent };
+
+  useEffect(() => {
+    readStudent(studentStates);
+  }, []);
 
   return (
     <div className="CRUDContainComponents">
