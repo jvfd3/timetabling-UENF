@@ -124,7 +124,7 @@ function MultiClassesRefactor() {
   return (
     <div className="CRUDContainComponents">
       <MultiClassesCard {...globalStates} />
-      {/* <NotOfferedSubjects {...classStates} /> */}
+      <NotOfferedSubjects {...classStates} />
     </div>
   );
 }

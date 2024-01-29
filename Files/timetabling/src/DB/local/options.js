@@ -7,7 +7,7 @@ const options = {
     iconButtons: true,
     defaultIndexes: {
       year: 13,
-      semester: 0,
+      semester: 1,
       professor: 0,
       student: 0,
       subject: 0,
