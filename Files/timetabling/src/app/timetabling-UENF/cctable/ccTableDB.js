@@ -1,6 +1,6 @@
+import "./ccTable.css";
 import options from "../../../DB/local/options";
 import { filterDay, filterHour } from "../../../helpers/filteringFunc";
-import "./ccTable.css";
 
 function TopLeft() {
   return <th className="TopLeftCorner"></th>;

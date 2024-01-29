@@ -1,17 +1,17 @@
 import "./multiTurmas.css";
 import React, { useState, useEffect } from "react";
+import ClassesTable from "../../../components/ClassItemTable/ClassItemTable";
+import NotOfferedSubjects from "../../../components/multiClasses/NotOfferedSubjects";
 import { SmartCreateClassItem } from "../../../components/Buttons/Smart/Smart";
 import { MultiClassesFilters } from "../../../components/Filters/Filters";
 import { readClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
-import ClassesTable from "../../../components/ClassItemTable/ClassItemTable";
-import NotOfferedSubjects from "../../../components/multiClasses/NotOfferedSubjects";
+import { readSubject } from "../../../helpers/CRUDFunctions/subjectCRUD";
+import { readProfessor } from "../../../helpers/CRUDFunctions/professorCRUD";
+import { readRoom } from "../../../helpers/CRUDFunctions/roomCRUD";
 import {
   createClass,
   readClass,
 } from "../../../helpers/CRUDFunctions/classCRUD";
-import { readSubject } from "../../../helpers/CRUDFunctions/subjectCRUD";
-import { readProfessor } from "../../../helpers/CRUDFunctions/professorCRUD";
-import { readRoom } from "../../../helpers/CRUDFunctions/roomCRUD";
 import {
   getDefaultClassItem,
   getDefaultClassTime,

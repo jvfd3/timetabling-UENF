@@ -1,7 +1,7 @@
+import "./main.css";
 import React from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
-import "./main.css";
 // import Workbench from ""../../../components/tests/Workbench";
 
 function Main() {
