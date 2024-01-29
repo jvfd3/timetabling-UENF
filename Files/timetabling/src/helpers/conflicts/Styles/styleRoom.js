@@ -155,7 +155,7 @@ function getRoomStyledConflict(conflicts, classTime) {
 
   // console.log("roomStyles", roomStyles.merged);
 
-  return roomStyles.merged;
+  return roomStyles;
 }
 
 export { getRoomStyledConflict /* , getAllocStyledConflict */ };

@@ -122,7 +122,7 @@ function getProfessorStyledConflict(conflicts, classItem) {
   // professorStyles.subjects = getSubjectsStyles();
   professorStyles.merged = mergeStyles(professorStyles);
 
-  return professorStyles.merged;
+  return professorStyles;
 }
 
 export { getProfessorStyledConflict };

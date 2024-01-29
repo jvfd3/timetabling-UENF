@@ -44,7 +44,7 @@ function ClassTimeRow(classTimeRowStates) {
         <SmartDeleteClassTime {...CRUDClassTimeProps} />
         <SmartUpdateClassTime {...CRUDClassTimeProps} />
       </td>
-      <td {...conflictStyles.room}>
+      <td {...conflictStyles.room.merged}>
         <SelectClassTimeRoom {...classTimeRowStates} />
       </td>
       <td {...conflictStyles.day}>
