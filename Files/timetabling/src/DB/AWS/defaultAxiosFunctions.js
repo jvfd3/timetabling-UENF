@@ -127,10 +127,13 @@ async function defaultDBRead(itemName) {
   let returnedData = null;
   let localError = null;
   isDebugging && console.log(toastMessages.pretty);
+  // console.log("itemName", itemName);
   if (false) {
   } else {
     try {
+      // console.log("preRead", itemName);
       let response = await myAxios.read(itemName);
+      // console.log("response", response);
       isDebugging && debugPayload(response); // Only Executes if isDebugging is true
       returnedData = response.data.queryResult;
       const statusCode = response.status;

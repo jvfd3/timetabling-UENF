@@ -49,6 +49,7 @@ function createClassTime(classTimeStates) {
 function readClassTime(classTimeStates) {
   const { classTimes, setClassTimes, classTime, setClassTime } =
     classTimeStates;
+
   function getIndexFromCurrentClassTime(currentClassTime) {
     const index = getItemIndexInListById(currentClassTime, classTimes);
     return index == -1 ? 0 : index;
@@ -57,12 +58,17 @@ function readClassTime(classTimeStates) {
     const index = getIndexFromCurrentClassTime(classTime);
     const lastItem = dataFromDB[dataFromDB.length - 1];
     const currentClassTime = dataFromDB?.[index] ?? lastItem;
+    // console.log("currentClassTime", dataFromDB.length);
     setClassTime(currentClassTime);
     setClassTimes(dataFromDB);
   }
 
+  // console.log("readingClassTime");
   defaultDBRead(itemName)
-    .then(insertNewClassTimesFromDB)
+    .then((data) => {
+      console.log(data.length);
+      insertNewClassTimesFromDB(data);
+    })
     .catch(defaultHandleError);
 }
 

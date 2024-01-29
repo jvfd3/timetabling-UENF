@@ -125,7 +125,7 @@ function MultiClassesFilters({ classTimeStates, classStates }) {
   );
 }
 
-function CCTableFilters({ setCurrentClasses, allSplittedClasses }) {
+function CCTableFiltersOffline({ setCurrentClasses, allSplittedClasses }) {
   const years = options.constantValues.years;
   const yearIndex = options.config.defaultIndexes.year;
   const semesters = options.constantValues.semesters;
@@ -166,4 +166,49 @@ function CCTableFilters({ setCurrentClasses, allSplittedClasses }) {
   );
 }
 
-export { MultiClassesFilters, CCTableFilters };
+function CCTableFilters(globalStates) {
+  const { classTimeStates, selectStates } = globalStates;
+  const { classTimes, setFilteredClassTimes, setClassTime } = classTimeStates;
+  const { professors, subjects, rooms } = selectStates;
+
+  const years = options.constantValues.years;
+  const yearIndex = options.config.defaultIndexes.year;
+  const semesters = options.constantValues.semesters;
+  const semesterIndex = options.config.defaultIndexes.semester;
+
+  const [year, setYear] = useState(years[yearIndex]);
+  const [semester, setSemester] = useState(semesters[semesterIndex]);
+  const [professor, setProfessor] = useState(null);
+  const [room, setRoom] = useState(null);
+  const [expectedSemester, setExpectedSemester] = useState(null);
+
+  const props = {
+    year: { year, setYear },
+    semester: { semester, setSemester },
+    professor: { professors, professor, setProfessor },
+    room: { rooms, room, setRoom },
+    expectedSemester: { expectedSemester, setExpectedSemester },
+  };
+
+  useEffect(() => {
+    let filtering = classTimes;
+    filtering = filterYear(filtering, year);
+    filtering = filterSemester(filtering, semester);
+    filtering = filterProfessor(filtering, professor);
+    filtering = filterRoom(filtering, room);
+    filtering = filterExpectedSemester(filtering, expectedSemester);
+    setFilteredClassTimes(filtering);
+  }, [year, semester, professor, room, expectedSemester, classTimes]);
+
+  return (
+    <div className="CCTableFilters">
+      <FilterYear {...props.year} />
+      <FilterSemester {...props.semester} />
+      <FilterProfessor {...props.professor} />
+      <FilterRoom {...props.room} />
+      <FilterExpectedSemester {...props.expectedSemester} />
+    </div>
+  );
+}
+
+export { MultiClassesFilters, CCTableFiltersOffline, CCTableFilters };

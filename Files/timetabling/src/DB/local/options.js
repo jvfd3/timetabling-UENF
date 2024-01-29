@@ -6,8 +6,8 @@ const options = {
   config: {
     iconButtons: true,
     defaultIndexes: {
-      year: 13,
-      semester: 1,
+      year: 10,
+      semester: 0,
       professor: 0,
       student: 0,
       subject: 0,

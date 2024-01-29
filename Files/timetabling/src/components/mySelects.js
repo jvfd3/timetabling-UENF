@@ -505,7 +505,7 @@ function SelectFilterSemester({ semester, setSemester }) {
   return <SelectSemester {...semesterStates} />;
 }
 
-function SelectFilterProfessor({ professor, setProfessor }) {
+function SelectFilterProfessor({ professor, setProfessor, professors }) {
   function updateOuterProfessor(newProfessor) {
     const newProfessorValue = newProfessor ?? null;
     setProfessor(newProfessorValue);
@@ -515,12 +515,13 @@ function SelectFilterProfessor({ professor, setProfessor }) {
     outerProfessor: professor,
     setOuterProfessor: updateOuterProfessor,
     outerIsClearable: true,
+    professors,
   };
 
   return <SelectProfessor {...professorStates} />;
 }
 
-function SelectFilterRoom({ room, setRoom }) {
+function SelectFilterRoom({ room, setRoom, rooms }) {
   function updateOuterRoom(newRoom) {
     const newRoomValue = newRoom ?? null;
     setRoom(newRoomValue);
@@ -530,6 +531,7 @@ function SelectFilterRoom({ room, setRoom }) {
     outerRoom: room,
     setOuterRoom: updateOuterRoom,
     outerIsClearable: true,
+    rooms,
   };
 
   return <SelectRoom {...roomStates} />;

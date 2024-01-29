@@ -1,127 +1,186 @@
 import "./ccTable.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { getClassesData } from "../../../DB/retrieveData";
 import { splitTurmas } from "../../../helpers/conflicts/auxConflictFunctions";
 import { filterDay, filterHour } from "../../../helpers/filteringFunc";
-import { CCTableFilters } from "../../../components/Filters/Filters";
+import {
+  CCTableFiltersOffline,
+  CCTableFilters,
+} from "../../../components/Filters/Filters";
+import { getDefaultClassTime } from "../../../helpers/auxCRUD";
+import { readClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
+import { readSubject } from "../../../helpers/CRUDFunctions/subjectCRUD";
+import { readProfessor } from "../../../helpers/CRUDFunctions/professorCRUD";
+import { readRoom } from "../../../helpers/CRUDFunctions/roomCRUD";
+import CCTableDB from "./ccTableDB";
+
+function getCellMessage(turma) {
+  // console.log("turma", turma.sala);
+  const subject = turma.disciplina;
+  const prof = turma.professor;
+  const room = turma.sala;
+  const subjectInfo = subject
+    ? `${subject?.periodo} - ${subject?.apelido}`
+    : "Discip. indef.";
+  const profInfo = prof ? `${prof.apelido}` : "Prof. indef.";
+  const roomInfo = room
+    ? `${room?.bloco}${room?.codigo ? "-" + room?.codigo : ""}`
+    : "Sala indef.";
+  const cellMessage = `${subjectInfo} (${profInfo} / ${roomInfo})`;
+  return cellMessage;
+}
+
+function CellContent({ turmas }) {
+  const listaDeTurmas = turmas.map((turma) => {
+    const cellMessage = getCellMessage(turma);
+    const cellKey = `ChaveCellContent: ${turma.idTurma}-${turma.idHorario}`;
+    return (
+      <div key={cellKey} className="eachClassInCell">
+        {cellMessage}
+      </div>
+    );
+  });
+
+  return listaDeTurmas;
+}
+
+function Linha({ hora, curClasses }) {
+  const turmasDaHora = filterHour(curClasses, hora);
+
+  const daysColumn = options.constantValues.days.map((dia) => {
+    const turmasDoDia = filterDay(turmasDaHora, dia.value);
+
+    return (
+      <td key={`Key Coluna: ${dia.value}-${hora}`} className="ContentCell">
+        <CellContent turmas={turmasDoDia} />
+      </td>
+    );
+  });
+
+  return (
+    <tr key={`Linha: ${hora}`}>
+      <td className="HorariosCol" key={`Linha: ${hora}, Header: ${hora}`}>
+        {hora}
+      </td>
+      {daysColumn}
+    </tr>
+  );
+}
+
+function TopRow() {
+  const daysList = options.constantValues.days;
+  const days = daysList.map((day, index) => {
+    return (
+      <th key={index} className="DiasHeader">
+        {day.label}
+      </th>
+    );
+  });
+
+  return [days];
+}
+
+function TopLeft() {
+  return <th className="TopLeftCorner"></th>;
+}
+
+function Header() {
+  return (
+    <thead>
+      <tr className="HeaderRow">
+        <TopLeft />
+        <TopRow />
+      </tr>
+    </thead>
+  );
+}
+
+function Body({ curClasses }) {
+  const hoursTangList = options.constantValues.hoursTang;
+  return (
+    <tbody>
+      {hoursTangList.map((iterHour) => (
+        <Linha
+          key={`Linha: ${iterHour.hora}`}
+          hora={iterHour.hora}
+          curClasses={curClasses}
+        />
+      ))}
+    </tbody>
+  );
+}
+
+function CCTableOffline({ curClasses }) {
+  return (
+    <table className="TabelaCC">
+      <Header />
+      <Body curClasses={curClasses} />
+    </table>
+  );
+}
 
 function CCTableView() {
+  const [classTimes, setClassTimes] = useState([]);
+  const [filteredClassTimes, setFilteredClassTimes] = useState([]);
+  const [classTime, setClassTime] = useState(getDefaultClassTime());
+
+  const [professors, setProfessors] = useState([]);
+  const [subjects, setSubjects] = useState([]);
+  const [rooms, setRooms] = useState([]);
+
+  const classTimeStates = {
+    classTimes,
+    setClassTimes,
+    filteredClassTimes,
+    setFilteredClassTimes,
+    classTime,
+    setClassTime,
+  };
+
+  // console.log(classTimes.length, filteredClassTimes.length);
+
+  const selectStates = {
+    professors,
+    setProfessors,
+    professor: {},
+    setProfessor: () => {},
+    subjects,
+    setSubjects,
+    subject: {},
+    setSubject: () => {},
+    rooms,
+    setRooms,
+    room: {},
+    setRoom: () => {},
+  };
+
+  const globalStates = { classTimeStates, selectStates };
+
+  useEffect(() => {
+    // console.log("useEffect");
+    readRoom(selectStates);
+    readProfessor(selectStates);
+    readSubject(selectStates);
+    readClassTime(classTimeStates);
+  }, []);
+
   const turmas = getClassesData();
   const allSplittedClasses = splitTurmas(turmas);
   const [currentClasses, setCurrentClasses] = useState(allSplittedClasses);
-
-  function CCTable2({ curClasses }) {
-    function Header() {
-      function TopLeft() {
-        return <th className="TopLeftCorner"></th>;
-      }
-
-      function TopRow() {
-        const daysList = options.constantValues.days;
-        const days = daysList.map((day, index) => {
-          return (
-            <th key={index} className="DiasHeader">
-              {day.label}
-            </th>
-          );
-        });
-
-        return [days];
-      }
-      return (
-        <thead>
-          <tr className="HeaderRow">
-            <TopLeft />
-            <TopRow />
-          </tr>
-        </thead>
-      );
-    }
-
-    function Body() {
-      function Linha({ hora }) {
-        const turmasDaHora = filterHour(curClasses, hora);
-        // console.log("turmasDaHora", turmasDaHora);
-        // console.log("hora", hora);
-        const daysColumn = options.constantValues.days.map((dia) => {
-          const turmasDoDia = filterDay(turmasDaHora, dia.value);
-
-          function CellContent({ turmas }) {
-            function getCellMessage(turma) {
-              // console.log("turma", turma.sala);
-              const subject = turma.disciplina;
-              const prof = turma.professor;
-              const room = turma.sala;
-              const subjectInfo = subject
-                ? `${subject?.periodo} - ${subject?.apelido}`
-                : "Discip. indef.";
-              const profInfo = prof ? `${prof.apelido}` : "Prof. indef.";
-              const roomInfo = room
-                ? `${room?.bloco}${room?.codigo ? "-" + room?.codigo : ""}`
-                : "Sala indef.";
-              const cellMessage = `${subjectInfo} (${profInfo} / ${roomInfo})`;
-              return cellMessage;
-            }
-
-            const listaDeTurmas = turmas.map((turma) => {
-              const cellMessage = getCellMessage(turma);
-              const cellKey = `ChaveCellContent: ${turma.idTurma}-${turma.idHorario}`;
-              return (
-                <div key={cellKey} className="eachClassInCell">
-                  {cellMessage}
-                </div>
-              );
-            });
-
-            return listaDeTurmas;
-          }
-
-          return (
-            <td
-              key={`Key Coluna: ${dia.value}-${hora}`}
-              className="ContentCell"
-            >
-              <CellContent turmas={turmasDoDia} />
-            </td>
-          );
-        });
-
-        return (
-          <tr key={`Linha: ${hora}`}>
-            <td className="HorariosCol" key={`Linha: ${hora}, Header: ${hora}`}>
-              {hora}
-            </td>
-            {daysColumn}
-          </tr>
-        );
-      }
-      const hoursTangList = options.constantValues.hoursTang;
-      return (
-        <tbody>
-          {hoursTangList.map((iterHour) => (
-            <Linha key={`Linha: ${iterHour.hora}`} hora={iterHour.hora} />
-          ))}
-        </tbody>
-      );
-    }
-
-    return (
-      <table className="TabelaCC">
-        <Header />
-        <Body />
-      </table>
-    );
-  }
 
   const filterStates = { allSplittedClasses, setCurrentClasses };
 
   return (
     <div className="CRUDContainComponents">
       <div className="infoCard">
-        <CCTableFilters {...filterStates} />
-        <CCTable2 curClasses={currentClasses} />
+        <CCTableFilters {...globalStates} />
+        <CCTableDB classTimes={filteredClassTimes} />
+        {/*
+        <CCTableFiltersOffline {...filterStates} />
+        <CCTableOffline curClasses={currentClasses} />
+        */}
       </div>
     </div>
   );

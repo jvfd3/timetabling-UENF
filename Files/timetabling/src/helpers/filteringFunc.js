@@ -113,7 +113,7 @@ function filterExpectedSemester(classes, expectedSemester) {
     filteredClasses = generalFilter(
       classes,
       ["disciplina", "periodo"],
-      expectedSemester?.value
+      expectedSemester?.value ?? expectedSemester
     );
   }
   // console.log("classes", classes.length);
