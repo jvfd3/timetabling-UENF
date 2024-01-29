@@ -1,5 +1,4 @@
 import options from "../../../DB/local/options";
-// import { getAllocStyledConflict } from "./styleRoom";
 
 const conflictOptions = options.config.colors.conflicts;
 
@@ -37,27 +36,6 @@ function getDurationNotSetStyle(classTime) {
   return notSetStyle;
 }
 
-function getDurationRoomAllocStyle(conflicts, classTime) {
-  const allocStyledConflict = getAllocStyledConflict(conflicts.old1, classTime);
-  // console.log(a);
-  // There might be a better way of doing it instead of recalculating everything
-  /*
-    const defaultRoomAllocStyle = { title: defaultTitles.roomAlloc, style: {} };
-    const conflictRoomAllocStyle = {
-      title: defaultTitles.roomAlloc,
-      style: {
-        backgroundColor: conflictOptions.hasConflict.room,
-      },
-    };
-
-    const hasRoomAllocConflict = true;
-    const roomAllocStyle = hasRoomAllocConflict
-      ? conflictRoomAllocStyle
-      : defaultRoomAllocStyle;
-  */
-  return allocStyledConflict;
-}
-
 function mergeStyles(styles) {
   let newTitle = "";
   let newStyle = {};
@@ -67,14 +45,14 @@ function mergeStyles(styles) {
     newStyle = { ...newStyle, ...styles.default.style };
   }
 
-  if (styles.roomAlloc) {
-    newTitle += styles.roomAlloc.title;
-    newStyle = { ...newStyle, ...styles.roomAlloc.style };
-  }
-
   if (styles.professorAlloc) {
     newTitle += styles.professorAlloc.title;
     newStyle = { ...newStyle, ...styles.professorAlloc.style };
+  }
+
+  if (styles.roomAlloc) {
+    newTitle += styles.roomAlloc.title;
+    newStyle = { ...newStyle, ...styles.roomAlloc.style };
   }
 
   if (styles.notSet) {
@@ -91,15 +69,63 @@ function mergeStyles(styles) {
   return mergedStyles;
 }
 
+function getDurationStyleRoomAlloc(conflicts, classTime) {
+  const defaultStyle = { title: defaultTitles.roomAlloc, style: {} };
+  const conflictStyle = conflicts.room.alloc;
+
+  const rawRoomAllocConflict = conflicts.timeConflicts.raw.room.alloc;
+  const hasRoomAlloc = rawRoomAllocConflict.length !== 0;
+
+  const hasDuration = classTime.duracao !== 0;
+
+  const hasRoomAllocConflict = hasDuration && hasRoomAlloc;
+
+  const roomAllocStyle = hasRoomAllocConflict ? conflictStyle : defaultStyle;
+  // console.log("conflictStyle", classTime.duracao, hasRoomAllocConflict);
+
+  return roomAllocStyle;
+}
+
+function getDurationStyleProfessorAlloc(conflicts, classTime) {
+  const defaultStyle = { title: defaultTitles.professorAlloc, style: {} };
+  const conflictStyle = conflicts.itemConflicts.styled.professor.alloc;
+
+  const hasDuration = classTime.duracao !== 0;
+
+  const allocProfessor = conflicts.itemConflicts.raw.professor.alloc;
+
+  let hasDurationAllocProfessor = false;
+
+  allocProfessor.forEach((alloc) => {
+    const allocId = alloc.from.id;
+    if (allocId === classTime.id) {
+      hasDurationAllocProfessor = true;
+    }
+  });
+
+  const hasProfessorAllocConflict = hasDuration && hasDurationAllocProfessor;
+
+  const professorAllocStyle = hasProfessorAllocConflict
+    ? conflictStyle
+    : defaultStyle;
+  // console.log("conflictStyle", classTime.duracao, hasProfessorAllocConflict);
+
+  return professorAllocStyle;
+}
+
 function getStyledConflictDuration(conflicts, classTime) {
   const durationStyles = {};
 
-  console.log(conflicts);
-
   durationStyles.default = getDurationDefaultStyle();
   durationStyles.notSet = getDurationNotSetStyle(classTime);
-  // durationStyles.roomAlloc = getDurationRoomAllocStyle(conflicts, classTime);
-  // durationStyles.professorAlloc = getDurationProfessorAllocStyle();
+
+  // durationStyles.roomAlloc = conflicts.timeConflicts.styled.room.alloc;
+  durationStyles.roomAlloc = getDurationStyleRoomAlloc(conflicts, classTime);
+  durationStyles.professorAlloc = getDurationStyleProfessorAlloc(
+    conflicts,
+    classTime
+  );
+  // conflicts.itemConflicts.styled.professor.alloc;
 
   // durationStyles.professorPreferences = getDurationProfessorPreferencesStyle();
   // durationStyles.studentConflicts = getDurationStudentConflictsStyle();

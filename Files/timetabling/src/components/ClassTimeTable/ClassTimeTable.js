@@ -28,7 +28,8 @@ function ClassTimeRow(classTimeRowStates) {
     classTime,
     conflicts
   );
-  const conflictStyles = classTimeConflicts.styled;
+
+  const conflictStyles = classTimeConflicts.timeConflicts.styled;
 
   const CRUDClassTimeProps = {
     classTime,

@@ -52,13 +52,11 @@ function getRawTimeConflicts(classes, classTime) {
   return rawTimeConflicts;
 }
 
-function getStyledTimeConflict(timeConflicts, classTime) {
-  const classTimeStyles = {};
-  // console.log(classTime);
+function getStyledTimeConflict(conflicts, classTime) {
+  const classTimeStyles = { ...conflicts };
 
-  classTimeStyles.timeConflicts = timeConflicts;
-
-  classTimeStyles.room = getRoomStyledConflict(classTimeStyles, classTime);
+  // It's a little messy...
+  classTimeStyles.room = getRoomStyledConflict(conflicts, classTime);
   classTimeStyles.day = getDayStyledConflict(classTimeStyles, classTime);
   classTimeStyles.hour = getHourStyledConflict(classTimeStyles, classTime);
   classTimeStyles.duration = getStyledConflictDuration(
@@ -66,17 +64,19 @@ function getStyledTimeConflict(timeConflicts, classTime) {
     classTime
   );
 
+  delete classTimeStyles.conflicts;
+
   return classTimeStyles;
 }
 
-function getClassTimeConflicts(classes, classTime, conflicts) {
-  const timeConflicts = {};
-  // console.log(conflicts);
-  timeConflicts.itemConflicts = conflicts;
-  timeConflicts.raw = getRawTimeConflicts(classes, classTime);
-  timeConflicts.styled = getStyledTimeConflict(timeConflicts, classTime);
+function getClassTimeConflicts(classes, classTime, itemConflicts) {
+  const conflicts = { timeConflicts: {}, itemConflicts };
+  // console.log(itemConflicts);
 
-  return timeConflicts;
+  conflicts.timeConflicts.raw = getRawTimeConflicts(classes, classTime);
+  conflicts.timeConflicts.styled = getStyledTimeConflict(conflicts, classTime);
+
+  return conflicts;
 }
 
 export { getClassItemConflicts, getClassTimeConflicts };
