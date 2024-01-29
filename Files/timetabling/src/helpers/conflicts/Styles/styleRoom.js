@@ -116,6 +116,11 @@ function mergeStyles(styles) {
     newStyle = { ...newStyle, ...styles.default.style };
   }
 
+  if (styles.notSet) {
+    newTitle += styles.notSet.title;
+    newStyle = { ...newStyle, ...styles.notSet.style };
+  }
+
   if (styles.alloc) {
     newTitle += styles.alloc.title;
     newStyle = { ...newStyle, ...styles.alloc.style };
@@ -124,11 +129,6 @@ function mergeStyles(styles) {
   if (styles.demand) {
     newTitle += styles.demand.title;
     newStyle = { ...newStyle, ...styles.demand.style };
-  }
-
-  if (styles.notSet) {
-    newTitle += styles.notSet.title;
-    newStyle = { ...newStyle, ...styles.notSet.style };
   }
 
   const mergedStyles = {
