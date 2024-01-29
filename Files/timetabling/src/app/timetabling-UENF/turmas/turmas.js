@@ -1,8 +1,13 @@
 import "./turmas.css";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
-import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
+import ClassTimeTable from "../../../components/ClassTimeTable/ClassTimeTable";
+import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
+import { readSubject } from "../../../helpers/CRUDFunctions/subjectCRUD";
+import { readProfessor } from "../../../helpers/CRUDFunctions/professorCRUD";
+import { readRoom } from "../../../helpers/CRUDFunctions/roomCRUD";
+import { getClassItemConflicts } from "../../../helpers/conflicts/centralConflicts";
 import {
   SelectClassItem,
   SelectClassYear,
@@ -10,22 +15,16 @@ import {
   SelectClassSubject,
   SelectClassProfessor,
 } from "../../../components/mySelects";
-import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
 import {
   createClass,
   readClass,
   updateClass,
   deleteClass,
 } from "../../../helpers/CRUDFunctions/classCRUD";
-import { readSubject } from "../../../helpers/CRUDFunctions/subjectCRUD";
-import { readProfessor } from "../../../helpers/CRUDFunctions/professorCRUD";
-import { readRoom } from "../../../helpers/CRUDFunctions/roomCRUD";
 import {
   TextInputClassExpectedDemand,
   TextInputClassId,
 } from "../../../components/MyTextFields";
-import ClassTimeTable from "../../../components/ClassTimeTable/ClassTimeTable";
-import { getClassItemConflicts } from "../../../helpers/conflicts/centralConflicts";
 
 function TurmaSelection(classStates) {
   /* It just contains the selection an maybe allows scrolling selection */
