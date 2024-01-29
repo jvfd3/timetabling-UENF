@@ -96,10 +96,11 @@ function ProfessorCard(professorStates) {
 }
 
 function Professors() {
-  const defaultProfessors = sqlDataFromJson.professors;
+  // const defaultProfessors = sqlDataFromJson.professors;
+  const defaultProfessors = [];
 
   const [professors, setProfessors] = useState(defaultProfessors);
-  const [professor, setProfessor] = useState(professors[professors.length - 1]);
+  const [professor, setProfessor] = useState(professors[0]);
 
   const professorStates = {
     professors,

@@ -100,7 +100,10 @@ function StudentCard(studentStates) {
 }
 
 function Students() {
-  const [students, setStudents] = useState(sqlDataFromJson.students);
+  const defaultStudents = sqlDataFromJson.students;
+  // const defaultStudents = [];
+
+  const [students, setStudents] = useState(defaultStudents);
   const [student, setStudent] = useState(students[38]); // JVFD
 
   const studentStates = { students, setStudents, student, setStudent };

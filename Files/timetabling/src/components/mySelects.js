@@ -802,7 +802,7 @@ function SelectProfessorLab(professorStates) {
   }
 
   const labStates = {
-    outerLab: professor.laboratorio,
+    outerLab: professor?.laboratorio,
     setOuterLab: updateProfessorLab,
   };
 
@@ -823,7 +823,7 @@ function SelectProfessorCourse({
   }
 
   const courseStates = {
-    outerCourse: professor.curso,
+    outerCourse: professor?.curso,
     setOuterCourse: updateProfessorCourse,
   };
 
@@ -843,7 +843,7 @@ function SelectRoomItem({ rooms, setRooms, room, setRoom }) {
     customProps: {
       getOptionValue: (option) => option.id,
       getOptionLabel: (option) =>
-        `${option.capacidade} ${option.bloco} ${option.codigo}`,
+        `${option?.capacidade} ${option?.bloco} ${option?.codigo}`,
       formatOptionLabel: ({ capacidade, bloco, codigo }) => {
         let msg = "";
         msg += capacidade ? `(${capacidade})` : "(Cap. indef.)";
@@ -873,7 +873,7 @@ function SelectRoomBlock(myRoomStates) {
 
   const blockStates = {
     // outerBlock: room.bloco,
-    outerBlock: room.idBlock,
+    outerBlock: room?.idBlock,
     setOuterBlock: updateRoomBlock,
   };
 
@@ -891,8 +891,8 @@ function SelectSubjectItem({ subjects, setSubjects, subject, setSubject }) {
     value: subject,
     // findCorrectObject: ,
     customProps: {
-      getOptionValue: (option) => option.codigo,
-      getOptionLabel: (option) => `${option.codigo} - ${option.nome}`,
+      getOptionValue: (option) => option?.codigo,
+      getOptionLabel: (option) => `${option?.codigo} - ${option?.nome}`,
       formatOptionLabel: ({ codigo, nome }) => {
         let msg = "";
         msg += codigo ? `(${codigo})` : "(Cod. indef.)";
@@ -907,12 +907,12 @@ function SelectSubjectItem({ subjects, setSubjects, subject, setSubject }) {
 
 function SelectSubjectExpectedSemester({ subject, setSubject }) {
   function updateDisciplinaExpectedSemester(newExpectedSemester) {
-    const newDisciplina = { ...subject, periodo: newExpectedSemester.value };
+    const newDisciplina = { ...subject, periodo: newExpectedSemester?.value };
     setSubject(newDisciplina);
   }
 
   const expectedSemesterStates = {
-    outerExpectedSemester: subject.periodo,
+    outerExpectedSemester: subject?.periodo,
     setOuterExpectedSemester: updateDisciplinaExpectedSemester,
   };
 
@@ -930,7 +930,7 @@ function SelectStudentItem({ students, setStudents, student, setStudent }) {
     value: student,
     // findCorrectObject: ,
     customProps: {
-      getOptionValue: (option) => option.matricula,
+      getOptionValue: (option) => option?.matricula,
       getOptionLabel: ({ matricula, nome }) => `${matricula}: ${nome}`,
       formatOptionLabel: ({ matricula, nome }) => `${matricula}: ${nome}`,
     },
@@ -942,12 +942,12 @@ function SelectStudentItem({ students, setStudents, student, setStudent }) {
 function SelectStudentYear({ student, setStudent }) {
   function updateStudentYear(newYear) {
     // console.log(newYear);
-    const newStudent = { ...student, anoEntrada: newYear.value };
+    const newStudent = { ...student, anoEntrada: newYear?.value };
     setStudent(newStudent);
   }
 
   const yearStates = {
-    outerYear: student.anoEntrada,
+    outerYear: student?.anoEntrada,
     setOuterYear: updateStudentYear,
   };
 
@@ -961,7 +961,7 @@ function SelectStudentCourse({ student, setStudent }) {
   }
 
   const courseStates = {
-    outerCourse: student.curso,
+    outerCourse: student?.curso,
     setOuterCourse: updateStudentCourse,
   };
 

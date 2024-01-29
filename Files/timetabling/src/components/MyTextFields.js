@@ -152,7 +152,7 @@ function TextInputProfessorName({
     setItem: setProfessor,
   };
   const specificValues = {
-    mainValue: professor.nome,
+    mainValue: professor?.nome,
     getNewItemObject: (newValue) => ({ ...professor, nome: newValue }),
     title: "Nome",
   };
@@ -173,7 +173,7 @@ function TextinputProfessorAlias({
     setItem: setProfessor,
   };
   const specificValues = {
-    mainValue: professor.apelido,
+    mainValue: professor?.apelido,
     getNewItemObject: (newValue) => ({ ...professor, apelido: newValue }),
     title: "Apelido",
   };
@@ -194,7 +194,7 @@ function TextInputProfessorId({
     setItem: setProfessor,
   };
   const specificValues = {
-    mainValue: professor.id,
+    mainValue: professor?.id,
     getNewItemObject: (newValue) => ({ ...professor, id: newValue }),
     title: "ID",
     isNumeric: true,
@@ -214,7 +214,7 @@ function TextInputSubjectCode({ subjects, setSubjects, subject, setSubject }) {
     setItem: setSubject,
   };
   const specificValues = {
-    mainValue: subject.codigo,
+    mainValue: subject?.codigo,
     getNewItemObject: (newValue) => ({ ...subject, codigo: newValue }),
     title: "Código",
   };
@@ -231,7 +231,7 @@ function TextInputSubjectName({ subjects, setSubjects, subject, setSubject }) {
     setItem: setSubject,
   };
   const specificValues = {
-    mainValue: subject.nome,
+    mainValue: subject?.nome,
     getNewItemObject: (newValue) => ({ ...subject, nome: newValue }),
     title: "Nome",
   };
@@ -248,7 +248,7 @@ function TextInputSubjectAlias({ subjects, setSubjects, subject, setSubject }) {
     setItem: setSubject,
   };
   const specificValues = {
-    mainValue: subject.apelido,
+    mainValue: subject?.apelido,
     getNewItemObject: (newValue) => ({ ...subject, apelido: newValue }),
     title: "Apelido",
   };
@@ -265,7 +265,7 @@ function TextInputSubjectId({ subjects, setSubjects, subject, setSubject }) {
     setItem: setSubject,
   };
   const specificValues = {
-    mainValue: subject.id,
+    mainValue: subject?.id,
     getNewItemObject: (newValue) => ({ ...subject, id: newValue }),
     title: "ID",
     isNumeric: true,
@@ -290,7 +290,7 @@ function TextInputStudentEnrollment({
     setItem: setStudent,
   };
   const specificValues = {
-    mainValue: student.matricula,
+    mainValue: student?.matricula,
     getNewItemObject: (newValue) => ({ ...student, matricula: newValue }),
     title: "Matrícula",
   };
@@ -307,7 +307,7 @@ function TextInputStudentName({ students, setStudents, student, setStudent }) {
     setItem: setStudent,
   };
   const specificValues = {
-    mainValue: student.nome,
+    mainValue: student?.nome,
     getNewItemObject: (newValue) => ({ ...student, nome: newValue }),
     title: "Nome",
   };
@@ -323,7 +323,7 @@ function TextInputStudentId({ students, setStudents, student, setStudent }) {
     setItem: setStudent,
   };
   const specificValues = {
-    mainValue: student.id,
+    mainValue: student?.id,
     getNewItemObject: (newValue) => ({ ...student, id: newValue }),
     title: "ID",
     isNumeric: true,
@@ -343,7 +343,7 @@ function TextInputRoomDescription({ rooms, setRooms, room, setRoom }) {
     setItem: setRoom,
   };
   const specificValues = {
-    mainValue: room.descricao,
+    mainValue: room?.descricao,
     getNewItemObject: (newValue) => ({ ...room, descricao: newValue }),
     title: "Descrição",
   };
@@ -360,7 +360,7 @@ function TextInputRoomCode({ rooms, setRooms, room, setRoom }) {
     setItem: setRoom,
   };
   const specificValues = {
-    mainValue: room.codigo,
+    mainValue: room?.codigo,
     getNewItemObject: (newValue) => ({ ...room, codigo: newValue }),
     title: "Código",
   };
@@ -377,7 +377,7 @@ function TextInputRoomCapacity({ rooms, setRooms, room, setRoom }) {
     setItem: setRoom,
   };
   const specificValues = {
-    mainValue: room.capacidade,
+    mainValue: room?.capacidade,
     getNewItemObject: (newValue) => ({ ...room, capacidade: newValue }),
     title: "Capacidade",
     isNumeric: true,
@@ -395,7 +395,7 @@ function TextInputRoomId({ rooms, setRooms, room, setRoom }) {
     setItem: setRoom,
   };
   const specificValues = {
-    mainValue: room.id,
+    mainValue: room?.id,
     getNewItemObject: (newValue) => ({ ...room, id: newValue }),
     title: "ID",
     isNumeric: true,

@@ -67,11 +67,9 @@ function CCTableView() {
 
             const listaDeTurmas = turmas.map((turma) => {
               const cellMessage = getCellMessage(turma);
+              const cellKey = `ChaveCellContent: ${turma.idTurma}-${turma.idHorario}`;
               return (
-                <div
-                  key={`ChaveCellContent: ${turma.idTurma}-${turma.idHorario}`}
-                  className="eachClassInCell"
-                >
+                <div key={cellKey} className="eachClassInCell">
                   {cellMessage}
                 </div>
               );

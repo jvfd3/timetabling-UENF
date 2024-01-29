@@ -98,12 +98,15 @@ function SubjectCard(mySubjectsStates) {
 }
 
 function Subjects() {
-  const [subjects, setSubjects] = useState(sqlDataFromJson.subjects);
+  const defaultSubjects = sqlDataFromJson.subjects;
+  // const defaultSubjects = [];
+
+  const [subjects, setSubjects] = useState(defaultSubjects);
   const [subject, setSubject] = useState(subjects[36]);
 
   const mySubjectsStates = { subjects, setSubjects, subject, setSubject };
 
-  useEffect(() => {}), [subject.apelido];
+  useEffect(() => {}), [subject?.apelido];
 
   return (
     <div className="CRUDContainComponents">

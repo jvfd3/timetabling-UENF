@@ -164,7 +164,10 @@ function RoomCard(myRoomsStates) {
 }
 
 function Rooms() {
-  const [rooms, setRooms] = useState(sqlDataFromJson.salas);
+  const defaultRooms = sqlDataFromJson.salas;
+  // const defaultRooms = [];
+
+  const [rooms, setRooms] = useState(defaultRooms);
   const [room, setRoom] = useState(rooms[3]);
 
   const myRoomsStates = { rooms, setRooms, room, setRoom };
