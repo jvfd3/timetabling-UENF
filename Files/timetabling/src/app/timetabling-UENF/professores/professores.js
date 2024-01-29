@@ -2,8 +2,8 @@ import "./professores.css";
 import React, { useEffect, useState } from "react";
 import CRUDPageSelection from "../../../components/PageSelect";
 import options from "../../../DB/local/options";
-import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
 import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
+import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
 // import { scrollThroughProfessores } from "../functions/firulas/minhasFirulas";
 import {
   SelectProfessorItem,
@@ -96,8 +96,7 @@ function ProfessorCard(professorStates) {
 }
 
 function Professors() {
-  const defaultProfessors = sqlDataFromJson.professors;
-  // const defaultProfessors = [];
+  const defaultProfessors = sqlDataFromJson.professors ?? [];
 
   const [professors, setProfessors] = useState(defaultProfessors);
   const [professor, setProfessor] = useState(professors[0]);

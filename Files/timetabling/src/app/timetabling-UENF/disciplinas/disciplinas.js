@@ -2,8 +2,8 @@ import "./disciplinas.css";
 import React, { useEffect, useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
-import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
 import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
+import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
 // import { scrollThroughDisciplinas } from "../functions/firulas/minhasFirulas";
 import {
   SelectSubjectItem,
@@ -98,8 +98,7 @@ function SubjectCard(subjectStates) {
 }
 
 function Subjects() {
-  const defaultSubjects = sqlDataFromJson.subjects;
-  // const defaultSubjects = [];
+  const defaultSubjects = sqlDataFromJson.subjects ?? [];
 
   const [subjects, setSubjects] = useState(defaultSubjects);
   const [subject, setSubject] = useState(subjects[36]);

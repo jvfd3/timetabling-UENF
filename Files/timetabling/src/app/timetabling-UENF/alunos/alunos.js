@@ -2,6 +2,7 @@ import "./alunos.css";
 import React, { useEffect, useState } from "react";
 import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
+import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
 import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
 // import { scrollThroughAlunos } from "../functions/firulas/minhasFirulas";
 import {
@@ -20,7 +21,6 @@ import {
   updateStudent,
   deleteStudent,
 } from "../../../helpers/CRUDFunctions/studentCRUD";
-import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
 
 function StudentSelection(studentStates) {
   const studentCRUDFunctions = {
@@ -100,8 +100,7 @@ function StudentCard(studentStates) {
 }
 
 function Students() {
-  const defaultStudents = sqlDataFromJson.students;
-  // const defaultStudents = [];
+  const defaultStudents = sqlDataFromJson.students ?? [];
 
   const [students, setStudents] = useState(defaultStudents);
   const [student, setStudent] = useState(students[38]); // JVFD

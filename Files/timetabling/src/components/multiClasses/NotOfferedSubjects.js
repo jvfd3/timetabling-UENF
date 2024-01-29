@@ -9,8 +9,8 @@ function isSameParity(subject, semester) {
   return sameParity;
 }
 
-function getListOfNotOfferedSubjects(classes, semester) {
-  const allSubjects = sqlDataFromJson.subjects; // Should get from DB
+function getListOfNotOfferedSubjects(classes, semester, subjects = []) {
+  const allSubjects = subjects.length > 0 ? subjects : sqlDataFromJson.subjects; // Should get from DB
 
   // Neste código, filter(Boolean) remove todos os valores falsy do array, incluindo null e undefined.
   const offeredSubjectsCodes = classes
@@ -123,12 +123,14 @@ function NonOfferedSubjectsTable(unofferedSubjectsProps) {
 }
 
 function NotOfferedSubjects(classStates) {
-  const { filteredClasses, classItem } = classStates;
+  console.log(classStates);
+  const { filteredClasses, classItem, subjects } = classStates;
   const semesterValue = classItem.semestre;
 
   const nonOfferedSubjects = getListOfNotOfferedSubjects(
     filteredClasses,
-    semesterValue
+    semesterValue,
+    subjects
   );
 
   const someValuesProps = { nonOfferedSubjects, semesterValue, classStates };
