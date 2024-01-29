@@ -90,15 +90,6 @@ function ClassData(classesStates) {
 }
 
 function Classes() {
-  // const classIndex = useRef(sqlDataFromJson.classes.length);
-  // let defaultClasses = getFullHorarios();
-
-  /* const defaultClassItem = {
-    ...options.emptyObjects.classItem,
-    id: classIndex.current,
-    idTurma: classIndex.current,
-  }; */
-  // const defaultClasses = [defaultClassItem];
   const defaultClasses = [];
 
   const [classes, setClasses] = useState(defaultClasses);
@@ -131,10 +122,6 @@ function Classes() {
     setClassItem,
     conflicts,
   };
-
-  useEffect(() => {
-    // console.log("useEffect", subjects);
-  }, [subjects]);
 
   // console.log("subjects", subjects);
 
