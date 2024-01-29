@@ -103,7 +103,7 @@ function Students() {
   const [students, setStudents] = useState(sqlDataFromJson.students);
   const [student, setStudent] = useState(students[38]); // JVFD
 
-  let studentStates = { students, setStudents, student, setStudent };
+  const studentStates = { students, setStudents, student, setStudent };
 
   return (
     <div className="CRUDContainComponents">

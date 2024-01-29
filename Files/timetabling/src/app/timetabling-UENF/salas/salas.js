@@ -96,10 +96,10 @@ function RoomBaseInfo(myRoomsStates) {
 
 function ClassesInRoom(room) {
   const { id } = room;
-  let classes = getClassesData();
-  let splittedClasses = splitTurmas(classes);
-  let turmasNestaSala = splittedClasses.filter((splittedClass) => {
-    let found = splittedClass.sala?.id === id;
+  const classes = getClassesData();
+  const splittedClasses = splitTurmas(classes);
+  const turmasNestaSala = splittedClasses.filter((splittedClass) => {
+    const found = splittedClass.sala?.id === id;
     return found;
   });
   return turmasNestaSala.length === 0 ? (

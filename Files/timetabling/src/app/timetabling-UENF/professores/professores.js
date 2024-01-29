@@ -23,7 +23,7 @@ import {
 } from "../../../helpers/CRUDFunctions/professorCRUD";
 
 function ProfessorSelection(professorStates) {
-  let professorCRUDFunctions = {
+  const professorCRUDFunctions = {
     createFunc: () => createProfessor(professorStates),
     readFunc: () => readProfessor(professorStates),
     updateFunc: () => updateProfessor(professorStates),
@@ -96,12 +96,17 @@ function ProfessorCard(professorStates) {
 }
 
 function Professors() {
-  let defaultProfessors = sqlDataFromJson.professors;
+  const defaultProfessors = sqlDataFromJson.professors;
 
   const [professors, setProfessors] = useState(defaultProfessors);
   const [professor, setProfessor] = useState(professors[professors.length - 1]);
 
-  let professorStates = { professors, setProfessors, professor, setProfessor };
+  const professorStates = {
+    professors,
+    setProfessors,
+    professor,
+    setProfessor,
+  };
 
   return (
     <div className="CRUDContainComponents">

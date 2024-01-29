@@ -8,8 +8,8 @@ import { filterDay, filterHour } from "../../../helpers/filteringFunc";
 import { CCTableFilters } from "../../../components/Filters/Filters";
 
 function CCTableView() {
-  let turmas = getClassesData();
-  let allSplittedClasses = splitTurmas(turmas);
+  const turmas = getClassesData();
+  const allSplittedClasses = splitTurmas(turmas);
   const [currentClasses, setCurrentClasses] = useState(allSplittedClasses);
 
   function CCTable2({ curClasses }) {
@@ -42,11 +42,11 @@ function CCTableView() {
 
     function Body() {
       function Linha({ hora }) {
-        let turmasDaHora = filterHour(curClasses, hora);
+        const turmasDaHora = filterHour(curClasses, hora);
         // console.log("turmasDaHora", turmasDaHora);
         // console.log("hora", hora);
         const daysColumn = options.constantValues.days.map((dia) => {
-          let turmasDoDia = filterDay(turmasDaHora, dia.value);
+          const turmasDoDia = filterDay(turmasDaHora, dia.value);
 
           function CellContent({ turmas }) {
             function getCellMessage(turma) {
@@ -79,8 +79,8 @@ function CCTableView() {
               return cellMessage;
             }
 
-            let listaDeTurmas = turmas.map((turma) => {
-              let cellMessage = getCellMessage(turma);
+            const listaDeTurmas = turmas.map((turma) => {
+              const cellMessage = getCellMessage(turma);
               return (
                 <div
                   key={`ChaveCellContent: ${turma.idTurma}-${turma.idHorario}`}
@@ -116,7 +116,7 @@ function CCTableView() {
       const hoursTangList = options.constantValues.hoursTang;
       return (
         <tbody>
-          {hoursTangList.map((iterHour, rowIndex) => (
+          {hoursTangList.map((iterHour) => (
             <Linha key={`Linha: ${iterHour.hora}`} hora={iterHour.hora} />
           ))}
         </tbody>
@@ -131,10 +131,7 @@ function CCTableView() {
     );
   }
 
-  const filterStates = {
-    allSplittedClasses,
-    setCurrentClasses,
-  };
+  const filterStates = { allSplittedClasses, setCurrentClasses };
 
   return (
     <div className="CRUDContainComponents">
@@ -147,7 +144,7 @@ function CCTableView() {
 }
 
 function CCTable() {
-  let defaultPageValue = options.constantValues.pageSelection.CCTable;
+  const defaultPageValue = options.constantValues.pageSelection.CCTable;
   return (
     <div className="background">
       <CRUDPageSelection defaultValue={defaultPageValue} />

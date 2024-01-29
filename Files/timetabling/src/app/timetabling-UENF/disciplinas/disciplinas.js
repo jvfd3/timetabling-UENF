@@ -101,7 +101,7 @@ function Subjects() {
   const [subjects, setSubjects] = useState(sqlDataFromJson.subjects);
   const [subject, setSubject] = useState(subjects[36]);
 
-  let mySubjectsStates = { subjects, setSubjects, subject, setSubject };
+  const mySubjectsStates = { subjects, setSubjects, subject, setSubject };
 
   useEffect(() => {}), [subject.apelido];
 
