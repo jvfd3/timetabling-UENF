@@ -8,9 +8,10 @@ function TopLeft() {
 
 function TopRow() {
   const daysList = options.constantValues.days;
-  const days = daysList.map((day, index) => {
+  const days = daysList.map((day) => {
+    const headerKey = `HeaderKey: ${day.label}`;
     return (
-      <th key={index} className="daysHeader">
+      <th key={headerKey} className="daysHeader">
         {day.label}
       </th>
     );
@@ -96,7 +97,7 @@ function Row({ hour, classTimes }) {
   );
 }
 
-function Body(classTimes) {
+function Body({ classTimes }) {
   // console.log(classTimes);
   const hoursTangList = options.constantValues.hoursTang;
   return (
@@ -105,7 +106,7 @@ function Body(classTimes) {
         const rowKey = `Linha: ${iterHour.hora}`;
         const rowProps = {
           hour: iterHour.hora,
-          ...classTimes,
+          classTimes,
         };
         return <Row key={rowKey} {...rowProps} />;
       })}
