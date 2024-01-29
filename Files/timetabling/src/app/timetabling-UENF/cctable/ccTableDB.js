@@ -31,17 +31,22 @@ function Header() {
 }
 
 function getCellMessage(classItem) {
-  // console.log("classItem", classItem.sala);
   // console.log("classItem", classItem);
   const subject = classItem.disciplina;
   const prof = classItem.professor;
   const room = classItem.sala;
   const subjectInfo = subject
-    ? `${subject?.periodo} - ${subject?.apelido}`
+    ? `${subject?.periodo ?? "Período indefinido"} - ${
+        subject?.apelido ?? "Apelido Indefinido"
+      }`
     : "Discip. indef.";
-  const profInfo = prof ? `${prof.apelido}` : "Prof. indef.";
+  const profInfo = prof
+    ? `${prof?.apelido ?? "Apelido Indefinido"}`
+    : "Prof. indef.";
   const roomInfo = room
-    ? `${room?.bloco}${room?.codigo ? "-" + room?.codigo : ""}`
+    ? `${room?.bloco ?? "Bloco indefinido"}${
+        room?.codigo ? "-" + room?.codigo : ""
+      }`
     : "Sala indef.";
   const cellMessage = `${subjectInfo} (${profInfo} / ${roomInfo})`;
   return cellMessage;
