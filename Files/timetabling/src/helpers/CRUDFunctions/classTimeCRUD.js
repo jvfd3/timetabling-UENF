@@ -66,7 +66,7 @@ function readClassTime(classTimeStates) {
   // console.log("readingClassTime");
   defaultDBRead(itemName)
     .then((data) => {
-      console.log(data.length);
+      // console.log(data.length);
       insertNewClassTimesFromDB(data);
     })
     .catch(defaultHandleError);

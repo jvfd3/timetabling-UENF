@@ -32,6 +32,7 @@ function Header() {
 
 function getCellMessage(classItem) {
   // console.log("classItem", classItem.sala);
+  // console.log("classItem", classItem);
   const subject = classItem.disciplina;
   const prof = classItem.professor;
   const room = classItem.sala;
