@@ -25,6 +25,7 @@ import {
   TextInputClassExpectedDemand,
   TextInputClassId,
 } from "../../../components/MyTextFields";
+import { ClassesFilters } from "../../../components/Filters/Filters";
 
 function TurmaSelection(classStates) {
   /* It just contains the selection an maybe allows scrolling selection */
@@ -34,10 +35,12 @@ function TurmaSelection(classStates) {
     updateFunc: () => updateClass(classStates),
     deleteFunc: () => deleteClass(classStates),
   };
+
   return (
     <div className="SelectionBar">
       <CRUDButtonsContainer {...turmaCRUDFunctions} />
       <SelectClassItem {...classStates} />
+      <ClassesFilters {...classStates} />
     </div>
   );
 }
@@ -93,6 +96,7 @@ function Classes() {
   const defaultClasses = [];
 
   const [classes, setClasses] = useState(defaultClasses);
+  const [filteredClasses, setFilteredClasses] = useState([]);
   const [classItem, setClassItem] = useState(classes[0]);
   const [professors, setProfessors] = useState([]);
   const [subjects, setSubjects] = useState([]);
@@ -113,11 +117,13 @@ function Classes() {
     setRoom: () => {},
   };
 
-  const conflicts = getClassItemConflicts(classes, classItem);
+  const conflicts = getClassItemConflicts(filteredClasses, classItem);
   const classesStates = {
     ...selectStates,
     classes,
     setClasses,
+    filteredClasses,
+    setFilteredClasses,
     classItem,
     setClassItem,
     conflicts,

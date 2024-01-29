@@ -1,5 +1,6 @@
-.MultiTurmasFilters,
-.CCTableFilters {
+.MultiClassesFilters,
+.CCTableFilters,
+.ClassesFilters {
   display: flex;
   gap: 20px;
   padding: 10px;

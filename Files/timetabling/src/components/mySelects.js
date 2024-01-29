@@ -661,12 +661,12 @@ function SelectClassTimeDuration(classTimeStates) {
 /* \ Classes / */
 
 function SelectClassItem(classStates) {
-  const { classes, setClasses, classItem, setClassItem } = classStates;
+  const { filteredClasses, setClasses, classItem, setClassItem } = classStates;
 
   const SelectClassItemStates = {
     placeHolderText: "Selecione uma turma",
     isClearable: false,
-    options: classes,
+    options: filteredClasses,
     setOuterValue: setClassItem,
     value: classItem,
     customProps: {

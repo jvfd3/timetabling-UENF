@@ -118,7 +118,7 @@ function MultiClassesFilters({ classTimeStates, classStates }) {
   }, [year, semester, classes]);
 
   return (
-    <div className="MultiTurmasFilters">
+    <div className="MultiClassesFilters">
       <FilterYear {...props.year} />
       <FilterSemester {...props.semester} />
     </div>
@@ -170,4 +170,39 @@ function CCTableFilters(globalStates) {
   );
 }
 
-export { MultiClassesFilters, CCTableFilters };
+function ClassesFilters(classStates) {
+  const { classes, setFilteredClasses, setClassItem } = classStates;
+
+  const defaultYearSemester = getDefaultYearSemesterValues();
+
+  const [year, setYear] = useState(defaultYearSemester.year);
+  const [semester, setSemester] = useState(defaultYearSemester.semester);
+
+  const props = {
+    year: { year, setYear },
+    semester: { semester, setSemester },
+  };
+
+  function filterList(list, year, semester) {
+    let filteredList = list;
+    filteredList = filterYear(filteredList, year);
+    filteredList = filterSemester(filteredList, semester);
+    return filteredList;
+  }
+
+  useEffect(() => {
+    let filteredClasses = filterList(classes, year, semester);
+    let newClassItem = filteredClasses?.[0];
+    setFilteredClasses(filteredClasses);
+    setClassItem(newClassItem);
+  }, [year, semester, classes]);
+
+  return (
+    <div className="ClassesFilters">
+      <FilterYear {...props.year} />
+      <FilterSemester {...props.semester} />
+    </div>
+  );
+}
+
+export { MultiClassesFilters, CCTableFilters, ClassesFilters };
