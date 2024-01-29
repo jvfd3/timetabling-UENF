@@ -62,7 +62,6 @@ function ClassTimeRow(classTimeRowStates) {
 }
 
 function ClassTimeTable(classesStates) {
-  console.log(classesStates);
   const { classItem, conflicts } = classesStates;
   const [classTimes, setClassTimes] = useState(classItem?.horarios ?? []);
 
