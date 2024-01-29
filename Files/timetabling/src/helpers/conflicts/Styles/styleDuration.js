@@ -7,8 +7,8 @@ const defaultTitles = {
   base: "Conflitos de duração avaliados:\n",
   roomAlloc: "✅ Sem conflitos de alocação de sala\n",
   professorAlloc: "✅ Sem conflitos de alocação de professor\n",
-  notSet: "✅ Sem conflitos de sala não definida\n",
-  notSetConflict: "❌ Conflito: Sala não definida\n",
+  notSet: "✅ Sem conflitos de duração não definida\n",
+  notSetConflict: "❌ Conflito: duração não definida\n",
 };
 
 function getDurationDefaultStyle() {
@@ -93,6 +93,9 @@ function mergeStyles(styles) {
 
 function getStyledConflictDuration(conflicts, classTime) {
   const durationStyles = {};
+
+  console.log(conflicts);
+
   durationStyles.default = getDurationDefaultStyle();
   durationStyles.notSet = getDurationNotSetStyle(classTime);
   // durationStyles.roomAlloc = getDurationRoomAllocStyle(conflicts, classTime);
