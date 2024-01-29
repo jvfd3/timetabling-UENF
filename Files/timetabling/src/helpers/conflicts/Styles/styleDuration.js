@@ -130,7 +130,7 @@ function getStyledConflictDuration(conflicts, classTime) {
   // durationStyles.professorPreferences = getDurationProfessorPreferencesStyle();
   // durationStyles.studentConflicts = getDurationStudentConflictsStyle();
   durationStyles.merged = mergeStyles(durationStyles);
-  return durationStyles.merged;
+  return durationStyles;
 }
 
 export { getStyledConflictDuration };

@@ -48,13 +48,13 @@ function ClassTimeRow(classTimeRowStates) {
       <td {...conflictStyles.room.merged}>
         <SelectClassTimeRoom {...classTimeRowStates} />
       </td>
-      <td {...conflictStyles.day}>
+      <td {...conflictStyles.day.merged}>
         <SelectClassTimeDay {...classTimeRowStates} />
       </td>
-      <td {...conflictStyles.hour}>
+      <td {...conflictStyles.hour.merged}>
         <SelectClassTimeStartHour {...classTimeRowStates} />
       </td>
-      <td {...conflictStyles.duration}>
+      <td {...conflictStyles.duration.merged}>
         <SelectClassTimeDuration {...classTimeRowStates} />
       </td>
     </tr>

@@ -31,6 +31,8 @@ const options = {
           subject: "##529E52",
           room: "#13612D",
           duration: "#237049",
+          day: "#237049",
+          hour: "#237049",
         },
         hasConflict: {
           subject: "#000000",
@@ -38,6 +40,8 @@ const options = {
           demand: "#DD3333",
           room: "#E3580E",
           duration: "#C72508",
+          day: "#C72508",
+          hour: "#C72508",
         },
         levels: {
           level0: "#008B45",
