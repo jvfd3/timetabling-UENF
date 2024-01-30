@@ -1,33 +1,33 @@
 import "./Filters.css";
 import { useEffect, useState } from "react";
-import {
-  filterDay,
-  filterExpectedSemester,
-  filterHour,
-  filterProfessor,
-  filterRoom,
-  filterSemester,
-  filterSubject,
-  filterYear,
-} from "../../helpers/filteringFunc";
-import {
-  SelectFilterYear,
-  SelectFilterSemester,
-  SelectFilterProfessor,
-  SelectFilterRoom,
-  SelectFilterExpectedSemester,
-  SelectFilterDay,
-  SelectFilterHour,
-  SelectFilterSubject,
-} from "../mySelects";
+import { readRoom } from "../../helpers/CRUDFunctions/roomCRUD";
+import { readSubject } from "../../helpers/CRUDFunctions/subjectCRUD";
+import { readProfessor } from "../../helpers/CRUDFunctions/professorCRUD";
 import { getDefaultYearSemesterValues } from "../../helpers/auxFunctions";
 import {
   getDefaultClassItem,
   getDefaultClassTime,
 } from "../../helpers/auxCRUD";
-import { readRoom } from "../../helpers/CRUDFunctions/roomCRUD";
-import { readProfessor } from "../../helpers/CRUDFunctions/professorCRUD";
-import { readSubject } from "../../helpers/CRUDFunctions/subjectCRUD";
+import {
+  filterDay,
+  filterYear,
+  filterHour,
+  filterRoom,
+  filterSubject,
+  filterSemester,
+  filterProfessor,
+  filterExpectedSemester,
+} from "../../helpers/filteringFunc";
+import {
+  SelectFilterDay,
+  SelectFilterYear,
+  SelectFilterHour,
+  SelectFilterRoom,
+  SelectFilterSubject,
+  SelectFilterSemester,
+  SelectFilterProfessor,
+  SelectFilterExpectedSemester,
+} from "../mySelects";
 
 function FilterYear(filterYearStates) {
   // console.log("filterYearStates", filterYearStates);
@@ -213,7 +213,6 @@ function CCTableFilters(classTimeStates) {
 
   function updateOuterStates() {
     let filtering = classTimes;
-
     filtering = filterYear(filtering, year);
     filtering = filterSemester(filtering, semester);
     filtering = filterSubject(filtering, subject);

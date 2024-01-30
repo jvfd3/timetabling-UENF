@@ -1,7 +1,7 @@
 // import "../defaultStyle.css";
 import Select from "react-select";
-import { useNavigate } from "react-router-dom";
 import options from "../DB/local/options";
+import { useNavigate } from "react-router-dom";
 import { changePageByScrolling } from "../helpers/firulas/minhasFirulas";
 // import { changePageByScrolling } from "../functions/firulas/minhasFirulas";
 

@@ -5,10 +5,10 @@ import { readClassTime } from "../../helpers/CRUDFunctions/classTimeCRUD";
 import { sortClassTimes } from "../Sorts/sortingFunctions";
 import { ViewTableFilters } from "../Filters/Filters";
 import {
-  checkIndefinition,
-  getProfessorLabel,
   getRoomLabel,
   getSubjectLabel,
+  checkIndefinition,
+  getProfessorLabel,
 } from "../../helpers/visualizationText/textLabels";
 
 function NoClasses({ noClassesTitle }) {

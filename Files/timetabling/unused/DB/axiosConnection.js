@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import options from "../local/options";
+import options from "../../src/DB/local/options";
 
 let url = options.AWS.fullEndpoint;
 let debuggingLocal = ">axiosConnection";

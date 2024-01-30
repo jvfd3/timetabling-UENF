@@ -1,9 +1,11 @@
 import options from "../../../DB/local/options";
 
+const conflictOptions = options.config.colors.conflicts;
+
 const defaultTitles = {
   base: "Conflitos de professor avaliados:\n",
-  notSet: "✅ Sem conflitos de professor não definido\n",
-  notSetConflict: "❌ Conflito: professor não definido\n",
+  notSetted: "✅ Sem conflitos de professor não definido\n",
+  notSettedConflict: "❌ Conflito: professor não definido\n",
   alloc: "✅ Sem conflitos de alocação de professor\n",
   allocConflict: "❌ Conflito: Alocação de professor\n",
 };
@@ -12,26 +14,26 @@ function getProfessorDefaultStyle() {
   const defaultStyle = {
     title: defaultTitles.base,
     style: {
-      backgroundColor: options.config.colors.conflicts.noProblem.professor,
+      backgroundColor: conflictOptions.noProblem.professor,
     },
   };
   return defaultStyle;
 }
 
-function getProfessorNotSetStyle(classItem) {
-  const defaultNullStyle = { title: defaultTitles.notSet, style: {} };
+function getProfessornotSettedStyle(classItem) {
+  const defaultNullStyle = { title: defaultTitles.notSetted, style: {} };
   const professor = classItem?.professor;
   const hasProfessor = professor !== null && professor !== undefined;
 
   const conflictNullStyle = {
-    title: defaultTitles.notSetConflict,
+    title: defaultTitles.notSettedConflict,
     style: {
-      backgroundColor: options.config.colors.conflicts.notSet.professor,
+      backgroundColor: conflictOptions.notSetted.professor,
     },
   };
 
-  const notSetStyle = hasProfessor ? defaultNullStyle : conflictNullStyle;
-  return notSetStyle;
+  const notSettedStyle = hasProfessor ? defaultNullStyle : conflictNullStyle;
+  return notSettedStyle;
 }
 
 function getProfessorAllocMessage(profAllocConflict) {
@@ -72,7 +74,7 @@ function getProfessorAllocStyle(allocConflict) {
   const allocConflictStyle = {
     title: getProfessorAllocMessage(allocConflict),
     style: {
-      backgroundColor: options.config.colors.conflicts.hasConflict.professor,
+      backgroundColor: conflictOptions.hasConflict.professor,
     },
   };
 
@@ -92,9 +94,9 @@ function mergeStyles(styles) {
     newStyle = { ...newStyle, ...styles.default.style };
   }
 
-  if (styles.notSet) {
-    newTitle += styles.notSet.title;
-    newStyle = { ...newStyle, ...styles.notSet.style };
+  if (styles.notSetted) {
+    newTitle += styles.notSetted.title;
+    newStyle = { ...newStyle, ...styles.notSetted.style };
   }
 
   if (styles.alloc) {
@@ -111,11 +113,11 @@ function mergeStyles(styles) {
   return mergedStyles;
 }
 
-function getProfessorStyledConflict(conflicts, classItem) {
+function getStyledConflictProfessor(conflicts, classItem) {
   const professorStyles = {};
 
   professorStyles.default = getProfessorDefaultStyle();
-  professorStyles.notSet = getProfessorNotSetStyle(classItem);
+  professorStyles.notSetted = getProfessornotSettedStyle(classItem);
   professorStyles.alloc = getProfessorAllocStyle(conflicts.raw.professor.alloc);
 
   // professorStyles.preferences = getPreferencesStyles();
@@ -125,4 +127,4 @@ function getProfessorStyledConflict(conflicts, classItem) {
   return professorStyles;
 }
 
-export { getProfessorStyledConflict };
+export { getStyledConflictProfessor };

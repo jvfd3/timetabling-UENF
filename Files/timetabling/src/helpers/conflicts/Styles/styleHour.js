@@ -6,8 +6,8 @@ const defaultTitles = {
   base: "Conflitos de hora avaliados:\n",
   roomAlloc: "✅ Sem conflitos de alocação de sala\n",
   professorAlloc: "✅ Sem conflitos de alocação de professor\n",
-  notSet: "✅ Sem conflitos de hora não definida\n",
-  notSetConflict: "❌ Conflito: hora não definida\n",
+  notSetted: "✅ Sem conflitos de hora não definida\n",
+  notSettedConflict: "❌ Conflito: hora não definida\n",
 };
 
 function getDefaultStyleHour() {
@@ -20,20 +20,20 @@ function getDefaultStyleHour() {
   return defaultStyle;
 }
 
-function getNotSetStyleHour(classTime) {
-  const defaultNullStyle = { title: defaultTitles.notSet, style: {} };
+function getnotSettedStyleHour(classTime) {
+  const defaultNullStyle = { title: defaultTitles.notSetted, style: {} };
   const hour = classTime?.horaInicio;
   const hasHour = hour !== null && hour !== undefined;
 
   const conflictNullStyle = {
-    title: defaultTitles.notSetConflict,
+    title: defaultTitles.notSettedConflict,
     style: {
-      backgroundColor: conflictOptions.notSet.hour,
+      backgroundColor: conflictOptions.notSetted.hour,
     },
   };
 
-  const notSetStyle = hasHour ? defaultNullStyle : conflictNullStyle;
-  return notSetStyle;
+  const notSettedStyle = hasHour ? defaultNullStyle : conflictNullStyle;
+  return notSettedStyle;
 }
 
 function mergeStyles(styles) {
@@ -45,9 +45,9 @@ function mergeStyles(styles) {
     newStyle = { ...newStyle, ...styles.default.style };
   }
 
-  if (styles.notSet) {
-    newTitle += styles.notSet.title;
-    newStyle = { ...newStyle, ...styles.notSet.style };
+  if (styles.notSetted) {
+    newTitle += styles.notSetted.title;
+    newStyle = { ...newStyle, ...styles.notSetted.style };
   }
 
   if (styles.professorAlloc) {
@@ -115,7 +115,7 @@ function getStyledConflictHour(conflictStyles, classTime) {
   const hourStyles = {};
 
   hourStyles.default = getDefaultStyleHour();
-  hourStyles.notSet = getNotSetStyleHour(classTime);
+  hourStyles.notSetted = getnotSettedStyleHour(classTime);
   hourStyles.roomAlloc = getRoomAllocStyleHour(conflictStyles, classTime);
   hourStyles.professorAlloc = getProfessorAllocStyleHour(
     conflictStyles,

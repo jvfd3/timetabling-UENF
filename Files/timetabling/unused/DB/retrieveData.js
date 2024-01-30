@@ -3,7 +3,7 @@ import {
   splittedToUnified2,
   getTurmasDoAnoSemestre,
   splittedToUnified,
-} from "../helpers/auxFunctions";
+} from "../../src/helpers/auxFunctions";
 
 // import { readTurmas } from "../../../DB/AWS/axiosConnection";
 

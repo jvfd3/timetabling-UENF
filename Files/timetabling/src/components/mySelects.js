@@ -1,15 +1,14 @@
 import "./mySelects.css";
 import React, { useEffect, useState } from "react";
+import Select, { components } from "react-select";
 import options from "../DB/local/options";
 import { sqlDataFromJson } from "../DB/local/dataFromJSON";
-import Select, { components } from "react-select";
-// import { updateProfessorFromList } from "../helpers/auxFunctions";
+import { getValueFromObject } from "../helpers/auxFunctions";
 import { LockedProp, UnlockedProp } from "./Buttons/Dumb/Dumb";
 import {
   getItemFromListById,
   replaceNewItemInListById,
 } from "../helpers/auxCRUD";
-import { getValueFromObject } from "../helpers/auxFunctions";
 
 const styleWidthFix = options.SelectStyles.fullItem;
 
@@ -869,9 +868,9 @@ function SelectProfessorLab(professorStates) {
     professorStates;
   function updateProfessorLab(newLab) {
     const newProfessor = { ...professor, laboratorio: newLab?.apelido ?? null };
+    const newProfessors = replaceNewItemInListById(newProfessor, professors);
     setProfessor(newProfessor);
-    // const newProfessors = updateProfessorFromList(professors, newProfessor);
-    // setProfessors(newProfessors);
+    setProfessors(newProfessors);
   }
 
   const labStates = {
@@ -890,9 +889,9 @@ function SelectProfessorCourse({
 }) {
   function updateProfessorCourse(newCourse) {
     const newProfessor = { ...professor, curso: newCourse?.apelido ?? null };
+    const newProfessors = replaceNewItemInListById(newProfessor, professors);
     setProfessor(newProfessor);
-    // const newProfessors = updateProfessorFromList(professors, newProfessor);
-    // setProfessors(newProfessors);
+    setProfessors(newProfessors);
   }
 
   const courseStates = {

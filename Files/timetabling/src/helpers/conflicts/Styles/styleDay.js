@@ -6,8 +6,8 @@ const defaultTitles = {
   base: "Conflitos de dia avaliados:\n",
   roomAlloc: "✅ Sem conflitos de alocação de sala\n",
   professorAlloc: "✅ Sem conflitos de alocação de professor\n",
-  notSet: "✅ Sem conflitos de dia não definido\n",
-  notSetConflict: "❌ Conflito: dia não definido\n",
+  notSetted: "✅ Sem conflitos de dia não definido\n",
+  notSettedConflict: "❌ Conflito: dia não definido\n",
 };
 
 function getDefaultStyleDay() {
@@ -20,20 +20,20 @@ function getDefaultStyleDay() {
   return defaultStyle;
 }
 
-function getNotSetStyleDay(classTime) {
-  const defaultNullStyle = { title: defaultTitles.notSet, style: {} };
+function getnotSettedStyleDay(classTime) {
+  const defaultNullStyle = { title: defaultTitles.notSetted, style: {} };
   const day = classTime?.dia;
   const hasDay = day !== null && day !== undefined;
 
   const conflictNullStyle = {
-    title: defaultTitles.notSetConflict,
+    title: defaultTitles.notSettedConflict,
     style: {
-      backgroundColor: conflictOptions.notSet.day,
+      backgroundColor: conflictOptions.notSetted.day,
     },
   };
 
-  const notSetStyle = hasDay ? defaultNullStyle : conflictNullStyle;
-  return notSetStyle;
+  const notSettedStyle = hasDay ? defaultNullStyle : conflictNullStyle;
+  return notSettedStyle;
 }
 
 function mergeStyles(styles) {
@@ -45,9 +45,9 @@ function mergeStyles(styles) {
     newStyle = { ...newStyle, ...styles.default.style };
   }
 
-  if (styles.notSet) {
-    newTitle += styles.notSet.title;
-    newStyle = { ...newStyle, ...styles.notSet.style };
+  if (styles.notSetted) {
+    newTitle += styles.notSetted.title;
+    newStyle = { ...newStyle, ...styles.notSetted.style };
   }
 
   if (styles.professorAlloc) {
@@ -115,7 +115,7 @@ function getStyledConflictDay(classTimeStyles, classTime) {
   const dayStyles = {};
 
   dayStyles.default = getDefaultStyleDay();
-  dayStyles.notSet = getNotSetStyleDay(classTime);
+  dayStyles.notSetted = getnotSettedStyleDay(classTime);
   dayStyles.roomAlloc = getRoomAllocStyleDay(classTimeStyles, classTime);
   dayStyles.professorAlloc = getProfessorAllocStyleDay(
     classTimeStyles,

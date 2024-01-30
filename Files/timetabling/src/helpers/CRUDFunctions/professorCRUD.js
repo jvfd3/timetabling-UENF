@@ -6,8 +6,8 @@ import {
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
 import {
-  getItemIndexInListById,
   removeItemInListById,
+  getItemIndexInListById,
   replaceNewItemInListById,
 } from "../auxCRUD";
 

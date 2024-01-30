@@ -56,7 +56,7 @@ function getSubjectStyledConflict(turma) {
   let titleMessage = "";
   if (expectedSemester === undefined) {
     titleMessage = "Disciplina ainda não definida";
-    newColor = options.config.colors.conflicts.notSet.subject;
+    newColor = options.config.colors.conflicts.notSetted.subject;
   } else {
     newColor = getColorGradient(expectedSemester, semestreAtual);
     // console.log(newColor);

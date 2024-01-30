@@ -1,19 +1,20 @@
 import "react-toastify/dist/ReactToastify.css";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
 import options from "../../DB/local/options";
+import { ToastContainer } from "react-toastify";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+
 // import PageSelection from "./components/PageSelect";
 // Page imports
 /* Isso poderia ser trocado pro valor do options */
 import Main from "../timetabling-UENF/main/main";
-import Classes from "../timetabling-UENF//turmas/turmas";
-import MultiClasses from "../timetabling-UENF//multiturmas/multiTurmas";
+import Classes from "../timetabling-UENF/classes/classes";
+import MultiClasses from "../timetabling-UENF/multiClasses/MultiClasses";
 import NoMatch from "../timetabling-UENF//notFound/notFound";
 import CCTable from "../timetabling-UENF//cctable/ccTable";
 import Professors from "../timetabling-UENF//baseCRUD/professors/professors";
 import Students from "../timetabling-UENF/baseCRUD/students/students";
 import Subjects from "../timetabling-UENF/baseCRUD/subjects/subjects";
 import Rooms from "../timetabling-UENF/baseCRUD/rooms/rooms";
-import { ToastContainer } from "react-toastify";
 
 function MyRouting() {
   const basePath = options.constantValues.routing.urlPath; //"/timetabling-uenf/";

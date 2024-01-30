@@ -1,11 +1,13 @@
 import options from "../../../DB/local/options";
 
+const conflictOptions = options.config.colors.conflicts;
+
 const defaultTitles = {
   base: "Conflitos de disciplina avaliados:\n",
 
   isSet: "✅ Disciplina está definida ",
   optional: "mas não é obrigatória",
-  notSetConflict: "❌ Conflito: disciplina não está definida\n",
+  notSettedConflict: "❌ Conflito: disciplina não está definida\n",
 
   parity: "✅ Disciplina está na paridade adequada\n",
   summer: "✅🌞 Não há necessidade de paridade no verão\n",
@@ -19,7 +21,7 @@ function getStyledConflictSubject(conflicts) {
   const subjectStyles = {};
 
   subjectStyles.default = getStyledConflictsDefault();
-  subjectStyles.notSet = getStyledConflictNull(rawSubjectConflicts);
+  subjectStyles.notSetted = getStyledConflictNull(rawSubjectConflicts);
   subjectStyles.parity = getStyledConflictsParity(rawSubjectConflicts);
   subjectStyles.merged = mergeStyles(subjectStyles);
 
@@ -32,7 +34,7 @@ function getStyledConflictsDefault() {
   const defaultStyle = {
     title: defaultTitles.base,
     style: {
-      backgroundColor: options.config.colors.conflicts.notSet.subject,
+      backgroundColor: conflictOptions.notSetted.subject,
     },
   };
   return defaultStyle;
@@ -42,9 +44,9 @@ function getStyledConflictNull(conflicts) {
   const defaultNullStyle = { title: defaultTitles.isSet, style: {} };
   // console.log(conflicts);
   const conflictNullStyle = {
-    title: defaultTitles.notSetConflict,
+    title: defaultTitles.notSettedConflict,
     style: {
-      backgroundColor: options.config.colors.conflicts.notSet.subject,
+      backgroundColor: conflictOptions.notSetted.subject,
     },
   };
 
@@ -73,7 +75,7 @@ function getStyledConflictsParity(conflicts) {
   const { hasSubject, hasSemester, isSummer, parity } = conflicts;
 
   let newTitle = "";
-  let parityColor = options.config.colors.conflicts.notSet.subject;
+  let parityColor = conflictOptions.notSetted.subject;
 
   const semester = parity.from?.expectedSemester;
   if (parity.status === true) {
@@ -109,9 +111,9 @@ function mergeStyles(styles) {
     newStyle = { ...newStyle, ...styles.default.style };
   }
 
-  if (styles.notSet) {
-    newTitle += styles.notSet.title;
-    newStyle = { ...newStyle, ...styles.notSet.style };
+  if (styles.notSetted) {
+    newTitle += styles.notSetted.title;
+    newStyle = { ...newStyle, ...styles.notSetted.style };
   }
 
   if (styles.parity) {

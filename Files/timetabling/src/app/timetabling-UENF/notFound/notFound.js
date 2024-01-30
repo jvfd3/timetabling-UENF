@@ -8,8 +8,8 @@ function notFound() {
     <div className="background">
       <CRUDPageSelection defaultValue={defaultPageValue} />
       <div className="CRUDContainComponents">
-        <h1 style={{ color: "white" }}>Is this a 404 page?</h1>
-        <p style={{ color: "white" }}>I guess not. 💠</p>
+        <h1>Is this a 404 page?</h1>
+        <p>I guess not. 💠</p>
       </div>
     </div>
   );

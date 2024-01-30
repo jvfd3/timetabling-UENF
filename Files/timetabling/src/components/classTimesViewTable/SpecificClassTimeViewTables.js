@@ -1,9 +1,9 @@
+import ClassesTableView from "./ClassTimeViewTable";
 import {
-  filterProfessor,
   filterRoom,
   filterSubject,
+  filterProfessor,
 } from "../../helpers/filteringFunc";
-import ClassesTableView from "./ClassTimeViewTable";
 
 function RoomClasses(room) {
   // const {id, bloco, descricao, capacidade, codigo, idBlock} = room;

@@ -6,8 +6,8 @@ const defaultTitles = {
   base: "Conflitos de duração avaliados:\n",
   roomAlloc: "✅ Sem conflitos de alocação de sala\n",
   professorAlloc: "✅ Sem conflitos de alocação de professor\n",
-  notSet: "✅ Sem conflitos de duração não definida\n",
-  notSetConflict: "❌ Conflito: duração não definida\n",
+  notSetted: "✅ Sem conflitos de duração não definida\n",
+  notSettedConflict: "❌ Conflito: duração não definida\n",
 };
 
 function getDurationDefaultStyle() {
@@ -20,20 +20,20 @@ function getDurationDefaultStyle() {
   return defaultStyle;
 }
 
-function getDurationNotSetStyle(classTime) {
-  const defaultNullStyle = { title: defaultTitles.notSet, style: {} };
+function getDurationnotSettedStyle(classTime) {
+  const defaultNullStyle = { title: defaultTitles.notSetted, style: {} };
   const duration = classTime?.duracao;
   const hasDuration = duration !== null && duration !== undefined;
 
   const conflictNullStyle = {
-    title: defaultTitles.notSetConflict,
+    title: defaultTitles.notSettedConflict,
     style: {
-      backgroundColor: conflictOptions.notSet.duration,
+      backgroundColor: conflictOptions.notSetted.duration,
     },
   };
 
-  const notSetStyle = hasDuration ? defaultNullStyle : conflictNullStyle;
-  return notSetStyle;
+  const notSettedStyle = hasDuration ? defaultNullStyle : conflictNullStyle;
+  return notSettedStyle;
 }
 
 function mergeStyles(styles) {
@@ -45,9 +45,9 @@ function mergeStyles(styles) {
     newStyle = { ...newStyle, ...styles.default.style };
   }
 
-  if (styles.notSet) {
-    newTitle += styles.notSet.title;
-    newStyle = { ...newStyle, ...styles.notSet.style };
+  if (styles.notSetted) {
+    newTitle += styles.notSetted.title;
+    newStyle = { ...newStyle, ...styles.notSetted.style };
   }
 
   if (styles.professorAlloc) {
@@ -117,7 +117,7 @@ function getStyledConflictDuration(conflicts, classTime) {
   const durationStyles = {};
 
   durationStyles.default = getDurationDefaultStyle();
-  durationStyles.notSet = getDurationNotSetStyle(classTime);
+  durationStyles.notSetted = getDurationnotSettedStyle(classTime);
 
   // durationStyles.roomAlloc = conflicts.timeConflicts.styled.room.alloc;
   durationStyles.roomAlloc = getDurationStyleRoomAlloc(conflicts, classTime);

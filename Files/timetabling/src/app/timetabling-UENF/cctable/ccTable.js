@@ -1,11 +1,10 @@
-import "./ccTable.css";
 import React, { useEffect, useState } from "react";
 import options from "../../../DB/local/options";
+import ClassTimeGridCC from "../../../components/GridView/ClassTimeGridCC";
 import CRUDPageSelection from "../../../components/PageSelect";
-import CCTableDB from "./ccTableDB";
+import { readClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
 import { CCTableFilters } from "../../../components/Filters/Filters";
 import { getDefaultClassTime } from "../../../helpers/auxCRUD";
-import { readClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
 
 function CCTableView() {
   const [classTimes, setClassTimes] = useState([]);
@@ -30,7 +29,7 @@ function CCTableView() {
     <div className="CRUDContainComponents">
       <div className="infoCard">
         <CCTableFilters {...classTimeStates} />
-        <CCTableDB classTimes={filteredClassTimes} />
+        <ClassTimeGridCC classTimes={filteredClassTimes} />
       </div>
     </div>
   );

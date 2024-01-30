@@ -16,7 +16,7 @@ const options = {
     },
     colors: {
       conflicts: {
-        notSet: {
+        notSetted: {
           subject: "#708090",
           professor: "#8090A0",
           demand: "#90A0B0",

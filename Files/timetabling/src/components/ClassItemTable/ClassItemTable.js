@@ -60,7 +60,7 @@ function ClassItemTableRow(classItemRowStates) {
       <td {...conflicts.styled.professor.merged}>
         <SelectClassProfessor {...classItemRowStates} />
       </td>
-      <td {...conflicts.styled.expectedDemand}>
+      <td {...conflicts.styled.expectedDemand.merged}>
         <NumberInputMultiClassesExpectedDemand {...classItemRowStates} />
       </td>
       <td>

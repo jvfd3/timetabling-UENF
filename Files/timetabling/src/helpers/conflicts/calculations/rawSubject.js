@@ -45,8 +45,8 @@ function checkCorrectPeriodParity(expectedSemester, subjectSemester) {
   const subSem = subjectSemester;
 
   const isSummerSemester = subSem === 3;
-  const isNotSet = !expSem || !subSem;
-  const hasNoParity = isSummerSemester || isNotSet;
+  const isnotSetted = !expSem || !subSem;
+  const hasNoParity = isSummerSemester || isnotSetted;
 
   const evenSubjectOnEvenSemester = subSem === 1 && expSem % 2 === 1;
   const oddSubjectOnOddSemester = subSem === 2 && expSem % 2 === 0;

@@ -1,3 +1,4 @@
+import options from "../../DB/local/options";
 import {
   defaultDBCreate,
   defaultDBRead,
@@ -7,11 +8,10 @@ import {
 } from "../../DB/AWS/defaultAxiosFunctions";
 import {
   getId,
-  getItemIndexInListById,
   removeItemInListById,
+  getItemIndexInListById,
   replaceNewItemInListById,
 } from "../auxCRUD";
-import options from "../../DB/local/options";
 
 const itemName = "classData";
 

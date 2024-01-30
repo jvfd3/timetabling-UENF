@@ -4,8 +4,8 @@ import { getId } from "../../helpers/auxCRUD";
 import { getClassTimeConflicts } from "../../helpers/conflicts/centralConflicts";
 import {
   SelectClassTimeDay,
-  SelectClassTimeDuration,
   SelectClassTimeRoom,
+  SelectClassTimeDuration,
   SelectClassTimeStartHour,
 } from "../mySelects";
 import {

@@ -2,9 +2,9 @@ import options from "../../../DB/local/options";
 import { filterRoom } from "../../filteringFunc";
 import {
   splitTurmas,
-  getOverlappingClasses,
   removeSameId,
   getTargetClasses,
+  getOverlappingClasses,
 } from "../auxConflictFunctions";
 
 function getOnlyNeededValues(splittedClasses) {

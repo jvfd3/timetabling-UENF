@@ -4,8 +4,8 @@ import { filterProfessor } from "../../filteringFunc";
 import {
   splitTurmas,
   removeSameId,
-  getOverlappingClasses,
   getTargetClasses,
+  getOverlappingClasses,
 } from "../auxConflictFunctions";
 
 function getOnlyNeededValues(splittedClasses) {
@@ -60,7 +60,7 @@ function getAllocConflictObjects(classes, classItems) {
   return allocConflict;
 }
 
-function conflictsProfessor(classes, classItem) {
+function getRawConflictsProfessor(classes, classItem) {
   const splittedClasses = splitTurmas(classes);
   const splittedClassItems = splitTurmas([classItem]);
 
@@ -77,4 +77,4 @@ function conflictsProfessor(classes, classItem) {
   return roomConflicts;
 }
 
-export { conflictsProfessor };
+export { getRawConflictsProfessor };

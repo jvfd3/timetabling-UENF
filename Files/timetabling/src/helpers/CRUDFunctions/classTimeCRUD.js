@@ -1,3 +1,4 @@
+import options from "../../DB/local/options";
 import {
   defaultDBCreate,
   defaultDBRead,
@@ -5,11 +6,10 @@ import {
   defaultDBDelete,
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
-import options from "../../DB/local/options";
 import {
   getId,
-  getItemIndexInListById,
   removeItemInListById,
+  getItemIndexInListById,
   replaceNewItemInListById,
 } from "../auxCRUD";
 

@@ -84,7 +84,7 @@ function filterDay(classes, day) {
 
 function filterExpectedSemester(classes, expectedSemester) {
   let filteredClasses = classes;
-  console.log("expectedSemester", expectedSemester);
+  // console.log(expectedSemester);
   if (expectedSemester) {
     filteredClasses = generalFilter(
       classes,

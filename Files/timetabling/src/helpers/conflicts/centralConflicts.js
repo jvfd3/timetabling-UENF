@@ -1,24 +1,23 @@
-import { conflictsProfessor } from "./calculations/rawProfessor";
+import { getRawConflictSubject } from "./calculations/rawSubject";
+import { getRawConflictsProfessor } from "./calculations/rawProfessor";
 import { getRawConflictsDemand } from "./calculations/rawDemand";
+
 import { getRawConflictsRoom } from "./calculations/rawRoom";
 
-import {
-  getStyledConflictSubject,
-  getSubjectStyledConflict,
-} from "./Styles/styleSubject";
-import { getProfessorStyledConflict } from "./Styles/styleProfessor";
+import { getStyledConflictSubject } from "./Styles/styleSubject";
+import { getStyledConflictProfessor } from "./Styles/styleProfessor";
 import { getStyledConflictDemand } from "./Styles/styleDemand";
-import { getRoomStyledConflict } from "./Styles/styleRoom";
-import { getStyledConflictDuration } from "./Styles/styleDuration";
+
+import { getStyledConflictRoom } from "./Styles/styleRoom";
 import { getStyledConflictDay } from "./Styles/styleDay";
 import { getStyledConflictHour } from "./Styles/styleHour";
-import { getRawConflictSubject } from "./calculations/rawSubject";
+import { getStyledConflictDuration } from "./Styles/styleDuration";
 
 function getRawItemConflicts(classes, classItem) {
   const rawItemConflicts = {};
 
   rawItemConflicts.subject = getRawConflictSubject(classItem);
-  rawItemConflicts.professor = conflictsProfessor(classes, classItem);
+  rawItemConflicts.professor = getRawConflictsProfessor(classes, classItem);
   rawItemConflicts.expectedDemand = getRawConflictsDemand(classes, classItem);
 
   return rawItemConflicts;
@@ -28,7 +27,7 @@ function getStyledItemConflict(conflicts, classItem) {
   const classConflictStyles = {};
 
   classConflictStyles.subject = getStyledConflictSubject(conflicts, classItem);
-  classConflictStyles.professor = getProfessorStyledConflict(
+  classConflictStyles.professor = getStyledConflictProfessor(
     conflicts,
     classItem
   );
@@ -61,7 +60,7 @@ function getStyledTimeConflict(conflicts, classTime) {
   const classTimeStyles = { ...conflicts };
 
   // It's a little messy...
-  classTimeStyles.room = getRoomStyledConflict(conflicts, classTime);
+  classTimeStyles.room = getStyledConflictRoom(conflicts, classTime);
   classTimeStyles.day = getStyledConflictDay(classTimeStyles, classTime);
   classTimeStyles.hour = getStyledConflictHour(classTimeStyles, classTime);
   classTimeStyles.duration = getStyledConflictDuration(

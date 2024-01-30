@@ -1,8 +1,3 @@
-/*
-- Update class in Classes
-- Update classTime in ClassTimes
-*/
-
 import options from "../DB/local/options";
 import { getDefaultYearSemesterValues } from "./auxFunctions";
 

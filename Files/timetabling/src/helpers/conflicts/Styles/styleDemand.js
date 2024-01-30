@@ -1,9 +1,11 @@
 import options from "../../../DB/local/options";
 
+const conflictOptions = options.config.colors.conflicts;
+
 const defaultTitles = {
   base: `Conflitos de demanda avaliados:\n`,
-  notSet: `✅ Sem conflitos de demanda não definida\n`,
-  notSetConflict: `❌ Conflito: demanda não definida\n`,
+  notSetted: `✅ Sem conflitos de demanda não definida\n`,
+  notSettedConflict: `❌ Conflito: demanda não definida\n`,
   singleCapacity: `✅ Todas as salas desta turma comportam a demanda estimada\n`,
   singleCapacityConflict: `❌ Conflito: há sala que não comporta a demanda\n`,
 };
@@ -30,7 +32,7 @@ function getStyledDefaultConflict() {
   const defaultStyle = {
     title: defaultTitles.base,
     style: {
-      backgroundColor: options.config.colors.conflicts.noProblem.demand,
+      backgroundColor: conflictOptions.noProblem.demand,
     },
   };
 
@@ -44,7 +46,7 @@ function getStyledConflictCapacity(singleClassCapacity) {
   if (hasConflict) {
     demandConflictStyle.title = getDemandMessage(singleClassCapacity);
     demandConflictStyle.style = {
-      backgroundColor: options.config.colors.conflicts.hasConflict.demand,
+      backgroundColor: conflictOptions.hasConflict.demand,
     };
   }
 
@@ -52,11 +54,11 @@ function getStyledConflictCapacity(singleClassCapacity) {
 }
 
 function getNullStyledConflict(demand) {
-  const defaultNullStyle = { title: defaultTitles.notSet, style: {} };
+  const defaultNullStyle = { title: defaultTitles.notSetted, style: {} };
   const conflictNullStyle = {
-    title: defaultTitles.notSetConflict,
+    title: defaultTitles.notSettedConflict,
     style: {
-      backgroundColor: options.config.colors.conflicts.notSet.demand,
+      backgroundColor: conflictOptions.notSetted.demand,
     },
   };
 
@@ -76,9 +78,9 @@ function mergeStyles(styles) {
     newStyle = { ...newStyle, ...styles.default.style };
   }
 
-  if (styles.notSet) {
-    newTitle += styles.notSet.title;
-    newStyle = { ...newStyle, ...styles.notSet.style };
+  if (styles.notSetted) {
+    newTitle += styles.notSetted.title;
+    newStyle = { ...newStyle, ...styles.notSetted.style };
   }
 
   if (styles.singleClassCapacity) {
@@ -106,10 +108,10 @@ function getStyledConflictDemand(conflicts, classItem) {
   demandStyles.default = getStyledDefaultConflict();
   demandStyles.singleClassCapacity =
     getStyledConflictCapacity(singleClassCapacity);
-  demandStyles.notSet = getNullStyledConflict(demand);
+  demandStyles.notSetted = getNullStyledConflict(demand);
   demandStyles.merged = mergeStyles(demandStyles);
 
-  return demandStyles.merged;
+  return demandStyles;
 }
 
 export { getStyledConflictDemand };

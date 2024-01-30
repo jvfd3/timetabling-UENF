@@ -1,6 +1,6 @@
-import "./ccTable.css";
-import options from "../../../DB/local/options";
-import { filterDay, filterHour } from "../../../helpers/filteringFunc";
+import "./ClassTimeGridCC.css";
+import options from "../../DB/local/options";
+import { filterDay, filterHour } from "../../helpers/filteringFunc";
 
 function TopLeft() {
   return <th className="TopLeftCorner"></th>;
@@ -114,7 +114,7 @@ function Body({ classTimes }) {
   );
 }
 
-function CCTableDB(classTimes) {
+function ClassTimeGridCC(classTimes) {
   // console.log(classTimes);
   return (
     <table className="TabelaCC">
@@ -124,4 +124,4 @@ function CCTableDB(classTimes) {
   );
 }
 
-export default CCTableDB;
+export default ClassTimeGridCC;

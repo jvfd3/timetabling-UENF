@@ -1,4 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
+import { getId } from "../../../helpers/auxCRUD";
+import options from "../../../DB/local/options";
+import {
+  getValueFromObject,
+  getDefaultYearSemesterValues,
+} from "../../../helpers/auxFunctions";
 import {
   CreateClassTime,
   DeleteClassTime,
@@ -8,12 +14,6 @@ import {
   UpdateClassTime,
   UpdateItem,
 } from "../Dumb/Dumb";
-import { getId } from "../../../helpers/auxCRUD";
-import options from "../../../DB/local/options";
-import {
-  getDefaultYearSemesterValues,
-  getValueFromObject,
-} from "../../../helpers/auxFunctions";
 
 function SmartInputSubject(inputSubjectProps) {
   const { classStates, createClassDB, subjects, inputConfig } =

@@ -1,5 +1,5 @@
-import { sqlDataFromJson } from "../../DB/local/dataFromJSON";
 import { createClass } from "../../helpers/CRUDFunctions/classCRUD";
+import { sqlDataFromJson } from "../../DB/local/dataFromJSON";
 import { SmartInputSubject } from "../Buttons/Smart/Smart";
 
 function isSameParity(subject, semester) {

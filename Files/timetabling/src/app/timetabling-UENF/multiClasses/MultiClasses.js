@@ -1,13 +1,15 @@
-import "./multiTurmas.css";
+import "./multiClasses.css";
 import React, { useState, useEffect } from "react";
+import options from "../../../DB/local/options";
 import ClassesTable from "../../../components/ClassItemTable/ClassItemTable";
+import CRUDPageSelection from "../../../components/PageSelect";
 import NotOfferedSubjects from "../../../components/multiClasses/NotOfferedSubjects";
-import { SmartCreateClassItem } from "../../../components/Buttons/Smart/Smart";
-import { MultiClassesFilters } from "../../../components/Filters/Filters";
-import { readClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
-import { readSubject } from "../../../helpers/CRUDFunctions/subjectCRUD";
-import { readProfessor } from "../../../helpers/CRUDFunctions/professorCRUD";
 import { readRoom } from "../../../helpers/CRUDFunctions/roomCRUD";
+import { readSubject } from "../../../helpers/CRUDFunctions/subjectCRUD";
+import { readClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
+import { readProfessor } from "../../../helpers/CRUDFunctions/professorCRUD";
+import { MultiClassesFilters } from "../../../components/Filters/Filters";
+import { SmartCreateClassItem } from "../../../components/Buttons/Smart/Smart";
 import {
   createClass,
   readClass,
@@ -129,4 +131,14 @@ function MultiClassesRefactor() {
   );
 }
 
-export { MultiClassesRefactor };
+function MultiClasses() {
+  const defaultPageValue = options.constantValues.pageSelection.multiClasses;
+  return (
+    <div className="background">
+      <CRUDPageSelection defaultValue={defaultPageValue} />
+      <MultiClassesRefactor />
+    </div>
+  );
+}
+
+export default MultiClasses;

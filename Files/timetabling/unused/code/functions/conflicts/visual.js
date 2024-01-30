@@ -10,7 +10,7 @@ function getNullgetClassTimeConflicts(classTime) {
 
 function setNullStyles(conflictStyles, classTime) {
   const isNull = getNullgetClassTimeConflicts(classTime);
-  const notSetTexts = {
+  const notSettedTexts = {
     room: "Sala não definida",
     day: "Dia não definido",
     hour: "Hora não definida",
@@ -18,14 +18,16 @@ function setNullStyles(conflictStyles, classTime) {
   };
   if (isNull.day) {
     conflictStyles.day = {
-      title: notSetTexts.day,
-      style: { backgroundColor: options.config.colors.conflicts.notSet.day },
+      title: notSettedTexts.day,
+      style: { backgroundColor: options.config.colors.conflicts.notSetted.day },
     };
   }
   if (isNull.hour) {
     conflictStyles.hour = {
-      title: notSetTexts.hour,
-      style: { backgroundColor: options.config.colors.conflicts.notSet.hour },
+      title: notSettedTexts.hour,
+      style: {
+        backgroundColor: options.config.colors.conflicts.notSetted.hour,
+      },
     };
   }
   return conflictStyles;

@@ -63,7 +63,7 @@ function ClassData(classesStates) {
           </tr>
           <tr>
             <th>Disciplina</th>
-            <td {...conflictStyles.subject}>
+            <td {...conflictStyles.subject.merged}>
               <SelectClassSubject {...classesStates} />
             </td>
           </tr>
@@ -75,7 +75,7 @@ function ClassData(classesStates) {
           </tr>
           <tr>
             <th>Demanda Estimada</th>
-            <td {...conflictStyles.expectedDemand}>
+            <td {...conflictStyles.expectedDemand.merged}>
               <TextInputClassExpectedDemand {...classesStates} />
             </td>
           </tr>
