@@ -5,6 +5,7 @@ import {
   defaultDBDelete,
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
+import options from "../../DB/local/options";
 import {
   removeItemInListById,
   getItemIndexInListById,
@@ -15,7 +16,8 @@ const itemName = "student";
 
 function createStudent({ students, setStudents, student, setStudent }) {
   function getNewStudent(newId) {
-    const newStudent = { ...student, id: newId };
+    const emptyStudent = options.emptyObjects.student;
+    const newStudent = { ...emptyStudent, id: newId };
     return newStudent;
   }
 

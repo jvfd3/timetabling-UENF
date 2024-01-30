@@ -5,6 +5,7 @@ import {
   defaultDBDelete,
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
+import options from "../../DB/local/options";
 import {
   getItemIndexInListById,
   removeItemInListById,
@@ -15,7 +16,8 @@ const itemName = "subject";
 
 function createSubject({ subjects, setSubjects, subject, setSubject }) {
   function getNewSubject(newId) {
-    const newSubject = { ...subject, id: newId };
+    const emptySubject = options.emptyObjects.subject;
+    const newSubject = { ...emptySubject, periodo: 0, id: newId };
     return newSubject;
   }
 

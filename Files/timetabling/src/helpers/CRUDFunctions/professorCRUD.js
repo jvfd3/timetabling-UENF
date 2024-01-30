@@ -5,6 +5,7 @@ import {
   defaultDBDelete,
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
+import options from "../../DB/local/options";
 import {
   removeItemInListById,
   getItemIndexInListById,
@@ -20,7 +21,8 @@ function createProfessor({
   setProfessor,
 }) {
   function insertNewProfessorFromDB(newId) {
-    const newProfessor = { ...professor, id: newId };
+    const emptyProfessor = options.emptyObjects.professor;
+    const newProfessor = { ...emptyProfessor, id: newId };
     setProfessor(newProfessor);
     setProfessors([...professors, newProfessor]);
   }

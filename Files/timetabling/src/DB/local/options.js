@@ -181,6 +181,13 @@ const options = {
       apelido: null, //STR
       nome: null, //STR
     },
+    student: {
+      id: null, //INT
+      anoEntrada: null, //INT
+      curso: null, //STR
+      matricula: null, //STR
+      nome: null, //STR
+    },
     courses: {
       apelido: null, //STR
       nome: null, //STR

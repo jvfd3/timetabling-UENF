@@ -5,6 +5,7 @@ import {
   defaultDBDelete,
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
+import options from "../../DB/local/options";
 import {
   removeItemInListById,
   getItemIndexInListById,
@@ -15,7 +16,8 @@ const itemName = "room";
 
 function createRoom({ rooms, setRooms, room, setRoom }) {
   function getNewRoom(newId) {
-    const newRoom = { ...room, id: newId };
+    const emptyRoom = options.emptyObjects.room;
+    const newRoom = { ...emptyRoom, id: newId };
     return newRoom;
   }
 
