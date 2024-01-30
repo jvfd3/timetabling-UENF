@@ -6,9 +6,17 @@ import { sqlDataFromJson } from "../DB/local/dataFromJSON";
 import { getValueFromObject } from "../helpers/auxFunctions";
 import { LockedProp, UnlockedProp } from "./Buttons/Dumb/Dumb";
 import {
+  getId,
   getItemFromListById,
   replaceNewItemInListById,
 } from "../helpers/auxCRUD";
+import {
+  getDefaultOptionLabelClassItem,
+  getDefaultOptionLabelProfessor,
+  getDefaultOptionLabelRoom,
+  getDefaultOptionLabelStudent,
+  getDefaultOptionLabelSubject,
+} from "../helpers/visualizationText/textLabels";
 
 const styleWidthFix = options.SelectStyles.fullItem;
 
@@ -720,15 +728,8 @@ function SelectClassItem(classStates) {
     setOuterValue: setClassItem,
     value: classItem,
     customProps: {
-      getOptionValue: (classItem) =>
-        `id: ${classItem?.id ?? classItem?.idTurma}`,
-      getOptionLabel: ({ ano, semestre, disciplina, professor }) => {
-        let message = "";
-        message += `${ano}.${semestre} - `;
-        message += `${disciplina?.apelido ?? "disc. indef."} - `;
-        message += `${professor?.apelido ?? "prof. indef."}`;
-        return message;
-      },
+      getOptionValue: (classItem) => getId(classItem),
+      getOptionLabel: (classItem) => getDefaultOptionLabelClassItem(classItem),
       formatOptionLabel: (
         { id, idTurma, ano, semestre, disciplina, professor },
         { context }
@@ -840,15 +841,8 @@ function SelectProfessorItem(professorStates) {
     setOuterValue: setProfessor,
     value: professor,
     customProps: {
-      getOptionValue: ({ id }) => id,
-      getOptionLabel: ({ nome, apelido, laboratorio, curso }) => {
-        let message = "";
-        message += `${nome} - `;
-        message += `${apelido} - `;
-        message += `${laboratorio} - `;
-        message += `${curso}`;
-        return message;
-      },
+      getOptionValue: (professor) => getId(professor),
+      getOptionLabel: (professor) => getDefaultOptionLabelProfessor(professor),
       formatOptionLabel: ({ laboratorio, curso, apelido }) => {
         let message = "";
         message += `(`;
@@ -913,9 +907,8 @@ function SelectRoomItem({ rooms, setRooms, room, setRoom }) {
     value: room,
     // findCorrectObject: ,
     customProps: {
-      getOptionValue: (option) => option.id,
-      getOptionLabel: (option) =>
-        `${option?.capacidade} ${option?.bloco} ${option?.codigo}`,
+      getOptionValue: (room) => getId(room),
+      getOptionLabel: (room) => getDefaultOptionLabelRoom(room),
       formatOptionLabel: ({ capacidade, bloco, codigo }) => {
         let msg = "";
         msg += capacidade ? `(${capacidade})` : "(Cap. indef.)";
@@ -963,8 +956,8 @@ function SelectSubjectItem({ subjects, setSubjects, subject, setSubject }) {
     value: subject,
     // findCorrectObject: ,
     customProps: {
-      getOptionValue: (option) => option?.codigo,
-      getOptionLabel: (option) => `${option?.codigo} - ${option?.nome}`,
+      getOptionValue: (subject) => getId(subject),
+      getOptionLabel: (subject) => getDefaultOptionLabelSubject(subject),
       formatOptionLabel: ({ codigo, nome }) => {
         let msg = "";
         msg += codigo ? `(${codigo})` : "(Cod. indef.)";
@@ -1002,8 +995,8 @@ function SelectStudentItem({ students, setStudents, student, setStudent }) {
     value: student,
     // findCorrectObject: ,
     customProps: {
-      getOptionValue: (option) => option?.matricula,
-      getOptionLabel: ({ matricula, nome }) => `${matricula}: ${nome}`,
+      getOptionValue: (student) => getId(student),
+      getOptionLabel: (student) => getDefaultOptionLabelStudent(student),
       formatOptionLabel: ({ matricula, nome }) => `${matricula}: ${nome}`,
     },
   };
