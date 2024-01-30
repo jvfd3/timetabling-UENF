@@ -19,6 +19,8 @@ import {
   updateRoom,
   deleteRoom,
 } from "../../../helpers/CRUDFunctions/roomCRUD";
+import { getId } from "../../../helpers/auxCRUD";
+import ClassesInRoom from "../../../components/rooms/classesInRoom";
 
 function RoomSelection(roomStates) {
   const roomCRUDFunctions = {
@@ -40,12 +42,12 @@ function RoomBaseInfo(roomStates) {
     <div className="showBasicDataCard">
       <h3>INFORMAÇÕES DA SALA</h3>
       <table className="showBasicDataTable">
-        <thead>
+        {/* <thead>
           <tr>
             <th>Chave</th>
             <th>Valor</th>
           </tr>
-        </thead>
+        </thead> */}
         <tbody>
           <tr>
             <th>Bloco</th>
@@ -88,66 +90,6 @@ function RoomBaseInfo(roomStates) {
             {/* For debug purposes */}
             {/* <td>{id}</td> */}
           </tr>
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-function ClassesInRoom(room) {
-  const { id } = room;
-  const classes = getClassesData();
-  const splittedClasses = splitTurmas(classes);
-  const turmasNestaSala = splittedClasses.filter((splittedClass) => {
-    const found = splittedClass.sala?.id === id;
-    return found;
-  });
-  return turmasNestaSala.length === 0 ? (
-    <div className="showBasicDataCard">
-      <h5>Não há turmas nesta sala</h5>
-    </div>
-  ) : (
-    <div className="showBasicDataCard">
-      <h4>TURMAS NESTA SALA</h4>
-
-      <table className="showBasicDataTable">
-        <thead>
-          <tr>
-            <th>idTurma</th>
-            <th>idHorario</th>
-            <th>Ano.Semestre</th>
-            <th>Disciplina</th>
-            <th>Professor</th>
-            <th>Dia</th>
-            <th>Hora Início</th>
-            <th>Duração</th>
-          </tr>
-        </thead>
-        <tbody>
-          {turmasNestaSala.map((turma, i) => {
-            function checkIndefinition(value) {
-              return value ? value : "Indef.";
-            }
-
-            return (
-              <tr key={i}>
-                <td>{turma.idTurma}</td>
-                <td>{turma.idHorario}</td>
-                <td>
-                  {turma.ano}.{turma.semestre}
-                </td>
-                <td>
-                  {turma.codigoDisciplina && turma.apelidoDisciplina
-                    ? `${turma.codigoDisciplina} - ${turma.apelidoDisciplina}`
-                    : "Indef."}
-                </td>
-                <td>{checkIndefinition(turma.apelidoProfessor)}</td>
-                <td>{checkIndefinition(turma.dia)}</td>
-                <td>{checkIndefinition(turma.horaInicio)}</td>
-                <td>{checkIndefinition(turma.duracao)}</td>
-              </tr>
-            );
-          })}
         </tbody>
       </table>
     </div>

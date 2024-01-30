@@ -205,4 +205,50 @@ function ClassesFilters(classStates) {
   );
 }
 
-export { MultiClassesFilters, CCTableFilters, ClassesFilters };
+function RoomsFilters(classTimeStates) {
+  const { classTimes, setFilteredClassTimes, room } = classTimeStates;
+  // console.log("classTimes", classTimes.length);
+
+  const defaultYearSemester = getDefaultYearSemesterValues();
+
+  const [year, setYear] = useState(defaultYearSemester.year);
+  const [semester, setSemester] = useState(defaultYearSemester.semester);
+
+  const props = {
+    year: { year, setYear },
+    semester: { semester, setSemester },
+  };
+
+  function filterList(list, year, semester) {
+    let filteredList = list;
+
+    filteredList = filterYear(filteredList, year);
+    filteredList = filterSemester(filteredList, semester);
+    filteredList = filterRoom(filteredList, room);
+
+    return filteredList;
+  }
+
+  function updateOuterStates() {
+    const filteredClassTimes = filterList(classTimes, year, semester);
+
+    setFilteredClassTimes(filteredClassTimes);
+  }
+
+  useEffect(() => {
+    updateOuterStates();
+  }, []);
+
+  useEffect(() => {
+    updateOuterStates();
+  }, [year, semester, classTimes]);
+
+  return (
+    <div className="MultiClassesFilters">
+      <FilterYear {...props.year} />
+      <FilterSemester {...props.semester} />
+    </div>
+  );
+}
+
+export { MultiClassesFilters, CCTableFilters, ClassesFilters, RoomsFilters };
