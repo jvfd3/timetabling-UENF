@@ -1,27 +1,26 @@
-import "./professores.css";
 import React, { useEffect, useState } from "react";
-import CRUDPageSelection from "../../../components/PageSelect";
-import options from "../../../DB/local/options";
-import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
-import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
+import options from "../../../../DB/local/options";
+import CRUDPageSelection from "../../../../components/PageSelect";
+import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
+import { CRUDButtonsContainer } from "../../../../components/CRUDButtons";
 // import { scrollThroughProfessores } from "../functions/firulas/minhasFirulas";
 import {
+  SelectProfessorLab,
   SelectProfessorItem,
   SelectProfessorCourse,
-  SelectProfessorLab,
-} from "../../../components/mySelects";
+} from "../../../../components/mySelects";
 import {
   TextInputProfessorId,
   TextInputProfessorName,
   TextinputProfessorAlias,
-} from "../../../components/MyTextFields";
+} from "../../../../components/MyTextFields";
 import {
   createProfessor,
   readProfessor,
   updateProfessor,
   deleteProfessor,
-} from "../../../helpers/CRUDFunctions/professorCRUD";
-import { ProfessorClasses } from "../../../components/classTimesViewTable/SpecificClassTimeViewTables";
+} from "../../../../helpers/CRUDFunctions/professorCRUD";
+import { ProfessorClasses } from "../../../../components/classTimesViewTable/SpecificClassTimeViewTables";
 
 function ProfessorSelection(professorStates) {
   const professorCRUDFunctions = {

@@ -1,23 +1,25 @@
-import "./salas.css";
-import options from "../../../DB/local/options";
-import CRUDPageSelection from "../../../components/PageSelect";
 import { useEffect, useState } from "react";
-import { SelectRoomItem, SelectRoomBlock } from "../../../components/mySelects";
-import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
-import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
+import options from "../../../../DB/local/options";
+import CRUDPageSelection from "../../../../components/PageSelect";
+import { RoomClasses } from "../../../../components/classTimesViewTable/SpecificClassTimeViewTables";
+import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
+import { CRUDButtonsContainer } from "../../../../components/CRUDButtons";
 import {
-  TextInputRoomCapacity,
-  TextInputRoomCode,
-  TextInputRoomDescription,
+  SelectRoomItem,
+  SelectRoomBlock,
+} from "../../../../components/mySelects";
+import {
   TextInputRoomId,
-} from "../../../components/MyTextFields";
+  TextInputRoomCode,
+  TextInputRoomCapacity,
+  TextInputRoomDescription,
+} from "../../../../components/MyTextFields";
 import {
   createRoom,
   readRoom,
   updateRoom,
   deleteRoom,
-} from "../../../helpers/CRUDFunctions/roomCRUD";
-import { RoomClasses } from "../../../components/classTimesViewTable/SpecificClassTimeViewTables";
+} from "../../../../helpers/CRUDFunctions/roomCRUD";
 
 function RoomSelection(roomStates) {
   const roomCRUDFunctions = {

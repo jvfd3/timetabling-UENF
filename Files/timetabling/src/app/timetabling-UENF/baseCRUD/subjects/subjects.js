@@ -1,27 +1,26 @@
-import "./disciplinas.css";
 import React, { useEffect, useState } from "react";
-import options from "../../../DB/local/options";
-import CRUDPageSelection from "../../../components/PageSelect";
-import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
-import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
+import options from "../../../../DB/local/options";
+import CRUDPageSelection from "../../../../components/PageSelect";
+import { SubjectClasses } from "../../../../components/classTimesViewTable/SpecificClassTimeViewTables";
+import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
+import { CRUDButtonsContainer } from "../../../../components/CRUDButtons";
 // import { scrollThroughDisciplinas } from "../functions/firulas/minhasFirulas";
 import {
   SelectSubjectItem,
   SelectSubjectExpectedSemester,
-} from "../../../components/mySelects";
+} from "../../../../components/mySelects";
 import {
+  TextInputSubjectId,
   TextInputSubjectCode,
   TextInputSubjectName,
   TextInputSubjectAlias,
-  TextInputSubjectId,
-} from "../../../components/MyTextFields";
+} from "../../../../components/MyTextFields";
 import {
   createSubject,
   readSubject,
   updateSubject,
   deleteSubject,
-} from "../../../helpers/CRUDFunctions/subjectCRUD";
-import { SubjectClasses } from "../../../components/classTimesViewTable/SpecificClassTimeViewTables";
+} from "../../../../helpers/CRUDFunctions/subjectCRUD";
 
 function SubjectSelection(subjectStates) {
   const subjectCRUDFunctions = {

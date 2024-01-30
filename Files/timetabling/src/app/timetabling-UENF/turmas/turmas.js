@@ -1,12 +1,12 @@
-import "./turmas.css";
 import React, { useEffect, useState } from "react";
 import options from "../../../DB/local/options";
-import CRUDPageSelection from "../../../components/PageSelect";
 import ClassTimeTable from "../../../components/ClassTimeTable/ClassTimeTable";
-import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
+import CRUDPageSelection from "../../../components/PageSelect";
+import { readRoom } from "../../../helpers/CRUDFunctions/roomCRUD";
 import { readSubject } from "../../../helpers/CRUDFunctions/subjectCRUD";
 import { readProfessor } from "../../../helpers/CRUDFunctions/professorCRUD";
-import { readRoom } from "../../../helpers/CRUDFunctions/roomCRUD";
+import { ClassesFilters } from "../../../components/Filters/Filters";
+import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
 import { getClassItemConflicts } from "../../../helpers/conflicts/centralConflicts";
 import {
   SelectClassItem,
@@ -25,7 +25,6 @@ import {
   TextInputClassExpectedDemand,
   TextInputClassId,
 } from "../../../components/MyTextFields";
-import { ClassesFilters } from "../../../components/Filters/Filters";
 
 function TurmaSelection(classStates) {
   /* It just contains the selection an maybe allows scrolling selection */

@@ -1,26 +1,25 @@
-import "./alunos.css";
 import React, { useEffect, useState } from "react";
-import options from "../../../DB/local/options";
-import CRUDPageSelection from "../../../components/PageSelect";
-import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
-import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
+import options from "../../../../DB/local/options";
+import CRUDPageSelection from "../../../../components/PageSelect";
+import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
+import { CRUDButtonsContainer } from "../../../../components/CRUDButtons";
 // import { scrollThroughAlunos } from "../functions/firulas/minhasFirulas";
 import {
   SelectStudentItem,
   SelectStudentYear,
   SelectStudentCourse,
-} from "../../../components/mySelects";
+} from "../../../../components/mySelects";
 import {
-  TextInputStudentEnrollment,
-  TextInputStudentName,
   TextInputStudentId,
-} from "../../../components/MyTextFields";
+  TextInputStudentName,
+  TextInputStudentEnrollment,
+} from "../../../../components/MyTextFields";
 import {
   createStudent,
   readStudent,
   updateStudent,
   deleteStudent,
-} from "../../../helpers/CRUDFunctions/studentCRUD";
+} from "../../../../helpers/CRUDFunctions/studentCRUD";
 
 function StudentSelection(studentStates) {
   const studentCRUDFunctions = {

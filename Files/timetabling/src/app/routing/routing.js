@@ -7,12 +7,12 @@ import options from "../../DB/local/options";
 import Main from "../timetabling-UENF/main/main";
 import Classes from "../timetabling-UENF//turmas/turmas";
 import MultiClasses from "../timetabling-UENF//multiturmas/multiTurmas";
-import Students from "../timetabling-UENF//alunos/alunos";
-import Professors from "../timetabling-UENF//professores/professores";
-import Subjects from "../timetabling-UENF//disciplinas/disciplinas";
-import Rooms from "../timetabling-UENF//salas/salas";
 import NoMatch from "../timetabling-UENF//notFound/notFound";
 import CCTable from "../timetabling-UENF//cctable/ccTable";
+import Professors from "../timetabling-UENF//baseCRUD/professors/professors";
+import Students from "../timetabling-UENF/baseCRUD/students/students";
+import Subjects from "../timetabling-UENF/baseCRUD/subjects/subjects";
+import Rooms from "../timetabling-UENF/baseCRUD/rooms/rooms";
 import { ToastContainer } from "react-toastify";
 
 function MyRouting() {
