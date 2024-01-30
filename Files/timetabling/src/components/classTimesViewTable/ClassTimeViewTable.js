@@ -1,14 +1,18 @@
-import "./classesInRoom.css";
-import { useEffect, useState } from "react";
+import "./ClassTimeViewTable.css";
 import { getId } from "../../helpers/auxCRUD";
-import { readClassTime } from "../../helpers/CRUDFunctions/classTimeCRUD";
-import { RoomsFilters } from "../Filters/Filters";
+import { ViewTableFilters } from "../Filters/Filters";
 import {
   checkIndefinition,
   getProfessorLabel,
   getRoomLabel,
   getSubjectLabel,
 } from "../../helpers/visualizationText/textLabels";
+import { readClassTime } from "../../helpers/CRUDFunctions/classTimeCRUD";
+import { useEffect, useState } from "react";
+
+function NoClasses({ noClassesTitle }) {
+  return <h5>{noClassesTitle}</h5>;
+}
 
 function TableHeader() {
   return (
@@ -27,11 +31,6 @@ function TableHeader() {
       </tr>
     </thead>
   );
-}
-
-function NoClassesInRoom() {
-  const noClassesInRoomText = "Não há turmas nesta sala";
-  return <h5>{noClassesInRoomText}</h5>;
 }
 
 function ClassRow({ classTimes, classTime }) {
@@ -70,17 +69,16 @@ function ClassRow({ classTimes, classTime }) {
 
 function HeaderFilter(classTimeStates) {
   const size = classTimeStates.filteredClassTimes.length;
-  // console.log(classTimeStates);
-  const classesInRoomTitle = "Turmas Nesta Sala: " + size;
+  const classesInRoomTitle = classTimeStates.headerTitle + size;
   return (
     <div className="header">
       <h4>{classesInRoomTitle}</h4>
-      <RoomsFilters {...classTimeStates} />
+      <ViewTableFilters {...classTimeStates} />
     </div>
   );
 }
 
-function ClassesInRoomTable({ classTimes }) {
+function ClassesTable({ classTimes }) {
   // console.log(classTimes);
   return (
     <table className="showBasicDataTable">
@@ -96,20 +94,25 @@ function ClassesInRoomTable({ classTimes }) {
   );
 }
 
-function ClassesInRoom(room) {
-  // const {id, bloco, descricao, capacidade, codigo, idBlock} = room;
+function ClassesTableView(customPageStates) {
+  /* const {
+    baseFilter,
+    baseValueToFilter,
+    headerTitle,
+    noClassesTitle,
+  } = customPageStates; */
 
   const [classTimes, setClassTimes] = useState([]);
   const [filteredClassTimes, setFilteredClassTimes] = useState([]);
 
   const classTimeStates = {
+    ...customPageStates,
     classTimes,
     setClassTimes,
     classTime: {},
     setClassTime: () => {},
     filteredClassTimes,
     setFilteredClassTimes,
-    room,
   };
 
   useEffect(() => {
@@ -117,21 +120,19 @@ function ClassesInRoom(room) {
   }, []);
 
   const hasClasses = filteredClassTimes.length > 0;
-  // console.log(offlineFilteredClasses.length, hasClasses);
-
   return (
     <div className="showBasicDataCard">
       <HeaderFilter {...classTimeStates} />
       {hasClasses ? (
         <div>
-          <ClassesInRoomTable classTimes={filteredClassTimes} />
+          <ClassesTable classTimes={filteredClassTimes} />
           {/* <ClassesInRoomTable classes={offlineFilteredClasses} /> */}
         </div>
       ) : (
-        <NoClassesInRoom />
+        <NoClasses {...classTimeStates} />
       )}
     </div>
   );
 }
 
-export default ClassesInRoom;
+export default ClassesTableView;

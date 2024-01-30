@@ -205,8 +205,9 @@ function ClassesFilters(classStates) {
   );
 }
 
-function RoomsFilters(classTimeStates) {
-  const { classTimes, setFilteredClassTimes, room } = classTimeStates;
+function ViewTableFilters(classTimeStates) {
+  const { classTimes, setFilteredClassTimes, baseFilter, baseValueToFilter } =
+    classTimeStates;
   // console.log("classTimes", classTimes.length);
 
   const defaultYearSemester = getDefaultYearSemesterValues();
@@ -224,7 +225,7 @@ function RoomsFilters(classTimeStates) {
 
     filteredList = filterYear(filteredList, year);
     filteredList = filterSemester(filteredList, semester);
-    filteredList = filterRoom(filteredList, room);
+    filteredList = baseFilter(filteredList, baseValueToFilter);
 
     return filteredList;
   }
@@ -251,4 +252,9 @@ function RoomsFilters(classTimeStates) {
   );
 }
 
-export { MultiClassesFilters, CCTableFilters, ClassesFilters, RoomsFilters };
+export {
+  MultiClassesFilters,
+  CCTableFilters,
+  ClassesFilters,
+  ViewTableFilters,
+};

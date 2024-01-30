@@ -3,8 +3,6 @@ import options from "../../../DB/local/options";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { useEffect, useState } from "react";
 import { SelectRoomItem, SelectRoomBlock } from "../../../components/mySelects";
-import { getClassesData } from "../../../DB/retrieveData";
-import { splitTurmas } from "../../../helpers/conflicts/auxConflictFunctions";
 import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
 import { sqlDataFromJson } from "../../../DB/local/dataFromJSON";
 import {
@@ -19,8 +17,7 @@ import {
   updateRoom,
   deleteRoom,
 } from "../../../helpers/CRUDFunctions/roomCRUD";
-import { getId } from "../../../helpers/auxCRUD";
-import ClassesInRoom from "../../../components/rooms/classesInRoom";
+import { ClassesInRoom } from "../../../components/classTimesViewTable/SpecificClassTimeViewTables";
 
 function RoomSelection(roomStates) {
   const roomCRUDFunctions = {

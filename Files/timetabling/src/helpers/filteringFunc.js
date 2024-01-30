@@ -107,6 +107,17 @@ function filterRoom(classes, room) {
   return filteredClasses;
 }
 
+function filterSubject(classes, subject) {
+  let filteredClasses = classes;
+  if (subject) {
+    filteredClasses = generalFilter(classes, ["disciplina", "id"], subject?.id);
+  }
+  // console.log("subject", subject);
+  // console.log("subjectClasses", subjectClasses);
+  // console.log("subjectClasses", filteredClasses);
+  return filteredClasses;
+}
+
 function filterExpectedSemester(classes, expectedSemester) {
   let filteredClasses = classes;
   if (expectedSemester) {
@@ -128,6 +139,9 @@ export {
   /* Internal Use Only ? */
   // getValueFromDataWithPropArray,
   // generalFilter,
+
+  /* Disciplinas */
+  filterSubject,
 
   /* CCTurmas */
   filterHour,
