@@ -6,18 +6,11 @@ import CCTableDB from "./ccTableDB";
 import { CCTableFilters } from "../../../components/Filters/Filters";
 import { getDefaultClassTime } from "../../../helpers/auxCRUD";
 import { readClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
-import { readSubject } from "../../../helpers/CRUDFunctions/subjectCRUD";
-import { readProfessor } from "../../../helpers/CRUDFunctions/professorCRUD";
-import { readRoom } from "../../../helpers/CRUDFunctions/roomCRUD";
 
 function CCTableView() {
   const [classTimes, setClassTimes] = useState([]);
   const [filteredClassTimes, setFilteredClassTimes] = useState([]);
   const [classTime, setClassTime] = useState(getDefaultClassTime());
-
-  const [professors, setProfessors] = useState([]);
-  const [subjects, setSubjects] = useState([]);
-  const [rooms, setRooms] = useState([]);
 
   const classTimeStates = {
     classTimes,
@@ -28,37 +21,15 @@ function CCTableView() {
     setClassTime,
   };
 
-  // console.log(classTimes.length, filteredClassTimes.length);
-
-  const selectStates = {
-    professors,
-    setProfessors,
-    professor: {},
-    setProfessor: () => {},
-    subjects,
-    setSubjects,
-    subject: {},
-    setSubject: () => {},
-    rooms,
-    setRooms,
-    room: {},
-    setRoom: () => {},
-  };
-
-  const globalStates = { classTimeStates, selectStates };
-
   useEffect(() => {
     // console.log("useEffect");
-    readRoom(selectStates);
-    readProfessor(selectStates);
-    readSubject(selectStates);
     readClassTime(classTimeStates);
   }, []);
 
   return (
     <div className="CRUDContainComponents">
       <div className="infoCard">
-        <CCTableFilters {...globalStates} />
+        <CCTableFilters {...classTimeStates} />
         <CCTableDB classTimes={filteredClassTimes} />
       </div>
     </div>

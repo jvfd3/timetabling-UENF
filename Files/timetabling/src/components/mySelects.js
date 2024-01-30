@@ -540,6 +540,40 @@ function SelectFilterHour({ hour, setHour }) {
   return <SelectStartHour {...startHourStates} />;
 }
 
+function SelectFilterExpectedSemester({
+  expectedSemester,
+  setExpectedSemester,
+}) {
+  function updateOuterExpectedSemester(newExpectedSemester) {
+    const newExpectedSemesterValue = getValueFromObject(newExpectedSemester);
+    setExpectedSemester(newExpectedSemesterValue);
+  }
+
+  const expectedSemesterStates = {
+    outerExpectedSemester: expectedSemester,
+    setOuterExpectedSemester: updateOuterExpectedSemester,
+    outerIsClearable: true,
+  };
+
+  return <SelectExpectedSemester {...expectedSemesterStates} />;
+}
+
+function SelectFilterSubject({ subject, setSubject, subjects }) {
+  function updateOuterSubject(newSubject) {
+    const newSubjectValue = newSubject ?? null;
+    setSubject(newSubjectValue);
+  }
+
+  const subjectStates = {
+    outerSubject: subject,
+    setOuterSubject: updateOuterSubject,
+    outerIsClearable: true,
+    subjects,
+  };
+
+  return <SelectSubject {...subjectStates} />;
+}
+
 function SelectFilterProfessor({ professor, setProfessor, professors }) {
   function updateOuterProfessor(newProfessor) {
     const newProfessorValue = newProfessor ?? null;
@@ -570,24 +604,6 @@ function SelectFilterRoom({ room, setRoom, rooms }) {
   };
 
   return <SelectRoom {...roomStates} />;
-}
-
-function SelectFilterExpectedSemester({
-  expectedSemester,
-  setExpectedSemester,
-}) {
-  function updateOuterExpectedSemester(newExpectedSemester) {
-    const newExpectedSemesterValue = getValueFromObject(newExpectedSemester);
-    setExpectedSemester(newExpectedSemesterValue);
-  }
-
-  const expectedSemesterStates = {
-    outerExpectedSemester: expectedSemester,
-    setOuterExpectedSemester: updateOuterExpectedSemester,
-    outerIsClearable: true,
-  };
-
-  return <SelectExpectedSemester {...expectedSemesterStates} />;
 }
 
 /* /\ /\ /\ /\ /\ /\ /\ /\ NEW FILTER GENERATION /\ /\ /\ /\ /\ /\ /\ /\ */
@@ -1031,9 +1047,10 @@ export {
   SelectFilterSemester,
   SelectFilterDay,
   SelectFilterHour,
+  SelectFilterExpectedSemester,
+  SelectFilterSubject,
   SelectFilterProfessor,
   SelectFilterRoom,
-  SelectFilterExpectedSemester,
 
   /* \\ CRUD // */
 

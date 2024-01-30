@@ -1,6 +1,5 @@
 import "./Filters.css";
 import { useEffect, useState } from "react";
-import options from "../../DB/local/options";
 import {
   filterDay,
   filterExpectedSemester,
@@ -8,6 +7,7 @@ import {
   filterProfessor,
   filterRoom,
   filterSemester,
+  filterSubject,
   filterYear,
 } from "../../helpers/filteringFunc";
 import {
@@ -18,12 +18,16 @@ import {
   SelectFilterExpectedSemester,
   SelectFilterDay,
   SelectFilterHour,
+  SelectFilterSubject,
 } from "../mySelects";
 import { getDefaultYearSemesterValues } from "../../helpers/auxFunctions";
 import {
   getDefaultClassItem,
   getDefaultClassTime,
 } from "../../helpers/auxCRUD";
+import { readRoom } from "../../helpers/CRUDFunctions/roomCRUD";
+import { readProfessor } from "../../helpers/CRUDFunctions/professorCRUD";
+import { readSubject } from "../../helpers/CRUDFunctions/subjectCRUD";
 
 function FilterYear(filterYearStates) {
   // console.log("filterYearStates", filterYearStates);
@@ -62,6 +66,24 @@ function FilterHour(filterHourStates) {
   );
 }
 
+function FilterExpectedSemester(filterExpectedSemesterStates) {
+  return (
+    <div className="defaultFilterStyle">
+      Semestre Esperado:
+      <SelectFilterExpectedSemester {...filterExpectedSemesterStates} />
+    </div>
+  );
+}
+
+function FilterSubject(filterSubjectStates) {
+  return (
+    <div className="defaultFilterStyle">
+      Disciplina:
+      <SelectFilterSubject {...filterSubjectStates} />
+    </div>
+  );
+}
+
 function FilterProfessor(filterProfessorStates) {
   return (
     <div className="defaultFilterStyle">
@@ -76,15 +98,6 @@ function FilterRoom(filterRoomStates) {
     <div className="defaultFilterStyle">
       Sala:
       <SelectFilterRoom {...filterRoomStates} />
-    </div>
-  );
-}
-
-function FilterExpectedSemester(filterExpectedSemesterStates) {
-  return (
-    <div className="defaultFilterStyle">
-      Semestre Esperado:
-      <SelectFilterExpectedSemester {...filterExpectedSemesterStates} />
     </div>
   );
 }
@@ -147,47 +160,89 @@ function MultiClassesFilters({ classTimeStates, classStates }) {
   );
 }
 
-function CCTableFilters(globalStates) {
-  const { classTimeStates, selectStates } = globalStates;
+function CCTableFilters(classTimeStates) {
   const { classTimes, setFilteredClassTimes, setClassTime } = classTimeStates;
-  const { professors, subjects, rooms } = selectStates;
 
-  const years = options.constantValues.years;
-  const yearIndex = options.config.defaultIndexes.year;
-  const semesters = options.constantValues.semesters;
-  const semesterIndex = options.config.defaultIndexes.semester;
+  const defaultYearSemester = getDefaultYearSemesterValues();
 
-  const [year, setYear] = useState(years[yearIndex]);
-  const [semester, setSemester] = useState(semesters[semesterIndex]);
+  const [year, setYear] = useState(defaultYearSemester.year);
+  const [semester, setSemester] = useState(defaultYearSemester.semester);
+
+  const [subjects, setSubjects] = useState([]);
+  const [professors, setProfessors] = useState([]);
+  const [rooms, setRooms] = useState([]);
+
+  const [subject, setSubject] = useState(null);
+  const [expectedSemester, setExpectedSemester] = useState(null);
   const [professor, setProfessor] = useState(null);
   const [room, setRoom] = useState(null);
-  const [expectedSemester, setExpectedSemester] = useState(null);
+
+  const selectStates = {
+    professors,
+    setProfessors,
+    professor: {},
+    setProfessor: () => {},
+    subjects,
+    setSubjects,
+    subject: {},
+    setSubject: () => {},
+    rooms,
+    setRooms,
+    room: {},
+    setRoom: () => {},
+  };
 
   const props = {
     year: { year, setYear },
     semester: { semester, setSemester },
+    expectedSemester: { expectedSemester, setExpectedSemester },
+    subject: { subjects, subject, setSubject },
     professor: { professors, professor, setProfessor },
     room: { rooms, room, setRoom },
-    expectedSemester: { expectedSemester, setExpectedSemester },
   };
 
-  useEffect(() => {
+  const statesToWatchFor = [
+    year,
+    semester,
+    expectedSemester,
+    subject,
+    professor,
+    room,
+    classTimes,
+  ];
+
+  function updateOuterStates() {
     let filtering = classTimes;
+
     filtering = filterYear(filtering, year);
     filtering = filterSemester(filtering, semester);
+    filtering = filterSubject(filtering, subject);
+    filtering = filterExpectedSemester(filtering, expectedSemester);
     filtering = filterProfessor(filtering, professor);
     filtering = filterRoom(filtering, room);
-    filtering = filterExpectedSemester(filtering, expectedSemester);
+
     setFilteredClassTimes(filtering);
-  }, [year, semester, professor, room, expectedSemester, classTimes]);
+  }
+
+  useEffect(() => {
+    readRoom(selectStates);
+    readProfessor(selectStates);
+    readSubject(selectStates);
+    updateOuterStates();
+  }, []);
+
+  useEffect(() => {
+    updateOuterStates();
+  }, statesToWatchFor);
 
   return (
     <div className="CCTableFilters">
       <FilterYear {...props.year} />
       <FilterSemester {...props.semester} />
+      <FilterSubject {...props.subject} />
+      <FilterExpectedSemester {...props.expectedSemester} />
       <FilterProfessor {...props.professor} />
       <FilterRoom {...props.room} />
-      <FilterExpectedSemester {...props.expectedSemester} />
     </div>
   );
 }

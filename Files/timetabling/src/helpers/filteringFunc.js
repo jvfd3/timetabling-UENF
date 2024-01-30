@@ -30,6 +30,7 @@ function generalFilter(originData, originPropArray, propValueToFind) {
     if (propValue === undefined) {
       // console.log("data", data);
     }
+
     const found = propValue === propValueToFind;
     return found;
   });
@@ -81,6 +82,35 @@ function filterDay(classes, day) {
   return filteredClasses;
 }
 
+function filterExpectedSemester(classes, expectedSemester) {
+  let filteredClasses = classes;
+  console.log("expectedSemester", expectedSemester);
+  if (expectedSemester) {
+    filteredClasses = generalFilter(
+      classes,
+      ["disciplina", "periodo"],
+      getValueFromObject(expectedSemester)
+    );
+  }
+  // console.log("classes", classes.length);
+  // console.log("classes", classes);
+  // console.log("expectedSemester", expectedSemester);
+  // console.log("expectedSemesterClasses", expectedSemesterClasses.length);
+  // console.log("expectedSemesterClasses", filteredClasses.length);
+  return filteredClasses;
+}
+
+function filterSubject(classes, subject) {
+  let filteredClasses = classes;
+  if (subject) {
+    filteredClasses = generalFilter(classes, ["disciplina", "id"], subject?.id);
+  }
+  // console.log("subject", subject);
+  // console.log("subjectClasses", subjectClasses);
+  // console.log("subjectClasses", filteredClasses);
+  return filteredClasses;
+}
+
 function filterProfessor(classes, professor) {
   let filteredClasses = classes;
   if (professor) {
@@ -104,34 +134,6 @@ function filterRoom(classes, room) {
   // console.log("room", room);
   // console.log("roomClasses", roomClasses);
   // console.log("roomClasses", filteredClasses);
-  return filteredClasses;
-}
-
-function filterSubject(classes, subject) {
-  let filteredClasses = classes;
-  if (subject) {
-    filteredClasses = generalFilter(classes, ["disciplina", "id"], subject?.id);
-  }
-  // console.log("subject", subject);
-  // console.log("subjectClasses", subjectClasses);
-  // console.log("subjectClasses", filteredClasses);
-  return filteredClasses;
-}
-
-function filterExpectedSemester(classes, expectedSemester) {
-  let filteredClasses = classes;
-  if (expectedSemester) {
-    filteredClasses = generalFilter(
-      classes,
-      ["disciplina", "periodo"],
-      expectedSemester?.value ?? expectedSemester
-    );
-  }
-  // console.log("classes", classes.length);
-  // console.log("classes", classes);
-  // console.log("expectedSemester", expectedSemester);
-  // console.log("expectedSemesterClasses", expectedSemesterClasses.length);
-  // console.log("expectedSemesterClasses", filteredClasses.length);
   return filteredClasses;
 }
 
