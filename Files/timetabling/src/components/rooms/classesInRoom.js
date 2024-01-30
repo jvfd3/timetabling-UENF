@@ -1,8 +1,6 @@
 import "./classesInRoom.css";
 import { useEffect, useState } from "react";
-import { getClassesData } from "../../DB/retrieveData";
 import { getId } from "../../helpers/auxCRUD";
-import { splitTurmas } from "../../helpers/conflicts/auxConflictFunctions";
 import { readClassTime } from "../../helpers/CRUDFunctions/classTimeCRUD";
 import { RoomsFilters } from "../Filters/Filters";
 import {
@@ -51,6 +49,7 @@ function ClassRow({ classTimes, classTime }) {
     duracao,
   } = classTime;
 
+  // use ClassTime later to check for conflicts
   const yearSemesterText = `${ano}.${semestre}`;
 
   return (
