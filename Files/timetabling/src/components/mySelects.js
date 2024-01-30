@@ -406,7 +406,7 @@ function SelectRoom({
   return <DefaultSelect {...SelectRoomStates} />;
 }
 
-function SelectDay({ outerDay, setOuterDay }) {
+function SelectDay({ outerDay, setOuterDay, outerIsClearable = true }) {
   function findDayObject(day) {
     const days = options.constantValues.days;
     const dayObject = days.find((iterDay) => iterDay?.value == day);
@@ -415,7 +415,7 @@ function SelectDay({ outerDay, setOuterDay }) {
 
   const SelectDayStates = {
     placeHolderText: "Dia",
-    isClearable: true,
+    isClearable: outerIsClearable,
     value: outerDay,
     setOuterValue: setOuterDay,
     options: options.constantValues.days,
@@ -425,7 +425,11 @@ function SelectDay({ outerDay, setOuterDay }) {
   return <DefaultSelect {...SelectDayStates} />;
 }
 
-function SelectStartHour({ outerStartHour, setOuterStartHour }) {
+function SelectStartHour({
+  outerStartHour,
+  setOuterStartHour,
+  outerIsClearable = true,
+}) {
   function findHourObject(hour) {
     const hours = options.constantValues.hours;
     const hourObject = hours.find((iterHour) => iterHour?.hora == hour);
@@ -434,7 +438,7 @@ function SelectStartHour({ outerStartHour, setOuterStartHour }) {
 
   const SelectStartHourStates = {
     placeHolderText: "Hora",
-    isClearable: true,
+    isClearable: outerIsClearable,
     value: outerStartHour,
     setOuterValue: setOuterStartHour,
     options: options.constantValues.hours,
@@ -503,6 +507,37 @@ function SelectFilterSemester({ semester, setSemester }) {
   };
 
   return <SelectSemester {...semesterStates} />;
+}
+
+function SelectFilterDay({ day, setDay }) {
+  function updateOuterDay(newDay) {
+    const newDayValue = getValueFromObject(newDay);
+    setDay(newDayValue);
+  }
+
+  const dayStates = {
+    outerDay: day,
+    setOuterDay: updateOuterDay,
+    outerIsClearable: true,
+  };
+
+  return <SelectDay {...dayStates} />;
+}
+
+function SelectFilterHour({ hour, setHour }) {
+  function updateOuterStartHour(newStartHour) {
+    const newStartHourValue = getValueFromObject(newStartHour);
+    console.log(newStartHourValue);
+    setHour(newStartHourValue);
+  }
+
+  const startHourStates = {
+    outerStartHour: hour,
+    setOuterStartHour: updateOuterStartHour,
+    outerIsClearable: true,
+  };
+
+  return <SelectStartHour {...startHourStates} />;
 }
 
 function SelectFilterProfessor({ professor, setProfessor, professors }) {
@@ -994,6 +1029,8 @@ export {
   /* Filters */
   SelectFilterYear,
   SelectFilterSemester,
+  SelectFilterDay,
+  SelectFilterHour,
   SelectFilterProfessor,
   SelectFilterRoom,
   SelectFilterExpectedSemester,

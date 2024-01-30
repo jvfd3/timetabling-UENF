@@ -2,7 +2,9 @@ import "./Filters.css";
 import { useEffect, useState } from "react";
 import options from "../../DB/local/options";
 import {
+  filterDay,
   filterExpectedSemester,
+  filterHour,
   filterProfessor,
   filterRoom,
   filterSemester,
@@ -14,6 +16,8 @@ import {
   SelectFilterProfessor,
   SelectFilterRoom,
   SelectFilterExpectedSemester,
+  SelectFilterDay,
+  SelectFilterHour,
 } from "../mySelects";
 import { getDefaultYearSemesterValues } from "../../helpers/auxFunctions";
 import {
@@ -36,6 +40,24 @@ function FilterSemester(filterSemesterStates) {
     <div className="defaultFilterStyle">
       Semestre:
       <SelectFilterSemester {...filterSemesterStates} />
+    </div>
+  );
+}
+
+function FilterDay(filterDayStates) {
+  return (
+    <div className="defaultFilterStyle">
+      Dia:
+      <SelectFilterDay {...filterDayStates} />
+    </div>
+  );
+}
+
+function FilterHour(filterHourStates) {
+  return (
+    <div className="defaultFilterStyle">
+      Hora:
+      <SelectFilterHour {...filterHourStates} />
     </div>
   );
 }
@@ -214,11 +236,17 @@ function ViewTableFilters(classTimeStates) {
 
   const [year, setYear] = useState(defaultYearSemester.year);
   const [semester, setSemester] = useState(defaultYearSemester.semester);
+  const [day, setDay] = useState(null);
+  const [hour, setHour] = useState(null);
 
   const props = {
     year: { year, setYear },
     semester: { semester, setSemester },
+    day: { day, setDay },
+    hour: { hour, setHour },
   };
+
+  const statesToWatchFor = [year, semester, day, hour, classTimes];
 
   function filterList(list, year, semester) {
     let filteredList = list;
@@ -226,6 +254,8 @@ function ViewTableFilters(classTimeStates) {
     filteredList = filterYear(filteredList, year);
     filteredList = filterSemester(filteredList, semester);
     filteredList = baseFilter(filteredList, baseValueToFilter);
+    filteredList = filterDay(filteredList, day);
+    filteredList = filterHour(filteredList, hour);
 
     return filteredList;
   }
@@ -242,12 +272,14 @@ function ViewTableFilters(classTimeStates) {
 
   useEffect(() => {
     updateOuterStates();
-  }, [year, semester, classTimes]);
+  }, statesToWatchFor);
 
   return (
     <div className="MultiClassesFilters">
       <FilterYear {...props.year} />
       <FilterSemester {...props.semester} />
+      <FilterDay {...props.day} />
+      <FilterHour {...props.hour} />
     </div>
   );
 }

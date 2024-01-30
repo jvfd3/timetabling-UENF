@@ -23,7 +23,7 @@ function getByIDhorario(idHorario) {
 }
 
 function getValueFromObject(myObject) {
-  const objectValue = myObject?.value ?? myObject ?? null;
+  const objectValue = myObject?.hora ?? myObject?.value ?? myObject ?? null;
   return objectValue;
 }
 
