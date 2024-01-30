@@ -6,13 +6,13 @@ const options = {
   config: {
     iconButtons: true,
     defaultIndexes: {
-      year: 10,
-      semester: 0,
-      professor: 0,
-      student: 0,
-      subject: 0,
-      room: 0,
-      classItem: 0,
+      year: 10, // 10: 2024
+      semester: 0, // 1
+      professor: 2, // Tang
+      student: 38, // João Vítor Fernandes Dias
+      subject: 58, // Monografia
+      room: 1, // Inf. 1
+      classItem: 10,
     },
     colors: {
       conflicts: {

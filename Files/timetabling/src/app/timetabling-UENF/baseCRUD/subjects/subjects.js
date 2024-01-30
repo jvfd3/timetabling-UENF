@@ -103,7 +103,9 @@ function Subjects() {
   const defaultSubjects = sqlDataFromJson.subjects ?? [];
 
   const [subjects, setSubjects] = useState(defaultSubjects);
-  const [subject, setSubject] = useState(subjects?.[58] ?? subjects?.[0]);
+  const [subject, setSubject] = useState(
+    subjects?.[options.config.defaultIndexes.subject] ?? subjects?.[0]
+  );
 
   const subjectStates = { subjects, setSubjects, subject, setSubject };
 

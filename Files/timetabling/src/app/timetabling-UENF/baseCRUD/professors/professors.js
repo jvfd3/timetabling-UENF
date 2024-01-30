@@ -102,7 +102,7 @@ function Professors() {
 
   const [professors, setProfessors] = useState(defaultProfessors);
   const [professor, setProfessor] = useState(
-    professors?.[2] ?? professors?.[0]
+    professors?.[options.config.defaultIndexes.professor] ?? professors?.[0]
   );
 
   const professorStates = {
