@@ -11,6 +11,7 @@ function getSubjectLabel(subject) {
 
   let subjectLabel = "";
   subjectLabel += `${subjectText}`;
+  subjectLabel = subject ? subjectLabel : "Indef.";
   return subjectLabel;
 }
 
@@ -21,6 +22,7 @@ function getProfessorLabel(professor) {
 
   let professorLabel = "";
   professorLabel += `${professorText}`;
+  professorLabel = professor ? professorLabel : "Indef.";
   return professorLabel;
 }
 
@@ -36,6 +38,7 @@ function getRoomLabel(room) {
   roomLabel += `${checkIndefinition(block)}`;
   roomLabel += ` - `;
   roomLabel += `${checkIndefinition(code)}`;
+  roomLabel = room ? roomLabel : "Indef.";
   return roomLabel;
 }
 
