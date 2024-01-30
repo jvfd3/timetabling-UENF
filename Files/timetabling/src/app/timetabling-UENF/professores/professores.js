@@ -43,12 +43,14 @@ function BaseProfessorData(professorStates) {
     <div className="showBasicDataCard">
       <h3>INFORMAÇÕES DO PROFESSOR</h3>
       <table className="showBasicDataTable">
+        {/* 
         <thead>
           <tr>
             <th>Chave</th>
             <th>Valor</th>
           </tr>
         </thead>
+        */}
         <tbody>
           <tr>
             <th>laboratório</th>
