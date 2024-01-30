@@ -17,7 +17,7 @@ import {
   updateRoom,
   deleteRoom,
 } from "../../../helpers/CRUDFunctions/roomCRUD";
-import { ClassesInRoom } from "../../../components/classTimesViewTable/SpecificClassTimeViewTables";
+import { RoomClasses } from "../../../components/classTimesViewTable/SpecificClassTimeViewTables";
 
 function RoomSelection(roomStates) {
   const roomCRUDFunctions = {
@@ -97,7 +97,7 @@ function RoomCard(roomStates) {
   return (
     <div className="infoCard">
       <RoomBaseInfo {...roomStates} />
-      <ClassesInRoom {...roomStates.room} />
+      <RoomClasses {...roomStates.room} />
     </div>
   );
 }

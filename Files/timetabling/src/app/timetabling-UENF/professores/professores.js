@@ -21,7 +21,7 @@ import {
   updateProfessor,
   deleteProfessor,
 } from "../../../helpers/CRUDFunctions/professorCRUD";
-import { ProfessorInClasses } from "../../../components/classTimesViewTable/SpecificClassTimeViewTables";
+import { ProfessorClasses } from "../../../components/classTimesViewTable/SpecificClassTimeViewTables";
 
 function ProfessorSelection(professorStates) {
   const professorCRUDFunctions = {
@@ -92,7 +92,7 @@ function ProfessorCard(professorStates) {
   return (
     <div className="infoCard">
       <BaseProfessorData {...professorStates} />
-      {/* <ProfessorClasses {...professorStates} /> */}
+      <ProfessorClasses {...professorStates.professor} />
       {/* <ProfessorPreferences {...professorStates} /> */}
     </div>
   );
@@ -121,7 +121,6 @@ function Professors() {
     <div className="CRUDContainComponents">
       <ProfessorSelection {...professorStates} />
       <ProfessorCard {...professorStates} />
-      <ProfessorInClasses {...professor} />
     </div>
   );
 }

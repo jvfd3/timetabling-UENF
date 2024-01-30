@@ -5,7 +5,7 @@ import {
 } from "../../helpers/filteringFunc";
 import ClassesTableView from "./ClassTimeViewTable";
 
-function ClassesInRoom(room) {
+function RoomClasses(room) {
   // const {id, bloco, descricao, capacidade, codigo, idBlock} = room;
 
   const customPageStates = {
@@ -18,7 +18,7 @@ function ClassesInRoom(room) {
   return <ClassesTableView {...customPageStates} />;
 }
 
-function ProfessorInClasses(professor) {
+function ProfessorClasses(professor) {
   const customPageStates = {
     baseFilter: filterProfessor,
     baseValueToFilter: professor,
@@ -29,7 +29,7 @@ function ProfessorInClasses(professor) {
   return <ClassesTableView {...customPageStates} />;
 }
 
-function ClassesOfSubjects(subject) {
+function SubjectClasses(subject) {
   const customPageStates = {
     baseFilter: filterSubject,
     baseValueToFilter: subject,
@@ -40,4 +40,4 @@ function ClassesOfSubjects(subject) {
   return <ClassesTableView {...customPageStates} />;
 }
 
-export { ClassesInRoom, ProfessorInClasses, ClassesOfSubjects };
+export { RoomClasses, ProfessorClasses, SubjectClasses };
