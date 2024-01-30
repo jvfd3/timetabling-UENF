@@ -1,5 +1,8 @@
 import "./ClassTimeViewTable.css";
+import { useEffect, useState } from "react";
 import { getId } from "../../helpers/auxCRUD";
+import { readClassTime } from "../../helpers/CRUDFunctions/classTimeCRUD";
+import { sortClassTimes } from "../Sorts/sortingFunctions";
 import { ViewTableFilters } from "../Filters/Filters";
 import {
   checkIndefinition,
@@ -7,9 +10,6 @@ import {
   getRoomLabel,
   getSubjectLabel,
 } from "../../helpers/visualizationText/textLabels";
-import { readClassTime } from "../../helpers/CRUDFunctions/classTimeCRUD";
-import { useEffect, useState } from "react";
-import options from "../../DB/local/options";
 
 function NoClasses({ noClassesTitle }) {
   return <h5>{noClassesTitle}</h5>;
@@ -79,27 +79,8 @@ function HeaderFilter(classTimeStates) {
   );
 }
 
-function orderClassTimes(classTimes) {
-  const days = options.constantValues.days;
-  let orderedClassTimes = [];
-
-  days.forEach((day) => {
-    const filteredClassTimes = classTimes.filter(
-      (classTime) => classTime.dia === day.value
-    );
-    filteredClassTimes.sort((a, b) => {
-      const aTime = a.horaInicio;
-      const bTime = b.horaInicio;
-      return aTime - bTime;
-    });
-    orderedClassTimes = [...orderedClassTimes, ...filteredClassTimes];
-  });
-
-  return orderedClassTimes;
-}
-
 function ClassesTable({ classTimes }) {
-  const orderedClassTimes = orderClassTimes(classTimes);
+  const orderedClassTimes = sortClassTimes(classTimes);
 
   return (
     <table className="showBasicDataTable">
