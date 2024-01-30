@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/timetabling-UENF/static/css/main.cba784e7.css",
-    "main.js": "/timetabling-UENF/static/js/main.8c4772ac.js",
+    "main.css": "/timetabling-UENF/static/css/main.886699d7.css",
+    "main.js": "/timetabling-UENF/static/js/main.f2078067.js",
     "index.html": "/timetabling-UENF/index.html",
-    "main.cba784e7.css.map": "/timetabling-UENF/static/css/main.cba784e7.css.map",
-    "main.8c4772ac.js.map": "/timetabling-UENF/static/js/main.8c4772ac.js.map"
+    "main.886699d7.css.map": "/timetabling-UENF/static/css/main.886699d7.css.map",
+    "main.f2078067.js.map": "/timetabling-UENF/static/js/main.f2078067.js.map"
   },
   "entrypoints": [
-    "static/css/main.cba784e7.css",
-    "static/js/main.8c4772ac.js"
+    "static/css/main.886699d7.css",
+    "static/js/main.f2078067.js"
   ]
 }
