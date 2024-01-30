@@ -2,20 +2,22 @@ import { conflictsProfessor } from "./calculations/rawProfessor";
 import { getRawConflictsDemand } from "./calculations/rawDemand";
 import { getRawConflictsRoom } from "./calculations/rawRoom";
 
-import { getSubjectStyledConflict } from "./Styles/styleSubject";
+import {
+  getStyledConflictSubject,
+  getSubjectStyledConflict,
+} from "./Styles/styleSubject";
 import { getProfessorStyledConflict } from "./Styles/styleProfessor";
 import { getStyledConflictDemand } from "./Styles/styleDemand";
 import { getRoomStyledConflict } from "./Styles/styleRoom";
 import { getStyledConflictDuration } from "./Styles/styleDuration";
-import { getDayStyledConflict, getStyledConflictDay } from "./Styles/styleDay";
-import {
-  getHourStyledConflict,
-  getStyledConflictHour,
-} from "./Styles/styleHour";
+import { getStyledConflictDay } from "./Styles/styleDay";
+import { getStyledConflictHour } from "./Styles/styleHour";
+import { getRawConflictSubject } from "./calculations/rawSubject";
 
 function getRawItemConflicts(classes, classItem) {
   const rawItemConflicts = {};
 
+  rawItemConflicts.subject = getRawConflictSubject(classItem);
   rawItemConflicts.professor = conflictsProfessor(classes, classItem);
   rawItemConflicts.expectedDemand = getRawConflictsDemand(classes, classItem);
 
@@ -25,7 +27,7 @@ function getRawItemConflicts(classes, classItem) {
 function getStyledItemConflict(conflicts, classItem) {
   const classConflictStyles = {};
 
-  classConflictStyles.subject = getSubjectStyledConflict(classItem);
+  classConflictStyles.subject = getStyledConflictSubject(conflicts, classItem);
   classConflictStyles.professor = getProfessorStyledConflict(
     conflicts,
     classItem

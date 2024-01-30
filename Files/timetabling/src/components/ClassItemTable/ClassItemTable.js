@@ -54,10 +54,9 @@ function ClassItemTableRow(classItemRowStates) {
         <SmartDeleteClassItem {...CRUDClassItemProps} />
         <SmartUpdateClassItem {...CRUDClassItemProps} />
       </td>
-      <td {...conflicts.styled.subject}>
+      <td {...conflicts.styled.subject.merged}>
         <SelectClassSubject {...classItemRowStates} />
       </td>
-
       <td {...conflicts.styled.professor.merged}>
         <SelectClassProfessor {...classItemRowStates} />
       </td>

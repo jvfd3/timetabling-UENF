@@ -1,86 +1,130 @@
 import options from "../../../DB/local/options";
 
-function checkCorrectPeriodParity(expectedSemester, currentSemester) {
-  const evenSubjectOnEvenSemester =
-    currentSemester === 1 && expectedSemester % 2 === 1;
-  const oddSubjectOnOddSemester =
-    currentSemester === 2 && expectedSemester % 2 === 0;
-  const correctPeriodParity =
-    evenSubjectOnEvenSemester || oddSubjectOnOddSemester;
-  const isSummerSemester = currentSemester === 3;
-  const rightOrWrongParity = correctPeriodParity ? 1 : -1;
-  const returnedParity = isSummerSemester ? 0 : rightOrWrongParity;
-  return returnedParity;
+const defaultTitles = {
+  base: "Conflitos de disciplina avaliados:\n",
+
+  isSet: "✅ Disciplina está definida ",
+  optional: "mas não é obrigatória",
+  notSetConflict: "❌ Conflito: disciplina não está definida\n",
+
+  parity: "✅ Disciplina está na paridade adequada\n",
+  summer: "✅🌞 Não há necessidade de paridade no verão\n",
+  noParity: "⚠️ Disciplina não tem uma paridade especificada\n",
+  parityConflict: "❌ Conflito: disciplina não está na paridade correta\n",
+};
+
+function getStyledConflictSubject(conflicts) {
+  const rawSubjectConflicts = conflicts.raw.subject;
+
+  const subjectStyles = {};
+
+  subjectStyles.default = getStyledConflictsDefault();
+  subjectStyles.notSet = getStyledConflictNull(rawSubjectConflicts);
+  subjectStyles.parity = getStyledConflictsParity(rawSubjectConflicts);
+  subjectStyles.merged = mergeStyles(subjectStyles);
+
+  // console.log(subjectStyles.merged.title);
+
+  return subjectStyles;
 }
 
-function getColorGradient(periodoEsperado, semestreAtual) {
-  function getColorValue(baseColor, percentile) {
-    let maxValue = 255;
-    // let colorValue = Math.floor(baseColor - percentile * (maxValue - baseColor));
-    let colorValue = Math.floor(maxValue + 70 - percentile * maxValue);
-    return colorValue;
-  }
-  let grayValue = 128;
-  let color = `rgb(${grayValue}, ${grayValue}, ${grayValue})`;
-  // console.log("periodoEsperado", periodoEsperado);
-  // console.log("semestreAtual", semestreAtual);
-  let baseColor = 200; //Maior deixa mais claro
-  if (periodoEsperado !== 0) {
-    if (semestreAtual === 3) {
-      // Semestre de verão
-      let percentile = periodoEsperado / 10;
-      let colorValue = getColorValue(baseColor, percentile);
-      color = `rgb(${colorValue}, ${colorValue}, 0)`;
-    } else {
-      let percentile = Math.ceil(periodoEsperado / 2) / 5;
-      let colorValue = getColorValue(baseColor, percentile);
-      const parityCheck = checkCorrectPeriodParity(
-        periodoEsperado,
-        semestreAtual
-      );
-      if (parityCheck == 1) {
-        //Semestres no período correto
-        color = `rgb(0, ${colorValue}, 0)`;
-      } else if (parityCheck == -1) {
-        //Semestres no período errado
-        color = `rgb(${colorValue}, 0, 0)`;
-      }
-    }
-  }
-  return color;
+function getStyledConflictsDefault() {
+  const defaultStyle = {
+    title: defaultTitles.base,
+    style: {
+      backgroundColor: options.config.colors.conflicts.notSet.subject,
+    },
+  };
+  return defaultStyle;
 }
 
-function getSubjectStyledConflict(turma) {
-  let semestreAtual = turma?.semestre;
-  const expectedSemester = turma?.disciplina?.periodo;
-  let subjectStyle = {};
-  let newColor = "";
-  let titleMessage = "";
-  if (expectedSemester === undefined) {
-    titleMessage = "Disciplina ainda não definida";
-    newColor = options.config.colors.conflicts.notSet.subject;
-  } else {
-    newColor = getColorGradient(expectedSemester, semestreAtual);
-    // console.log(newColor);
-    if (expectedSemester === 0) {
-      titleMessage = "Disciplina não-obrigatória";
-    } else {
-      titleMessage = `Disciplina do período ${expectedSemester}\n`;
-      const parity = checkCorrectPeriodParity(expectedSemester, semestreAtual);
-      if (parity === 0) {
-        titleMessage += "Não há";
-      } else if (parity === 1) {
-        titleMessage += "Está na";
-      } else if (parity === -1) {
-        titleMessage += "Não está na";
-      }
-      titleMessage += " paridade esperada";
-    }
-  }
+function getStyledConflictNull(conflicts) {
+  const defaultNullStyle = { title: defaultTitles.isSet, style: {} };
+  // console.log(conflicts);
+  const conflictNullStyle = {
+    title: defaultTitles.notSetConflict,
+    style: {
+      backgroundColor: options.config.colors.conflicts.notSet.subject,
+    },
+  };
 
-  subjectStyle.title = titleMessage;
-  subjectStyle.style = { backgroundColor: newColor };
-  return subjectStyle;
+  const isSet = conflicts.hasSubject;
+
+  let newText = "";
+
+  const isOptional = conflicts.parity.status === null;
+  const semester = conflicts.parity.from?.expectedSemester;
+
+  if (isOptional) {
+    newText += defaultTitles.optional;
+  } else if (semester > -1) {
+    newText += `com período ${semester}`;
+  }
+  newText += "\n";
+
+  defaultNullStyle.title += newText;
+
+  const nullSubjectStyle = isSet ? defaultNullStyle : conflictNullStyle;
+
+  return nullSubjectStyle;
 }
 
-export { getSubjectStyledConflict };
+function getStyledConflictsParity(conflicts) {
+  const { hasSubject, hasSemester, isSummer, parity } = conflicts;
+
+  let newTitle = "";
+  let parityColor = options.config.colors.conflicts.notSet.subject;
+
+  const semester = parity.from?.expectedSemester;
+  if (parity.status === true) {
+    newTitle = defaultTitles.parity;
+    parityColor = options.config.colors.subject.rightParity[semester];
+  } else if (parity.status === false) {
+    newTitle = defaultTitles.parityConflict;
+    parityColor = options.config.colors.subject.wrongParity[semester];
+  } else if (parity.status === null && hasSubject && hasSemester) {
+    newTitle = defaultTitles.noParity;
+    parityColor = options.config.colors.subject.noParity;
+  }
+
+  if (isSummer && hasSubject && hasSemester) {
+    newTitle = defaultTitles.summer;
+    parityColor = options.config.colors.subject.summer[semester];
+  }
+
+  const parityStyle = {
+    title: newTitle,
+    style: { backgroundColor: parityColor },
+  };
+
+  return parityStyle;
+}
+
+function mergeStyles(styles) {
+  let newTitle = "";
+  let newStyle = {};
+
+  if (styles.default) {
+    newTitle += styles.default.title;
+    newStyle = { ...newStyle, ...styles.default.style };
+  }
+
+  if (styles.notSet) {
+    newTitle += styles.notSet.title;
+    newStyle = { ...newStyle, ...styles.notSet.style };
+  }
+
+  if (styles.parity) {
+    newTitle += styles.parity.title;
+    newStyle = { ...newStyle, ...styles.parity.style };
+  }
+
+  const mergedStyles = {
+    title: newTitle,
+    style: newStyle,
+  };
+
+  return mergedStyles;
+}
+
+export { getStyledConflictSubject };
