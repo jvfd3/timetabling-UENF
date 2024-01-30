@@ -9,6 +9,7 @@ import {
 } from "../../helpers/visualizationText/textLabels";
 import { readClassTime } from "../../helpers/CRUDFunctions/classTimeCRUD";
 import { useEffect, useState } from "react";
+import options from "../../DB/local/options";
 
 function NoClasses({ noClassesTitle }) {
   return <h5>{noClassesTitle}</h5>;
@@ -72,19 +73,39 @@ function HeaderFilter(classTimeStates) {
   const classesInRoomTitle = classTimeStates.headerTitle + size;
   return (
     <div className="header">
-      <h4>{classesInRoomTitle}</h4>
+      <h2>{classesInRoomTitle}</h2>
       <ViewTableFilters {...classTimeStates} />
     </div>
   );
 }
 
+function orderClassTimes(classTimes) {
+  const days = options.constantValues.days;
+  let orderedClassTimes = [];
+
+  days.forEach((day) => {
+    const filteredClassTimes = classTimes.filter(
+      (classTime) => classTime.dia === day.value
+    );
+    filteredClassTimes.sort((a, b) => {
+      const aTime = a.horaInicio;
+      const bTime = b.horaInicio;
+      return aTime - bTime;
+    });
+    orderedClassTimes = [...orderedClassTimes, ...filteredClassTimes];
+  });
+
+  return orderedClassTimes;
+}
+
 function ClassesTable({ classTimes }) {
-  // console.log(classTimes);
+  const orderedClassTimes = orderClassTimes(classTimes);
+
   return (
     <table className="showBasicDataTable">
       <TableHeader />
       <tbody>
-        {classTimes.map((iterClassTime) => {
+        {orderedClassTimes.map((iterClassTime) => {
           const classRowProps = { classTimes, classTime: iterClassTime };
           const classTimeRowKey = `class: ${getId(iterClassTime)}`;
           return <ClassRow key={classTimeRowKey} {...classRowProps} />;
