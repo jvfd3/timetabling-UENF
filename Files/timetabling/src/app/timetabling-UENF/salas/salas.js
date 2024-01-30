@@ -167,7 +167,7 @@ function Rooms() {
   const defaultRooms = sqlDataFromJson.salas ?? [];
 
   const [rooms, setRooms] = useState(defaultRooms);
-  const [room, setRoom] = useState(rooms[3]);
+  const [room, setRoom] = useState(rooms?.[1] ?? rooms?.[0]);
 
   const roomStates = { rooms, setRooms, room, setRoom };
 

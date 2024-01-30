@@ -97,7 +97,7 @@ function Classes() {
 
   const [classes, setClasses] = useState(defaultClasses);
   const [filteredClasses, setFilteredClasses] = useState([]);
-  const [classItem, setClassItem] = useState(classes[0]);
+  const [classItem, setClassItem] = useState(classes?.[0]);
   const [professors, setProfessors] = useState([]);
   const [subjects, setSubjects] = useState([]);
   const [rooms, setRooms] = useState([]);
