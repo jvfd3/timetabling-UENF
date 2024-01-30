@@ -21,6 +21,7 @@ import {
   updateSubject,
   deleteSubject,
 } from "../../../helpers/CRUDFunctions/subjectCRUD";
+import { ClassesOfSubjects } from "../../../components/classTimesViewTable/SpecificClassTimeViewTables";
 
 function SubjectSelection(subjectStates) {
   const subjectCRUDFunctions = {
@@ -90,6 +91,7 @@ function SubjectCard(subjectStates) {
   return (
     <div className="infoCard">
       <SubjectBaseInfo {...subjectStates} />
+      <ClassesOfSubjects {...subjectStates?.subject} />
       {/* <SubjectClasses {...myDisciplinasStates} /> */}
       {/* <SubjectRequirements {...myDisciplinasStates} /> */}
       {/* <SubjectDemandees {...myDisciplinasStates} /> */}
