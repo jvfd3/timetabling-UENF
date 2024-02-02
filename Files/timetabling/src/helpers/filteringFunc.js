@@ -5,7 +5,7 @@ function getValueFromDataWithPropArray(data, propArray) {
   let value = data;
 
   // Itera sobre cada propriedade no array de propriedades
-  for (let prop of propArray) {
+  for (const prop of propArray) {
     // Se o valor atual é um objeto e tem a propriedade atual, atualiza o valor
     if (value && value.hasOwnProperty(prop)) {
       value = value[prop];
@@ -20,17 +20,8 @@ function getValueFromDataWithPropArray(data, propArray) {
 }
 
 function generalFilter(originData, originPropArray, propValueToFind) {
-  // console.log("originData", originData);
-  // console.log("originPropArray", originPropArray);
-  // console.log("propValueToFind", propValueToFind);
-
   const filteredData = originData.filter((data) => {
     const propValue = getValueFromDataWithPropArray(data, originPropArray);
-    // console.log("propValue", propValue);
-    if (propValue === undefined) {
-      // console.log("data", data);
-    }
-
     const found = propValue === propValueToFind;
     return found;
   });
@@ -38,103 +29,63 @@ function generalFilter(originData, originPropArray, propValueToFind) {
 }
 
 function filterYear(classes, year) {
-  let filteredClasses = classes;
   if (year) {
-    filteredClasses = generalFilter(classes, ["ano"], getValueFromObject(year));
+    return generalFilter(classes, ["ano"], getValueFromObject(year));
   }
-  // console.log("year", year);
-  // console.log("yearClasses", yearClasses);
-  // console.log("yearClasses", filteredClasses);
-  return filteredClasses;
+  return classes;
 }
 
 function filterSemester(classes, semester) {
-  let filteredClasses = classes;
   if (semester) {
-    filteredClasses = generalFilter(
-      classes,
-      ["semestre"],
-      getValueFromObject(semester)
-    );
+    return generalFilter(classes, ["semestre"], getValueFromObject(semester));
   }
-  // console.log("semester", semester);
-  // console.log("semesterClasses", semesterClasses);
-  // console.log("semesterClasses", filteredClasses);
-  return filteredClasses;
+  return classes;
 }
 
 function filterHour(classes, hour) {
-  let filteredClasses = classes;
   if (hour) {
-    filteredClasses = generalFilter(classes, ["horaInicio"], hour);
+    return generalFilter(classes, ["horaInicio"], hour);
   }
-  // console.log("hour", hour);
-  return filteredClasses;
+  return classes;
 }
 
 function filterDay(classes, day) {
-  let filteredClasses = classes;
   if (day) {
-    filteredClasses = generalFilter(classes, ["dia"], day);
+    return generalFilter(classes, ["dia"], day);
   }
-  // console.log("day", day);
-  // console.log("dayClasses", filteredClasses);
-  return filteredClasses;
+  return classes;
 }
 
 function filterExpectedSemester(classes, expectedSemester) {
-  let filteredClasses = classes;
-  // console.log(expectedSemester);
   if (expectedSemester) {
-    filteredClasses = generalFilter(
+    return generalFilter(
       classes,
       ["disciplina", "periodo"],
       getValueFromObject(expectedSemester)
     );
   }
-  // console.log("classes", classes.length);
-  // console.log("classes", classes);
-  // console.log("expectedSemester", expectedSemester);
-  // console.log("expectedSemesterClasses", expectedSemesterClasses.length);
-  // console.log("expectedSemesterClasses", filteredClasses.length);
-  return filteredClasses;
+  return classes;
 }
 
 function filterSubject(classes, subject) {
-  let filteredClasses = classes;
   if (subject) {
-    filteredClasses = generalFilter(classes, ["disciplina", "id"], subject?.id);
+    return generalFilter(classes, ["disciplina", "id"], subject?.id);
   }
-  // console.log("subject", subject);
-  // console.log("subjectClasses", subjectClasses);
-  // console.log("subjectClasses", filteredClasses);
-  return filteredClasses;
+  return classes;
 }
 
 function filterProfessor(classes, professor) {
-  let filteredClasses = classes;
   if (professor) {
-    filteredClasses = generalFilter(
-      classes,
-      ["professor", "id"],
-      professor?.id
-    );
+    return generalFilter(classes, ["professor", "id"], professor?.id);
   }
-  // console.log("professor", professor);
-  // console.log("professorClasses", professorClasses);
-  // console.log("professorClasses", filteredClasses);
-  return filteredClasses;
+  return classes;
 }
 
 function filterRoom(classes, room) {
-  let filteredClasses = classes;
   if (room) {
-    filteredClasses = generalFilter(classes, ["sala", "id"], room?.id);
+    return generalFilter(classes, ["sala", "id"], room?.id);
   }
-  // console.log("room", room);
-  // console.log("roomClasses", roomClasses);
-  // console.log("roomClasses", filteredClasses);
-  return filteredClasses;
+  return classes;
 }
 
 export {
