@@ -1,4 +1,4 @@
-import options from "../../DB/local/options";
+import emptyObjects from "../../config/emptyObjects";
 import {
   defaultDBCreate,
   defaultDBRead,
@@ -22,7 +22,7 @@ function createProfessor({
   setProfessor,
 }) {
   function getNewProfessor(newId) {
-    const emptyProfessor = options.emptyObjects.professor;
+    const emptyProfessor = emptyObjects.professor;
     const newProfessor = { ...emptyProfessor, id: newId };
     return newProfessor;
   }

@@ -1,4 +1,4 @@
-import options from "../../DB/local/options";
+import emptyObjects from "../../config/emptyObjects";
 import {
   defaultDBCreate,
   defaultDBRead,
@@ -17,7 +17,7 @@ const itemName = "subject";
 
 function createSubject({ subjects, setSubjects, subject, setSubject }) {
   function getNewSubject(newId) {
-    const emptySubject = options.emptyObjects.subject;
+    const emptySubject = emptyObjects.subject;
     const newSubject = { ...emptySubject, periodo: 0, id: newId };
     return newSubject;
   }

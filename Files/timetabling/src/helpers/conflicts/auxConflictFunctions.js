@@ -1,4 +1,4 @@
-import options from "../../DB/local/options";
+import emptyObjects from "../../config/emptyObjects";
 import { filterDay } from "../filteringFunc";
 
 function removeSameId(classes, id) {
@@ -114,7 +114,7 @@ function splitTurmas(turmas) {
       });
     } else {
       const newTurma = {
-        ...options.emptyObjects.classTime,
+        ...emptyObjects.classTime,
         /* when I do that, the idHorario is null and it shouldn't. Check it later. */
         ...turma,
       };

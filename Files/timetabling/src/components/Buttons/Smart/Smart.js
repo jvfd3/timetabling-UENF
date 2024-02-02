@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { getId } from "../../../helpers/auxCRUD";
 import options from "../../../DB/local/options";
+import emptyObjects from "../../../config/emptyObjects";
 import {
   getValueFromObject,
   getDefaultYearSemesterValues,
@@ -36,7 +37,7 @@ function SmartInputSubject(inputSubjectProps) {
   }
 
   function addClassWithSubject(subject) {
-    const newClass = { ...options.emptyObjects.classItem };
+    const newClass = { ...emptyObjects.classItem };
     newClass.ano = classStates.classItem.ano;
     newClass.semestre = classStates.classItem.semestre;
     newClass.disciplina = subject;
@@ -73,7 +74,7 @@ function SmartCreateClassItem(createStates) {
   const semesterValue = getValueFromObject(semester) ?? yearSemester.semester;
 
   function createClassItemInDB() {
-    const newClass = options.emptyObjects.classItem;
+    const newClass = emptyObjects.classItem;
     newClass.ano = yearValue;
     newClass.semestre = semesterValue;
 

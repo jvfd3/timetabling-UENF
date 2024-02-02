@@ -1,4 +1,4 @@
-import options from "../../DB/local/options";
+import emptyObjects from "../../config/emptyObjects";
 import {
   defaultDBCreate,
   defaultDBRead,
@@ -19,7 +19,7 @@ function createClassTime(classTimeStates) {
   const { classes, setClasses, classItem, setClassItem } = classTimeStates;
 
   const baseClassTime = {
-    ...options.emptyObjects.classTime,
+    ...emptyObjects.classTime,
     idTurma: getId(classItem),
     duracao: 2,
   };

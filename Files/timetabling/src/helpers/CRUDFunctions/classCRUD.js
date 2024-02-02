@@ -1,4 +1,4 @@
-import options from "../../DB/local/options";
+import emptyObjects from "../../config/emptyObjects";
 import {
   defaultDBCreate,
   defaultDBRead,
@@ -10,7 +10,6 @@ import {
   getId,
   keepOldItem,
   removeItemInListById,
-  getItemIndexInListById,
   replaceNewItemInListById,
 } from "../auxCRUD";
 
@@ -21,7 +20,7 @@ function createClass(createClassStates) {
     createClassStates;
 
   function getNewClassItem(newId) {
-    const emptyClass = options.emptyObjects.classItem;
+    const emptyClass = emptyObjects.classItem;
     const newClass = {
       ...emptyClass,
       ano: year ?? classItem?.ano,

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import options from "../../../DB/local/options";
+import emptyObjects from "../../../config/emptyObjects";
 import ClassTimeTable from "../../../components/ClassTimeTable/ClassTimeTable";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { readRoom } from "../../../helpers/CRUDFunctions/roomCRUD";
@@ -32,7 +33,7 @@ function TurmaSelection(classStates) {
     ...classStates,
     classItem: {
       ...classStates.classItem,
-      disciplina: options.emptyObjects.classItem.disciplina,
+      disciplina: emptyObjects.classItem.disciplina,
     },
   };
 

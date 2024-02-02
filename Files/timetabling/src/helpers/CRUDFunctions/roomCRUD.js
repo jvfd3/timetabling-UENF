@@ -1,4 +1,4 @@
-import options from "../../DB/local/options";
+import emptyObjects from "../../config/emptyObjects";
 import {
   defaultDBCreate,
   defaultDBRead,
@@ -17,7 +17,7 @@ const itemName = "room";
 
 function createRoom({ rooms, setRooms, room, setRoom }) {
   function getNewRoom(newId) {
-    const emptyRoom = options.emptyObjects.room;
+    const emptyRoom = emptyObjects.room;
     const newRoom = { ...emptyRoom, id: newId };
     return newRoom;
   }

@@ -1,4 +1,4 @@
-import options from "../../DB/local/options";
+import emptyObjects from "../../config/emptyObjects";
 import {
   defaultDBCreate,
   defaultDBRead,
@@ -17,7 +17,7 @@ const itemName = "student";
 
 function createStudent({ students, setStudents, student, setStudent }) {
   function getNewStudent(newId) {
-    const emptyStudent = options.emptyObjects.student;
+    const emptyStudent = emptyObjects.student;
     const newStudent = { ...emptyStudent, id: newId };
     return newStudent;
   }

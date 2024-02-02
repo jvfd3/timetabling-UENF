@@ -1,4 +1,4 @@
-import options from "../DB/local/options";
+import emptyObjects from "../config/emptyObjects";
 import { getDefaultYearSemesterValues } from "./auxFunctions";
 
 function getId(item) {
@@ -57,7 +57,7 @@ function getDefaultClassItem(year, semester) {
   const defaultYearSemester = getDefaultYearSemesterValues();
 
   const defaultClassItem = {
-    ...options.emptyObjects.classItem,
+    ...emptyObjects.classItem,
     ano: year ?? defaultYearSemester.year,
     semestre: semester ?? defaultYearSemester.semester,
   };
@@ -69,7 +69,7 @@ function getDefaultClassTime(year, semester) {
   const defaultYearSemester = getDefaultYearSemesterValues();
 
   const defaultClassTime = {
-    ...options.emptyObjects.classTime,
+    ...emptyObjects.classTime,
     ano: year ?? defaultYearSemester.year,
     semestre: semester ?? defaultYearSemester.semester,
   };
