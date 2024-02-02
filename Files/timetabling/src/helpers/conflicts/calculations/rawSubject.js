@@ -52,7 +52,7 @@ function checkCorrectPeriodParity(expectedSemester, subjectSemester) {
   const oddSubjectOnOddSemester = subSem === 2 && expSem % 2 === 0;
   const correctParity = evenSubjectOnEvenSemester || oddSubjectOnOddSemester;
 
-  let returnedParity = hasNoParity ? null : correctParity;
+  const returnedParity = hasNoParity ? null : correctParity;
   return returnedParity;
 }
 

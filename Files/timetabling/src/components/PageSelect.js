@@ -52,7 +52,7 @@ function CRUDPageSelection(props) {
         className="PageSelectionSelect"
         onWheel={(event) => {
           // changePageByScrolling(event);
-          let itemStates = [filteredOptions, props, handleChange];
+          const itemStates = [filteredOptions, props, handleChange];
           changePageByScrolling(event, itemStates);
         }}
       >

@@ -18,19 +18,16 @@ function TextInputDefault(myStates) {
   }, [mainValue]);
 
   function numericValueFilter(value) {
-    let newValue = null;
-    // console.log("value", value);
-    newValue = Number(value);
-    if (newValue < 1) newValue = null;
-    if (newValue > 9999) newValue = 9999;
-    return newValue;
+    const numberValue = Number(value);
+    if (numberValue < 1) return null;
+    if (numberValue > 9999) return 9999;
+    return numberValue;
   }
 
   function updateValue(event) {
+    // function updateValue({ target: { value } }) {
     let newValue = event.target.value;
-    if (isNumeric) {
-      newValue = numericValueFilter(newValue);
-    }
+    newValue = isNumeric ? numericValueFilter(newValue) : newValue;
     const newItem = getNewItemObject(newValue);
     const newItems = replaceNewItemInListById(newItem, items);
     setMainProp(newValue);

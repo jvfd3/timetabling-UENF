@@ -94,8 +94,8 @@ function SmartUpdateClassItem(updateClassItemProps) {
   const date = `${classItem?.ano}.${classItem?.semestre}`;
   const classItemId = ` ${date} (id: ${getId(classItem)})\n`;
 
-  let dontUpdateMessage = `Não foram identificadas alterações na turma`;
-  dontUpdateMessage += classItemId;
+  const dontUpdateMessage =
+    `Não foram identificadas alterações na turma` + classItemId;
 
   const baseMessage = `Atualizar turma` + classItemId;
 
@@ -138,6 +138,28 @@ function SmartUpdateClassItem(updateClassItemProps) {
     modifications += sameProfessor ? "" : newProfessorText;
     modifications += sameExpectedDemand ? "" : newExpectedDemandText;
 
+    /*
+    const properties = [
+      { name: 'disciplina', old: oldSubject, new: newSubject, same: sameSubject },
+      { name: 'professor', old: oldProfessor, new: newProfessor, same: sameProfessor },
+      { name: 'demandaEstimada', old: oldExpectedDemand, new: newExpectedDemand, same: sameExpectedDemand },
+    ];
+
+    let modifications = "";
+
+    for (const prop of properties) {
+      if (!prop.same) {
+        modifications += `${prop.name}: ${prop.old} -> ${prop.new}\n`;
+      }
+    }
+
+    const hasChanges = modifications.length > 0;
+
+    const modificationsObject = {
+      updateText: modifications,
+      updateStatus: hasChanges,
+    };
+    */
     // console.log(newSubjectText);
 
     // const hasChanges = !sameSubject || !sameProfessor || !sameExpectedDemand;

@@ -38,7 +38,7 @@ function getAxios() {
     return await axios.delete(localUrl);
   }
 
-  let myAxios = {
+  const myAxios = {
     create: createTest,
     read: readTest,
     update: updateTest,
@@ -63,7 +63,7 @@ function debugPayload(payload) {
 async function defaultDBCreate(itemName, itemToSend) {
   const action = "creat";
   const localMessage = `defaultDB${action}e> ${itemName}`;
-  let toastMessages = {
+  const toastMessages = {
     debug: [localMessage],
     pretty: `Ready for a ${itemName} ${action}ing journey?`,
   };
@@ -81,7 +81,7 @@ async function defaultDBCreate(itemName, itemToSend) {
     isDebugging && console.error(toastMessages);
   } else {
     try {
-      let response = await myAxios.create(itemName, itemToSend);
+      const response = await myAxios.create(itemName, itemToSend);
       isDebugging && debugPayload(response); // Only Executes if isDebugging is true
       const statusCode = response.status;
       if (statusCode === 201) {
@@ -119,7 +119,7 @@ async function defaultDBCreate(itemName, itemToSend) {
 async function defaultDBRead(itemName) {
   const action = "read";
   const localMessage = `defaultDB${action}_${itemName}>`;
-  let toastMessages = {
+  const toastMessages = {
     debug: [localMessage],
     pretty: `Ready for a ${itemName} ${action}ing journey?`,
   };
@@ -132,7 +132,7 @@ async function defaultDBRead(itemName) {
   } else {
     try {
       // console.log("preRead", itemName);
-      let response = await myAxios.read(itemName);
+      const response = await myAxios.read(itemName);
       // console.log("response", response);
       isDebugging && debugPayload(response); // Only Executes if isDebugging is true
       returnedData = response.data.queryResult;
@@ -173,7 +173,7 @@ async function defaultDBRead(itemName) {
 async function defaultDBUpdate(itemName, itemToSend) {
   const action = "updat";
   const localMessage = `defaultDB${action}e> ${itemName}`;
-  let toastMessages = {
+  const toastMessages = {
     debug: [localMessage],
     pretty: `Ready for a ${itemName} ${action}ing journey?`,
   };
@@ -191,7 +191,7 @@ async function defaultDBUpdate(itemName, itemToSend) {
     isDebugging && console.error(toastMessages);
   } else {
     try {
-      let response = await myAxios.update(itemName, itemToSend);
+      const response = await myAxios.update(itemName, itemToSend);
       isDebugging && debugPayload(response); // Only Executes if isDebugging is true
       const statusCode = response.status;
       if (statusCode === 200) {
@@ -241,7 +241,7 @@ async function defaultDBUpdate(itemName, itemToSend) {
 async function defaultDBDelete(itemName, itemToSend) {
   const action = "delet";
   const localMessage = `defaultDB${action}e> ${itemName}`;
-  let toastMessages = {
+  const toastMessages = {
     debug: [localMessage],
     pretty: `Ready for a ${itemName} ${action}ing journey?`,
   };
@@ -259,7 +259,7 @@ async function defaultDBDelete(itemName, itemToSend) {
     isDebugging && console.error(toastMessages);
   } else {
     try {
-      let response = await myAxios.delete(itemName, itemToSend);
+      const response = await myAxios.delete(itemName, itemToSend);
       isDebugging && debugPayload(response); // Only Executes if isDebugging is true
       const statusCode = response.status;
       const body = response.data.body;

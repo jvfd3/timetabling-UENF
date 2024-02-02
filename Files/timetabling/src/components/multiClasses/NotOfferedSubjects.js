@@ -76,10 +76,19 @@ function NonOfferedSubjectsTable(unofferedSubjectsProps) {
     unofferedSubjectsProps;
 
   const baseMessage = "Disciplinas ainda não oferecidas ";
+  const semesterMessages = {
+    1: "do período ímpar",
+    2: "do período par",
+    3: "dos períodos",
+  };
+
+  const semesterMessage = semesterMessages[semesterValue] || "";
+  /* 
   let semesterMessage = "";
   semesterMessage += semesterValue === 1 ? "do período ímpar" : "";
   semesterMessage += semesterValue === 2 ? "do período par" : "";
   semesterMessage += semesterValue === 3 ? "dos períodos" : "";
+  */
 
   const inputProps = {
     classStates,

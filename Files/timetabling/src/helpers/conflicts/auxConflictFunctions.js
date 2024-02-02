@@ -68,8 +68,8 @@ function getOverlappingClasses(classes, classTime) {
 function getTargetClasses(filteredClasses) {
   /* Used by room and professor */
   // console.log(filteredClasses);
-  let newToList = filteredClasses.reduce((acc, classTime) => {
-    let existingClassTime = acc.find(
+  const newToList = filteredClasses.reduce((acc, classTime) => {
+    const existingClassTime = acc.find(
       (item) => item.idTurma === classTime.idTurma
     );
 
@@ -91,7 +91,7 @@ function getTargetClasses(filteredClasses) {
 
 function flattenTurma(classData, classTime) {
   const { horarios, ...rest } = classData;
-  let newClassData = {
+  const newClassData = {
     ...rest,
     ...classTime,
   };
@@ -105,15 +105,15 @@ function splitTurmas(turmas) {
     );
     return splittedClasses;
   } */
-  let newSplittedTurmas = [];
+  const newSplittedTurmas = [];
   turmas?.forEach((turma) => {
     if (turma?.horarios !== null && turma?.horarios?.length > 0) {
       turma?.horarios.forEach((horario) => {
-        let newTurma = flattenTurma(turma, horario);
+        const newTurma = flattenTurma(turma, horario);
         newSplittedTurmas.push(newTurma);
       });
     } else {
-      let newTurma = {
+      const newTurma = {
         ...options.emptyObjects.classTime,
         /* when I do that, the idHorario is null and it shouldn't. Check it later. */
         ...turma,

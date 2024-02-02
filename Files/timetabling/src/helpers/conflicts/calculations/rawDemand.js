@@ -2,7 +2,7 @@ import options from "../../../DB/local/options";
 import { getId } from "../../auxCRUD";
 
 function getSingleClassDemandConflict(demandClassData) {
-  let singleClassDemandConflicts = [];
+  const singleClassDemandConflicts = [];
   demandClassData.forEach((iterClass) => {
     /*
       forEach class, check if there is a room capacity conflict.

@@ -18,8 +18,8 @@ function getRoomAllocMessage(conflictObject) {
   conflictMessage += `\t- Sala sobreposta com ${to?.length} turmas\n`;
 
   to.forEach((classTime) => {
-    let classItem = `\t\t- Turma: ${classTime.idTurma}, horários: `;
-    let classTimes = JSON.stringify(classTime.idHorario);
+    const classItem = `\t\t- Turma: ${classTime.idTurma}, horários: `;
+    const classTimes = JSON.stringify(classTime.idHorario);
     conflictMessage += classItem + classTimes + "\n";
   });
 
