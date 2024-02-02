@@ -19,15 +19,15 @@ import Rooms from "../timetabling-UENF/baseCRUD/rooms/rooms";
 function MyRouting() {
   const basePath = options.constantValues.routing.urlPath; //"/timetabling-uenf/";
   const pageSelection = options.constantValues.pageSelection;
-  const mainPath = basePath + pageSelection.main.value;
-  const multiClassesPath = basePath + pageSelection.multiClasses.value;
-  const turmasPath = basePath + pageSelection.classes.value;
-  const alunosPath = basePath + pageSelection.students.value;
-  const professoresPath = basePath + pageSelection.professors.value;
-  const disciplinasPath = basePath + pageSelection.subjects.value;
-  const salasPath = basePath + pageSelection.classrooms.value;
-  const notFoundPath = basePath + pageSelection.notFound.value;
-  const ccTablePath = basePath + pageSelection.CCTable.value;
+  const pathMain = basePath + pageSelection.main.value;
+  const pathMultiClasses = basePath + pageSelection.multiClasses.value;
+  const pathClasses = basePath + pageSelection.classes.value;
+  const pathStudents = basePath + pageSelection.students.value;
+  const pathProfessors = basePath + pageSelection.professors.value;
+  const pathSubjects = basePath + pageSelection.subjects.value;
+  const pathRooms = basePath + pageSelection.classrooms.value;
+  const pathNotFound = basePath + pageSelection.notFound.value;
+  const pathCCtable = basePath + pageSelection.CCTable.value;
 
   return (
     <BrowserRouter basename="/">
@@ -37,20 +37,20 @@ function MyRouting() {
         <Route element={<Main />} index />
         <Route element={<Main />} path={"/"} />
         <Route element={<Main />} path={basePath} />
-        <Route element={<Main />} path={mainPath} />
-        <Route element={<MultiClasses />} path={multiClassesPath} />
-        <Route element={<CCTable />} path={ccTablePath} />
-        <Route element={<Classes />} path={turmasPath} />
-        <Route element={<Professors />} path={professoresPath} />
-        <Route element={<Rooms />} path={salasPath} />
-        <Route element={<Subjects />} path={disciplinasPath} />
-        <Route element={<Students />} path={alunosPath} />
-        <Route element={<NoMatch />} path={notFoundPath} />
+        <Route element={<Main />} path={pathMain} />
+        <Route element={<MultiClasses />} path={pathMultiClasses} />
+        <Route element={<CCTable />} path={pathCCtable} />
+        <Route element={<Classes />} path={pathClasses} />
+        <Route element={<Professors />} path={pathProfessors} />
+        <Route element={<Rooms />} path={pathRooms} />
+        <Route element={<Subjects />} path={pathSubjects} />
+        <Route element={<Students />} path={pathStudents} />
+        <Route element={<NoMatch />} path={pathNotFound} />
         <Route element={<NoMatch />} path="*" />
-      </Routes>{" "}
+      </Routes>
       <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
+        autoClose={options.config.toast.time}
+        position={options.config.toast.position}
         // closeOnClick
         // draggable
         // pauseOnHover
