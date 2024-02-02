@@ -108,7 +108,7 @@ function keepOldItem(item, items) {
     frst: getId(firstItem),
   };
 
-  console.log(debug);
+  // console.log(debug);
 
   const showedItem =
     keepCurrentItem ?? previous ?? next ?? lastItem ?? firstItem ?? null;

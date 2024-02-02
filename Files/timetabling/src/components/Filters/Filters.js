@@ -127,6 +127,8 @@ function MultiClassesFilters({ classTimeStates, classStates }) {
   const defaultClassItem = getDefaultClassItem(year, semester);
   const defaultClassTime = getDefaultClassTime(year, semester);
 
+  const statesToWatchFor = [year, semester, classes];
+
   function updateOuterStates() {
     const filteredClassTimes = filterList(classTimes, year, semester);
     const filteredClasses = filterList(classes, year, semester);
@@ -151,7 +153,7 @@ function MultiClassesFilters({ classTimeStates, classStates }) {
 
   useEffect(() => {
     updateOuterStates();
-  }, [year, semester, classes]);
+  }, statesToWatchFor);
 
   return (
     <div className="MultiClassesFilters">
@@ -212,8 +214,9 @@ function CCTableFilters(classTimeStates) {
     classTimes,
   ];
 
-  function updateOuterStates() {
-    let filtering = classTimes;
+  function filterList(list) {
+    let filtering = list;
+
     filtering = filterYear(filtering, year);
     filtering = filterSemester(filtering, semester);
     filtering = filterSubject(filtering, subject);
@@ -221,7 +224,12 @@ function CCTableFilters(classTimeStates) {
     filtering = filterProfessor(filtering, professor);
     filtering = filterRoom(filtering, room);
 
-    setFilteredClassTimes(filtering);
+    return filtering;
+  }
+
+  function updateOuterStates() {
+    const filteredClassTimes = filterList(classTimes);
+    setFilteredClassTimes(filteredClassTimes);
   }
 
   useEffect(() => {
@@ -260,10 +268,14 @@ function ClassesFilters(classStates) {
     semester: { semester, setSemester },
   };
 
+  const statesToWatchFor = [year, semester, classes];
+
   function filterList(list, year, semester) {
     let filteredList = list;
+
     filteredList = filterYear(filteredList, year);
     filteredList = filterSemester(filteredList, semester);
+
     return filteredList;
   }
 
@@ -272,7 +284,7 @@ function ClassesFilters(classStates) {
     let newClassItem = keepOldItem(filteredClasses, classItem);
     setFilteredClasses(filteredClasses);
     setClassItem(newClassItem);
-  }, [year, semester, classes]);
+  }, statesToWatchFor);
 
   return (
     <div className="ClassesFilters">
@@ -317,7 +329,6 @@ function ViewTableFilters(classTimeStates) {
 
   function updateOuterStates() {
     const filteredClassTimes = filterList(classTimes, year, semester);
-
     setFilteredClassTimes(filteredClassTimes);
   }
 

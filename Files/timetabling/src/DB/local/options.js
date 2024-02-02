@@ -4,6 +4,10 @@ const options = {
       "https://ey1h94aard.execute-api.us-east-2.amazonaws.com/timetablingStage/",
   },
   config: {
+    toast: {
+      time: 2000,
+      position: "bottom-right",
+    },
     iconButtons: true,
     defaultIndexes: {
       year: 10, // 10: 2024

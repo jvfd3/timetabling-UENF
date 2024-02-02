@@ -50,8 +50,6 @@ function getStyledConflictNull(conflicts) {
     },
   };
 
-  const isSet = conflicts.hasSubject;
-
   let newText = "";
 
   const isOptional = conflicts.parity.status === null;
@@ -62,10 +60,10 @@ function getStyledConflictNull(conflicts) {
   } else if (semester > -1) {
     newText += `com período ${semester}`;
   }
-  newText += "\n";
 
-  defaultNullStyle.title += newText;
+  defaultNullStyle.title += newText + "\n";
 
+  const isSet = conflicts.hasSubject;
   const nullSubjectStyle = isSet ? defaultNullStyle : conflictNullStyle;
 
   return nullSubjectStyle;
