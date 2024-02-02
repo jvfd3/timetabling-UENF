@@ -9,7 +9,6 @@ import {
 import {
   keepOldItem,
   removeItemInListById,
-  getItemIndexInListById,
   replaceNewItemInListById,
 } from "../auxCRUD";
 
