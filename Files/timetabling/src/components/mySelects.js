@@ -2,6 +2,7 @@ import "./mySelects.css";
 import React, { useEffect, useState } from "react";
 import Select, { components } from "react-select";
 import options from "../DB/local/options";
+import defaultColors from "../config/defaultColors";
 import { sqlDataFromJson } from "../DB/local/dataFromJSON";
 import { getValueFromObject } from "../helpers/auxFunctions";
 import { LockedProp, UnlockedProp } from "./Buttons/Dumb/Dumb";
@@ -47,8 +48,8 @@ function LockableSelect(extProps) {
         style={{
           pointerEvents: "auto",
           color: isLocked
-            ? options.config.colors.locker.locked
-            : options.config.colors.locker.unlocked,
+            ? defaultColors.locker.locked
+            : defaultColors.locker.unlocked,
           cursor: "pointer",
         }}
       >

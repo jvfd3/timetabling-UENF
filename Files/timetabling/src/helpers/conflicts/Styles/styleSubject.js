@@ -1,6 +1,6 @@
-import options from "../../../DB/local/options";
+import defaultColors from "../../../config/defaultColors";
 
-const conflictOptions = options.config.colors.conflicts;
+const conflictOptions = defaultColors.conflicts;
 
 const defaultTitles = {
   base: "Conflitos de disciplina avaliados:\n",
@@ -78,18 +78,18 @@ function getStyledConflictsParity(conflicts) {
   const semester = parity.from?.expectedSemester;
   if (parity.status === true) {
     newTitle = defaultTitles.parity;
-    parityColor = options.config.colors.subject.rightParity[semester];
+    parityColor = defaultColors.subject.rightParity[semester];
   } else if (parity.status === false) {
     newTitle = defaultTitles.parityConflict;
-    parityColor = options.config.colors.subject.wrongParity[semester];
+    parityColor = defaultColors.subject.wrongParity[semester];
   } else if (parity.status === null && hasSubject && hasSemester) {
     newTitle = defaultTitles.noParity;
-    parityColor = options.config.colors.subject.noParity;
+    parityColor = defaultColors.subject.noParity;
   }
 
   if (isSummer && hasSubject && hasSemester) {
     newTitle = defaultTitles.summer;
-    parityColor = options.config.colors.subject.summer[semester];
+    parityColor = defaultColors.subject.summer[semester];
   }
 
   const parityStyle = {

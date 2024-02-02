@@ -1,3 +1,5 @@
+import defaultColors from "../../../../src/config/defaultColors";
+
 function checkCorrectPeriodParity(expectedSemester, currentSemester) {
   const evenSubjectOnEvenSemester =
     currentSemester === 1 && expectedSemester % 2 === 1;
@@ -56,7 +58,7 @@ function getSubjectStyledConflict(turma) {
   let titleMessage = "";
   if (expectedSemester === undefined) {
     titleMessage = "Disciplina ainda não definida";
-    newColor = options.config.colors.conflicts.notSetted.subject;
+    newColor = defaultColors.conflicts.notSetted.subject;
   } else {
     newColor = getColorGradient(expectedSemester, semestreAtual);
     // console.log(newColor);

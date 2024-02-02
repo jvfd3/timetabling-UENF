@@ -1,7 +1,7 @@
-import options from "../../../DB/local/options";
+import defaultColors from "../../../config/defaultColors";
 import { getId } from "../../auxCRUD";
 
-const conflictOptions = options.config.colors.conflicts;
+const conflictOptions = defaultColors.conflicts;
 
 const defaultTitles = {
   base: "Conflitos de alocação de sala avaliados:\n",

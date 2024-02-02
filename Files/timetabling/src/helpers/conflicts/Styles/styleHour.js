@@ -1,6 +1,6 @@
-import options from "../../../DB/local/options";
+import defaultColors from "../../../config/defaultColors";
 
-const conflictOptions = options.config.colors.conflicts;
+const conflictOptions = defaultColors.conflicts;
 
 const defaultTitles = {
   base: "Conflitos de hora avaliados:\n",

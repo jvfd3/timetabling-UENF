@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { getId } from "../../../helpers/auxCRUD";
-import options from "../../../DB/local/options";
 import emptyObjects from "../../../config/emptyObjects";
 import {
   getValueFromObject,
@@ -104,8 +103,8 @@ function SmartUpdateClassItem(updateClassItemProps) {
   const [needsUpdateStatus, setNeedsUpdateStatus] = useState(false);
 
   const iconColor = needsUpdateStatus
-    ? options.config.colors.CRUD.update
-    : options.config.colors.CRUD.default;
+    ? defaultColors.CRUD.update
+    : defaultColors.CRUD.default;
 
   useEffect(() => {
     const modProps = getModificationsProps(oldClassItem, classItem);
@@ -217,8 +216,8 @@ function SmartUpdateClassTime({ classTime, updateClassTimeDB }) {
   const [needsUpdateStatus, setNeedsUpdateStatus] = useState(false);
 
   const iconColor = needsUpdateStatus
-    ? options.config.colors.CRUD.update
-    : options.config.colors.CRUD.default;
+    ? defaultColors.CRUD.update
+    : defaultColors.CRUD.default;
 
   useEffect(() => {
     const modProps = getModificationsProps(oldClassTime.current, classTime);

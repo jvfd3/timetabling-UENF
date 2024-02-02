@@ -19,14 +19,14 @@ function setNullStyles(conflictStyles, classTime) {
   if (isNull.day) {
     conflictStyles.day = {
       title: notSettedTexts.day,
-      style: { backgroundColor: options.config.colors.conflicts.notSetted.day },
+      style: { backgroundColor: defaultColors.conflicts.notSetted.day },
     };
   }
   if (isNull.hour) {
     conflictStyles.hour = {
       title: notSettedTexts.hour,
       style: {
-        backgroundColor: options.config.colors.conflicts.notSetted.hour,
+        backgroundColor: defaultColors.conflicts.notSetted.hour,
       },
     };
   }
