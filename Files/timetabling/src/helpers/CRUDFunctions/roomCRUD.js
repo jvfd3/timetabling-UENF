@@ -1,3 +1,4 @@
+import options from "../../DB/local/options";
 import {
   defaultDBCreate,
   defaultDBRead,
@@ -5,8 +6,8 @@ import {
   defaultDBDelete,
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
-import options from "../../DB/local/options";
 import {
+  keepOldItem,
   removeItemInListById,
   getItemIndexInListById,
   replaceNewItemInListById,
@@ -23,8 +24,9 @@ function createRoom({ rooms, setRooms, room, setRoom }) {
 
   function insertNewRoomFromDB(newId) {
     const newRoom = getNewRoom(newId);
+    const newRooms = [...rooms, newRoom];
     setRoom(newRoom);
-    setRooms([...rooms, newRoom]);
+    setRooms(newRooms);
   }
 
   defaultDBCreate(itemName, room)
@@ -34,10 +36,7 @@ function createRoom({ rooms, setRooms, room, setRoom }) {
 
 function readRoom({ setRooms, setRoom, room }) {
   function insertNewRoomsFromDB(roomsFromDB) {
-    const index = getItemIndexInListById(room, roomsFromDB);
-    const keepCurrentRoom = roomsFromDB?.[index];
-    const lastRoom = roomsFromDB[roomsFromDB.length - 1];
-    const showedRoom = keepCurrentRoom ?? lastRoom;
+    const showedRoom = keepOldItem(room, roomsFromDB);
     setRoom(showedRoom);
     setRooms(roomsFromDB);
   }
@@ -48,6 +47,7 @@ function readRoom({ setRooms, setRoom, room }) {
 function updateRoom({ rooms, setRooms, room }) {
   function updateRoomOnList(newRoom) {
     const updatedRooms = replaceNewItemInListById(newRoom, rooms);
+    // setRoom(newRoom);
     setRooms(updatedRooms);
   }
 

@@ -8,6 +8,7 @@ import {
 } from "../../DB/AWS/defaultAxiosFunctions";
 import {
   getId,
+  keepOldItem,
   removeItemInListById,
   getItemIndexInListById,
   replaceNewItemInListById,
@@ -18,9 +19,11 @@ const itemName = "classData";
 function createClass(createClassStates) {
   const { classes, setClasses, classItem, setClassItem, year, semester } =
     createClassStates;
+
   function getNewClassItem(newId) {
+    const emptyClass = options.emptyObjects.classItem;
     const newClass = {
-      ...options.emptyObjects.classItem,
+      ...emptyClass,
       ano: year ?? classItem?.ano,
       semestre: semester ?? classItem?.semestre,
       disciplina: classItem?.disciplina ?? null,
@@ -36,7 +39,7 @@ function createClass(createClassStates) {
     setClassItem(newClass);
     setClasses(newClasses);
   }
-  // insertNewClass(123);
+
   defaultDBCreate(itemName, classItem)
     .then(insertNewClass)
     .catch(defaultHandleError);
@@ -44,11 +47,8 @@ function createClass(createClassStates) {
 
 function readClass({ setClasses, classItem, setClassItem }) {
   function insertNewClassesFromDB(dataFromDB) {
-    const index = getItemIndexInListById(classItem, dataFromDB);
-    const lastItem = dataFromDB[dataFromDB.length - 1];
-    const keepCurrentClass = dataFromDB?.[index];
-    const showedClass = keepCurrentClass ?? lastItem;
-    setClassItem(showedClass);
+    const showedClassItem = keepOldItem(classItem, dataFromDB);
+    setClassItem(showedClassItem);
     setClasses(dataFromDB);
   }
 
@@ -62,7 +62,7 @@ function updateClass(classStates) {
 
   function updateClassOnList(newClass) {
     const updatedClasses = replaceNewItemInListById(newClass, classes);
-    setClassItem(newClass);
+    // setClassItem(newClass);
     setClasses(updatedClasses);
   }
 
@@ -86,7 +86,6 @@ function deleteClass({ classes, setClasses, classItem, setClassItem }) {
           "deleteClass: Não há mais classes para serem exibidas na lista";
         console.error(errorMessage);
       }
-      // const newItem = options.emptyObjects.classItem;
       setClassItem(newItem);
       setClasses(filteredClasses);
     }

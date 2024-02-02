@@ -28,8 +28,16 @@ import {
 
 function TurmaSelection(classStates) {
   /* It just contains the selection an maybe allows scrolling selection */
+  const createStates = {
+    ...classStates,
+    classItem: {
+      ...classStates.classItem,
+      disciplina: options.emptyObjects.classItem.disciplina,
+    },
+  };
+
   const turmaCRUDFunctions = {
-    createFunc: () => createClass(classStates),
+    createFunc: () => createClass(createStates),
     readFunc: () => readClass(classStates),
     updateFunc: () => updateClass(classStates),
     deleteFunc: () => deleteClass(classStates),
@@ -93,7 +101,6 @@ function ClassData(classesStates) {
 
 function Classes() {
   const defaultClasses = [];
-
   const [classes, setClasses] = useState(defaultClasses);
   const [filteredClasses, setFilteredClasses] = useState([]);
   const [classItem, setClassItem] = useState(

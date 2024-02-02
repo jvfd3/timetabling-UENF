@@ -1,3 +1,4 @@
+import options from "../../DB/local/options";
 import {
   defaultDBCreate,
   defaultDBRead,
@@ -5,8 +6,8 @@ import {
   defaultDBDelete,
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
-import options from "../../DB/local/options";
 import {
+  keepOldItem,
   removeItemInListById,
   getItemIndexInListById,
   replaceNewItemInListById,
@@ -23,8 +24,9 @@ function createStudent({ students, setStudents, student, setStudent }) {
 
   function insertNewStudentFromDB(newId) {
     const newStudent = getNewStudent(newId);
+    const newStudents = [...students, newStudent];
     setStudent(newStudent);
-    setStudents([...students, newStudent]);
+    setStudents(newStudents);
   }
 
   defaultDBCreate(itemName, student)
@@ -34,10 +36,7 @@ function createStudent({ students, setStudents, student, setStudent }) {
 
 function readStudent({ setStudents, setStudent, student }) {
   function insertNewStudentsFromDB(studentsFromDB) {
-    const index = getItemIndexInListById(student, studentsFromDB);
-    const keepCurrentStudent = studentsFromDB?.[index];
-    const lastStudent = studentsFromDB[studentsFromDB.length - 1];
-    const showedStudent = keepCurrentStudent ?? lastStudent;
+    const showedStudent = keepOldItem(student, studentsFromDB);
     setStudent(showedStudent);
     setStudents(studentsFromDB);
   }
@@ -50,6 +49,7 @@ function readStudent({ setStudents, setStudent, student }) {
 function updateStudent({ students, setStudents, student }) {
   function updateStudentOnList(newStudent) {
     const updatedStudents = replaceNewItemInListById(newStudent, students);
+    // setStudent(newStudent);
     setStudents(updatedStudents);
   }
 
@@ -62,6 +62,7 @@ function deleteStudent({ students, setStudents, student, setStudent }) {
   function deleteStudentOnList(deletedStudent) {
     if (deletedStudent) {
       const updatedStudents = removeItemInListById(deletedStudent, students);
+      const showedStudent = keepOldItem(student, students);
       const index = getItemIndexInListById(deletedStudent, students);
       let newStudent = null;
       if (index > 0) {
@@ -73,6 +74,12 @@ function deleteStudent({ students, setStudents, student, setStudent }) {
           "Uai, não tem mais professores! Como diria o Silvio Santos: 'Está certo disto?'"
         );
       }
+      console.log(
+        "D, N, S",
+        deletedStudent.id,
+        newStudent.id,
+        showedStudent.id
+      );
       setStudent(newStudent);
       setStudents(updatedStudents);
     }

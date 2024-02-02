@@ -1,3 +1,4 @@
+import options from "../../DB/local/options";
 import {
   defaultDBCreate,
   defaultDBRead,
@@ -5,10 +6,10 @@ import {
   defaultDBDelete,
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
-import options from "../../DB/local/options";
 import {
-  getItemIndexInListById,
+  keepOldItem,
   removeItemInListById,
+  getItemIndexInListById,
   replaceNewItemInListById,
 } from "../auxCRUD";
 
@@ -23,8 +24,9 @@ function createSubject({ subjects, setSubjects, subject, setSubject }) {
 
   function insertNewSubjectFromDB(newId) {
     const newSubject = getNewSubject(newId);
+    const newSubjects = [...subjects, newSubject];
     setSubject(newSubject);
-    setSubjects([...subjects, newSubject]);
+    setSubjects(newSubjects);
   }
 
   defaultDBCreate(itemName, subject)
@@ -34,11 +36,7 @@ function createSubject({ subjects, setSubjects, subject, setSubject }) {
 
 function readSubject({ setSubjects, setSubject, subject }) {
   function insertNewSubjectsFromDB(subjectsFromDB) {
-    const index = getItemIndexInListById(subject, subjectsFromDB);
-    const keepCurrentSubject = subjectsFromDB?.[index];
-    const lastSubject = subjectsFromDB[subjectsFromDB.length - 1];
-    const showedSubject = keepCurrentSubject ?? lastSubject;
-    // console.log("subjectsFromDB", subjectsFromDB);
+    const showedSubject = keepOldItem(subject, subjectsFromDB);
     setSubject(showedSubject);
     setSubjects(subjectsFromDB);
   }
@@ -51,6 +49,7 @@ function readSubject({ setSubjects, setSubject, subject }) {
 function updateSubject({ subjects, setSubjects, subject }) {
   function updateSubjectOnList(newSubject) {
     const updatedSubjects = replaceNewItemInListById(newSubject, subjects);
+    // setSubject(newSubject);
     setSubjects(updatedSubjects);
   }
 

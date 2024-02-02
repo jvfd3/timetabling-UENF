@@ -8,8 +8,8 @@ import {
 } from "../../DB/AWS/defaultAxiosFunctions";
 import {
   getId,
+  keepOldItem,
   removeItemInListById,
-  getItemIndexInListById,
   replaceNewItemInListById,
 } from "../auxCRUD";
 
@@ -25,10 +25,7 @@ function createClassTime(classTimeStates) {
   };
 
   function getNewClassTime(newId) {
-    const newClassTime = {
-      ...baseClassTime,
-      id: newId,
-    };
+    const newClassTime = { ...baseClassTime, id: newId };
     return newClassTime;
   }
 
@@ -46,20 +43,10 @@ function createClassTime(classTimeStates) {
     .catch(defaultHandleError);
 }
 
-function readClassTime(classTimeStates) {
-  const { classTimes, setClassTimes, classTime, setClassTime } =
-    classTimeStates;
-
-  function getIndexFromCurrentClassTime(currentClassTime) {
-    const index = getItemIndexInListById(currentClassTime, classTimes);
-    return index == -1 ? 0 : index;
-  }
+function readClassTime({ setClassTimes, classTime, setClassTime }) {
   function insertNewClassTimesFromDB(dataFromDB) {
-    const index = getIndexFromCurrentClassTime(classTime);
-    const lastItem = dataFromDB[dataFromDB.length - 1];
-    const currentClassTime = dataFromDB?.[index] ?? lastItem;
-    // console.log("currentClassTime", dataFromDB.length);
-    setClassTime(currentClassTime);
+    const showedClassTime = keepOldItem(classTime, dataFromDB);
+    setClassTime(showedClassTime);
     setClassTimes(dataFromDB);
   }
 

@@ -1,3 +1,4 @@
+import options from "../../DB/local/options";
 import {
   defaultDBCreate,
   defaultDBRead,
@@ -5,8 +6,8 @@ import {
   defaultDBDelete,
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
-import options from "../../DB/local/options";
 import {
+  keepOldItem,
   removeItemInListById,
   getItemIndexInListById,
   replaceNewItemInListById,
@@ -20,12 +21,19 @@ function createProfessor({
   professor,
   setProfessor,
 }) {
-  function insertNewProfessorFromDB(newId) {
+  function getNewProfessor(newId) {
     const emptyProfessor = options.emptyObjects.professor;
     const newProfessor = { ...emptyProfessor, id: newId };
-    setProfessor(newProfessor);
-    setProfessors([...professors, newProfessor]);
+    return newProfessor;
   }
+
+  function insertNewProfessorFromDB(newId) {
+    const newProfessor = getNewProfessor(newId);
+    const newProfessors = [...professors, newProfessor];
+    setProfessor(newProfessor);
+    setProfessors(newProfessors);
+  }
+
   defaultDBCreate(itemName, professor)
     .then(insertNewProfessorFromDB)
     .catch(defaultHandleError);
@@ -33,10 +41,7 @@ function createProfessor({
 
 function readProfessor({ setProfessors, setProfessor, professor }) {
   function insertNewProfessorsFromDB(professoresFromDB) {
-    const index = getItemIndexInListById(professor, professoresFromDB);
-    const keepCurrentProfessor = professoresFromDB?.[index];
-    const lastProfessor = professoresFromDB[professoresFromDB.length - 1];
-    const showedProfessor = keepCurrentProfessor ?? lastProfessor;
+    const showedProfessor = keepOldItem(professor, professoresFromDB);
     setProfessor(showedProfessor);
     setProfessors(professoresFromDB);
   }
@@ -52,6 +57,7 @@ function updateProfessor({ professors, setProfessors, professor }) {
       newProfessor,
       professors
     );
+    // setProfessor(newProfessor);
     setProfessors(updatedProfessors);
   }
 

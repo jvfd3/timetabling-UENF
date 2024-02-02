@@ -7,6 +7,7 @@ import { getDefaultYearSemesterValues } from "../../helpers/auxFunctions";
 import {
   getDefaultClassItem,
   getDefaultClassTime,
+  keepOldItem,
 } from "../../helpers/auxCRUD";
 import {
   filterDay,
@@ -247,7 +248,7 @@ function CCTableFilters(classTimeStates) {
 }
 
 function ClassesFilters(classStates) {
-  const { classes, setFilteredClasses, setClassItem } = classStates;
+  const { classes, setFilteredClasses, setClassItem, classItem } = classStates;
 
   const defaultYearSemester = getDefaultYearSemesterValues();
 
@@ -268,7 +269,7 @@ function ClassesFilters(classStates) {
 
   useEffect(() => {
     let filteredClasses = filterList(classes, year, semester);
-    let newClassItem = filteredClasses?.[0];
+    let newClassItem = keepOldItem(filteredClasses, classItem);
     setFilteredClasses(filteredClasses);
     setClassItem(newClassItem);
   }, [year, semester, classes]);
