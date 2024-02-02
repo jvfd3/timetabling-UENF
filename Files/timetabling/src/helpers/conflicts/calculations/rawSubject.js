@@ -1,4 +1,4 @@
-import options from "../../../DB/local/options";
+import conflicts from "../../../config/conflicts";
 import { getId } from "../../auxCRUD";
 
 function getOnlyNeededValues(classItem) {
@@ -68,7 +68,7 @@ function getParityStatus({ subject, semester }) {
 
 function getSubjectConflictParity(classItem) {
   const parityConflict = {
-    type: options.conflicts.subject.parity,
+    type: conflicts.subject.parity,
     from: {
       id: classItem.id,
       subjectId: classItem?.subject?.id,

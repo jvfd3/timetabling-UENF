@@ -1,4 +1,4 @@
-import options from "../../../DB/local/options";
+import conflicts from "../../../config/conflicts";
 import { getId } from "../../auxCRUD";
 import { filterProfessor } from "../../filteringFunc";
 import {
@@ -33,7 +33,7 @@ function getAllocConflictObject(classes, classItem) {
   filteredClasses = getOverlappingClasses(filteredClasses, classItem);
 
   const allocConflict = {
-    type: options.conflicts.professorAlloc,
+    type: conflicts.professorAlloc,
     from: {
       id: getId(classItem),
       professor: classItem.professor,

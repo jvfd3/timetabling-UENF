@@ -1,4 +1,4 @@
-import options from "../../../DB/local/options";
+import conflicts from "../../../config/conflicts";
 import { filterRoom } from "../../filteringFunc";
 import {
   splitTurmas,
@@ -42,7 +42,7 @@ function getAllocRoomConflictObject(classes, classTime) {
   filteredClasses = getOverlappingClasses(filteredClasses, classTime); // Get only classes with the same day
 
   const allocConflictObject = {
-    type: options.conflicts.roomAlloc,
+    type: conflicts.roomAlloc,
     from: { ...classTime },
     to: getTargetClasses(filteredClasses),
   };

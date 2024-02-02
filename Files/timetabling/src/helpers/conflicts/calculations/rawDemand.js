@@ -1,4 +1,4 @@
-import options from "../../../DB/local/options";
+import conflicts from "../../../config/conflicts";
 import { getId } from "../../auxCRUD";
 
 function getSingleClassDemandConflict(demandClassData) {
@@ -25,7 +25,7 @@ function getSingleClassDemandConflict(demandClassData) {
       const conflictObject = {
         expectedDemand,
         capacity,
-        type: options.conflicts.roomCapacity,
+        type: conflicts.roomCapacity,
         idClass: iterClass.idClass,
         idClassTime: iterClass.idClassTime,
         idRoom: iterClass.idRoom,
