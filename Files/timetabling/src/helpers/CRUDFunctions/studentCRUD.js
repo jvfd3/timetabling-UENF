@@ -63,24 +63,7 @@ function deleteStudent({ students, setStudents, student, setStudent }) {
     if (deletedStudent) {
       const updatedStudents = removeItemInListById(deletedStudent, students);
       const showedStudent = keepOldItem(student, students);
-      const index = getItemIndexInListById(deletedStudent, students);
-      let newStudent = null;
-      if (index > 0) {
-        newStudent = students[index - 1];
-      } else if (updatedStudents.length > 0) {
-        newStudent = students[0];
-      } else {
-        console.error(
-          "Uai, não tem mais professores! Como diria o Silvio Santos: 'Está certo disto?'"
-        );
-      }
-      console.log(
-        "D, N, S",
-        deletedStudent.id,
-        newStudent.id,
-        showedStudent.id
-      );
-      setStudent(newStudent);
+      setStudent(showedStudent);
       setStudents(updatedStudents);
     }
   }

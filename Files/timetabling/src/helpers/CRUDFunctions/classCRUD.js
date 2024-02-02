@@ -75,17 +75,7 @@ function deleteClass({ classes, setClasses, classItem, setClassItem }) {
   function deleteClassOnList(classToDelete) {
     if (classToDelete) {
       const filteredClasses = removeItemInListById(classToDelete, classes);
-      const index = getItemIndexInListById(classToDelete, classes);
-      let newItem = null;
-      if (index > 0) {
-        newItem = classes[index - 1];
-      } else if (filteredClasses.length > 0) {
-        newItem = classes[0];
-      } else {
-        const errorMessage =
-          "deleteClass: Não há mais classes para serem exibidas na lista";
-        console.error(errorMessage);
-      }
+      const newItem = keepOldItem(classItem, filteredClasses);
       setClassItem(newItem);
       setClasses(filteredClasses);
     }

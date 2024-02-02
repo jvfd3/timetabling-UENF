@@ -78,20 +78,7 @@ function deleteProfessor({
         deletedProfessor,
         professors
       );
-
-      const index = getItemIndexInListById(deletedProfessor, professors);
-      let newProfessor = null;
-      if (index > 0) {
-        newProfessor = updatedProfessorList[index - 1]; // continua do anterior
-      } else if (updatedProfessorList.length > 0) {
-        newProfessor = updatedProfessorList[0];
-        // Se estou apagando o primeiro e ainda tem mais...
-      } else {
-        console.error(
-          "Uai, não tem mais professores! Como diria o Silvio Santos: 'Está certo disto?'"
-        );
-      }
-
+      const newProfessor = keepOldItem(professor, updatedProfessorList);
       setProfessor(newProfessor);
       setProfessors(updatedProfessorList);
     }

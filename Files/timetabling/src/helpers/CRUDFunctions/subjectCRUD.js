@@ -62,18 +62,8 @@ function deleteSubject({ subjects, setSubjects, subject, setSubject }) {
   function deleteSubjectOnList(deletedSubject) {
     if (deletedSubject) {
       const updatedSubjects = removeItemInListById(deletedSubject, subjects);
-      const index = getItemIndexInListById(deletedSubject, subjects);
-      let newSubject = null;
-      if (index > 0) {
-        newSubject = subjects[index - 1];
-      } else if (updatedSubjects.length > 0) {
-        newSubject = subjects[0];
-      } else {
-        console.error(
-          "Uai, não tem mais professores! Como diria o Silvio Santos: 'Está certo disto?'"
-        );
-      }
-      setSubject(newSubject);
+      const showedSubject = keepOldItem(subject, updatedSubjects);
+      setSubject(showedSubject);
       setSubjects(updatedSubjects);
     }
   }
