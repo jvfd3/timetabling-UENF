@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import options from "../../../../DB/local/options";
 import CRUDPageSelection from "../../../../components/PageSelect";
 import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
+import { ProfessorClasses } from "../../../../components/classTimesViewTable/SpecificClassTimeViewTables";
 import { CRUDButtonsContainer } from "../../../../components/CRUDButtons";
 // import { scrollThroughProfessores } from "../functions/firulas/minhasFirulas";
 import {
@@ -20,7 +21,15 @@ import {
   updateProfessor,
   deleteProfessor,
 } from "../../../../helpers/CRUDFunctions/professorCRUD";
-import { ProfessorClasses } from "../../../../components/classTimesViewTable/SpecificClassTimeViewTables";
+
+const classNames = {
+  selectionBar: "SelectionBar",
+  showBasicDataCard: "showBasicDataCard",
+  showBasicDataTable: "showBasicDataTable",
+  infoCard: "infoCard",
+  CRUDContainComponents: "CRUDContainComponents",
+  background: "background",
+};
 
 function ProfessorSelection(professorStates) {
   const professorCRUDFunctions = {
@@ -30,7 +39,7 @@ function ProfessorSelection(professorStates) {
     deleteFunc: () => deleteProfessor(professorStates),
   };
   return (
-    <div className="SelectionBar">
+    <div className={classNames.selectionBar}>
       <CRUDButtonsContainer {...professorCRUDFunctions} />
       <SelectProfessorItem {...professorStates} />
     </div>
@@ -38,45 +47,45 @@ function ProfessorSelection(professorStates) {
 }
 
 function BaseProfessorData(professorStates) {
+  const professorTitle = "INFORMAÇÕES DO PROFESSOR";
+  const professorInfoHeader = {
+    lab: "laboratório",
+    course: "curso",
+    name: "nome",
+    alias: "apelido",
+    id: "ID",
+  };
   return (
-    <div className="showBasicDataCard">
-      <h3>INFORMAÇÕES DO PROFESSOR</h3>
-      <table className="showBasicDataTable">
-        {/* 
-        <thead>
-          <tr>
-            <th>Chave</th>
-            <th>Valor</th>
-          </tr>
-        </thead>
-        */}
+    <div className={classNames.showBasicDataCard}>
+      <h3>{professorTitle}</h3>
+      <table className={classNames.showBasicDataTable}>
         <tbody>
           <tr>
-            <th>laboratório</th>
+            <th>{professorInfoHeader.lab}</th>
             <td>
               <SelectProfessorLab {...professorStates} />
             </td>
           </tr>
           <tr>
-            <th>Curso</th>
+            <th>{professorInfoHeader.course}</th>
             <td>
               <SelectProfessorCourse {...professorStates} />
             </td>
           </tr>
           <tr>
-            <th>Nome</th>
+            <th>{professorInfoHeader.name}</th>
             <td>
               <TextInputProfessorName {...professorStates} />
             </td>
           </tr>
           <tr>
-            <th>Apelido</th>
+            <th>{professorInfoHeader.alias}</th>
             <td>
               <TextinputProfessorAlias {...professorStates} />
             </td>
           </tr>
           <tr>
-            <th>ID</th>
+            <th>{professorInfoHeader.id}</th>
             <td>
               <TextInputProfessorId {...professorStates} />
             </td>
@@ -89,7 +98,7 @@ function BaseProfessorData(professorStates) {
 
 function ProfessorCard(professorStates) {
   return (
-    <div className="infoCard">
+    <div className={classNames.infoCard}>
       <BaseProfessorData {...professorStates} />
       <ProfessorClasses {...professorStates.professor} />
       {/* <ProfessorPreferences {...professorStates} /> */}
@@ -117,7 +126,7 @@ function Professors() {
   }, []);
 
   return (
-    <div className="CRUDContainComponents">
+    <div className={classNames.CRUDContainComponents}>
       <ProfessorSelection {...professorStates} />
       <ProfessorCard {...professorStates} />
     </div>
@@ -127,7 +136,7 @@ function Professors() {
 function CRUDprofessors() {
   const defaultPageValue = options.constantValues.pageSelection.professors;
   return (
-    <div className="background">
+    <div className={classNames.background}>
       <CRUDPageSelection defaultValue={defaultPageValue} />
       <Professors />
     </div>
