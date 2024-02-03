@@ -42,6 +42,16 @@ const mainPageText = {
   },
 };
 
+function Logo() {
+  return (
+    <img
+      src={process.env.PUBLIC_URL + "/logos/OurClass.png"}
+      alt="Logo OurClass"
+      style={{ width: "30%", margin: "auto", display: "block" }}
+    />
+  );
+}
+
 function Instructions() {
   return (
     <div className={defaultClassNames.containerCardBaseInfo}>
@@ -73,12 +83,8 @@ function Shortcuts() {
 
 function Main() {
   return (
-      <img
-        src={process.env.PUBLIC_URL + "/logos/OurClass.png"}
-        alt="Logo OurClass"
-        style={{ width: "50%" }}
-      />
     <div className={defaultClassNames.containerCards}>
+      <Logo />
       <Instructions />
       <Shortcuts />
     </div>
