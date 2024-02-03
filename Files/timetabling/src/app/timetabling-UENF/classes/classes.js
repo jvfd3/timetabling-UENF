@@ -37,6 +37,21 @@ const classNames = {
   yearSemesterSelect: "SelectAnoSemestre",
 };
 
+const baseInfoCard = {
+  title: "INFORMAÇÕES DA TURMA",
+  tableTitles: {
+    yearSemester: "Ano/Semestre",
+    subject: "Disciplina",
+    professor: "Professor",
+    expectedDemand: "Demanda Estimada",
+    id: "ID",
+  },
+};
+
+const classTimeTitles = {
+  classTimes: "Horários",
+  addClassTime: "Adicionar Horário",
+};
 
 function ClassSelection(classStates) {
   /* It just contains the selection an maybe allows scrolling selection */
@@ -67,13 +82,13 @@ function ClassSelection(classStates) {
 function BaseInfoCard(classesStates) {
   const conflictStyles = classesStates.conflicts.styled;
   return (
-      <h3>INFORMAÇÕES DA TURMA</h3>
     <div className={classNames.showBasicDataCard}>
+      <h3>{baseInfoCard.title}</h3>
       <table className={classNames.showBasicDataTable}>
         <thead></thead>
         <tbody>
           <tr>
-            <th>Ano/Semestre</th>
+            <th>{baseInfoCard.tableTitles.yearSemester}</th>
             <td>
               <div className={classNames.yearSemesterSelect}>
                 <SelectClassYear {...classesStates} />
@@ -82,31 +97,46 @@ function BaseInfoCard(classesStates) {
             </td>
           </tr>
           <tr>
-            <th>Disciplina</th>
+            <th>{baseInfoCard.tableTitles.subject}</th>
             <td {...conflictStyles.subject.merged}>
               <SelectClassSubject {...classesStates} />
             </td>
           </tr>
           <tr>
-            <th>Professor</th>
+            <th>{baseInfoCard.tableTitles.professor}</th>
             <td {...conflictStyles.professor.merged}>
               <SelectClassProfessor {...classesStates} />
             </td>
           </tr>
           <tr>
-            <th>Demanda Estimada</th>
+            <th>{baseInfoCard.tableTitles.expectedDemand}</th>
             <td {...conflictStyles.expectedDemand.merged}>
               <TextInputClassExpectedDemand {...classesStates} />
             </td>
           </tr>
           <tr>
-            <th>Id</th>
+            <th>{baseInfoCard.tableTitles.id}</th>
             <td>
               <TextInputClassId {...classesStates} />
             </td>
           </tr>
         </tbody>
       </table>
+    </div>
+  );
+}
+
+function ClassTimesTable(classesStates) {
+  const classTimes = classesStates?.classItem?.horarios ?? [];
+
+  return (
+    <div className={classNames.showBasicDataCard}>
+      <h3>
+        {classTimes.length > 0
+          ? classTimeTitles.classTimes
+          : classTimeTitles.addClassTime}
+      </h3>
+      <ClassTimeTable {...classesStates} />
     </div>
   );
 }
@@ -156,18 +186,13 @@ function Classes() {
     readRoom(selectStates);
   }, []);
 
-  const classTimes = classItem?.horarios ?? [];
-
   return (
     <div className={classNames.CRUDContainComponents}>
       <ClassSelection {...classesStates} />
       <div className={classNames.infoCard}>
-        <div className="showBasicDataCard">
-          <h3>{classTimes.length > 0 ? "Horários" : "Adicione um horário"}</h3>
-          <ClassTimeTable {...classesStates} />
-        </div>
-        {/* <Participants {...myTurmaStates} /> */}
         <BaseInfoCard {...classesStates} />
+        <ClassTimesTable {...classesStates} />
+        {/* <Participants /> */}
       </div>
     </div>
   );
