@@ -30,6 +30,17 @@ const classNames = {
   background: "background",
 };
 
+const baseInfoCard = {
+  title: "INFORMAÇÕES DA SALA",
+  tableTitles: {
+    block: "Bloco",
+    description: "Descrição",
+    code: "Código",
+    capacity: "Capacidade",
+    id: "ID",
+  },
+};
+
 function RoomSelection(roomStates) {
   const roomCRUDFunctions = {
     createFunc: () => createRoom(roomStates),
@@ -47,37 +58,36 @@ function RoomSelection(roomStates) {
 
 function BaseInfoCard(roomStates) {
   return (
-      <h3>INFORMAÇÕES DA SALA</h3>
-      <table className="showBasicDataTable">
     <div className={classNames.showBasicDataCard}>
+      <h3>{baseInfoCard.title}</h3>
       <table className={classNames.showBasicDataTable}>
         <tbody>
           <tr>
-            <th>Bloco</th>
+            <th>{baseInfoCard.tableTitles.block}</th>
             <td>
               <SelectRoomBlock {...roomStates} />
             </td>
           </tr>
           <tr>
-            <th>Descrição</th>
+            <th>{baseInfoCard.tableTitles.description}</th>
             <td>
               <TextInputRoomDescription {...roomStates} />
             </td>
           </tr>
           <tr>
-            <th>Código</th>
+            <th>{baseInfoCard.tableTitles.code}</th>
             <td>
               <TextInputRoomCode {...roomStates} />
             </td>
           </tr>
           <tr>
-            <th>Capacidade</th>
+            <th>{baseInfoCard.tableTitles.capacity}</th>
             <td>
               <TextInputRoomCapacity {...roomStates} />
             </td>
           </tr>
           <tr>
-            <th>ID</th>
+            <th>{baseInfoCard.tableTitles.id}</th>
             <td>
               <TextInputRoomId {...roomStates} />
             </td>

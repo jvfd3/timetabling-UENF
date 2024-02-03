@@ -30,6 +30,17 @@ const classNames = {
   background: "background",
 };
 
+const baseInfoCard = {
+  title: "INFORMAÇÕES DO ALUNO",
+  tableTitles: {
+    year: "Ano de entrada",
+    course: "Curso",
+    enrollment: "Matrícula",
+    name: "Nome",
+    id: "ID",
+  },
+};
+
 function StudentSelection(studentStates) {
   const studentCRUDFunctions = {
     createFunc: () => createStudent(studentStates),
@@ -48,39 +59,36 @@ function StudentSelection(studentStates) {
 
 function BaseInfoCard(studentStates) {
   return (
-      <h3>INFORMAÇÕES DO ALUNO</h3>
     <div className={classNames.showBasicDataCard}>
+      <h3>{baseInfoCard.title}</h3>
       <table className={classNames.showBasicDataTable}>
         <tbody>
           <tr>
-            <th>Ano de entrada</th>
+            <th>{baseInfoCard.tableTitles.year}</th>
             <td>
               <SelectStudentYear {...studentStates} />
             </td>
-            {/* <td>{anoEntrada}</td> */}
           </tr>
           <tr>
-            <th>Curso</th>
+            <th>{baseInfoCard.tableTitles.course}</th>
             <td>
-              {/* Debugging Purpose */}
-              {/* {studentStates.student.curso} */}
               <SelectStudentCourse {...studentStates} />
             </td>
           </tr>
           <tr>
-            <th>Matrícula</th>
+            <th>{baseInfoCard.tableTitles.enrollment}</th>
             <td>
               <TextInputStudentEnrollment {...studentStates} />
             </td>
           </tr>
           <tr>
-            <th>Nome</th>
+            <th>{baseInfoCard.tableTitles.name}</th>
             <td>
               <TextInputStudentName {...studentStates} />
             </td>
           </tr>
           <tr>
-            <th>ID</th>
+            <th>{baseInfoCard.tableTitles.id}</th>
             <td>
               <TextInputStudentId {...studentStates} />
             </td>

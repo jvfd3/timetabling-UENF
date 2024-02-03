@@ -30,6 +30,17 @@ const classNames = {
   CRUDContainComponents: "CRUDContainComponents",
   background: "background",
 };
+const baseInfoCard = {
+  title: "INFORMAÇÕES DA DISCIPLINA",
+  tableTitles: {
+    code: "Código",
+    name: "Nome",
+    alias: "Apelido",
+    expectedSemester: "Período Esperado",
+    id: "ID",
+  },
+};
+
 function SubjectSelection(subjectStates) {
   const subjectCRUDFunctions = {
     createFunc: () => createSubject(subjectStates),
@@ -48,36 +59,36 @@ function SubjectSelection(subjectStates) {
 
 function BaseInfoCard(subjectStates) {
   return (
-      <h3>INFORMAÇÕES DA DISCIPLINA</h3>
     <div className={classNames.showBasicDataCard}>
+      <h3>{baseInfoCard.title}</h3>
       <table className={classNames.showBasicDataTable}>
         <tbody>
           <tr>
-            <th>Código</th>
+            <th>{baseInfoCard.tableTitles.code}</th>
             <td>
               <TextInputSubjectCode {...subjectStates} />
             </td>
           </tr>
           <tr>
-            <th>Nome</th>
+            <th>{baseInfoCard.tableTitles.name}</th>
             <td>
               <TextInputSubjectName {...subjectStates} />
             </td>
           </tr>
           <tr>
-            <th>Apelido</th>
+            <th>{baseInfoCard.tableTitles.alias}</th>
             <td>
               <TextInputSubjectAlias {...subjectStates} />
             </td>
           </tr>
           <tr>
-            <th>Período Esperado</th>
+            <th>{baseInfoCard.tableTitles.expectedSemester}</th>
             <td>
               <SelectSubjectExpectedSemester {...subjectStates} />
             </td>
           </tr>
           <tr>
-            <th>ID</th>
+            <th>{baseInfoCard.tableTitles.id}</th>
             <td>
               <TextInputSubjectId {...subjectStates} />
             </td>

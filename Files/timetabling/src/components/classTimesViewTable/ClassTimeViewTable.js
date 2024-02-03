@@ -17,6 +17,19 @@ const classNames = {
   showBasicDataTable: "showBasicDataTable",
 };
 
+const headers = {
+  idTurma: "idTurma",
+  yearSemester: "Ano.Semestre",
+  subject: "Disciplina",
+  professor: "Professor",
+  demand: "Demanda Estimada",
+  idHorario: "idHorario",
+  room: "Sala",
+  day: "Dia",
+  startHour: "Hora Início",
+  duration: "Duração",
+};
+
 function NoClasses({ noClassesTitle }) {
   return <h5>{noClassesTitle}</h5>;
 }
@@ -25,16 +38,16 @@ function TableHeader() {
   return (
     <thead>
       <tr>
-        <th>idTurma</th>
-        <th>Ano.Semestre</th>
-        <th>Disciplina</th>
-        <th>Professor</th>
-        <th>Demanda Estimada</th>
-        <th>idHorario</th>
-        <th>Sala</th>
-        <th>Dia</th>
-        <th>Hora Início</th>
-        <th>Duração</th>
+        <th>{headers.idTurma}</th>
+        <th>{headers.yearSemester}</th>
+        <th>{headers.subject}</th>
+        <th>{headers.professor}</th>
+        <th>{headers.demand}</th>
+        <th>{headers.idHorario}</th>
+        <th>{headers.room}</th>
+        <th>{headers.day}</th>
+        <th>{headers.startHour}</th>
+        <th>{headers.duration}</th>
       </tr>
     </thead>
   );

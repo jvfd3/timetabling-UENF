@@ -30,6 +30,15 @@ const classNames = {
   showBasicDataCard: "showBasicDataCard",
   showBasicDataTable: "showBasicDataTable",
 };
+const baseInfoCard = {
+  title: "INFORMAÇÕES DO PROFESSOR",
+  tableTitles: {
+    lab: "laboratório",
+    course: "curso",
+    name: "nome",
+    alias: "apelido",
+    id: "ID",
+  },
 };
 
 function ProfessorSelection(professorStates) {
@@ -47,14 +56,6 @@ function ProfessorSelection(professorStates) {
   );
 }
 
-  const professorTitle = "INFORMAÇÕES DO PROFESSOR";
-  const professorInfoHeader = {
-    lab: "laboratório",
-    course: "curso",
-    name: "nome",
-    alias: "apelido",
-    id: "ID",
-  };
 function BaseInfoCard(professorStates) {
   return (
     <div className={classNames.showBasicDataCard}>
