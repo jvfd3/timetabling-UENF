@@ -21,6 +21,15 @@ import {
   deleteStudent,
 } from "../../../../helpers/CRUDFunctions/studentCRUD";
 
+const classNames = {
+  selectionBar: "selectionBar",
+  showBasicDataCard: "showBasicDataCard",
+  showBasicDataTable: "showBasicDataTable",
+  infoCard: "infoCard",
+  CRUDContainComponents: "CRUDContainComponents",
+  background: "background",
+};
+
 function StudentSelection(studentStates) {
   const studentCRUDFunctions = {
     createFunc: () => createStudent(studentStates),
@@ -30,7 +39,7 @@ function StudentSelection(studentStates) {
   };
 
   return (
-    <div className="SelectionBar">
+    <div className={classNames.selectionBar}>
       <CRUDButtonsContainer {...studentCRUDFunctions} />
       <SelectStudentItem {...studentStates} />
     </div>
@@ -39,9 +48,9 @@ function StudentSelection(studentStates) {
 
 function StudentBaseInfo(studentStates) {
   return (
-    <div className="showBasicDataCard">
       <h3>INFORMAÇÕES DO ALUNO</h3>
-      <table className="showBasicDataTable">
+    <div className={classNames.showBasicDataCard}>
+      <table className={classNames.showBasicDataTable}>
         <tbody>
           <tr>
             <th>Ano de entrada</th>
@@ -84,8 +93,8 @@ function StudentBaseInfo(studentStates) {
 
 function StudentCard(studentStates) {
   return (
-    <div className="infoCard">
       <StudentBaseInfo {...studentStates} />
+    <div className={classNames.infoCard}>
       {/* <StudentClasses {...studentStates} /> */}
       {/* <StudentProgress {...studentStates} /> */}
     </div>
@@ -107,7 +116,7 @@ function Students() {
   }, []);
 
   return (
-    <div className="CRUDContainComponents">
+    <div className={classNames.CRUDContainComponents}>
       <StudentSelection {...studentStates} />
       <StudentCard {...studentStates} />
     </div>
@@ -117,7 +126,7 @@ function Students() {
 function CRUDStudents() {
   const defaultPageValue = configInfo.pageSelection.students;
   return (
-    <div className="background">
+    <div className={classNames.background}>
       <CRUDPageSelection defaultValue={defaultPageValue} />
       <Students />
     </div>

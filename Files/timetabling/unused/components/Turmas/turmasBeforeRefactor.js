@@ -35,7 +35,7 @@ function Turmas2() {
   function TurmaSelection() {
     return (
       <div
-        className="SelectionBar"
+        className="selectionBar"
         onWheel={(event) => {
           // let itemStates = [turmas, setTurma, turma];
           // scrollThroughTurmas(event, itemStates);

@@ -11,6 +11,12 @@ import {
   getProfessorLabel,
 } from "../../helpers/visualizationText/textLabels";
 
+const classNames = {
+  header: "header",
+  showBasicDataCard: "showBasicDataCard",
+  showBasicDataTable: "showBasicDataTable",
+};
+
 function NoClasses({ noClassesTitle }) {
   return <h5>{noClassesTitle}</h5>;
 }
@@ -72,7 +78,7 @@ function HeaderFilter(classTimeStates) {
   const size = classTimeStates.filteredClassTimes.length;
   const classesInRoomTitle = classTimeStates.headerTitle + size;
   return (
-    <div className="header">
+    <div className={classNames.header}>
       <h2>{classesInRoomTitle}</h2>
       <ViewTableFilters {...classTimeStates} />
     </div>
@@ -83,7 +89,7 @@ function ClassesTable({ classTimes }) {
   const orderedClassTimes = sortClassTimes(classTimes);
 
   return (
-    <table className="showBasicDataTable">
+    <table className={classNames.showBasicDataCard}>
       <TableHeader />
       <tbody>
         {orderedClassTimes.map((iterClassTime) => {
@@ -123,7 +129,7 @@ function ClassesTableView(customPageStates) {
 
   const hasClasses = filteredClassTimes.length > 0;
   return (
-    <div className="showBasicDataCard">
+    <div className={classNames.showBasicDataTable}>
       <HeaderFilter {...classTimeStates} />
       {hasClasses ? (
         <div>

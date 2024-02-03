@@ -89,7 +89,7 @@ body {
 
 }
 
-.SelectionBar {
+.selectionBar {
   /* background-color: cadetblue; */
   display: flex;
   align-self: baseline;

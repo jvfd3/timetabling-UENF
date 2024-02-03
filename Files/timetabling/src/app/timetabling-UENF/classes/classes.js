@@ -27,6 +27,16 @@ import {
   TextInputClassId,
 } from "../../../components/MyTextFields";
 
+const classNames = {
+  selectionBar: "selectionBar",
+  showBasicDataCard: "showBasicDataCard",
+  showBasicDataTable: "showBasicDataTable",
+  infoCard: "infoCard",
+  CRUDContainComponents: "CRUDContainComponents",
+  background: "background",
+  yearSemesterSelect: "SelectAnoSemestre",
+};
+
 
 function ClassSelection(classStates) {
   /* It just contains the selection an maybe allows scrolling selection */
@@ -46,7 +56,7 @@ function ClassSelection(classStates) {
   };
 
   return (
-    <div className="SelectionBar">
+    <div className={classNames.selectionBar}>
       <CRUDButtonsContainer {...ClassCRUDFunctions} />
       <SelectClassItem {...classStates} />
       <ClassesFilters {...classStates} />
@@ -57,15 +67,15 @@ function ClassSelection(classStates) {
 function ClassData(classesStates) {
   const conflictStyles = classesStates.conflicts.styled;
   return (
-    <div className="showBasicDataCard">
       <h3>INFORMAÇÕES DA TURMA</h3>
-      <table className="showBasicDataTable">
+    <div className={classNames.showBasicDataCard}>
+      <table className={classNames.showBasicDataTable}>
         <thead></thead>
         <tbody>
           <tr>
             <th>Ano/Semestre</th>
             <td>
-              <div className="SelectAnoSemestre">
+              <div className={classNames.yearSemesterSelect}>
                 <SelectClassYear {...classesStates} />
                 <SelectClassSemester {...classesStates} />
               </div>
@@ -149,9 +159,9 @@ function Classes() {
   const classTimes = classItem?.horarios ?? [];
 
   return (
-    <div className="CRUDContainComponents">
-      <div className="infoCard">
+    <div className={classNames.CRUDContainComponents}>
       <ClassSelection {...classesStates} />
+      <div className={classNames.infoCard}>
         <ClassData {...classesStates} />
         <div className="showBasicDataCard">
           <h3>{classTimes.length > 0 ? "Horários" : "Adicione um horário"}</h3>
@@ -166,7 +176,7 @@ function Classes() {
 function CRUDclass() {
   const defaultPageValue = configInfo.pageSelection.classes;
   return (
-    <div className="background">
+    <div className={classNames.background}>
       <CRUDPageSelection defaultValue={defaultPageValue} />
       <Classes />
     </div>

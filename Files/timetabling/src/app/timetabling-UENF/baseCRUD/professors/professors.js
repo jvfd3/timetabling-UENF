@@ -23,12 +23,13 @@ import {
 } from "../../../../helpers/CRUDFunctions/professorCRUD";
 
 const classNames = {
-  selectionBar: "SelectionBar",
+  background: "background",
+  CRUDContainComponents: "CRUDContainComponents",
+  selectionBar: "selectionBar",
+  infoCard: "infoCard",
   showBasicDataCard: "showBasicDataCard",
   showBasicDataTable: "showBasicDataTable",
-  infoCard: "infoCard",
-  CRUDContainComponents: "CRUDContainComponents",
-  background: "background",
+};
 };
 
 function ProfessorSelection(professorStates) {
@@ -57,35 +58,35 @@ function BaseProfessorData(professorStates) {
   };
   return (
     <div className={classNames.showBasicDataCard}>
-      <h3>{professorTitle}</h3>
+      <h3>{baseInfoCard.title}</h3>
       <table className={classNames.showBasicDataTable}>
         <tbody>
           <tr>
-            <th>{professorInfoHeader.lab}</th>
+            <th>{baseInfoCard.lab}</th>
             <td>
               <SelectProfessorLab {...professorStates} />
             </td>
           </tr>
           <tr>
-            <th>{professorInfoHeader.course}</th>
+            <th>{baseInfoCard.course}</th>
             <td>
               <SelectProfessorCourse {...professorStates} />
             </td>
           </tr>
           <tr>
-            <th>{professorInfoHeader.name}</th>
+            <th>{baseInfoCard.name}</th>
             <td>
               <TextInputProfessorName {...professorStates} />
             </td>
           </tr>
           <tr>
-            <th>{professorInfoHeader.alias}</th>
+            <th>{baseInfoCard.alias}</th>
             <td>
               <TextinputProfessorAlias {...professorStates} />
             </td>
           </tr>
           <tr>
-            <th>{professorInfoHeader.id}</th>
+            <th>{baseInfoCard.id}</th>
             <td>
               <TextInputProfessorId {...professorStates} />
             </td>

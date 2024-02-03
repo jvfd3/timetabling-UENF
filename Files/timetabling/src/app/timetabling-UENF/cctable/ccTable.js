@@ -6,6 +6,12 @@ import { readClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
 import { CCTableFilters } from "../../../components/Filters/Filters";
 import { getDefaultClassTime } from "../../../helpers/auxCRUD";
 
+const classNames = {
+  CRUDContainComponents: "CRUDContainComponents",
+  infoCard: "infoCard",
+  background: "background",
+};
+
 function CCTableView() {
   const [classTimes, setClassTimes] = useState([]);
   const [filteredClassTimes, setFilteredClassTimes] = useState([]);
@@ -26,8 +32,8 @@ function CCTableView() {
   }, []);
 
   return (
-    <div className="CRUDContainComponents">
-      <div className="infoCard">
+    <div className={classNames.CRUDContainComponents}>
+      <div className={classNames.infoCard}>
         <CCTableFilters {...classTimeStates} />
         <ClassTimeGridCC classTimes={filteredClassTimes} />
       </div>
@@ -38,7 +44,7 @@ function CCTableView() {
 function CCTable() {
   const defaultPageValue = configInfo.pageSelection.CCTable;
   return (
-    <div className="background">
+    <div className={classNames.background}>
       <CRUDPageSelection defaultValue={defaultPageValue} />
       <CCTableView />
     </div>

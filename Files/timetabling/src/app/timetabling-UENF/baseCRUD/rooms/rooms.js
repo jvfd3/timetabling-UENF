@@ -21,6 +21,14 @@ import {
   deleteRoom,
 } from "../../../../helpers/CRUDFunctions/roomCRUD";
 
+const classNames = {
+  selectionBar: "selectionBar",
+  showBasicDataCard: "showBasicDataCard",
+  showBasicDataTable: "showBasicDataTable",
+  infoCard: "infoCard",
+  CRUDContainComponents: "CRUDContainComponents",
+  background: "background",
+};
 function RoomSelection(roomStates) {
   const roomCRUDFunctions = {
     createFunc: () => createRoom(roomStates),
@@ -29,7 +37,7 @@ function RoomSelection(roomStates) {
     deleteFunc: () => deleteRoom(roomStates),
   };
   return (
-    <div className="SelectionBar">
+    <div className={classNames.selectionBar}>
       <CRUDButtonsContainer {...roomCRUDFunctions} />
       <SelectRoomItem {...roomStates} />
     </div>
@@ -38,9 +46,10 @@ function RoomSelection(roomStates) {
 
 function RoomBaseInfo(roomStates) {
   return (
-    <div className="showBasicDataCard">
       <h3>INFORMAÇÕES DA SALA</h3>
       <table className="showBasicDataTable">
+    <div className={classNames.showBasicDataCard}>
+      <table className={classNames.showBasicDataTable}>
         <tbody>
           <tr>
             <th>Bloco</th>
@@ -80,7 +89,7 @@ function RoomBaseInfo(roomStates) {
 
 function RoomCard(roomStates) {
   return (
-    <div className="infoCard">
+    <div className={classNames.infoCard}>
       <RoomBaseInfo {...roomStates} />
       <RoomClasses {...roomStates.room} />
     </div>
@@ -102,7 +111,7 @@ function Rooms() {
   }, []);
 
   return (
-    <div className="CRUDContainComponents">
+    <div className={classNames.CRUDContainComponents}>
       <RoomSelection {...roomStates} />
       <RoomCard {...roomStates} />
     </div>
@@ -112,7 +121,7 @@ function Rooms() {
 function CRUDrooms() {
   const defaultPageValue = configInfo.pageSelection.rooms;
   return (
-    <div className="background">
+    <div className={classNames.background}>
       <CRUDPageSelection defaultValue={defaultPageValue} />
       <Rooms />
     </div>

@@ -22,6 +22,14 @@ import {
   deleteSubject,
 } from "../../../../helpers/CRUDFunctions/subjectCRUD";
 
+const classNames = {
+  selectionBar: "selectionBar",
+  showBasicDataCard: "showBasicDataCard",
+  showBasicDataTable: "showBasicDataTable",
+  infoCard: "infoCard",
+  CRUDContainComponents: "CRUDContainComponents",
+  background: "background",
+};
 function SubjectSelection(subjectStates) {
   const subjectCRUDFunctions = {
     createFunc: () => createSubject(subjectStates),
@@ -31,7 +39,7 @@ function SubjectSelection(subjectStates) {
   };
 
   return (
-    <div className="SelectionBar">
+    <div className={classNames.selectionBar}>
       <CRUDButtonsContainer {...subjectCRUDFunctions} />
       <SelectSubjectItem {...subjectStates} />
     </div>
@@ -40,9 +48,9 @@ function SubjectSelection(subjectStates) {
 
 function SubjectBaseInfo(subjectStates) {
   return (
-    <div className="showBasicDataCard">
       <h3>INFORMAÇÕES DA DISCIPLINA</h3>
-      <table className="showBasicDataTable">
+    <div className={classNames.showBasicDataCard}>
+      <table className={classNames.showBasicDataTable}>
         <tbody>
           <tr>
             <th>Código</th>
@@ -82,8 +90,8 @@ function SubjectBaseInfo(subjectStates) {
 
 function SubjectCard(subjectStates) {
   return (
-    <div className="infoCard">
       <SubjectBaseInfo {...subjectStates} />
+    <div className={classNames.infoCard}>
       <SubjectClasses {...subjectStates?.subject} />
       {/* <SubjectRequirements {...myDisciplinasStates} /> */}
       {/* <SubjectDemandees {...myDisciplinasStates} /> */}
@@ -106,7 +114,7 @@ function Subjects() {
   }, []);
 
   return (
-    <div className="CRUDContainComponents">
+    <div className={classNames.CRUDContainComponents}>
       <SubjectSelection {...subjectStates} />
       <SubjectCard {...subjectStates} />
     </div>
@@ -116,7 +124,7 @@ function Subjects() {
 function CRUDSubjects() {
   const defaultPageValue = configInfo.pageSelection.subjects;
   return (
-    <div className="background">
+    <div className={classNames.background}>
       <CRUDPageSelection defaultValue={defaultPageValue} />
       <Subjects />
     </div>
