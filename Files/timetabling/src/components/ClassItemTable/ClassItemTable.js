@@ -1,9 +1,9 @@
-import "./ClassItemTable.css";
 import React, { useState } from "react";
+import myStyles from "../../config/myStyles";
+import ClassTimeTable from "../ClassTimeTable/ClassTimeTable";
 import { getClassItemConflicts } from "../../helpers/conflicts/centralConflicts";
 import { NumberInputMultiClassesExpectedDemand } from "../MyTextFields";
 import { SelectClassProfessor, SelectClassSubject } from "../mySelects";
-import ClassTimeTable from "../ClassTimeTable/ClassTimeTable";
 import {
   createClass,
   deleteClass,
@@ -15,6 +15,8 @@ import {
   SmartUpdateClassItem,
 } from "../Buttons/Smart/Smart";
 import { getId } from "../../helpers/auxCRUD";
+
+const defaultClassNames = myStyles.classNames.default;
 
 function ClassTableHeader(createStates) {
   return (
@@ -82,7 +84,7 @@ function ClassesTable(globalStates) {
   };
 
   return (
-    <table className="showBasicDataTable">
+    <table className={defaultClassNames.componentTable}>
       <ClassTableHeader {...createStates} />
       <tbody>
         {filteredClasses.map((iterClassItem) => {

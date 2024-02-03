@@ -1,6 +1,8 @@
+import "./NotOfferedSubjects.css";
 import { createClass } from "../../helpers/CRUDFunctions/classCRUD";
 import { sqlDataFromJson } from "../../DB/local/dataFromJSON";
 import { SmartInputSubject } from "../Buttons/Smart/Smart";
+import myStyles from "../../config/myStyles";
 
 function isSameParity(subject, semester) {
   const subjectParity = subject?.periodo % 2;
@@ -49,9 +51,10 @@ function NotOfferedSubjectRow({ iterSubject, classStates }) {
   const code = iterSubject.codigo;
   const semester = iterSubject.periodo;
 
+  const newHighlight =
+    myStyles.classNames.local.component.notOfferedSubjects.highlight;
   const isFirstSemester = semester === 1;
-  // Se o período da disciplina for 1, aplicar o className EnfasePrimeiroPeriodo
-  const firstSemesterHighlight = isFirstSemester ? "EnfasePrimeiroPeriodo" : "";
+  const firstSemesterHighlight = isFirstSemester ? newHighlight : "";
 
   const inputProps = {
     classStates,

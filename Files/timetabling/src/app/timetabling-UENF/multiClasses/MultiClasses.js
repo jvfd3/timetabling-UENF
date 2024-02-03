@@ -1,5 +1,6 @@
 import "./multiClasses.css";
 import React, { useState, useEffect } from "react";
+import myStyles from "../../../config/myStyles";
 import configInfo from "../../../config/configInfo";
 import ClassesTable from "../../../components/ClassItemTable/ClassItemTable";
 import CRUDPageSelection from "../../../components/PageSelect";
@@ -19,9 +20,11 @@ import {
   getDefaultClassTime,
 } from "../../../helpers/auxCRUD";
 
+const defaultClassNames = myStyles.classNames.default;
+
 function MultiClassesCardHeader(globalStates) {
   return (
-    <div className="MultiTurmasTitle">
+    <div className={myStyles.classNames.local.page.multiClasses.header}>
       <h2>MultiTurmas</h2>
       <MultiClassesFilters {...globalStates} />
     </div>
@@ -37,7 +40,7 @@ function NoOfferedClasses(classStates) {
   };
   return (
     <div
-      className="infoCard"
+      className={defaultClassNames.containerCardBaseInfo}
       style={{
         display: "flex",
         flexDirection: "row",
@@ -55,9 +58,9 @@ function MultiClassesCard(globalStates) {
   const { classStates } = globalStates;
   const hasClasses = classStates.filteredClasses.length > 0;
   return (
-    <div className="infoCard">
+    <div className={defaultClassNames.containerCardsHolder}>
       <MultiClassesCardHeader {...globalStates} />
-      <div className="showBasicDataCard">
+      <div className={defaultClassNames.containerCardBaseInfo}>
         {hasClasses ? (
           <ClassesTable {...globalStates} />
         ) : (
@@ -124,7 +127,7 @@ function MultiClassesRefactor() {
   }, []);
 
   return (
-    <div className="CRUDContainComponents">
+    <div className={defaultClassNames.containerCards}>
       <MultiClassesCard {...globalStates} />
       <NotOfferedSubjects {...classStates} />
     </div>
@@ -134,7 +137,7 @@ function MultiClassesRefactor() {
 function MultiClasses() {
   const defaultPageValue = configInfo.pageSelection.multiClasses;
   return (
-    <div className="background">
+    <div className={defaultClassNames.background}>
       <CRUDPageSelection defaultValue={defaultPageValue} />
       <MultiClassesRefactor />
     </div>

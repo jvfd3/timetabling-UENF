@@ -33,7 +33,7 @@ body {
 }
 
 .containerCardBaseInfo {
-  background-color: rgb(251, 205, 148);
+  background-color: #fbcd94;
   display: flex;
   flex-direction: column;
   justify-content: center;

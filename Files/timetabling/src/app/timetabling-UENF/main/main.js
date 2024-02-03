@@ -68,7 +68,7 @@ function Instructions() {
 
 function Shortcuts() {
   return (
-    <div className={defaultClassNames.containerCards}>
+    <div className={defaultClassNames.containerCardBaseInfo}>
       <h4>{mainPageText.shortcuts.header}</h4>
       <ul>
         {mainPageText.shortcuts.infoList.map((info) => (

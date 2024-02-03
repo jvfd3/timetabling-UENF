@@ -13,10 +13,17 @@ const myStyles = {
       // containerItemBaseInfo: "showBasicDataCard",
     },
     local: {
-      page: {},
+      page: {
+        multiClasses: {
+          header: "Title",
+        },
+      },
       component: {
         classTimeViewTable: {
           header: "header",
+        },
+        notOfferedSubjects: {
+          highlight: "FirstExpectedSemesterHighlight",
         },
       },
     },
