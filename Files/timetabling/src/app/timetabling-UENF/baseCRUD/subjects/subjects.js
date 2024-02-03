@@ -46,7 +46,7 @@ function SubjectSelection(subjectStates) {
   );
 }
 
-function SubjectBaseInfo(subjectStates) {
+function BaseInfoCard(subjectStates) {
   return (
       <h3>INFORMAÇÕES DA DISCIPLINA</h3>
     <div className={classNames.showBasicDataCard}>
@@ -90,8 +90,8 @@ function SubjectBaseInfo(subjectStates) {
 
 function SubjectCard(subjectStates) {
   return (
-      <SubjectBaseInfo {...subjectStates} />
     <div className={classNames.infoCard}>
+      <BaseInfoCard {...subjectStates} />
       <SubjectClasses {...subjectStates?.subject} />
       {/* <SubjectRequirements {...myDisciplinasStates} /> */}
       {/* <SubjectDemandees {...myDisciplinasStates} /> */}

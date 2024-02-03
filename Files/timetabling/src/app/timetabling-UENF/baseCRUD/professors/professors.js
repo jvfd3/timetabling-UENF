@@ -47,7 +47,6 @@ function ProfessorSelection(professorStates) {
   );
 }
 
-function BaseProfessorData(professorStates) {
   const professorTitle = "INFORMAÇÕES DO PROFESSOR";
   const professorInfoHeader = {
     lab: "laboratório",
@@ -56,6 +55,7 @@ function BaseProfessorData(professorStates) {
     alias: "apelido",
     id: "ID",
   };
+function BaseInfoCard(professorStates) {
   return (
     <div className={classNames.showBasicDataCard}>
       <h3>{baseInfoCard.title}</h3>
@@ -100,7 +100,7 @@ function BaseProfessorData(professorStates) {
 function ProfessorCard(professorStates) {
   return (
     <div className={classNames.infoCard}>
-      <BaseProfessorData {...professorStates} />
+      <BaseInfoCard {...professorStates} />
       <ProfessorClasses {...professorStates.professor} />
       {/* <ProfessorPreferences {...professorStates} /> */}
     </div>

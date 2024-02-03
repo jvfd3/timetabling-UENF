@@ -29,6 +29,7 @@ const classNames = {
   CRUDContainComponents: "CRUDContainComponents",
   background: "background",
 };
+
 function RoomSelection(roomStates) {
   const roomCRUDFunctions = {
     createFunc: () => createRoom(roomStates),
@@ -44,7 +45,7 @@ function RoomSelection(roomStates) {
   );
 }
 
-function RoomBaseInfo(roomStates) {
+function BaseInfoCard(roomStates) {
   return (
       <h3>INFORMAÇÕES DA SALA</h3>
       <table className="showBasicDataTable">
@@ -90,7 +91,7 @@ function RoomBaseInfo(roomStates) {
 function RoomCard(roomStates) {
   return (
     <div className={classNames.infoCard}>
-      <RoomBaseInfo {...roomStates} />
+      <BaseInfoCard {...roomStates} />
       <RoomClasses {...roomStates.room} />
     </div>
   );

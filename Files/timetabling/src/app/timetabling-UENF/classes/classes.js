@@ -64,7 +64,7 @@ function ClassSelection(classStates) {
   );
 }
 
-function ClassData(classesStates) {
+function BaseInfoCard(classesStates) {
   const conflictStyles = classesStates.conflicts.styled;
   return (
       <h3>INFORMAÇÕES DA TURMA</h3>
@@ -162,12 +162,12 @@ function Classes() {
     <div className={classNames.CRUDContainComponents}>
       <ClassSelection {...classesStates} />
       <div className={classNames.infoCard}>
-        <ClassData {...classesStates} />
         <div className="showBasicDataCard">
           <h3>{classTimes.length > 0 ? "Horários" : "Adicione um horário"}</h3>
           <ClassTimeTable {...classesStates} />
         </div>
         {/* <Participants {...myTurmaStates} /> */}
+        <BaseInfoCard {...classesStates} />
       </div>
     </div>
   );

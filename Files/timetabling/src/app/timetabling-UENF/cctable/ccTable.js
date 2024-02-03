@@ -27,7 +27,6 @@ function CCTableView() {
   };
 
   useEffect(() => {
-    // console.log("useEffect");
     readClassTime(classTimeStates);
   }, []);
 

@@ -46,7 +46,7 @@ function StudentSelection(studentStates) {
   );
 }
 
-function StudentBaseInfo(studentStates) {
+function BaseInfoCard(studentStates) {
   return (
       <h3>INFORMAÇÕES DO ALUNO</h3>
     <div className={classNames.showBasicDataCard}>
@@ -93,8 +93,8 @@ function StudentBaseInfo(studentStates) {
 
 function StudentCard(studentStates) {
   return (
-      <StudentBaseInfo {...studentStates} />
     <div className={classNames.infoCard}>
+      <BaseInfoCard {...studentStates} />
       {/* <StudentClasses {...studentStates} /> */}
       {/* <StudentProgress {...studentStates} /> */}
     </div>
