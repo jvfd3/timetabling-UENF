@@ -43,14 +43,6 @@ function SubjectBaseInfo(subjectStates) {
     <div className="showBasicDataCard">
       <h3>INFORMAÇÕES DA DISCIPLINA</h3>
       <table className="showBasicDataTable">
-        {/*
-        <thead>
-          <tr>
-            <th>Chave</th>
-            <th>Valor</th>
-          </tr>
-        </thead>
-        */}
         <tbody>
           <tr>
             <th>Código</th>

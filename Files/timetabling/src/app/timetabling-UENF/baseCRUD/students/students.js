@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import configInfo from "../../../../config/configInfo";
-import constantValues from "../../../../config/constantValues";
 import CRUDPageSelection from "../../../../components/PageSelect";
 import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
 import { CRUDButtonsContainer } from "../../../../components/CRUDButtons";
@@ -43,14 +42,6 @@ function StudentBaseInfo(studentStates) {
     <div className="showBasicDataCard">
       <h3>INFORMAÇÕES DO ALUNO</h3>
       <table className="showBasicDataTable">
-        {/*
-        <thead>
-          <tr>
-            <th>Chave</th>
-            <th>Valor</th>
-          </tr>
-        </thead>
-        */}
         <tbody>
           <tr>
             <th>Ano de entrada</th>

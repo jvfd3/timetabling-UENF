@@ -41,55 +41,36 @@ function RoomBaseInfo(roomStates) {
     <div className="showBasicDataCard">
       <h3>INFORMAÇÕES DA SALA</h3>
       <table className="showBasicDataTable">
-        {/*
-        <thead>
-          <tr>
-            <th>Chave</th>
-            <th>Valor</th>
-          </tr>
-        </thead>
-        */}
         <tbody>
           <tr>
             <th>Bloco</th>
             <td>
               <SelectRoomBlock {...roomStates} />
             </td>
-            {/* For debug purposes */}
-            {/* <td>{bloco}</td> */}
           </tr>
           <tr>
             <th>Descrição</th>
             <td>
               <TextInputRoomDescription {...roomStates} />
             </td>
-            {/* For debug purposes */}
-            {/* <td>{descricao}</td> */}
           </tr>
           <tr>
             <th>Código</th>
-            {/* <td>{codigo}</td> */}
             <td>
               <TextInputRoomCode {...roomStates} />
             </td>
-            {/* For debug purposes */}
-            {/* <td>{codigo}</td> */}
           </tr>
           <tr>
             <th>Capacidade</th>
             <td>
               <TextInputRoomCapacity {...roomStates} />
             </td>
-            {/* For debug purposes */}
-            {/* <td>{capacidade}</td> */}
           </tr>
           <tr>
             <th>ID</th>
             <td>
               <TextInputRoomId {...roomStates} />
             </td>
-            {/* For debug purposes */}
-            {/* <td>{id}</td> */}
           </tr>
         </tbody>
       </table>

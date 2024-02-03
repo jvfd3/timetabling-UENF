@@ -138,19 +138,7 @@ function Classes() {
     conflicts,
   };
 
-  // console.log("subjects", subjects);
-
-  /* useEffect(() => {
-    updateClass(classesStates);
-  }, [
-    classItem?.ano,
-    classItem?.semestre,
-    classItem?.disciplina?.id,
-    classItem?.professor?.id,
-  ]); */
-
   useEffect(() => {
-    // console.log("initialUseEffect", subjects);
     readClass(classesStates);
     readProfessor(selectStates);
     readSubject(selectStates);
