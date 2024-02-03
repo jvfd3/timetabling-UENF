@@ -46,21 +46,34 @@ function TextInputDefault(myStates) {
       }
     : {};
 
-  return (
-    <TextField
-      fullWidth
-      {...specificIDProps}
-      {...specificNumericProps}
-      id={`TextField ID: ${title}-${getId(item)}`}
-      key={`TextField Key: ${title}-${getId(item)}`}
-      label={`${title}`}
-      variant="outlined"
-      value={mainProp || ""}
-      onChange={updateValue}
-      style={{ width: "100%" }} // Adicionado para garantir que o TextField preencha todo o conteúdo
-      disabled={isId}
-    />
-  );
+  const TextFieldProps = {
+    fullWidth: true,
+    id: `TextField ID: ${title}-${getId(item)}`,
+    key: `TextField Key: ${title}-${getId(item)}`,
+    label: `${title}`,
+    variant: "outlined",
+    value: mainProp || "",
+    onChange: updateValue,
+    style: { width: "100%" }, // Adicionado para garantir que o TextField preencha todo o conteúdo
+    ...specificIDProps,
+    ...specificNumericProps,
+    disabled: isId,
+    // readOnly: true,
+    /* InputLabelProps: {
+      style: {
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
+        overflow: "hidden",
+        width: "100%",
+        color: "green",
+        backgroundColor: "lightgray",
+        borderColor: "red",
+      },
+    }, */
+    style: { width: "100%" }, // Adicionado para garantir que o TextField preencha todo o conteúdo
+  };
+
+  return <TextField {...TextFieldProps} />;
 }
 
 /* \\ MultiClasses // */
