@@ -1,8 +1,9 @@
 import "./mySelects.css";
 import React, { useEffect, useState } from "react";
 import Select, { components } from "react-select";
-import options from "../DB/local/options";
 import defaultColors from "../config/defaultColors";
+import styleFunctions from "../config/styleFunctions";
+import constantValues from "../config/constantValues";
 import { sqlDataFromJson } from "../DB/local/dataFromJSON";
 import { getValueFromObject } from "../helpers/auxFunctions";
 import { LockedProp, UnlockedProp } from "./Buttons/Dumb/Dumb";
@@ -18,8 +19,9 @@ import {
   getDefaultOptionLabelStudent,
   getDefaultOptionLabelSubject,
 } from "../helpers/visualizationText/textLabels";
+import pseudoDatabase from "../config/pseudoDatabase";
 
-const styleWidthFix = options.SelectStyles.fullItem;
+const styleWidthFix = styleFunctions.fullItem;
 
 /* \\ Internal-use Selects // */
 
@@ -146,7 +148,7 @@ Where each Select is used:
 
 function SelectYear({ outerYear, setOuterYear, outerIsClearable = false }) {
   function findYearObject(year) {
-    const years = options.constantValues.years;
+    const years = constantValues.years;
     const yearObject = years.find((iterYear) => iterYear.value == year);
     return yearObject;
   }
@@ -154,7 +156,7 @@ function SelectYear({ outerYear, setOuterYear, outerIsClearable = false }) {
   const SelectYearStates = {
     placeHolderText: "Ano",
     isClearable: outerIsClearable,
-    options: options.constantValues.years,
+    options: constantValues.years,
     setOuterValue: setOuterYear,
     value: outerYear,
     findCorrectObject: findYearObject,
@@ -169,7 +171,7 @@ function SelectSemester({
   outerIsClearable = false,
 }) {
   function findSemesterObject(semester) {
-    const semesters = options.constantValues.semesters;
+    const semesters = constantValues.semesters;
     const semesterObject = semesters.find(
       (iterSemester) => iterSemester.value == semester
     );
@@ -179,7 +181,7 @@ function SelectSemester({
   const SelectSemesterStates = {
     placeHolderText: "Semestre",
     isClearable: outerIsClearable,
-    options: options.constantValues.semesters,
+    options: constantValues.semesters,
     setOuterValue: setOuterSemester,
     value: outerSemester,
     findCorrectObject: findSemesterObject,
@@ -190,7 +192,7 @@ function SelectSemester({
 
 function SelectLab({ outerLab, setOuterLab }) {
   function findLabObject(labAlias) {
-    const labs = options.constantValues.labs;
+    const labs = pseudoDatabase.labs;
     const labObject = labs.find((iterLab) => iterLab.apelido === labAlias);
     return labObject ?? null;
   }
@@ -198,7 +200,7 @@ function SelectLab({ outerLab, setOuterLab }) {
   const SelectLabStates = {
     placeHolderText: "Laboratório",
     isClearable: true,
-    options: options.constantValues.labs,
+    options: pseudoDatabase.labs,
     setOuterValue: setOuterLab,
     value: outerLab,
     findCorrectObject: findLabObject,
@@ -218,7 +220,7 @@ function SelectLab({ outerLab, setOuterLab }) {
 
 function SelectCourse({ outerCourse, setOuterCourse }) {
   function findCourseObject(course) {
-    const courses = options.constantValues.courses;
+    const courses = pseudoDatabase.courses;
     const courseObject = courses.find(
       (iterCourse) => iterCourse.apelido === course
     );
@@ -228,7 +230,7 @@ function SelectCourse({ outerCourse, setOuterCourse }) {
   const SelectCourseStates = {
     placeHolderText: "Curso",
     isClearable: true,
-    options: options.constantValues.courses,
+    options: pseudoDatabase.courses,
     setOuterValue: setOuterCourse,
     value: outerCourse,
     findCorrectObject: findCourseObject,
@@ -248,7 +250,7 @@ function SelectCourse({ outerCourse, setOuterCourse }) {
 
 function SelectBlock({ outerBlock, setOuterBlock }) {
   function findBlockObject(block) {
-    const blocks = options.constantValues.blocks;
+    const blocks = pseudoDatabase.blocks;
     const blockObject = blocks.find((iterBlock) => iterBlock.id == block);
     return blockObject;
   }
@@ -256,7 +258,7 @@ function SelectBlock({ outerBlock, setOuterBlock }) {
   const SelectBlockStates = {
     placeHolderText: "Bloco",
     isClearable: false,
-    options: options.constantValues.blocks,
+    options: pseudoDatabase.blocks,
     setOuterValue: setOuterBlock,
     value: outerBlock,
     findCorrectObject: findBlockObject,
@@ -284,7 +286,7 @@ function SelectExpectedSemester({
   outerIsClearable = false,
 }) {
   function findExpectedSemesterObject(expectedSemester) {
-    const expectedSemesters = options.constantValues.expectedSemester;
+    const expectedSemesters = constantValues.expectedSemester;
     const expectedSemesterObject = expectedSemesters.find(
       (iterExpectedSemester) => iterExpectedSemester.value == expectedSemester
     );
@@ -294,7 +296,7 @@ function SelectExpectedSemester({
   const SelectExpectedSemesterStates = {
     placeHolderText: "Semestre esperado",
     isClearable: outerIsClearable,
-    options: options.constantValues.expectedSemester,
+    options: constantValues.expectedSemester,
     setOuterValue: setOuterExpectedSemester,
     value: outerExpectedSemester,
     findCorrectObject: findExpectedSemesterObject,
@@ -416,7 +418,7 @@ function SelectRoom({
 
 function SelectDay({ outerDay, setOuterDay, outerIsClearable = true }) {
   function findDayObject(day) {
-    const days = options.constantValues.days;
+    const days = constantValues.days;
     const dayObject = days.find((iterDay) => iterDay?.value == day);
     return dayObject ?? null;
   }
@@ -426,7 +428,7 @@ function SelectDay({ outerDay, setOuterDay, outerIsClearable = true }) {
     isClearable: outerIsClearable,
     value: outerDay,
     setOuterValue: setOuterDay,
-    options: options.constantValues.days,
+    options: constantValues.days,
     findCorrectObject: findDayObject,
   };
 
@@ -439,7 +441,7 @@ function SelectStartHour({
   outerIsClearable = true,
 }) {
   function findHourObject(hour) {
-    const hours = options.constantValues.hours;
+    const hours = constantValues.hours;
     const hourObject = hours.find((iterHour) => iterHour?.hora == hour);
     return hourObject ?? null;
   }
@@ -449,7 +451,7 @@ function SelectStartHour({
     isClearable: outerIsClearable,
     value: outerStartHour,
     setOuterValue: setOuterStartHour,
-    options: options.constantValues.hours,
+    options: constantValues.hours,
     findCorrectObject: findHourObject,
     customProps: {
       getOptionValue: (hour) => hour.hora,
@@ -467,7 +469,7 @@ function SelectStartHour({
 
 function SelectDuration({ outerDuration, setOuterDuration }) {
   function findDurationObject(duration) {
-    const durations = options.constantValues.durations;
+    const durations = constantValues.durations;
     const durationObject = durations.find(
       (iterDuration) => iterDuration?.value == duration
     );
@@ -479,7 +481,7 @@ function SelectDuration({ outerDuration, setOuterDuration }) {
     isClearable: true,
     value: outerDuration,
     setOuterValue: setOuterDuration,
-    options: options.constantValues.durations,
+    options: constantValues.durations,
     findCorrectObject: findDurationObject,
   };
 

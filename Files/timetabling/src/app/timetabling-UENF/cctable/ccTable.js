@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import options from "../../../DB/local/options";
+import configInfo from "../../../config/configInfo";
 import ClassTimeGridCC from "../../../components/GridView/ClassTimeGridCC";
 import CRUDPageSelection from "../../../components/PageSelect";
 import { readClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
@@ -36,7 +36,7 @@ function CCTableView() {
 }
 
 function CCTable() {
-  const defaultPageValue = options.constantValues.pageSelection.CCTable;
+  const defaultPageValue = configInfo.pageSelection.CCTable;
   return (
     <div className="background">
       <CRUDPageSelection defaultValue={defaultPageValue} />

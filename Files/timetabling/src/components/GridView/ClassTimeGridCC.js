@@ -1,5 +1,5 @@
 import "./ClassTimeGridCC.css";
-import options from "../../DB/local/options";
+import constantValues from "../../config/constantValues";
 import { filterDay, filterHour } from "../../helpers/filteringFunc";
 
 function TopLeft() {
@@ -7,7 +7,7 @@ function TopLeft() {
 }
 
 function TopRow() {
-  const daysList = options.constantValues.days;
+  const daysList = constantValues.days;
   const days = daysList.map((day) => {
     const headerKey = `HeaderKey: ${day.label}`;
     return (
@@ -73,7 +73,7 @@ function Row({ hour, classTimes }) {
   // console.log(classTimes);
 
   const classTimesHour = filterHour(classTimes, hour);
-  const daysList = options.constantValues.days;
+  const daysList = constantValues.days;
   const rowKey = `Linha: ${hour}, Header: ${hour}`;
 
   const daysColumn = daysList.map((iterDay) => {
@@ -99,7 +99,7 @@ function Row({ hour, classTimes }) {
 
 function Body({ classTimes }) {
   // console.log(classTimes);
-  const hoursTangList = options.constantValues.hoursTang;
+  const hoursTangList = constantValues.hoursTang;
   return (
     <tbody>
       {hoursTangList.map((iterHour) => {

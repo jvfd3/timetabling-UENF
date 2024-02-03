@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import options from "../../../../DB/local/options";
+import configInfo from "../../../../config/configInfo";
 import CRUDPageSelection from "../../../../components/PageSelect";
 import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
 import { ProfessorClasses } from "../../../../components/classTimesViewTable/SpecificClassTimeViewTables";
@@ -111,7 +111,7 @@ function Professors() {
 
   const [professors, setProfessors] = useState(defaultProfessors);
   const [professor, setProfessor] = useState(
-    professors?.[options.config.defaultIndexes.professor] ?? professors?.[0]
+    professors?.[configInfo.defaultIndexes.professor] ?? professors?.[0]
   );
 
   const professorStates = {
@@ -134,7 +134,7 @@ function Professors() {
 }
 
 function CRUDprofessors() {
-  const defaultPageValue = options.constantValues.pageSelection.professors;
+  const defaultPageValue = configInfo.pageSelection.professors;
   return (
     <div className={classNames.background}>
       <CRUDPageSelection defaultValue={defaultPageValue} />

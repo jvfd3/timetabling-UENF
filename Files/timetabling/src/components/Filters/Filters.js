@@ -5,9 +5,9 @@ import { readSubject } from "../../helpers/CRUDFunctions/subjectCRUD";
 import { readProfessor } from "../../helpers/CRUDFunctions/professorCRUD";
 import { getDefaultYearSemesterValues } from "../../helpers/auxFunctions";
 import {
+  keepOldItem,
   getDefaultClassItem,
   getDefaultClassTime,
-  keepOldItem,
 } from "../../helpers/auxCRUD";
 import {
   filterDay,
@@ -280,8 +280,8 @@ function ClassesFilters(classStates) {
   }
 
   useEffect(() => {
-    let filteredClasses = filterList(classes, year, semester);
-    let newClassItem = keepOldItem(filteredClasses, classItem);
+    const filteredClasses = filterList(classes, year, semester);
+    const newClassItem = keepOldItem(classItem, filteredClasses);
     setFilteredClasses(filteredClasses);
     setClassItem(newClassItem);
   }, statesToWatchFor);

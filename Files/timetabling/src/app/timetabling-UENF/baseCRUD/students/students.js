@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import options from "../../../../DB/local/options";
+import configInfo from "../../../../config/configInfo";
+import constantValues from "../../../../config/constantValues";
 import CRUDPageSelection from "../../../../components/PageSelect";
 import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
 import { CRUDButtonsContainer } from "../../../../components/CRUDButtons";
@@ -105,7 +106,7 @@ function Students() {
 
   const [students, setStudents] = useState(defaultStudents);
   const [student, setStudent] = useState(
-    students?.[options.config.defaultIndexes.student] ?? students?.[0]
+    students?.[configInfo.defaultIndexes.student] ?? students?.[0]
   ); // JVFD
 
   const studentStates = { students, setStudents, student, setStudent };
@@ -123,7 +124,7 @@ function Students() {
 }
 
 function CRUDStudents() {
-  const defaultPageValue = options.constantValues.pageSelection.students;
+  const defaultPageValue = configInfo.pageSelection.students;
   return (
     <div className="background">
       <CRUDPageSelection defaultValue={defaultPageValue} />

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import options from "../../../DB/local/options";
+import configInfo from "../../../config/configInfo";
 import emptyObjects from "../../../config/emptyObjects";
 import ClassTimeTable from "../../../components/ClassTimeTable/ClassTimeTable";
 import CRUDPageSelection from "../../../components/PageSelect";
@@ -105,7 +105,7 @@ function Classes() {
   const [classes, setClasses] = useState(defaultClasses);
   const [filteredClasses, setFilteredClasses] = useState([]);
   const [classItem, setClassItem] = useState(
-    classes?.[options.config.defaultIndexes.classItem] ?? classes?.[0]
+    classes?.[configInfo.defaultIndexes.classItem] ?? classes?.[0]
   );
   const [professors, setProfessors] = useState([]);
   const [subjects, setSubjects] = useState([]);
@@ -175,7 +175,7 @@ function Classes() {
 }
 
 function CRUDclass() {
-  const defaultPageValue = options.constantValues.pageSelection.classes;
+  const defaultPageValue = configInfo.pageSelection.classes;
   return (
     <div className="background">
       <CRUDPageSelection defaultValue={defaultPageValue} />

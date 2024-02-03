@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { getId } from "../../../helpers/auxCRUD";
 import emptyObjects from "../../../config/emptyObjects";
+import defaultColors from "../../../config/defaultColors";
+import { getId } from "../../../helpers/auxCRUD";
 import {
   getValueFromObject,
   getDefaultYearSemesterValues,

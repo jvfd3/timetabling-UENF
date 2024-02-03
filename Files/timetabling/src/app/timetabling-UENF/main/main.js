@@ -1,6 +1,5 @@
-import "./main.css";
 import React from "react";
-import options from "../../../DB/local/options";
+import configInfo from "../../../config/configInfo";
 import CRUDPageSelection from "../../../components/PageSelect";
 // import Workbench from ""../../../components/tests/Workbench";
 
@@ -33,7 +32,7 @@ function Main() {
 }
 
 function MainPage() {
-  const defaultPageValue = options.constantValues.pageSelection.main;
+  const defaultPageValue = configInfo.pageSelection.main;
   return (
     <div className="background">
       <CRUDPageSelection defaultValue={defaultPageValue} />

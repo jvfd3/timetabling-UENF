@@ -1,9 +1,9 @@
 import React from "react";
-import options from "../../../DB/local/options";
+import configInfo from "../../../config/configInfo";
 import CRUDPageSelection from "../../../components/PageSelect";
 
 function notFound() {
-  const defaultPageValue = options.constantValues.pageSelection.notFound;
+  const defaultPageValue = configInfo.pageSelection.notFound;
   return (
     <div className="background">
       <CRUDPageSelection defaultValue={defaultPageValue} />

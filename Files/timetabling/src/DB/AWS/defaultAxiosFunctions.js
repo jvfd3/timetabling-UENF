@@ -1,9 +1,9 @@
 import axios from "axios";
-import options from "../local/options";
+import configInfo from "../../config/configInfo";
 import { toast } from "react-toastify";
 import { getId } from "../../helpers/auxCRUD";
 
-const url = options.AWS.fullEndpoint;
+const url = configInfo.AWS.fullEndpoint;
 const debuggingLocal = "newAxios.js>";
 const isDebugging = false;
 

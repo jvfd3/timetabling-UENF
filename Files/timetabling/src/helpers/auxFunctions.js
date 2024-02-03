@@ -1,4 +1,5 @@
-import options from "../DB/local/options";
+import configInfo from "../config/configInfo";
+import constantValues from "../config/constantValues";
 
 function getValueFromObject(myObject) {
   const objectValue = myObject?.hora ?? myObject?.value ?? myObject ?? null;
@@ -6,13 +7,13 @@ function getValueFromObject(myObject) {
 }
 
 function getDefaultYearSemesterValues() {
-  const years = options.constantValues.years;
-  const yearIndex = options.config.defaultIndexes.year;
+  const years = constantValues.years;
+  const yearIndex = configInfo.defaultIndexes.year;
   const year = years[yearIndex];
   const yearValue = getValueFromObject(year);
 
-  const semesters = options.constantValues.semesters;
-  const semesterIndex = options.config.defaultIndexes.semester;
+  const semesters = constantValues.semesters;
+  const semesterIndex = configInfo.defaultIndexes.semester;
   const semester = semesters[semesterIndex];
   const semesterValue = getValueFromObject(semester);
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import options from "../../../../DB/local/options";
+import configInfo from "../../../../config/configInfo";
 import CRUDPageSelection from "../../../../components/PageSelect";
 import { RoomClasses } from "../../../../components/classTimesViewTable/SpecificClassTimeViewTables";
 import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
@@ -41,12 +41,14 @@ function RoomBaseInfo(roomStates) {
     <div className="showBasicDataCard">
       <h3>INFORMAÇÕES DA SALA</h3>
       <table className="showBasicDataTable">
-        {/* <thead>
+        {/*
+        <thead>
           <tr>
             <th>Chave</th>
             <th>Valor</th>
           </tr>
-        </thead> */}
+        </thead>
+        */}
         <tbody>
           <tr>
             <th>Bloco</th>
@@ -109,7 +111,7 @@ function Rooms() {
 
   const [rooms, setRooms] = useState(defaultRooms);
   const [room, setRoom] = useState(
-    rooms?.[options.config.defaultIndexes.room] ?? rooms?.[0]
+    rooms?.[configInfo.defaultIndexes.room] ?? rooms?.[0]
   );
 
   const roomStates = { rooms, setRooms, room, setRoom };
@@ -127,7 +129,7 @@ function Rooms() {
 }
 
 function CRUDrooms() {
-  const defaultPageValue = options.constantValues.pageSelection.classrooms;
+  const defaultPageValue = configInfo.pageSelection.rooms;
   return (
     <div className="background">
       <CRUDPageSelection defaultValue={defaultPageValue} />

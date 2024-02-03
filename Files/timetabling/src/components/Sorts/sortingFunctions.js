@@ -1,7 +1,7 @@
-import options from "../../DB/local/options";
+import constantValues from "../../config/constantValues";
 
 function sortClassTimes(classTimes) {
-  const days = options.constantValues.days;
+  const days = constantValues.days;
   let orderedClassTimes = [];
 
   days.forEach((day) => {

@@ -1,7 +1,9 @@
 import "react-toastify/dist/ReactToastify.css";
-import options from "../../DB/local/options";
 import { ToastContainer } from "react-toastify";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
+import configInfo from "../../config/configInfo";
+
+const { routing, pageSelection } = configInfo;
 
 // import PageSelection from "./components/PageSelect";
 // Page imports
@@ -17,17 +19,16 @@ import Subjects from "../timetabling-UENF/baseCRUD/subjects/subjects";
 import Rooms from "../timetabling-UENF/baseCRUD/rooms/rooms";
 
 function MyRouting() {
-  const basePath = options.constantValues.routing.urlPath; //"/timetabling-uenf/";
-  const pageSelection = options.constantValues.pageSelection;
-  const pathMain = basePath + pageSelection.main.value;
-  const pathMultiClasses = basePath + pageSelection.multiClasses.value;
-  const pathClasses = basePath + pageSelection.classes.value;
-  const pathStudents = basePath + pageSelection.students.value;
-  const pathProfessors = basePath + pageSelection.professors.value;
-  const pathSubjects = basePath + pageSelection.subjects.value;
-  const pathRooms = basePath + pageSelection.classrooms.value;
-  const pathNotFound = basePath + pageSelection.notFound.value;
-  const pathCCtable = basePath + pageSelection.CCTable.value;
+  const basePath = routing.urlPath; //"/timetabling-uenf/";
+  const pathMain = basePath + pageSelection.main.url;
+  const pathMultiClasses = basePath + pageSelection.multiClasses.url;
+  const pathClasses = basePath + pageSelection.classes.url;
+  const pathStudents = basePath + pageSelection.students.url;
+  const pathProfessors = basePath + pageSelection.professors.url;
+  const pathSubjects = basePath + pageSelection.subjects.url;
+  const pathRooms = basePath + pageSelection.rooms.url;
+  const pathNotFound = basePath + pageSelection.notFound.url;
+  const pathCCtable = basePath + pageSelection.CCTable.url;
 
   return (
     <BrowserRouter basename="/">
@@ -49,8 +50,8 @@ function MyRouting() {
         <Route element={<NoMatch />} path="*" />
       </Routes>
       <ToastContainer
-        autoClose={options.config.toast.time}
-        position={options.config.toast.position}
+        autoClose={configInfo.toast.time}
+        position={configInfo.toast.position}
         // closeOnClick
         // draggable
         // pauseOnHover

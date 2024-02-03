@@ -1,6 +1,6 @@
 import defaultColors from "../../../config/defaultColors";
 
-const conflictOptions = defaultColors;
+const conflictOptions = defaultColors.conflicts;
 
 const defaultTitles = {
   base: "Conflitos de dia avaliados:\n",

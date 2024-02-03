@@ -1,21 +1,22 @@
 // import "../defaultStyle.css";
 import Select from "react-select";
-import options from "../DB/local/options";
+import configInfo from "../config/configInfo";
+import styleFunctions from "../config/styleFunctions";
 import { useNavigate } from "react-router-dom";
 import { changePageByScrolling } from "../helpers/firulas/minhasFirulas";
 // import { changePageByScrolling } from "../functions/firulas/minhasFirulas";
 
 function CRUDPageSelection(props) {
-  const pages = options.constantValues.pageSelection;
+  const pages = configInfo.pageSelection;
   const navigate = useNavigate();
 
   const handleChange = (selectedOption) => {
-    navigate(options.constantValues.routing.urlPath + selectedOption.value);
+    navigate(configInfo.routing.urlPath + selectedOption.url);
   };
 
   // Filtrar as opções para remover Not Found e Main CRUD
   const filteredOptions = Object.values(pages).filter(
-    (option) => option.label !== "Not Found"
+    (option) => option.pageName !== "Not Found"
   );
 
   /*
@@ -42,8 +43,8 @@ function CRUDPageSelection(props) {
   }, []);
   */
 
-  const formatOptionLabel = ({ label }) => (
-    <div style={{ display: "flex" }}>{label}</div>
+  const formatOptionLabel = ({ pageName }) => (
+    <div style={{ display: "flex" }}>{pageName}</div>
   );
 
   return (
@@ -58,11 +59,13 @@ function CRUDPageSelection(props) {
       >
         <Select
           className="SelectList"
-          styles={options.SelectStyles.fullItem}
           placeholder={"Selecionar CRUD"}
-          options={filteredOptions} // Use as opções filtradas aqui
+          styles={styleFunctions.fullItem}
+          options={filteredOptions}
           defaultValue={props.defaultValue}
           formatOptionLabel={formatOptionLabel}
+          getOptionLabel={(option) => option.pageName}
+          getOptionValue={(option) => option.url}
           onChange={handleChange}
         />
       </div>

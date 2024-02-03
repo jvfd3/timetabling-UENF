@@ -1,6 +1,6 @@
 import "./multiClasses.css";
 import React, { useState, useEffect } from "react";
-import options from "../../../DB/local/options";
+import configInfo from "../../../config/configInfo";
 import ClassesTable from "../../../components/ClassItemTable/ClassItemTable";
 import CRUDPageSelection from "../../../components/PageSelect";
 import NotOfferedSubjects from "../../../components/multiClasses/NotOfferedSubjects";
@@ -132,7 +132,7 @@ function MultiClassesRefactor() {
 }
 
 function MultiClasses() {
-  const defaultPageValue = options.constantValues.pageSelection.multiClasses;
+  const defaultPageValue = configInfo.pageSelection.multiClasses;
   return (
     <div className="background">
       <CRUDPageSelection defaultValue={defaultPageValue} />

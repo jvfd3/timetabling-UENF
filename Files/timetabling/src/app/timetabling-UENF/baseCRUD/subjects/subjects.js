@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import options from "../../../../DB/local/options";
+import configInfo from "../../../../config/configInfo";
 import CRUDPageSelection from "../../../../components/PageSelect";
 import { SubjectClasses } from "../../../../components/classTimesViewTable/SpecificClassTimeViewTables";
 import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
@@ -104,7 +104,7 @@ function Subjects() {
 
   const [subjects, setSubjects] = useState(defaultSubjects);
   const [subject, setSubject] = useState(
-    subjects?.[options.config.defaultIndexes.subject] ?? subjects?.[0]
+    subjects?.[configInfo.defaultIndexes.subject] ?? subjects?.[0]
   );
 
   const subjectStates = { subjects, setSubjects, subject, setSubject };
@@ -122,7 +122,7 @@ function Subjects() {
 }
 
 function CRUDSubjects() {
-  const defaultPageValue = options.constantValues.pageSelection.subjects;
+  const defaultPageValue = configInfo.pageSelection.subjects;
   return (
     <div className="background">
       <CRUDPageSelection defaultValue={defaultPageValue} />
