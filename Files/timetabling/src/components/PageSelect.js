@@ -1,7 +1,7 @@
 // import "../defaultStyle.css";
 import Select from "react-select";
+import myStyles from "../config/myStyles";
 import configInfo from "../config/configInfo";
-import styleFunctions from "../config/styleFunctions";
 import { useNavigate } from "react-router-dom";
 import { changePageByScrolling } from "../helpers/firulas/minhasFirulas";
 // import { changePageByScrolling } from "../functions/firulas/minhasFirulas";
@@ -58,9 +58,9 @@ function CRUDPageSelection(props) {
         }}
       >
         <Select
-          className="SelectList"
+          className={myStyles.selects.className}
           placeholder={"Selecionar CRUD"}
-          styles={styleFunctions.fullItem}
+          styles={myStyles.selects.fullItem}
           options={filteredOptions}
           defaultValue={props.defaultValue}
           formatOptionLabel={formatOptionLabel}

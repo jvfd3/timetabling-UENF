@@ -20,15 +20,9 @@ import {
   updateRoom,
   deleteRoom,
 } from "../../../../helpers/CRUDFunctions/roomCRUD";
+import myStyles from "../../../../config/myStyles";
 
-const classNames = {
-  selectionBar: "selectionBar",
-  showBasicDataCard: "showBasicDataCard",
-  showBasicDataTable: "showBasicDataTable",
-  infoCard: "infoCard",
-  CRUDContainComponents: "CRUDContainComponents",
-  background: "background",
-};
+const defaultClassNames = myStyles.classNames.default;
 
 const baseInfoCard = {
   title: "INFORMAÇÕES DA SALA",
@@ -49,7 +43,7 @@ function RoomSelection(roomStates) {
     deleteFunc: () => deleteRoom(roomStates),
   };
   return (
-    <div className={classNames.selectionBar}>
+    <div className={defaultClassNames.containerItemSelection}>
       <CRUDButtonsContainer {...roomCRUDFunctions} />
       <SelectRoomItem {...roomStates} />
     </div>
@@ -58,9 +52,9 @@ function RoomSelection(roomStates) {
 
 function BaseInfoCard(roomStates) {
   return (
-    <div className={classNames.showBasicDataCard}>
+    <div className={defaultClassNames.containerCardBaseInfo}>
       <h3>{baseInfoCard.title}</h3>
-      <table className={classNames.showBasicDataTable}>
+      <table className={defaultClassNames.componentTable}>
         <tbody>
           <tr>
             <th>{baseInfoCard.tableTitles.block}</th>
@@ -100,7 +94,7 @@ function BaseInfoCard(roomStates) {
 
 function RoomCard(roomStates) {
   return (
-    <div className={classNames.infoCard}>
+    <div className={defaultClassNames.containerCardsHolder}>
       <BaseInfoCard {...roomStates} />
       <RoomClasses {...roomStates.room} />
     </div>
@@ -122,7 +116,7 @@ function Rooms() {
   }, []);
 
   return (
-    <div className={classNames.CRUDContainComponents}>
+    <div className={defaultClassNames.containerCards}>
       <RoomSelection {...roomStates} />
       <RoomCard {...roomStates} />
     </div>
@@ -132,7 +126,7 @@ function Rooms() {
 function CRUDrooms() {
   const defaultPageValue = configInfo.pageSelection.rooms;
   return (
-    <div className={classNames.background}>
+    <div className={defaultClassNames.background}>
       <CRUDPageSelection defaultValue={defaultPageValue} />
       <Rooms />
     </div>

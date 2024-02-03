@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import myStyles from "../../../config/myStyles";
 import configInfo from "../../../config/configInfo";
 import emptyObjects from "../../../config/emptyObjects";
 import ClassTimeTable from "../../../components/ClassTimeTable/ClassTimeTable";
@@ -27,15 +28,7 @@ import {
   TextInputClassId,
 } from "../../../components/MyTextFields";
 
-const classNames = {
-  selectionBar: "selectionBar",
-  showBasicDataCard: "showBasicDataCard",
-  showBasicDataTable: "showBasicDataTable",
-  infoCard: "infoCard",
-  CRUDContainComponents: "CRUDContainComponents",
-  background: "background",
-  yearSemesterSelect: "SelectAnoSemestre",
-};
+const defaultClassNames = myStyles.classNames.default;
 
 const baseInfoCard = {
   title: "INFORMAÇÕES DA TURMA",
@@ -71,7 +64,7 @@ function ClassSelection(classStates) {
   };
 
   return (
-    <div className={classNames.selectionBar}>
+    <div className={defaultClassNames.containerItemSelection}>
       <CRUDButtonsContainer {...ClassCRUDFunctions} />
       <SelectClassItem {...classStates} />
       <ClassesFilters {...classStates} />
@@ -82,18 +75,16 @@ function ClassSelection(classStates) {
 function BaseInfoCard(classesStates) {
   const conflictStyles = classesStates.conflicts.styled;
   return (
-    <div className={classNames.showBasicDataCard}>
+    <div className={defaultClassNames.containerCardBaseInfo}>
       <h3>{baseInfoCard.title}</h3>
-      <table className={classNames.showBasicDataTable}>
         <thead></thead>
+      <table className={defaultClassNames.componentTable}>
         <tbody>
           <tr>
             <th>{baseInfoCard.tableTitles.yearSemester}</th>
             <td>
-              <div className={classNames.yearSemesterSelect}>
-                <SelectClassYear {...classesStates} />
-                <SelectClassSemester {...classesStates} />
-              </div>
+              <SelectClassYear {...classesStates} />
+              <SelectClassSemester {...classesStates} />
             </td>
           </tr>
           <tr>

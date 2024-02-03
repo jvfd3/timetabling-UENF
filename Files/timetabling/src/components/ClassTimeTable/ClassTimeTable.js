@@ -1,5 +1,5 @@
-import "./ClassTimeTable.css";
 import React, { useEffect, useState } from "react";
+import myStyles from "../../config/myStyles";
 import { getId } from "../../helpers/auxCRUD";
 import { getClassTimeConflicts } from "../../helpers/conflicts/centralConflicts";
 import {
@@ -19,6 +19,8 @@ import {
   updateClassTime,
   deleteClassTime,
 } from "../../helpers/CRUDFunctions/classTimeCRUD";
+
+const defaultClassNames = myStyles.classNames.default;
 
 function ClassTimeRow(classTimeRowStates) {
   const { classTime, conflicts, filteredClasses } = classTimeRowStates;
@@ -79,7 +81,7 @@ function ClassTimeTable(classesStates) {
   return classTimes.length == 0 ? (
     <SmartCreateClassTime {...createClassTimeProps} />
   ) : (
-    <table className="showBasicDataTable">
+    <table className={defaultClassNames.componentTable}>
       <thead>
         <tr key={`ClassTime Header: ${getId(classItem)}`}>
           <th>

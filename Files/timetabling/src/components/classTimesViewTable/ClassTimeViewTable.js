@@ -1,4 +1,5 @@
 import "./ClassTimeViewTable.css";
+import myStyles from "../../config/myStyles";
 import { useEffect, useState } from "react";
 import { getId } from "../../helpers/auxCRUD";
 import { readClassTime } from "../../helpers/CRUDFunctions/classTimeCRUD";
@@ -11,11 +12,8 @@ import {
   getProfessorLabel,
 } from "../../helpers/visualizationText/textLabels";
 
-const classNames = {
-  header: "header",
-  showBasicDataCard: "showBasicDataCard",
-  showBasicDataTable: "showBasicDataTable",
-};
+const defaultClassNames = myStyles.classNames.default;
+const localClassNames = myStyles.classNames.local.component.classTimeViewTable;
 
 const headers = {
   idTurma: "idTurma",
@@ -91,7 +89,7 @@ function HeaderFilter(classTimeStates) {
   const size = classTimeStates.filteredClassTimes.length;
   const classesInRoomTitle = classTimeStates.headerTitle + size;
   return (
-    <div className={classNames.header}>
+    <div className={localClassNames.header}>
       <h2>{classesInRoomTitle}</h2>
       <ViewTableFilters {...classTimeStates} />
     </div>
@@ -102,7 +100,7 @@ function ClassesTable({ classTimes }) {
   const orderedClassTimes = sortClassTimes(classTimes);
 
   return (
-    <table className={classNames.showBasicDataCard}>
+    <table className={defaultClassNames.componentTable}>
       <TableHeader />
       <tbody>
         {orderedClassTimes.map((iterClassTime) => {
@@ -142,13 +140,10 @@ function ClassesTableView(customPageStates) {
 
   const hasClasses = filteredClassTimes.length > 0;
   return (
-    <div className={classNames.showBasicDataTable}>
+    <div className={defaultClassNames.containerCardBaseInfo}>
       <HeaderFilter {...classTimeStates} />
       {hasClasses ? (
-        <div>
-          <ClassesTable classTimes={filteredClassTimes} />
-          {/* <ClassesInRoomTable classes={offlineFilteredClasses} /> */}
-        </div>
+        <ClassesTable classTimes={filteredClassTimes} />
       ) : (
         <NoClasses {...classTimeStates} />
       )}

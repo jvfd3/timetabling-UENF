@@ -2,8 +2,9 @@ import "./mySelects.css";
 import React, { useEffect, useState } from "react";
 import Select, { components } from "react-select";
 import defaultColors from "../config/defaultColors";
-import styleFunctions from "../config/styleFunctions";
+import myStyles from "../config/myStyles";
 import constantValues from "../config/constantValues";
+import pseudoDatabase from "../config/pseudoDatabase";
 import { sqlDataFromJson } from "../DB/local/dataFromJSON";
 import { getValueFromObject } from "../helpers/auxFunctions";
 import { LockedProp, UnlockedProp } from "./Buttons/Dumb/Dumb";
@@ -19,9 +20,8 @@ import {
   getDefaultOptionLabelStudent,
   getDefaultOptionLabelSubject,
 } from "../helpers/visualizationText/textLabels";
-import pseudoDatabase from "../config/pseudoDatabase";
 
-const styleWidthFix = styleFunctions.fullItem;
+const styleWidthFix = myStyles.selects.fullItem;
 
 /* \\ Internal-use Selects // */
 
@@ -78,7 +78,7 @@ function LockableSelect(extProps) {
         onChange={onChange}
         getOptionValue={getOptionValue}
         getOptionLabel={getOptionLabel}
-        className="mySelectList"
+        className={myStyles.selects.className}
         styles={styleWidthFix}
         isDisabled={isLocked}
         isClearable={true}
@@ -121,7 +121,7 @@ function DefaultSelect(defaultProps) {
       onChange={updateOuterValue}
       value={currentValue}
       {...customProps}
-      className="mySelectList"
+      className={myStyles.selects.className}
       styles={styleWidthFix}
     />
   );

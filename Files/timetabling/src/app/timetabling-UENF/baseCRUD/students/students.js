@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import myStyles from "../../../../config/myStyles";
 import configInfo from "../../../../config/configInfo";
 import CRUDPageSelection from "../../../../components/PageSelect";
 import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
@@ -21,14 +22,7 @@ import {
   deleteStudent,
 } from "../../../../helpers/CRUDFunctions/studentCRUD";
 
-const classNames = {
-  selectionBar: "selectionBar",
-  showBasicDataCard: "showBasicDataCard",
-  showBasicDataTable: "showBasicDataTable",
-  infoCard: "infoCard",
-  CRUDContainComponents: "CRUDContainComponents",
-  background: "background",
-};
+const defaultClassNames = myStyles.classNames.default;
 
 const baseInfoCard = {
   title: "INFORMAÇÕES DO ALUNO",
@@ -50,7 +44,7 @@ function StudentSelection(studentStates) {
   };
 
   return (
-    <div className={classNames.selectionBar}>
+    <div className={defaultClassNames.containerItemSelection}>
       <CRUDButtonsContainer {...studentCRUDFunctions} />
       <SelectStudentItem {...studentStates} />
     </div>
@@ -59,9 +53,9 @@ function StudentSelection(studentStates) {
 
 function BaseInfoCard(studentStates) {
   return (
-    <div className={classNames.showBasicDataCard}>
+    <div className={defaultClassNames.containerCardBaseInfo}>
       <h3>{baseInfoCard.title}</h3>
-      <table className={classNames.showBasicDataTable}>
+      <table className={defaultClassNames.componentTable}>
         <tbody>
           <tr>
             <th>{baseInfoCard.tableTitles.year}</th>
@@ -101,7 +95,7 @@ function BaseInfoCard(studentStates) {
 
 function StudentCard(studentStates) {
   return (
-    <div className={classNames.infoCard}>
+    <div className={defaultClassNames.containerCardsHolder}>
       <BaseInfoCard {...studentStates} />
       {/* <StudentClasses {...studentStates} /> */}
       {/* <StudentProgress {...studentStates} /> */}
@@ -124,7 +118,7 @@ function Students() {
   }, []);
 
   return (
-    <div className={classNames.CRUDContainComponents}>
+    <div className={defaultClassNames.containerCards}>
       <StudentSelection {...studentStates} />
       <StudentCard {...studentStates} />
     </div>
@@ -134,7 +128,7 @@ function Students() {
 function CRUDStudents() {
   const defaultPageValue = configInfo.pageSelection.students;
   return (
-    <div className={classNames.background}>
+    <div className={defaultClassNames.background}>
       <CRUDPageSelection defaultValue={defaultPageValue} />
       <Students />
     </div>

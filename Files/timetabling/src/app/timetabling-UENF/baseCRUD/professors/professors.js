@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import myStyles from "../../../../config/myStyles";
 import configInfo from "../../../../config/configInfo";
 import CRUDPageSelection from "../../../../components/PageSelect";
 import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
@@ -22,14 +23,8 @@ import {
   deleteProfessor,
 } from "../../../../helpers/CRUDFunctions/professorCRUD";
 
-const classNames = {
-  background: "background",
-  CRUDContainComponents: "CRUDContainComponents",
-  selectionBar: "selectionBar",
-  infoCard: "infoCard",
-  showBasicDataCard: "showBasicDataCard",
-  showBasicDataTable: "showBasicDataTable",
-};
+const defaultClassNames = myStyles.classNames.default;
+
 const baseInfoCard = {
   title: "INFORMAÇÕES DO PROFESSOR",
   tableTitles: {
@@ -49,7 +44,7 @@ function ProfessorSelection(professorStates) {
     deleteFunc: () => deleteProfessor(professorStates),
   };
   return (
-    <div className={classNames.selectionBar}>
+    <div className={defaultClassNames.containerItemSelection}>
       <CRUDButtonsContainer {...professorCRUDFunctions} />
       <SelectProfessorItem {...professorStates} />
     </div>
@@ -58,9 +53,9 @@ function ProfessorSelection(professorStates) {
 
 function BaseInfoCard(professorStates) {
   return (
-    <div className={classNames.showBasicDataCard}>
+    <div className={defaultClassNames.containerCardBaseInfo}>
       <h3>{baseInfoCard.title}</h3>
-      <table className={classNames.showBasicDataTable}>
+      <table className={defaultClassNames.componentTable}>
         <tbody>
           <tr>
             <th>{baseInfoCard.lab}</th>
@@ -100,7 +95,7 @@ function BaseInfoCard(professorStates) {
 
 function ProfessorCard(professorStates) {
   return (
-    <div className={classNames.infoCard}>
+    <div className={defaultClassNames.containerCardsHolder}>
       <BaseInfoCard {...professorStates} />
       <ProfessorClasses {...professorStates.professor} />
       {/* <ProfessorPreferences {...professorStates} /> */}
@@ -128,7 +123,7 @@ function Professors() {
   }, []);
 
   return (
-    <div className={classNames.CRUDContainComponents}>
+    <div className={defaultClassNames.containerCards}>
       <ProfessorSelection {...professorStates} />
       <ProfessorCard {...professorStates} />
     </div>
@@ -138,7 +133,7 @@ function Professors() {
 function CRUDprofessors() {
   const defaultPageValue = configInfo.pageSelection.professors;
   return (
-    <div className={classNames.background}>
+    <div className={defaultClassNames.background}>
       <CRUDPageSelection defaultValue={defaultPageValue} />
       <Professors />
     </div>
