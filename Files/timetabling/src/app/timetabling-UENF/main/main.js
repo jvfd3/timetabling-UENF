@@ -1,32 +1,89 @@
 import React from "react";
 import configInfo from "../../../config/configInfo";
 import CRUDPageSelection from "../../../components/PageSelect";
-// import Workbench from ""../../../components/tests/Workbench";
+
+const classNames = {
+  CRUDContainComponents: "CRUDContainComponents",
+  showBasicDataCard: "showBasicDataCard",
+  background: "background",
+};
+
+const mainPageText = {
+  instructions: {
+    header: "Instruções",
+    subHeaders: [
+      {
+        key: 1,
+        title: "Objetivo:",
+        description:
+          "O objetivo desta aplicação é facilitar a visualização e manipulação de dados de horários de aulas.",
+      },
+      {
+        key: 2,
+        title: "Como usar:",
+        description:
+          "Adicione as informações de disciplina, salas, professores, turmas e horários. Veja os conflitos que surgem na página MultiTurmas e resolva-os. A grade final criada pode ser visualizada na página ccTable.",
+      },
+    ],
+  },
+  shortcuts: {
+    header: "Atalhos",
+    infoList: [
+      {
+        key: 1,
+        title: "Mudar páginas:",
+        description:
+          "passar o mouse por cima do menu no canto superior esquerdo da tela e usar o scroll do mouse",
+      },
+      {
+        key: 2,
+        title: "Selecionar um item:",
+        description:
+          "passar o mouse por cima da seleção de itens e usar o scroll do mouse",
+      },
+    ],
+  },
+};
+
+function Instructions() {
+  return (
+    <div className={classNames.showBasicDataCard}>
+      <h3>{mainPageText.instructions.header}</h3>
+      {mainPageText.instructions.subHeaders.map((info) => (
+        <div key={info.key}>
+          <h5>{info.title}</h5>
+          <p>{info.description}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function Shortcuts() {
+  return (
+    <div className={classNames.showBasicDataCard}>
+      <h4>{mainPageText.shortcuts.header}</h4>
+      <ul>
+        {mainPageText.shortcuts.infoList.map((info) => (
+          <li key={info.key}>
+            <strong>{info.title}</strong> <p>{info.description}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
 
 function Main() {
   return (
-    <div className="CRUDContainComponents">
+    <div className={classNames.CRUDContainComponents}>
       <img
         src={process.env.PUBLIC_URL + "/logos/OurClass.png"}
         alt="Logo OurClass"
         style={{ width: "50%" }}
       />
-      <h4>Atalhos</h4>
-      <ul>
-        <li>
-          <strong>Mudar páginas</strong>: passar o mouse por cima do menu no
-          canto superior esquerdo da tela e usar o scroll do mouse
-        </li>
-        <li>
-          <strong>Selecionar um item</strong>: passar o mouse por cima da
-          seleção de itens e usar o scroll do mouse
-        </li>
-        <li>
-          <strong>Obs.</strong>: quando a página é longa e tem scroll, pressione
-          a letra "s" para impedir a rolagem da página e poder usar o scroll do
-          mouse para selecionar itens.
-        </li>
-      </ul>
+      <Instructions />
+      <Shortcuts />
     </div>
   );
 }
@@ -34,7 +91,7 @@ function Main() {
 function MainPage() {
   const defaultPageValue = configInfo.pageSelection.main;
   return (
-    <div className="background">
+    <div className={classNames.background}>
       <CRUDPageSelection defaultValue={defaultPageValue} />
       <Main />
     </div>
