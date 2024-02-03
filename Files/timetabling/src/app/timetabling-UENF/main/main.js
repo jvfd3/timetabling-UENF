@@ -1,12 +1,9 @@
 import React from "react";
+import myStyles from "../../../config/myStyles";
 import configInfo from "../../../config/configInfo";
 import CRUDPageSelection from "../../../components/PageSelect";
 
-const classNames = {
-  CRUDContainComponents: "CRUDContainComponents",
-  showBasicDataCard: "showBasicDataCard",
-  background: "background",
-};
+const defaultClassNames = myStyles.classNames.default;
 
 const mainPageText = {
   instructions: {
@@ -47,7 +44,7 @@ const mainPageText = {
 
 function Instructions() {
   return (
-    <div className={classNames.showBasicDataCard}>
+    <div className={defaultClassNames.containerCardBaseInfo}>
       <h3>{mainPageText.instructions.header}</h3>
       {mainPageText.instructions.subHeaders.map((info) => (
         <div key={info.key}>
@@ -61,7 +58,7 @@ function Instructions() {
 
 function Shortcuts() {
   return (
-    <div className={classNames.showBasicDataCard}>
+    <div className={defaultClassNames.containerCards}>
       <h4>{mainPageText.shortcuts.header}</h4>
       <ul>
         {mainPageText.shortcuts.infoList.map((info) => (
@@ -76,12 +73,12 @@ function Shortcuts() {
 
 function Main() {
   return (
-    <div className={classNames.CRUDContainComponents}>
       <img
         src={process.env.PUBLIC_URL + "/logos/OurClass.png"}
         alt="Logo OurClass"
         style={{ width: "50%" }}
       />
+    <div className={defaultClassNames.containerCards}>
       <Instructions />
       <Shortcuts />
     </div>
@@ -91,7 +88,7 @@ function Main() {
 function MainPage() {
   const defaultPageValue = configInfo.pageSelection.main;
   return (
-    <div className={classNames.background}>
+    <div className={defaultClassNames.background}>
       <CRUDPageSelection defaultValue={defaultPageValue} />
       <Main />
     </div>

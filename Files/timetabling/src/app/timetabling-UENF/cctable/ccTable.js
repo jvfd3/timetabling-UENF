@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import myStyles from "../../../config/myStyles";
 import configInfo from "../../../config/configInfo";
 import ClassTimeGridCC from "../../../components/GridView/ClassTimeGridCC";
 import CRUDPageSelection from "../../../components/PageSelect";
@@ -6,11 +7,7 @@ import { readClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
 import { CCTableFilters } from "../../../components/Filters/Filters";
 import { getDefaultClassTime } from "../../../helpers/auxCRUD";
 
-const classNames = {
-  CRUDContainComponents: "CRUDContainComponents",
-  infoCard: "infoCard",
-  background: "background",
-};
+const defaultClassNames = myStyles.classNames.default;
 
 function CCTableView() {
   const [classTimes, setClassTimes] = useState([]);
@@ -31,9 +28,9 @@ function CCTableView() {
   }, []);
 
   return (
-    <div className={classNames.CRUDContainComponents}>
-      <div className={classNames.infoCard}>
-        <CCTableFilters {...classTimeStates} />
+    <div className={defaultClassNames.containerCards}>
+      <CCTableFilters {...classTimeStates} />
+      <div className={defaultClassNames.containerCardsHolder}>
         <ClassTimeGridCC classTimes={filteredClassTimes} />
       </div>
     </div>
@@ -43,7 +40,7 @@ function CCTableView() {
 function CCTable() {
   const defaultPageValue = configInfo.pageSelection.CCTable;
   return (
-    <div className={classNames.background}>
+    <div className={defaultClassNames.background}>
       <CRUDPageSelection defaultValue={defaultPageValue} />
       <CCTableView />
     </div>
