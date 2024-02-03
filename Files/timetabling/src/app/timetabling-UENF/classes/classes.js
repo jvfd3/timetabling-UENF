@@ -120,7 +120,7 @@ function ClassTimesTable(classesStates) {
   const classTimes = classesStates?.classItem?.horarios ?? [];
 
   return (
-    <div className={classNames.showBasicDataCard}>
+    <div className={defaultClassNames.containerCardBaseInfo}>
       <h3>
         {classTimes.length > 0
           ? classTimeTitles.classTimes
@@ -177,9 +177,9 @@ function Classes() {
   }, []);
 
   return (
-    <div className={classNames.CRUDContainComponents}>
+    <div className={defaultClassNames.containerCards}>
       <ClassSelection {...classesStates} />
-      <div className={classNames.infoCard}>
+      <div className={defaultClassNames.containerCardsHolder}>
         <BaseInfoCard {...classesStates} />
         <ClassTimesTable {...classesStates} />
         {/* <Participants /> */}
@@ -191,7 +191,7 @@ function Classes() {
 function CRUDclass() {
   const defaultPageValue = configInfo.pageSelection.classes;
   return (
-    <div className={classNames.background}>
+    <div className={defaultClassNames.background}>
       <CRUDPageSelection defaultValue={defaultPageValue} />
       <Classes />
     </div>
