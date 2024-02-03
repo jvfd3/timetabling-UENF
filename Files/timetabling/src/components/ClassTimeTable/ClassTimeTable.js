@@ -78,12 +78,14 @@ function ClassTimeTable(classesStates) {
     setClassTimes(classItem?.horarios ?? []);
   }, [classItem?.horarios]);
 
+  const headerKey = `ClassTime Header: ${getId(classItem)}`;
+
   return classTimes.length == 0 ? (
     <SmartCreateClassTime {...createClassTimeProps} />
   ) : (
     <table className={defaultClassNames.componentTable}>
       <thead>
-        <tr key={`ClassTime Header: ${getId(classItem)}`}>
+        <tr key={headerKey}>
           <th>
             <SmartCreateClassTime {...createClassTimeProps} />
           </th>
@@ -99,10 +101,10 @@ function ClassTimeTable(classesStates) {
             ...classesStates,
             classTime: iterClassTime,
             // shouldUpdate,
+            key: `ClassTimeRow: ${getId(iterClassTime)}`,
             conflicts,
           };
-          const classTimeRowKey = `ClassTimeRow: ${getId(iterClassTime)}`;
-          return <ClassTimeRow {...classTimeRowStates} key={classTimeRowKey} />;
+          return <ClassTimeRow {...classTimeRowStates} />;
         })}
       </tbody>
     </table>

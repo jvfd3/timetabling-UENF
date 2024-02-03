@@ -77,7 +77,6 @@ function BaseInfoCard(classesStates) {
   return (
     <div className={defaultClassNames.containerCardBaseInfo}>
       <h3>{baseInfoCard.title}</h3>
-        <thead></thead>
       <table className={defaultClassNames.componentTable}>
         <tbody>
           <tr>
