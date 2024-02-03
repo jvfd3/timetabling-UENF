@@ -27,7 +27,8 @@ import {
   TextInputClassId,
 } from "../../../components/MyTextFields";
 
-function TurmaSelection(classStates) {
+
+function ClassSelection(classStates) {
   /* It just contains the selection an maybe allows scrolling selection */
   const createStates = {
     ...classStates,
@@ -37,7 +38,7 @@ function TurmaSelection(classStates) {
     },
   };
 
-  const turmaCRUDFunctions = {
+  const ClassCRUDFunctions = {
     createFunc: () => createClass(createStates),
     readFunc: () => readClass(classStates),
     updateFunc: () => updateClass(classStates),
@@ -46,7 +47,7 @@ function TurmaSelection(classStates) {
 
   return (
     <div className="SelectionBar">
-      <CRUDButtonsContainer {...turmaCRUDFunctions} />
+      <CRUDButtonsContainer {...ClassCRUDFunctions} />
       <SelectClassItem {...classStates} />
       <ClassesFilters {...classStates} />
     </div>
@@ -149,8 +150,8 @@ function Classes() {
 
   return (
     <div className="CRUDContainComponents">
-      <TurmaSelection {...classesStates} />
       <div className="infoCard">
+      <ClassSelection {...classesStates} />
         <ClassData {...classesStates} />
         <div className="showBasicDataCard">
           <h3>{classTimes.length > 0 ? "Horários" : "Adicione um horário"}</h3>
