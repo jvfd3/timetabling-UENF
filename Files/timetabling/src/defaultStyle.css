@@ -31,33 +31,12 @@ body {
   background-color: #000;
   margin: 0;
   font-family: 'Segoe UI';
-  /* // Other fonts below */
-  /* 
-    'Roboto',
-    'Oxygen',
-    'Ubuntu',
-    'Cantarell',
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif */
-  /* Locating index background */
-  /* background-color: #00FFFF; */
-  /* display: flex; */
-  /* width: 100%; */
-  /* -webkit-font-smoothing: antialiased; */
-  /* -moz-osx-font-smoothing: grayscale; */
 }
 
 .background {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: space-between; */
-  /* background-color: rgb(63, 7, 7); */
-  /* background-color: black; */
-  /* width: 95vw; */
-  /* height: 100vh; */
 }
 
 .CRUDContainComponents {
@@ -72,36 +51,13 @@ body {
   padding: 10px;
   margin: 20px;
   gap: 10px;
-
-
-  /* width: 450px; */
-  /* width: 1200px; */
-  /* Preenche a tela inteira */
-  /* width: 100%; */
-
-  /* Reduz o blanche até o tamanho mínimo (select) */
-  /* width: min-content; */
-
-  /* Faz nada */
-  /* width: auto; */
-  /* width: fit-content; */
-  /* width: max-content; */
-
 }
 
 .selectionBar {
-  /* background-color: cadetblue; */
   display: flex;
   align-self: baseline;
   padding: 10px;
   font-weight: bolder;
-
-  /* Fill all parent component */
-  /* border: 10w; */
-  /* width: 100%; */
-
-  /* Just englobes children */
-  /* width: auto; */
 }
 
 .containerCardBaseInfo {
@@ -117,7 +73,6 @@ body {
 }
 
 .infoCard {
-  /* background-color: aquamarine; */
   display: flex;
   flex-direction: column;
   align-self: baseline;
@@ -134,15 +89,6 @@ body {
   margin: 10px;
   margin-bottom: 0;
   width: fit-content;
-  /* align-items: center; */
-
-  /* Forçando o BDC a sair do aquamarine */
-  /* width: 100%; */
-
-  /* Reduzindo pra fit o content */
-
-  /* Faz nada */
-  /* width: auto; */
 }
 
 .showBasicDataTable {
@@ -161,18 +107,12 @@ body {
   padding-top: 20px;
   padding-left: 20px;
   align-self: baseline;
-  /* background-color: aqua; */
 }
 
 .PageSelectionSelect:hover {
-  /* background-color: rgba(0, 0, 0, 0.5); */
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-  /* Ajuste esses valores para o efeito de sombra desejado */
 }
 
 .SelectList {
-  /* display: flex; */
-  /* padding-left: 2%; */
   font-weight: bolder;
-  /* min-width: max-content; */
 }
