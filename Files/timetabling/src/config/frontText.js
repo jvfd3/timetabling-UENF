@@ -102,6 +102,25 @@ const text = {
   component: {
     ccTable: {},
     classTimes: {},
+    SelectPlaceholder: {
+      student: "Aluno",
+      professor: "Professor",
+      subject: "Disciplina",
+      room: "Sala",
+      classItem: "Turma",
+      // classTime: "Horário",
+
+      year: "Ano",
+      semester: "Semestre",
+      expectedSemester: "Período Esperado",
+
+      block: "Bloco",
+      course: "Curso relacionado",
+      lab: "Laboratório",
+      day: "Dia da semana",
+      hour: "Hora de início",
+      duration: "Duração",
+    },
   },
 };
 

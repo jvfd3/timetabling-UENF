@@ -19,9 +19,10 @@ import {
   getDefaultOptionLabelStudent,
   getDefaultOptionLabelSubject,
 } from "../helpers/visualizationText/textLabels";
+import text from "../config/frontText";
 
 const styleWidthFix = myStyles.selects.fullItem;
-
+const placeHolders = text.component.SelectPlaceholder;
 /* \\ Internal-use Selects // */
 
 function LockableSelect(extProps) {
@@ -153,7 +154,7 @@ function SelectYear({ outerYear, setOuterYear, outerIsClearable = false }) {
   }
 
   const SelectYearStates = {
-    placeHolderText: "Ano",
+    placeHolderText: placeHolders.year,
     isClearable: outerIsClearable,
     options: constantValues.years,
     setOuterValue: setOuterYear,
@@ -178,7 +179,7 @@ function SelectSemester({
   }
 
   const SelectSemesterStates = {
-    placeHolderText: "Semestre",
+    placeHolderText: placeHolders.semester,
     isClearable: outerIsClearable,
     options: constantValues.semesters,
     setOuterValue: setOuterSemester,
@@ -197,7 +198,7 @@ function SelectLab({ outerLab, setOuterLab }) {
   }
 
   const SelectLabStates = {
-    placeHolderText: "Laboratório",
+    placeHolderText: placeHolders.lab,
     isClearable: true,
     options: pseudoDatabase.labs,
     setOuterValue: setOuterLab,
@@ -227,7 +228,7 @@ function SelectCourse({ outerCourse, setOuterCourse }) {
   }
 
   const SelectCourseStates = {
-    placeHolderText: "Curso",
+    placeHolderText: placeHolders.course,
     isClearable: true,
     options: pseudoDatabase.courses,
     setOuterValue: setOuterCourse,
@@ -255,7 +256,7 @@ function SelectBlock({ outerBlock, setOuterBlock }) {
   }
 
   const SelectBlockStates = {
-    placeHolderText: "Bloco",
+    placeHolderText: placeHolders.block,
     isClearable: false,
     options: pseudoDatabase.blocks,
     setOuterValue: setOuterBlock,
@@ -293,7 +294,7 @@ function SelectExpectedSemester({
   }
 
   const SelectExpectedSemesterStates = {
-    placeHolderText: "Semestre esperado",
+    placeHolderText: placeHolders.expectedSemester,
     isClearable: outerIsClearable,
     options: constantValues.expectedSemester,
     setOuterValue: setOuterExpectedSemester,
@@ -315,7 +316,7 @@ function SelectSubject({ outerSubject, setOuterSubject, subjects = [] }) {
   }
 
   const SelectSubjectStates = {
-    placeHolderText: "Disciplina",
+    placeHolderText: placeHolders.subject,
     isClearable: true,
     options: localSubjects,
     setOuterValue: setOuterSubject,
@@ -354,7 +355,7 @@ function SelectProfessor({
   }
 
   const SelectProfessorStates = {
-    placeHolderText: "Professor",
+    placeHolderText: placeHolders.professor,
     isClearable: outerIsClearable,
     options: localProfessors,
     setOuterValue: setOuterProfessor,
@@ -391,7 +392,7 @@ function SelectRoom({
   }
 
   const SelectRoomStates = {
-    placeHolderText: "Sala",
+    placeHolderText: placeHolders.room,
     isClearable: outerIsClearable,
     options: localRooms,
     setOuterValue: setOuterRoom,
@@ -423,7 +424,7 @@ function SelectDay({ outerDay, setOuterDay, outerIsClearable = true }) {
   }
 
   const SelectDayStates = {
-    placeHolderText: "Dia",
+    placeHolderText: placeHolders.day,
     isClearable: outerIsClearable,
     value: outerDay,
     setOuterValue: setOuterDay,
@@ -446,7 +447,7 @@ function SelectStartHour({
   }
 
   const SelectStartHourStates = {
-    placeHolderText: "Hora",
+    placeHolderText: placeHolders.hour,
     isClearable: outerIsClearable,
     value: outerStartHour,
     setOuterValue: setOuterStartHour,
@@ -476,7 +477,7 @@ function SelectDuration({ outerDuration, setOuterDuration }) {
   }
 
   const SelectDurationStates = {
-    placeHolderText: "Duração",
+    placeHolderText: placeHolders.duration,
     isClearable: true,
     value: outerDuration,
     setOuterValue: setOuterDuration,
@@ -724,7 +725,7 @@ function SelectClassItem(classStates) {
   const { filteredClasses, setClasses, classItem, setClassItem } = classStates;
 
   const SelectClassItemStates = {
-    placeHolderText: "Selecione uma turma",
+    placeHolderText: placeHolders.classItem,
     isClearable: false,
     options: filteredClasses,
     setOuterValue: setClassItem,
@@ -837,7 +838,7 @@ function SelectProfessorItem(professorStates) {
     professorStates;
 
   const SelectProfessorItemStates = {
-    placeHolderText: "Selecione um professor",
+    placeHolderText: placeHolders.professor,
     isClearable: false,
     options: professors,
     setOuterValue: setProfessor,
@@ -902,7 +903,7 @@ function SelectProfessorCourse({
 
 function SelectRoomItem({ rooms, setRooms, room, setRoom }) {
   const SelectRoomItemStates = {
-    placeHolderText: "Selecione uma sala",
+    placeHolderText: placeHolders.room,
     isClearable: false,
     options: rooms,
     setOuterValue: setRoom,
@@ -951,7 +952,7 @@ function SelectRoomBlock(myRoomStates) {
 
 function SelectSubjectItem({ subjects, setSubjects, subject, setSubject }) {
   const SelectSubjectItemStates = {
-    placeHolderText: "Selecione uma disciplina",
+    placeHolderText: placeHolders.subject,
     isClearable: false,
     options: subjects,
     setOuterValue: setSubject,
@@ -990,7 +991,7 @@ function SelectSubjectExpectedSemester({ subject, setSubject }) {
 
 function SelectStudentItem({ students, setStudents, student, setStudent }) {
   const SelectStudentItemStates = {
-    placeHolderText: "Selecione um aluno",
+    placeHolderText: placeHolders.student,
     isClearable: false,
     options: students,
     setOuterValue: setStudent,
