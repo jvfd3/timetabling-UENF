@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Select, { components } from "react-select";
-import defaultColors from "../config/defaultColors";
 import myStyles from "../config/myStyles";
+import defaultColors from "../config/defaultColors";
 import constantValues from "../config/constantValues";
 import pseudoDatabase from "../config/pseudoDatabase";
 import { sqlDataFromJson } from "../DB/local/dataFromJSON";
