@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import myStyles from "../../../../config/myStyles";
 import configInfo from "../../../../config/configInfo";
-import CRUDPageSelection from "../../../../components/PageSelect";
+import CRUDPageSelection from "../../../../components/PageSelection/PageSelect";
 import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
 import { ProfessorClasses } from "../../../../components/classTimesViewTable/SpecificClassTimeViewTables";
 import { CRUDButtonsContainer } from "../../../../components/CRUDButtons";

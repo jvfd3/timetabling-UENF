@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import configInfo from "../../../../config/configInfo";
-import CRUDPageSelection from "../../../../components/PageSelect";
+import CRUDPageSelection from "../../../../components/PageSelection/PageSelect";
 import { RoomClasses } from "../../../../components/classTimesViewTable/SpecificClassTimeViewTables";
 import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
 import { CRUDButtonsContainer } from "../../../../components/CRUDButtons";

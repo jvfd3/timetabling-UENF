@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import myStyles from "../../../config/myStyles";
 import configInfo from "../../../config/configInfo";
 import ClassesTable from "../../../components/ClassItemTable/ClassItemTable";
-import CRUDPageSelection from "../../../components/PageSelect";
+import CRUDPageSelection from "../../../components/PageSelection/PageSelect";
 import NotOfferedSubjects from "../../../components/multiClasses/NotOfferedSubjects";
 import { readRoom } from "../../../helpers/CRUDFunctions/roomCRUD";
 import { readSubject } from "../../../helpers/CRUDFunctions/subjectCRUD";

@@ -5,7 +5,7 @@ import configInfo from "../../config/configInfo";
 
 const { routing, pageSelection } = configInfo;
 
-// import PageSelection from "./components/PageSelect";
+// import PageSelection from "./components/PageSelection/PageSelect";
 // Page imports
 /* Isso poderia ser trocado pro valor do options */
 import Main from "../timetabling-UENF/main/main";

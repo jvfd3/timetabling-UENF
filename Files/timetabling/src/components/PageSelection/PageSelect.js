@@ -1,10 +1,12 @@
-// import "../defaultStyle.css";
+import "./PageSelection.css";
 import Select from "react-select";
-import myStyles from "../config/myStyles";
-import configInfo from "../config/configInfo";
+import myStyles from "../../config/myStyles";
+import configInfo from "../../config/configInfo";
 import { useNavigate } from "react-router-dom";
-import { changePageByScrolling } from "../helpers/firulas/minhasFirulas";
+import { changePageByScrolling } from "../../helpers/firulas/minhasFirulas";
 // import { changePageByScrolling } from "../functions/firulas/minhasFirulas";
+
+const localClassNames = myStyles.classNames.local.component.PageSelection;
 
 function CRUDPageSelection(props) {
   const pages = configInfo.pageSelection;
@@ -48,9 +50,9 @@ function CRUDPageSelection(props) {
   );
 
   return (
-    <div className="PageSelection">
+    <div className={localClassNames.PageSelection}>
       <div
-        className="PageSelectionSelect"
+        className={localClassNames.PageSelectionSelect}
         onWheel={(event) => {
           // changePageByScrolling(event);
           const itemStates = [filteredOptions, props, handleChange];

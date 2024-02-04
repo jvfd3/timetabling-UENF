@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import myStyles from "../../../config/myStyles";
 import configInfo from "../../../config/configInfo";
 import ClassTimeGridCC from "../../../components/GridView/ClassTimeGridCC";
-import CRUDPageSelection from "../../../components/PageSelect";
+import CRUDPageSelection from "../../../components/PageSelection/PageSelect";
 import { readClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
 import { CCTableFilters } from "../../../components/Filters/Filters";
 import { getDefaultClassTime } from "../../../helpers/auxCRUD";

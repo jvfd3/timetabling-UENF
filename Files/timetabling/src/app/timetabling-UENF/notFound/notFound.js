@@ -1,6 +1,6 @@
 import React from "react";
 import configInfo from "../../../config/configInfo";
-import CRUDPageSelection from "../../../components/PageSelect";
+import CRUDPageSelection from "../../../components/PageSelection/PageSelect";
 import myStyles from "../../../config/myStyles";
 
 const defaultClassNames = myStyles.classNames.default;

@@ -1,7 +1,7 @@
 import "./ccTable.css";
 import React, { useEffect, useState } from "react";
 import options from "../../../DB/local/options";
-import CRUDPageSelection from "../../../components/PageSelect";
+import CRUDPageSelection from "../../../components/PageSelection/PageSelect";
 import { getClassesData } from "../../../DB/retrieveData";
 import { splitTurmas } from "../../../helpers/conflicts/auxConflictFunctions";
 import { getDefaultClassTime } from "../../../helpers/auxCRUD";

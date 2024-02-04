@@ -1,0 +1,9 @@
+.PageSelection {
+  padding-top: 20px;
+  padding-left: 20px;
+  align-self: baseline;
+}
+
+.PageSelectionSelect:hover {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}

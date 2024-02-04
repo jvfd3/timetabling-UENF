@@ -2,8 +2,6 @@ const myStyles = {
   classNames: {
     default: {
       background: "background",
-      PageSelection: "PageSelection",
-      PageSelectionSelect: "PageSelectionSelect",
       containerItemSelection: "selectionBar",
       containerCards: "CRUDContainComponents",
       containerCardsHolder: "",
@@ -47,6 +45,10 @@ const myStyles = {
           locked: "iconLocked",
           unlocked: "iconUnlocked",
           inputSubject: "iconInputSubject",
+        },
+        PageSelection: {
+          PageSelection: "PageSelection",
+          PageSelectionSelect: "PageSelectionSelect",
         },
       },
     },
