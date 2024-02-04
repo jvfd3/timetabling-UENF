@@ -1,4 +1,5 @@
 import "./Filters.css";
+import myStyles from "../../config/myStyles";
 import { useEffect, useState } from "react";
 import { readRoom } from "../../helpers/CRUDFunctions/roomCRUD";
 import { readSubject } from "../../helpers/CRUDFunctions/subjectCRUD";
@@ -30,10 +31,12 @@ import {
   SelectFilterExpectedSemester,
 } from "../mySelects";
 
+const filterStyles = myStyles.classNames.local.component.filters;
+
 function FilterYear(filterYearStates) {
   // console.log("filterYearStates", filterYearStates);
   return (
-    <div className="defaultFilterStyle">
+    <div className={filterStyles.item}>
       Ano:
       <SelectFilterYear {...filterYearStates} />
     </div>
@@ -42,7 +45,7 @@ function FilterYear(filterYearStates) {
 
 function FilterSemester(filterSemesterStates) {
   return (
-    <div className="defaultFilterStyle">
+    <div className={filterStyles.item}>
       Semestre:
       <SelectFilterSemester {...filterSemesterStates} />
     </div>
@@ -51,7 +54,7 @@ function FilterSemester(filterSemesterStates) {
 
 function FilterDay(filterDayStates) {
   return (
-    <div className="defaultFilterStyle">
+    <div className={filterStyles.item}>
       Dia:
       <SelectFilterDay {...filterDayStates} />
     </div>
@@ -60,7 +63,7 @@ function FilterDay(filterDayStates) {
 
 function FilterHour(filterHourStates) {
   return (
-    <div className="defaultFilterStyle">
+    <div className={filterStyles.item}>
       Hora:
       <SelectFilterHour {...filterHourStates} />
     </div>
@@ -69,7 +72,7 @@ function FilterHour(filterHourStates) {
 
 function FilterExpectedSemester(filterExpectedSemesterStates) {
   return (
-    <div className="defaultFilterStyle">
+    <div className={filterStyles.item}>
       Semestre Esperado:
       <SelectFilterExpectedSemester {...filterExpectedSemesterStates} />
     </div>
@@ -78,7 +81,7 @@ function FilterExpectedSemester(filterExpectedSemesterStates) {
 
 function FilterSubject(filterSubjectStates) {
   return (
-    <div className="defaultFilterStyle">
+    <div className={filterStyles.item}>
       Disciplina:
       <SelectFilterSubject {...filterSubjectStates} />
     </div>
@@ -87,7 +90,7 @@ function FilterSubject(filterSubjectStates) {
 
 function FilterProfessor(filterProfessorStates) {
   return (
-    <div className="defaultFilterStyle">
+    <div className={filterStyles.item}>
       Professor:
       <SelectFilterProfessor {...filterProfessorStates} />
     </div>
@@ -96,7 +99,7 @@ function FilterProfessor(filterProfessorStates) {
 
 function FilterRoom(filterRoomStates) {
   return (
-    <div className="defaultFilterStyle">
+    <div className={filterStyles.item}>
       Sala:
       <SelectFilterRoom {...filterRoomStates} />
     </div>
@@ -156,7 +159,7 @@ function MultiClassesFilters({ classTimeStates, classStates }) {
   }, statesToWatchFor);
 
   return (
-    <div className="MultiClassesFilters">
+    <div className={filterStyles.block}>
       <FilterYear {...props.year} />
       <FilterSemester {...props.semester} />
     </div>
@@ -244,7 +247,7 @@ function CCTableFilters(classTimeStates) {
   }, statesToWatchFor);
 
   return (
-    <div className="CCTableFilters">
+    <div className={filterStyles.block}>
       <FilterYear {...props.year} />
       <FilterSemester {...props.semester} />
       <FilterSubject {...props.subject} />
@@ -287,7 +290,7 @@ function ClassesFilters(classStates) {
   }, statesToWatchFor);
 
   return (
-    <div className="ClassesFilters">
+    <div className={filterStyles.block}>
       <FilterYear {...props.year} />
       <FilterSemester {...props.semester} />
     </div>
@@ -341,7 +344,7 @@ function ViewTableFilters(classTimeStates) {
   }, statesToWatchFor);
 
   return (
-    <div className="MultiClassesFilters">
+    <div className={filterStyles.block}>
       <FilterYear {...props.year} />
       <FilterSemester {...props.semester} />
       <FilterDay {...props.day} />

@@ -4,6 +4,8 @@ import { sqlDataFromJson } from "../../DB/local/dataFromJSON";
 import { SmartInputSubject } from "../Buttons/Smart/Smart";
 import myStyles from "../../config/myStyles";
 
+const defaultClassNames = myStyles.classNames.default;
+
 function isSameParity(subject, semester) {
   const subjectParity = subject?.periodo % 2;
   const semesterParity = semester % 2;
@@ -106,9 +108,9 @@ function NonOfferedSubjectsTable(unofferedSubjectsProps) {
   const headerText = "Período - (Código) Nome";
 
   return (
-    <div className="showBasicDataCard">
+    <div className={defaultClassNames.containerCardBaseInfo}>
       <h1>{baseMessage + semesterMessage}</h1>
-      <table className="showBasicDataTable">
+      <table className={defaultClassNames.componentTable}>
         <thead>
           <tr>
             <th>

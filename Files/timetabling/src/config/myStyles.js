@@ -9,8 +9,6 @@ const myStyles = {
       containerCardsHolder: "",
       containerCardBaseInfo: "containerCardBaseInfo",
       componentTable: "showBasicDataTable",
-      // infoCard: "infoCard",
-      // containerItemBaseInfo: "showBasicDataCard",
     },
     local: {
       page: {
@@ -24,6 +22,31 @@ const myStyles = {
         },
         notOfferedSubjects: {
           highlight: "FirstExpectedSemesterHighlight",
+        },
+        ClassTimeGridCC: {
+          table: "TabelaCC",
+          headerRow: "HeaderRow",
+          topLeftCorner: "TopLeftCorner",
+          daysHeader: "daysHeader",
+          contentCell: "ContentCell",
+          horariosCol: "HorariosCol",
+          eachClassInCell: "eachClassInCell",
+        },
+        filters: {
+          item: "filterItem",
+          block: "filterBlock",
+        },
+        CRUDButtons: {
+          container: "CRUDButtonsContainer",
+        },
+        DumbButtons: {
+          create: "iconCreate",
+          read: "iconRead",
+          update: "iconUpdate",
+          delete: "iconDelete",
+          locked: "iconLocked",
+          unlocked: "iconUnlocked",
+          inputSubject: "iconInputSubject",
         },
       },
     },

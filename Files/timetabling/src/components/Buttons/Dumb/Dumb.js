@@ -16,6 +16,7 @@ import {
   MdRefresh as ReadInfoIcon, // Two arrows in a circle
   MdEdit as UpdateInfoIcon, // Pencil
 } from "react-icons/md";
+import myStyles from "../../../config/myStyles";
 // import {
 //   AddCircleOutlineIcon as CreateItemIcon,
 //   Refresh as ReadInfoIcon,
@@ -28,12 +29,14 @@ import {
 //   Input as InputSubjectIcon,
 // } from "@mui/icons-material";
 
+const localClassNames = myStyles.classNames.local.component.DumbButtons;
+
 /* Database Buttons */
 
 function CreateDBButton({ createFunc, text = "Create", size = "2em" }) {
   return (
     <CreateDBIcon
-      className="iconCreate"
+      className={localClassNames.create}
       onClick={createFunc}
       title={text}
       size={size}
@@ -44,7 +47,7 @@ function CreateDBButton({ createFunc, text = "Create", size = "2em" }) {
 function ReadDBButton({ readFunc, text = "Read", size = "2em" }) {
   return (
     <ReadDBIcon
-      className="iconRead"
+      className={localClassNames.read}
       onClick={readFunc}
       title={text}
       size={size}
@@ -57,7 +60,7 @@ function ReadDBButton({ readFunc, text = "Read", size = "2em" }) {
 function CreateItem({ createFunc, text = "Create", size = "2em" }) {
   return (
     <CreateItemIcon
-      className="iconCreate"
+      className={localClassNames.create}
       onClick={createFunc}
       title={text}
       size={size}
@@ -73,7 +76,7 @@ function UpdateItem({
 }) {
   return (
     <UpdateItemIcon
-      className="iconUpdate"
+      className={localClassNames.update}
       onClick={updateFunc}
       title={text}
       size={size}
@@ -85,7 +88,7 @@ function UpdateItem({
 function DeleteItem({ deleteFunc, text = "Delete", size = "2em" }) {
   return (
     <DeleteItemIcon
-      className="iconDelete"
+      className={localClassNames.delete}
       onClick={deleteFunc}
       title={text}
       size={size}
@@ -98,7 +101,7 @@ function DeleteItem({ deleteFunc, text = "Delete", size = "2em" }) {
 function ReadInfo({ readFunc, text = "Read", size = "2em" }) {
   return (
     <ReadInfoIcon
-      className="iconRead"
+      className={localClassNames.read}
       onClick={readFunc}
       title={text}
       size={size}
@@ -109,7 +112,7 @@ function ReadInfo({ readFunc, text = "Read", size = "2em" }) {
 function UpdateInfo({ updateFunc, text = "Update", size = "2em" }) {
   return (
     <UpdateInfoIcon
-      className="iconUpdate"
+      className={localClassNames.update}
       onClick={updateFunc}
       title={text}
       size={size}
@@ -122,7 +125,7 @@ function UpdateInfo({ updateFunc, text = "Update", size = "2em" }) {
 function CreateClassTime({ createFunc, text = "Create", size = "2em" }) {
   return (
     <CreateClassTimeIcon
-      className="iconCreate"
+      className={localClassNames.create}
       onClick={createFunc}
       title={text}
       size={size}
@@ -138,7 +141,7 @@ function UpdateClassTime({
 }) {
   return (
     <UpdateClassTimeIcon
-      className="iconUpdate"
+      className={localClassNames.update}
       onClick={updateFunc}
       title={text}
       size={size}
@@ -150,7 +153,7 @@ function UpdateClassTime({
 function DeleteClassTime({ deleteFunc, text = "Delete", size = "2em" }) {
   return (
     <DeleteClassTimeIcon
-      className="iconDelete"
+      className={localClassNames.delete}
       onClick={deleteFunc}
       title={text}
       size={size}
@@ -161,7 +164,7 @@ function DeleteClassTime({ deleteFunc, text = "Delete", size = "2em" }) {
 function LockedProp({ unlockFunc, text = "Locked", size = "2em" }) {
   return (
     <LockedPropIcon
-      className="iconLocked"
+      className={localClassNames.locked}
       onClick={unlockFunc}
       title={text}
       size={size}
@@ -172,7 +175,7 @@ function LockedProp({ unlockFunc, text = "Locked", size = "2em" }) {
 function UnlockedProp({ lockFunc, text = "Unlocked", size = "2em" }) {
   return (
     <UnlockedPropIcon
-      className="iconUnlocked"
+      className={localClassNames.unlocked}
       onClick={lockFunc}
       title={text}
       size={size}
@@ -183,7 +186,7 @@ function UnlockedProp({ lockFunc, text = "Unlocked", size = "2em" }) {
 function InputSubject({ createFunc, text = "Input", size = "2em" }) {
   return (
     <InputSubjectIcon
-      className="iconInputSubject"
+      className={localClassNames.inputSubject}
       onClick={createFunc}
       title={text}
       size={size}
@@ -198,11 +201,11 @@ export {
   CreateClassTime,
   UpdateClassTime,
   DeleteClassTime,
-  LockedProp,
-  UnlockedProp,
   InputSubject,
   CreateDBButton,
   ReadDBButton,
   ReadInfo,
   UpdateInfo,
+  LockedProp,
+  UnlockedProp,
 };

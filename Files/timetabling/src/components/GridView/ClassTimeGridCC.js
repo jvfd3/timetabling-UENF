@@ -1,9 +1,12 @@
 import "./ClassTimeGridCC.css";
 import constantValues from "../../config/constantValues";
 import { filterDay, filterHour } from "../../helpers/filteringFunc";
+import myStyles from "../../config/myStyles";
+
+const localClassNames = myStyles.classNames.local.component.ClassTimeGridCC;
 
 function TopLeft() {
-  return <th className="TopLeftCorner"></th>;
+  return <th className={localClassNames.topLeftCorner}></th>;
 }
 
 function TopRow() {
@@ -11,7 +14,7 @@ function TopRow() {
   const days = daysList.map((day) => {
     const headerKey = `HeaderKey: ${day.label}`;
     return (
-      <th key={headerKey} className="daysHeader">
+      <th key={headerKey} className={localClassNames.daysHeader}>
         {day.label}
       </th>
     );
@@ -23,7 +26,7 @@ function TopRow() {
 function Header() {
   return (
     <thead>
-      <tr className="HeaderRow">
+      <tr className={localClassNames.headerRow}>
         <TopLeft />
         <TopRow />
       </tr>
@@ -59,7 +62,7 @@ function CellContent({ classTimes }) {
     const cellMessage = getCellMessage(iterClassTime);
     const cellKey = `ChaveCellContent: ${iterClassTime.idTurma}-${iterClassTime.idHorario}`;
     return (
-      <div key={cellKey} className="eachClassInCell">
+      <div key={cellKey} className={localClassNames.eachClassInCell}>
         {cellMessage}
       </div>
     );
@@ -81,7 +84,7 @@ function Row({ hour, classTimes }) {
     const cellKey = `Key Coluna: ${iterDay.value}-${hour}`;
     // console.log(classesDayHour);
     return (
-      <td key={cellKey} className="ContentCell">
+      <td key={cellKey} className={localClassNames.contentCell}>
         <CellContent classTimes={classesDayHour} />
       </td>
     );
@@ -89,7 +92,7 @@ function Row({ hour, classTimes }) {
 
   return (
     <tr key={`Linha: ${hour}`}>
-      <td key={rowKey} className="HorariosCol">
+      <td key={rowKey} className={localClassNames.horariosCol}>
         {hour}
       </td>
       {daysColumn}
@@ -117,7 +120,7 @@ function Body({ classTimes }) {
 function ClassTimeGridCC(classTimes) {
   // console.log(classTimes);
   return (
-    <table className="TabelaCC">
+    <table className={localClassNames.table}>
       <Header />
       <Body {...classTimes} />
     </table>

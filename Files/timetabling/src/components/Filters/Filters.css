@@ -1,12 +1,10 @@
-.MultiClassesFilters,
-.CCTableFilters,
-.ClassesFilters {
+.filterBlock {
   display: flex;
   gap: 20px;
   padding: 10px;
 }
 
-.defaultFilterStyle {
+.filterItem {
   display: flex;
   /* flex-direction: column; */
   flex-direction: row;
