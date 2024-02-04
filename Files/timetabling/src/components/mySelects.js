@@ -138,7 +138,7 @@ Where each Select is used:
 - SelectBlock             - CRUD: Room
 - SelectExpectedSemester  - CRUD: Subject
 - SelectSubject           - CRUD: ClassItem
-- SelectProfessor  - CRUD: ClassItem
+- SelectProfessor         - CRUD: ClassItem
 - SelectRoom              - CRUD: ClassTime
 - SelectDay               - CRUD: ClassTime
 - SelectStartHour         - CRUD: ClassTime
