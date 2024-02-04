@@ -1,4 +1,3 @@
-import "./mySelects.css";
 import React, { useEffect, useState } from "react";
 import Select, { components } from "react-select";
 import defaultColors from "../config/defaultColors";
