@@ -22,30 +22,6 @@ function CRUDPageSelection(props) {
     (option) => option.pageName !== "Not Found"
   );
 
-  /*
-  useEffect(() => {
-    const keydownHandler = (event) => {
-      if (event.key === "s") {
-        document.body.style.overflow = "hidden";
-      }
-    };
-
-    const keyupHandler = (event) => {
-      if (event.key === "s") {
-        document.body.style.overflow = "auto";
-      }
-    };
-
-    window.addEventListener("keydown", keydownHandler);
-    window.addEventListener("keyup", keyupHandler);
-
-    return () => {
-      window.removeEventListener("keydown", keydownHandler);
-      window.removeEventListener("keyup", keyupHandler);
-    };
-  }, []);
-  */
-
   const formatOptionLabel = ({ pageName }) => (
     <div style={{ display: "flex" }}>{pageName}</div>
   );
