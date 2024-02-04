@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import text from "../../../../config/frontText";
 import myStyles from "../../../../config/myStyles";
 import configInfo from "../../../../config/configInfo";
 import CRUDPageSelection from "../../../../components/PageSelection/PageSelect";
@@ -23,17 +24,7 @@ import {
 } from "../../../../helpers/CRUDFunctions/studentCRUD";
 
 const defaultClassNames = myStyles.classNames.default;
-
-const baseInfoCard = {
-  title: "INFORMAÇÕES DO ALUNO",
-  tableTitles: {
-    year: "Ano de entrada",
-    course: "Curso",
-    enrollment: "Matrícula",
-    name: "Nome",
-    id: "ID",
-  },
-};
+const pageTexts = text.page.students;
 
 function StudentSelection(studentStates) {
   const studentCRUDFunctions = {
@@ -54,35 +45,35 @@ function StudentSelection(studentStates) {
 function BaseInfoCard(studentStates) {
   return (
     <div className={defaultClassNames.containerCardBaseInfo}>
-      <h3>{baseInfoCard.title}</h3>
+      <h3>{pageTexts.title}</h3>
       <table className={defaultClassNames.componentTable}>
         <tbody>
           <tr>
-            <th>{baseInfoCard.tableTitles.year}</th>
+            <th>{pageTexts.tableTitles.year}</th>
             <td>
               <SelectStudentYear {...studentStates} />
             </td>
           </tr>
           <tr>
-            <th>{baseInfoCard.tableTitles.course}</th>
+            <th>{pageTexts.tableTitles.course}</th>
             <td>
               <SelectStudentCourse {...studentStates} />
             </td>
           </tr>
           <tr>
-            <th>{baseInfoCard.tableTitles.enrollment}</th>
+            <th>{pageTexts.tableTitles.enrollment}</th>
             <td>
               <TextInputStudentEnrollment {...studentStates} />
             </td>
           </tr>
           <tr>
-            <th>{baseInfoCard.tableTitles.name}</th>
+            <th>{pageTexts.tableTitles.name}</th>
             <td>
               <TextInputStudentName {...studentStates} />
             </td>
           </tr>
           <tr>
-            <th>{baseInfoCard.tableTitles.id}</th>
+            <th>{pageTexts.tableTitles.id}</th>
             <td>
               <TextInputStudentId {...studentStates} />
             </td>

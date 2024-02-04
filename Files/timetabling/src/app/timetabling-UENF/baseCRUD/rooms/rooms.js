@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import text from "../../../../config/frontText";
+import myStyles from "../../../../config/myStyles";
 import configInfo from "../../../../config/configInfo";
 import CRUDPageSelection from "../../../../components/PageSelection/PageSelect";
-import { RoomClasses } from "../../../../components/classTimesViewTable/SpecificClassTimeViewTables";
-import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
 import { CRUDButtonsContainer } from "../../../../components/CRUDButtons";
+import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
+import { RoomClasses } from "../../../../components/classTimesViewTable/SpecificClassTimeViewTables";
 import {
   SelectRoomItem,
   SelectRoomBlock,
@@ -20,20 +22,9 @@ import {
   updateRoom,
   deleteRoom,
 } from "../../../../helpers/CRUDFunctions/roomCRUD";
-import myStyles from "../../../../config/myStyles";
 
 const defaultClassNames = myStyles.classNames.default;
-
-const baseInfoCard = {
-  title: "INFORMAÇÕES DA SALA",
-  tableTitles: {
-    block: "Bloco",
-    description: "Descrição",
-    code: "Código",
-    capacity: "Capacidade",
-    id: "ID",
-  },
-};
+const pageTexts = text.page.rooms;
 
 function RoomSelection(roomStates) {
   const roomCRUDFunctions = {
@@ -53,35 +44,35 @@ function RoomSelection(roomStates) {
 function BaseInfoCard(roomStates) {
   return (
     <div className={defaultClassNames.containerCardBaseInfo}>
-      <h3>{baseInfoCard.title}</h3>
+      <h3>{pageTexts.title}</h3>
       <table className={defaultClassNames.componentTable}>
         <tbody>
           <tr>
-            <th>{baseInfoCard.tableTitles.block}</th>
+            <th>{pageTexts.tableTitles.block}</th>
             <td>
               <SelectRoomBlock {...roomStates} />
             </td>
           </tr>
           <tr>
-            <th>{baseInfoCard.tableTitles.description}</th>
+            <th>{pageTexts.tableTitles.description}</th>
             <td>
               <TextInputRoomDescription {...roomStates} />
             </td>
           </tr>
           <tr>
-            <th>{baseInfoCard.tableTitles.code}</th>
+            <th>{pageTexts.tableTitles.code}</th>
             <td>
               <TextInputRoomCode {...roomStates} />
             </td>
           </tr>
           <tr>
-            <th>{baseInfoCard.tableTitles.capacity}</th>
+            <th>{pageTexts.tableTitles.capacity}</th>
             <td>
               <TextInputRoomCapacity {...roomStates} />
             </td>
           </tr>
           <tr>
-            <th>{baseInfoCard.tableTitles.id}</th>
+            <th>{pageTexts.tableTitles.id}</th>
             <td>
               <TextInputRoomId {...roomStates} />
             </td>

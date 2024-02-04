@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import text from "../../../config/frontText";
 import myStyles from "../../../config/myStyles";
 import configInfo from "../../../config/configInfo";
 import emptyObjects from "../../../config/emptyObjects";
@@ -29,22 +30,7 @@ import {
 } from "../../../components/MyTextFields";
 
 const defaultClassNames = myStyles.classNames.default;
-
-const baseInfoCard = {
-  title: "INFORMAÇÕES DA TURMA",
-  tableTitles: {
-    yearSemester: "Ano/Semestre",
-    subject: "Disciplina",
-    professor: "Professor",
-    expectedDemand: "Demanda Estimada",
-    id: "ID",
-  },
-};
-
-const classTimeTitles = {
-  classTimes: "Horários",
-  addClassTime: "Adicionar Horário",
-};
+const pageTexts = text.page.classes;
 
 function ClassSelection(classStates) {
   /* It just contains the selection an maybe allows scrolling selection */
@@ -76,36 +62,36 @@ function BaseInfoCard(classesStates) {
   const conflictStyles = classesStates.conflicts.styled;
   return (
     <div className={defaultClassNames.containerCardBaseInfo}>
-      <h3>{baseInfoCard.title}</h3>
+      <h3>{pageTexts.title}</h3>
       <table className={defaultClassNames.componentTable}>
         <tbody>
           <tr>
-            <th>{baseInfoCard.tableTitles.yearSemester}</th>
+            <th>{pageTexts.tableTitles.yearSemester}</th>
             <td>
               <SelectClassYear {...classesStates} />
               <SelectClassSemester {...classesStates} />
             </td>
           </tr>
           <tr>
-            <th>{baseInfoCard.tableTitles.subject}</th>
+            <th>{pageTexts.tableTitles.subject}</th>
             <td {...conflictStyles.subject.merged}>
               <SelectClassSubject {...classesStates} />
             </td>
           </tr>
           <tr>
-            <th>{baseInfoCard.tableTitles.professor}</th>
+            <th>{pageTexts.tableTitles.professor}</th>
             <td {...conflictStyles.professor.merged}>
               <SelectClassProfessor {...classesStates} />
             </td>
           </tr>
           <tr>
-            <th>{baseInfoCard.tableTitles.expectedDemand}</th>
+            <th>{pageTexts.tableTitles.expectedDemand}</th>
             <td {...conflictStyles.expectedDemand.merged}>
               <TextInputClassExpectedDemand {...classesStates} />
             </td>
           </tr>
           <tr>
-            <th>{baseInfoCard.tableTitles.id}</th>
+            <th>{pageTexts.tableTitles.id}</th>
             <td>
               <TextInputClassId {...classesStates} />
             </td>
@@ -123,8 +109,8 @@ function ClassTimesTable(classesStates) {
     <div className={defaultClassNames.containerCardBaseInfo}>
       <h3>
         {classTimes.length > 0
-          ? classTimeTitles.classTimes
-          : classTimeTitles.addClassTime}
+          ? pageTexts.classTimeTitles.classTimes
+          : pageTexts.classTimeTitles.addClassTime}
       </h3>
       <ClassTimeTable {...classesStates} />
     </div>

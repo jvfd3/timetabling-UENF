@@ -1,14 +1,11 @@
 import React from "react";
+import text from "../../../config/frontText";
+import myStyles from "../../../config/myStyles";
 import configInfo from "../../../config/configInfo";
 import CRUDPageSelection from "../../../components/PageSelection/PageSelect";
-import myStyles from "../../../config/myStyles";
 
 const defaultClassNames = myStyles.classNames.default;
-
-const texts = {
-  title: "Is this a 404 page?",
-  message: "I guess not. 💠",
-};
+const pageTexts = text.page.notFound;
 
 function notFound() {
   const defaultPageValue = configInfo.pageSelection.notFound;
@@ -16,8 +13,8 @@ function notFound() {
     <div className={defaultClassNames.background}>
       <CRUDPageSelection defaultValue={defaultPageValue} />
       <div className={defaultClassNames.containerCards}>
-        <h1>{texts.title}</h1>
-        <p>{texts.message}</p>
+        <h1>{pageTexts.title}</h1>
+        <p>{pageTexts.message}</p>
       </div>
     </div>
   );

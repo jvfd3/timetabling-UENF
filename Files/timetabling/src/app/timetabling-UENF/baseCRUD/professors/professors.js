@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import text from "../../../../config/frontText";
 import myStyles from "../../../../config/myStyles";
 import configInfo from "../../../../config/configInfo";
 import CRUDPageSelection from "../../../../components/PageSelection/PageSelect";
-import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
-import { ProfessorClasses } from "../../../../components/classTimesViewTable/SpecificClassTimeViewTables";
 import { CRUDButtonsContainer } from "../../../../components/CRUDButtons";
+import { ProfessorClasses } from "../../../../components/classTimesViewTable/SpecificClassTimeViewTables";
+import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
 // import { scrollThroughProfessores } from "../functions/firulas/minhasFirulas";
 import {
   SelectProfessorLab,
@@ -24,17 +25,7 @@ import {
 } from "../../../../helpers/CRUDFunctions/professorCRUD";
 
 const defaultClassNames = myStyles.classNames.default;
-
-const baseInfoCard = {
-  title: "INFORMAÇÕES DO PROFESSOR",
-  tableTitles: {
-    lab: "laboratório",
-    course: "curso",
-    name: "nome",
-    alias: "apelido",
-    id: "ID",
-  },
-};
+const pageTexts = text.page.professors;
 
 function ProfessorSelection(professorStates) {
   const professorCRUDFunctions = {
@@ -54,35 +45,35 @@ function ProfessorSelection(professorStates) {
 function BaseInfoCard(professorStates) {
   return (
     <div className={defaultClassNames.containerCardBaseInfo}>
-      <h3>{baseInfoCard.title}</h3>
+      <h3>{pageTexts.title}</h3>
       <table className={defaultClassNames.componentTable}>
         <tbody>
           <tr>
-            <th>{baseInfoCard.lab}</th>
+            <th>{pageTexts.tableTitles.lab}</th>
             <td>
               <SelectProfessorLab {...professorStates} />
             </td>
           </tr>
           <tr>
-            <th>{baseInfoCard.course}</th>
+            <th>{pageTexts.tableTitles.course}</th>
             <td>
               <SelectProfessorCourse {...professorStates} />
             </td>
           </tr>
           <tr>
-            <th>{baseInfoCard.name}</th>
+            <th>{pageTexts.tableTitles.name}</th>
             <td>
               <TextInputProfessorName {...professorStates} />
             </td>
           </tr>
           <tr>
-            <th>{baseInfoCard.alias}</th>
+            <th>{pageTexts.tableTitles.alias}</th>
             <td>
               <TextinputProfessorAlias {...professorStates} />
             </td>
           </tr>
           <tr>
-            <th>{baseInfoCard.id}</th>
+            <th>{pageTexts.tableTitles.id}</th>
             <td>
               <TextInputProfessorId {...professorStates} />
             </td>

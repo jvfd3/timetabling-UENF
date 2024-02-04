@@ -1,46 +1,11 @@
 import React from "react";
+import text from "../../../config/frontText";
 import myStyles from "../../../config/myStyles";
 import configInfo from "../../../config/configInfo";
 import CRUDPageSelection from "../../../components/PageSelection/PageSelect";
 
 const defaultClassNames = myStyles.classNames.default;
-
-const mainPageText = {
-  instructions: {
-    header: "Instruções",
-    subHeaders: [
-      {
-        key: 1,
-        title: "Objetivo:",
-        description:
-          "O objetivo desta aplicação é facilitar a visualização e manipulação de dados de horários de aulas.",
-      },
-      {
-        key: 2,
-        title: "Como usar:",
-        description:
-          "Adicione as informações de disciplina, salas, professores, turmas e horários. Veja os conflitos que surgem na página MultiTurmas e resolva-os. A grade final criada pode ser visualizada na página ccTable.",
-      },
-    ],
-  },
-  shortcuts: {
-    header: "Atalhos",
-    infoList: [
-      {
-        key: 1,
-        title: "Mudar páginas:",
-        description:
-          "passar o mouse por cima do menu no canto superior esquerdo da tela e usar o scroll do mouse",
-      },
-      {
-        key: 2,
-        title: "Selecionar um item:",
-        description:
-          "passar o mouse por cima da seleção de itens e usar o scroll do mouse",
-      },
-    ],
-  },
-};
+const pageTexts = text.page.main;
 
 function Logo() {
   return (
@@ -55,8 +20,8 @@ function Logo() {
 function Instructions() {
   return (
     <div className={defaultClassNames.containerCardBaseInfo}>
-      <h3>{mainPageText.instructions.header}</h3>
-      {mainPageText.instructions.subHeaders.map((info) => (
+      <h3>{pageTexts.instructions.header}</h3>
+      {pageTexts.instructions.subHeaders.map((info) => (
         <div key={info.key}>
           <h5>{info.title}</h5>
           <p>{info.description}</p>
@@ -69,9 +34,9 @@ function Instructions() {
 function Shortcuts() {
   return (
     <div className={defaultClassNames.containerCardBaseInfo}>
-      <h4>{mainPageText.shortcuts.header}</h4>
+      <h4>{pageTexts.shortcuts.header}</h4>
       <ul>
-        {mainPageText.shortcuts.infoList.map((info) => (
+        {pageTexts.shortcuts.infoList.map((info) => (
           <li key={info.key}>
             <strong>{info.title}</strong> <p>{info.description}</p>
           </li>

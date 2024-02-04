@@ -1,5 +1,6 @@
 import "./multiClasses.css";
 import React, { useState, useEffect } from "react";
+import text from "../../../config/frontText";
 import myStyles from "../../../config/myStyles";
 import configInfo from "../../../config/configInfo";
 import ClassesTable from "../../../components/ClassItemTable/ClassItemTable";
@@ -21,11 +22,12 @@ import {
 } from "../../../helpers/auxCRUD";
 
 const defaultClassNames = myStyles.classNames.default;
+const pageTexts = text.page.multiClasses;
 
 function MultiClassesCardHeader(globalStates) {
   return (
     <div className={myStyles.classNames.local.page.multiClasses.header}>
-      <h2>MultiTurmas</h2>
+      <h2>{pageTexts.title}</h2>
       <MultiClassesFilters {...globalStates} />
     </div>
   );
