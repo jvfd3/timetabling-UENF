@@ -9,6 +9,17 @@ function TextInputDefault(myStates) {
   const { items, setItems, item, setItem } = generalStates;
   const { mainValue, getNewItemObject, title, isNumeric } = specificValues;
 
+  /*
+multi
+myselects
+pageselect
+classitemtable
+classtimeviewtable
+classtimetable
+notofferedsubject
+
+*/
+
   const [mainProp, setMainProp] = useState(mainValue);
 
   useEffect(() => {
