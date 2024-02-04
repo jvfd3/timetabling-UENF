@@ -1,5 +1,6 @@
 import "./PageSelection.css";
 import Select from "react-select";
+import text from "../../config/frontText";
 import myStyles from "../../config/myStyles";
 import configInfo from "../../config/configInfo";
 import { useNavigate } from "react-router-dom";
@@ -60,8 +61,8 @@ function CRUDPageSelection(props) {
         }}
       >
         <Select
+          placeholder={text.component.unexpectedPlaceholder}
           className={myStyles.selects.className}
-          placeholder={"Selecionar CRUD"}
           styles={myStyles.selects.fullItem}
           options={filteredOptions}
           defaultValue={props.defaultValue}

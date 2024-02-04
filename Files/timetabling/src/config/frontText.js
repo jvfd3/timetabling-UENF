@@ -100,6 +100,7 @@ const text = {
     ccTable: {},
   },
   component: {
+    unexpectedPlaceholder: "Isso não deveria estar vazio. 😅",
     ccTable: {},
     classTimes: {},
     SelectPlaceholder: {
