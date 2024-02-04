@@ -103,11 +103,11 @@ const text = {
     ccTable: {},
     classTimes: {},
     SelectPlaceholder: {
-      student: "Aluno",
-      professor: "Professor",
-      subject: "Disciplina",
       room: "Sala",
+      student: "Aluno",
       classItem: "Turma",
+      subject: "Disciplina",
+      professor: "Professor",
       // classTime: "Horário",
 
       year: "Ano",
@@ -115,11 +115,11 @@ const text = {
       expectedSemester: "Período Esperado",
 
       block: "Bloco",
-      course: "Curso relacionado",
       lab: "Laboratório",
+      duration: "Duração",
       day: "Dia da semana",
       hour: "Hora de início",
-      duration: "Duração",
+      course: "Curso relacionado",
     },
     textInputPlaceholder: {
       id: "ID",
