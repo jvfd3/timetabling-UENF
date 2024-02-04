@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import { getId, replaceNewItemInListById } from "../helpers/auxCRUD";
+import text from "../config/frontText";
+
+const placeHolders = text.component.textInputPlaceholder;
 
 /* DEFAULT TEXTINPUT */
 
@@ -103,7 +106,7 @@ function NumberInputMultiClassesExpectedDemand(currentClassStates) {
       const newClassItem = { ...classItem, demandaEstimada: newValue };
       return newClassItem;
     },
-    title: "Demanda Estimada",
+    title: placeHolders.expectedDemand,
     isNumeric: true,
   };
   const capacityStates = { generalStates, specificValues };
@@ -124,7 +127,7 @@ function TextInputClassId({ classes, setClasses, classItem, setClassItem }) {
   const specificValues = {
     mainValue: classItem?.idTurma,
     getNewItemObject: (newValue) => ({ ...classItem, idTurma: newValue }),
-    title: "ID",
+    title: placeHolders.id,
     isNumeric: true,
   };
   const idStates = { generalStates, specificValues };
@@ -150,7 +153,7 @@ function TextInputClassExpectedDemand({
       ...classItem,
       demandaEstimada: newValue,
     }),
-    title: "Demanda Estimada",
+    title: placeHolders.expectedDemand,
     isNumeric: true,
   };
   const demandStates = { generalStates, specificValues };
@@ -175,7 +178,7 @@ function TextInputProfessorName({
   const specificValues = {
     mainValue: professor?.nome,
     getNewItemObject: (newValue) => ({ ...professor, nome: newValue }),
-    title: "Nome",
+    title: placeHolders.name,
   };
   const nomeStates = { generalStates, specificValues };
   return <TextInputDefault {...nomeStates} />;
@@ -196,7 +199,7 @@ function TextinputProfessorAlias({
   const specificValues = {
     mainValue: professor?.apelido,
     getNewItemObject: (newValue) => ({ ...professor, apelido: newValue }),
-    title: "Apelido",
+    title: placeHolders.alias,
   };
   const aliasStates = { generalStates, specificValues };
   return <TextInputDefault {...aliasStates} />;
@@ -217,7 +220,7 @@ function TextInputProfessorId({
   const specificValues = {
     mainValue: professor?.id,
     getNewItemObject: (newValue) => ({ ...professor, id: newValue }),
-    title: "ID",
+    title: placeHolders.id,
     isNumeric: true,
   };
   const idStates = { generalStates, specificValues };
@@ -237,7 +240,7 @@ function TextInputSubjectCode({ subjects, setSubjects, subject, setSubject }) {
   const specificValues = {
     mainValue: subject?.codigo,
     getNewItemObject: (newValue) => ({ ...subject, codigo: newValue }),
-    title: "Código",
+    title: placeHolders.code,
   };
   const codeStates = { generalStates, specificValues };
 
@@ -254,7 +257,7 @@ function TextInputSubjectName({ subjects, setSubjects, subject, setSubject }) {
   const specificValues = {
     mainValue: subject?.nome,
     getNewItemObject: (newValue) => ({ ...subject, nome: newValue }),
-    title: "Nome",
+    title: placeHolders.name,
   };
   const nomeStates = { generalStates, specificValues };
 
@@ -271,7 +274,7 @@ function TextInputSubjectAlias({ subjects, setSubjects, subject, setSubject }) {
   const specificValues = {
     mainValue: subject?.apelido,
     getNewItemObject: (newValue) => ({ ...subject, apelido: newValue }),
-    title: "Apelido",
+    title: placeHolders.alias,
   };
   const aliasStates = { generalStates, specificValues };
 
@@ -288,7 +291,7 @@ function TextInputSubjectId({ subjects, setSubjects, subject, setSubject }) {
   const specificValues = {
     mainValue: subject?.id,
     getNewItemObject: (newValue) => ({ ...subject, id: newValue }),
-    title: "ID",
+    title: placeHolders.id,
     isNumeric: true,
   };
   const idStates = { generalStates, specificValues };
@@ -313,7 +316,7 @@ function TextInputStudentEnrollment({
   const specificValues = {
     mainValue: student?.matricula,
     getNewItemObject: (newValue) => ({ ...student, matricula: newValue }),
-    title: "Matrícula",
+    title: placeHolders.enrollment,
   };
   const matriculaStates = { generalStates, specificValues };
 
@@ -330,7 +333,7 @@ function TextInputStudentName({ students, setStudents, student, setStudent }) {
   const specificValues = {
     mainValue: student?.nome,
     getNewItemObject: (newValue) => ({ ...student, nome: newValue }),
-    title: "Nome",
+    title: placeHolders.name,
   };
   const nomeStates = { generalStates, specificValues };
   return <TextInputDefault {...nomeStates} />;
@@ -346,7 +349,7 @@ function TextInputStudentId({ students, setStudents, student, setStudent }) {
   const specificValues = {
     mainValue: student?.id,
     getNewItemObject: (newValue) => ({ ...student, id: newValue }),
-    title: "ID",
+    title: placeHolders.id,
     isNumeric: true,
   };
   const idStates = { generalStates, specificValues };
@@ -366,7 +369,7 @@ function TextInputRoomDescription({ rooms, setRooms, room, setRoom }) {
   const specificValues = {
     mainValue: room?.descricao,
     getNewItemObject: (newValue) => ({ ...room, descricao: newValue }),
-    title: "Descrição",
+    title: placeHolders.comment,
   };
   const descriptionStates = { generalStates, specificValues };
 
@@ -383,7 +386,7 @@ function TextInputRoomCode({ rooms, setRooms, room, setRoom }) {
   const specificValues = {
     mainValue: room?.codigo,
     getNewItemObject: (newValue) => ({ ...room, codigo: newValue }),
-    title: "Código",
+    title: placeHolders.code,
   };
   const codeStates = { generalStates, specificValues };
 
@@ -400,7 +403,7 @@ function TextInputRoomCapacity({ rooms, setRooms, room, setRoom }) {
   const specificValues = {
     mainValue: room?.capacidade,
     getNewItemObject: (newValue) => ({ ...room, capacidade: newValue }),
-    title: "Capacidade",
+    title: placeHolders.capacity,
     isNumeric: true,
   };
   const capacityStates = { generalStates, specificValues };
@@ -418,7 +421,7 @@ function TextInputRoomId({ rooms, setRooms, room, setRoom }) {
   const specificValues = {
     mainValue: room?.id,
     getNewItemObject: (newValue) => ({ ...room, id: newValue }),
-    title: "ID",
+    title: placeHolders.id,
     isNumeric: true,
   };
   const idStates = { generalStates, specificValues };

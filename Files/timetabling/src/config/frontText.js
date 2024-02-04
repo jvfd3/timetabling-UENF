@@ -121,6 +121,16 @@ const text = {
       hour: "Hora de início",
       duration: "Duração",
     },
+    textInputPlaceholder: {
+      id: "ID",
+      name: "Nome",
+      code: "Código",
+      alias: "Apelido",
+      comment: "Descrição",
+      capacity: "Capacidade",
+      enrollment: "Matrícula",
+      expectedDemand: "Demanda Estimada",
+    },
   },
 };
 
