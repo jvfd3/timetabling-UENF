@@ -2,6 +2,16 @@ function checkIndefinition(value) {
   return value ? value : "Indef.";
 }
 
+function getLabelStudentSelection(student) {
+  const enrollment = student?.matricula;
+  const name = student?.nome;
+
+  let studentLabel = "";
+  studentLabel += enrollment ? enrollment + " - " : "Matrícula Indef. - ";
+  studentLabel += name ? name : "Nome Indef.";
+  return studentLabel;
+}
+
 function getSubjectLabel(subject) {
   const subjectCode = subject?.codigo;
   const subjectAlias = subject?.apelido;
@@ -51,6 +61,7 @@ function getDefaultOptionLabelSubject(subject) {
   subjectLabel += checkIndefinition(subject?.periodo) + " Período Periodo-";
   return subjectLabel;
 }
+
 function getDefaultOptionLabelProfessor(professor) {
   let professorLabel = "";
   professorLabel += checkIndefinition(professor?.id) + "-";
@@ -60,6 +71,7 @@ function getDefaultOptionLabelProfessor(professor) {
   professorLabel += checkIndefinition(professor?.curso) + "-";
   return professorLabel;
 }
+
 function getDefaultOptionLabelRoom(room) {
   let roomLabel = "";
   roomLabel += checkIndefinition(room?.id) + "-";
@@ -69,6 +81,7 @@ function getDefaultOptionLabelRoom(room) {
   roomLabel += checkIndefinition(room?.codigo) + "-";
   return roomLabel;
 }
+
 function getDefaultOptionLabelStudent(student) {
   let studentLabel = "";
   studentLabel += checkIndefinition(student?.id) + "-";
@@ -96,9 +109,10 @@ export {
   getSubjectLabel,
   getProfessorLabel,
   checkIndefinition,
-  getDefaultOptionLabelSubject,
-  getDefaultOptionLabelProfessor,
+  getLabelStudentSelection,
   getDefaultOptionLabelRoom,
   getDefaultOptionLabelStudent,
+  getDefaultOptionLabelSubject,
   getDefaultOptionLabelClassItem,
+  getDefaultOptionLabelProfessor,
 };

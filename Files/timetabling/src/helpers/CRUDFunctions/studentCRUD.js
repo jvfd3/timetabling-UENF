@@ -15,8 +15,10 @@ import {
 const itemName = "student";
 
 function createStudent({ students, setStudents, student, setStudent }) {
+  const emptyStudent = emptyObjects.student;
+
   function getNewStudent(newId) {
-    const emptyStudent = emptyObjects.student;
+    // const emptyStudent = emptyObjects.student;
     const newStudent = { ...emptyStudent, id: newId };
     return newStudent;
   }
@@ -28,7 +30,7 @@ function createStudent({ students, setStudents, student, setStudent }) {
     setStudents(newStudents);
   }
 
-  defaultDBCreate(itemName, student)
+  defaultDBCreate(itemName, emptyStudent)
     .then(insertNewStudentFromDB)
     .catch(defaultHandleError);
 }

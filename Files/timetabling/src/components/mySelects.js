@@ -18,6 +18,7 @@ import {
   getDefaultOptionLabelRoom,
   getDefaultOptionLabelStudent,
   getDefaultOptionLabelSubject,
+  getLabelStudentSelection,
 } from "../helpers/visualizationText/textLabels";
 import text from "../config/frontText";
 import configInfo from "../config/configInfo";
@@ -1039,7 +1040,7 @@ function SelectStudentItem({ students, setStudents, student, setStudent }) {
     customProps: {
       getOptionValue: (student) => getId(student),
       getOptionLabel: (student) => getDefaultOptionLabelStudent(student),
-      formatOptionLabel: ({ matricula, nome }) => `${matricula}: ${nome}`,
+      formatOptionLabel: (student) => getLabelStudentSelection(student),
     },
   };
 
@@ -1049,7 +1050,7 @@ function SelectStudentItem({ students, setStudents, student, setStudent }) {
 function SelectStudentYear({ student, setStudent }) {
   function updateStudentYear(newYear) {
     // console.log(newYear);
-    const newStudent = { ...student, anoEntrada: newYear?.value };
+    const newStudent = { ...student, anoEntrada: newYear?.value ?? null };
     setStudent(newStudent);
   }
 
