@@ -1058,6 +1058,7 @@ function SelectStudentYear({ student, setStudent }) {
   const yearStates = {
     outerYear: student?.anoEntrada,
     setOuterYear: updateStudentYear,
+    outerIsClearable: true,
   };
 
   return <SelectYear {...yearStates} />;
