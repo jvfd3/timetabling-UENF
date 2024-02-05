@@ -14,13 +14,13 @@ function getNewIndex(currentIndex, itemsList, deltaY) {
 }
 
 function changePageByScrolling(itemStates) {
-  const { filteredOptions, currentPage, handleChange, deltaY } = itemStates;
-  const index = filteredOptions.findIndex((iterPage) => {
-    const found = iterPage.url === currentPage.url;
+  const { options, currentItem, handleChange, deltaY } = itemStates;
+  const index = options.findIndex((iterPage) => {
+    const found = iterPage.url === currentItem.url;
     return found;
   });
-  const newIndex = getNewIndex(index, filteredOptions, deltaY);
-  const newOption = filteredOptions[newIndex];
+  const newIndex = getNewIndex(index, options, deltaY);
+  const newOption = options[newIndex];
   handleChange(newOption);
 }
 

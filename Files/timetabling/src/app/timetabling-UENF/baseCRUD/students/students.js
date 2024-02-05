@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import text from "../../../../config/frontText";
 import myStyles from "../../../../config/myStyles";
 import configInfo from "../../../../config/configInfo";
-import CRUDPageSelection from "../../../../components/PageSelection/PageSelect";
 import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
 import { CRUDButtonsContainer } from "../../../../components/CRUDButtons";
 // import { scrollThroughAlunos } from "../functions/firulas/minhasFirulas";
@@ -116,14 +115,4 @@ function Students() {
   );
 }
 
-function CRUDStudents() {
-  const defaultPageValue = configInfo.pageSelection.students;
-  return (
-    <div className={defaultClassNames.background}>
-      <CRUDPageSelection defaultValue={defaultPageValue} />
-      <Students />
-    </div>
-  );
-}
-
-export default CRUDStudents;
+export default Students;

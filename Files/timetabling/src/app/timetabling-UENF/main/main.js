@@ -1,8 +1,6 @@
 import React from "react";
 import text from "../../../config/frontText";
 import myStyles from "../../../config/myStyles";
-import configInfo from "../../../config/configInfo";
-import CRUDPageSelection from "../../../components/PageSelection/PageSelect";
 
 const defaultClassNames = myStyles.classNames.default;
 const pageTexts = text.page.main;
@@ -56,14 +54,4 @@ function Main() {
   );
 }
 
-function MainPage() {
-  const defaultPageValue = configInfo.pageSelection.main;
-  return (
-    <div className={defaultClassNames.background}>
-      <CRUDPageSelection defaultValue={defaultPageValue} />
-      <Main />
-    </div>
-  );
-}
-
-export default MainPage;
+export default Main;

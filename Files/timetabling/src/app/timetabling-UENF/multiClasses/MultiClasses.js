@@ -2,9 +2,7 @@ import "./multiClasses.css";
 import React, { useState, useEffect } from "react";
 import text from "../../../config/frontText";
 import myStyles from "../../../config/myStyles";
-import configInfo from "../../../config/configInfo";
 import ClassesTable from "../../../components/ClassItemTable/ClassItemTable";
-import CRUDPageSelection from "../../../components/PageSelection/PageSelect";
 import NotOfferedSubjects from "../../../components/multiClasses/NotOfferedSubjects";
 import { readRoom } from "../../../helpers/CRUDFunctions/roomCRUD";
 import { readSubject } from "../../../helpers/CRUDFunctions/subjectCRUD";
@@ -73,7 +71,7 @@ function MultiClassesCard(globalStates) {
   );
 }
 
-function MultiClassesRefactor() {
+function MultiClasses() {
   const [classTimes, setClassTimes] = useState([]);
   const [filteredClassTimes, setFilteredClassTimes] = useState([]);
   const [classTime, setClassTime] = useState(getDefaultClassTime());
@@ -132,16 +130,6 @@ function MultiClassesRefactor() {
     <div className={defaultClassNames.containerCards}>
       <MultiClassesCard {...globalStates} />
       <NotOfferedSubjects {...classStates} />
-    </div>
-  );
-}
-
-function MultiClasses() {
-  const defaultPageValue = configInfo.pageSelection.multiClasses;
-  return (
-    <div className={defaultClassNames.background}>
-      <CRUDPageSelection defaultValue={defaultPageValue} />
-      <MultiClassesRefactor />
     </div>
   );
 }

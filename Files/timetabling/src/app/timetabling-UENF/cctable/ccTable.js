@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import myStyles from "../../../config/myStyles";
-import configInfo from "../../../config/configInfo";
 import ClassTimeGridCC from "../../../components/GridView/ClassTimeGridCC";
-import CRUDPageSelection from "../../../components/PageSelection/PageSelect";
 import { readClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
 import { CCTableFilters } from "../../../components/Filters/Filters";
 import { getDefaultClassTime } from "../../../helpers/auxCRUD";
@@ -37,14 +35,4 @@ function CCTableView() {
   );
 }
 
-function CCTable() {
-  const defaultPageValue = configInfo.pageSelection.CCTable;
-  return (
-    <div className={defaultClassNames.background}>
-      <CRUDPageSelection defaultValue={defaultPageValue} />
-      <CCTableView />
-    </div>
-  );
-}
-
-export default CCTable;
+export default CCTableView;

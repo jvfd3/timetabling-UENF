@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import text from "../../../../config/frontText";
 import myStyles from "../../../../config/myStyles";
 import configInfo from "../../../../config/configInfo";
-import CRUDPageSelection from "../../../../components/PageSelection/PageSelect";
 import { CRUDButtonsContainer } from "../../../../components/CRUDButtons";
 import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
 import { RoomClasses } from "../../../../components/classTimesViewTable/SpecificClassTimeViewTables";
@@ -114,14 +113,4 @@ function Rooms() {
   );
 }
 
-function CRUDrooms() {
-  const defaultPageValue = configInfo.pageSelection.rooms;
-  return (
-    <div className={defaultClassNames.background}>
-      <CRUDPageSelection defaultValue={defaultPageValue} />
-      <Rooms />
-    </div>
-  );
-}
-
-export default CRUDrooms;
+export default Rooms;

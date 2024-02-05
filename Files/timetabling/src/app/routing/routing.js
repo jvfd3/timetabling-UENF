@@ -1,7 +1,7 @@
 import "react-toastify/dist/ReactToastify.css";
+import configInfo from "../../config/configInfo";
 import { ToastContainer } from "react-toastify";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import configInfo from "../../config/configInfo";
 
 const { routing, pageSelection } = configInfo;
 
@@ -17,7 +17,8 @@ import Professors from "../timetabling-UENF//baseCRUD/professors/professors";
 import Students from "../timetabling-UENF/baseCRUD/students/students";
 import Subjects from "../timetabling-UENF/baseCRUD/subjects/subjects";
 import Rooms from "../timetabling-UENF/baseCRUD/rooms/rooms";
-import PageSelectV2 from "../../components/PageSelection/PageSelectV2";
+import PageSelection from "../../components/PageSelection/PageSelection";
+import myStyles from "../../config/myStyles";
 
 function MyRouting() {
   const basePath = routing.urlPath; //"/timetabling-uenf/";
@@ -31,28 +32,30 @@ function MyRouting() {
   const pathNotFound = basePath + pageSelection.notFound.url;
   const pathCCtable = basePath + pageSelection.CCTable.url;
 
+  const defaultClassNames = myStyles.classNames.default;
+
   return (
-    <BrowserRouter basename="/">
-      <PageSelectV2 />
-      {/* <PageSelection /> */}
-      {/* <Navigation /> */}
-      <Routes>
-        <Route element={<Main />} index />
-        <Route element={<Main />} path={"/"} />
-        <Route element={<Main />} path={basePath} />
-        <Route element={<Main />} path={pathMain} />
-        <Route element={<MultiClasses />} path={pathMultiClasses} />
-        <Route element={<CCTable />} path={pathCCtable} />
-        <Route element={<Classes />} path={pathClasses} />
-        <Route element={<Professors />} path={pathProfessors} />
-        <Route element={<Rooms />} path={pathRooms} />
-        <Route element={<Subjects />} path={pathSubjects} />
-        <Route element={<Students />} path={pathStudents} />
-        <Route element={<NoMatch />} path={pathNotFound} />
-        <Route element={<NoMatch />} path="*" />
-      </Routes>
-      <ToastContainer {...configInfo.toast} />
-    </BrowserRouter>
+    <div className={defaultClassNames.background}>
+      <BrowserRouter basename="/">
+        <PageSelection />
+        <Routes>
+          <Route element={<Main />} index />
+          <Route element={<Main />} path={"/"} />
+          <Route element={<Main />} path={basePath} />
+          <Route element={<Main />} path={pathMain} />
+          <Route element={<MultiClasses />} path={pathMultiClasses} />
+          <Route element={<CCTable />} path={pathCCtable} />
+          <Route element={<Classes />} path={pathClasses} />
+          <Route element={<Professors />} path={pathProfessors} />
+          <Route element={<Rooms />} path={pathRooms} />
+          <Route element={<Subjects />} path={pathSubjects} />
+          <Route element={<Students />} path={pathStudents} />
+          <Route element={<NoMatch />} path={pathNotFound} />
+          <Route element={<NoMatch />} path="*" />
+        </Routes>
+        <ToastContainer {...configInfo.toast} />
+      </BrowserRouter>
+    </div>
   );
 }
 

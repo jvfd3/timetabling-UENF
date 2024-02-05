@@ -48,7 +48,7 @@ const myStyles = {
         },
         PageSelection: {
           PageSelection: "PageSelection",
-          PageSelectionSelect: "PageSelectionSelect",
+          PageSelectionHighlight: "PageSelectionHighlight",
         },
       },
     },

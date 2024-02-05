@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import text from "../../../../config/frontText";
 import myStyles from "../../../../config/myStyles";
 import configInfo from "../../../../config/configInfo";
-import CRUDPageSelection from "../../../../components/PageSelection/PageSelect";
 import { CRUDButtonsContainer } from "../../../../components/CRUDButtons";
 import { ProfessorClasses } from "../../../../components/classTimesViewTable/SpecificClassTimeViewTables";
 import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
@@ -121,14 +120,4 @@ function Professors() {
   );
 }
 
-function CRUDprofessors() {
-  const defaultPageValue = configInfo.pageSelection.professors;
-  return (
-    <div className={defaultClassNames.background}>
-      <CRUDPageSelection defaultValue={defaultPageValue} />
-      <Professors />
-    </div>
-  );
-}
-
-export default CRUDprofessors;
+export default Professors;

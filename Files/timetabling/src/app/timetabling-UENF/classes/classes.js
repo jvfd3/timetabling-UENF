@@ -4,7 +4,6 @@ import myStyles from "../../../config/myStyles";
 import configInfo from "../../../config/configInfo";
 import emptyObjects from "../../../config/emptyObjects";
 import ClassTimeTable from "../../../components/ClassTimeTable/ClassTimeTable";
-import CRUDPageSelection from "../../../components/PageSelection/PageSelect";
 import { readRoom } from "../../../helpers/CRUDFunctions/roomCRUD";
 import { readSubject } from "../../../helpers/CRUDFunctions/subjectCRUD";
 import { readProfessor } from "../../../helpers/CRUDFunctions/professorCRUD";
@@ -174,14 +173,4 @@ function Classes() {
   );
 }
 
-function CRUDclass() {
-  const defaultPageValue = configInfo.pageSelection.classes;
-  return (
-    <div className={defaultClassNames.background}>
-      <CRUDPageSelection defaultValue={defaultPageValue} />
-      <Classes />
-    </div>
-  );
-}
-
-export default CRUDclass;
+export default Classes;

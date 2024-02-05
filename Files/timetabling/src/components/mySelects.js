@@ -20,6 +20,7 @@ import {
   getDefaultOptionLabelSubject,
 } from "../helpers/visualizationText/textLabels";
 import text from "../config/frontText";
+import configInfo from "../config/configInfo";
 
 const styleWidthFix = myStyles.selects.fullItem;
 const placeHolders = text.component.SelectPlaceholder;
@@ -145,6 +146,44 @@ Where each Select is used:
 - SelectStartHour         - CRUD: ClassTime
 - SelectDuration          - CRUD: ClassTime
 */
+
+/* \ Page Selection / */
+
+function SelectPage({ currentPage, setCurrentPage }) {
+  const pageObjectList = configInfo.pageSelection;
+  const pagesList = Object.values(pageObjectList);
+  const filteredPages = pagesList.filter(
+    (iterPage) => iterPage.url !== pageObjectList.notFound.url
+  );
+
+  function findPageObject(selectedPage) {
+    const pageObject = pagesList.find((iterPage) => {
+      const iterUrl = iterPage?.url;
+      const selectedUrl = selectedPage?.url;
+      const isSameUrl = iterUrl === selectedUrl;
+      return isSameUrl;
+    });
+    return pageObject ?? null;
+  }
+
+  const selectPageProps = {
+    placeHolderText: text.component.unexpectedPlaceholder,
+    isClearable: false,
+    options: filteredPages,
+    setOuterValue: setCurrentPage,
+    value: currentPage,
+    findCorrectObject: findPageObject,
+    customProps: {
+      getOptionLabel: ({ pageName }) => pageName,
+      getOptionValue: ({ url }) => url,
+      formatOptionLabel: ({ pageName }) => (
+        <div style={{ display: "flex" }}>{pageName}</div>
+      ),
+    },
+  };
+
+  return <DefaultSelect {...selectPageProps} />;
+}
 
 function SelectYear({ outerYear, setOuterYear, outerIsClearable = false }) {
   function findYearObject(year) {
@@ -1037,6 +1076,7 @@ function SelectStudentCourse({ student, setStudent }) {
 }
 
 export {
+  SelectPage,
   /* Filters */
   SelectFilterYear,
   SelectFilterSemester,
