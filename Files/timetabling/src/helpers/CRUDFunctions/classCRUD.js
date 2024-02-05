@@ -19,15 +19,17 @@ function createClass(createClassStates) {
   const { classes, setClasses, classItem, setClassItem, year, semester } =
     createClassStates;
 
+  const newClassItem = {
+    ...emptyObjects.classItem,
+    ano: year ?? classItem?.ano,
+    semestre: semester ?? classItem?.semestre,
+    disciplina: classItem?.disciplina ?? null,
+  };
+
   function getNewClassItem(newId) {
-    const emptyClass = emptyObjects.classItem;
     const newClass = {
-      ...emptyClass,
-      ano: year ?? classItem?.ano,
-      semestre: semester ?? classItem?.semestre,
-      disciplina: classItem?.disciplina ?? null,
+      ...newClassItem,
       id: newId,
-      idTurma: newId,
     };
     return newClass;
   }
@@ -39,7 +41,7 @@ function createClass(createClassStates) {
     setClasses(newClasses);
   }
 
-  defaultDBCreate(itemName, classItem)
+  defaultDBCreate(itemName, newClassItem)
     .then(insertNewClass)
     .catch(defaultHandleError);
 }

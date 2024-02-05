@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import text from "../../../config/frontText";
 import myStyles from "../../../config/myStyles";
 import configInfo from "../../../config/configInfo";
-import emptyObjects from "../../../config/emptyObjects";
 import ClassTimeTable from "../../../components/ClassTimeTable/ClassTimeTable";
 import { readRoom } from "../../../helpers/CRUDFunctions/roomCRUD";
 import { readSubject } from "../../../helpers/CRUDFunctions/subjectCRUD";
@@ -37,7 +36,7 @@ function ClassSelection(classStates) {
     ...classStates,
     classItem: {
       ...classStates.classItem,
-      disciplina: emptyObjects.classItem.disciplina,
+      disciplina: null,
     },
   };
 
