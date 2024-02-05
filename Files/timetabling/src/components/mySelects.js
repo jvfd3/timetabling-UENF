@@ -288,7 +288,7 @@ function SelectCourse({ outerCourse, setOuterCourse }) {
   return <DefaultSelect {...SelectCourseStates} />;
 }
 
-function SelectBlock({ outerBlock, setOuterBlock }) {
+function SelectBlock({ outerBlock, setOuterBlock, outerIsClearable = false }) {
   function findBlockObject(block) {
     const blocks = pseudoDatabase.blocks;
     const blockObject = blocks.find((iterBlock) => iterBlock.id == block);
@@ -297,7 +297,7 @@ function SelectBlock({ outerBlock, setOuterBlock }) {
 
   const SelectBlockStates = {
     placeHolderText: placeHolders.block,
-    isClearable: false,
+    isClearable: outerIsClearable,
     options: pseudoDatabase.blocks,
     setOuterValue: setOuterBlock,
     value: outerBlock,
@@ -969,11 +969,11 @@ function SelectRoomBlock(myRoomStates) {
   const { room, setRoom } = myRoomStates;
 
   function updateRoomBlock(newBlock) {
-    const { id, code, alias, name } = newBlock;
+    // const { id, code, alias, name } = newBlock;
     // const sameCodeAlias = code === alias;
     // const description = sameCodeAlias ? name : alias;
     // const newBlockValue = `(${code}) ${description}`
-    const newRoom = { ...room, idBlock: id, bloco: code };
+    const newRoom = { ...room, idBlock: newBlock?.id, bloco: newBlock?.code };
     setRoom(newRoom);
   }
 
@@ -983,6 +983,7 @@ function SelectRoomBlock(myRoomStates) {
     // outerBlock: room.bloco,
     outerBlock: room?.idBlock,
     setOuterBlock: updateRoomBlock,
+    outerIsClearable: true,
   };
 
   return <SelectBlock {...blockStates} />;

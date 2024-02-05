@@ -15,8 +15,9 @@ import {
 const itemName = "room";
 
 function createRoom({ rooms, setRooms, room, setRoom }) {
+  const emptyRoom = emptyObjects.room;
+
   function getNewRoom(newId) {
-    const emptyRoom = emptyObjects.room;
     const newRoom = { ...emptyRoom, id: newId };
     return newRoom;
   }
@@ -28,7 +29,7 @@ function createRoom({ rooms, setRooms, room, setRoom }) {
     setRooms(newRooms);
   }
 
-  defaultDBCreate(itemName, room)
+  defaultDBCreate(itemName, emptyRoom)
     .then(insertNewRoomFromDB)
     .catch(defaultHandleError);
 }
