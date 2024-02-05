@@ -190,7 +190,7 @@ function SelectYear({ outerYear, setOuterYear, outerIsClearable = false }) {
   function findYearObject(year) {
     const years = constantValues.years;
     const yearObject = years.find((iterYear) => iterYear.value == year);
-    return yearObject;
+    return yearObject ?? null;
   }
 
   const SelectYearStates = {
@@ -292,7 +292,7 @@ function SelectBlock({ outerBlock, setOuterBlock }) {
   function findBlockObject(block) {
     const blocks = pseudoDatabase.blocks;
     const blockObject = blocks.find((iterBlock) => iterBlock.id == block);
-    return blockObject;
+    return blockObject ?? null;
   }
 
   const SelectBlockStates = {
@@ -330,7 +330,7 @@ function SelectExpectedSemester({
     const expectedSemesterObject = expectedSemesters.find(
       (iterExpectedSemester) => iterExpectedSemester.value == expectedSemester
     );
-    return expectedSemesterObject;
+    return expectedSemesterObject ?? null;
   }
 
   const SelectExpectedSemesterStates = {
@@ -391,7 +391,7 @@ function SelectProfessor({
   function findProfessorObject(professor) {
     const professorsList = localProfessors; // get from DB
     const professorObject = getItemFromListById(professor, professorsList);
-    return professorObject ? professorObject : null;
+    return professorObject ?? null;
   }
 
   const SelectProfessorStates = {
