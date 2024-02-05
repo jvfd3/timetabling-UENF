@@ -77,48 +77,45 @@ function getDefaultClassTime(year, semester) {
   return defaultClassTime;
 }
 
-function keepOldItem(item, items) {
-  /*
-  // Deletion case - use this to keep the previous item
-  let newItem = null;
-  if (index > 0) {
-    newItem = classes[index - 1];
-  } else if (filteredClasses.length > 0) {
-    newItem = classes[0];
-  } else {
-    const errorMessage =
-      "deleteClass: Não há mais classes para serem exibidas na lista";
-    console.error(errorMessage);
+function refreshShownItem(item, oldItems, newItems) {
+  const indexInNew = getItemIndexInListById(item, newItems);
+  const indexInOld = getItemIndexInListById(item, oldItems);
+
+  let showedItem = null;
+
+  // console.log("item", item);
+  // console.log("indexInNew", indexInNew, newItems);
+  // console.log("indexInOld", indexInOld);
+
+  if (indexInNew !== -1) {
+    // READING
+    // console.log("keepCurrent");
+    // The current item is in the new list, so keep it
+    showedItem = newItems[indexInNew];
+  } else if (indexInOld !== -1 && newItems.length > 0) {
+    // DELETING
+    if (indexInOld >= newItems.length) {
+      // console.log("keepLast");
+      // The current item is above the new items limit, so keep the last
+      showedItem = newItems[newItems.length - 1]; //Get Last item
+    } else if (indexInOld === 0) {
+      // console.log("keepFirst");
+      // The current item is below the new items limit, so keep the first
+      showedItem = newItems[0]; //Get First item
+    } else {
+      // console.log("keepMiddle");
+      // The current item is in the middle of the new items, so keep the previous
+      showedItem = newItems[indexInOld - 1]; // Get Previous item
+    }
   }
-  */
 
-  const index = getItemIndexInListById(item, items);
-  const keepCurrentItem = items?.[index];
-  const previous = items?.[index - 1];
-  const next = items?.[index + 1];
-  const lastItem = items?.[items.length - 1];
-  const firstItem = items?.[0];
-
-  const debug = {
-    curr: getId(item),
-    kept: getId(keepCurrentItem),
-    prev: getId(previous),
-    next: getId(next),
-    last: getId(lastItem),
-    frst: getId(firstItem),
-  };
-
-  // console.log(debug);
-
-  const showedItem =
-    keepCurrentItem ?? previous ?? next ?? lastItem ?? firstItem ?? null;
   return showedItem;
 }
 
 export {
   // replaceNewClassTimeInList,
   // replaceNewClassItemInList,
-  keepOldItem,
+  refreshShownItem,
   getItemFromListById, // Room Select
   getItemIndexInListById, // Read
   replaceNewItemInListById, // Update

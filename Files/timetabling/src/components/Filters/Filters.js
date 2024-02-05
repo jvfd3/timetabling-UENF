@@ -6,7 +6,7 @@ import { readSubject } from "../../helpers/CRUDFunctions/subjectCRUD";
 import { readProfessor } from "../../helpers/CRUDFunctions/professorCRUD";
 import { getDefaultYearSemesterValues } from "../../helpers/auxFunctions";
 import {
-  keepOldItem,
+  refreshShownItem,
   getDefaultClassItem,
   getDefaultClassTime,
 } from "../../helpers/auxCRUD";
@@ -284,8 +284,9 @@ function ClassesFilters(classStates) {
 
   useEffect(() => {
     const filteredClasses = filterList(classes, year, semester);
-    const newClassItem = keepOldItem(classItem, filteredClasses);
     setFilteredClasses(filteredClasses);
+
+    const newClassItem = refreshShownItem(classItem, classes, filteredClasses);
     setClassItem(newClassItem);
   }, statesToWatchFor);
 

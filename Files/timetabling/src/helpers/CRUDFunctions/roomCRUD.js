@@ -7,7 +7,7 @@ import {
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
 import {
-  keepOldItem,
+  refreshShownItem,
   removeItemInListById,
   replaceNewItemInListById,
 } from "../auxCRUD";
@@ -34,11 +34,12 @@ function createRoom({ rooms, setRooms, room, setRoom }) {
     .catch(defaultHandleError);
 }
 
-function readRoom({ setRooms, setRoom, room }) {
+function readRoom({ rooms, setRooms, setRoom, room }) {
   function insertNewRoomsFromDB(roomsFromDB) {
-    const showedRoom = keepOldItem(room, roomsFromDB);
-    setRoom(showedRoom);
     setRooms(roomsFromDB);
+
+    const showedRoom = refreshShownItem(room, rooms, roomsFromDB);
+    setRoom(showedRoom);
   }
 
   defaultDBRead(itemName).then(insertNewRoomsFromDB).catch(defaultHandleError);
@@ -60,7 +61,7 @@ function deleteRoom({ rooms, setRooms, room, setRoom }) {
   function deleteRoomOnList(deletedRoom) {
     if (deletedRoom) {
       const deletedRoomList = removeItemInListById(deletedRoom, rooms);
-      const showedRoom = keepOldItem(room, deletedRoomList);
+      const showedRoom = refreshShownItem(room, deletedRoomList);
       setRoom(showedRoom);
       setRooms(deletedRoomList);
     }

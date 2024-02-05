@@ -7,7 +7,8 @@ import {
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
 import {
-  keepOldItem,
+  getId,
+  refreshShownItem,
   removeItemInListById,
   replaceNewItemInListById,
 } from "../auxCRUD";
@@ -35,11 +36,12 @@ function createStudent({ students, setStudents, student, setStudent }) {
     .catch(defaultHandleError);
 }
 
-function readStudent({ setStudents, setStudent, student }) {
+function readStudent({ students, setStudents, setStudent, student }) {
   function insertNewStudentsFromDB(studentsFromDB) {
-    const showedStudent = keepOldItem(student, studentsFromDB);
-    setStudent(showedStudent);
     setStudents(studentsFromDB);
+
+    const showedStudent = refreshShownItem(student, students, studentsFromDB);
+    setStudent(showedStudent);
   }
 
   defaultDBRead(itemName)
@@ -63,9 +65,14 @@ function deleteStudent({ students, setStudents, student, setStudent }) {
   function deleteStudentOnList(deletedStudent) {
     if (deletedStudent) {
       const updatedStudents = removeItemInListById(deletedStudent, students);
-      const showedStudent = keepOldItem(student, students);
-      setStudent(showedStudent);
       setStudents(updatedStudents);
+
+      const showedStudent = refreshShownItem(
+        student,
+        students,
+        updatedStudents
+      );
+      setStudent(showedStudent);
     }
   }
 

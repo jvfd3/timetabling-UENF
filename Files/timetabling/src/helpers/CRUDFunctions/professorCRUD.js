@@ -7,7 +7,7 @@ import {
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
 import {
-  keepOldItem,
+  refreshShownItem,
   removeItemInListById,
   replaceNewItemInListById,
 } from "../auxCRUD";
@@ -39,11 +39,16 @@ function createProfessor({
     .catch(defaultHandleError);
 }
 
-function readProfessor({ setProfessors, setProfessor, professor }) {
+function readProfessor({ professors, setProfessors, setProfessor, professor }) {
   function insertNewProfessorsFromDB(professoresFromDB) {
-    const showedProfessor = keepOldItem(professor, professoresFromDB);
-    setProfessor(showedProfessor);
     setProfessors(professoresFromDB);
+
+    const showedProfessor = refreshShownItem(
+      professor,
+      professors,
+      professoresFromDB
+    );
+    setProfessor(showedProfessor);
   }
 
   defaultDBRead(itemName)
@@ -78,7 +83,7 @@ function deleteProfessor({
         deletedProfessor,
         professors
       );
-      const newProfessor = keepOldItem(professor, updatedProfessorList);
+      const newProfessor = refreshShownItem(professor, updatedProfessorList);
       setProfessor(newProfessor);
       setProfessors(updatedProfessorList);
     }

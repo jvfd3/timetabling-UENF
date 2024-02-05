@@ -8,7 +8,7 @@ import {
 } from "../../DB/AWS/defaultAxiosFunctions";
 import {
   getId,
-  keepOldItem,
+  refreshShownItem,
   removeItemInListById,
   replaceNewItemInListById,
 } from "../auxCRUD";
@@ -46,11 +46,12 @@ function createClass(createClassStates) {
     .catch(defaultHandleError);
 }
 
-function readClass({ setClasses, classItem, setClassItem }) {
+function readClass({ classes, setClasses, classItem, setClassItem }) {
   function insertNewClassesFromDB(dataFromDB) {
-    const showedClassItem = keepOldItem(classItem, dataFromDB);
-    setClassItem(showedClassItem);
     setClasses(dataFromDB);
+
+    const showedClassItem = refreshShownItem(classItem, classes, dataFromDB);
+    setClassItem(showedClassItem);
   }
 
   defaultDBRead(itemName)
@@ -76,7 +77,7 @@ function deleteClass({ classes, setClasses, classItem, setClassItem }) {
   function deleteClassOnList(classToDelete) {
     if (classToDelete) {
       const filteredClasses = removeItemInListById(classToDelete, classes);
-      const newItem = keepOldItem(classItem, filteredClasses);
+      const newItem = refreshShownItem(classItem, filteredClasses);
       setClassItem(newItem);
       setClasses(filteredClasses);
     }

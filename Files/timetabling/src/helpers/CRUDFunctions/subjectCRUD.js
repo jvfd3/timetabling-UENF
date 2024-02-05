@@ -7,7 +7,7 @@ import {
   defaultHandleError,
 } from "../../DB/AWS/defaultAxiosFunctions";
 import {
-  keepOldItem,
+  refreshShownItem,
   removeItemInListById,
   replaceNewItemInListById,
 } from "../auxCRUD";
@@ -34,11 +34,12 @@ function createSubject({ subjects, setSubjects, subject, setSubject }) {
     .catch(defaultHandleError);
 }
 
-function readSubject({ setSubjects, setSubject, subject }) {
+function readSubject({ subjects, setSubjects, setSubject, subject }) {
   function insertNewSubjectsFromDB(subjectsFromDB) {
-    const showedSubject = keepOldItem(subject, subjectsFromDB);
-    setSubject(showedSubject);
     setSubjects(subjectsFromDB);
+
+    const showedSubject = refreshShownItem(subject, subjects, subjectsFromDB);
+    setSubject(showedSubject);
   }
 
   defaultDBRead(itemName)
@@ -62,7 +63,7 @@ function deleteSubject({ subjects, setSubjects, subject, setSubject }) {
   function deleteSubjectOnList(deletedSubject) {
     if (deletedSubject) {
       const updatedSubjects = removeItemInListById(deletedSubject, subjects);
-      const showedSubject = keepOldItem(subject, updatedSubjects);
+      const showedSubject = refreshShownItem(subject, updatedSubjects);
       setSubject(showedSubject);
       setSubjects(updatedSubjects);
     }
