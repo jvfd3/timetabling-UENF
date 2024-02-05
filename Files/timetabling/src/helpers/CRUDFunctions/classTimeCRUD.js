@@ -76,8 +76,6 @@ function updateClassTime(classTimeStates) {
     setClasses(updatedClasses);
   }
 
-  // updateClassTimeFromDB(classTime);
-
   defaultDBUpdate(itemName, classTime)
     .then(updateClassTimeFromDB)
     .catch(defaultHandleError);
