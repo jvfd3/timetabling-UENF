@@ -20,8 +20,9 @@ function createProfessor({
   professor,
   setProfessor,
 }) {
+  const emptyProfessor = emptyObjects.professor;
+
   function getNewProfessor(newId) {
-    const emptyProfessor = emptyObjects.professor;
     const newProfessor = { ...emptyProfessor, id: newId };
     return newProfessor;
   }
@@ -33,7 +34,7 @@ function createProfessor({
     setProfessors(newProfessors);
   }
 
-  defaultDBCreate(itemName, professor)
+  defaultDBCreate(itemName, emptyProfessor)
     .then(insertNewProfessorFromDB)
     .catch(defaultHandleError);
 }
