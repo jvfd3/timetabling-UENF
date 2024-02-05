@@ -63,9 +63,14 @@ function deleteSubject({ subjects, setSubjects, subject, setSubject }) {
   function deleteSubjectOnList(deletedSubject) {
     if (deletedSubject) {
       const updatedSubjects = removeItemInListById(deletedSubject, subjects);
-      const showedSubject = refreshShownItem(subject, updatedSubjects);
-      setSubject(showedSubject);
       setSubjects(updatedSubjects);
+
+      const showedSubject = refreshShownItem(
+        subject,
+        subjects,
+        updatedSubjects
+      );
+      setSubject(showedSubject);
     }
   }
 

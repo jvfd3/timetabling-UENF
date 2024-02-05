@@ -61,9 +61,10 @@ function deleteRoom({ rooms, setRooms, room, setRoom }) {
   function deleteRoomOnList(deletedRoom) {
     if (deletedRoom) {
       const deletedRoomList = removeItemInListById(deletedRoom, rooms);
-      const showedRoom = refreshShownItem(room, deletedRoomList);
-      setRoom(showedRoom);
       setRooms(deletedRoomList);
+
+      const showedRoom = refreshShownItem(room, rooms, deletedRoomList);
+      setRoom(showedRoom);
     }
   }
 

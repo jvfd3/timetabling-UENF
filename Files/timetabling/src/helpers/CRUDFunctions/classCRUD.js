@@ -77,9 +77,10 @@ function deleteClass({ classes, setClasses, classItem, setClassItem }) {
   function deleteClassOnList(classToDelete) {
     if (classToDelete) {
       const filteredClasses = removeItemInListById(classToDelete, classes);
-      const newItem = refreshShownItem(classItem, filteredClasses);
-      setClassItem(newItem);
       setClasses(filteredClasses);
+
+      const newItem = refreshShownItem(classItem, classes, filteredClasses);
+      setClassItem(newItem);
     }
   }
 

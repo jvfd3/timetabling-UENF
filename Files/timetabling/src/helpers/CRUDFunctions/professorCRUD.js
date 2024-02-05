@@ -83,9 +83,14 @@ function deleteProfessor({
         deletedProfessor,
         professors
       );
-      const newProfessor = refreshShownItem(professor, updatedProfessorList);
-      setProfessor(newProfessor);
       setProfessors(updatedProfessorList);
+
+      const newProfessor = refreshShownItem(
+        professor,
+        professors,
+        updatedProfessorList
+      );
+      setProfessor(newProfessor);
     }
   }
 
