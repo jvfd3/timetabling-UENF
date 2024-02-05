@@ -1022,6 +1022,7 @@ function SelectSubjectExpectedSemester({ subject, setSubject }) {
   const expectedSemesterStates = {
     outerExpectedSemester: subject?.periodo,
     setOuterExpectedSemester: updateDisciplinaExpectedSemester,
+    outerIsClearable: true,
   };
 
   return <SelectExpectedSemester {...expectedSemesterStates} />;

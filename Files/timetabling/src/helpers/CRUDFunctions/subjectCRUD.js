@@ -15,9 +15,10 @@ import {
 const itemName = "subject";
 
 function createSubject({ subjects, setSubjects, subject, setSubject }) {
+  const emptySubject = emptyObjects.subject;
+
   function getNewSubject(newId) {
-    const emptySubject = emptyObjects.subject;
-    const newSubject = { ...emptySubject, periodo: 0, id: newId };
+    const newSubject = { ...emptySubject, id: newId };
     return newSubject;
   }
 
@@ -28,7 +29,7 @@ function createSubject({ subjects, setSubjects, subject, setSubject }) {
     setSubjects(newSubjects);
   }
 
-  defaultDBCreate(itemName, subject)
+  defaultDBCreate(itemName, emptySubject)
     .then(insertNewSubjectFromDB)
     .catch(defaultHandleError);
 }
