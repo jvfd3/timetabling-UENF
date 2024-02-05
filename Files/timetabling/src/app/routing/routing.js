@@ -49,17 +49,7 @@ function MyRouting() {
         <Route element={<NoMatch />} path={pathNotFound} />
         <Route element={<NoMatch />} path="*" />
       </Routes>
-      <ToastContainer
-        autoClose={configInfo.toast.time}
-        position={configInfo.toast.position}
-        // closeOnClick
-        // draggable
-        // pauseOnHover
-        // hideProgressBar={false}
-        // newestOnTop={false}
-        // pauseOnFocusLoss
-        // theme="light"
-      />
+      <ToastContainer {...configInfo.toast} />
     </BrowserRouter>
   );
 }

@@ -1,8 +1,15 @@
 const configInfo = {
   iconButtons: true,
   toast: {
-    time: 2000,
+    autoClose: 2000,
     position: "bottom-right",
+    // closeOnClick
+    // draggable
+    // pauseOnHover
+    // hideProgressBar={false}
+    // newestOnTop={false}
+    // pauseOnFocusLoss
+    // theme="light"
   },
   routing: {
     filePath: "/pages/",
