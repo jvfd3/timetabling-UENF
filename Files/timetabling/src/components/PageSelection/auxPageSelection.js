@@ -9,7 +9,7 @@ function getCurrentPage() {
   const thisPage = location[location.length - 1];
   const currentPageObject = pagesList.find((page) => page.url === thisPage);
 
-  const mainPaths = ["", "/", "/timetabling-UENF/", "/timetabling-UENF/main"];
+  const mainPaths = ["", "/", "main", "timetabling-UENF"];
 
   const mainPage = pageObjectList.main;
   const notFoundPage = pageObjectList.notFound;
