@@ -1,16 +1,27 @@
-function getIndexVariation(event) {
+function getIndexVariation(deltaY) {
   const UP = "up";
   const DOWN = "down";
-  const diretion = event.deltaY > 0 ? DOWN : UP;
+  const diretion = deltaY > 0 ? DOWN : UP;
   const indexVariation = diretion === UP ? -1 : 1;
   return indexVariation;
 }
 
-function getNewIndex(currentIndex, itemsList, event) {
-  const indexVariation = getIndexVariation(event);
+function getNewIndex(currentIndex, itemsList, deltaY) {
+  const indexVariation = getIndexVariation(deltaY);
   const fullIndex = currentIndex + indexVariation + itemsList.length;
   const newIndex = fullIndex % itemsList.length;
   return newIndex;
+}
+
+function changePageByScrolling(itemStates) {
+  const { filteredOptions, currentPage, handleChange, deltaY } = itemStates;
+  const index = filteredOptions.findIndex((iterPage) => {
+    const found = iterPage.url === currentPage.url;
+    return found;
+  });
+  const newIndex = getNewIndex(index, filteredOptions, deltaY);
+  const newOption = filteredOptions[newIndex];
+  handleChange(newOption);
 }
 
 function scrollThroughProfessores(event, professorStates) {
@@ -28,14 +39,7 @@ function scrollThroughItemList(event, itemStates) {
   const newOption = items[getNewIndex(index, items, event)];
   setItem(newOption);
 }
-function changePageByScrolling(event, itemStates) {
-  const [filteredOptions, props, handleChange] = itemStates;
-  const index = filteredOptions.findIndex(
-    (option) => option.value === props.defaultValue.value
-  );
-  const newOption = filteredOptions[getNewIndex(index, filteredOptions, event)];
-  handleChange(newOption);
-}
+
 function scrollThroughDisciplinas(event, itemStates) {
   const [disciplinas, setDisciplina, disciplina] = itemStates;
   const index = disciplinas.findIndex(

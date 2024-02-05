@@ -17,6 +17,7 @@ import Professors from "../timetabling-UENF//baseCRUD/professors/professors";
 import Students from "../timetabling-UENF/baseCRUD/students/students";
 import Subjects from "../timetabling-UENF/baseCRUD/subjects/subjects";
 import Rooms from "../timetabling-UENF/baseCRUD/rooms/rooms";
+import PageSelectV2 from "../../components/PageSelection/PageSelectV2";
 
 function MyRouting() {
   const basePath = routing.urlPath; //"/timetabling-uenf/";
@@ -32,6 +33,7 @@ function MyRouting() {
 
   return (
     <BrowserRouter basename="/">
+      <PageSelectV2 />
       {/* <PageSelection /> */}
       {/* <Navigation /> */}
       <Routes>
