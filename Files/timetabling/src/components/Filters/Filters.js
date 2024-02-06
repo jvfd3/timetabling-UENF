@@ -317,7 +317,7 @@ function ViewTableFilters(classTimeStates) {
     hour: { hour, setHour },
   };
 
-  const statesToWatchFor = [year, semester, day, hour, classTimes];
+  const statesToWatchFor = [year, semester, day, hour, classTimes, baseValueToFilter];
 
   function filterList(list, year, semester) {
     let filteredList = list;
