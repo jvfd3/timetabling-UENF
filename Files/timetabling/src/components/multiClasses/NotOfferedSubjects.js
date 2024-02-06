@@ -139,7 +139,7 @@ function NonOfferedSubjectsTable(unofferedSubjectsProps) {
 function NotOfferedSubjects(classStates) {
   // console.log(classStates);
   const { filteredClasses, classItem, subjects } = classStates;
-  const semesterValue = classItem.semestre;
+  const semesterValue = classItem?.semestre;
 
   const nonOfferedSubjects = getListOfNotOfferedSubjects(
     filteredClasses,
