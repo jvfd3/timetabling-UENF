@@ -3,7 +3,7 @@
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 9,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220201,
     "disciplina": {
       "id": 2,
@@ -22,14 +22,13 @@
     "dia": "TER",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022020101
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 9,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220201,
     "disciplina": {
       "id": 2,
@@ -48,14 +47,13 @@
     "dia": "QUI",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022020102
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 9,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220201,
     "disciplina": {
       "id": 2,
@@ -74,14 +72,13 @@
     "dia": "QUI",
     "horaInicio": 12,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022020103
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 9,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220201,
     "disciplina": {
       "id": 2,
@@ -100,14 +97,13 @@
     "dia": "SEX",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022020104
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 6,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220202,
     "disciplina": {
       "id": 2,
@@ -126,14 +122,13 @@
     "dia": "TER",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022020206
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 6,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220202,
     "disciplina": {
       "id": 2,
@@ -152,14 +147,13 @@
     "dia": "QUI",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022020207
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 6,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220202,
     "disciplina": {
       "id": 2,
@@ -178,14 +172,13 @@
     "dia": "SEG",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022020205
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 28,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220203,
     "disciplina": {
       "id": 9,
@@ -204,14 +197,13 @@
     "dia": "TER",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022020308
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 28,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220203,
     "disciplina": {
       "id": 9,
@@ -230,14 +222,13 @@
     "dia": "QUI",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022020309
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 25,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220204,
     "disciplina": {
       "id": 10,
@@ -256,14 +247,13 @@
     "dia": "TER",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022020410
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 25,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220204,
     "disciplina": {
       "id": 10,
@@ -282,14 +272,13 @@
     "dia": "QUI",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022020411
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 25,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220204,
     "disciplina": {
       "id": 10,
@@ -308,21 +297,19 @@
     "dia": "QUI",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022020412
   },
   {
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20220205,
     "horaInicio": null,
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 35,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 11,
       "periodo": 2,
@@ -342,7 +329,7 @@
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 40,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220206,
     "disciplina": {
       "id": 12,
@@ -361,14 +348,13 @@
     "dia": "SEG",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022020613
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 40,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220206,
     "disciplina": {
       "id": 12,
@@ -387,21 +373,19 @@
     "dia": "QUA",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022020614
   },
   {
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20220207,
     "horaInicio": null,
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 12,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 13,
       "periodo": 2,
@@ -421,7 +405,7 @@
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 37,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220208,
     "disciplina": {
       "id": 13,
@@ -440,14 +424,13 @@
     "dia": "TER",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022020816
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 37,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220208,
     "disciplina": {
       "id": 13,
@@ -466,14 +449,13 @@
     "dia": "QUA",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022020817
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 37,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220208,
     "disciplina": {
       "id": 13,
@@ -492,14 +474,13 @@
     "dia": "SEG",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022020815
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 24,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220209,
     "disciplina": {
       "id": 14,
@@ -518,14 +499,13 @@
     "dia": "SEX",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022020918
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 24,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220209,
     "disciplina": {
       "id": 14,
@@ -544,14 +524,13 @@
     "dia": "SEX",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022020919
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 21,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220210,
     "disciplina": {
       "id": 15,
@@ -570,14 +549,13 @@
     "dia": "SEG",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021020
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 21,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220210,
     "disciplina": {
       "id": 15,
@@ -596,14 +574,13 @@
     "dia": "QUA",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021021
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 15,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220211,
     "disciplina": {
       "id": 17,
@@ -622,14 +599,13 @@
     "dia": "QUI",
     "horaInicio": 18,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021122
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 15,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220211,
     "disciplina": {
       "id": 17,
@@ -648,14 +624,13 @@
     "dia": "SEX",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021124
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 15,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220211,
     "disciplina": {
       "id": 17,
@@ -674,14 +649,13 @@
     "dia": "QUA",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021123
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 15,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220212,
     "disciplina": {
       "id": 23,
@@ -700,14 +674,13 @@
     "dia": "TER",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021225
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 15,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220212,
     "disciplina": {
       "id": 23,
@@ -726,14 +699,13 @@
     "dia": "QUI",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021226
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 3,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220213,
     "disciplina": {
       "id": 28,
@@ -752,14 +724,13 @@
     "dia": "TER",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021329
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 3,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220213,
     "disciplina": {
       "id": 28,
@@ -778,14 +749,13 @@
     "dia": "QUI",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021330
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 3,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220213,
     "disciplina": {
       "id": 28,
@@ -804,14 +774,13 @@
     "dia": "SEG",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021327
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 3,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220213,
     "disciplina": {
       "id": 28,
@@ -830,14 +799,13 @@
     "dia": "QUA",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021328
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 12,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220214,
     "disciplina": {
       "id": 29,
@@ -856,14 +824,13 @@
     "dia": "QUA",
     "horaInicio": 18,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021432
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 12,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220214,
     "disciplina": {
       "id": 29,
@@ -882,14 +849,13 @@
     "dia": "SEG",
     "horaInicio": 18,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021431
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 10,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220215,
     "disciplina": {
       "id": 30,
@@ -908,14 +874,13 @@
     "dia": "QUA",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021533
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 10,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220215,
     "disciplina": {
       "id": 30,
@@ -934,14 +899,13 @@
     "dia": "SEX",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021534
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 14,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220216,
     "disciplina": {
       "id": 31,
@@ -960,14 +924,13 @@
     "dia": "QUA",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021636
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 14,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220216,
     "disciplina": {
       "id": 31,
@@ -986,14 +949,13 @@
     "dia": "SEG",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021635
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 10,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220217,
     "disciplina": {
       "id": 37,
@@ -1012,14 +974,13 @@
     "dia": "TER",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021737
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 10,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220217,
     "disciplina": {
       "id": 37,
@@ -1038,14 +999,13 @@
     "dia": "QUI",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021738
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 14,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220218,
     "disciplina": {
       "id": 39,
@@ -1064,14 +1024,13 @@
     "dia": "SEX",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021839
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 3,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220219,
     "disciplina": {
       "id": 40,
@@ -1090,14 +1049,13 @@
     "dia": "SEG",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021940
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 3,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220219,
     "disciplina": {
       "id": 40,
@@ -1116,14 +1074,13 @@
     "dia": "QUA",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022021941
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 14,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220220,
     "disciplina": {
       "id": 42,
@@ -1142,14 +1099,13 @@
     "dia": "TER",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022022042
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 14,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220220,
     "disciplina": {
       "id": 42,
@@ -1168,14 +1124,13 @@
     "dia": "QUI",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022022043
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 13,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220221,
     "disciplina": {
       "id": 43,
@@ -1194,14 +1149,13 @@
     "dia": "SEX",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022022145
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 13,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220221,
     "disciplina": {
       "id": 43,
@@ -1220,14 +1174,13 @@
     "dia": "QUA",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022022144
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 8,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220222,
     "disciplina": {
       "id": 43,
@@ -1246,14 +1199,13 @@
     "dia": "SEG",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022022246
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 8,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220222,
     "disciplina": {
       "id": 43,
@@ -1272,14 +1224,13 @@
     "dia": "QUA",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022022247
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 12,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220223,
     "disciplina": {
       "id": 44,
@@ -1298,14 +1249,13 @@
     "dia": "TER",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022022348
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 12,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220223,
     "disciplina": {
       "id": 44,
@@ -1324,14 +1274,13 @@
     "dia": "QUI",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022022349
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 10,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220224,
     "disciplina": {
       "id": 45,
@@ -1350,14 +1299,13 @@
     "dia": "TER",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022022450
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 10,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220224,
     "disciplina": {
       "id": 45,
@@ -1376,21 +1324,19 @@
     "dia": "SEX",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022022451
   },
   {
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20220225,
     "horaInicio": null,
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 7,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 46,
       "periodo": 7,
@@ -1410,7 +1356,7 @@
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 20,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220226,
     "disciplina": {
       "id": 47,
@@ -1429,14 +1375,13 @@
     "dia": "SEX",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022022653
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220227,
     "disciplina": {
       "id": 56,
@@ -1455,14 +1400,13 @@
     "dia": "SEX",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022022754
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220228,
     "disciplina": {
       "id": 58,
@@ -1481,14 +1425,13 @@
     "dia": "SEX",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022022855
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220229,
     "disciplina": {
       "id": 59,
@@ -1507,14 +1450,13 @@
     "dia": "SEX",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022022956
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220229,
     "disciplina": {
       "id": 59,
@@ -1533,14 +1475,13 @@
     "dia": "TER",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022022957
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 9,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220230,
     "disciplina": {
       "id": 65,
@@ -1559,14 +1500,13 @@
     "dia": "QUI",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022023059
   },
   {
     "ano": 2022,
     "semestre": 2,
     "demandaEstimada": 9,
-    "comment": "",
+    "comment": null,
     "idTurma": 20220230,
     "disciplina": {
       "id": 65,
@@ -1585,14 +1525,13 @@
     "dia": "QUI",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2022023060
   },
   {
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "idTurma": 20230109,
     "disciplina": {
       "id": 7,
@@ -1611,7 +1550,6 @@
     "dia": "TER",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2023010908,
     "sala": {
       "id": 26,
@@ -1626,7 +1564,7 @@
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "idTurma": 20230109,
     "disciplina": {
       "id": 7,
@@ -1645,7 +1583,6 @@
     "dia": "QUI",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2023010909,
     "sala": {
       "id": 23,
@@ -1660,7 +1597,7 @@
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": 4,
-    "comment": "",
+    "comment": null,
     "idTurma": 20230110,
     "disciplina": {
       "id": 16,
@@ -1679,14 +1616,13 @@
     "dia": "SEG",
     "horaInicio": 18,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2023011010
   },
   {
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": 5,
-    "comment": "",
+    "comment": null,
     "idTurma": 20230111,
     "disciplina": {
       "id": 18,
@@ -1705,7 +1641,6 @@
     "dia": "SEX",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2023011111,
     "sala": {
       "id": 6,
@@ -1720,7 +1655,7 @@
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": 5,
-    "comment": "",
+    "comment": null,
     "idTurma": 20230112,
     "disciplina": {
       "id": 20,
@@ -1739,7 +1674,6 @@
     "dia": "SEG",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2023011212,
     "sala": {
       "id": 2,
@@ -1754,7 +1688,7 @@
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": 3,
-    "comment": "",
+    "comment": null,
     "idTurma": 20230113,
     "disciplina": {
       "id": 22,
@@ -1773,7 +1707,6 @@
     "dia": "TER",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2023011313,
     "sala": {
       "id": 2,
@@ -1788,14 +1721,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230114,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 22,
       "periodo": 3,
@@ -1815,7 +1747,7 @@
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "idTurma": 20230115,
     "disciplina": {
       "id": 22,
@@ -1834,7 +1766,6 @@
     "dia": "QUA",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2023011514,
     "sala": {
       "id": 2,
@@ -1849,7 +1780,7 @@
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "idTurma": 20230115,
     "disciplina": {
       "id": 22,
@@ -1868,21 +1799,19 @@
     "dia": "SEG",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2023011515
   },
   {
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230116,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": 13,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 23,
       "periodo": 3,
@@ -1902,7 +1831,7 @@
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": 12,
-    "comment": "",
+    "comment": null,
     "idTurma": 20230117,
     "disciplina": {
       "id": 24,
@@ -1921,14 +1850,13 @@
     "dia": "QUA",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2023011716
   },
   {
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": 12,
-    "comment": "",
+    "comment": null,
     "idTurma": 20230117,
     "disciplina": {
       "id": 24,
@@ -1947,14 +1875,13 @@
     "dia": "SEG",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2023011717
   },
   {
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": 45,
-    "comment": "",
+    "comment": null,
     "idTurma": 20230118,
     "disciplina": {
       "id": 25,
@@ -1973,21 +1900,19 @@
     "dia": "QUI",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2023011818
   },
   {
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230119,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": 35,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 26,
       "periodo": 3,
@@ -2007,7 +1932,7 @@
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": 45,
-    "comment": "",
+    "comment": null,
     "idTurma": 20230120,
     "disciplina": {
       "id": 27,
@@ -2026,14 +1951,13 @@
     "dia": "QUA",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2023012019
   },
   {
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": 45,
-    "comment": "",
+    "comment": null,
     "idTurma": 20230120,
     "disciplina": {
       "id": 27,
@@ -2052,14 +1976,13 @@
     "dia": "TER",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2023012020
   },
   {
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": 45,
-    "comment": "",
+    "comment": null,
     "idTurma": 20230121,
     "disciplina": {
       "id": 27,
@@ -2078,14 +2001,13 @@
     "dia": "SEG",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2023012121
   },
   {
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": 16,
-    "comment": "",
+    "comment": null,
     "idTurma": 20230122,
     "disciplina": {
       "id": 27,
@@ -2104,14 +2026,13 @@
     "dia": "QUA",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2023012222
   },
   {
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": 16,
-    "comment": "",
+    "comment": null,
     "idTurma": 20230123,
     "disciplina": {
       "id": 27,
@@ -2130,7 +2051,6 @@
     "dia": "TER",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2023012323,
     "sala": {
       "id": 26,
@@ -2145,14 +2065,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230124,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": 30,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 28,
       "periodo": 4,
@@ -2172,7 +2091,7 @@
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": 11,
-    "comment": "",
+    "comment": null,
     "idTurma": 20230125,
     "disciplina": {
       "id": 34,
@@ -2191,7 +2110,6 @@
     "dia": "SEG",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2023012524,
     "sala": {
       "id": 8,
@@ -2206,7 +2124,7 @@
     "ano": 2023,
     "semestre": 1,
     "demandaEstimada": 11,
-    "comment": "",
+    "comment": null,
     "idTurma": 20230125,
     "disciplina": {
       "id": 34,
@@ -2225,7 +2143,6 @@
     "dia": "QUI",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2023012525,
     "sala": {
       "id": 26,
@@ -2240,14 +2157,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230201,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 2,
       "periodo": 1,
@@ -2260,14 +2176,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230202,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 7,
       "periodo": 1,
@@ -2280,14 +2195,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230203,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 8,
       "periodo": 2,
@@ -2307,14 +2221,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230204,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 10,
       "periodo": 2,
@@ -2334,14 +2247,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230205,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 11,
       "periodo": 2,
@@ -2361,14 +2273,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230206,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 12,
       "periodo": 2,
@@ -2388,14 +2299,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230207,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 13,
       "periodo": 2,
@@ -2415,14 +2325,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230208,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 14,
       "periodo": 2,
@@ -2435,14 +2344,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230209,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 16,
       "periodo": 2,
@@ -2455,14 +2363,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230210,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 16,
       "periodo": 2,
@@ -2475,14 +2382,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230211,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 18,
       "periodo": 2,
@@ -2495,14 +2401,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230212,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 28,
       "periodo": 4,
@@ -2522,14 +2427,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230213,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 29,
       "periodo": 4,
@@ -2549,14 +2453,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230214,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 30,
       "periodo": 4,
@@ -2576,14 +2479,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230215,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 31,
       "periodo": 4,
@@ -2603,14 +2505,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230216,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 32,
       "periodo": 4,
@@ -2630,14 +2531,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230217,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 33,
       "periodo": 4,
@@ -2657,14 +2557,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230218,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 39,
       "periodo": 5,
@@ -2677,14 +2576,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230219,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 40,
       "periodo": 6,
@@ -2704,14 +2602,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230220,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 41,
       "periodo": 6,
@@ -2731,14 +2628,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230221,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 42,
       "periodo": 6,
@@ -2758,14 +2654,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230222,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 43,
       "periodo": 6,
@@ -2785,14 +2680,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230223,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 44,
       "periodo": 6,
@@ -2812,14 +2706,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230224,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 45,
       "periodo": 6,
@@ -2839,14 +2732,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230225,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 56,
       "periodo": 9,
@@ -2866,14 +2758,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230226,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 58,
       "periodo": 10,
@@ -2893,14 +2784,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230227,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 59,
       "periodo": 10,
@@ -2920,14 +2810,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230228,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 67,
       "periodo": 0,
@@ -2947,14 +2836,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230229,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 68,
       "periodo": 0,
@@ -2974,14 +2862,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20230230,
     "horaInicio": null,
     "ano": 2023,
     "semestre": 2,
     "demandaEstimada": null,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 70,
       "periodo": 0,
@@ -3001,7 +2888,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 30,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240101,
     "disciplina": {
       "id": 4,
@@ -3020,14 +2907,13 @@
     "dia": "SEG",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024010101
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 30,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240101,
     "disciplina": {
       "id": 4,
@@ -3046,14 +2932,13 @@
     "dia": "QUA",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024010102
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 35,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240102,
     "disciplina": {
       "id": 2,
@@ -3072,14 +2957,13 @@
     "dia": "TER",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024010203
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 35,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240102,
     "disciplina": {
       "id": 2,
@@ -3098,14 +2982,13 @@
     "dia": "QUI",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024010204
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 35,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240102,
     "disciplina": {
       "id": 2,
@@ -3124,14 +3007,13 @@
     "dia": "SEX",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": 3,
     "idHorario": 2024010205
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 27,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240103,
     "disciplina": {
       "id": 3,
@@ -3150,14 +3032,13 @@
     "dia": "QUA",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024010306
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 27,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240103,
     "disciplina": {
       "id": 3,
@@ -3176,14 +3057,13 @@
     "dia": "SEX",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024010307
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 27,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240104,
     "disciplina": {
       "id": 5,
@@ -3202,7 +3082,6 @@
     "dia": "TER",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024010408,
     "sala": {
       "id": 6,
@@ -3217,7 +3096,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 27,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240104,
     "disciplina": {
       "id": 5,
@@ -3236,7 +3115,6 @@
     "dia": "QUI",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024010409,
     "sala": {
       "id": 6,
@@ -3251,7 +3129,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 35,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240105,
     "disciplina": {
       "id": 1,
@@ -3270,14 +3148,13 @@
     "dia": "TER",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024010510
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 35,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240105,
     "disciplina": {
       "id": 1,
@@ -3296,14 +3173,13 @@
     "dia": "QUI",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024010511
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 27,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240106,
     "disciplina": {
       "id": 6,
@@ -3322,14 +3198,13 @@
     "dia": "QUA",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024010612
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 30,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240107,
     "disciplina": {
       "id": 7,
@@ -3348,14 +3223,13 @@
     "dia": "SEX",
     "horaInicio": 14,
     "duracao": 3,
-    "ordem": 1,
     "idHorario": 2024010713
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 25,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240108,
     "disciplina": {
       "id": 23,
@@ -3374,14 +3248,13 @@
     "dia": "SEG",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024010814
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 25,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240108,
     "disciplina": {
       "id": 23,
@@ -3400,14 +3273,13 @@
     "dia": "QUA",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024010815
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 15,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240109,
     "disciplina": {
       "id": 24,
@@ -3426,14 +3298,13 @@
     "dia": "TER",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024010916
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 15,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240109,
     "disciplina": {
       "id": 24,
@@ -3452,14 +3323,13 @@
     "dia": "QUI",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024010917
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 9,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240110,
     "disciplina": {
       "id": 20,
@@ -3478,14 +3348,13 @@
     "dia": "SEG",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024011018
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 9,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240110,
     "disciplina": {
       "id": 20,
@@ -3504,14 +3373,13 @@
     "dia": "QUA",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024011019
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 9,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240111,
     "disciplina": {
       "id": 22,
@@ -3530,7 +3398,6 @@
     "dia": "SEG",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024011120,
     "sala": {
       "id": 11,
@@ -3545,7 +3412,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 30,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240112,
     "disciplina": {
       "id": 25,
@@ -3564,14 +3431,13 @@
     "dia": "QUA",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024011221
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 30,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240112,
     "disciplina": {
       "id": 25,
@@ -3590,14 +3456,13 @@
     "dia": "SEX",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024011222
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 25,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240113,
     "disciplina": {
       "id": 26,
@@ -3616,7 +3481,6 @@
     "dia": "TER",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024011323,
     "sala": {
       "id": 3,
@@ -3631,7 +3495,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 25,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240113,
     "disciplina": {
       "id": 26,
@@ -3650,7 +3514,6 @@
     "dia": "QUI",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024011324,
     "sala": {
       "id": 3,
@@ -3665,7 +3528,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 25,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240114,
     "disciplina": {
       "id": 27,
@@ -3684,7 +3547,6 @@
     "dia": "SEG",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024011425,
     "sala": {
       "id": 6,
@@ -3699,7 +3561,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 25,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240114,
     "disciplina": {
       "id": 27,
@@ -3718,7 +3580,6 @@
     "dia": "QUA",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024011426,
     "sala": {
       "id": 6,
@@ -3733,7 +3594,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 10,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240115,
     "disciplina": {
       "id": 34,
@@ -3752,7 +3613,6 @@
     "dia": "TER",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024011527,
     "sala": {
       "id": 3,
@@ -3767,7 +3627,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 10,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240115,
     "disciplina": {
       "id": 34,
@@ -3786,7 +3646,6 @@
     "dia": "QUI",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024011528,
     "sala": {
       "id": 3,
@@ -3801,7 +3660,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 30,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240116,
     "disciplina": {
       "id": 35,
@@ -3820,14 +3679,13 @@
     "dia": "SEG",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024011629
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 30,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240116,
     "disciplina": {
       "id": 35,
@@ -3846,14 +3704,13 @@
     "dia": "QUA",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024011630
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 20,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240117,
     "disciplina": {
       "id": 37,
@@ -3872,14 +3729,13 @@
     "dia": "TER",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024011731
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 20,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240117,
     "disciplina": {
       "id": 37,
@@ -3898,14 +3754,13 @@
     "dia": "QUI",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024011732
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 27,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240118,
     "disciplina": {
       "id": 36,
@@ -3924,7 +3779,6 @@
     "dia": "SEG",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024011833,
     "sala": {
       "id": 6,
@@ -3939,7 +3793,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 27,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240118,
     "disciplina": {
       "id": 36,
@@ -3958,7 +3812,6 @@
     "dia": "QUA",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024011834,
     "sala": {
       "id": 6,
@@ -3973,7 +3826,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 28,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240119,
     "disciplina": {
       "id": 38,
@@ -3992,7 +3845,6 @@
     "dia": "TER",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024011935,
     "sala": {
       "id": 6,
@@ -4007,7 +3859,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 28,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240119,
     "disciplina": {
       "id": 38,
@@ -4026,7 +3878,6 @@
     "dia": "QUI",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024011936,
     "sala": {
       "id": 6,
@@ -4041,7 +3892,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 30,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240120,
     "disciplina": {
       "id": 39,
@@ -4060,14 +3911,13 @@
     "dia": "SEX",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024012037
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 10,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240121,
     "disciplina": {
       "id": 48,
@@ -4086,7 +3936,6 @@
     "dia": "TER",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024012138,
     "sala": {
       "id": 2,
@@ -4101,7 +3950,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 10,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240121,
     "disciplina": {
       "id": 48,
@@ -4120,7 +3969,6 @@
     "dia": "QUI",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024012139,
     "sala": {
       "id": 2,
@@ -4135,7 +3983,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 6,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240122,
     "disciplina": {
       "id": 47,
@@ -4154,7 +4002,6 @@
     "dia": "SEG",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024012240,
     "sala": {
       "id": 2,
@@ -4169,7 +4016,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 6,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240122,
     "disciplina": {
       "id": 47,
@@ -4188,7 +4035,6 @@
     "dia": "QUA",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024012241,
     "sala": {
       "id": 2,
@@ -4203,7 +4049,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 12,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240123,
     "disciplina": {
       "id": 49,
@@ -4222,14 +4068,13 @@
     "dia": "TER",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024012342
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 12,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240123,
     "disciplina": {
       "id": 49,
@@ -4248,14 +4093,13 @@
     "dia": "QUI",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024012343
   },
   {
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 5,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240124,
     "disciplina": {
       "id": 46,
@@ -4274,7 +4118,6 @@
     "dia": "SEG",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024012444,
     "sala": {
       "id": 2,
@@ -4289,7 +4132,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 5,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240124,
     "disciplina": {
       "id": 46,
@@ -4308,7 +4151,6 @@
     "dia": "QUA",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024012445,
     "sala": {
       "id": 2,
@@ -4323,7 +4165,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 10,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240125,
     "disciplina": {
       "id": 64,
@@ -4342,7 +4184,6 @@
     "dia": "SEG",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024012546,
     "sala": {
       "id": 2,
@@ -4357,7 +4198,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 10,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240125,
     "disciplina": {
       "id": 64,
@@ -4376,7 +4217,6 @@
     "dia": "QUA",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024012547,
     "sala": {
       "id": 2,
@@ -4391,7 +4231,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 7,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240126,
     "disciplina": {
       "id": 65,
@@ -4410,7 +4250,6 @@
     "dia": "TER",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024012648,
     "sala": {
       "id": 2,
@@ -4425,7 +4264,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 7,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240126,
     "disciplina": {
       "id": 65,
@@ -4444,7 +4283,6 @@
     "dia": "QUI",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": 2,
     "idHorario": 2024012649,
     "sala": {
       "id": 2,
@@ -4459,7 +4297,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 5,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240127,
     "disciplina": {
       "id": 56,
@@ -4478,7 +4316,6 @@
     "dia": "SEX",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024012750,
     "sala": {
       "id": 3,
@@ -4493,7 +4330,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 5,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240128,
     "disciplina": {
       "id": 58,
@@ -4512,7 +4349,6 @@
     "dia": "SEX",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024012851,
     "sala": {
       "id": 2,
@@ -4527,7 +4363,7 @@
     "ano": 2024,
     "semestre": 1,
     "demandaEstimada": 4,
-    "comment": "",
+    "comment": null,
     "idTurma": 20240129,
     "disciplina": {
       "id": 59,
@@ -4546,7 +4382,6 @@
     "dia": "SEX",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": 1,
     "idHorario": 2024012952,
     "sala": {
       "id": 2,
@@ -4561,14 +4396,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250101,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 35,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 1,
       "periodo": 1,
@@ -4588,14 +4422,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250102,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 35,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 2,
       "periodo": 1,
@@ -4615,14 +4448,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250103,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 27,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 3,
       "periodo": 1,
@@ -4642,14 +4474,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250104,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 30,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 4,
       "periodo": 1,
@@ -4669,14 +4500,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250105,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 27,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 5,
       "periodo": 1,
@@ -4696,14 +4526,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250106,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 27,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 6,
       "periodo": 1,
@@ -4723,14 +4552,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250107,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 30,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 7,
       "periodo": 1,
@@ -4750,14 +4578,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250108,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 9,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 20,
       "periodo": 3,
@@ -4777,14 +4604,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250109,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 9,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 22,
       "periodo": 3,
@@ -4804,14 +4630,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250110,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 25,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 23,
       "periodo": 3,
@@ -4831,14 +4656,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250111,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 15,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 24,
       "periodo": 3,
@@ -4858,14 +4682,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250112,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 30,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 25,
       "periodo": 3,
@@ -4885,14 +4708,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250113,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 25,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 26,
       "periodo": 3,
@@ -4912,14 +4734,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250114,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 25,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 27,
       "periodo": 3,
@@ -4939,14 +4760,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250115,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 10,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 34,
       "periodo": 5,
@@ -4966,14 +4786,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250116,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 30,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 35,
       "periodo": 5,
@@ -4993,14 +4812,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250117,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 27,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 36,
       "periodo": 5,
@@ -5020,14 +4838,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250118,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 20,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 37,
       "periodo": 5,
@@ -5047,14 +4864,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250119,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 28,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 38,
       "periodo": 5,
@@ -5074,14 +4890,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250120,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 30,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 39,
       "periodo": 5,
@@ -5101,14 +4916,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250121,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 5,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 46,
       "periodo": 7,
@@ -5128,14 +4942,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250122,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 6,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 47,
       "periodo": 7,
@@ -5155,14 +4968,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250123,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 10,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 48,
       "periodo": 7,
@@ -5182,14 +4994,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250124,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 12,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 49,
       "periodo": 7,
@@ -5209,14 +5020,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250125,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 5,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 56,
       "periodo": 9,
@@ -5236,14 +5046,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250126,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 5,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 58,
       "periodo": 10,
@@ -5263,14 +5072,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250127,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 4,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 59,
       "periodo": 10,
@@ -5290,14 +5098,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250128,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 10,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 64,
       "periodo": 0,
@@ -5317,14 +5124,13 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20250129,
     "horaInicio": null,
     "ano": 2025,
     "semestre": 1,
     "demandaEstimada": 7,
-    "comment": "",
+    "comment": null,
     "disciplina": {
       "id": 65,
       "periodo": 0,
@@ -5356,7 +5162,6 @@
     "dia": "SEG",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028010101
   },
   {
@@ -5375,7 +5180,6 @@
     "dia": "SEG",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028010102
   },
   {
@@ -5394,7 +5198,6 @@
     "dia": "SEG",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028010203
   },
   {
@@ -5413,7 +5216,6 @@
     "dia": "SEG",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028010204
   },
   {
@@ -5432,7 +5234,6 @@
     "dia": "SEG",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028010305
   },
   {
@@ -5451,7 +5252,6 @@
     "dia": "QUA",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028010306
   },
   {
@@ -5470,7 +5270,6 @@
     "dia": "QUA",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028010407
   },
   {
@@ -5489,7 +5288,6 @@
     "dia": "SEX",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028010408
   },
   {
@@ -5508,7 +5306,6 @@
     "dia": "SEG",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028010509
   },
   {
@@ -5527,7 +5324,6 @@
     "dia": "SEG",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028010510
   },
   {
@@ -5546,7 +5342,6 @@
     "dia": "SEG",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028010611
   },
   {
@@ -5565,7 +5360,6 @@
     "dia": "SEG",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028010612
   },
   {
@@ -5584,7 +5378,6 @@
     "dia": "SEG",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028010713
   },
   {
@@ -5603,7 +5396,6 @@
     "dia": "TER",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028010714
   },
   {
@@ -5622,7 +5414,6 @@
     "dia": "QUA",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028010815
   },
   {
@@ -5641,7 +5432,6 @@
     "dia": "QUI",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028010816
   },
   {
@@ -5653,7 +5443,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020101,
     "sala": {
       "id": 1,
@@ -5673,7 +5462,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020102,
     "sala": {
       "id": 5,
@@ -5693,7 +5481,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020103,
     "sala": {
       "id": 6,
@@ -5713,7 +5500,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020104,
     "sala": {
       "id": 7,
@@ -5733,7 +5519,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020105,
     "sala": {
       "id": 25,
@@ -5753,7 +5538,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020106,
     "sala": {
       "id": 26,
@@ -5773,7 +5557,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020107
   },
   {
@@ -5785,7 +5568,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020201,
     "sala": {
       "id": 1,
@@ -5805,7 +5587,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020202,
     "sala": {
       "id": 5,
@@ -5825,7 +5606,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020203,
     "sala": {
       "id": 6,
@@ -5845,7 +5625,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020204,
     "sala": {
       "id": 7,
@@ -5865,7 +5644,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020205,
     "sala": {
       "id": 25,
@@ -5885,7 +5663,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020206,
     "sala": {
       "id": 26,
@@ -5905,7 +5682,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020207
   },
   {
@@ -5917,7 +5693,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020301,
     "sala": {
       "id": 1,
@@ -5937,7 +5712,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020302,
     "sala": {
       "id": 5,
@@ -5957,7 +5731,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020303,
     "sala": {
       "id": 6,
@@ -5977,7 +5750,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020304,
     "sala": {
       "id": 7,
@@ -5997,7 +5769,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020305,
     "sala": {
       "id": 25,
@@ -6017,7 +5788,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020306,
     "sala": {
       "id": 26,
@@ -6037,7 +5807,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020307
   },
   {
@@ -6049,7 +5818,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020401,
     "sala": {
       "id": 1,
@@ -6069,7 +5837,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020402,
     "sala": {
       "id": 5,
@@ -6089,7 +5856,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020403,
     "sala": {
       "id": 6,
@@ -6109,7 +5875,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020404,
     "sala": {
       "id": 7,
@@ -6129,7 +5894,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020405,
     "sala": {
       "id": 25,
@@ -6149,7 +5913,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020406,
     "sala": {
       "id": 26,
@@ -6169,7 +5932,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020407
   },
   {
@@ -6181,7 +5943,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020501,
     "sala": {
       "id": 1,
@@ -6201,7 +5962,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020502,
     "sala": {
       "id": 5,
@@ -6221,7 +5981,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020503,
     "sala": {
       "id": 6,
@@ -6241,7 +6000,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020504,
     "sala": {
       "id": 7,
@@ -6261,7 +6019,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020505,
     "sala": {
       "id": 25,
@@ -6281,7 +6038,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020506,
     "sala": {
       "id": 26,
@@ -6301,7 +6057,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020507
   },
   {
@@ -6313,7 +6068,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020601,
     "sala": {
       "id": 1,
@@ -6333,7 +6087,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020602,
     "sala": {
       "id": 5,
@@ -6353,7 +6106,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020603,
     "sala": {
       "id": 6,
@@ -6373,7 +6125,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020604,
     "sala": {
       "id": 7,
@@ -6393,7 +6144,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020605,
     "sala": {
       "id": 25,
@@ -6413,7 +6163,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020606,
     "sala": {
       "id": 26,
@@ -6433,7 +6182,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020607
   },
   {
@@ -6445,7 +6193,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020701,
     "sala": {
       "id": 1,
@@ -6465,7 +6212,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020702,
     "sala": {
       "id": 5,
@@ -6485,7 +6231,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020703,
     "sala": {
       "id": 6,
@@ -6505,7 +6250,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020704,
     "sala": {
       "id": 7,
@@ -6525,7 +6269,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020705,
     "sala": {
       "id": 25,
@@ -6545,7 +6288,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020706,
     "sala": {
       "id": 26,
@@ -6565,7 +6307,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020707
   },
   {
@@ -6577,7 +6318,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020801,
     "sala": {
       "id": 1,
@@ -6597,7 +6337,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020802,
     "sala": {
       "id": 5,
@@ -6617,7 +6356,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020803,
     "sala": {
       "id": 6,
@@ -6637,7 +6375,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020804,
     "sala": {
       "id": 7,
@@ -6657,7 +6394,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020805,
     "sala": {
       "id": 25,
@@ -6677,7 +6413,6 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020806,
     "sala": {
       "id": 26,
@@ -6697,14 +6432,12 @@
     "dia": null,
     "horaInicio": null,
     "duracao": null,
-    "ordem": null,
     "idHorario": 2028020807
   },
   {
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20280209,
     "horaInicio": null,
@@ -6722,7 +6455,6 @@
     "dia": "SEG",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030101,
     "sala": {
       "id": 1,
@@ -6742,7 +6474,6 @@
     "dia": "SEG",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030102,
     "sala": {
       "id": 1,
@@ -6762,7 +6493,6 @@
     "dia": "SEG",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030103,
     "sala": {
       "id": 1,
@@ -6782,7 +6512,6 @@
     "dia": "SEG",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030104,
     "sala": {
       "id": 1,
@@ -6802,7 +6531,6 @@
     "dia": "SEG",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030205,
     "sala": {
       "id": 1,
@@ -6822,7 +6550,6 @@
     "dia": "SEG",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030206,
     "sala": {
       "id": 1,
@@ -6842,7 +6569,6 @@
     "dia": "SEG",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030207,
     "sala": {
       "id": 1,
@@ -6862,7 +6588,6 @@
     "dia": "TER",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030208,
     "sala": {
       "id": 1,
@@ -6882,7 +6607,6 @@
     "dia": "SEG",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030309,
     "sala": {
       "id": 1,
@@ -6902,7 +6626,6 @@
     "dia": "SEG",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030310,
     "sala": {
       "id": 1,
@@ -6922,7 +6645,6 @@
     "dia": "TER",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030311,
     "sala": {
       "id": 1,
@@ -6942,7 +6664,6 @@
     "dia": "TER",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030312,
     "sala": {
       "id": 1,
@@ -6962,7 +6683,6 @@
     "dia": "SEG",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030413,
     "sala": {
       "id": 1,
@@ -6982,7 +6702,6 @@
     "dia": "TER",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030414,
     "sala": {
       "id": 1,
@@ -7002,7 +6721,6 @@
     "dia": "TER",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030415,
     "sala": {
       "id": 1,
@@ -7022,7 +6740,6 @@
     "dia": "TER",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030416,
     "sala": {
       "id": 1,
@@ -7042,7 +6759,6 @@
     "dia": "QUA",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030517,
     "sala": {
       "id": 1,
@@ -7062,7 +6778,6 @@
     "dia": "QUA",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030518,
     "sala": {
       "id": 1,
@@ -7082,7 +6797,6 @@
     "dia": "QUA",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030519,
     "sala": {
       "id": 1,
@@ -7102,7 +6816,6 @@
     "dia": "QUA",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030520,
     "sala": {
       "id": 1,
@@ -7122,7 +6835,6 @@
     "dia": "SEG",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030621,
     "sala": {
       "id": 2,
@@ -7142,7 +6854,6 @@
     "dia": "SEG",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030622,
     "sala": {
       "id": 2,
@@ -7162,7 +6873,6 @@
     "dia": "SEG",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030623,
     "sala": {
       "id": 2,
@@ -7182,7 +6892,6 @@
     "dia": "SEG",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030624,
     "sala": {
       "id": 2,
@@ -7202,7 +6911,6 @@
     "dia": "TER",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030725,
     "sala": {
       "id": 2,
@@ -7222,7 +6930,6 @@
     "dia": "TER",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030726,
     "sala": {
       "id": 2,
@@ -7242,7 +6949,6 @@
     "dia": "TER",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030727,
     "sala": {
       "id": 2,
@@ -7262,7 +6968,6 @@
     "dia": "TER",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030728,
     "sala": {
       "id": 2,
@@ -7282,7 +6987,6 @@
     "dia": "QUA",
     "horaInicio": 8,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030829,
     "sala": {
       "id": 2,
@@ -7302,7 +7006,6 @@
     "dia": "QUA",
     "horaInicio": 10,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030830,
     "sala": {
       "id": 2,
@@ -7322,7 +7025,6 @@
     "dia": "QUA",
     "horaInicio": 14,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030831,
     "sala": {
       "id": 2,
@@ -7342,7 +7044,6 @@
     "dia": "QUA",
     "horaInicio": 16,
     "duracao": 2,
-    "ordem": null,
     "idHorario": 2028030832,
     "sala": {
       "id": 2,
@@ -7357,7 +7058,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290100,
     "horaInicio": null,
@@ -7370,7 +7070,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290101,
     "horaInicio": null,
@@ -7390,7 +7089,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290102,
     "horaInicio": null,
@@ -7410,7 +7108,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290103,
     "horaInicio": null,
@@ -7430,7 +7127,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290104,
     "horaInicio": null,
@@ -7450,7 +7146,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290105,
     "horaInicio": null,
@@ -7470,7 +7165,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290106,
     "horaInicio": null,
@@ -7490,7 +7184,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290107,
     "horaInicio": null,
@@ -7510,7 +7203,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290108,
     "horaInicio": null,
@@ -7530,7 +7222,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290109,
     "horaInicio": null,
@@ -7550,7 +7241,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290110,
     "horaInicio": null,
@@ -7570,7 +7260,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290111,
     "horaInicio": null,
@@ -7590,7 +7279,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290200,
     "horaInicio": null,
@@ -7603,7 +7291,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290201,
     "horaInicio": null,
@@ -7623,7 +7310,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290202,
     "horaInicio": null,
@@ -7643,7 +7329,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290203,
     "horaInicio": null,
@@ -7663,7 +7348,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290204,
     "horaInicio": null,
@@ -7683,7 +7367,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290205,
     "horaInicio": null,
@@ -7703,7 +7386,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290206,
     "horaInicio": null,
@@ -7723,7 +7405,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290207,
     "horaInicio": null,
@@ -7743,7 +7424,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290208,
     "horaInicio": null,
@@ -7763,7 +7443,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290209,
     "horaInicio": null,
@@ -7783,7 +7462,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290210,
     "horaInicio": null,
@@ -7803,7 +7481,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290211,
     "horaInicio": null,
@@ -7823,7 +7500,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290300,
     "horaInicio": null,
@@ -7836,7 +7512,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290301,
     "horaInicio": null,
@@ -7856,7 +7531,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290302,
     "horaInicio": null,
@@ -7876,7 +7550,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290303,
     "horaInicio": null,
@@ -7896,7 +7569,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290304,
     "horaInicio": null,
@@ -7916,7 +7588,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290305,
     "horaInicio": null,
@@ -7936,7 +7607,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290306,
     "horaInicio": null,
@@ -7956,7 +7626,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290307,
     "horaInicio": null,
@@ -7976,7 +7645,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290308,
     "horaInicio": null,
@@ -7996,7 +7664,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290309,
     "horaInicio": null,
@@ -8016,7 +7683,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290310,
     "horaInicio": null,
@@ -8036,7 +7702,6 @@
     "id": null,
     "dia": null,
     "sala": null,
-    "ordem": null,
     "duracao": null,
     "idTurma": 20290311,
     "horaInicio": null,
