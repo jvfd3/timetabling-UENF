@@ -13,7 +13,6 @@ const emptyObjects = {
     id: null, //INT
     dia: null, //STR
     sala: null, //OBJ
-    ordem: null, //INT
     duracao: null, //INT
     idTurma: null, //INT
     horaInicio: null, //INT

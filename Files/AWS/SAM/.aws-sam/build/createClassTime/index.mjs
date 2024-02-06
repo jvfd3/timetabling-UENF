@@ -1,7 +1,7 @@
 import { defaultCreate } from "/opt/db.js";
 
 const createItemQuery =
-  "INSERT INTO `horarios` (`dia`, `horaInicio`, `duracao`, `ordem`, `idTurma`, `idSala`) VALUES(?, ?, ?, ?, ?, ?)";
+  "INSERT INTO `horarios` (`dia`, `horaInicio`, `duracao`, `idTurma`, `idSala`) VALUES(?, ?, ?, ?, ?, ?)";
 
 const itemName = "ClassData";
 let local = `aws>lambda>Create>${itemName}>handler`;
@@ -14,7 +14,6 @@ function convertToList(classTime) {
     classTime?.dia ?? null,
     classTime?.horaInicio ?? null,
     classTime?.duracao ?? null,
-    classTime?.ordem ?? null,
     classTime?.idTurma ?? null,
     classTime?.idSala ?? classTime?.sala?.id ?? null,
   ];

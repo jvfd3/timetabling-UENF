@@ -32,7 +32,6 @@ Tenho o seguinte banco de dados:
   - dia (VARCHAR)
   - horaInicio (INT)
   - duracao (INT)
-  - ordem (INT)
   - idTurma (INT, FK)
   - idSala (INT, FK)
 */
@@ -53,7 +52,6 @@ A query deve retornar os seguintes campos:
 - dia (VARCHAR)
 - horaInicio (INT)
 - duracao (INT)
-- ordem (INT)
 - turma (JSON_OBJECT)
   - id (INT)
   - ano (INT)
@@ -111,7 +109,6 @@ A query deve retornar os seguintes campos:
           dia: VARCHAR,
           horaInicio: INT,
           duracao: INT,
-          ordem: INT,
           sala: {
             id: INT,
             idBlock: INT,
@@ -163,7 +160,6 @@ SELECT
           'dia', h.dia,
           'horaInicio', h.horaInicio,
           'duracao', h.duracao,
-          'ordem', h.ordem,
           'idTurma', h.idTurma,
           'sala', CASE
             WHEN h.idSala IS NOT NULL THEN JSON_OBJECT(
@@ -196,7 +192,6 @@ LEFT JOIN professores as p ON t.idProfessor = p.id;
       dia: VARCHAR,
       horaInicio: INT,
       duracao: INT,
-      ordem: INT,
       turma: {
         id: INT,
         ano: INT,
@@ -233,7 +228,6 @@ SELECT
   h.dia,
   h.horaInicio,
   h.duracao,
-  h.ordem,
   JSON_OBJECT(
     'id', t.id,
     'ano', t.ano,
@@ -283,7 +277,6 @@ WHERE
       dia: VARCHAR,
       horaInicio: INT,
       duracao: INT,
-      ordem: INT,
       idTurma: INT,
       ano: INT,
       semestre: INT,
@@ -390,7 +383,6 @@ WHERE
       dia: VARCHAR,
       horaInicio: INT,
       duracao: INT,
-      ordem: INT,
       idTurma: INT,
       ano: INT,
       semestre: INT,
@@ -541,7 +533,6 @@ SELECT
 /* Selecionar horários */
 SELECT
     h.idTurma AS idTurma,
-    h.ordem AS ordem,
     h.dia AS dia,
     h.horaInicio AS horaInicio,
     h.duracao AS duracao,
@@ -554,7 +545,7 @@ SELECT
       ON h.idSala = s.id
     JOIN turmas AS t
       ON h.idTurma = t.id
-ORDER BY h.idTurma, h.ordem;
+ORDER BY h.idTurma;
 
 WITH turmasCTE AS (
   SELECT
@@ -589,7 +580,6 @@ SELECT
     t.ApelidoDisciplina AS apelidoDisciplina,
     t.CodigoDisciplina AS codigoDisciplina,
     t.PeriodoDisciplina AS periodoDisciplina,
-    h.ordem AS ordem AS ordemHorario,
     h.dia AS diaHorario,
     h.horaInicio AS horaInicio,
     h.duracao AS duracao,
@@ -602,6 +592,6 @@ JOIN salas AS s
   ON h.idSala = s.id
 JOIN turmasCTE AS t
   ON h.idTurma = t.idTurma
-ORDER BY h.idTurma, h.ordem;
+ORDER BY h.idTurma;
 
-WITH turmasCTE AS ( SELECT t.id AS idTurma, t.ano AS ano, t.semestre AS semestre, t.demandaEstimada AS demandaEstimada, p.nome AS NomeProfessor, p.apelido AS ApelidoProfessor, p.curso AS CursoProfessor, p.laboratorio AS LaboratorioProfessor, d.nome AS NomeDisciplina, d.apelido AS ApelidoDisciplina, d.codigo AS CodigoDisciplina, d.periodo AS PeriodoDisciplina FROM turmas AS t JOIN professores AS p ON t.idProfessor = p.id JOIN disciplinas AS d ON t.idDisciplina = d.id ) SELECT t.idTurma, h.id AS idHorario, t.ano, t.semestre, t.demandaEstimada, t.NomeProfessor, t.ApelidoProfessor, t.CursoProfessor, t.LaboratorioProfessor, t.NomeDisciplina, t.ApelidoDisciplina, t.CodigoDisciplina, t.PeriodoDisciplina, h.ordem AS ordem, h.dia AS dia, h.horaInicio AS horaInicio, h.duracao AS duracao, s.capacidade AS CapacidadeSala, s.bloco AS bloco, s.codigo AS codigoSala, s.descricao AS descricao FROM horarios AS h JOIN salas AS s ON h.idSala = s.id JOIN turmasCTE AS t ON h.idTurma = t.idTurma ORDER BY h.idTurma, h.ordem;
+WITH turmasCTE AS ( SELECT t.id AS idTurma, t.ano AS ano, t.semestre AS semestre, t.demandaEstimada AS demandaEstimada, p.nome AS NomeProfessor, p.apelido AS ApelidoProfessor, p.curso AS CursoProfessor, p.laboratorio AS LaboratorioProfessor, d.nome AS NomeDisciplina, d.apelido AS ApelidoDisciplina, d.codigo AS CodigoDisciplina, d.periodo AS PeriodoDisciplina FROM turmas AS t JOIN professores AS p ON t.idProfessor = p.id JOIN disciplinas AS d ON t.idDisciplina = d.id ) SELECT t.idTurma, h.id AS idHorario, t.ano, t.semestre, t.demandaEstimada, t.NomeProfessor, t.ApelidoProfessor, t.CursoProfessor, t.LaboratorioProfessor, t.NomeDisciplina, t.ApelidoDisciplina, t.CodigoDisciplina, t.PeriodoDisciplina, h.dia AS dia, h.horaInicio AS horaInicio, h.duracao AS duracao, s.capacidade AS CapacidadeSala, s.bloco AS bloco, s.codigo AS codigoSala, s.descricao AS descricao FROM horarios AS h JOIN salas AS s ON h.idSala = s.id JOIN turmasCTE AS t ON h.idTurma = t.idTurma ORDER BY h.idTurma;

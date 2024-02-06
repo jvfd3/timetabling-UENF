@@ -60,7 +60,6 @@ function getQuery() {
             'dia', h.dia,\
             'horaInicio', h.horaInicio,\
             'duracao', h.duracao,\
-            'ordem', h.ordem,\
             'idTurma', h.idTurma,\
             'sala', CASE\
               WHEN h.idSala IS NOT NULL THEN JSON_OBJECT(\

@@ -14,7 +14,6 @@ function createTurma(myProps) {
   let year = ano.value;
   let semester = semestre.value;
   blankHorario.duracao = 2;
-  // blankHorario.ordem = 1;
   blankHorario.idTurma = `${ano.value}0${semestre.value}-${classIndex.current}`;
   blankHorario.idHorario = classTimeIndex.current;
   // console.log("createTurma>3", class;Index);

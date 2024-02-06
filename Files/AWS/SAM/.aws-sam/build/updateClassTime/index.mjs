@@ -1,7 +1,7 @@
 import { defaultUpdate, checkExistance } from "/opt/db.js";
 
 const updateItemQuery =
-  "UPDATE `horarios` SET `dia` = ?, `horaInicio` = ?, `duracao` = ?, `ordem` = ?, `idTurma` = ?, `idSala` = ? WHERE `id` = ?";
+  "UPDATE `horarios` SET `dia` = ?, `horaInicio` = ?, `duracao` = ?, `idTurma` = ?, `idSala` = ? WHERE `id` = ?";
 const checkQuery = "SELECT * FROM `horarios` WHERE `id` = ?";
 const itemName = "ClassData";
 let local = `aws>lambda>Update>${itemName}>handler`;
@@ -14,7 +14,6 @@ function convertToList(classTime) {
     classTime?.dia ?? null,
     classTime?.horaInicio ?? null,
     classTime?.duracao ?? null,
-    classTime?.ordem ?? null,
     classTime?.idTurma ?? null,
     classTime?.sala?.id ?? classTime?.idSala ?? null,
     classTime?.id ?? null,

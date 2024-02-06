@@ -34,8 +34,8 @@ function MultiClassesCardHeader(globalStates) {
 function NoOfferedClasses(classStates) {
   const createStates = {
     classesStates: classStates,
-    year: classStates.classItem.ano,
-    semester: classStates.classItem.semestre,
+    year: classStates.classItem?.ano,
+    semester: classStates.classItem?.semestre,
     createClassDB: createClass,
   };
   return (
