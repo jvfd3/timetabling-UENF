@@ -1,21 +1,32 @@
 const conflicts = {
   subject: {
     parity: {
+      weight: 0,
+      name: "Disciplina não oferecida no semestre correto",
+    },
+    rightParityNotOffered: {
       weight: 1,
-      name: "Paridade de semestre",
+      name: "Disciplina do semestre não foi oferecida",
+      description:
+        "Calculado baseado em: quantidade de disciplinas em que ela é requisito e a quantidade de alunos que requerem a disciplina",
     },
   },
-  professorAlloc: {
-    weight: 1,
-    name: "Alocação simultânea de professores",
+  roomCapacity: {
+    weight: 2,
+    name: "Capacidade de sala insuficiente pra demanda",
+    description: "Calculado por unidade de aluno excedente",
   },
   roomAlloc: {
-    weight: 1,
+    weight: 2,
     name: "Alocação simultânea de Salas",
+    description:
+      "Calculado pelo total de alunos excedentes de todas as turmas dessa sala nesse horário",
   },
-  roomCapacity: {
-    weight: 1,
-    name: "Capacidade de sala insuficiente pra demanda",
+  professorAlloc: {
+    weight: 10,
+    name: "Alocação simultânea de professores",
+    description:
+      "Calculado relacionado com a quantidade de alunos da menor turma afetada; Relacionar com a paridade?",
   },
   professorPreferences: {
     weight: 1,
