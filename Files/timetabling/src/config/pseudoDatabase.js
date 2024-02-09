@@ -1,57 +1,74 @@
 const pseudoDatabase = {
   courses: [
-    { apelido: "CC", nome: "Ciência da Computação" },
-    { apelido: "Eng Civ", nome: "Engenharia Civil" },
-    { apelido: "Lic Fis", nome: "Licenciatura em Física" },
-    { apelido: "Lic Qui", nome: "Licenciatura em Química" },
-    { apelido: "Eng Prod", nome: "Engenharia de Produção" },
-    { apelido: "Eng Met", nome: "Engenharia Meteorológica" },
-    { apelido: "Lic Mat", nome: "Licenciatura em Matemática" },
-    { apelido: "Eng Mat", nome: "Engenharia Metalúrgica e de Materiais" },
-    { apelido: "Lic Qui EAD", nome: "Licenciatura em Química à Distância" },
+    { id: 1, apelido: "CC", nome: "Ciência da Computação" },
+    { id: 2, apelido: "Eng Civ", nome: "Engenharia Civil" },
+    { id: 3, apelido: "Lic Fis", nome: "Licenciatura em Física" },
+    { id: 4, apelido: "Lic Qui", nome: "Licenciatura em Química" },
+    { id: 5, apelido: "Eng Prod", nome: "Engenharia de Produção" },
+    { id: 6, apelido: "Eng Met", nome: "Engenharia Meteorológica" },
+    { id: 7, apelido: "Lic Mat", nome: "Licenciatura em Matemática" },
     {
+      id: 8,
+      apelido: "Eng Mat",
+      nome: "Engenharia Metalúrgica e de Materiais",
+    },
+    {
+      id: 9,
+      apelido: "Lic Qui EAD",
+      nome: "Licenciatura em Química à Distância",
+    },
+    {
+      id: 10,
       apelido: "Eng Petr",
       nome: "Engenharia de Exploração e Produção de Petróleo",
     },
-    { apelido: "Outro", nome: "Outro" },
+    { id: 0, apelido: "Outro", nome: "Outro" },
   ],
   labs: [
     {
+      id: 1,
       centro: "CCT",
       apelido: "LCMAT",
       nome: "Laboratório de Ciências Matemáticas",
     },
     {
+      id: 2,
       centro: "CCT",
       apelido: "LCFIS",
       nome: "Laboratório de Ciências Físicas",
     },
     {
+      id: 3,
       centro: "CCT",
       apelido: "LAMET",
       nome: "Laboratório de Meteorologia",
     },
     {
+      id: 4,
       centro: "CCT",
       apelido: "LECIV",
       nome: "Laboratório de Engenharia Civil",
     },
     {
+      id: 5,
       centro: "CCT",
       apelido: "LCQUI",
       nome: "Laboratório de Ciências Químicas",
     },
     {
+      id: 6,
       centro: "CCT",
       apelido: "LAMAV",
       nome: "Laboratório de Materiais Avançados",
     },
     {
+      id: 7,
       centro: "CCT",
       apelido: "LEPROD",
       nome: "Laboratório de Engenharia de Produção",
     },
     {
+      id: 8,
       centro: "CCT",
       apelido: "LENEP",
       nome: "Laboratório de Engenharia e Exploração de Petróleo",
@@ -138,12 +155,25 @@ const pseudoDatabase = {
       { id: 2, description: "Eletiva Livre" },
     ],
     centros: [
-      { code: "CBB", name: "Centro de Biociências e Biotecnologia" },
-      { code: "CCH", name: "Centro de Ciências do Homem" },
-      { code: "CCT", name: "Centro de Ciência e Tecnologia" },
       {
+        id: 1,
+        code: "CCT",
+        name: "Centro de Ciência e Tecnologia",
+      },
+      {
+        id: 2,
+        code: "CBB",
+        name: "Centro de Biociências e Biotecnologia",
+      },
+      {
+        id: 3,
         code: "CCTA",
         name: "Centro de Ciências e Tecnologias Agropecuárias",
+      },
+      {
+        id: 4,
+        code: "CCH",
+        name: "Centro de Ciências do Homem",
       },
     ],
     otherBlocks: [
