@@ -1,4 +1,4 @@
-import { sqlDataFromJson } from "../../../src/DB/local/dataFromJSON";
+import sqlDataFromJson from "../../../src/DB/local/dataFromJSON";
 
 juntarTodasAsInformacoes();
 

@@ -45,7 +45,7 @@ function getQuery() {
     h.dia,\
     h.horaInicio AS 'horaInicio',\
     h.duracao AS 'duracao',\
-    h.id AS 'idHorario',\
+    h.id AS 'id',\
     IF(h.idSala IS NULL, NULL, JSON_OBJECT(\
         'id', s.id,\
         'idBlock', s.idBlock,\

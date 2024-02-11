@@ -135,7 +135,7 @@
 ### Additional configuration
 
 - Database options
-  - Initial database name: `OurClassUIRDS_DBName`
+  - Initial database name: `OurClassDB`
   - DB parameter group
     - [X] default.mysql8.0
   - Option group

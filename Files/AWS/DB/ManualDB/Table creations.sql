@@ -43,7 +43,7 @@ CREATE TABLE `alunos` (
   `matricula` varchar(255),
   `nome` varchar(255),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=326 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB AUTO_INCREMENT=326 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `disciplinas` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -53,7 +53,7 @@ CREATE TABLE `disciplinas` (
   `nome` varchar(255),
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `professores` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -63,7 +63,7 @@ CREATE TABLE `professores` (
   `nome` varchar(255),
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `salas` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -73,7 +73,7 @@ CREATE TABLE `salas` (
   `codigo` varchar(255),
   `descricao` varchar(255),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `turmas` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -89,7 +89,7 @@ CREATE TABLE `turmas` (
   KEY `idTurmaDisciplina_idx` (`idDisciplina`),
   CONSTRAINT `idTurmaDisciplina` FOREIGN KEY (`idDisciplina`) REFERENCES `disciplinas` (`id`),
   CONSTRAINT `idTurmaProfessor` FOREIGN KEY (`idProfessor`) REFERENCES `professores` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20290509 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB AUTO_INCREMENT=20290509 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `horarios` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -105,4 +105,4 @@ CREATE TABLE `horarios` (
   KEY `idHorarioTurma_idx` (`idTurma`),
   CONSTRAINT `idHorarioSala` FOREIGN KEY (`idSala`) REFERENCES `salas` (`id`),
   CONSTRAINT `idHorarioTurma` FOREIGN KEY (`idTurma`) REFERENCES `turmas` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2028030895 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB AUTO_INCREMENT=2028030895 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

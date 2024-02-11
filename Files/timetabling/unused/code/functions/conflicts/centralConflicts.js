@@ -1,5 +1,5 @@
 import { flattenTurma, splitTurmas } from "./auxConflictFunctions";
-import { sqlDataFromJson } from "../../DB/local/dataFromJSON";
+import sqlDataFromJson from "../../DB/local/dataFromJSON";
 /*
 ## Visualizar conflitos impeditivos #30
 

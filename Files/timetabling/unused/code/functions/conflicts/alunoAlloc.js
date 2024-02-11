@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import options from "../temp/options";
 import "../CSS/defaultStyle.css";
-import { sqlDataFromJson } from "../../DB/dataFromJSON";
+import sqlDataFromJson from "../../DB/dataFromJSON";
 import Tabela from "./Timetable";
 import {
   getTurmasPorAnoESemestre,

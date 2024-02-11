@@ -1,0 +1,70 @@
+id,periodo,codigo,apelido,nome
+1,1,MAT01117,Geom Analít,Geometria Analítica e Vetores
+2,1,MAT01101,Calc 1,Cálculo Diferencial e Integral I
+3,1,INF01105,Org Comp,Organização de Computadores
+4,1,MAT01104,Lógic Mat,Lógica Matemática
+5,1,INF01106,Prog 1,Programação I
+6,1,INF01101,Intro CC,Introdução à Ciência da Computação
+7,1,LEL04102,Inglês 1,Inglês Instrumental I
+8,2,MAT01212,Álgebra Lin,Álgebra Linear
+9,2,MAT01204,Álgebra Lin,Álgebra Linear
+10,2,MAT01203,Calc 2,Cálculo Diferencial e Integral II
+11,2,INF01104,Lógic Dig,Lógica Digital
+12,2,INF01207,Estrut Disc,Estruturas Discretas
+13,2,INF01209,Prog 2,Programação II
+14,2,LEL04206,Inglês 2,Inglês Instrumental II
+15,2,FIS01202,Fís G 1,Física Geral I
+16,2,FIS01272,Fís 1,Física 1
+17,2,FIS01204,Lab Fís G 1,Laboratório de Física Geral I
+18,2,FIS01273,Fís Exp 1,Física Experimental 1
+19,3,FIS01103,Fís G 2,Física Geral II
+20,3,FIS01170,Fís 2,Física 2
+21,3,FIS01109,Lab Fís G 2,Laboratório de Física Geral II
+22,3,FIS01171,Fís Exp 2,Física Experimental 2
+23,3,MAT01106,Met Mat,Métodos Matemáticos
+24,3,MAT01105,Calc 3,Cálculo Diferencial e Integral III
+25,3,INF01112,Arq Comp,Arquitetura de Computadores
+26,3,INF01113,Parad Ling Prog,Paradigmas de Linguagens de Programação
+27,3,INF01114,ED1,Estruturas de Dados I
+28,4,MAT01208,Calc Num,Cálculo Numérico
+29,4,MAT01201,Estatística,Estatística e Probabilidade
+30,4,INF01204,Sist Op,Sistema Operacional
+31,4,INF01202,ED2,Estrutura de dados II
+32,4,INF01203,POO,Programação Orientado a Objetos
+33,4,INF01201,Análise Proj Sist,Análise e Projeto de Sistemas
+34,5,MAT01107,Estocásticos,Processos Estocásticos
+35,5,INF01115,Redes,Redes de Computadores
+36,5,INF01116,BD1,Banco de Dados I
+37,5,INF01117,Ling Form,Linguagens formais e teoria da computação
+38,5,INF01119,Eng Soft,Engenharia de Software
+39,5,LES04536,Comp Soc,Computação e Sociedade
+40,6,INF01211,Pesq Op,Pesquisa Operacional
+41,6,INF01124,Intro CG,Introdução à computação gráfica
+42,6,INF01212,Compiladores,Compiladores
+43,6,INF01206,BD2,Banco de Dados II
+44,6,INF01205,IA,Inteligência Artificial
+45,6,INF01210,POODS,Paradigmas OO para Desenvolvimento de Software
+46,7,INF01121,Test Soft,Teste de Software
+47,7,INF01122,Sist Dist,Sistemas Distribuídos
+48,7,INF01123,Interface HM,Interface Homem-Máquina
+49,7,PRO01122,Metod Trab Cien,Metodologia de Trabalho Científico
+50,7,INF0OPT1,Opt 1,Eletiva Optativa 1
+51,8,INF0OPT2,Opt 2,Eletiva Optativa 2
+52,8,INF0OPT3,Opt 3,Eletiva Optativa 3
+53,8,INF0OPT4,Opt 4,Eletiva Optativa 4
+54,9,INF0OPT5,Opt 5,Eletiva Optativa 5
+55,9,INF0OPT6,Opt 6,Eletiva Optativa 6
+56,9,INF01130,Proj Monog,Projeto de Monografia
+57,8,PRO01540,Empreend,Empreendedorismo
+58,10,INF01127,Estágio,Estágio Supervisionado
+59,10,INF01131,Monog,Monografia
+60,1,MAT01102,FCC,Fundamentos da Ciência da Computação
+61,1,MAT01112,FCC,Fundamentos da Ciência da Computação
+62,1,MAT01155,FCC,Fundamentos da Ciência da Computação
+63,1,MAT01108,Intro Info,Introdução à Informática
+64,0,INF01219,Grafos,Tópicos Especiais em Simulação Computacional: Algoritmos em Grafos
+65,0,INF01220,Fund Proces Img,Fundamentos de Processamento de Imagens
+67,0,INF01232,Engen Dados,Tópicos Especiais em Inteligência Artificial: Engenharia de Dados
+68,0,INF01250,Prog Concor,Tópicos Especiais em Programação: Programação Concorrente
+69,0,INF01140,Seg Comp,Tópicos Especiais em Computação III: Segurança Computacional
+70,0,INF01242,Comp Ambiental,Tópicos Especiais em Gestão Computacional Ambiental: Sistemas Computacionais

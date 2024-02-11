@@ -55,7 +55,7 @@ const configInfo = {
   },
   AWS: {
     fullEndpoint:
-      "https://ey1h94aard.execute-api.us-east-2.amazonaws.com/timetablingStage/",
+      "https://mckwruc3w1.execute-api.us-east-2.amazonaws.com/timetablingStage",
   },
   defaultIndexes: {
     year: 10, // 10: 2024

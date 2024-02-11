@@ -1,6 +1,7 @@
 const mysql = require("mysql2/promise");
 
 let local = "db.js>";
+const isDebugging = true;
 
 function getDbConfig() {
   const dbConfig = {
@@ -16,11 +17,13 @@ async function createDbConnection() {
   local += "createDbConnection>";
   try {
     const dbConfig = getDbConfig();
-    return await mysql.createConnection(dbConfig);
+    isDebugging && console.log(local, dbConfig);
+    const connection = await mysql.createConnection(dbConfig);
+    isDebugging && console.log(connection);
+    return connection;
   } catch (err) {
-    const errorMessage = local + err;
-    const error = new Error(errorMessage);
-    console.error(error);
+    const error = new Error(local + err);
+    isDebugging && console.error(error);
     throw error;
   }
 }
@@ -28,28 +31,30 @@ async function createDbConnection() {
 async function dbExecute(query, values = null) {
   local += "dbExecute>";
   try {
-    let dbConnection = await createDbConnection();
-    let queryResult = await dbConnection.execute(query, values);
+    const dbConnection = await createDbConnection();
+    isDebugging && console.log(local, query, values);
+    isDebugging && console.log(local, dbConnection);
+    const queryResult = await dbConnection.execute(query, values);
+    isDebugging && console.log(local, queryResult);
     await dbConnection.end();
     return queryResult;
   } catch (err) {
-    const errorMessage = local + err;
-    let error = new Error(errorMessage);
-    console.error(error);
+    const error = new Error(local + err);
+    isDebugging && console.error(error);
     throw error;
   }
 }
 
 async function checkExistance(checkQuery, idInList) {
   local += "checkExistance>";
-  let message = local;
+  const errorMessage = `>Error while checking existance>`;
   try {
     const queryResult = await dbExecute(checkQuery, idInList);
     const rows = queryResult[0] ?? [];
     return rows.length > 0;
   } catch (error) {
-    message += `Catch>Erro ao executar a {query: ${checkQuery}}`;
-    console.error(message, error);
+    const message = local + errorMessage + checkQuery;
+    isDebugging && console.error(message, error);
     return false;
   }
 }
@@ -78,7 +83,7 @@ function getPayloadResponse(
     },
     body: JSON.stringify(myBody ?? null),
   };
-  console.log(payloadResponse);
+  isDebugging && console.log(payloadResponse);
   return payloadResponse;
 }
 
@@ -97,12 +102,12 @@ async function defaultCreate(query, queryValues, exists) {
     try {
       queryResult = await dbExecute(query, queryValues);
       message += successMessage;
-      console.log(message, statusCode, queryResult);
+      isDebugging && console.log(message, statusCode, queryResult);
     } catch (error) {
       statusCode = 500;
       localError = error;
       message = local + errorMessage;
-      console.error(message, statusCode, error);
+      isDebugging && console.error(message, statusCode, error);
     }
   }
   return getPayloadResponse(
@@ -130,12 +135,12 @@ async function defaultRead(query, queryValues, exists) {
     try {
       queryResult = await dbExecute(query, queryValues);
       message += successMessage + `${queryResult.length}`;
-      console.log(message, statusCode, queryResult?.[0]);
+      isDebugging && console.log(message, statusCode, queryResult?.[0]);
     } catch (error) {
       statusCode = 500;
       localError = error;
       message = local + errorMessage;
-      console.error(message, statusCode, error);
+      isDebugging && console.error(message, statusCode, error);
     }
   }
   return getPayloadResponse(
@@ -169,12 +174,12 @@ async function defaultUpdate(query, queryValues, exists) {
       queryResult[1] = null; // remove excessive metadata
       message = successMessage;
       statusCode = 200;
-      console.log(message, statusCode, queryResult);
+      isDebugging && console.log(message, statusCode, queryResult);
     } catch (error) {
       statusCode = 500;
       localError = error;
       message = errorMessage;
-      console.error(message, statusCode, error);
+      isDebugging && console.error(message, statusCode, error);
     }
   }
   return getPayloadResponse(
@@ -208,12 +213,12 @@ async function defaultDelete(query, queryValues, exists) {
       queryResult[1] = null; // remove excessive metadata
       message = successMessage;
       statusCode = 200;
-      console.log(message, statusCode, queryResult);
+      isDebugging && console.log(message, statusCode, queryResult);
     } catch (error) {
       statusCode = 500;
       localError = error;
       message = errorMessage;
-      console.error(message, statusCode, error);
+      isDebugging && console.error(message, statusCode, error);
     }
   }
   return getPayloadResponse(

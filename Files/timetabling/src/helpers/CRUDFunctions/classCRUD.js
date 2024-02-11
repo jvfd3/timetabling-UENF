@@ -1,17 +1,17 @@
 import emptyObjects from "../../config/emptyObjects";
 import {
-  defaultDBCreate,
-  defaultDBRead,
-  defaultDBUpdate,
-  defaultDBDelete,
-  defaultHandleError,
-} from "../../DB/AWS/defaultAxiosFunctions";
-import {
   getId,
   refreshShownItem,
   removeItemInListById,
   replaceNewItemInListById,
 } from "../auxCRUD";
+import {
+  defaultDBCreate,
+  defaultDBRead,
+  defaultDBUpdate,
+  defaultDBDelete,
+  defaultHandleError,
+} from "../../DB/defaultAxiosFunctions";
 
 const itemName = "classData";
 

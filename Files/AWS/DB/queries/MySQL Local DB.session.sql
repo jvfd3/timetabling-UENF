@@ -273,7 +273,7 @@ WHERE
     DESCRIPTION: returns all classtimes with their respective classes, professors, subjects and rooms
     STRUCTURE: 
     horario: {
-      idHorario: INT,
+      id: INT,
       dia: VARCHAR,
       horaInicio: INT,
       duracao: INT,
@@ -319,7 +319,7 @@ SELECT
     )) AS 'disciplina',
     h.duracao AS 'duracao',
     h.horaInicio AS 'horaInicio',
-    h.id AS 'idHorario',
+    h.id AS 'id',
     t.id AS 'idTurma',
     IF(t.idProfessor IS NULL, NULL, JSON_OBJECT(
         'id', p.id,
@@ -356,7 +356,7 @@ WHERE
 SELECT 
     t.ano AS 'ano',
     t.semestre AS 'semestre',
-    h.id AS 'idHorario',
+    h.id AS 'id',
     t.id AS 'idTurma',
     d.id AS 'idDisciplina',
     p.id AS 'idProfessor',
@@ -379,7 +379,7 @@ WHERE
     DESCRIPTION: returns all classtimes with their respective classes, professors, subjects and rooms
     STRUCTURE: 
     horario: {
-      idHorario: INT,
+      id: INT,
       dia: VARCHAR,
       horaInicio: INT,
       duracao: INT,
@@ -426,7 +426,7 @@ SELECT
   )) AS 'disciplina',
   h.duracao AS 'duracao',
   h.horaInicio AS 'horaInicio',
-  h.id AS 'idHorario',
+  h.id AS 'id',
   t.id AS 'idTurma',
   IF(t.idProfessor IS NULL, NULL, JSON_OBJECT(
       'id', p.id,
@@ -478,7 +478,7 @@ GROUP BY
 SELECT 
     t.ano AS 'ano',
     t.semestre AS 'semestre',
-    h.id AS 'idHorario',
+    h.id AS 'id',
     t.id AS 'idTurma',
     d.id AS 'idDisciplina',
     p.id AS 'idProfessor',
@@ -594,4 +594,4 @@ JOIN turmasCTE AS t
   ON h.idTurma = t.idTurma
 ORDER BY h.idTurma;
 
-WITH turmasCTE AS ( SELECT t.id AS idTurma, t.ano AS ano, t.semestre AS semestre, t.demandaEstimada AS demandaEstimada, p.nome AS NomeProfessor, p.apelido AS ApelidoProfessor, p.curso AS CursoProfessor, p.laboratorio AS LaboratorioProfessor, d.nome AS NomeDisciplina, d.apelido AS ApelidoDisciplina, d.codigo AS CodigoDisciplina, d.periodo AS PeriodoDisciplina FROM turmas AS t JOIN professores AS p ON t.idProfessor = p.id JOIN disciplinas AS d ON t.idDisciplina = d.id ) SELECT t.idTurma, h.id AS idHorario, t.ano, t.semestre, t.demandaEstimada, t.NomeProfessor, t.ApelidoProfessor, t.CursoProfessor, t.LaboratorioProfessor, t.NomeDisciplina, t.ApelidoDisciplina, t.CodigoDisciplina, t.PeriodoDisciplina, h.dia AS dia, h.horaInicio AS horaInicio, h.duracao AS duracao, s.capacidade AS CapacidadeSala, s.bloco AS bloco, s.codigo AS codigoSala, s.descricao AS descricao FROM horarios AS h JOIN salas AS s ON h.idSala = s.id JOIN turmasCTE AS t ON h.idTurma = t.idTurma ORDER BY h.idTurma;
+WITH turmasCTE AS ( SELECT t.id AS idTurma, t.ano AS ano, t.semestre AS semestre, t.demandaEstimada AS demandaEstimada, p.nome AS NomeProfessor, p.apelido AS ApelidoProfessor, p.curso AS CursoProfessor, p.laboratorio AS LaboratorioProfessor, d.nome AS NomeDisciplina, d.apelido AS ApelidoDisciplina, d.codigo AS CodigoDisciplina, d.periodo AS PeriodoDisciplina FROM turmas AS t JOIN professores AS p ON t.idProfessor = p.id JOIN disciplinas AS d ON t.idDisciplina = d.id ) SELECT t.idTurma, h.id AS id, t.ano, t.semestre, t.demandaEstimada, t.NomeProfessor, t.ApelidoProfessor, t.CursoProfessor, t.LaboratorioProfessor, t.NomeDisciplina, t.ApelidoDisciplina, t.CodigoDisciplina, t.PeriodoDisciplina, h.dia AS dia, h.horaInicio AS horaInicio, h.duracao AS duracao, s.capacidade AS CapacidadeSala, s.bloco AS bloco, s.codigo AS codigoSala, s.descricao AS descricao FROM horarios AS h JOIN salas AS s ON h.idSala = s.id JOIN turmasCTE AS t ON h.idTurma = t.idTurma ORDER BY h.idTurma;

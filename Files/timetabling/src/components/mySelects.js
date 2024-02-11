@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Select, { components } from "react-select";
+import text from "../config/frontText";
 import myStyles from "../config/myStyles";
+import configInfo from "../config/configInfo";
 import defaultColors from "../config/defaultColors";
 import constantValues from "../config/constantValues";
 import pseudoDatabase from "../config/pseudoDatabase";
-import { sqlDataFromJson } from "../DB/local/dataFromJSON";
+import sqlDataFromJson from "../DB/dataFromJSON";
 import { getValueFromObject } from "../helpers/auxFunctions";
 import { LockedProp, UnlockedProp } from "./Buttons/Dumb/Dumb";
 import {
@@ -20,8 +22,6 @@ import {
   getDefaultOptionLabelSubject,
   getLabelStudentSelection,
 } from "../helpers/visualizationText/textLabels";
-import text from "../config/frontText";
-import configInfo from "../config/configInfo";
 
 const styleWidthFix = myStyles.selects.fullItem;
 const placeHolders = text.component.SelectPlaceholder;

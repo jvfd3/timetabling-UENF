@@ -1,0 +1,27 @@
+id,capacidade,idBlock,bloco,codigo,descricao
+1,20,1,E1,217,E1 (DESENHO) Prédio da reitoria
+2,24,7,P5,inf1,P5
+3,24,7,P5,inf2,P5
+4,24,7,P5,111,P5
+5,24,7,P5,112,P5
+6,30,5,P3,Bcct,Bancada do CCT
+7,35,5,P3,104,Prédio do CCT
+8,35,5,P3,105,Prédio do CCT
+9,35,5,P3,107,Prédio do CCT
+10,35,5,P3,109A,Prédio do CCT
+11,35,5,P3,203A,Prédio do CCT
+12,35,5,P3,208,Prédio do CCT
+13,35,5,P3,209B,Lab Fis CCT
+14,35,1,E1,205,E1 (LCMAT) Prédio da reitoria
+15,35,1,E1,206,E1 Prédio da reitoria
+16,35,1,E1,211,E1 Prédio da reitoria
+17,35,1,E1,219,E1 Prédio da reitoria
+18,35,1,E1,220,E1 Prédio da reitoria
+19,35,12,P10,3,P10
+20,40,5,P3,108,Prédio do CCT
+21,40,5,P3,109B,Prédio do CCT
+22,40,5,P3,206,Prédio do CCT
+23,40,5,P3,207,Prédio do CCT
+24,40,12,P10,1,P10
+25,40,12,P10,2,P10
+26,65,5,P3,106,Prédio do CCT

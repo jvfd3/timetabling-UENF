@@ -43,7 +43,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -70,7 +70,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -97,7 +97,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -124,7 +124,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -151,7 +151,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -178,7 +178,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -205,7 +205,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -232,7 +232,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -259,7 +259,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -286,7 +286,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -313,7 +313,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -340,7 +340,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -367,7 +367,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -394,7 +394,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -421,7 +421,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -448,7 +448,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -475,7 +475,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -502,7 +502,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -529,7 +529,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -556,7 +556,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -583,7 +583,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -610,7 +610,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -637,7 +637,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:
@@ -664,7 +664,7 @@ Resources:
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
+          DB_NAME: OurClassDB
           DB_USER: tang
           DB_PSWD: annabell
     Metadata:

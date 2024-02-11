@@ -1,4 +1,4 @@
-import { sqlDataFromJson } from "../../DB/dataFromJSON";
+import sqlDataFromJson from "../../DB/dataFromJSON";
 import options from "../temp/options";
 import { updateData } from "./CRUD_JSONBIN";
 

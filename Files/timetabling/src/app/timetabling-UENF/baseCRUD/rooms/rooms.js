@@ -3,7 +3,7 @@ import text from "../../../../config/frontText";
 import myStyles from "../../../../config/myStyles";
 import configInfo from "../../../../config/configInfo";
 import { CRUDButtonsContainer } from "../../../../components/CRUDButtons";
-import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
+import sqlDataFromJson from "../../../../DB/dataFromJSON";
 import { RoomClasses } from "../../../../components/classTimesViewTable/SpecificClassTimeViewTables";
 import {
   SelectRoomItem,

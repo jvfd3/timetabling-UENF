@@ -1,4 +1,4 @@
-import { sqlDataFromJson } from "../../DB/dataFromJSON";
+import sqlDataFromJson from "../../DB/dataFromJSON";
 
 function getPeriodoEsperado(codigoDisciplina) {
   let disciplina = allLocalJsonData.static.infoDisciplinasCC.find(
@@ -249,7 +249,7 @@ function splitTurmas(turmas) {
 }
 
 import options from "../DB/local/options";
-import { sqlDataFromJson } from "../DB/local/dataFromJSON";
+import sqlDataFromJson from "../DB/local/dataFromJSON";
 import { replaceNewItemInListById } from "./auxCRUD";
 
 function debugFunc(debugClasses, message) {

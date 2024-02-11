@@ -5,7 +5,7 @@ import {
   defaultDBUpdate,
   defaultDBDelete,
   defaultHandleError,
-} from "../../DB/AWS/defaultAxiosFunctions";
+} from "../../DB/defaultAxiosFunctions";
 import {
   getId,
   refreshShownItem,

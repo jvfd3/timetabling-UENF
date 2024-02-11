@@ -3,7 +3,7 @@ import text from "../../../../config/frontText";
 import myStyles from "../../../../config/myStyles";
 import configInfo from "../../../../config/configInfo";
 import { SubjectClasses } from "../../../../components/classTimesViewTable/SpecificClassTimeViewTables";
-import { sqlDataFromJson } from "../../../../DB/local/dataFromJSON";
+import sqlDataFromJson from "../../../../DB/dataFromJSON";
 import { CRUDButtonsContainer } from "../../../../components/CRUDButtons";
 // import { scrollThroughDisciplinas } from "../functions/firulas/minhasFirulas";
 import {

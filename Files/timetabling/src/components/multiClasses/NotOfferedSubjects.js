@@ -1,8 +1,8 @@
 import "./NotOfferedSubjects.css";
-import { createClass } from "../../helpers/CRUDFunctions/classCRUD";
-import { sqlDataFromJson } from "../../DB/local/dataFromJSON";
-import { SmartInputSubject } from "../Buttons/Smart/Smart";
 import myStyles from "../../config/myStyles";
+import sqlDataFromJson from "../../DB/dataFromJSON";
+import { SmartInputSubject } from "../Buttons/Smart/Smart";
+import { createClass } from "../../helpers/CRUDFunctions/classCRUD";
 
 const defaultClassNames = myStyles.classNames.default;
 
