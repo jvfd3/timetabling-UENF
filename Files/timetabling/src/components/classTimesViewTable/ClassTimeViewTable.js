@@ -14,19 +14,7 @@ import {
 
 const defaultClassNames = myStyles.classNames.default;
 const localClassNames = myStyles.classNames.local.component.classTimeViewTable;
-
-const headers = {
-  idTurma: "idTurma",
-  yearSemester: "Ano.Semestre",
-  subject: "Disciplina",
-  professor: "Professor",
-  demand: "Demanda Estimada",
-  idHorario: "idHorario",
-  room: "Sala",
-  day: "Dia",
-  startHour: "Hora Início",
-  duration: "Duração",
-};
+const frontText = text.component.classTimeViewTable.tableTitles;
 
 function NoClasses({ noClassesTitle }) {
   return <h5>{noClassesTitle}</h5>;
@@ -36,16 +24,16 @@ function TableHeader() {
   return (
     <thead>
       <tr>
-        <th>{headers.idTurma}</th>
-        <th>{headers.yearSemester}</th>
-        <th>{headers.subject}</th>
-        <th>{headers.professor}</th>
-        <th>{headers.demand}</th>
-        <th>{headers.idHorario}</th>
-        <th>{headers.room}</th>
-        <th>{headers.day}</th>
-        <th>{headers.startHour}</th>
-        <th>{headers.duration}</th>
+        <th>{frontText.idTurma}</th>
+        <th>{frontText.yearSemester}</th>
+        <th>{frontText.subject}</th>
+        <th>{frontText.professor}</th>
+        <th>{frontText.demand}</th>
+        <th>{frontText.idHorario}</th>
+        <th>{frontText.room}</th>
+        <th>{frontText.day}</th>
+        <th>{frontText.startHour}</th>
+        <th>{frontText.duration}</th>
       </tr>
     </thead>
   );

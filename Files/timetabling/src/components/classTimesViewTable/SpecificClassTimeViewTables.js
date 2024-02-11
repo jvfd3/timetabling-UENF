@@ -1,3 +1,4 @@
+import text from "../../config/frontText";
 import ClassesTableView from "./ClassTimeViewTable";
 import {
   filterRoom,
@@ -5,14 +6,16 @@ import {
   filterProfessor,
 } from "../../helpers/filteringFunc";
 
+const frontText = text.component.classTimeViewTable.specificTexts;
+
 function RoomClasses(room) {
   // const {id, bloco, descricao, capacidade, codigo, idBlock} = room;
 
   const customPageStates = {
     baseFilter: filterRoom,
     baseValueToFilter: room,
-    headerTitle: "Turmas nesta sala: ",
-    noClassesTitle: "Não há turmas nesta sala",
+    headerTitle: frontText.room.headerTitle,
+    noClassesTitle: frontText.room.noClassesTitle,
   };
 
   return <ClassesTableView {...customPageStates} />;
@@ -22,8 +25,8 @@ function ProfessorClasses(professor) {
   const customPageStates = {
     baseFilter: filterProfessor,
     baseValueToFilter: professor,
-    headerTitle: "Turmas desse professor: ",
-    noClassesTitle: "Não há turmas para este professor",
+    headerTitle: frontText.professor.headerTitle,
+    noClassesTitle: frontText.professor.noClassesTitle,
   };
 
   return <ClassesTableView {...customPageStates} />;
@@ -33,8 +36,8 @@ function SubjectClasses(subject) {
   const customPageStates = {
     baseFilter: filterSubject,
     baseValueToFilter: subject,
-    headerTitle: "Turmas desta disciplina: ",
-    noClassesTitle: "Não há turmas para esta disciplina",
+    headerTitle: frontText.subject.headerTitle,
+    noClassesTitle: frontText.subject.noClassesTitle,
   };
 
   return <ClassesTableView {...customPageStates} />;

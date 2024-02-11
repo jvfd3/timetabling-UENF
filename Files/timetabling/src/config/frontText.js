@@ -111,6 +111,34 @@ const text = {
         classTimes: "Horários",
       },
     },
+    classTimeViewTable: {
+      specificTexts: {
+        room: {
+          headerTitle: "Turmas nesta sala: ",
+          noClassesTitle: "Não há turmas nesta sala",
+        },
+        professor: {
+          headerTitle: "Turmas desse professor: ",
+          noClassesTitle: "Não há turmas para este professor",
+        },
+        subject: {
+          headerTitle: "Turmas desta disciplina: ",
+          noClassesTitle: "Não há turmas para esta disciplina",
+        },
+      },
+      tableTitles: {
+        idTurma: "idTurma",
+        yearSemester: "Ano.Semestre",
+        subject: "Disciplina",
+        professor: "Professor",
+        demand: "Demanda Estimada",
+        idHorario: "idHorario",
+        room: "Sala",
+        day: "Dia",
+        startHour: "Hora Início",
+        duration: "Duração",
+      },
+    },
     SelectPlaceholder: {
       room: "Sala",
       student: "Aluno",
