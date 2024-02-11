@@ -32,10 +32,10 @@ Resources:
       CodeUri: createProfessor
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -59,10 +59,10 @@ Resources:
       CodeUri: readProfessor
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -86,10 +86,10 @@ Resources:
       CodeUri: updateProfessor
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -113,10 +113,10 @@ Resources:
       CodeUri: deleteProfessor
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -140,10 +140,10 @@ Resources:
       CodeUri: createSubject
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -167,10 +167,10 @@ Resources:
       CodeUri: readSubject
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -194,10 +194,10 @@ Resources:
       CodeUri: updateSubject
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -221,10 +221,10 @@ Resources:
       CodeUri: deleteSubject
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -248,10 +248,10 @@ Resources:
       CodeUri: createStudent
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -275,10 +275,10 @@ Resources:
       CodeUri: readStudent
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -302,10 +302,10 @@ Resources:
       CodeUri: updateStudent
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -329,10 +329,10 @@ Resources:
       CodeUri: deleteStudent
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -357,10 +357,10 @@ Resources:
       CodeUri: createRoom
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -385,10 +385,10 @@ Resources:
       CodeUri: readRoom
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -413,10 +413,10 @@ Resources:
       CodeUri: updateRoom
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -441,10 +441,10 @@ Resources:
       CodeUri: deleteRoom
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -469,10 +469,10 @@ Resources:
       CodeUri: createClassData
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -497,10 +497,10 @@ Resources:
       CodeUri: readClassData
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -525,10 +525,10 @@ Resources:
       CodeUri: updateClassData
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -553,10 +553,10 @@ Resources:
       CodeUri: deleteClassData
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -581,10 +581,10 @@ Resources:
       CodeUri: createClassTime
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -609,10 +609,10 @@ Resources:
       CodeUri: readClassTime
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -637,10 +637,10 @@ Resources:
       CodeUri: updateClassTime
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
@@ -665,10 +665,10 @@ Resources:
       CodeUri: deleteClassTime
       Environment:
         Variables:
-          DB_HOST: dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-          DB_NAME: timetabling
       Layers:
       - Ref: dbFunctionLayer
       Events:
