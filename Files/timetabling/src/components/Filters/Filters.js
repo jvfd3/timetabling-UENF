@@ -1,4 +1,5 @@
 import "./Filters.css";
+import text from "../../config/frontText";
 import myStyles from "../../config/myStyles";
 import { useEffect, useState } from "react";
 import { readRoom } from "../../helpers/CRUDFunctions/roomCRUD";
@@ -32,12 +33,13 @@ import {
 } from "../mySelects";
 
 const filterStyles = myStyles.classNames.local.component.filters;
+const frontText = text.component.filters;
 
 function FilterYear(filterYearStates) {
   // console.log("filterYearStates", filterYearStates);
   return (
     <div className={filterStyles.item}>
-      Ano:
+      {frontText.year}
       <SelectFilterYear {...filterYearStates} />
     </div>
   );
@@ -46,7 +48,7 @@ function FilterYear(filterYearStates) {
 function FilterSemester(filterSemesterStates) {
   return (
     <div className={filterStyles.item}>
-      Semestre:
+      {frontText.semester}
       <SelectFilterSemester {...filterSemesterStates} />
     </div>
   );
@@ -55,7 +57,7 @@ function FilterSemester(filterSemesterStates) {
 function FilterDay(filterDayStates) {
   return (
     <div className={filterStyles.item}>
-      Dia:
+      {frontText.day}
       <SelectFilterDay {...filterDayStates} />
     </div>
   );
@@ -64,7 +66,7 @@ function FilterDay(filterDayStates) {
 function FilterHour(filterHourStates) {
   return (
     <div className={filterStyles.item}>
-      Hora:
+      {frontText.hour}
       <SelectFilterHour {...filterHourStates} />
     </div>
   );
@@ -73,7 +75,7 @@ function FilterHour(filterHourStates) {
 function FilterExpectedSemester(filterExpectedSemesterStates) {
   return (
     <div className={filterStyles.item}>
-      Semestre Esperado:
+      {frontText.expectedSemester}
       <SelectFilterExpectedSemester {...filterExpectedSemesterStates} />
     </div>
   );
@@ -82,7 +84,7 @@ function FilterExpectedSemester(filterExpectedSemesterStates) {
 function FilterSubject(filterSubjectStates) {
   return (
     <div className={filterStyles.item}>
-      Disciplina:
+      {frontText.subject}
       <SelectFilterSubject {...filterSubjectStates} />
     </div>
   );
@@ -91,7 +93,7 @@ function FilterSubject(filterSubjectStates) {
 function FilterProfessor(filterProfessorStates) {
   return (
     <div className={filterStyles.item}>
-      Professor:
+      {frontText.professor}
       <SelectFilterProfessor {...filterProfessorStates} />
     </div>
   );
@@ -100,7 +102,7 @@ function FilterProfessor(filterProfessorStates) {
 function FilterRoom(filterRoomStates) {
   return (
     <div className={filterStyles.item}>
-      Sala:
+      {frontText.room}
       <SelectFilterRoom {...filterRoomStates} />
     </div>
   );

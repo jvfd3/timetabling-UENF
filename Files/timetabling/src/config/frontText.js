@@ -103,6 +103,16 @@ const text = {
     unexpectedPlaceholder: "Isso não deveria estar vazio. 😅",
     ccTable: {},
     classTimes: {},
+    filters: {
+      year: "Ano:",
+      semester: "Semestre:",
+      day: "Dia:",
+      hour: "Hora:",
+      expectedSemester: "Período Esperado:",
+      subject: "Disciplina:",
+      professor: "Professor:",
+      room: "Sala:",
+    },
     classItemTable: {
       tableTitles: {
         subject: "Disciplina",
