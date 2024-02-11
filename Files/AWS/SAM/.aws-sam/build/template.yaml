@@ -25,19 +25,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: createProfessor
-      Runtime: nodejs14.x
-      Role:
-        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
       CodeUri: createProfessor
-      Environment:
-        Variables:
-          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
-          DB_NAME: OurClassUIRDS
-          DB_USER: tang
-          DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
       Events:
         ApiEvent:
           Type: Api
@@ -46,25 +34,25 @@ Resources:
             Method: post
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: createProfessor
-  readProfessor:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: readProfessor
       Runtime: nodejs14.x
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: readProfessor
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: createProfessor
+  readProfessor:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: readProfessor
+      CodeUri: readProfessor
       Events:
         ApiEvent:
           Type: Api
@@ -73,25 +61,25 @@ Resources:
             Method: get
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: readProfessor
-  updateProfessor:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: updateProfessor
       Runtime: nodejs14.x
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: updateProfessor
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: readProfessor
+  updateProfessor:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: updateProfessor
+      CodeUri: updateProfessor
       Events:
         ApiEvent:
           Type: Api
@@ -100,25 +88,25 @@ Resources:
             Method: put
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: updateProfessor
-  deleteProfessor:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: deleteProfessor
       Runtime: nodejs14.x
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: deleteProfessor
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: updateProfessor
+  deleteProfessor:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: deleteProfessor
+      CodeUri: deleteProfessor
       Events:
         ApiEvent:
           Type: Api
@@ -127,25 +115,25 @@ Resources:
             Method: delete
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: deleteProfessor
-  createSubject:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: createSubject
       Runtime: nodejs14.x
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: createSubject
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: deleteProfessor
+  createSubject:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: createSubject
+      CodeUri: createSubject
       Events:
         ApiEvent:
           Type: Api
@@ -154,25 +142,25 @@ Resources:
             Method: post
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: createSubject
-  readSubject:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: readSubject
       Runtime: nodejs14.x
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: readSubject
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: createSubject
+  readSubject:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: readSubject
+      CodeUri: readSubject
       Events:
         ApiEvent:
           Type: Api
@@ -181,25 +169,25 @@ Resources:
             Method: get
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: readSubject
-  updateSubject:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: updateSubject
       Runtime: nodejs14.x
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: updateSubject
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: readSubject
+  updateSubject:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: updateSubject
+      CodeUri: updateSubject
       Events:
         ApiEvent:
           Type: Api
@@ -208,25 +196,25 @@ Resources:
             Method: put
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: updateSubject
-  deleteSubject:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: deleteSubject
       Runtime: nodejs14.x
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: deleteSubject
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: updateSubject
+  deleteSubject:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: deleteSubject
+      CodeUri: deleteSubject
       Events:
         ApiEvent:
           Type: Api
@@ -235,25 +223,25 @@ Resources:
             Method: delete
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: deleteSubject
-  createStudent:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: createStudent
       Runtime: nodejs14.x
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: createStudent
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: deleteSubject
+  createStudent:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: createStudent
+      CodeUri: createStudent
       Events:
         ApiEvent:
           Type: Api
@@ -262,25 +250,25 @@ Resources:
             Method: post
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: createStudent
-  readStudent:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: readStudent
       Runtime: nodejs14.x
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: readStudent
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: createStudent
+  readStudent:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: readStudent
+      CodeUri: readStudent
       Events:
         ApiEvent:
           Type: Api
@@ -289,25 +277,25 @@ Resources:
             Method: get
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: readStudent
-  updateStudent:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: updateStudent
       Runtime: nodejs14.x
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: updateStudent
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: readStudent
+  updateStudent:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: updateStudent
+      CodeUri: updateStudent
       Events:
         ApiEvent:
           Type: Api
@@ -316,25 +304,25 @@ Resources:
             Method: put
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: updateStudent
-  deleteStudent:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: deleteStudent
       Runtime: nodejs14.x
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: deleteStudent
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: updateStudent
+  deleteStudent:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: deleteStudent
+      CodeUri: deleteStudent
       Events:
         ApiEvent:
           Type: Api
@@ -343,26 +331,25 @@ Resources:
             Method: delete
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: deleteStudent
-  createRoom:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: createRoom
       Runtime: nodejs14.x
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Timeout: 30
-      Handler: index.handler
-      CodeUri: createRoom
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: deleteStudent
+  createRoom:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: createRoom
+      CodeUri: createRoom
       Events:
         ApiEvent:
           Type: Api
@@ -371,26 +358,25 @@ Resources:
             Method: post
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: createRoom
-  readRoom:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: readRoom
       Runtime: nodejs14.x
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Timeout: 30
-      Handler: index.handler
-      CodeUri: readRoom
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: createRoom
+  readRoom:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: readRoom
+      CodeUri: readRoom
       Events:
         ApiEvent:
           Type: Api
@@ -399,26 +385,25 @@ Resources:
             Method: get
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: readRoom
-  updateRoom:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: updateRoom
       Runtime: nodejs14.x
-      Timeout: 30
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: updateRoom
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: readRoom
+  updateRoom:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: updateRoom
+      CodeUri: updateRoom
       Events:
         ApiEvent:
           Type: Api
@@ -427,26 +412,25 @@ Resources:
             Method: put
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: updateRoom
-  deleteRoom:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: deleteRoom
       Runtime: nodejs14.x
-      Timeout: 30
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: deleteRoom
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: updateRoom
+  deleteRoom:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: deleteRoom
+      CodeUri: deleteRoom
       Events:
         ApiEvent:
           Type: Api
@@ -455,26 +439,25 @@ Resources:
             Method: delete
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: deleteRoom
-  createClassData:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: createClassData
       Runtime: nodejs14.x
-      Timeout: 30
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: createClassData
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: deleteRoom
+  createClassData:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: createClassData
+      CodeUri: createClassData
       Events:
         ApiEvent:
           Type: Api
@@ -483,26 +466,25 @@ Resources:
             Method: post
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: createClassData
-  readClassData:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: readClassData
       Runtime: nodejs14.x
-      Timeout: 30
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: readClassData
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: createClassData
+  readClassData:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: readClassData
+      CodeUri: readClassData
       Events:
         ApiEvent:
           Type: Api
@@ -511,26 +493,25 @@ Resources:
             Method: get
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: readClassData
-  updateClassData:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: updateClassData
       Runtime: nodejs14.x
-      Timeout: 30
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: updateClassData
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: readClassData
+  updateClassData:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: updateClassData
+      CodeUri: updateClassData
       Events:
         ApiEvent:
           Type: Api
@@ -539,26 +520,25 @@ Resources:
             Method: put
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: updateClassData
-  deleteClassData:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: deleteClassData
       Runtime: nodejs14.x
-      Timeout: 30
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: deleteClassData
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: updateClassData
+  deleteClassData:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: deleteClassData
+      CodeUri: deleteClassData
       Events:
         ApiEvent:
           Type: Api
@@ -567,26 +547,25 @@ Resources:
             Method: delete
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: deleteClassData
-  createClassTime:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: createClassTime
       Runtime: nodejs14.x
-      Timeout: 30
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: createClassTime
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: deleteClassData
+  createClassTime:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: createClassTime
+      CodeUri: createClassTime
       Events:
         ApiEvent:
           Type: Api
@@ -595,26 +574,25 @@ Resources:
             Method: post
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: createClassTime
-  readClassTime:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: readClassTime
       Runtime: nodejs14.x
-      Timeout: 30
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: readClassTime
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: createClassTime
+  readClassTime:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: readClassTime
+      CodeUri: readClassTime
       Events:
         ApiEvent:
           Type: Api
@@ -623,26 +601,25 @@ Resources:
             Method: get
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: readClassTime
-  updateClassTime:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: updateClassTime
       Runtime: nodejs14.x
-      Timeout: 30
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: updateClassTime
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: readClassTime
+  updateClassTime:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: updateClassTime
+      CodeUri: updateClassTime
       Events:
         ApiEvent:
           Type: Api
@@ -651,26 +628,25 @@ Resources:
             Method: put
             RestApiId:
               Ref: TimetablingAPI
-    Metadata:
-      SamResourceId: updateClassTime
-  deleteClassTime:
-    Type: AWS::Serverless::Function
-    Properties:
-      FunctionName: deleteClassTime
       Runtime: nodejs14.x
-      Timeout: 30
+      Handler: index.handler
       Role:
         Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
-      Handler: index.handler
-      CodeUri: deleteClassTime
+      Layers:
+      - Ref: dbFunctionLayer
       Environment:
         Variables:
           DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
           DB_NAME: OurClassUIRDS
           DB_USER: tang
           DB_PSWD: annabell
-      Layers:
-      - Ref: dbFunctionLayer
+    Metadata:
+      SamResourceId: updateClassTime
+  deleteClassTime:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: deleteClassTime
+      CodeUri: deleteClassTime
       Events:
         ApiEvent:
           Type: Api
@@ -679,5 +655,17 @@ Resources:
             Method: delete
             RestApiId:
               Ref: TimetablingAPI
+      Runtime: nodejs14.x
+      Handler: index.handler
+      Role:
+        Fn::Sub: arn:aws:iam::${AWS::AccountId}:role/LambdaRole
+      Layers:
+      - Ref: dbFunctionLayer
+      Environment:
+        Variables:
+          DB_HOST: ourclassuirds.cgsgwtemx5r8.us-east-2.rds.amazonaws.com
+          DB_NAME: OurClassUIRDS
+          DB_USER: tang
+          DB_PSWD: annabell
     Metadata:
       SamResourceId: deleteClassTime
