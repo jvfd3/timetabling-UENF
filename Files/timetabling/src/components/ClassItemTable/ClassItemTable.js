@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import text from "../../config/frontText";
 import myStyles from "../../config/myStyles";
 import ClassTimeTable from "../ClassTimeTable/ClassTimeTable";
+import { getId } from "../../helpers/auxCRUD";
 import { getClassItemConflicts } from "../../helpers/conflicts/centralConflicts";
 import { NumberInputMultiClassesExpectedDemand } from "../MyTextFields";
 import { SelectClassProfessor, SelectClassSubject } from "../mySelects";
@@ -14,8 +16,8 @@ import {
   SmartDeleteClassItem,
   SmartUpdateClassItem,
 } from "../Buttons/Smart/Smart";
-import { getId } from "../../helpers/auxCRUD";
 
+const frontText = text.component.classItemTable.tableTitles;
 const defaultClassNames = myStyles.classNames.default;
 
 function ClassTableHeader(createStates) {
@@ -25,10 +27,10 @@ function ClassTableHeader(createStates) {
         <th>
           <SmartCreateClassItem {...createStates} />
         </th>
-        <th>Código - Nome</th>
-        <th>Professor</th>
-        <th>Demanda Estimada</th>
-        <th colSpan={5}>Horários</th>
+        <th>{frontText.subject}</th>
+        <th>{frontText.professor}</th>
+        <th>{frontText.expectedDemand}</th>
+        <th colSpan={5}>{frontText.classTimes}</th>
       </tr>
     </thead>
   );

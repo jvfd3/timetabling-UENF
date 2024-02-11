@@ -103,6 +103,14 @@ const text = {
     unexpectedPlaceholder: "Isso não deveria estar vazio. 😅",
     ccTable: {},
     classTimes: {},
+    classItemTable: {
+      tableTitles: {
+        subject: "Disciplina",
+        professor: "Professor",
+        expectedDemand: "Demanda Estimada",
+        classTimes: "Horários",
+      },
+    },
     SelectPlaceholder: {
       room: "Sala",
       student: "Aluno",
