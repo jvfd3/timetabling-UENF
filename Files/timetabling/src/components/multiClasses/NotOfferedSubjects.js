@@ -3,8 +3,10 @@ import myStyles from "../../config/myStyles";
 import sqlDataFromJson from "../../DB/dataFromJSON";
 import { SmartInputSubject } from "../Buttons/Smart/Smart";
 import { createClass } from "../../helpers/CRUDFunctions/classCRUD";
+import text from "../../config/frontText";
 
 const defaultClassNames = myStyles.classNames.default;
+const frontText = text.component.nonOfferedSubjects;
 
 function isSameParity(subject, semester) {
   const subjectParity = subject?.periodo % 2;
@@ -37,14 +39,10 @@ function getListOfNotOfferedSubjects(classes, semester, subjects = []) {
 }
 
 function AllSubjectsWereOffered() {
-  const mainTitle = "Todas as disciplinas do período ímpar foram oferecidas 👍";
-  const subtitle =
-    "Isso é mesmo possível? Ou o código bugou em algum lugar? 🤔";
-
   return (
     <div>
-      <h1>{mainTitle}</h1>
-      <p>{subtitle}</p>
+      <h1>{frontText.mainTitle}</h1>
+      <p>{frontText.subtitle}</p>
     </div>
   );
 }
@@ -80,7 +78,6 @@ function NonOfferedSubjectsTable(unofferedSubjectsProps) {
   const { semesterValue, nonOfferedSubjects, classStates } =
     unofferedSubjectsProps;
 
-  const baseMessage = "Disciplinas ainda não oferecidas ";
   const semesterMessages = {
     1: "do período ímpar",
     2: "do período par",
@@ -105,18 +102,16 @@ function NonOfferedSubjectsTable(unofferedSubjectsProps) {
     },
   };
 
-  const headerText = "Período - (Código) Nome";
-
   return (
     <div className={defaultClassNames.containerCardBaseInfo}>
-      <h1>{baseMessage + semesterMessage}</h1>
+      <h1>{text.baseMessage + semesterMessage}</h1>
       <table className={defaultClassNames.componentTable}>
         <thead>
           <tr>
             <th>
               <SmartInputSubject {...inputProps} />
             </th>
-            <th>{headerText}</th>
+            <th>{frontText.headerText}</th>
           </tr>
         </thead>
         <tbody>

@@ -103,6 +103,12 @@ const text = {
     unexpectedPlaceholder: "Isso não deveria estar vazio. 😅",
     ccTable: {},
     classTimes: {},
+    nonOfferedSubjects: {
+      mainTitle: "Todas as disciplinas do período ímpar foram oferecidas 👍",
+      subtitle: "Isso é mesmo possível? Ou o código bugou em algum lugar? 🤔",
+      baseMessage: "Disciplinas ainda não oferecidas ",
+      headerText: "Período - (Código) Nome",
+    },
     filters: {
       year: "Ano:",
       semester: "Semestre:",
