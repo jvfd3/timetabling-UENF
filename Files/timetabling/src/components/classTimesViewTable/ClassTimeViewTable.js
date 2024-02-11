@@ -1,4 +1,5 @@
 import "./ClassTimeViewTable.css";
+import text from "../../config/frontText";
 import myStyles from "../../config/myStyles";
 import { useEffect, useState } from "react";
 import { getId } from "../../helpers/auxCRUD";
