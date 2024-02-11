@@ -55,22 +55,6 @@ CREATE TABLE `disciplinas` (
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 
-CREATE TABLE `horarios` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `dia` ENUM('SEG', 'TER', 'QUA', 'QUI', 'SEX'),
-  `horaInicio` int unsigned DEFAULT NULL,
-  `duracao` int unsigned DEFAULT NULL,
-  `idTurma` int unsigned DEFAULT NULL,
-  `idSala` int unsigned DEFAULT NULL,
-  `comment` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `idHorarioSala_idx` (`idSala`),
-  KEY `idHorarioTurma_idx` (`idTurma`),
-  CONSTRAINT `idHorarioSala` FOREIGN KEY (`idSala`) REFERENCES `salas` (`id`),
-  CONSTRAINT `idHorarioTurma` FOREIGN KEY (`idTurma`) REFERENCES `turmas` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2028030895 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
-
 CREATE TABLE `professores` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `laboratorio` varchar(255),
@@ -106,3 +90,19 @@ CREATE TABLE `turmas` (
   CONSTRAINT `idTurmaDisciplina` FOREIGN KEY (`idDisciplina`) REFERENCES `disciplinas` (`id`),
   CONSTRAINT `idTurmaProfessor` FOREIGN KEY (`idProfessor`) REFERENCES `professores` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20290509 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `horarios` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `dia` ENUM('SEG', 'TER', 'QUA', 'QUI', 'SEX'),
+  `horaInicio` int unsigned DEFAULT NULL,
+  `duracao` int unsigned DEFAULT NULL,
+  `idTurma` int unsigned DEFAULT NULL,
+  `idSala` int unsigned DEFAULT NULL,
+  `comment` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `idHorarioSala_idx` (`idSala`),
+  KEY `idHorarioTurma_idx` (`idTurma`),
+  CONSTRAINT `idHorarioSala` FOREIGN KEY (`idSala`) REFERENCES `salas` (`id`),
+  CONSTRAINT `idHorarioTurma` FOREIGN KEY (`idTurma`) REFERENCES `turmas` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2028030895 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
