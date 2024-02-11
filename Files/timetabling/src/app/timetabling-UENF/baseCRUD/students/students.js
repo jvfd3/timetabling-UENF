@@ -97,9 +97,7 @@ function Students() {
   const defaultStudents = sqlDataFromJson.students ?? [];
 
   const [students, setStudents] = useState(defaultStudents);
-  const [student, setStudent] = useState(
-    students?.[configInfo.defaultIndexes.student] ?? students?.[0]
-  ); // JVFD
+  const [student, setStudent] = useState(null);
 
   const studentStates = { students, setStudents, student, setStudent };
 

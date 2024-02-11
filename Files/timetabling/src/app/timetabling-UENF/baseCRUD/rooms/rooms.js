@@ -95,9 +95,7 @@ function Rooms() {
   const defaultRooms = sqlDataFromJson.salas ?? [];
 
   const [rooms, setRooms] = useState(defaultRooms);
-  const [room, setRoom] = useState(
-    rooms?.[configInfo.defaultIndexes.room] ?? rooms?.[0]
-  );
+  const [room, setRoom] = useState(null);
 
   const roomStates = { rooms, setRooms, room, setRoom };
 

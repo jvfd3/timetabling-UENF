@@ -97,9 +97,7 @@ function Professors() {
   const defaultProfessors = sqlDataFromJson.professors ?? [];
 
   const [professors, setProfessors] = useState(defaultProfessors);
-  const [professor, setProfessor] = useState(
-    professors?.[configInfo.defaultIndexes.professor] ?? professors?.[0]
-  );
+  const [professor, setProfessor] = useState(null);
 
   const professorStates = {
     professors,
