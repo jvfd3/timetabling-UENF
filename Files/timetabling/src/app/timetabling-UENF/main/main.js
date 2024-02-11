@@ -8,7 +8,7 @@ const pageTexts = text.page.main;
 function Logo() {
   return (
     <img
-      src={process.env.PUBLIC_URL + "/logos/OurClass.png"}
+      src={process.env.PUBLIC_URL + "/OurClass.png"}
       alt="Logo OurClass"
       style={{ width: "30%", margin: "auto", display: "block" }}
     />
