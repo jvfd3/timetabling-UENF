@@ -1,9 +1,9 @@
 import "./NotOfferedSubjects.css";
-import myStyles from "../../config/myStyles";
-import sqlDataFromJson from "../../DB/dataFromJSON";
-import { SmartInputSubject } from "../Buttons/Smart/Smart";
-import { createClass } from "../../helpers/CRUDFunctions/classCRUD";
-import text from "../../config/frontText";
+import myStyles from "../../../config/myStyles";
+import sqlDataFromJson from "../../../DB/dataFromJSON";
+import { SmartInputSubject } from "../../Buttons/Smart/Smart";
+import { createClass } from "../../../helpers/CRUDFunctions/classCRUD";
+import text from "../../../config/frontText";
 
 const defaultClassNames = myStyles.classNames.default;
 const frontText = text.component.nonOfferedSubjects;
@@ -104,7 +104,7 @@ function NonOfferedSubjectsTable(unofferedSubjectsProps) {
 
   return (
     <div className={defaultClassNames.containerCardBaseInfo}>
-      <h1>{text.baseMessage + semesterMessage}</h1>
+      <h1>{frontText.baseMessage + semesterMessage}</h1>
       <table className={defaultClassNames.componentTable}>
         <thead>
           <tr>
@@ -119,11 +119,9 @@ function NonOfferedSubjectsTable(unofferedSubjectsProps) {
             const NotOfferedProps = {
               iterSubject,
               classStates,
+              key: iterSubject.codigo,
             };
-            const subjectRowKey = iterSubject.codigo;
-            return (
-              <NotOfferedSubjectRow {...NotOfferedProps} key={subjectRowKey} />
-            );
+            return <NotOfferedSubjectRow {...NotOfferedProps} />;
           })}
         </tbody>
       </table>

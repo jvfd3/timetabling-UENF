@@ -93,11 +93,9 @@ function ClassesTable(globalStates) {
           const classItemRowProps = {
             ...classStates,
             classItem: iterClassItem,
+            key: `ClassItemTableRow: ${getId(iterClassItem)}`,
           };
-          const classItemRowKey = `ClassItemTableRow: ${getId(iterClassItem)}`;
-          return (
-            <ClassItemTableRow {...classItemRowProps} key={classItemRowKey} />
-          );
+          return <ClassItemTableRow {...classItemRowProps} />;
         })}
       </tbody>
     </table>
