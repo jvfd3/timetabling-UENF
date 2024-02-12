@@ -93,9 +93,12 @@ function ClassesTable({ classTimes }) {
       <TableHeader />
       <tbody>
         {orderedClassTimes.map((iterClassTime) => {
-          const classRowProps = { classTimes, classTime: iterClassTime };
-          const classTimeRowKey = `class: ${getId(iterClassTime)}`;
-          return <ClassRow key={classTimeRowKey} {...classRowProps} />;
+          const classRowProps = {
+            classTimes,
+            classTime: iterClassTime,
+            key: `class: ${getId(iterClassTime)}`,
+          };
+          return <ClassRow {...classRowProps} />;
         })}
       </tbody>
     </table>

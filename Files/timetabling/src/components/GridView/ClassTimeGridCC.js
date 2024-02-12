@@ -77,11 +77,12 @@ function Row({ hour, classTimes }) {
 
   const classTimesHour = filterHour(classTimes, hour);
   const daysList = constantValues.days;
-  const rowKey = `Linha: ${hour}, Header: ${hour}`;
+  const rowKey = `Header Row: ${hour}`;
+  const rowColKey = `${rowKey}, Header: ${hour}`;
 
   const daysColumn = daysList.map((iterDay) => {
     const classesDayHour = filterDay(classTimesHour, iterDay.value);
-    const cellKey = `Key Coluna: ${iterDay.value}-${hour}`;
+    const cellKey = `Column Key: ${iterDay.value}-${hour}`;
     // console.log(classesDayHour);
     return (
       <td key={cellKey} className={localClassNames.contentCell}>
@@ -91,8 +92,8 @@ function Row({ hour, classTimes }) {
   });
 
   return (
-    <tr key={`Linha: ${hour}`}>
-      <td key={rowKey} className={localClassNames.horariosCol}>
+    <tr key={rowKey}>
+      <td key={rowColKey} className={localClassNames.horariosCol}>
         {hour}
       </td>
       {daysColumn}
@@ -106,7 +107,7 @@ function Body({ classTimes }) {
   return (
     <tbody>
       {hoursTangList.map((iterHour) => {
-        const rowKey = `Linha: ${iterHour.hora}`;
+        const rowKey = `Body Row: ${iterHour.hora}`;
         const rowProps = {
           hour: iterHour.hora,
           classTimes,
