@@ -60,7 +60,7 @@ function CellContent({ classTimes }) {
   // console.log(classTimes);
   const classesList = classTimes.map((iterClassTime) => {
     const cellMessage = getCellMessage(iterClassTime);
-    const cellKey = `ChaveCellContent: ${iterClassTime.idTurma}-${iterClassTime.idHorario}`;
+    const cellKey = `ChaveCellContent: ${iterClassTime.idTurma}-${iterClassTime.id}`;
     return (
       <div key={cellKey} className={localClassNames.eachClassInCell}>
         {cellMessage}
