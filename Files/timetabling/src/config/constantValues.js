@@ -55,7 +55,6 @@ const constantValues = {
     { hora: 20, turno: "Noite" },
   ],
   expectedSemester: [
-    { value: 0, label: "0" },
     { value: 1, label: "1" },
     { value: 2, label: "2" },
     { value: 3, label: "3" },
@@ -68,7 +67,7 @@ const constantValues = {
     { value: 10, label: "10" },
     { value: 11, label: "Eletiva Optativa" },
     { value: 12, label: "Eletiva Livre" },
-    { value: 12, label: "Não pertence ao curso" },
+    { value: 13, label: "Disciplina Não-CC" },
   ],
   durations: [
     { value: 0, label: "sem aula" },
