@@ -1,7 +1,7 @@
 import { defaultCreate } from "/opt/db.js";
 
 const createItemQuery =
-  "INSERT INTO `horarios` (`dia`, `horaInicio`, `duracao`, `idTurma`, `idSala`) VALUES(?, ?, ?, ?, ?, ?)";
+  "INSERT INTO `horarios` (`dia`, `horaInicio`, `duracao`, `idTurma`, `idSala`) VALUES(?, ?, ?, ?, ?)";
 
 const itemName = "ClassData";
 let local = `aws>lambda>Create>${itemName}>handler`;
