@@ -1,14 +1,8 @@
+import text from "../../../config/frontText";
 import defaultColors from "../../../config/defaultColors";
 
 const conflictOptions = defaultColors.conflicts;
-
-const defaultTitles = {
-  base: "Conflitos de professor avaliados:\n",
-  notSetted: "✅ Sem conflitos de professor não definido\n",
-  notSettedConflict: "❌ Conflito: professor não definido\n",
-  alloc: "✅ Sem conflitos de alocação de professor\n",
-  allocConflict: "❌ Conflito: Alocação de professor\n",
-};
+const defaultTitles = text.conflicts.professor;
 
 function getProfessorDefaultStyle() {
   const defaultStyle = {

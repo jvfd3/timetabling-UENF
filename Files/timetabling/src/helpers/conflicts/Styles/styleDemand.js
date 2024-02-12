@@ -1,14 +1,8 @@
+import text from "../../../config/frontText";
 import defaultColors from "../../../config/defaultColors";
 
 const conflictOptions = defaultColors.conflicts;
-
-const defaultTitles = {
-  base: `Conflitos de demanda avaliados:\n`,
-  notSetted: `✅ Sem conflitos de demanda não definida\n`,
-  notSettedConflict: `❌ Conflito: demanda não definida\n`,
-  singleCapacity: `✅ Todas as salas desta turma comportam a demanda estimada\n`,
-  singleCapacityConflict: `❌ Conflito: há sala que não comporta a demanda\n`,
-};
+const defaultTitles = text.conflicts.demand;
 
 function getDemandMessage(conflicts) {
   let titleMessage = defaultTitles.singleCapacityConflict;

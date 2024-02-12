@@ -1,19 +1,8 @@
+import text from "../../../config/frontText";
 import defaultColors from "../../../config/defaultColors";
 
 const conflictOptions = defaultColors.conflicts;
-
-const defaultTitles = {
-  base: "Conflitos de disciplina avaliados:\n",
-
-  isSet: "✅ Disciplina está definida ",
-  optional: "mas não é obrigatória",
-  notSettedConflict: "❌ Conflito: disciplina não está definida\n",
-
-  parity: "✅ Disciplina está na paridade adequada\n",
-  summer: "✅🌞 Não há necessidade de paridade no verão\n",
-  noParity: "⚠️ Disciplina não tem uma paridade especificada\n",
-  parityConflict: "❌ Conflito: disciplina não está na paridade correta\n",
-};
+const defaultTitles = text.conflicts.subject;
 
 function getStyledConflictSubject(conflicts) {
   const rawSubjectConflicts = conflicts.raw.subject;

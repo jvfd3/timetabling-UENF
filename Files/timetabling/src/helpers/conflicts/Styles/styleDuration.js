@@ -1,14 +1,8 @@
+import text from "../../../config/frontText";
 import defaultColors from "../../../config/defaultColors";
 
 const conflictOptions = defaultColors.conflicts;
-
-const defaultTitles = {
-  base: "Conflitos de duração avaliados:\n",
-  roomAlloc: "✅ Sem conflitos de alocação de sala\n",
-  professorAlloc: "✅ Sem conflitos de alocação de professor\n",
-  notSetted: "✅ Sem conflitos de duração não definida\n",
-  notSettedConflict: "❌ Conflito: duração não definida\n",
-};
+const defaultTitles = text.conflicts.duration;
 
 function getDurationDefaultStyle() {
   const defaultStyle = {

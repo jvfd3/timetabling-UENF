@@ -1,14 +1,8 @@
+import text from "../../../config/frontText";
 import defaultColors from "../../../config/defaultColors";
 
 const conflictOptions = defaultColors.conflicts;
-
-const defaultTitles = {
-  base: "Conflitos de hora avaliados:\n",
-  roomAlloc: "✅ Sem conflitos de alocação de sala\n",
-  professorAlloc: "✅ Sem conflitos de alocação de professor\n",
-  notSetted: "✅ Sem conflitos de hora não definida\n",
-  notSettedConflict: "❌ Conflito: hora não definida\n",
-};
+const defaultTitles = text.conflicts.hour;
 
 function getDefaultStyleHour() {
   const defaultStyle = {

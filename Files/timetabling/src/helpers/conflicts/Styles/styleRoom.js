@@ -1,16 +1,9 @@
+import text from "../../../config/frontText";
 import defaultColors from "../../../config/defaultColors";
 import { getId } from "../../auxCRUD";
 
 const conflictOptions = defaultColors.conflicts;
-
-const defaultTitles = {
-  base: "Conflitos de alocação de sala avaliados:\n",
-  alloc: "✅ Sem conflitos de alocação de sala\n",
-  demand: "✅ Sem conflitos de demanda de sala\n",
-  demandConflict: "❌ Conflito: Demanda de sala\n",
-  notSetted: "✅ Sem conflitos de sala não definida\n",
-  notSettedConflict: "❌ Conflito: Sala não definida\n",
-};
+const defaultTitles = text.conflicts.room;
 
 function getRoomAllocMessage(conflictObject) {
   const { type, to } = conflictObject;

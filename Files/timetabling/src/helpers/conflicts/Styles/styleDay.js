@@ -1,14 +1,8 @@
+import text from "../../../config/frontText";
 import defaultColors from "../../../config/defaultColors";
 
 const conflictOptions = defaultColors.conflicts;
-
-const defaultTitles = {
-  base: "Conflitos de dia avaliados:\n",
-  roomAlloc: "✅ Sem conflitos de alocação de sala\n",
-  professorAlloc: "✅ Sem conflitos de alocação de professor\n",
-  notSetted: "✅ Sem conflitos de dia não definido\n",
-  notSettedConflict: "❌ Conflito: dia não definido\n",
-};
+const defaultTitles = text.conflicts.day;
 
 function getDefaultStyleDay() {
   const defaultStyle = {

@@ -185,6 +185,61 @@ const text = {
       expectedDemand: "Demanda Estimada",
     },
   },
+  conflicts: {
+    subject: {
+      base: "Conflitos de disciplina avaliados:\n",
+      isSet: "✅ Disciplina está definida ",
+      optional: "mas não é obrigatória",
+      notSettedConflict: "❌ Conflito: disciplina não está definida\n",
+      parity: "✅ Disciplina está na paridade adequada\n",
+      summer: "✅🌞 Não há necessidade de paridade no verão\n",
+      noParity: "⚠️ Disciplina não tem uma paridade especificada\n",
+      parityConflict: "❌ Conflito: disciplina não está na paridade correta\n",
+    },
+    professor: {
+      base: "Conflitos de professor avaliados:\n",
+      notSetted: "✅ Sem conflitos de professor não definido\n",
+      notSettedConflict: "❌ Conflito: professor não definido\n",
+      alloc: "✅ Sem conflitos de alocação de professor\n",
+      allocConflict: "❌ Conflito: Alocação de professor\n",
+    },
+    demand: {
+      base: `Conflitos de demanda avaliados:\n`,
+      notSetted: `✅ Sem conflitos de demanda não definida\n`,
+      notSettedConflict: `❌ Conflito: demanda não definida\n`,
+      singleCapacity: `✅ Todas as salas desta turma comportam a demanda estimada\n`,
+      singleCapacityConflict: `❌ Conflito: há sala que não comporta a demanda\n`,
+    },
+    room: {
+      base: "Conflitos de alocação de sala avaliados:\n",
+      alloc: "✅ Sem conflitos de alocação de sala\n",
+      demand: "✅ Sem conflitos de demanda de sala\n",
+      demandConflict: "❌ Conflito: Demanda de sala\n",
+      notSetted: "✅ Sem conflitos de sala não definida\n",
+      notSettedConflict: "❌ Conflito: Sala não definida\n",
+    },
+    day: {
+      base: "Conflitos de dia avaliados:\n",
+      roomAlloc: "✅ Sem conflitos de alocação de sala\n",
+      professorAlloc: "✅ Sem conflitos de alocação de professor\n",
+      notSetted: "✅ Sem conflitos de dia não definido\n",
+      notSettedConflict: "❌ Conflito: dia não definido\n",
+    },
+    hour: {
+      base: "Conflitos de hora avaliados:\n",
+      roomAlloc: "✅ Sem conflitos de alocação de sala\n",
+      professorAlloc: "✅ Sem conflitos de alocação de professor\n",
+      notSetted: "✅ Sem conflitos de hora não definida\n",
+      notSettedConflict: "❌ Conflito: hora não definida\n",
+    },
+    duration: {
+      base: "Conflitos de duração avaliados:\n",
+      roomAlloc: "✅ Sem conflitos de alocação de sala\n",
+      professorAlloc: "✅ Sem conflitos de alocação de professor\n",
+      notSetted: "✅ Sem conflitos de duração não definida\n",
+      notSettedConflict: "❌ Conflito: duração não definida\n",
+    },
+  },
 };
 
 export default text;
