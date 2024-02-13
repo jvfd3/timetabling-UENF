@@ -42,8 +42,6 @@ function SmartInputSubject(inputSubjectProps) {
     newClass.semestre = classStates.classItem.semestre;
     newClass.disciplina = subject;
 
-    console.log(newClass);
-
     const createClassStates = {
       ...classStates,
       classItem: newClass,
