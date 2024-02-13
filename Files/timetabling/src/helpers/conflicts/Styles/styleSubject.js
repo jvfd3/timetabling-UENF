@@ -148,15 +148,14 @@ function mergeStyles(styles) {
     newStyle = { ...newStyle, ...styles.notCS.style };
   }
 
-  console.log(newStyle);
-  if (styles.parity) {
-    newTitle += styles.parity.title;
-    newStyle = { ...newStyle, ...styles.parity.style };
-  }
-
   if (styles.category) {
     newTitle += styles.category.title;
     newStyle = { ...newStyle, ...styles.category.style };
+  }
+
+  if (styles.parity) {
+    newTitle += styles.parity.title;
+    newStyle = { ...newStyle, ...styles.parity.style };
   }
 
   const mergedStyles = {
