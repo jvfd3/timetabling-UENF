@@ -10,7 +10,7 @@ function getStyledConflictParity({ generalStatus, minimalSubjectInfo }) {
   const { expectedSemester } = minimalSubjectInfo;
   console.log(generalStatus);
 
-  const expectedSemesterText = `Disciplina do ${expectedSemester}º período`;
+  const expectedSemesterText = `Disciplina do ${expectedSemester}º período\n`;
 
   const defaultParityStatus = { title: "", style: {} };
   const rightParityStyle = {
