@@ -14,8 +14,7 @@ function RoomClasses(room) {
   const customPageStates = {
     baseFilter: filterRoom,
     baseValueToFilter: room,
-    headerTitle: frontText.room.headerTitle,
-    noClassesTitle: frontText.room.noClassesTitle,
+    specificTexts: frontText.room,
   };
 
   return <ClassesTableView {...customPageStates} />;
@@ -25,8 +24,7 @@ function ProfessorClasses(professor) {
   const customPageStates = {
     baseFilter: filterProfessor,
     baseValueToFilter: professor,
-    headerTitle: frontText.professor.headerTitle,
-    noClassesTitle: frontText.professor.noClassesTitle,
+    specificTexts: frontText.professor,
   };
 
   return <ClassesTableView {...customPageStates} />;
@@ -36,8 +34,7 @@ function SubjectClasses(subject) {
   const customPageStates = {
     baseFilter: filterSubject,
     baseValueToFilter: subject,
-    headerTitle: frontText.subject.headerTitle,
-    noClassesTitle: frontText.subject.noClassesTitle,
+    specificTexts: frontText.subject,
   };
 
   return <ClassesTableView {...customPageStates} />;

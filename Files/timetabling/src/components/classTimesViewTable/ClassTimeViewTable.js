@@ -17,8 +17,12 @@ const defaultClassNames = myStyles.classNames.default;
 const localClassNames = myStyles.classNames.local.component.classTimeViewTable;
 const frontText = text.component.classTimeViewTable.tableTitles;
 
-function NoClasses({ noClassesTitle }) {
-  return <h5>{noClassesTitle}</h5>;
+function NoSelectedItem({ specificTexts }) {
+  return <h2>{specificTexts.noSelectedItem}</h2>;
+}
+
+function NoClasses({ specificTexts }) {
+  return <h5>{specificTexts.noClassesTitle}</h5>;
 }
 
 function TableHeader() {
@@ -76,7 +80,7 @@ function ClassRow({ classTimes, classTime }) {
 
 function HeaderFilter(classTimeStates) {
   const size = classTimeStates.filteredClassTimes.length;
-  const classesInRoomTitle = classTimeStates.headerTitle + size;
+  const classesInRoomTitle = classTimeStates.specificTexts.headerTitle + size;
   return (
     <div className={localClassNames.header}>
       <h2>{classesInRoomTitle}</h2>
@@ -130,14 +134,23 @@ function ClassesTableView(customPageStates) {
     readClassTime(classTimeStates);
   }, []);
 
+  const isSet = customPageStates.baseValueToFilter?.id;
   const hasClasses = filteredClassTimes.length > 0;
+
+  console.log("isSet", customPageStates.baseValueToFilter?.id);
   return (
     <div className={defaultClassNames.containerCardBaseInfo}>
-      <HeaderFilter {...classTimeStates} />
-      {hasClasses ? (
-        <ClassesTable classTimes={filteredClassTimes} />
+      {!isSet ? (
+        <NoSelectedItem {...classTimeStates} />
       ) : (
-        <NoClasses {...classTimeStates} />
+        <>
+          <HeaderFilter {...classTimeStates} />
+          {isSet && hasClasses ? (
+            <ClassesTable classTimes={filteredClassTimes} />
+          ) : (
+            <NoClasses {...classTimeStates} />
+          )}
+        </>
       )}
     </div>
   );

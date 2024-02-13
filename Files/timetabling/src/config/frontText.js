@@ -132,14 +132,17 @@ const text = {
         room: {
           headerTitle: "Turmas nesta sala: ",
           noClassesTitle: "Não há turmas nesta sala",
+          noSelectedItem: "Selecione uma sala para ver suas turmas",
         },
         professor: {
           headerTitle: "Turmas desse professor: ",
           noClassesTitle: "Não há turmas para este professor",
+          noSelectedItem: "Selecione um professor para ver suas turmas",
         },
         subject: {
           headerTitle: "Turmas desta disciplina: ",
           noClassesTitle: "Não há turmas para esta disciplina",
+          noSelectedItem: "Selecione uma disciplina para ver suas turmas",
         },
       },
       tableTitles: {
