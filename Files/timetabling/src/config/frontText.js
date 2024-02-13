@@ -191,7 +191,7 @@ const text = {
       isSet: "✅ Disciplina está definida\n",
       notSetSubject: "❌ Conflito: disciplina não está definida\n",
       notSetExpectedSemester:
-        "⚠️ Alerta: o semestre esperado da disciplina não está definido\n",
+        "⚠️ Alerta: o período esperado da disciplina não está definido\n",
       optional: "mas não é obrigatória",
       CSSubject: "✅👨‍💻 Disciplina de Ciência da Computação\n",
       parity: "✅ Disciplina está na paridade correta. ",
