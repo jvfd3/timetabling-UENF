@@ -1,13 +1,13 @@
 const defaultColors = {
   conflicts: {
     notSetted: {
-      subject: "#D0E0F0",
-      professor: "#C0D0E0",
-      demand: "#B0C0D0",
-      room: "#A0B0C0",
-      day: "#90A0B0",
-      hour: "#8090A0",
-      duration: "#708090",
+      subject: "#E0E0E0",
+      professor: "#D0D0D0",
+      demand: "#C0C0C0",
+      room: "#B0B0B0",
+      day: "#A0A0A0",
+      hour: "#909090",
+      duration: "#808080",
     },
     noProblem: {
       subject: "#ccff33",
@@ -54,7 +54,12 @@ const defaultColors = {
     delete: "#D77A61",
   },
   subject: {
+    // NotCS: "#a600ff",
+    NotCS: "#d66615",
     noParity: "#808080",
+    OptionalCS: "#0055ff",
+    OptionalFree: "#4800ff",
+    noExpectedDemand: "#EEC0C0",
     summer: {
       0: "#808080",
       1: "#FFFF00",

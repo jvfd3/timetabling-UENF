@@ -28,6 +28,17 @@ function getOnlyNeededValues(classItem) {
   return cleanedClassItem;
 }
 
+function getMinimalSubjectInfo(classItem) {
+  const minimalSubjectInfo = {
+    id: classItem.id,
+    subjectId: classItem?.subject?.id,
+    semester: classItem?.semester,
+    expectedSemester: classItem?.subject?.periodo,
+  };
+
+  return minimalSubjectInfo;
+}
+
 function getSubjectConflictIsSummer(classItem) {
   return Boolean(classItem?.semester === 3);
 }
@@ -36,58 +47,66 @@ function getSubjectConflictHasSemester(classItem) {
   return Boolean(classItem?.semester);
 }
 
+function getSubjectConflictHasExpectedSemester(classItem) {
+  return Boolean(classItem?.subject?.periodo);
+}
+
 function getSubjectConflictHasSubject(classItem) {
   return Boolean(classItem?.subject);
 }
 
-function checkCorrectPeriodParity(expectedSemester, subjectSemester) {
-  const expSem = expectedSemester;
-  const subSem = subjectSemester;
+function getCorrectParity({ subject, semester }) {
+  const isSummer = semester === 3;
 
-  const isSummerSemester = subSem === 3;
-  const isnotSetted = !expSem || !subSem;
-  const hasNoParity = isSummerSemester || isnotSetted;
+  const subSem = subject?.periodo;
+  const selSem = semester;
 
-  const evenSubjectOnEvenSemester = subSem === 1 && expSem % 2 === 1;
-  const oddSubjectOnOddSemester = subSem === 2 && expSem % 2 === 0;
+  const evenSubjectOnEvenSemester =
+    selSem === 1 && subSem <= 10 && subSem % 2 === 1;
+
+  const oddSubjectOnOddSemester =
+    selSem === 2 && subSem <= 10 && subSem % 2 === 0;
+
   const correctParity = evenSubjectOnEvenSemester || oddSubjectOnOddSemester;
 
-  const returnedParity = hasNoParity ? null : correctParity;
-  return returnedParity;
+  const confirmRightParity =
+    correctParity && !isSummer && subSem <= 10 && subSem && Boolean(selSem);
+
+  return confirmRightParity;
 }
 
-function getParityStatus({ subject, semester }) {
-  /*
-    - null: summer, or something is not set (Has no parity)
-    - true: correct parity
-    - false: wrong parity
-  */
-  const parityValue = checkCorrectPeriodParity(subject?.periodo, semester);
-  return parityValue;
-}
+function getGeneralSubjectStatus(classItem) {
+  const hasSemester = getSubjectConflictHasSemester(classItem);
+  const hasSubject = getSubjectConflictHasSubject(classItem);
+  const hasExpectedSemester = getSubjectConflictHasExpectedSemester(classItem);
+  const isSummer = getSubjectConflictIsSummer(classItem);
+  const isOnRightParity = getCorrectParity(classItem);
 
-function getSubjectConflictParity(classItem) {
-  const parityConflict = {
-    type: conflicts.subject.parity,
-    from: {
-      id: classItem.id,
-      subjectId: classItem?.subject?.id,
-      semester: classItem?.semester,
-      expectedSemester: classItem?.subject?.periodo,
-    },
-    status: getParityStatus(classItem),
-  };
+  const expSem = classItem?.subject?.periodo;
 
-  return parityConflict;
+  const status = {};
+
+  status.hasSemester = hasSemester;
+  status.hasSubject = hasSubject;
+  status.hasExpectedSemester = hasExpectedSemester;
+  status.isSummer = isSummer;
+  status.isOnRightParity = isOnRightParity;
+  status.hasParity =
+    hasSemester && hasSubject && hasExpectedSemester && !isSummer;
+  status.isCS = expSem ? 0 <= expSem && expSem <= 12 : false;
+  status.isCSMandatory = status.isCS && expSem <= 10;
+  status.isOptionalCS = expSem === 11;
+  status.isOptionalFree = expSem === 12;
+  status.isNotCS = expSem === 13;
+
+  return status;
 }
 
 function getSubjectConflicts(classItem) {
   const subjectConflicts = {};
 
-  subjectConflicts.hasSubject = getSubjectConflictHasSubject(classItem);
-  subjectConflicts.hasSemester = getSubjectConflictHasSemester(classItem);
-  subjectConflicts.isSummer = getSubjectConflictIsSummer(classItem);
-  subjectConflicts.parity = getSubjectConflictParity(classItem);
+  subjectConflicts.minimalSubjectInfo = getMinimalSubjectInfo(classItem);
+  subjectConflicts.generalStatus = getGeneralSubjectStatus(classItem);
 
   return subjectConflicts;
 }
@@ -96,6 +115,8 @@ function getRawConflictSubject(classItem) {
   const cleanClassItem = getOnlyNeededValues([classItem]);
 
   const subjectConflicts = getSubjectConflicts(cleanClassItem?.[0]);
+
+  // console.log(subjectConflicts);
 
   return subjectConflicts;
 }

@@ -188,13 +188,21 @@ const text = {
   conflicts: {
     subject: {
       base: "Conflitos de disciplina avaliados:\n",
-      isSet: "✅ Disciplina está definida ",
+      isSet: "✅ Disciplina está definida\n",
+      notSetSubject: "❌ Conflito: disciplina não está definida\n",
+      notSetExpectedSemester:
+        "⚠️ Alerta: o semestre esperado da disciplina não está definido\n",
       optional: "mas não é obrigatória",
-      notSettedConflict: "❌ Conflito: disciplina não está definida\n",
-      parity: "✅ Disciplina está na paridade adequada\n",
-      summer: "✅🌞 Não há necessidade de paridade no verão\n",
+      CSSubject: "✅👨‍💻 Disciplina de Ciência da Computação\n",
+      parity: "✅ Disciplina está na paridade correta. ",
+      parityConflict: "❌ Conflito: disciplina não está na paridade correta. ",
+      summer: "🌞 Não há necessidade de paridade no verão\n",
       noParity: "⚠️ Disciplina não tem uma paridade especificada\n",
-      parityConflict: "❌ Conflito: disciplina não está na paridade correta\n",
+      mandatoryCSSubject: "✅👨‍💻 Disciplina obrigatória\n",
+      notCSSubject:
+        "⚠️👷 Alerta: Esta disciplina não é de Ciência da Computação\n",
+      optionalCS: "✅👨‍💻🎓 Disciplina eletiva optativa\n",
+      optionalFree: "✅👨‍💻🌍 Disciplina eletiva livre\n",
     },
     professor: {
       base: "Conflitos de professor avaliados:\n",
