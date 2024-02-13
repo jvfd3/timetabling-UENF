@@ -65,7 +65,13 @@ function BaseInfoCard(classesStates) {
         <tbody>
           <tr>
             <th>{pageTexts.tableTitles.yearSemester}</th>
-            <td>
+            <td
+              style={{
+                gap: 5,
+                display: "flex",
+                flexDirection: "row",
+              }}
+            >
               <SelectClassYear {...classesStates} />
               <SelectClassSemester {...classesStates} />
             </td>
