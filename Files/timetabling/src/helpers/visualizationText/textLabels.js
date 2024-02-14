@@ -52,6 +52,21 @@ function getRoomLabel(room) {
   return roomLabel;
 }
 
+function getMultiClassesSubjectLabel(subject, context) {
+  const code = checkIndefinition(subject?.codigo);
+  const name = checkIndefinition(subject?.nome);
+  const alias = checkIndefinition(subject?.apelido);
+  // const isOpened = context === "value";
+  const isOpened = false;
+
+  let subjectLabel = "";
+
+  subjectLabel += `${code} - `;
+  subjectLabel += isOpened ? `${alias}` : `${name}`;
+
+  return subjectLabel;
+}
+
 function getDefaultOptionLabelSubject(subject) {
   let subjectLabel = "";
   subjectLabel += checkIndefinition(subject?.id) + "-";
@@ -110,6 +125,7 @@ export {
   getProfessorLabel,
   checkIndefinition,
   getLabelStudentSelection,
+  getMultiClassesSubjectLabel,
   getDefaultOptionLabelRoom,
   getDefaultOptionLabelStudent,
   getDefaultOptionLabelSubject,

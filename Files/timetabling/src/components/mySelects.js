@@ -21,6 +21,7 @@ import {
   getDefaultOptionLabelStudent,
   getDefaultOptionLabelSubject,
   getLabelStudentSelection,
+  getMultiClassesSubjectLabel,
 } from "../helpers/visualizationText/textLabels";
 
 const styleWidthFix = myStyles.selects.fullItem;
@@ -363,15 +364,10 @@ function SelectSubject({ outerSubject, setOuterSubject, subjects = [] }) {
     value: outerSubject,
     findCorrectObject: findSubjectObject,
     customProps: {
-      getOptionValue: (subject) => subject.id,
-      getOptionLabel: ({ codigo, apelido, nome }) =>
-        `${codigo} - ${apelido} - ${nome}`,
-      formatOptionLabel: ({ codigo, apelido, nome }, { context }) => {
-        const isOpened = context === "value";
-        let message = `${codigo} - `;
-        message += isOpened ? `${apelido}` : `${nome}`;
-        return message;
-      },
+      getOptionValue: (subject) => subject?.id,
+      getOptionLabel: (subject) => getDefaultOptionLabelSubject(subject),
+      formatOptionLabel: (subject, { context }) =>
+        getMultiClassesSubjectLabel(subject, context),
     },
   };
   // console.log("SelectSubject", outerSubject?.apelido);
