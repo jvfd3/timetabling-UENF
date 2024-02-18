@@ -105,8 +105,14 @@ function getDefaultFormatOptionLabelProfessor(professor, context) {
 
   const name = professor?.nome;
   const alias = professor?.apelido;
+  const course = professor?.curso;
+  const center = professor?.centro;
+  const lab = professor?.laboratorio;
 
   let fullName = "";
+  // fullName += checkIndefinition(center) + " - ";
+  fullName += "(" + checkIndefinition(lab) + ", ";
+  fullName += checkIndefinition(course) + ") ";
   fullName += checkIndefinition(name);
 
   let shortName = "";
