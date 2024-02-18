@@ -15,11 +15,14 @@ import {
   replaceNewItemInListById,
 } from "../helpers/auxCRUD";
 import {
+  getDefaultFormatOptionLabelProfessor,
   getDefaultOptionLabelClassItem,
   getDefaultOptionLabelProfessor,
   getDefaultOptionLabelRoom,
   getDefaultOptionLabelStudent,
   getDefaultOptionLabelSubject,
+  getDefaultProfessorValue,
+  getFormatOptionLabelSelectClassItem,
   getLabelStudentSelection,
   getMultiClassesSubjectLabel,
 } from "../helpers/visualizationText/textLabels";
@@ -398,14 +401,10 @@ function SelectProfessor({
     value: outerProfessor,
     findCorrectObject: findProfessorObject,
     customProps: {
-      getOptionValue: (professor) => professor.id,
-      getOptionLabel: ({ nome, apelido, laboratorio, curso }) =>
-        `${nome} - ${apelido} - ${laboratorio} - ${curso}`,
-      formatOptionLabel: ({ nome, apelido }, { context }) => {
-        const isOpened = context === "value";
-        const message = isOpened ? `${apelido}` : `${nome}`;
-        return message;
-      },
+      getOptionValue: (professor) => getDefaultProfessorValue(professor),
+      getOptionLabel: (professor) => getDefaultOptionLabelProfessor(professor),
+      formatOptionLabel: (professor, { context }) =>
+        getDefaultFormatOptionLabelProfessor(professor, context),
     },
   };
 
@@ -769,17 +768,8 @@ function SelectClassItem(classStates) {
     customProps: {
       getOptionValue: (classItem) => getId(classItem),
       getOptionLabel: (classItem) => getDefaultOptionLabelClassItem(classItem),
-      formatOptionLabel: (
-        { id, idTurma, ano, semestre, disciplina, professor },
-        { context }
-      ) => {
-        let message = "";
-        message += `(id: ${id ?? idTurma}) `;
-        message += `${ano}.${semestre} - `;
-        message += `${disciplina?.apelido ?? "disc. indef."} - `;
-        message += `${professor?.apelido ?? "prof. indef."}`;
-        return message;
-      },
+      formatOptionLabel: (classItem, { context }) =>
+        getFormatOptionLabelSelectClassItem(classItem, context),
     },
   };
 

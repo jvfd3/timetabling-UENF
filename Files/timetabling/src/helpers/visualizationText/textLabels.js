@@ -1,3 +1,5 @@
+import { getId } from "../auxCRUD";
+
 function checkIndefinition(value) {
   return value ? value : "Indef.";
 }
@@ -77,6 +79,17 @@ function getDefaultOptionLabelSubject(subject) {
   return subjectLabel;
 }
 
+function getDefaultProfessorValue(professor) {
+  let professorValue = "";
+  professorValue += checkIndefinition(professor?.id) + "-";
+  professorValue += checkIndefinition(professor?.nome) + "-";
+  professorValue += checkIndefinition(professor?.apelido) + "-";
+  professorValue += checkIndefinition(professor?.laboratorio) + "-";
+  professorValue += checkIndefinition(professor?.curso) + "-";
+  professorValue += checkIndefinition(professor?.centro) + "-";
+  return professorValue;
+}
+
 function getDefaultOptionLabelProfessor(professor) {
   let professorLabel = "";
   professorLabel += checkIndefinition(professor?.id) + "-";
@@ -85,6 +98,23 @@ function getDefaultOptionLabelProfessor(professor) {
   professorLabel += checkIndefinition(professor?.laboratorio) + "-";
   professorLabel += checkIndefinition(professor?.curso) + "-";
   return professorLabel;
+}
+
+function getDefaultFormatOptionLabelProfessor(professor, context) {
+  const isOpened = context === "value";
+
+  const name = professor?.nome;
+  const alias = professor?.apelido;
+
+  let fullName = "";
+  fullName += checkIndefinition(name);
+
+  let shortName = "";
+  shortName += alias ? checkIndefinition(alias) : fullName;
+
+  let formattedOptionLabel = "";
+  formattedOptionLabel += isOpened ? shortName : fullName;
+  return formattedOptionLabel;
 }
 
 function getDefaultOptionLabelRoom(room) {
@@ -119,6 +149,31 @@ function getDefaultOptionLabelClassItem(classItem) {
   return classItemLabel;
 }
 
+function getFormatOptionLabelSelectClassItem(classItem, context) {
+  const id = getId(classItem);
+  const year = classItem?.ano;
+  const semester = classItem?.semestre;
+  const subject = classItem?.disciplina;
+  const professor = classItem?.professor;
+
+  const isOpened = context === "value";
+
+  const professorName = professor?.nome;
+  const professorAlias = professor?.apelido;
+  const professorLabel = checkIndefinition(professorAlias ?? professorName);
+
+  const subjectName = subject?.nome;
+  const subjectAlias = subject?.apelido;
+  const subjectLabel = checkIndefinition(subjectAlias ?? subjectName);
+
+  let formattedOptionLabel = "";
+  formattedOptionLabel += `(id: ${id}) `;
+  formattedOptionLabel += `${year}.${semester} - `;
+  formattedOptionLabel += `${professorLabel} - `;
+  formattedOptionLabel += `${subjectLabel}`;
+  return formattedOptionLabel;
+}
+
 export {
   getRoomLabel,
   getSubjectLabel,
@@ -131,4 +186,7 @@ export {
   getDefaultOptionLabelSubject,
   getDefaultOptionLabelClassItem,
   getDefaultOptionLabelProfessor,
+  getDefaultProfessorValue,
+  getDefaultFormatOptionLabelProfessor,
+  getFormatOptionLabelSelectClassItem,
 };
