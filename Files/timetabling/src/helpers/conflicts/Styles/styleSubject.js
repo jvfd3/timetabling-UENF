@@ -8,7 +8,6 @@ const defaultTitles = text.conflicts.subject;
 function getStyledConflictParity({ generalStatus, minimalSubjectInfo }) {
   const { isCSMandatory, isOnRightParity, isSummer } = generalStatus;
   const { expectedSemester } = minimalSubjectInfo;
-  console.log(generalStatus);
 
   const expectedSemesterText = `Disciplina do ${expectedSemester}º período\n`;
 
