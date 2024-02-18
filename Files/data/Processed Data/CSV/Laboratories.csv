@@ -1,0 +1,41 @@
+id,center,alias,name
+1,CCT,LAMAV,Laboratório de Materiais Avançados
+2,CCT,LAMET,Laboratório de Meteorologia
+3,CCT,LCENG,Laboratório de Ciências de Engenharia
+4,CCT,LCFIS,Laboratorio de Ciencias Fisicas
+5,CCT,LCMAT,Laboratorio de Ciencias Matematicas
+6,CCT,LCQUI,Laboratório de Ciências Químicas
+7,CCT,LECIV,Laboratório de Engenharia Civil
+8,CCT,LENEP,Laboratorio de Engenharia e Exploracao de Petroleo
+9,CCT,LEPROD,Laboratório de Engenharia de Produção
+10,CCT,LMCCT,Laboratório Matrícula CCT
+9,CBB,LBCT,Laboratório de Biologia Celular e Tecidual
+10,CBB,LBR,Laboratório de Biologia do Reconhecer
+11,CBB,LBT,Laboratório de Biotecnologia
+12,CBB,LCA,Laboratório de Ciências Ambientais
+13,CBB,LFBM,Labor. de Fisiologia e Bioquímica de Microrganismos
+14,CBB,LQFPP,Labor. de Química e Função de Proteínas e Peptídeos
+15,CCH,LCC,Laboratório de Ciências Cognitivas
+16,CCH,LCL,Laboratório de Cognição e Linguagem
+17,CCH,LEEA,Laboratório de Estudos do Espaço Antrópico
+18,CCH,LEEL,Laboratório de Estudos da Educação e Linguagem
+19,CCH,LESCE,Laboratório de Estudo da Sociedade Civil e Estado
+20,CCH,LEXPED,Laboratório de Experimentação Pedagógicia
+21,CCH,LGPP,Laboratório de Gestão e Políticas Públicas
+22,CCH,LPT,Laboratorio de Pesquisa e Tecnologia de Educação
+33,CCTA,LCCA,Laboratório de Clínicas e Cirurgia Animal
+34,CCTA,LEAG,Laboratório de Engenharia Agrícola
+35,CCTA,LEF,Laboratório de Entomologia e Fitopatologia
+36,CCTA,LFBM,Laboratório de Fisiologia e Bioquímica de Microrganimos
+37,CCTA,LFIT,Laboratório de Fitotecnia
+38,CCTA,LMCCTA,Laboratório Matrícula Ccta
+39,CCTA,LMGA,Laboratório de Melhoramento Genético Animal
+40,CCTA,LMGV,Laboratório de Melhoramento Genético Vegetal
+41,CCTA,LMPA,Laboratório de Morfologia e Patologia Animal
+42,CCTA,LPP,Laboratório de Proteção de Plantas
+43,CCTA,LRGBG,Laboratório de Recursos Genéticos-banco de Germoplasma
+44,CCTA,LSA,Laboratório de Sanidade Animal
+45,CCTA,LSOL,Laboratório de Solos
+46,CCTA,LTA,Laboratório de Tecnologia de Alimentos
+47,CCTA,LZNA,Laboratório de Zootecnia e Nutrição Animal
+48,CCTA,LZO,Laboratório de Zootecnia
