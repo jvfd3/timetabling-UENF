@@ -125,8 +125,8 @@ function TextInputClassId({ classes, setClasses, classItem, setClassItem }) {
     setItem: setClassItem,
   };
   const specificValues = {
-    mainValue: classItem?.idTurma,
-    getNewItemObject: (newValue) => ({ ...classItem, idTurma: newValue }),
+    mainValue: getId(classItem),
+    getNewItemObject: (newValue) => ({ ...classItem, id: newValue }),
     title: placeHolders.id,
     isNumeric: true,
   };
