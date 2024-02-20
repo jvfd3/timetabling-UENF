@@ -367,7 +367,7 @@ function SelectSubject({ outerSubject, setOuterSubject, subjects = [] }) {
     value: outerSubject,
     findCorrectObject: findSubjectObject,
     customProps: {
-      getOptionValue: (subject) => subject?.id,
+      getOptionValue: (subject) => getId(subject),
       getOptionLabel: (subject) => getDefaultOptionLabelSubject(subject),
       formatOptionLabel: (subject, { context }) =>
         getMultiClassesSubjectLabel(subject, context),
@@ -872,14 +872,8 @@ function SelectProfessorItem(professorStates) {
     customProps: {
       getOptionValue: (professor) => getId(professor),
       getOptionLabel: (professor) => getDefaultOptionLabelProfessor(professor),
-      formatOptionLabel: ({ laboratorio, curso, apelido }) => {
-        let message = "";
-        message += `(`;
-        message += `${laboratorio || "lab indef."} - `;
-        message += `${curso || "cur indef."}) - `;
-        message += `${apelido || "Apelido indef."}`;
-        return message;
-      },
+      formatOptionLabel: (professor, { context }) =>
+        getDefaultFormatOptionLabelProfessor(professor, context),
     },
   };
 

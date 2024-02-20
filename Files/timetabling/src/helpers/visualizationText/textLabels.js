@@ -70,12 +70,18 @@ function getMultiClassesSubjectLabel(subject, context) {
 }
 
 function getDefaultOptionLabelSubject(subject) {
+  const id = getId(subject);
+  const code = subject?.codigo;
+  const name = subject?.nome;
+  const alias = subject?.apelido;
+  const expectedSemester = subject?.periodo;
+
   let subjectLabel = "";
-  subjectLabel += checkIndefinition(subject?.id) + "-";
-  subjectLabel += checkIndefinition(subject?.codigo) + "-";
-  subjectLabel += checkIndefinition(subject?.nome) + "-";
-  subjectLabel += checkIndefinition(subject?.apelido) + "-";
-  subjectLabel += checkIndefinition(subject?.periodo) + " Período Periodo-";
+  subjectLabel += checkIndefinition(id) + "-";
+  subjectLabel += checkIndefinition(code) + "-";
+  subjectLabel += checkIndefinition(name) + "-";
+  subjectLabel += checkIndefinition(alias) + "-";
+  subjectLabel += checkIndefinition(expectedSemester) + " Período Periodo-";
   return subjectLabel;
 }
 
@@ -91,12 +97,18 @@ function getDefaultProfessorValue(professor) {
 }
 
 function getDefaultOptionLabelProfessor(professor) {
+  const id = getId(professor);
+  const name = professor?.nome;
+  const alias = professor?.apelido;
+  const lab = professor?.laboratorio;
+  const course = professor?.curso;
+
   let professorLabel = "";
-  professorLabel += checkIndefinition(professor?.id) + "-";
-  professorLabel += checkIndefinition(professor?.nome) + "-";
-  professorLabel += checkIndefinition(professor?.apelido) + "-";
-  professorLabel += checkIndefinition(professor?.laboratorio) + "-";
-  professorLabel += checkIndefinition(professor?.curso) + "-";
+  professorLabel += checkIndefinition(id) + "-";
+  professorLabel += checkIndefinition(name) + "-";
+  professorLabel += checkIndefinition(alias) + "-";
+  professorLabel += checkIndefinition(lab) + "-";
+  professorLabel += checkIndefinition(course) + "-";
   return professorLabel;
 }
 
@@ -144,25 +156,83 @@ function getDefaultOptionLabelStudent(student) {
 }
 
 function getDefaultOptionLabelClassItem(classItem) {
+  const id = getId(classItem);
+  const year = classItem?.ano;
+  const semester = classItem?.semestre;
+  const expectedDemand = classItem?.demandaEstimada;
+  const subject = classItem?.disciplina;
+  const professor = classItem?.professor;
+  const classTimes = classItem?.horarios;
+
+  // const subjectLabel = JSON.stringify(subject);
+  // const professorLabel = JSON.stringify(professor);
+  const classTimesLabel = JSON.stringify(classTimes);
+
   let classItemLabel = "";
-  classItemLabel += checkIndefinition(classItem?.id) + "-";
-  classItemLabel += checkIndefinition(classItem?.idTurma) + "-";
-  classItemLabel += checkIndefinition(classItem?.ano) + "-";
-  classItemLabel += checkIndefinition(classItem?.semestre) + "-";
-  classItemLabel += checkIndefinition(classItem?.demandaEstimada) + "-";
-  classItemLabel += getDefaultOptionLabelProfessor(classItem?.professor) + "-";
-  classItemLabel += getDefaultOptionLabelSubject(classItem?.disciplina) + "-";
+  classItemLabel += checkIndefinition(id) + "-";
+  classItemLabel += checkIndefinition(year) + "-";
+  classItemLabel += checkIndefinition(semester) + "-";
+  classItemLabel += checkIndefinition(expectedDemand) + "-";
+  classItemLabel += getDefaultOptionLabelSubject(subject) + "-";
+  classItemLabel += getDefaultOptionLabelProfessor(professor) + "-";
+  classItemLabel += checkIndefinition(classTimesLabel) + "-";
   return classItemLabel;
 }
 
+function getClassTimeLabel(classTime) {
+  const room = classTime?.sala;
+  const roomCapacity = room?.capacidade;
+  const roomBlock = room?.bloco;
+  const roomCode = room?.codigo;
+
+  const capacityLabel = checkIndefinition(roomCapacity);
+  const codeBlock =
+    checkIndefinition(roomBlock) + "-" + checkIndefinition(roomCode);
+  // const midRoomLabel = `${capacityLabel}, ${codeBlock}`;
+  const midRoomLabel = codeBlock;
+  const finalRoomLabel = room ? midRoomLabel : "Indef.";
+
+  const day = classTime?.dia;
+  const dayLabel = checkIndefinition(day);
+
+  const startTime = classTime?.horaInicio;
+  const startTimeLabel = checkIndefinition(startTime);
+
+  const endTime = startTime + classTime?.duracao;
+  const endTimeLabel = checkIndefinition(endTime);
+
+  const timeLabel = `${dayLabel}: ${startTimeLabel}~${endTimeLabel}`;
+
+  let classTimeLabel = "";
+  classTimeLabel += finalRoomLabel + ", ";
+  classTimeLabel += timeLabel;
+  classTimeLabel = `(${classTimeLabel})`;
+  return classTimeLabel;
+}
+
+function getClassTimeLabelPlus(classItem, index) {
+  const nextClassTime = classItem?.horarios?.[index + 1];
+  const classTime = classItem?.horarios?.[index];
+  const classTimeLabel = getClassTimeLabel(classTime);
+  const cleanClassTimeLabel = classTime ? classTimeLabel : "";
+  const classTimeLabelEnd = nextClassTime ? "; " : "";
+  return cleanClassTimeLabel + classTimeLabelEnd;
+}
+
 function getFormatOptionLabelSelectClassItem(classItem, context) {
+  const isOpened = context === "value";
+
   const id = getId(classItem);
   const year = classItem?.ano;
   const semester = classItem?.semestre;
   const subject = classItem?.disciplina;
   const professor = classItem?.professor;
 
-  const isOpened = context === "value";
+  const classTime1 = getClassTimeLabelPlus(classItem, 0);
+  const classTime2 = getClassTimeLabelPlus(classItem, 1);
+  const classTime3 = getClassTimeLabelPlus(classItem, 2);
+  const classTime4 = getClassTimeLabelPlus(classItem, 3);
+  const classTimesLabel = classTime1 + classTime2 + classTime3 + classTime4;
 
   const professorName = professor?.nome;
   const professorAlias = professor?.apelido;
@@ -172,11 +242,17 @@ function getFormatOptionLabelSelectClassItem(classItem, context) {
   const subjectAlias = subject?.apelido;
   const subjectLabel = checkIndefinition(subjectAlias ?? subjectName);
 
+  const idLabel = `(id: ${id}) `;
+  const yearSemester = `${year}.${semester} - `;
+
+  const classTimeHifen = classTimesLabel ? " - " : "";
+
   let formattedOptionLabel = "";
-  formattedOptionLabel += `(id: ${id}) `;
-  formattedOptionLabel += `${year}.${semester} - `;
-  formattedOptionLabel += `${professorLabel} - `;
-  formattedOptionLabel += `${subjectLabel}`;
+  // formattedOptionLabel += idLabel;
+  formattedOptionLabel += yearSemester;
+  formattedOptionLabel += subjectLabel + " - ";
+  formattedOptionLabel += professorLabel + classTimeHifen;
+  formattedOptionLabel += `${classTimesLabel}`;
   return formattedOptionLabel;
 }
 
