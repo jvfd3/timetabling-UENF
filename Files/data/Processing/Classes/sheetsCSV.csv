@@ -1,0 +1,477 @@
+duration; startHour; day; year; semester; expectedSemester; subject; professor; expectedDemand; room; classDescription
+2;10; SEG;2019;2;8; Ger de Redes; Alvaro; None; Binf1; None
+2;10; TER;2019;2;8; Ger de Redes; Alvaro; None; Binf1; None
+2;14; QUA;2023;2;2; Lógica Digital; Andre; None; 109A; None
+2;14; SEX;2023;2;2; Lógica Digital; Andre; None; 109A; None
+2;14; QUA;2019;2;6; Intelig Artificial; Anna; None; BInf1; None
+2;14; SEG;2019;2;6; lntelig Artificial; Anna; None; BInf1; None
+2;16; SEG;2019;2;4; Prog Orient Objs; Anna; None; BInf1; None
+2;16; QUA;2019;2;4; Prog Orient Objs; Anna; None; BInf1; None
+2;14; SEX;2019;2;8; Sistemas Intel; Anna; None; BInf2; None
+2;16; SEG;2019;1;5; Lings Formais; Annab; None;208; None
+2;16; QUA;2019;1;5; Lings Formais; Annab; None;208; None
+2;16; QUI;2020;1;1; Org Comp; Annab; None; 109A P3; None
+2;16; TER;2020;1;1; Org Comp; Annab; None; 109A P3 ; None
+2;16; SEG;2020;1;5; Ling Formais; Annab; None; 208P3 ; None
+2;16; QUA;2020;1;5; Ling Formais; Annab; None; 208P3 ; None
+2;14; SEG;2019;1;1; Programação 1; Annab; None; B2; None
+2;14; QUA;2019;1;1; Programação 1; Annab; None; B2; None
+2;14; SEG;2020;1;1; Programação 1; Annab; None; BP3; None
+2;14; QUA;2020;1;1; Programação 1; Annab; None; BP3; None
+2;10; TER;2023;1;1; Prog I; Annabell;45; 106P3; None
+2;14; TER;2023;2;4; Prog OO; Annabell; None; 111P5; None
+2;14; QUI;2023;2;4; Prog OO; Annabell; None; 111P5; None
+2;16; TER;2022;1;1; Prog I; Annabell; None; Audit P5; None
+2;10; SEX;2023;1;1; Prog I; Annabell;25; BanP3; C
+2;16; TER;2024;1;1; Prog I; Annabell;27; BP3; None
+2;16; QUI;2024;1;1; Prog I; Annabell;27; BP3; None
+2;8; TER;2023;2;6; Int Artificial; Annabell; None; Inf1; None
+2;8; QUI;2023;2;6; Int Artificial; Annabell; None; Inf1; None
+2;10; SEG;2023;1;5; L Formais; Annabell;10; inf1; None
+2;10; QUA;2023;1;5; L Formais; Annabell;10; inf1; None
+2;16; SEG;2022;1;6; Banco de Dados II; Annabell; None; None; None
+2;18; SEG;2022;1;6; Banco de Dados II; Annabell; None; None; None
+2;10; TER;2023;2;8; Eng de Dados; Annabell; None; None; None
+2;10; QUI;2023;2;8; Eng de Dados; Annabell; None; None; None
+2;8; TER;2022;2;6; Int Artificial; Annabell;12; None; None
+2;8; QUI;2022;2;6; Int Artificial; Annabell;12; None; None
+2;14; TER;2022;2;4; Prog OO; Annabell;12; None; None
+2;14; QUI;2022;2;4; Prog OO; Annabell;12; None; None
+2;16; QUI;2022;1;1; Programação I; Annabell; None; None; None
+2;10; TER;2024;1;5; L Formais; Annabell;20; sala; None
+2;10; QUI;2024;1;5; L Formais; Annabell;20; sala; None
+2;14; SEG;2019;1;5; Redes de Comp; Antônio; None; B1; None
+2;14; QUA;2019;1;5; Redes de Comp; Antônio; None; B1; None
+2;16; SEG;2019;1;7; Sists Distrib; Antônio; None; B1; None
+2;16; QUA;2019;1;7; Sists Distrib; Antônio; None; B1; None
+2;10; TER;2023;2;4; Intr Prob e Estatística; Arica; None; None; None
+2;16; SEG;2019;2;8; Top Microcontr; Átila; None; BInf2; None
+2;16; QUA;2019;2;8; Top Microcontr; Átila; None; BInf2; None
+2;14; SEG;2019;2;2; Lógica Digital; Átila; None; P3 206; None
+2;14; QUA;2019;2;2; Lógica Digital; Átila; None; P3 206; None
+2;18; QUA;2022;1;3; Arquitetura; Átila; None; None; None
+2;18; SEX;2022;1;3; Arquitetura; Átila; None; None; None
+2;16; QUI;2019;2;4; Análise e Projeto; aus; None; BInf1; None
+2;16; TER;2019;2;4; Análise Projeto; aus; None; BInf1; None
+2;14; TER;2019;2;6; Parad OO Des Soft; Aus; None; BInf1; None
+2;14; QUI;2019;2;6; Parad OO Des Soft; Aus; None; BInf1; None
+2;10; TER;2023;2;4; Analise Proj Sist; Ausb; None; 109A; None
+2;10; SEX;2019;2;10; Estagio S; Ausb; None; 116p5; None
+2;16; QUI;2019;1;5; Eng de Soft; Ausb; None; B1; None
+2;10; TER;2019;1;3; Paradig Ling Prog; Ausb; None; B1; None
+2;16; TER;2019;1;5; Engenharia de Soft; Ausb; None; B1 ; None
+2;14; QUI;2020;1;5; Eng Software; Ausb; None; B1 P5; None
+2;10; TER;2020;1;3; Paradigmas; Ausb; None; B1 P5; None
+2;10; QUI;2020;1;3; Paradigmas; Ausb; None; B1 P5; None
+2;14; TER;2020;1;5; Eng Software; Ausb; None; B1 P5 ; None
+2;14; TER;2023;1;3; Paradig LP; Ausb;35; BanP3; None
+2;14; QUI;2023;1;3; Paradig LP; Ausb;35; BanP3; None
+2;14; TER;2024;1;5; Eng Software; Ausb;28; BP3; None
+2;14; QUI;2024;1;5; Eng Software; Ausb;28; BP3; None
+2;14; TER;2023;2;6; Par OO Desenv; Ausb; None; Inf1; None
+2;14; QUI;2023;2;6; Par OO Desenv; Ausb; None; Inf1; None
+2;10; TER;2024;1;3; Paradig LP; Ausb;25; Inf2; None
+2;10; QUI;2024;1;3; Paradig LP; Ausb;25; Inf2; None
+2;8; SEG;2023;1;7; Segurança Com; Ausb;10; inf2; None
+2;8; QUA;2023;1;7; Segurança Com; Ausb;10; inf2; None
+2;10; SEX;2022;2;6; Par OO Desenv; Ausb;10; None; None
+2;14; TER;2022;2;6; Par OO Desenv; Ausb;10; None; None
+2;10; QUI;2019;1;3; Paradig Ling Prog; Ausb; None; None; None
+2;10; TER;2022;2;3; Paradigmas Ling; Ausb;10; None; None
+2;11; QUI;2022;2;3; Paradigmas Ling; Ausb;10; None; None
+2;10; SEX;2019;1;10; Estágio Sup; Ausb; None;P5 119; None
+2;14; TER;2022;1;4; Análi Proj Sist; Ausberto; None; None; None
+2;14; QUI;2022;1;4; Análi Proj Sist; Ausberto; None; None; None
+2;16; TER;2022;1;6; Paradigma OO; Ausberto; None; None; None
+2;16; QUI;2022;1;6; Paradigma OO; Ausberto; None; None; None
+2;14; SEG;2023;1;3; Método Mat; Beggio;13; 106P3; None
+2;14; QUA;2023;1;3; Método Mat; Beggio;13; 106P3; None
+2;14; SEG;2022;1;3; Método Mat; Beggio; None; Apitão; None
+2;14; QUA;2022;1;3; Método Mat; Beggio; None; Apitão; None
+2;14; SEG;2024;1;3; Método Mat; Beggio;25; None; None
+2;14; QUA;2024;1;3; Método Mat; Beggio;25; None; None
+2;8; QUA;2024;1;3; Arquitet C; Bolsista;30; None; None
+2;8; SEX;2024;1;3; Arquitet C; Bolsista;30; None; None
+2;8; SEX;2022;2;5; Comp e Socied; Bolsista;14; None; None
+2;10; TER;2022;2;6; Compiladores; Bolsista;14; None; None
+2;11; QUI;2022;2;6; Compiladores; Bolsista;14; None; None
+2;10; SEX;2024;1;5; Computação e Sociedade; Bolsista;30; None; None
+2;8; SEX;2022;2;2; Inglês II; Bolsista;24; None; None
+2;10; SEX;2022;2;2; Inglês II; Bolsista;24; None; None
+2;10; QUA;2024;1;1; Org Comp; Bolsista;27; None; None
+2;10; SEX;2024;1;1; Org Comp; Bolsista;27; None; None
+2;8; QUI;2022;2;7; Teste Software; Bolsista;7; None; None
+2;14; TER;2022;2;7; Teste Software; Bolsista;7; None; None
+2;10; TER;2022;2;1; Calculo I; Bruna;9; None; None
+2;10; SEX;2022;2;1; Calculo I; Bruna;9; None; None
+2;11; QUI;2022;2;1; Calculo I; Bruna;9; None; None
+2;12; QUI;2022;2;1; Calculo I; Bruna;9; None; None
+2;16; SEX;2020;1;1; Inglês I; Carlos; None; 113 E1; None
+2;14; SEX;2020;1;1; Inglês I; Carlos; None; 113 E1 ; None
+2;14; TER;2020;1;8; Empreend; Edson; None; 220 E1; None
+2;14; QUA;2022;1;8; Empreendedorismo; Edson; None; None; None
+2;16; SEG;2023;2;8; Comp Ambiental; Eduardo; None; None; None
+2;16; TER;2023;2;4; Sist Operacional; Eduardo; None; None; None
+2;14; TER;2023;2;2; Algebra Linear; Elba; None; 106P3; None
+2;14; QUI;2023;2;2; Algebra Linear; Elba; None; 106P3; None
+2;14; TER;2023;1;1; Geo Analit; Elba;60; 106P3; None
+2;14; QUI;2023;1;1; Geo Analit; Elba;60; 106P3; None
+2;14; TER;2019;1;1; Geom Analít; Elba; None; 109 B; None
+2;14; QUI;2019;1;1; Geom Analít; Elba; None; 109 B; None
+2;14; QUI;2020;1;1; Geom Analít; Elba; None; 109BP3; None
+2;14; TER;2020;1;1; Geom Analít; Elba; None; 109BP3 ; None
+2;14; TER;2022;1;2; Algebra Linear; Elba; None; Apitão; None
+2;10; SEG;2022;1;4; Cálc Núm; Elba; None; Apitão; None
+2;10; QUA;2022;1;4; Cálc Núm; Elba; None; Apitão; None
+2;14; TER;2019;2;2; Álgeb Linear; Elba; None; None; None
+2;14; QUI;2019;2;2; Álgeb Linear; Elba; None; None; None
+2;14; TER;2022;2;2; Algebra Linear; Elba;28; None; None
+2;14; QUI;2022;2;2; Algebra Linear; Elba;28; None; None
+2;14; QUI;2022;1;2; Algebra Linear; Elba; None; None; None
+2;14; TER;2024;1;1; Geo Analit; Elba;35; None; None
+2;14; QUI;2024;1;1; Geo Analit; Elba;35; None; None
+2;10; TER;2022;1;4; Probabilidades; Gudelia; None; None; None
+2;10; SEX;2022;1;4; Probabilidades; Gudelia; None; None; None
+2;8; TER;2024;1;5; P Estocáticos; Guill;10; Inf2; None
+2;8; QUI;2024;1;5; P Estocáticos; Guill;10; Inf2; None
+2;8; TER;2023;1;5; P Estocáticos; Guill;11; inf2; None
+2;8; SEG;2022;2;2; Est Discretas; Guillermo;40; None; None
+2;8; QUA;2022;2;2; Est Discretas; Guillermo;40; None; None
+2;8; QUI;2023;1;5; P Estocáticos; Guillermo;11; None; None
+2;8; TER;2022;1;5; Proc Estocáticos; Guillermo; None; None; None
+2;8; QUI;2022;1;5; Proc Estocáticos; Guillermo; None; None; None
+2;10; TER;2019;2;6; Compiladores; João; None; BInf2; None
+2;11; QUI;2019;2;6; Compiladores; João; None; BInf2; None
+2;8; TER;2019;2;4; Sis Operacional; João; None; BInf2; None
+2;8; QUI;2019;2;4; Sis Operacional; João; None; BInf2; None
+2;16; SEG;2023;1;5; Redes de Comp; João;6; Inf1; None
+2;16; QUA;2023;1;5; Redes de Comp; João;6; Inf1; None
+2;14; SEG;2024;1;7; Sistemas Distribuidos; João;6; Inf1; None
+2;14; QUA;2024;1;7; Sistemas Distribuidos; João;6; Inf1; None
+2;10; SEG;2023;1;7; Teste Software; João;8; inf1; None
+2;10; QUA;2023;1;7; Teste Software; João;8; inf1; None
+2;8; SEG;2022;1;1; Org de Comp; João; None; None; None
+2;10; SEX;2022;1;1; Org de Comp; João; None; None; None
+2;10; SEG;2022;1;5; Redes de Comp; João; None; None; None
+2;10; QUI;2022;1;5; Redes de Comp; João; None; None; None
+2;8; QUA;2022;2;7; Sist Distribuidos; João;20; None; None
+2;8; SEX;2022;2;7; Sist Distribuidos; João;20; None; None
+2;10; QUA;2022;2;4; Sist Operacional; João;10; None; None
+2;10; SEX;2022;2;4; Sist Operacional; João;10; None; None
+2;10; SEG;2024;1;5; Redes de Comp; João;30; sala; None
+2;10; QUA;2024;1;5; Redes de Comp; João;30; sala; None
+2;8; TER;2020;1;5; P Estocas; L Guill; None;P3 104; None
+2;8; QUI;2020;1;5; P Estocas; L Guill; None;P3 104; None
+2;8; QUI;2019;1;5; Proc Estocást; L Guill; None; 205 E1; None
+2;8; TER;2019;1;5; Proc Estocást; L Guill; None; None; None
+2;16; SEG;2024;1;5; BD I; L Mariano;27; BP3; None
+2;16; QUA;2024;1;5; BD I; L Mariano;27; BP3; None
+2;10; SEG;2024;1;9; Algoritmos em Grafos; L Mariano; None; Inf1; None
+2;10; QUA;2024;1;9; Algoritmos em Grafos; L Mariano; None; Inf1; None
+2;16; QUI;2024;1;9; Algoritmos em Grafos; L Mariano; None; Inf1; None
+2;16; TER;2023;1;5; BD I; L Mariano;13; inf1; None
+2;16; QUI;2023;1;5; BD I; L Mariano;13; inf1; None
+2;10; SEG;2023;2;6; B Dados II; L Mariano; None; None; None
+2;16; TER;2023;2;6; Compiladores; L Mariano; None; None; None
+2;14; SEG;2023;2;8; Prog Concorrente; L Mariano; None; None; None
+2;10; QUA;2023;1;1; Prog I; L Mariano;25; P3; B_R
+2;8; QUA;2022;1;7; Eng Apoiada Comp; L Maur; None; None; None
+2;10; TER;2022;1;7; Eng Apoiada Comp; L Maur; None; None; None
+2;14; SEG;2019;1;7; Test de Soft; Leonard; None; InfP3; None
+2;14; SEX;2019;1;7; Test de Soft; Leonard; None; InfP3; None
+2;8; SEG;2019;2;6; Banco de dados 2; LM; None; Binf2; None
+2;10; SEG;2019;2;6; Banco de dados 2; LM; None; BInf2; None
+2;8; SEX;2019;2;2; Programaçao 2; LM; None; infP3; None
+2;10; SEX;2019;2;2; Programação 2; LM; None; infP3; None
+2;10; SEG;2020;1;5; Banco Dados 1; Luiz M; None; 108P3; None
+2;10; QUI;2020;1;5; Banco Dados 1; Luiz M; None; 108P3; None
+2;10; QUI;2019;1;5; Banco Dados 1; Luiz M; None; B1; None
+2;8; QUI;2019;1;1; Organiz Comp; Luiz M; None; B2; None
+2;16; QUI;2019;1;1; Organiz Comp; Luiz M; None; None; None
+2;16; TER;2023;1;7; Metodologia; Molina; None; 105P3; None
+2;16; TER;2020;1;7; Met Trab C; Molina; None; 206 P3; None
+2;16; QUI;2020;1;7; Met Trab C; Molina; None; 206P3; None
+2;16; TER;2024;1;7; Metodologia; Molina; None; None; None
+2;16; QUI;2024;1;7; Metodologia; Molina; None; None; None
+2;16; QUI;2023;1;7; Metodologia; Molina; None; None; None
+2;16; TER;2022;1;7; Metodologia; Molina; None; None; None
+2;16; QUI;2022;1;7; Metodologia; Molina; None; None; None
+2;8; SEG;2019;1;1; Calculo I; Mylane; None;106; None
+2;8; QUA;2019;1;1; Calculo I; Mylane; None;106; None
+2;10; SEG;2019;1;1; Calculo I; Mylane; None;106; None
+2;10; QUA;2019;1;1; Calculo I; Mylane; None;106; None
+2;14; TER;2022;1;1; Geo Analit; Nelson; None; Audit P5; None
+2;18; SEG;2022;2;4; Estatística e Prob; Nelson;12; None; None
+2;18; QUA;2022;2;4; Estatística e Prob; Nelson;12; None; None
+2;14; QUI;2022;1;1; Geometria Analít; Nelson; None; None; None
+2;16; SEG;2022;2;1; Calculo I; Niander;6; None; None
+2;16; TER;2022;2;1; Calculo I; Niander;6; None; None
+2;16; QUI;2022;2;1; Calculo I; Niander;6; None; None
+2;8; SEX;2023;2;5; Comp e Socied; None;23;107; None
+2;10; SEX;2023;2;4; Int Prob Estatístic; None;10;107; None
+2;14; QUA;2019;1;3; Métodos Mat; None; None; 106 107; None
+2;14; SEG;2019;1;3; Métodos Mat; None; None; 106 e 107; None
+2;16; SEG;2023;2;2; Fisica 1; None; None; 106 e 109B; A e B
+2;16; QUA;2023;2;2; Fisica 1; None; None; 106 e 109B; A e B
+2;10; TER;2023;2;1; Calculo I; None; None; 106P3; None
+2;10; QUI;2023;2;1; Calculo I; None; None; 106P3; None
+2;10; SEX;2023;2;1; Calculo I; None; None; 106P3; None
+2;16; QUI;2023;2;4; Sist Operacional; None; None; 108P3; None
+2;10; QUI;2023;1;8; Empreendedorismo; None; None; 109A; None
+2;10; QUA;2023;2;4; Estruturas Dados II; None;26; 109A; None
+2;18; QUA;2023;2;2; Fisica Experimen 1; None; None; 205P3; E
+2;20; SEG;2023;2;2; Fisica Experimen 1; None; None; 205P3; LI
+2;8; TER;2019;1;3; Calculo III; None; None; 206 207; None
+2;8; QUI;2019;1;3; Calculo III; None; None; 206 207; None
+2;14; SEX;2019;1;9; Top Programação; None; None; B1; None
+2;16; SEX;2019;1;9; Top Programação; None; None; B1; None
+2;14; SEG;2020;1;5; Redes de Comp; None; None; B1 P5; None
+2;14; QUA;2020;1;5; Redes de Comp; None; None; B1 P5; None
+2;16; SEG;2020;1;7; Sists Distrib; None; None; B1 P5; None
+2;16; QUA;2020;1;7; Sists Distrib; None; None; B1 P5; None
+2;14; TER;2020;1;3; Arquitet Comp; None; None; B2; None
+2;14; QUI;2020;1;3; Arquitet Comp; None; None; B2; None
+2;14; SEG;2020;1;7; Test de Soft; None; None; B2; None
+2;14; QUA;2020;1;7; Test de Soft; None; None; B2 P5; None
+2;16; QUA;2023;2;2; Programação II; None; None; Ban P3; CC2
+2;16; QUI;2023;2;2; Programação II; None; None; Ban P3; CC1
+2;16; TER;2019;1;7; Metod Trab Cientif; None; None; P3; None
+2;16; QUI;2019;1;7; Metod Trab Cientif; None; None; P3; None
+2;10; QUA;2023;2;6; B Dados II; None;11; Inf1; None
+2;16; QUA;2023;2;8; Comp Ambiental; None; None; Inf1; None
+2;16; QUI;2023;2;6; Compiladores; None; None; Inf1; None
+2;16; SEG;2024;1;7; Teste Software; None; None; Inf1; None
+2;16; QUA;2024;1;7; Teste Software; None; None; Inf1; None
+2;10; QUI;2023;2;4; Analise Proj Sist; None; None; Inf1 e Inf2; None
+2;8; QUI;2023;2;6; Int Comp Grafic; None;3; Inf2; None
+2;14; QUA;2023;2;8; Prog Concorrente; None; None; Inf2; None
+2;10; SEG;2019;1;5; Banco Dados I; None; None; None; None
+2;14; SEG;2019;2;4; Cálc Numérico; None; None; None; Eng e Comp
+2;14; QUA;2019;2;4; Cálc Numérico; None; None; None; Eng e Comp
+2;8; TER;2019;2;2; Calculo Dif e Int 2; None; None; None; Eng e Comp
+2;8; QUI;2019;2;2; Calculo Dif e Int 2; None; None; None; Eng e Comp
+2;10; QUI;2019;2;2; Calculo Dif e Int 2; None; None; None; Eng e Comp
+2;8; QUI;2024;1;1; Calculo I; None; None; None; None
+2;8; SEX;2024;1;1; Calculo I; None; None; None; None
+2;8; SEG;2020;1;5; Computação e Sociedade; None; None; None; None
+2;8; SEG;2019;1;5; Computação e Sociedade; None; None; None; None
+2;14; SEG;2022;1;5; Engenharia de Software; None; None; None; None
+2;14; QUA;2022;1;5; Engenharia de Software; None; None; None; None
+2;10; SEG;2020;1;3; Fisica 2; None; None; None; None
+2;10; QUA;2020;1;3; Fisica 2; None; None; None; None
+2;18; SEG;2023;1;2; Fisica Experimental I; None;5; None; C
+2;14; SEG;2024;1;3; Fisica Experimental II; None; None; None; C
+2;16; SEG;2024;1;3; Fisica Experimental II; None; None; None; A
+2;18; SEG;2024;1;3; Fisica Experimental II; None; None; None; B
+2;14; SEG;2023;1;3; Fisica Experimental II; None; None; None; C
+2;16; QUI;2023;1;3; Fisica Experimental II; None; None; None; C
+2;18; SEG;2023;1;3; Fisica Experimental II; None;3; None; A
+2;10; SEG;2019;1;3; Fisica Ge 2; None; None; None; None
+2;16; TER;2019;2;2; Fisica Geral 1; None; None; None; *
+2;16; QUI;2019;2;2; Fisica Geral 1; None; None; None; *
+2;10; QUA;2019;1;3; Fisica Geral 2; None; None; None; None
+2;10; SEG;2022;2;2; Fisica Geral I; None;21; None; None
+2;10; QUA;2022;2;2; Fisica Geral I; None;21; None; None
+2;16; SEG;2022;1;2; Fisica Geral I; None; None; None; None
+2;16; QUA;2022;1;2; Fisica Geral I; None; None; None; None
+2;18; TER;2022;1;3; Fisica Geral II; None; None; None; None
+2;18; QUI;2022;1;3; Fisica Geral II; None; None; None; None
+2;10; SEG;2019;2;3; Fisica Geral II; None; None; None; FF*
+2;10; QUA;2019;2;3; Fisica Geral II; None; None; None; None
+2;14; SEG;2024;1;2; Fisica I; None; None; None; B
+2;14; QUA;2024;1;2; Fisica I; None; None; None; B
+2;14; SEG;2023;1;3; Fisica I; None;4; None; B
+2;14; QUA;2023;1;3; Fisica I; None;4; None; B
+2;14; SEG;2024;1;3; Fisica II; None; None; None; A
+2;14; QUA;2024;1;3; Fisica II; None; None; None; A
+2;16; QUA;2024;1;3; Fisica II; None;5; None; C
+2;16; SEG;2023;1;3; Fisica II; None;5; None; C
+2;16; QUA;2023;1;3; Fisica II; None;5; None; C
+2;14; SEX;2020;1;2; Inglês II; None; None; None; None
+2;16; SEX;2020;1;2; Inglês II; None; None; None; None
+2;14; SEX;2024;1;1; Inglês Instrumental; None; None; None; None
+2;12; TER;2019;1;1; Ingles Instrumental I; None; None; None; None
+2;12; QUI;2019;1;1; Ingles Instrumental I; None; None; None; None
+2;16; SEX;2024;1;1; Inglês Instrumental I; None; None; None; None
+2;13; SEX;2023;2;1; Inglês Instrumental I; None; None; None; L
+2;14; SEX;2023;2;1; Inglês Instrumental I; None; None; None; L
+2;16; SEX;2023;2;1; Inglês Instrumental I; None; None; None; L
+2;14; SEX;2023;1;1; Inglês Instrumental I; None; None; None; None
+2;16; SEX;2023;1;1; Inglês Instrumental I; None; None; None; None
+2;14; SEX;2022;1;1; Inglês Instrumental I; None; None; None; None
+2;16; SEX;2022;1;1; Inglês Instrumental I; None; None; None; None
+2;8; SEX;2023;2;2; Inglês Instrumental II; None; None; None; B
+2;10; SEX;2023;2;2; Inglês Instrumental II; None; None; None; B
+2;8; SEX;2022;1;2; Inglês Instrumental II; None; None; None; None
+2;10; SEX;2022;1;2; Inglês Instrumental II; None; None; None; None
+2;8; QUI;2019;2;6; Int Comp Grafica; None; None; None; None
+2;16; SEG;2020;1;3; Lab Física geral 2; None; None; None; A
+2;16; QUA;2020;1;3; Lab Física geral 2; None; None; None; D
+2;18; SEG;2020;1;3; Lab Física geral 2; None; None; None; B
+2;18; TER;2020;1;3; Lab Física geral 2; None; None; None; C
+2;18; QUA;2020;1;3; Lab Física geral 2; None; None; None; E
+2;16; SEG;2019;1;3; Lab Física geral 2; None; None; None; A
+2;16; QUA;2019;1;3; Lab Física geral 2; None; None; None; D
+2;18; SEG;2019;1;3; Lab Física geral 2; None; None; None; B
+2;18; TER;2019;1;3; Lab Física geral 2; None; None; None; C
+2;18; QUA;2019;1;3; Lab Física geral 2; None; None; None;" E;"
+2;18; QUI;2022;2;2; Lab Fisica Geral I; None;15; None; None
+2;10; SEG;2019;2;2; Lab Fisica geral I; None; None; None; *
+2;8; SEG;2022;1;5; Linguagens Formais; None; None; None; None
+2;8; SEX;2022;1;5; Linguagens Formais; None; None; None; None
+2;18; SEG;2019;2;4; Prob e Estatistica; None; None; None; mat*
+2;18; QUA;2019;2;4; Prob e Estatística; None; None; None; None
+2;8; SEG;2019;1;2; Calculo II; Oscar; None;107; None
+2;8; QUA;2019;1;2; Calculo II; Oscar; None;107; None
+2;10; SEG;2020;1;4; Estat e Prob; Oscar; None; 105P3; None
+2;10; QUA;2020;1;4; Estat e Prob; Oscar; None; 105P3; None
+2;8; SEG;2023;2;2; Est Discretas; Oscar; None; 106P3; None
+2;8; QUA;2023;2;2; Est Discretas; Oscar; None; 106P3; None
+2;8; TER;2023;1;3; Calculo III; Oscar;12; 106P3; None
+2;8; QUI;2023;1;3; Calculo III; Oscar;60; 106P3; None
+2;14; SEG;2023;2;4; Calc Numérico; Oscar; None; 108P3; None
+2;14; QUA;2023;2;4; Calc Numérico; Oscar; None; 108P3; None
+2;14; SEG;2023;1;4; C Numérico; Oscar;30; 108P3; None
+2;14; QUA;2023;1;4; C Numérico; Oscar;30; 108P3; None
+2;8; TER;2020;1;1; Calculo I; Oscar; None; 207P3; C
+2;8; QUI;2020;1;1; Calculo I; Oscar; None; 207P3; C
+2;8; SEX;2020;1;1; Calculo I; Oscar; None; 207P3; C
+2;8; QUA;2019;2;2; Est Discretas; Oscar; None; P3; None
+2;8; SEG;2019;2;2; Est Discretas; Oscar; None; P3 108; None
+2;8; TER;2022;1;1; Calculo I; Oscar; None; None; None
+2;8; QUI;2022;1;1; Calculo I; Oscar; None; None; None
+2;8; SEX;2022;1;1; Calculo I; Oscar; None; None; None
+2;8; TER;2022;2;2; Calculo II; Oscar;25; None; None
+2;8; QUI;2022;2;2; Calculo II; Oscar;25; None; None
+2;10; QUI;2022;2;2; Calculo II; Oscar;20; None; None
+2;8; TER;2024;1;3; Calculo III; Oscar;15; None; None
+2;8; QUI;2024;1;3; Calculo III; Oscar;15; None; None
+2;10; TER;2019;2;4; Calculo III; Oscar; None; None; None
+2;10; QUI;2019;2;4; Calculo III; Oscar; None; None; None
+2;10; QUA;2022;1;2; Estruturas Discret; Oscar; None; None; None
+2;14; SEG;2022;1;2; Estruturas Discret; Oscar; None; None; None
+2;14; TER;2019;1;3; Arquitet Comp; Osniel; None; B1; None
+2;14; QUI;2019;1;3; Arquitet Comp; Osniel; None; B1; None
+2;14; SEG;2020;1;3; Métodos Mat; P Dias; None; 106P3; None
+2;14; QUA;2020;1;3; Métodos Mat; P Dias; None; 106P3; None
+2;10; TER;2022;1;2; Calculo II; Paulo D; None; Apitão; None
+2;10; QUI;2022;1;2; Calculo II; Paulo D ; None; None; None
+2;16; TER;2022;2;3; Mét Matemáticos; Rebec;15; None; None
+2;16; QUI;2022;2;3; Mét Matemáticos; Rebec;15; None; None
+2;8; TER;2023;1;1; Calculo I; Rigob;40; 108P3; None
+2;8; QUI;2023;1;1; Calculo I; Rigob;40; 108P3; None
+2;8; SEX;2023;1;1; Calculo I; Rigob;40; 108P3; None
+2;8; TER;2023;2;2; Calculo II; Rigoberto; None; 106P3; None
+2;8; QUI;2023;2;2; Calculo II; Rigoberto; None; 106P3; None
+2;8; TER;2020;1;3; Calculo III; Rigoberto; None; 206P3; None
+2;8; QUI;2020;1;3; Calculo III; Rigoberto; None; 206P3; None
+2;8; TER;2024;1;1; Calculo I; Rigoberto;35; None; None
+2;8; QUA;2022;1;3; Calculo III; Rigoberto; None; None; None
+2;14; SEX;2022;1;3; Calculo III; Rigoberto; None; None; None
+2;8; TER;2020;1;9; Proc Imagens; Riv; None; 105P3; None
+2;8; QUI;2020;1;9; Proc Imagens; Riv; None; 105P3; None
+2;10; SEX;2020;1;9; Projeto Monog; Riv; None; 116 P5; None
+2;10; SEX;2019;1;9; Projeto de Monog; Riv; None; B1; None
+2;10; SEG;2020;1;7; Int Homem Máq; Riv; None; B1 P5; None
+2;10; QUA;2020;1;7; Int Homem Máq; Riv; None; B1 P5; None
+2;14; TER;2019;1;7; Interação Hom Maq; Riv; None; B2; None
+2;14; QUI;2019;1;7; Interação Hom Maq; Riv; None; B2; None
+2;10; TER;2019;1;9; Proc de Imagens; Riv; None; B2; None
+2;10; QUI;2019;1;9; Proc de Imagens; Riv; None; B2; None
+2;8; TER;2019;2;6; Int Comp Grafica; Riv; None; BInf1; None
+2;10; SEX;2019;2;9; Proj de Monografia; Riv; None; BInf1; None
+2;8; QUA;2020;1;1; Int Ciênc Comp; Riv; None; infP3; None
+2;8; TER;2019;1;1; Int Ciênc Comp; Riv; None; InfP3; None
+2;16; SEG;2019;2;2; Programação 2; Riv; None; infP3; None
+2;16; QUA;2019;2;2; Programação 2; Riv; None; infP3; None
+2;16; QUA;2023;1;1; Introd à CC; Rivera;35; 109A; None
+2;16; TER;2023;2;2; Programação II; Rivera; None; 206P3; None
+2;10; TER;2024;1;7; Interface HM; Rivera;10; inf1; None
+2;10; QUI;2024;1;7; Interface HM; Rivera;10; inf1; None
+2;8; SEX;2023;1;7; Interface HM; Rivera;12; inf1; None
+2;10; TER;2023;1;7; Interface HM; Rivera;12; inf1; None
+2;14; TER;2024;1;7; Proc Imagens; Rivera;5; inf1; None
+2;14; QUI;2024;1;7; Proc Imagens; Rivera;5; inf1; None
+2;14; TER;2023;1;7; Proc Imagens; Rivera;5; inf1; None
+2;14; QUI;2023;1;7; Proc Imagens; Rivera;5; inf1; None
+2;10; SEX;2024;1;9; Proj Monografia; Rivera;3; Inf1; None
+2;10; SEX;2023;1;9; Proj Monografia; Rivera;3; Inf1; None
+2;16; SEG;2023;2;6; Int Comp Grafica; Rivera; None; Inf2; None
+2;10; QUA;2023;2;9; Proj Monografia; Rivera; None; Inf2; None
+2;10; QUA;2022;1;6; Comput Gráfica; Rivera; None; None; None
+2;14; SEG;2022;1;6; Comput Gráfica; Rivera; None; None; None
+2;10; TER;2022;1;7; Interface Hom Maq; Rivera; None; None; None
+2;10; QUI;2022;1;7; Interface Hom Maq; Rivera; None; None; None
+2;8; QUA;2022;1;1; Introdução à CC; Rivera; None; None; None
+2;14; SEG;2022;2;8; Proc Imagens; Rivera;8; None; None
+2;14; QUA;2022;2;8; Proc Imagens; Rivera;8; None; None
+2;16; SEG;2022;2;2; Programação II; Rivera;37; None; None
+2;16; TER;2022;2;2; Programação II; Rivera;37; None; None
+2;16; QUA;2022;2;2; Programação II; Rivera;37; None; None
+2;10; SEX;2022;2;9; Projeto Monografia; Rivera; None; None; None
+2;8; QUA;2024;1;1; Introd à CC; Rivera;27; sala; None
+2;8; SEG;2023;1;3; Arquitet C; Sanya;45; 106P3; None
+2;8; QUA;2023;1;3; Arquitet C; Sanya;45; 106P3; None
+2;10; SEG;2023;1;1; Org Comp; Sanya;35; 205_E1; None
+2;10; QUI;2023;1;1; Org Comp; Sanya;35; 205_E1; None
+2;16; QUA;2022;1;5; Banco de Dados I; Sânya; None; None; None
+2;16; SEX;2022;1;5; Banco de Dados I; Sânya; None; None; None
+2;16; QUA;2022;2;6; Banco de Dados II; Sânya;13; None; None
+2;16; SEX;2022;2;6; Banco de Dados II; Sânya;13; None; None
+2;14; QUA;2022;2;2; Lógica Digital; Sânya;35; None; None
+2;14; SEX;2022;2;2; Lógica Digital; Sânya;35; None; None
+2;14; QUA;2022;1;2; Lógica Digital; Sânya; None; None; None
+2;14; SEX;2022;1;2; Lógica Digital; Sânya; None; None; None
+2;16; SEG;2019;1;1; Lógica Mat; Tang; None;206; None
+2;16; QUA;2019;1;1; Lógica Mat; Tang; None;206; None
+2;10; SEG;2023;1;3; Est Dados I; Tang;45; 106P3; None
+2;10; QUA;2023;1;3; Est Dados I; Tang;45; 106P3; None
+2;16; SEG;2020;1;1; Lógica Mat; Tang; None; 108P3 ; None
+2;16; QUA;2020;1;1; Lógica Mat; Tang; None; 108P3 ; None
+2;16; QUI;2020;1;3; Estr Dados 1; Tang; None; 111 P5; None
+2;16; TER;2020;1;3; Estr Dados 1; Tang; None; 112 P5; None
+2;10; QUI;2020;1;10; Monografia; Tang; None; 116 P5; None
+2;8; SEX;2019;2;10; Monografia; Tang; None; 116p5; None
+2;8; SEG;2023;1;1; Lógica Mat; Tang;40; 207P3; None
+2;8; QUA;2023;1;1; Lógica Mat; Tang;40; 207P3; None
+2;10; QUA;2022;1;1; Lógica Mat; Tang; None; Audit P5; None
+2;10; SEG;2022;1;1; Lógica Mat; Tang; None; AuditP5; None
+2;8; SEG;2020;1;9; Heurísticas e Complexidade; Tang; None; B2 P5; None
+2;8; QUA;2020;1;9; Heurísticas e Complexidade; Tang; None; B2 P5; None
+2;10; SEG;2024;1;3; Est Dados I; Tang;25; BP3; None
+2;10; QUA;2024;1;3; Est Dados I; Tang;25; BP3; None
+2;14; TER;2019;2;4; Estr de Dados 2; Tang; None; BInf2; None
+2;14; QUI;2019;2;4; Estr de Dados 2; Tang; None; BInf2; None
+2;16; TER;2019;2;6; Pesq Operac; Tang; None; P3107; None
+2;16; QUI;2019;2;6; Pesq Operac; Tang; None; P3107; None
+2;14; SEX;2024;1;10; Estágio Sup; Tang; None; Inf1; None
+2;14; SEX;2023;1;10; Estágio Sup; Tang; None; Inf1; None
+2;16; SEX;2024;1;10; Monografia; Tang; None; Inf1; None
+2;16; SEX;2023;1;10; Monografia; Tang; None; Inf1; None
+2;14; SEG;2023;2;6; Pesq Operacional; Tang; None; Inf1; None
+2;14; QUA;2023;2;6; Pesq Operacional; Tang; None; Inf1; None
+2;10; SEX;2023;1;3; Est Dados I; Tang;16; inf2; CC1
+2;16; TER;2023;1;3; Est Dados I CC1; Tang;16; inf2; None
+2;14; SEX;2023;2;10; Estágio Sup; Tang; None; None; None
+2;14; SEX;2022;2;10; Estágio Sup; Tang; None; None; None
+2;14; SEX;2022;1;10; Estágio Sup; Tang; None; None; None
+2;16; QUI;2019;1;3; Estrutura Dados 1; Tang; None; None; None
+2;16; SEG;2022;1;3; Estruturas Dados I; Tang; None; None; None
+2;16; QUA;2022;1;3; Estruturas Dados I; Tang; None; None; None
+2;10; SEG;2023;2;4; Estruturas Dados II; Tang; None; None; None
+2;16; SEG;2022;2;4; Estruturas Dados II; Tang;14; None; None
+2;16; QUA;2022;2;4; Estruturas Dados II; Tang;14; None; None
+2;8; SEG;2022;2;8; Heurísticas; Tang;9; None; None
+2;14; QUI;2022;2;8; Heurísticas; Tang;9; None; None
+2;14; SEG;2024;1;1; Lógica Mat; Tang;30; None; None
+2;14; QUA;2024;1;1; Lógica Mat; Tang;30; None; None
+2;16; SEX;2023;2;10; Monografia; Tang; None; None; None
+2;16; SEX;2022;2;10; Monografia; Tang; None; None; None
+2;16; SEX;2022;1;10; Monografia; Tang; None; None; None
+2;10; SEG;2022;2;6; Pesquisa Operacional; Tang;3; None; None
+2;10; QUA;2022;2;6; Pesquisa Operacional; Tang;3; None; None
+2;10; TER;2020;1;10; Estágio Sup; Tang; None;P5 119; None
+2;14; SEX;2019;1;10; Monografia; Tang; None;P5 119; None
+2;16; TER;2019;1;3; Estrutura Dados 1; Tang; None; Sal ; None
+2;14; SEG;2022;2;4; Calculo Numérico; Wilma;3; None; None
+2;14; QUA;2022;2;4; Calculo Numérico; Wilma;3; None; None
