@@ -4,6 +4,7 @@ import myStyles from "../../../config/myStyles";
 import configInfo from "../../../config/configInfo";
 import ClassTimeTable from "../../../components/ClassTimeTable/ClassTimeTable";
 import { readRoom } from "../../../helpers/CRUDFunctions/roomCRUD";
+import { sortClasses } from "../../../components/Sorts/sortingFunctions";
 import { readSubject } from "../../../helpers/CRUDFunctions/subjectCRUD";
 import { readProfessor } from "../../../helpers/CRUDFunctions/professorCRUD";
 import { ClassesFilters } from "../../../components/Filters/Filters";
@@ -34,6 +35,7 @@ function ClassSelection(classStates) {
   /* It just contains the selection an maybe allows scrolling selection */
   const createStates = {
     ...classStates,
+    classes: sortClasses(classStates.classes),
     classItem: {
       ...classStates.classItem,
       disciplina: null,
