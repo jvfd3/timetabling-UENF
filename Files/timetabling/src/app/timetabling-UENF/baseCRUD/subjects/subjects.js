@@ -22,22 +22,29 @@ import {
   updateSubject,
   deleteSubject,
 } from "../../../../helpers/CRUDFunctions/subjectCRUD";
+import { sortSubjects } from "../../../../components/Sorts/sortingFunctions";
 
 const defaultClassNames = myStyles.classNames.default;
 const pageTexts = text.page.subjects;
 
 function SubjectSelection(subjectStates) {
+  // console.log("subjectStates", subjectStates);
+  const CRUDSubjects = {
+    ...subjectStates,
+    subjects: sortSubjects(subjectStates?.subjects),
+  };
+
   const subjectCRUDFunctions = {
-    createFunc: () => createSubject(subjectStates),
-    readFunc: () => readSubject(subjectStates),
-    updateFunc: () => updateSubject(subjectStates),
-    deleteFunc: () => deleteSubject(subjectStates),
+    createFunc: () => createSubject(CRUDSubjects),
+    readFunc: () => readSubject(CRUDSubjects),
+    updateFunc: () => updateSubject(CRUDSubjects),
+    deleteFunc: () => deleteSubject(CRUDSubjects),
   };
 
   return (
     <div className={defaultClassNames.containerItemSelection}>
       <CRUDButtonsContainer {...subjectCRUDFunctions} />
-      <SelectSubjectItem {...subjectStates} />
+      <SelectSubjectItem {...CRUDSubjects} />
     </div>
   );
 }

@@ -26,11 +26,17 @@ const emptyObjects = {
     nome: null, //STR
   },
   subject: {
-    apelido: null, //STR
-    codigo: null, //INT
     id: null, //INT
-    nome: null, //STR
     periodo: null, //INT
+    validityStartYear: null, //INT
+    validityStartSemester: null, //INT
+    validityEndYear: null, //INT
+    validityEndSemester: null, //INT
+    codigo: null, //STR
+    apelido: null, //STR
+    nome: null, //STR
+    center: null, //STR
+    laboratory: null, //STR
   },
   room: {
     bloco: null, //STR

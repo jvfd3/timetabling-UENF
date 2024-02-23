@@ -6,6 +6,25 @@ function getValueFromObject(myObject) {
   return objectValue;
 }
 
+function getValueFromDataWithPropArray(data, propArray) {
+  // Inicializa o valor com os dados iniciais
+  let value = data;
+
+  // Itera sobre cada propriedade no array de propriedades
+  for (const prop of propArray) {
+    // Se o valor atual é um objeto e tem a propriedade atual, atualiza o valor
+    if (value && value.hasOwnProperty(prop)) {
+      value = value[prop];
+    } else {
+      // Se o valor atual não é um objeto ou não tem a propriedade atual, retorna undefined
+      return undefined;
+    }
+  }
+
+  // Retorna o valor final
+  return value;
+}
+
 function getDefaultYearSemesterValues() {
   const years = constantValues.years;
   const yearIndex = configInfo.defaultIndexes.year;
@@ -30,4 +49,9 @@ function menuIsOpen(context) {
   return context === possibleContexts[1];
 }
 
-export { getDefaultYearSemesterValues, getValueFromObject, menuIsOpen };
+export {
+  menuIsOpen,
+  getValueFromObject,
+  getDefaultYearSemesterValues,
+  getValueFromDataWithPropArray,
+};
