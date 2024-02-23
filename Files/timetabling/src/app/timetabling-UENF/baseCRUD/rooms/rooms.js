@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import text from "../../../../config/frontText";
 import myStyles from "../../../../config/myStyles";
-import configInfo from "../../../../config/configInfo";
-import { CRUDButtonsContainer } from "../../../../components/CRUDButtons";
 import sqlDataFromJson from "../../../../DB/dataFromJSON";
+import { sortRooms } from "../../../../components/Sorts/sortingFunctions";
 import { RoomClasses } from "../../../../components/classTimesViewTable/SpecificClassTimeViewTables";
+import { CRUDButtonsContainer } from "../../../../components/CRUDButtons";
 import {
   SelectRoomItem,
   SelectRoomBlock,
@@ -26,16 +26,21 @@ const defaultClassNames = myStyles.classNames.default;
 const pageTexts = text.page.rooms;
 
 function RoomSelection(roomStates) {
+  const crudRoomStates = {
+    ...roomStates,
+    rooms: sortRooms(roomStates.rooms),
+  };
+
   const roomCRUDFunctions = {
-    createFunc: () => createRoom(roomStates),
-    readFunc: () => readRoom(roomStates),
-    updateFunc: () => updateRoom(roomStates),
-    deleteFunc: () => deleteRoom(roomStates),
+    createFunc: () => createRoom(crudRoomStates),
+    readFunc: () => readRoom(crudRoomStates),
+    updateFunc: () => updateRoom(crudRoomStates),
+    deleteFunc: () => deleteRoom(crudRoomStates),
   };
   return (
     <div className={defaultClassNames.containerItemSelection}>
       <CRUDButtonsContainer {...roomCRUDFunctions} />
-      <SelectRoomItem {...roomStates} />
+      <SelectRoomItem {...crudRoomStates} />
     </div>
   );
 }

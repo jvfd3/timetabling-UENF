@@ -21,10 +21,10 @@ function sortClassTimes(classTimes) {
 
 function sortClasses(classes) {
   const orderedClasses = classes.sort((a, b) => {
-    const yearA = a?.ano;
-    const yearB = b?.ano;
-    const semesterA = a?.semestre;
-    const semesterB = b?.semestre;
+    const yearA = a?.ano ?? "";
+    const yearB = b?.ano ?? "";
+    const semesterA = a?.semestre ?? "";
+    const semesterB = b?.semestre ?? "";
     const subjectA = a?.disciplina?.nome ?? "";
     const subjectB = b?.disciplina?.nome ?? "";
     const professorA = a?.professor?.nome ?? "";
@@ -44,4 +44,25 @@ function sortClasses(classes) {
   return orderedClasses;
 }
 
-export { sortClassTimes, sortClasses };
+function sortRooms(rooms) {
+  const orderedRooms = rooms.sort((a, b) => {
+    const capacityA = a?.capacidade ?? "";
+    const capacityB = b?.capacidade ?? "";
+    const blockA = a?.bloco ?? "";
+    const blockB = b?.bloco ?? "";
+    const codeA = a?.codigo ?? "";
+    const codeB = b?.codigo ?? "";
+
+    if (capacityA !== capacityB) {
+      return capacityA - capacityB;
+    } else if (blockA !== blockB) {
+      return blockA.localeCompare(blockB);
+    } else {
+      return codeA.localeCompare(codeB);
+    }
+  });
+
+  return orderedRooms;
+}
+
+export { sortClassTimes, sortClasses, sortRooms };
