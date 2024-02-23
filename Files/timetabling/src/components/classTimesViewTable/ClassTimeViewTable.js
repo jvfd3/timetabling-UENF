@@ -137,7 +137,6 @@ function ClassesTableView(customPageStates) {
   const isSet = customPageStates.baseValueToFilter?.id;
   const hasClasses = filteredClassTimes.length > 0;
 
-  console.log("isSet", customPageStates.baseValueToFilter?.id);
   return (
     <div className={defaultClassNames.containerCardBaseInfo}>
       {!isSet ? (
