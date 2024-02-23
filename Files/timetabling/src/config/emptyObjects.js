@@ -52,8 +52,13 @@ const emptyObjects = {
     nome: null, //STR
   },
   courses: {
-    apelido: null, //STR
-    nome: null, //STR
+    id: null, //INT
+    level: null, //STR
+    center: null, //STR
+    alias: null, //STR
+    modality: null, //STR
+    category: null, //STR
+    name: null, //STR
   },
 };
 
