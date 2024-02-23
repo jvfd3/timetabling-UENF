@@ -1,18 +1,84 @@
 import { getId } from "../auxCRUD";
+import { menuIsOpen } from "../auxFunctions";
+
+/* DEFAULT */
 
 function checkIndefinition(value) {
   return value ? value : "Indef.";
 }
 
-function getLabelStudentSelection(student) {
-  const enrollment = student?.matricula;
-  const name = student?.nome;
-
-  let studentLabel = "";
-  studentLabel += enrollment ? enrollment + " - " : "Matrícula Indef. - ";
-  studentLabel += name ? name : "Nome Indef.";
-  return studentLabel;
+function defaultLabel(item) {
+  /* Go through all keys and append them to the current label */
+  /* If the item is a list or an object, it becomes recursive and inserts all items.
+    lists are considered objects with the indices as keys
+  */
+  let label = "";
+  for (const key in item) {
+    label += key + ":";
+    if (typeof item?.[key] === "object") {
+      label += "{ ";
+      label += defaultLabel(item?.[key]);
+      label += "} ";
+    } else {
+      label += checkIndefinition(item?.[key]) + " ";
+    }
+  }
+  return label;
 }
+
+/* MISC */
+
+function getBlockFormatLabel(block, context) {
+  // const blockId = getId(block);
+  const blockCode = block?.code ?? block?.alias;
+  const blockAlias = block?.alias;
+  const blockName = block?.name;
+
+  // let msg = `(${code}) `;
+  // const sameCodigoAndApelido = alias === code;
+  // msg += sameCodigoAndApelido ? `${name}` : `${alias}`;
+  // const finalMessage = isMenuLabel ? msg : `${code}`;
+  // return finalMessage;
+
+  const blockCodeText = checkIndefinition(blockCode);
+
+  const hasSameInfo = blockAlias === blockCode;
+  const blockDescription = hasSameInfo ? blockName : blockAlias;
+
+  const blockDescriptionText =
+    `${blockCodeText} - ` + checkIndefinition(blockDescription);
+
+  const blockLabel = menuIsOpen(context) ? blockDescriptionText : blockCodeText;
+  return blockLabel;
+}
+
+function getBlockLabel(block) {
+  const blockId = getId(block);
+  const blockCode = block?.code;
+  const blockAlias = block?.alias;
+  const blockName = block?.name;
+
+  let blockLabel = "";
+  blockLabel += " " + checkIndefinition(blockId);
+  blockLabel += " " + checkIndefinition(blockCode);
+  blockLabel += " " + checkIndefinition(blockAlias);
+  blockLabel += " " + checkIndefinition(blockName);
+  return blockLabel;
+}
+
+function getMultiClassesSubjectLabel(subject, context) {
+  const code = checkIndefinition(subject?.codigo);
+  const name = checkIndefinition(subject?.nome);
+  const alias = checkIndefinition(subject?.apelido);
+  let subjectLabel = "";
+
+  subjectLabel += `${code} - `;
+  subjectLabel += menuIsOpen(context) ? `${alias}` : `${name}`;
+
+  return subjectLabel;
+}
+
+/* SUBJECT */
 
 function getSubjectLabel(subject) {
   const subjectCode = subject?.codigo;
@@ -27,6 +93,8 @@ function getSubjectLabel(subject) {
   return subjectLabel;
 }
 
+/* PROFESSOR */
+
 function getProfessorLabel(professor) {
   const professorAlias = professor?.apelido;
   const professorAliasText = checkIndefinition(professorAlias);
@@ -38,83 +106,7 @@ function getProfessorLabel(professor) {
   return professorLabel;
 }
 
-function getRoomLabel(room) {
-  const block = room?.bloco;
-  const capacity = room?.capacidade;
-  const code = room?.codigo;
-  // const description = room?.descricao;
-  // const id = room?.id;
-  // const idBlock = room?.idBlock;
-  let roomLabel = "";
-  roomLabel += `(${checkIndefinition(capacity)}) `;
-  roomLabel += `${checkIndefinition(block)}`;
-  roomLabel += ` - `;
-  roomLabel += `${checkIndefinition(code)}`;
-  roomLabel = room ? roomLabel : "Indef.";
-  return roomLabel;
-}
-
-function getMultiClassesSubjectLabel(subject, context) {
-  const code = checkIndefinition(subject?.codigo);
-  const name = checkIndefinition(subject?.nome);
-  const alias = checkIndefinition(subject?.apelido);
-  // const isOpened = context === "value";
-  const isOpened = false;
-
-  let subjectLabel = "";
-
-  subjectLabel += `${code} - `;
-  subjectLabel += isOpened ? `${alias}` : `${name}`;
-
-  return subjectLabel;
-}
-
-function getDefaultOptionLabelSubject(subject) {
-  const id = getId(subject);
-  const code = subject?.codigo;
-  const name = subject?.nome;
-  const alias = subject?.apelido;
-  const expectedSemester = subject?.periodo;
-
-  let subjectLabel = "";
-  subjectLabel += checkIndefinition(id) + "-";
-  subjectLabel += checkIndefinition(code) + "-";
-  subjectLabel += checkIndefinition(name) + "-";
-  subjectLabel += checkIndefinition(alias) + "-";
-  subjectLabel += checkIndefinition(expectedSemester) + " Período Periodo-";
-  return subjectLabel;
-}
-
-function getDefaultProfessorValue(professor) {
-  let professorValue = "";
-  professorValue += checkIndefinition(professor?.id) + "-";
-  professorValue += checkIndefinition(professor?.nome) + "-";
-  professorValue += checkIndefinition(professor?.apelido) + "-";
-  professorValue += checkIndefinition(professor?.laboratorio) + "-";
-  professorValue += checkIndefinition(professor?.curso) + "-";
-  professorValue += checkIndefinition(professor?.centro) + "-";
-  return professorValue;
-}
-
-function getDefaultOptionLabelProfessor(professor) {
-  const id = getId(professor);
-  const name = professor?.nome;
-  const alias = professor?.apelido;
-  const lab = professor?.laboratorio;
-  const course = professor?.curso;
-
-  let professorLabel = "";
-  professorLabel += checkIndefinition(id) + "-";
-  professorLabel += checkIndefinition(name) + "-";
-  professorLabel += checkIndefinition(alias) + "-";
-  professorLabel += checkIndefinition(lab) + "-";
-  professorLabel += checkIndefinition(course) + "-";
-  return professorLabel;
-}
-
 function getDefaultFormatOptionLabelProfessor(professor, context) {
-  const isOpened = context === "value";
-
   const name = professor?.nome;
   const alias = professor?.apelido;
   const course = professor?.curso;
@@ -131,53 +123,22 @@ function getDefaultFormatOptionLabelProfessor(professor, context) {
   shortName += alias ? checkIndefinition(alias) : fullName;
 
   let formattedOptionLabel = "";
-  formattedOptionLabel += isOpened ? shortName : fullName;
+  formattedOptionLabel += menuIsOpen(context) ? fullName : shortName;
   return formattedOptionLabel;
 }
 
-function getDefaultOptionLabelRoom(room) {
-  let roomLabel = "";
-  roomLabel += checkIndefinition(room?.id) + "-";
-  roomLabel += checkIndefinition(room?.descricao) + "-";
-  roomLabel += checkIndefinition(room?.capacidade) + "-";
-  roomLabel += checkIndefinition(room?.bloco) + "-";
-  roomLabel += checkIndefinition(room?.codigo) + "-";
-  return roomLabel;
+function courseLabel(course, context) {
+  const alias = course?.alias;
+  const name = course?.name;
+
+  const aliasText = checkIndefinition(alias);
+  const nameText = checkIndefinition(name);
+
+  const message = menuIsOpen(context) ? `${aliasText}` : `${nameText}`;
+  return message;
 }
 
-function getDefaultOptionLabelStudent(student) {
-  let studentLabel = "";
-  studentLabel += checkIndefinition(student?.id) + "-";
-  studentLabel += checkIndefinition(student?.matricula) + "-";
-  studentLabel += checkIndefinition(student?.nome) + "-";
-  studentLabel += checkIndefinition(student?.anoEntrada) + "-";
-  studentLabel += checkIndefinition(student?.curso) + "-";
-  return studentLabel;
-}
-
-function getDefaultOptionLabelClassItem(classItem) {
-  const id = getId(classItem);
-  const year = classItem?.ano;
-  const semester = classItem?.semestre;
-  const expectedDemand = classItem?.demandaEstimada;
-  const subject = classItem?.disciplina;
-  const professor = classItem?.professor;
-  const classTimes = classItem?.horarios;
-
-  // const subjectLabel = JSON.stringify(subject);
-  // const professorLabel = JSON.stringify(professor);
-  const classTimesLabel = JSON.stringify(classTimes);
-
-  let classItemLabel = "";
-  classItemLabel += checkIndefinition(id) + "-";
-  classItemLabel += checkIndefinition(year) + "-";
-  classItemLabel += checkIndefinition(semester) + "-";
-  classItemLabel += checkIndefinition(expectedDemand) + "-";
-  classItemLabel += getDefaultOptionLabelSubject(subject) + "-";
-  classItemLabel += getDefaultOptionLabelProfessor(professor) + "-";
-  classItemLabel += checkIndefinition(classTimesLabel) + "-";
-  return classItemLabel;
-}
+/* CLASSITEM */
 
 function getClassTimeLabel(classTime) {
   const room = classTime?.sala;
@@ -220,8 +181,6 @@ function getClassTimeLabelPlus(classItem, index) {
 }
 
 function getFormatOptionLabelSelectClassItem(classItem, context) {
-  const isOpened = context === "value";
-
   const id = getId(classItem);
   const year = classItem?.ano;
   const semester = classItem?.semestre;
@@ -256,19 +215,78 @@ function getFormatOptionLabelSelectClassItem(classItem, context) {
   return formattedOptionLabel;
 }
 
+/* ROOM */
+
+function getRoomItemLabel(room, context) {
+  let selectedRoom = "";
+  let roomOptions = "";
+
+  // const id = getId(room);
+  // const idBlock = room?.idBlock;
+  const capacity = room?.capacidade;
+  const block = room?.bloco;
+  const code = room?.codigo;
+  const description = room?.descricao;
+
+  const capacityText = `(${checkIndefinition(capacity)}) `;
+  const blockText = checkIndefinition(block);
+  const codeText = checkIndefinition(code);
+  const descriptionText = checkIndefinition(description);
+
+  const cleanDescription = description ? descriptionText + " - " : "";
+
+  // It's the same for now but could be different in the future
+  selectedRoom +=
+    capacityText + blockText + " - " + cleanDescription + codeText;
+  roomOptions += capacityText + blockText + " - " + cleanDescription + codeText;
+
+  const roomLabel = menuIsOpen(context) ? roomOptions : selectedRoom;
+  return roomLabel;
+}
+
+function getRoomSelectionLabel(room, context) {
+  const block = room?.bloco;
+  const capacity = room?.capacidade;
+  const code = room?.codigo;
+  // const description = room?.descricao;
+  // const id = room?.id;
+  // const idBlock = room?.idBlock;
+  let roomLabel = "";
+  roomLabel += `(${checkIndefinition(capacity)}) `;
+  roomLabel += `${checkIndefinition(block)}`;
+  roomLabel += ` - `;
+  roomLabel += `${checkIndefinition(code)}`;
+  roomLabel = room ? roomLabel : "Indef.";
+  return roomLabel;
+}
+
+/* STUDENT */
+
+function getLabelStudentSelection(student) {
+  const enrollment = student?.matricula;
+  const name = student?.nome;
+
+  let studentLabel = "";
+  studentLabel += enrollment ? enrollment + " - " : "Matrícula Indef. - ";
+  studentLabel += name ? name : "Nome Indef.";
+  return studentLabel;
+}
+
 export {
-  getRoomLabel,
+  getBlockLabel,
+  getBlockFormatLabel,
   getSubjectLabel,
-  getProfessorLabel,
   checkIndefinition,
   getLabelStudentSelection,
   getMultiClassesSubjectLabel,
-  getDefaultOptionLabelRoom,
-  getDefaultOptionLabelStudent,
-  getDefaultOptionLabelSubject,
-  getDefaultOptionLabelClassItem,
-  getDefaultOptionLabelProfessor,
-  getDefaultProfessorValue,
-  getDefaultFormatOptionLabelProfessor,
   getFormatOptionLabelSelectClassItem,
+  /* PROFESSOR */
+  getProfessorLabel,
+  getDefaultFormatOptionLabelProfessor,
+  courseLabel,
+  /* ROOM */
+  getRoomItemLabel,
+  getRoomSelectionLabel,
+  /* DEFAULT */
+  defaultLabel,
 };

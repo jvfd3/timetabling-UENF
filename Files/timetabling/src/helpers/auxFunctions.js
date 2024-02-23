@@ -25,4 +25,9 @@ function getDefaultYearSemesterValues() {
   return yearSemester;
 }
 
-export { getDefaultYearSemesterValues, getValueFromObject };
+function menuIsOpen(context) {
+  const possibleContexts = ["value", "menu"];
+  return context === possibleContexts[1];
+}
+
+export { getDefaultYearSemesterValues, getValueFromObject, menuIsOpen };

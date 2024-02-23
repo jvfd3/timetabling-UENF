@@ -7,7 +7,7 @@ import defaultColors from "../config/defaultColors";
 import constantValues from "../config/constantValues";
 import pseudoDatabase from "../config/pseudoDatabase";
 import sqlDataFromJson from "../DB/dataFromJSON";
-import { getValueFromObject } from "../helpers/auxFunctions";
+import { getValueFromObject, menuIsOpen } from "../helpers/auxFunctions";
 import { LockedProp, UnlockedProp } from "./Buttons/Dumb/Dumb";
 import {
   getId,
@@ -15,16 +15,14 @@ import {
   replaceNewItemInListById,
 } from "../helpers/auxCRUD";
 import {
+  defaultLabel,
+  getBlockFormatLabel,
   getDefaultFormatOptionLabelProfessor,
-  getDefaultOptionLabelClassItem,
-  getDefaultOptionLabelProfessor,
-  getDefaultOptionLabelRoom,
-  getDefaultOptionLabelStudent,
-  getDefaultOptionLabelSubject,
-  getDefaultProfessorValue,
-  getFormatOptionLabelSelectClassItem,
   getLabelStudentSelection,
   getMultiClassesSubjectLabel,
+  getFormatOptionLabelSelectClassItem,
+  getRoomItemLabel,
+  courseLabel,
 } from "../helpers/visualizationText/textLabels";
 
 const styleWidthFix = myStyles.selects.fullItem;
@@ -179,8 +177,8 @@ function SelectPage({ currentPage, setCurrentPage }) {
     value: currentPage,
     findCorrectObject: findPageObject,
     customProps: {
-      getOptionLabel: ({ pageName }) => pageName,
       getOptionValue: ({ url }) => url,
+      getOptionLabel: ({ pageName }) => pageName,
       formatOptionLabel: ({ pageName }) => (
         <div style={{ display: "flex" }}>{pageName}</div>
       ),
@@ -249,11 +247,12 @@ function SelectLab({ outerLab, setOuterLab }) {
     value: outerLab,
     findCorrectObject: findLabObject,
     customProps: {
-      getOptionValue: (lab) => lab.apelido,
-      getOptionLabel: (lab) => `${lab.centro} -${lab.apelido} - ${lab.nome}`,
+      getOptionValue: (lab) => lab?.apelido,
+      getOptionLabel: (lab) => defaultLabel(lab),
       formatOptionLabel: ({ centro, apelido, nome }, { context }) => {
-        const isOpened = context === "value";
-        const message = isOpened ? `${apelido}` : `${centro} - ${nome}`;
+        const message = menuIsOpen(context)
+          ? `${apelido}`
+          : `${centro} - ${nome}`;
         return message;
       },
     },
@@ -266,7 +265,7 @@ function SelectCourse({ outerCourse, setOuterCourse }) {
   function findCourseObject(course) {
     const courses = pseudoDatabase.courses;
     const courseObject = courses.find(
-      (iterCourse) => iterCourse.apelido === course
+      (iterCourse) => iterCourse?.apelido === course
     );
     return courseObject ?? null;
   }
@@ -279,13 +278,9 @@ function SelectCourse({ outerCourse, setOuterCourse }) {
     value: outerCourse,
     findCorrectObject: findCourseObject,
     customProps: {
-      getOptionLabel: ({ nome, apelido }) => `${nome} - ${apelido}`,
-      getOptionValue: ({ nome, apelido }) => `${nome} - ${apelido}`,
-      formatOptionLabel: ({ nome, apelido }, { context }) => {
-        const isOpened = context === "value";
-        const message = isOpened ? `${apelido}` : `${nome}`;
-        return message;
-      },
+      getOptionValue: (course) => getId(course),
+      getOptionLabel: (course) => defaultLabel(course),
+      formatOptionLabel: (course, { context }) => courseLabel(course, context),
     },
   };
 
@@ -307,17 +302,10 @@ function SelectBlock({ outerBlock, setOuterBlock, outerIsClearable = false }) {
     value: outerBlock,
     findCorrectObject: findBlockObject,
     customProps: {
-      getOptionValue: ({ id }) => id,
-      getOptionLabel: ({ id, code, alias, name }) =>
-        `(${code}) ` + alias === code ? `${name}` : `${alias}`,
-      formatOptionLabel: ({ id, code, alias, name }, { context }) => {
-        const isMenuLabel = context === "menu";
-        let msg = `(${code}) `;
-        const sameCodigoAndApelido = alias === code;
-        msg += sameCodigoAndApelido ? `${name}` : `${alias}`;
-        const finalMessage = isMenuLabel ? msg : `${code}`;
-        return finalMessage;
-      },
+      getOptionValue: (block) => getId(block),
+      getOptionLabel: (block) => defaultLabel(block),
+      formatOptionLabel: (block, { context }) =>
+        getBlockFormatLabel(block, context),
     },
   };
 
@@ -368,7 +356,7 @@ function SelectSubject({ outerSubject, setOuterSubject, subjects = [] }) {
     findCorrectObject: findSubjectObject,
     customProps: {
       getOptionValue: (subject) => getId(subject),
-      getOptionLabel: (subject) => getDefaultOptionLabelSubject(subject),
+      getOptionLabel: (subject) => defaultLabel(subject),
       formatOptionLabel: (subject, { context }) =>
         getMultiClassesSubjectLabel(subject, context),
     },
@@ -401,8 +389,8 @@ function SelectProfessor({
     value: outerProfessor,
     findCorrectObject: findProfessorObject,
     customProps: {
-      getOptionValue: (professor) => getDefaultProfessorValue(professor),
-      getOptionLabel: (professor) => getDefaultOptionLabelProfessor(professor),
+      getOptionValue: (professor) => getId(professor),
+      getOptionLabel: (professor) => defaultLabel(professor),
       formatOptionLabel: (professor, { context }) =>
         getDefaultFormatOptionLabelProfessor(professor, context),
     },
@@ -434,11 +422,9 @@ function SelectRoom({
     value: outerRoom,
     findCorrectObject: findRoomObject,
     customProps: {
-      getOptionValue: (room) => room.id,
-      getOptionLabel: ({ capacidade, bloco, codigo }) =>
-        `${capacidade} - ${bloco} - ${codigo}`,
+      getOptionValue: (room) => getId(room),
+      getOptionLabel: (room) => defaultLabel(room),
       formatOptionLabel: ({ capacidade, bloco, codigo }, { context }) => {
-        const isOpened = context === "value";
         let message = "";
         message += capacidade ? `(${capacidade})` : "(Cap. indef.)";
         message += bloco ? ` ${bloco}` : "(Bloco indef.)";
@@ -490,10 +476,9 @@ function SelectStartHour({
     findCorrectObject: findHourObject,
     customProps: {
       getOptionValue: (hour) => hour.hora,
-      getOptionLabel: ({ hora, turno }) => `${hora} (${turno})`,
+      getOptionLabel: (startHour) => defaultLabel(startHour),
       formatOptionLabel: ({ hora, turno }, { context }) => {
-        const isOpened = context === "value";
-        const message = isOpened ? `${hora}` : `${hora} (${turno})`;
+        const message = menuIsOpen(context) ? `${hora}` : `${hora} (${turno})`;
         return message;
       },
     },
@@ -767,7 +752,7 @@ function SelectClassItem(classStates) {
     value: classItem,
     customProps: {
       getOptionValue: (classItem) => getId(classItem),
-      getOptionLabel: (classItem) => getDefaultOptionLabelClassItem(classItem),
+      getOptionLabel: (classItem) => defaultLabel(classItem),
       formatOptionLabel: (classItem, { context }) =>
         getFormatOptionLabelSelectClassItem(classItem, context),
     },
@@ -871,7 +856,7 @@ function SelectProfessorItem(professorStates) {
     value: professor,
     customProps: {
       getOptionValue: (professor) => getId(professor),
-      getOptionLabel: (professor) => getDefaultOptionLabelProfessor(professor),
+      getOptionLabel: (professor) => defaultLabel(professor),
       formatOptionLabel: (professor, { context }) =>
         getDefaultFormatOptionLabelProfessor(professor, context),
     },
@@ -905,7 +890,7 @@ function SelectProfessorCourse({
   setProfessor,
 }) {
   function updateProfessorCourse(newCourse) {
-    const newProfessor = { ...professor, curso: newCourse?.apelido ?? null };
+    const newProfessor = { ...professor, curso: newCourse?.name ?? null };
     const newProfessors = replaceNewItemInListById(newProfessor, professors);
     setProfessor(newProfessor);
     setProfessors(newProfessors);
@@ -931,14 +916,8 @@ function SelectRoomItem({ rooms, setRooms, room, setRoom }) {
     // findCorrectObject: ,
     customProps: {
       getOptionValue: (room) => getId(room),
-      getOptionLabel: (room) => getDefaultOptionLabelRoom(room),
-      formatOptionLabel: ({ capacidade, bloco, codigo }) => {
-        let msg = "";
-        msg += capacidade ? `(${capacidade})` : "(Cap. indef.)";
-        msg += bloco ? ` ${bloco}` : "(Bloco indef.)";
-        msg += codigo ? ` - ${codigo}` : " (Cod. indef.)";
-        return msg;
-      },
+      getOptionLabel: (room) => defaultLabel(room),
+      formatOptionLabel: (room, { context }) => getRoomItemLabel(room, context),
     },
   };
 
@@ -953,7 +932,11 @@ function SelectRoomBlock(myRoomStates) {
     // const sameCodeAlias = code === alias;
     // const description = sameCodeAlias ? name : alias;
     // const newBlockValue = `(${code}) ${description}`
-    const newRoom = { ...room, idBlock: newBlock?.id, bloco: newBlock?.code };
+    const newRoom = {
+      ...room,
+      idBlock: newBlock?.id,
+      bloco: newBlock?.code ?? newBlock?.alias ?? newBlock?.name,
+    };
     setRoom(newRoom);
   }
 
@@ -981,7 +964,7 @@ function SelectSubjectItem({ subjects, setSubjects, subject, setSubject }) {
     // findCorrectObject: ,
     customProps: {
       getOptionValue: (subject) => getId(subject),
-      getOptionLabel: (subject) => getDefaultOptionLabelSubject(subject),
+      getOptionLabel: (subject) => defaultLabel(subject),
       formatOptionLabel: ({ codigo, nome }) => {
         let msg = "";
         msg += codigo ? `(${codigo})` : "(Cod. indef.)";
@@ -1021,7 +1004,7 @@ function SelectStudentItem({ students, setStudents, student, setStudent }) {
     // findCorrectObject: ,
     customProps: {
       getOptionValue: (student) => getId(student),
-      getOptionLabel: (student) => getDefaultOptionLabelStudent(student),
+      getOptionLabel: (student) => defaultLabel(student),
       formatOptionLabel: (student) => getLabelStudentSelection(student),
     },
   };
