@@ -24,8 +24,9 @@ function SmartInputSubject(inputSubjectProps) {
   const localStates = { localClasses, setLocalClasses };
 
   useEffect(() => {
-    console.log("localClasses", localClasses);
+    // console.log("localClasses", localClasses);
     classStates.setFilteredClasses(localClasses);
+    // classStates.setClasses(localClasses);
   }, [localClasses]);
 
   function getMessage() {
