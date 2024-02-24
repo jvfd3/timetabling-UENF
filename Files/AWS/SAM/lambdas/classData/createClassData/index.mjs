@@ -1,21 +1,22 @@
 import { defaultCreate } from "/opt/db.js";
 
 const createItemQuery =
-  "INSERT INTO `turmas` (`ano`, `semestre`, `idDisciplina`, `idProfessor`, `demandaEstimada`) VALUES (?, ?, ?, ?, ?)";
+  "INSERT INTO `turmas` (`ano`, `semestre`, `idDisciplina`, `idProfessor`, `demandaEstimada`,`description`) VALUES (?, ?, ?, ?, ?, ?)";
 
-const itemName = "ClassData";
+const itemName = "classItem";
 let local = `aws>lambda>Create>${itemName}>handler`;
 const isDebugging = false;
 
-function convertToList(classData) {
-  isDebugging && console.log(local, classData);
+function convertToList(classItem) {
+  isDebugging && console.log(local, classItem);
   /* Vai ser nulo se algum item não for definido */
   const values = [
-    classData?.ano ?? null,
-    classData?.semestre ?? null,
-    classData?.idDisciplina ?? classData?.disciplina?.id ?? null,
-    classData?.idProfessor ?? classData?.professor?.id ?? null,
-    classData?.demandaEstimada ?? null,
+    classItem?.ano ?? null,
+    classItem?.semestre ?? null,
+    classItem?.idDisciplina ?? classItem?.disciplina?.id ?? null,
+    classItem?.idProfessor ?? classItem?.professor?.id ?? null,
+    classItem?.demandaEstimada ?? null,
+    classItem?.description ?? null,
   ];
   isDebugging && console.log(local + ">{newValues: ", values, "}");
   return values;

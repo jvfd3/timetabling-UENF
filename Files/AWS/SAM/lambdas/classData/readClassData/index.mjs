@@ -24,9 +24,9 @@ function getQuery() {
     "\
   SELECT\
     t.id AS 'id',\
-    t.id AS 'idTurma',\
     t.ano AS 'ano',\
     t.semestre AS 'semestre',\
+    t.description AS 'description',\
     t.demandaEstimada AS 'demandaEstimada',\
     CASE\
       WHEN d.id IS NOT NULL THEN JSON_OBJECT(\

@@ -1,7 +1,7 @@
 import { defaultUpdate, checkExistance } from "/opt/db.js";
 
 const updateItemQuery =
-  "UPDATE `turmas` SET  `ano` = ?, `semestre` = ?, `idDisciplina` = ?, `idProfessor` = ?, `demandaEstimada` = ? WHERE `id` = ?";
+  "UPDATE `turmas` SET  `ano` = ?, `semestre` = ?, `idDisciplina` = ?, `idProfessor` = ?, `demandaEstimada` = ?, `description` = ? WHERE `id` = ?";
 
 const checkQuery = "SELECT * FROM `turmas` WHERE `id` = ?";
 const itemName = "ClassData";
@@ -17,6 +17,7 @@ function convertToList(classData) {
     classData?.disciplina?.id ?? null,
     classData?.professor?.id ?? null,
     classData?.demandaEstimada ?? null,
+    classData?.description ?? null,
     classData?.id ?? null,
   ];
   isDebugging && console.log(local + ">{newValues: ", values, "}");
