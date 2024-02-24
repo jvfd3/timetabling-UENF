@@ -27,10 +27,7 @@ function createClass(createClassStates) {
   };
 
   function getNewClassItem(newId) {
-    const newClass = {
-      ...newClassItem,
-      id: newId,
-    };
+    const newClass = { ...newClassItem, id: newId };
     return newClass;
   }
 
