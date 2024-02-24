@@ -20,7 +20,12 @@ function getListOfNotOfferedSubjects(classes, semester, subjects = []) {
   const allSubjects = subjects.length > 0 ? subjects : sqlDataFromJson.subjects; // Should get from DB
 
   // Remover disciplinas com período esperado maior que 10
-  const CSSubjects = allSubjects.filter((subject) => subject.periodo <= 10);
+  const notNullSemesterSubjects = allSubjects.filter(
+    (subject) => subject?.periodo !== null
+  );
+  const CSSubjects = notNullSemesterSubjects.filter(
+    (subject) => subject.periodo <= 10
+  );
 
   // Neste código, filter(Boolean) remove todos os valores falsy do array, incluindo null e undefined.
   const offeredSubjectsCodes = classes
@@ -125,7 +130,7 @@ function NonOfferedSubjectsTable(unofferedSubjectsProps) {
             const NotOfferedProps = {
               iterSubject,
               classStates,
-              key: iterSubject.codigo,
+              key: getId(iterSubject),
             };
             return <NotOfferedSubjectRow {...NotOfferedProps} />;
           })}
