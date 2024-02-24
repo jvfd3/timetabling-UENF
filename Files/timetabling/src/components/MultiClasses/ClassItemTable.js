@@ -7,7 +7,7 @@ import { getClassItemConflicts } from "../../helpers/conflicts/centralConflicts"
 import { SelectClassProfessor, SelectClassSubject } from "../mySelects";
 import {
   NumberInputMultiClassesExpectedDemand,
-  TextInputMultiClassesDescription,
+  TextInputClassDescription,
 } from "../MyTextFields";
 import {
   createClass,
@@ -72,7 +72,7 @@ function ClassItemTableRow(classItemRowStates) {
         <NumberInputMultiClassesExpectedDemand {...classItemRowStates} />
       </td>
       <td>
-        <TextInputMultiClassesDescription {...classItemRowStates} />
+        <TextInputClassDescription {...classItemRowStates} />
       </td>
       <td>
         <ClassTimeTable {...classTimeTableProps} />

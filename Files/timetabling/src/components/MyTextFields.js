@@ -113,7 +113,7 @@ function NumberInputMultiClassesExpectedDemand(currentClassStates) {
   return <TextInputDefault {...capacityStates} />;
 }
 
-function TextInputMultiClassesDescription(currentClassStates) {
+function TextInputClassDescription(currentClassStates) {
   const { classes, setClasses, classItem, setClassItem } = currentClassStates;
   const generalStates = {
     items: classes,
@@ -454,7 +454,7 @@ function TextInputRoomId({ rooms, setRooms, room, setRoom }) {
 export {
   /* \ MultiClasses / */
   NumberInputMultiClassesExpectedDemand,
-  TextInputMultiClassesDescription,
+  TextInputClassDescription,
   /* \\ CRUD // */
   /* \ Classes / */
   TextInputClassExpectedDemand,
