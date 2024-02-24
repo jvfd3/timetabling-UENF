@@ -58,8 +58,8 @@ const configInfo = {
       "https://mckwruc3w1.execute-api.us-east-2.amazonaws.com/timetablingStage",
   },
   defaultIndexes: {
-    year: 10, // 10: 2024
-    semester: 0, // 1
+    year: 6, // 10: 2024
+    semester: 1, // 1
     professor: 2, // Tang
     student: 38, // João Vítor Fernandes Dias
     subject: 58, // Monografia
