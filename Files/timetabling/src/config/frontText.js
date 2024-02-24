@@ -83,6 +83,7 @@ const text = {
         subject: "Disciplina",
         professor: "Professor",
         expectedDemand: "Demanda Estimada",
+        description: "Descrição",
         id: "ID",
       },
       classTimeTitles: {

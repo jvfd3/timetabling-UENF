@@ -24,6 +24,7 @@ import {
   deleteClass,
 } from "../../../helpers/CRUDFunctions/classCRUD";
 import {
+  TextInputClassDescription,
   TextInputClassExpectedDemand,
   TextInputClassId,
 } from "../../../components/MyTextFields";
@@ -94,6 +95,12 @@ function BaseInfoCard(classesStates) {
             <th>{pageTexts.tableTitles.expectedDemand}</th>
             <td {...conflictStyles.expectedDemand.merged}>
               <TextInputClassExpectedDemand {...classesStates} />
+            </td>
+          </tr>
+          <tr>
+            <th>{pageTexts.tableTitles.description}</th>
+            <td>
+              <TextInputClassDescription {...classesStates} />
             </td>
           </tr>
           <tr>
