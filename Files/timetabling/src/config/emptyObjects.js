@@ -1,12 +1,12 @@
 const emptyObjects = {
   classItem: {
     id: null, //INT
-    idTurma: null, //INT
     ano: null, //INT
     semestre: null, //INT
     demandaEstimada: null, //INT
     professor: null, //OBJ
     disciplina: null, //OBJ
+    description: null, //STR
     horarios: [], //ARRAY
   },
   classTime: {
