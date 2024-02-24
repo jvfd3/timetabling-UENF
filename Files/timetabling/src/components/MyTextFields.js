@@ -113,6 +113,28 @@ function NumberInputMultiClassesExpectedDemand(currentClassStates) {
   return <TextInputDefault {...capacityStates} />;
 }
 
+function TextInputMultiClassesDescription(currentClassStates) {
+  const { classes, setClasses, classItem, setClassItem } = currentClassStates;
+  const generalStates = {
+    items: classes,
+    setItems: setClasses,
+    item: classItem,
+    setItem: setClassItem,
+  };
+
+  const specificValues = {
+    mainValue: classItem?.description,
+    getNewItemObject: (newValue) => {
+      const newClassItem = { ...classItem, description: newValue };
+      return newClassItem;
+    },
+    title: placeHolders.description,
+  };
+
+  const codeStates = { generalStates, specificValues };
+  return <TextInputDefault {...codeStates} />;
+}
+
 /* \\ CRUD // */
 
 /* \ Classes / */
@@ -432,6 +454,7 @@ function TextInputRoomId({ rooms, setRooms, room, setRoom }) {
 export {
   /* \ MultiClasses / */
   NumberInputMultiClassesExpectedDemand,
+  TextInputMultiClassesDescription,
   /* \\ CRUD // */
   /* \ Classes / */
   TextInputClassExpectedDemand,

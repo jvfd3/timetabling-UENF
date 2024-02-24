@@ -148,19 +148,24 @@ function SmartUpdateClassItem(updateClassItemProps) {
     const newProfessor = getId(classItem?.professor);
     const oldExpectedDemand = oldClassItem?.demandaEstimada;
     const newExpectedDemand = classItem?.demandaEstimada;
+    const oldDescription = oldClassItem?.description;
+    const newDescription = classItem?.description;
 
     const sameSubject = oldSubject === newSubject;
     const sameProfessor = oldProfessor === newProfessor;
     const sameExpectedDemand = oldExpectedDemand === newExpectedDemand;
+    const sameDescription = oldDescription === newDescription;
 
     const newSubjectText = `disciplina: ${oldSubject} -> ${newSubject}\n`;
     const newProfessorText = `professor: ${oldProfessor} -> ${newProfessor}\n`;
     const newExpectedDemandText = `demandaEstimada: ${oldExpectedDemand} -> ${newExpectedDemand}\n`;
+    const newDescriptionText = `description: ${oldDescription} -> ${newDescription}\n`;
 
     let modifications = "";
     modifications += sameSubject ? "" : newSubjectText;
     modifications += sameProfessor ? "" : newProfessorText;
     modifications += sameExpectedDemand ? "" : newExpectedDemandText;
+    modifications += sameDescription ? "" : newDescriptionText;
 
     /*
     const properties = [

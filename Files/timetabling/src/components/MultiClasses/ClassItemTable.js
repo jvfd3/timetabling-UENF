@@ -4,8 +4,11 @@ import myStyles from "../../config/myStyles";
 import ClassTimeTable from "../ClassTimeTable/ClassTimeTable";
 import { getId } from "../../helpers/auxCRUD";
 import { getClassItemConflicts } from "../../helpers/conflicts/centralConflicts";
-import { NumberInputMultiClassesExpectedDemand } from "../MyTextFields";
 import { SelectClassProfessor, SelectClassSubject } from "../mySelects";
+import {
+  NumberInputMultiClassesExpectedDemand,
+  TextInputMultiClassesDescription,
+} from "../MyTextFields";
 import {
   createClass,
   deleteClass,
@@ -30,6 +33,7 @@ function ClassTableHeader(createStates) {
         <th>{frontText.subject}</th>
         <th>{frontText.professor}</th>
         <th>{frontText.expectedDemand}</th>
+        <th>{frontText.description}</th>
         <th colSpan={5}>{frontText.classTimes}</th>
       </tr>
     </thead>
@@ -66,6 +70,9 @@ function ClassItemTableRow(classItemRowStates) {
       </td>
       <td {...conflicts.styled.expectedDemand.merged}>
         <NumberInputMultiClassesExpectedDemand {...classItemRowStates} />
+      </td>
+      <td>
+        <TextInputMultiClassesDescription {...classItemRowStates} />
       </td>
       <td>
         <ClassTimeTable {...classTimeTableProps} />
