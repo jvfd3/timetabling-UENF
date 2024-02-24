@@ -20,6 +20,14 @@ function SmartInputSubject(inputSubjectProps) {
   const { classStates, createClassDB, subjects, inputConfig } =
     inputSubjectProps;
 
+  const [localClasses, setLocalClasses] = useState(classStates.filteredClasses);
+  const localStates = { localClasses, setLocalClasses };
+
+  useEffect(() => {
+    console.log("localClasses", localClasses);
+    classStates.setFilteredClasses(localClasses);
+  }, [localClasses]);
+
   function getMessage() {
     const subjectsSize = subjects.length;
     const offerAllSubjectsMessage = `Adicionar todas as ${subjectsSize} turmas pendentes `;
@@ -36,27 +44,43 @@ function SmartInputSubject(inputSubjectProps) {
     return finalMessage;
   }
 
-  function addClassWithSubject(subject) {
-    const newClass = { ...emptyObjects.classItem };
-    newClass.ano = classStates.classItem.ano;
-    newClass.semestre = classStates.classItem.semestre;
-    newClass.disciplina = subject;
+  function getNewClassItem(subject) {
+    const newClass = {
+      ...emptyObjects.classItem,
+      ano: classStates.classItem.ano,
+      semestre: classStates.classItem.semestre,
+      disciplina: subject,
+    };
+    return newClass;
+  }
 
+  function addClassWithSubject(subject) {
     const createClassStates = {
       ...classStates,
-      classItem: newClass,
+      setClasses: () => {},
+      classItem: getNewClassItem(subject),
     };
+
     createClassDB(createClassStates);
   }
 
-  function addClassWithSubjects() {
-    subjects.forEach((subject) => addClassWithSubject(subject));
+  function addClassWithSubjects({ localClasses, setLocalClasses }) {
+    let classes = localClasses;
+    subjects.forEach((subject, index) => {
+      setTimeout(() => {
+        addClassWithSubject(subject);
+        classes.push(getNewClassItem(subject));
+      }, index * 100);
+    });
+    setLocalClasses(classes);
   }
 
   const inputProps = {
     text: getMessage(),
     size: inputConfig?.size ?? "2em",
-    createFunc: addClassWithSubjects,
+    createFunc: () => {
+      addClassWithSubjects(localStates);
+    },
   };
 
   return <InputSubject {...inputProps} />;
