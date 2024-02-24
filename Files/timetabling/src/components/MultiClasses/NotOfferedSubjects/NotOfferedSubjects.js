@@ -1,9 +1,9 @@
 import "./NotOfferedSubjects.css";
+import text from "../../../config/frontText";
 import myStyles from "../../../config/myStyles";
 import sqlDataFromJson from "../../../DB/dataFromJSON";
 import { SmartInputSubject } from "../../Buttons/Smart/Smart";
 import { createClass } from "../../../helpers/CRUDFunctions/classCRUD";
-import text from "../../../config/frontText";
 
 const defaultClassNames = myStyles.classNames.default;
 const frontText = text.component.nonOfferedSubjects;
