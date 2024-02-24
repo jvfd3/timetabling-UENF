@@ -1,11 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import emptyObjects from "../../../config/emptyObjects";
 import defaultColors from "../../../config/defaultColors";
+import getNewClassItem from "../../MultiClasses/NotOfferedSubjects/classCreation";
 import { getId } from "../../../helpers/auxCRUD";
-import {
-  getValueFromObject,
-  getDefaultYearSemesterValues,
-} from "../../../helpers/auxFunctions";
 import {
   CreateClassTime,
   DeleteClassTime,
@@ -15,21 +12,49 @@ import {
   UpdateClassTime,
   UpdateItem,
 } from "../Dumb/Dumb";
+import {
+  getValueFromObject,
+  getDefaultYearSemesterValues,
+} from "../../../helpers/auxFunctions";
 
 function SmartInputSubject(inputSubjectProps) {
   const { classStates, createClassDB, subjects, inputConfig } =
     inputSubjectProps;
+  const { classes, classItem } = classStates;
+  const currentSemester = {
+    year: classItem?.ano,
+    semester: classItem?.semestre,
+  };
 
-  const [localClasses, setLocalClasses] = useState(classStates.filteredClasses);
-  const localStates = { localClasses, setLocalClasses };
+  const localStates = { classes, currentSemester, createClassDB, subjects };
 
-  useEffect(() => {
-    // console.log("localClasses", localClasses);
-    classStates.setFilteredClasses(localClasses);
-    // classStates.setClasses(localClasses);
-  }, [localClasses]);
+  function createPreFilledClass(localStates) {
+    const { classes, currentSemester, createClassDB, subjects } = localStates;
+    let localClasses = classes;
+    // I'll fake insert it
+    subjects.forEach((iterSubject) => {
+      localClasses.push(getNewClassItem(classes, currentSemester, iterSubject));
+    });
+    localClasses.pop();
+    subjects.forEach((iterSubject, index) => {
+      setTimeout(() => {
+        const newClassItem = getNewClassItem(
+          classes,
+          currentSemester,
+          iterSubject
+        );
+        const createClassStates = {
+          ...classStates,
+          classes: localClasses,
+          classItem: newClassItem,
+        };
+        createClassDB(createClassStates);
+        // localClasses.push(newClassItem);
+      }, index * 100);
+    });
+  }
 
-  function getMessage() {
+  function getMessage(subjects) {
     const subjectsSize = subjects.length;
     const offerAllSubjectsMessage = `Adicionar todas as ${subjectsSize} turmas pendentes `;
     const extraText = inputConfig?.text ?? "";
@@ -38,49 +63,18 @@ function SmartInputSubject(inputSubjectProps) {
     let finalMessage = offerAllSubjectsMessage + extraText;
 
     if (subjects.length === 1) {
-      oneSubjectClassMessage += ` ${subjects[0].codigo}`;
+      oneSubjectClassMessage += ` ${subjects?.[0]?.codigo}`;
       finalMessage = oneSubjectClassMessage;
     }
 
     return finalMessage;
   }
 
-  function getNewClassItem(subject) {
-    const newClass = {
-      ...emptyObjects.classItem,
-      ano: classStates.classItem.ano,
-      semestre: classStates.classItem.semestre,
-      disciplina: subject,
-    };
-    return newClass;
-  }
-
-  function addClassWithSubject(subject) {
-    const createClassStates = {
-      ...classStates,
-      setClasses: () => {},
-      classItem: getNewClassItem(subject),
-    };
-
-    createClassDB(createClassStates);
-  }
-
-  function addClassWithSubjects({ localClasses, setLocalClasses }) {
-    let classes = localClasses;
-    subjects.forEach((subject, index) => {
-      setTimeout(() => {
-        addClassWithSubject(subject);
-        classes.push(getNewClassItem(subject));
-      }, index * 100);
-    });
-    setLocalClasses(classes);
-  }
-
   const inputProps = {
-    text: getMessage(),
+    text: getMessage(subjects),
     size: inputConfig?.size ?? "2em",
     createFunc: () => {
-      addClassWithSubjects(localStates);
+      createPreFilledClass(localStates);
     },
   };
 

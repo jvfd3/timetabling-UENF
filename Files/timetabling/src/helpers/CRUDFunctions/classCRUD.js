@@ -24,6 +24,9 @@ function createClass(createClassStates) {
     ano: year ?? classItem?.ano,
     semestre: semester ?? classItem?.semestre,
     disciplina: classItem?.disciplina ?? null,
+    professor: classItem?.professor ?? null,
+    demandaEstimada: classItem?.demandaEstimada ?? null,
+    description: classItem?.description ?? null,
   };
 
   function getNewClassItem(newId) {
