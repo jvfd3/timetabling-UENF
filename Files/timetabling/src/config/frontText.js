@@ -108,7 +108,11 @@ const text = {
       mainTitle: "Todas as disciplinas do período ímpar foram oferecidas 👍",
       subtitle: "Isso é mesmo possível? Ou o código bugou em algum lugar? 🤔",
       baseMessage: "Disciplinas ainda não oferecidas ",
-      headerText: "Período - (Código) Nome",
+      header: {
+        expectedSemester: "Período",
+        code: "Código",
+        name: "Nome",
+      },
     },
     filters: {
       year: "Ano:",

@@ -4,6 +4,7 @@ import myStyles from "../../../config/myStyles";
 import sqlDataFromJson from "../../../DB/dataFromJSON";
 import { SmartInputSubject } from "../../Buttons/Smart/Smart";
 import { createClass } from "../../../helpers/CRUDFunctions/classCRUD";
+import { getId } from "../../../helpers/auxCRUD";
 
 const defaultClassNames = myStyles.classNames.default;
 const frontText = text.component.nonOfferedSubjects;
@@ -70,9 +71,9 @@ function NotOfferedSubjectRow({ iterSubject, classStates }) {
       <td className={firstSemesterHighlight}>
         <SmartInputSubject {...inputProps} />
       </td>
-      <td className={firstSemesterHighlight}>
-        {`${semester} - (${code}) ${iterSubject.nome}`}
-      </td>
+      <td className={firstSemesterHighlight}>{semester}</td>
+      <td className={firstSemesterHighlight}>{code}</td>
+      <td className={firstSemesterHighlight}>{iterSubject.nome}</td>
     </tr>
   );
 }
@@ -114,7 +115,9 @@ function NonOfferedSubjectsTable(unofferedSubjectsProps) {
             <th>
               <SmartInputSubject {...inputProps} />
             </th>
-            <th>{frontText.headerText}</th>
+            <th>{frontText.header.expectedSemester}</th>
+            <th>{frontText.header.code}</th>
+            <th>{frontText.header.name}</th>
           </tr>
         </thead>
         <tbody>
