@@ -1,3 +1,4 @@
+import { getId } from "./auxCRUD";
 import {
   getValueFromDataWithPropArray,
   getValueFromObject,
@@ -53,21 +54,21 @@ function filterExpectedSemester(classes, expectedSemester) {
 
 function filterSubject(classes, subject) {
   if (subject) {
-    return generalFilter(classes, ["disciplina", "id"], subject?.id);
+    return generalFilter(classes, ["disciplina", "id"], getId(subject));
   }
   return classes;
 }
 
 function filterProfessor(classes, professor) {
   if (professor) {
-    return generalFilter(classes, ["professor", "id"], professor?.id);
+    return generalFilter(classes, ["professor", "id"], getId(professor));
   }
   return classes;
 }
 
 function filterRoom(classes, room) {
   if (room) {
-    return generalFilter(classes, ["sala", "id"], room?.id);
+    return generalFilter(classes, ["sala", "id"], getId(room));
   }
   return classes;
 }
