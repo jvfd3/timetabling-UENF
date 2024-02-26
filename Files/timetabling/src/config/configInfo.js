@@ -29,7 +29,7 @@ const configInfo = {
       url: "multiturmas",
     },
     CCTable: {
-      pageName: "CCTable",
+      pageName: "Grade de Horários",
       url: "cctable",
     },
     classes: {
