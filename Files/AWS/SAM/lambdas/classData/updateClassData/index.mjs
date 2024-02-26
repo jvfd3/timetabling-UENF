@@ -12,11 +12,15 @@ function convertToList(classData) {
   isDebugging && console.log(local, classData);
   /* Vai ser nulo se algum item não for definido */
   const values = [
-    classData?.ano ?? null,
-    classData?.semestre ?? null,
-    classData?.disciplina?.id ?? null,
-    classData?.professor?.id ?? null,
-    classData?.demandaEstimada ?? null,
+    classItem?.year ?? classData?.ano ?? null,
+    classItem?.semester ?? classData?.semestre ?? null,
+    classItem?.idSubject ??
+      classItem?.subject?.id ??
+      classData?.idDisciplina ??
+      classData?.disciplina?.id ??
+      null,
+    classItem?.idProfessor ?? classItem?.professor?.id ?? null,
+    classItem?.expectedDemand ?? classData?.demandaEstimada ?? null,
     classData?.description ?? null,
     classData?.id ?? null,
   ];

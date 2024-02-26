@@ -11,11 +11,11 @@ function convertToList(room) {
   isDebugging && console.log(local, room);
   /* Vai ser nulo se algum item não for definido */
   const values = [
-    room?.capacidade ?? null,
-    room?.idBlock ?? null,
-    room?.bloco ?? null,
-    room?.codigo ?? null,
-    room?.descricao ?? null,
+    room?.capacity ?? room?.capacidade ?? null,
+    room?.idBlock ?? room?.idBlock ?? null,
+    room?.block ?? room?.bloco ?? null,
+    room?.code ?? room?.codigo ?? null,
+    room?.description ?? room?.descricao ?? null,
   ];
   isDebugging && console.log(local + ">{newValues: ", values, "}");
   return values;

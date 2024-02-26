@@ -12,10 +12,10 @@ function convertToList(student) {
   isDebugging && console.log(local, student);
   /* Vai ser nulo se algum item não for definido */
   const values = [
-    student?.nome ?? null,
-    student?.curso ?? null,
-    student?.anoEntrada ?? null,
-    student?.matricula ?? null,
+    student?.name ?? student?.nome ?? null,
+    student?.course ?? student?.curso ?? null,
+    student?.entryYear ?? student?.anoEntrada ?? null,
+    student?.enrollmentCode ?? student?.matricula ?? null,
     student?.id ?? null,
   ];
   isDebugging && console.log(local + ">{newValues: ", values, "}");
