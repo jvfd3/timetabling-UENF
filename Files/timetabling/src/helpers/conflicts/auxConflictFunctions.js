@@ -98,7 +98,7 @@ function flattenTurma(classData, classTime) {
   return newClassData;
 }
 
-function splitTurmas(turmas) {
+function splitTurmas(classes) {
   /* function splitTurmas(classes) {
     let splittedClasses = classes.flatMap((classData) =>
       classData.horarios.map((classTime) => flattenTurma(classData, classTime))
@@ -106,20 +106,23 @@ function splitTurmas(turmas) {
     return splittedClasses;
   } */
   const newSplittedTurmas = [];
-  turmas?.forEach((turma) => {
-    if (turma?.horarios !== null && turma?.horarios?.length > 0) {
-      turma?.horarios.forEach((horario) => {
-        const newTurma = flattenTurma(turma, horario);
-        newSplittedTurmas.push(newTurma);
+  classes?.forEach((iterClassItem) => {
+    if (
+      iterClassItem?.horarios !== null &&
+      iterClassItem?.horarios?.length > 0
+    ) {
+      iterClassItem?.horarios.forEach((iterClassTime) => {
+        const newClassItem = flattenTurma(iterClassItem, iterClassTime);
+        newSplittedTurmas.push(newClassItem);
       });
     } else {
-      const newTurma = {
+      const newClassItem = {
         ...emptyObjects.classTime,
         /* when I do that, the idHorario is null and it shouldn't. Check it later. */
-        ...turma,
+        ...iterClassItem,
       };
-      delete newTurma?.horarios;
-      newSplittedTurmas.push(newTurma);
+      delete newClassItem?.horarios;
+      newSplittedTurmas.push(newClassItem);
     }
   });
 
