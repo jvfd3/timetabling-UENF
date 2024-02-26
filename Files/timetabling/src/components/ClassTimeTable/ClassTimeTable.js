@@ -23,7 +23,7 @@ import {
 const defaultClassNames = myStyles.classNames.default;
 
 function ClassTimeRow(classTimeRowStates) {
-  const { classTime, conflicts, filteredClasses } = classTimeRowStates;
+  const { classTime, conflicts, filteredClasses, index } = classTimeRowStates;
 
   const classTimeConflicts = getClassTimeConflicts(
     filteredClasses,
@@ -39,7 +39,8 @@ function ClassTimeRow(classTimeRowStates) {
     updateClassTimeDB: () => updateClassTime(classTimeRowStates),
   };
 
-  const classTimeTableRowKey = `ClassTimeTableRow: ${getId(classTime)}`;
+  const wholeClassTime = JSON.stringify(classTime);
+  const classTimeTableRowKey = `ClassTimeTableRow: ${wholeClassTime}-${index}`;
 
   return (
     <tr key={classTimeTableRowKey}>
@@ -69,10 +70,11 @@ function ClassTimeTable(classesStates) {
 
   const createClassTimeProps = {
     classItem,
-    createClassTimeDB: () => createClassTime(classesStates),
+    createClassTimeDB: () => {
+      // console.log("classesStates", classesStates);
+      createClassTime(classesStates);
+    },
   };
-
-  // const shouldUpdate = useRef(false);
 
   useEffect(() => {
     setClassTimes(classItem?.horarios ?? []);
@@ -96,13 +98,14 @@ function ClassTimeTable(classesStates) {
         </tr>
       </thead>
       <tbody>
-        {classTimes.map((iterClassTime) => {
+        {classTimes.map((iterClassTime, index) => {
           const classTimeRowStates = {
             ...classesStates,
             classTime: iterClassTime,
             // shouldUpdate,
-            key: `ClassTimeRow: ${getId(iterClassTime)}`,
+            key: `ClassTimeRow: ${JSON.stringify(iterClassTime)}`,
             conflicts,
+            index,
           };
           return <ClassTimeRow {...classTimeRowStates} />;
         })}

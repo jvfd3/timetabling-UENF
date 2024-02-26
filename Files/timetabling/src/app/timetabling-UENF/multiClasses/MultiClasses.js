@@ -92,22 +92,7 @@ function MultiClasses() {
     classTime,
     setClassTime,
   };
-  const selectStates = {
-    professors,
-    setProfessors,
-    professor: {},
-    setProfessor: () => {},
-    subjects,
-    setSubjects,
-    subject: {},
-    setSubject: () => {},
-    rooms,
-    setRooms,
-    room: {},
-    setRoom: () => {},
-  };
   const classStates = {
-    ...selectStates,
     classes,
     setClasses,
     filteredClasses,
@@ -115,21 +100,52 @@ function MultiClasses() {
     classItem,
     setClassItem,
   };
-
-  const globalStates = { classTimeStates, classStates };
+  const professorStates = {
+    professors,
+    setProfessors,
+    professor: {},
+    setProfessor: () => {},
+  };
+  const subjectStates = {
+    subjects,
+    setSubjects,
+    subject: {},
+    setSubject: () => {},
+  };
+  const roomStates = {
+    rooms,
+    setRooms,
+    room: {},
+    setRoom: () => {},
+  };
+  const currentSemester = {
+    year: classItem?.ano,
+    semester: classItem?.semestre,
+  };
+  const selectStates = {
+    professorStates,
+    subjectStates,
+    roomStates,
+  };
+  const globalStates = {
+    classStates,
+    selectStates,
+    classTimeStates,
+    currentSemester,
+  };
 
   useEffect(() => {
     readClassTime(classTimeStates);
     readClass(classStates);
-    readSubject(selectStates);
-    readProfessor(selectStates);
-    readRoom(selectStates);
+    readSubject(subjectStates);
+    readProfessor(professorStates);
+    readRoom(roomStates);
   }, []);
 
   return (
     <div className={defaultClassNames.containerCards}>
       <MultiClassesCard {...globalStates} />
-      <NotOfferedSubjects {...classStates} />
+      <NotOfferedSubjects {...globalStates} />
     </div>
   );
 }

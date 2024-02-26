@@ -16,12 +16,17 @@ import {
 const itemName = "classTime";
 
 function createClassTime(classTimeStates) {
-  const { classes, setClasses, classItem, setClassItem } = classTimeStates;
+  const { classes, setClasses, classItem, setClassItem, newClassTimeValues } =
+    classTimeStates;
 
   const baseClassTime = {
     ...emptyObjects.classTime,
     idTurma: getId(classItem),
-    duracao: 2,
+    duracao: newClassTimeValues?.duration ?? newClassTimeValues?.duracao ?? 2,
+    dia: newClassTimeValues?.day ?? newClassTimeValues?.dia ?? null,
+    horaInicio:
+      newClassTimeValues?.startHour ?? newClassTimeValues?.horaInicio ?? null,
+    sala: newClassTimeValues?.room ?? newClassTimeValues?.sala ?? null,
   };
 
   function getNewClassTime(newId) {
@@ -31,9 +36,13 @@ function createClassTime(classTimeStates) {
 
   function insertNewClassTime(newId) {
     const newClassTime = getNewClassTime(newId);
+    // console.log("newClassTime", newClassTime);
+    // console.log("newClassTime", newClassTimeValues);
     const newClassTimes = [...classItem.horarios, newClassTime];
     const newClassItem = { ...classItem, horarios: newClassTimes };
     const newClasses = replaceNewItemInListById(newClassItem, classes);
+    console.log("classes", classes[classes.length - 1]);
+    console.log("newClasses", newClasses[newClasses.length - 1]);
     setClassItem(newClassItem);
     setClasses(newClasses);
   }

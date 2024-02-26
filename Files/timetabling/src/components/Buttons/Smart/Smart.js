@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import emptyObjects from "../../../config/emptyObjects";
 import defaultColors from "../../../config/defaultColors";
-import getNewClassItem from "../../MultiClasses/NotOfferedSubjects/classCreation";
 import { getId } from "../../../helpers/auxCRUD";
+import { createClass } from "../../../helpers/CRUDFunctions/classCRUD";
+import { filterSubject } from "../../../helpers/filteringFunc";
+import { createClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
 import {
   CreateClassTime,
   DeleteClassTime,
@@ -16,41 +18,61 @@ import {
   getValueFromObject,
   getDefaultYearSemesterValues,
 } from "../../../helpers/auxFunctions";
+import {
+  getNewClassItem,
+  getNewClassTimes,
+  getUsualInfo,
+} from "../../MultiClasses/NotOfferedSubjects/processInitialValues";
+import configInfo from "../../../config/configInfo";
 
 function SmartInputSubject(inputSubjectProps) {
-  const { classStates, createClassDB, subjects, inputConfig } =
-    inputSubjectProps;
-  const { classes, classItem } = classStates;
-  const currentSemester = {
-    year: classItem?.ano,
-    semester: classItem?.semestre,
-  };
+  const { inputConfig, subjects } = inputSubjectProps;
 
-  const localStates = { classes, currentSemester, createClassDB, subjects };
+  function createPreFilledClass(classCreationProps) {
+    const { currentSemester, classTimeStates, classStates, subjects } =
+      classCreationProps;
 
-  function createPreFilledClass(localStates) {
-    const { classes, currentSemester, createClassDB, subjects } = localStates;
-    let localClasses = classes;
-    // I'll fake insert it
+    let localClasses = [...classStates.classes];
+    let creationStates = [];
+
     subjects.forEach((iterSubject) => {
-      localClasses.push(getNewClassItem(classes, currentSemester, iterSubject));
+      const sameSubjectClasses = filterSubject(localClasses, iterSubject);
+      const sameSubjectClassTimes = filterSubject(
+        classTimeStates.classTimes,
+        iterSubject
+      );
+
+      const usualInfo = getUsualInfo(sameSubjectClasses, sameSubjectClassTimes);
+
+      const newClassTimes = getNewClassTimes(usualInfo);
+      const newClassItem = getNewClassItem(
+        currentSemester,
+        iterSubject,
+        usualInfo
+      );
+      newClassItem.horarios = newClassTimes;
+
+      const newLocalStates = {
+        ...classStates,
+        classes: localClasses,
+        classItem: newClassItem,
+        newClassTimes: newClassItem?.horarios,
+      };
+
+      creationStates.push(newLocalStates);
+      localClasses.push(newClassItem);
     });
-    localClasses.pop();
-    subjects.forEach((iterSubject, index) => {
-      setTimeout(() => {
-        const newClassItem = getNewClassItem(
-          classes,
-          currentSemester,
-          iterSubject
-        );
-        const createClassStates = {
-          ...classStates,
-          classes: localClasses,
-          classItem: newClassItem,
-        };
-        createClassDB(createClassStates);
-        // localClasses.push(newClassItem);
-      }, index * 100);
+
+    function asyncCreateClassDB(creationState) {
+      createClass(creationState);
+      // console.log("Creating Class:", creationState.classItem);
+    }
+
+    creationStates.forEach((interClassStates, index) => {
+      setTimeout(
+        () => asyncCreateClassDB(interClassStates),
+        (index + 1) * configInfo.AWS.defaultRequestDelay
+      );
     });
   }
 
@@ -74,7 +96,7 @@ function SmartInputSubject(inputSubjectProps) {
     text: getMessage(subjects),
     size: inputConfig?.size ?? "2em",
     createFunc: () => {
-      createPreFilledClass(localStates);
+      createPreFilledClass(inputSubjectProps);
     },
   };
 

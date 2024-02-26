@@ -1,4 +1,5 @@
 import emptyObjects from "../../config/emptyObjects";
+import { getDefaultYearSemesterValues } from "../auxFunctions";
 import {
   getId,
   refreshShownItem,
@@ -12,6 +13,9 @@ import {
   defaultDBDelete,
   defaultHandleError,
 } from "../../DB/defaultAxiosFunctions";
+import { splitTurmas } from "../conflicts/auxConflictFunctions";
+import { createClassTime } from "./classTimeCRUD";
+import configInfo from "../../config/configInfo";
 
 const itemName = "classData";
 
@@ -19,13 +23,20 @@ function createClass(createClassStates) {
   const { classes, setClasses, classItem, setClassItem, year, semester } =
     createClassStates;
 
+  const currentSemester = getDefaultYearSemesterValues();
+
   const newClassItem = {
     ...emptyObjects.classItem,
-    ano: year ?? classItem?.ano,
-    semestre: semester ?? classItem?.semestre,
-    disciplina: classItem?.disciplina ?? null,
+    ano: year ?? classItem?.year ?? classItem?.ano ?? currentSemester.year,
+    semestre:
+      semester ??
+      classItem?.semester ??
+      classItem?.semestre ??
+      currentSemester.semester,
+    disciplina: classItem?.subject ?? classItem?.disciplina ?? null,
     professor: classItem?.professor ?? null,
-    demandaEstimada: classItem?.demandaEstimada ?? null,
+    demandaEstimada:
+      classItem?.expectedDemand ?? classItem?.demandaEstimada ?? null,
     description: classItem?.description ?? null,
   };
 
@@ -34,8 +45,39 @@ function createClass(createClassStates) {
     return newClass;
   }
 
+  function getNewClassTimes(newClass) {
+    let classTimesToCreate = [];
+    const newClassTimes = classItem?.horarios ?? [];
+    let graduallyFilledClass = { ...newClass };
+
+    newClassTimes.forEach((iterClassTime) => {
+      // console.log("iterClassTime", iterClassTime);
+      const createClassTimeProps = {
+        classes,
+        classItem: newClass,
+        setClasses,
+        setClassItem,
+        // classItem: graduallyFilledClass,
+        newClassTimeValues: { ...iterClassTime },
+      };
+      classTimesToCreate.push(createClassTimeProps);
+      graduallyFilledClass.horarios.push(iterClassTime);
+      // createClassTime(createClassTimeProps);
+    });
+
+    classTimesToCreate.forEach((createClassTimeProps, index) => {
+      setTimeout(() => {
+        createClassTime(createClassTimeProps);
+        console.log(index);
+      }, (index + 1) * configInfo.AWS.defaultRequestDelay);
+    });
+
+    return newClassTimes;
+  }
+
   function insertNewClass(newId) {
     const newClass = getNewClassItem(newId);
+    newClass.horarios = getNewClassTimes(newClass);
     const newClasses = [...classes, newClass];
     setClassItem(newClass);
     setClasses(newClasses);

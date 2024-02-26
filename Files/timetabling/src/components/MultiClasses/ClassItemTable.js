@@ -81,14 +81,11 @@ function ClassItemTableRow(classItemRowStates) {
   );
 }
 
-function ClassesTable(globalStates) {
-  const { classStates } = globalStates;
-  const { filteredClasses } = classStates;
-
+function ClassesTable({ classStates, currentSemester }) {
   const createStates = {
     classesStates: classStates,
-    year: classStates.classItem?.ano,
-    semester: classStates.classItem?.semestre,
+    year: currentSemester.year,
+    semester: currentSemester.semester,
     createClassDB: createClass,
   };
 
@@ -96,11 +93,11 @@ function ClassesTable(globalStates) {
     <table className={defaultClassNames.componentTable}>
       <ClassTableHeader {...createStates} />
       <tbody>
-        {filteredClasses.map((iterClassItem) => {
+        {classStates.filteredClasses.map((iterClassItem) => {
           const classItemRowProps = {
             ...classStates,
             classItem: iterClassItem,
-            key: `ClassItemTableRow: ${getId(iterClassItem)}`,
+            key: `ClassItemTableRow: ${JSON.stringify(iterClassItem)}`,
           };
           return <ClassItemTableRow {...classItemRowProps} />;
         })}

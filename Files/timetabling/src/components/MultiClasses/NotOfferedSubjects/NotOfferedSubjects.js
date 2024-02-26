@@ -3,8 +3,8 @@ import text from "../../../config/frontText";
 import myStyles from "../../../config/myStyles";
 import sqlDataFromJson from "../../../DB/dataFromJSON";
 import { SmartInputSubject } from "../../Buttons/Smart/Smart";
-import { createClass } from "../../../helpers/CRUDFunctions/classCRUD";
 import { getId } from "../../../helpers/auxCRUD";
+import { getDefaultYearSemesterValues } from "../../../helpers/auxFunctions";
 
 const defaultClassNames = myStyles.classNames.default;
 const frontText = text.component.nonOfferedSubjects;
@@ -56,20 +56,20 @@ function AllSubjectsWereOffered() {
   );
 }
 
-function NotOfferedSubjectRow({ iterSubject, classStates }) {
-  const code = iterSubject.codigo;
-  const semester = iterSubject.periodo;
+function NotOfferedSubjectRow(NotOfferedProps) {
+  const { subjects } = NotOfferedProps;
+  const subject = subjects?.[0];
+  const code = subject?.codigo;
+  const semester = subject?.periodo;
+  const name = subject?.nome;
 
   const newHighlight =
     myStyles.classNames.local.component.notOfferedSubjects.highlight;
   const isFirstSemester = semester === 1;
   const firstSemesterHighlight = isFirstSemester ? newHighlight : "";
 
-  const inputProps = {
-    classStates,
-    createClassDB: createClass,
-    subjects: [iterSubject],
-  };
+  const inputProps = { ...NotOfferedProps };
+  inputProps.inputConfig.size = "2em";
 
   return (
     <tr key={code}>
@@ -78,13 +78,13 @@ function NotOfferedSubjectRow({ iterSubject, classStates }) {
       </td>
       <td className={firstSemesterHighlight}>{semester}</td>
       <td className={firstSemesterHighlight}>{code}</td>
-      <td className={firstSemesterHighlight}>{iterSubject.nome}</td>
+      <td className={firstSemesterHighlight}>{name}</td>
     </tr>
   );
 }
 
 function NonOfferedSubjectsTable(unofferedSubjectsProps) {
-  const { semesterValue, nonOfferedSubjects, classStates } =
+  const { nonOfferedSubjects, classStates, currentSemester, classTimeStates } =
     unofferedSubjectsProps;
 
   const semesterMessages = {
@@ -93,7 +93,7 @@ function NonOfferedSubjectsTable(unofferedSubjectsProps) {
     3: "dos períodos",
   };
 
-  const semesterMessage = semesterMessages[semesterValue] || "";
+  const semesterMessage = semesterMessages[currentSemester.semester] || "";
   /* 
   let semesterMessage = "";
   semesterMessage += semesterValue === 1 ? "do período ímpar" : "";
@@ -102,8 +102,9 @@ function NonOfferedSubjectsTable(unofferedSubjectsProps) {
   */
 
   const inputProps = {
+    classTimeStates,
     classStates,
-    createClassDB: createClass,
+    currentSemester,
     subjects: nonOfferedSubjects,
     inputConfig: {
       text: semesterMessage,
@@ -128,8 +129,8 @@ function NonOfferedSubjectsTable(unofferedSubjectsProps) {
         <tbody>
           {nonOfferedSubjects.map((iterSubject) => {
             const NotOfferedProps = {
-              iterSubject,
-              classStates,
+              ...inputProps,
+              subjects: [iterSubject],
               key: getId(iterSubject),
             };
             return <NotOfferedSubjectRow {...NotOfferedProps} />;
@@ -140,25 +141,30 @@ function NonOfferedSubjectsTable(unofferedSubjectsProps) {
   );
 }
 
-function NotOfferedSubjects(classStates) {
-  // console.log(classStates);
-  const { filteredClasses, classItem, subjects } = classStates;
-  const semesterValue = classItem?.semestre;
+function NotOfferedSubjects(multiClassesStates) {
+  const { classStates, classTimeStates, selectStates, currentSemester } =
+    multiClassesStates;
 
   const nonOfferedSubjects = getListOfNotOfferedSubjects(
-    filteredClasses,
-    semesterValue,
-    subjects
+    classStates.filteredClasses,
+    currentSemester.semester,
+    selectStates.subjectStates.subjects
   );
 
-  const someValuesProps = { nonOfferedSubjects, semesterValue, classStates };
+  const someValuesProps = {
+    classTimeStates,
+    classStates,
+    currentSemester,
+    nonOfferedSubjects,
+  };
+  const hasSubjects = nonOfferedSubjects.length > 0;
 
   return (
     <div>
-      {nonOfferedSubjects.length === 0 ? (
-        <AllSubjectsWereOffered />
-      ) : (
+      {hasSubjects ? (
         <NonOfferedSubjectsTable {...someValuesProps} />
+      ) : (
+        <AllSubjectsWereOffered />
       )}
     </div>
   );
