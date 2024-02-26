@@ -81,7 +81,7 @@ function ClassItemTableRow(classItemRowStates) {
   );
 }
 
-function ClassesTable({ classStates, currentSemester }) {
+function ClassesTable({ classStates, selectStates, currentSemester }) {
   const createStates = {
     classesStates: classStates,
     year: currentSemester.year,
@@ -96,6 +96,9 @@ function ClassesTable({ classStates, currentSemester }) {
         {classStates.filteredClasses.map((iterClassItem) => {
           const classItemRowProps = {
             ...classStates,
+            professors: selectStates.professorStates.professors,
+            subjects: selectStates.subjectStates.subjects,
+            rooms: selectStates.roomStates.rooms,
             classItem: iterClassItem,
             key: `ClassItemTableRow: ${JSON.stringify(iterClassItem)}`,
           };
