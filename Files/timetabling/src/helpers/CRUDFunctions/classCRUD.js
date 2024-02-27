@@ -130,7 +130,10 @@ function deleteClass({ classes, setClasses, classItem, setClassItem }) {
   classItem.id = getId(classItem);
   defaultDBDelete(itemName, classItem)
     .then(deleteClassOnList)
-    .catch(defaultHandleError);
+    .catch((error) => {
+      defaultHandleError(error);
+      deleteClassOnList(classItem);
+    });
 }
 
 export { createClass, readClass, updateClass, deleteClass };
