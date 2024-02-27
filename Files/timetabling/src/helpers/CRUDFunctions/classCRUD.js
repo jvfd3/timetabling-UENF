@@ -68,7 +68,7 @@ function createClass(createClassStates) {
     classTimesToCreate.forEach((createClassTimeProps, index) => {
       setTimeout(() => {
         createClassTime(createClassTimeProps);
-        console.log(index);
+        // console.log(index);
       }, (index + 1) * configInfo.AWS.defaultRequestDelay);
     });
 

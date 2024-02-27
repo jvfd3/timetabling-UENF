@@ -41,8 +41,8 @@ function createClassTime(classTimeStates) {
     const newClassTimes = [...classItem.horarios, newClassTime];
     const newClassItem = { ...classItem, horarios: newClassTimes };
     const newClasses = replaceNewItemInListById(newClassItem, classes);
-    console.log("classes", classes[classes.length - 1]);
-    console.log("newClasses", newClasses[newClasses.length - 1]);
+    // console.log("classes", classes[classes.length - 1]);
+    // console.log("newClasses", newClasses[newClasses.length - 1]);
     setClassItem(newClassItem);
     setClasses(newClasses);
   }

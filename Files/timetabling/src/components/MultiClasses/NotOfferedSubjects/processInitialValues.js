@@ -65,7 +65,7 @@ function getMostFrequentItem(objArray, propList, numberOfFrequentItems = 1) {
     slicedModes,
     modesValueList,
   };
-  // console.log(debug);
+  console.log(debug);
 
   return modesValueList;
 }
