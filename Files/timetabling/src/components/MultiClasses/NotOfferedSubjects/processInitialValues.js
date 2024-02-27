@@ -142,6 +142,7 @@ function getUsualInfo(classes, classTimes) {
     professor: getMostFrequentItem(classes, ["professor"]),
     expectedDemand: getMeanDemand(classes),
     // description: getDescription(classes, currentSemester),
+    description: null,
     classTime: {
       quantity,
       day: getMostFrequentItem(classTimes, ["dia"], quantity),
@@ -172,7 +173,7 @@ function getNewClassItem(currentSemester, iterSubject, usualInfo) {
 function getNewClassTimes({ classTime }) {
   const classTimes = [];
   // console.log("classTime", classTime);
-  for (let i = 0; i < classTime.quantity; i++) {
+  for (let i = 0; i < classTime?.quantity; i++) {
     const newClassTime = {
       ...emptyObjects.classTime,
       id: "tempId-" + i,
