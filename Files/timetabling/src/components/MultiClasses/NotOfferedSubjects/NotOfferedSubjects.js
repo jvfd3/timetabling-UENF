@@ -56,8 +56,8 @@ function AllSubjectsWereOffered() {
   );
 }
 
-function NotOfferedSubjectRow(NotOfferedProps) {
-  const { subjects } = NotOfferedProps;
+function NotOfferedSubjectRow(notOfferedSubjectProps) {
+  const { subjects } = notOfferedSubjectProps;
   const subject = subjects?.[0];
   const code = subject?.codigo;
   const semester = subject?.periodo;
@@ -68,8 +68,10 @@ function NotOfferedSubjectRow(NotOfferedProps) {
   const isFirstSemester = semester === 1;
   const firstSemesterHighlight = isFirstSemester ? newHighlight : "";
 
-  const inputProps = { ...NotOfferedProps };
-  inputProps.inputConfig.size = "2em";
+  const inputProps = {
+    ...notOfferedSubjectProps,
+    inputConfig: { size: "2em" },
+  };
 
   return (
     <tr key={code}>
@@ -84,8 +86,7 @@ function NotOfferedSubjectRow(NotOfferedProps) {
 }
 
 function NonOfferedSubjectsTable(unofferedSubjectsProps) {
-  const { nonOfferedSubjects, classStates, currentSemester, classTimeStates } =
-    unofferedSubjectsProps;
+  const { currentSemester, subjects } = unofferedSubjectsProps;
 
   const semesterMessages = {
     1: "do período ímpar",
@@ -94,18 +95,9 @@ function NonOfferedSubjectsTable(unofferedSubjectsProps) {
   };
 
   const semesterMessage = semesterMessages[currentSemester.semester] || "";
-  /* 
-  let semesterMessage = "";
-  semesterMessage += semesterValue === 1 ? "do período ímpar" : "";
-  semesterMessage += semesterValue === 2 ? "do período par" : "";
-  semesterMessage += semesterValue === 3 ? "dos períodos" : "";
-  */
 
   const inputProps = {
-    classTimeStates,
-    classStates,
-    currentSemester,
-    subjects: nonOfferedSubjects,
+    ...unofferedSubjectsProps,
     inputConfig: {
       text: semesterMessage,
       size: "4em",
@@ -127,13 +119,13 @@ function NonOfferedSubjectsTable(unofferedSubjectsProps) {
           </tr>
         </thead>
         <tbody>
-          {nonOfferedSubjects.map((iterSubject) => {
-            const NotOfferedProps = {
+          {subjects.map((iterSubject) => {
+            const notOfferedSubjectProps = {
               ...inputProps,
               subjects: [iterSubject],
               key: getId(iterSubject),
             };
-            return <NotOfferedSubjectRow {...NotOfferedProps} />;
+            return <NotOfferedSubjectRow {...notOfferedSubjectProps} />;
           })}
         </tbody>
       </table>
@@ -151,18 +143,18 @@ function NotOfferedSubjects(multiClassesStates) {
     selectStates.subjectStates.subjects
   );
 
-  const someValuesProps = {
+  const notOfferedSubjectsProps = {
     classTimeStates,
     classStates,
     currentSemester,
-    nonOfferedSubjects,
+    subjects: nonOfferedSubjects,
   };
   const hasSubjects = nonOfferedSubjects.length > 0;
 
   return (
     <div>
       {hasSubjects ? (
-        <NonOfferedSubjectsTable {...someValuesProps} />
+        <NonOfferedSubjectsTable {...notOfferedSubjectsProps} />
       ) : (
         <AllSubjectsWereOffered />
       )}
