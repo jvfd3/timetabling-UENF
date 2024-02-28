@@ -82,7 +82,7 @@ function ClassItemTableRow(classItemRowStates) {
     updateClassItemDB: () => updateClass(classItemRowStates),
   };
 
-  const classItemRowKey = `ClassItemTableRow: ${classItem?.idTurma}-${classItem?.disciplina?.id}-${classItem?.professor?.id}`;
+  const classItemRowKey = `ClassItemTableRow: ${getId(classItem)}`;
 
   return (
     <tr key={classItemRowKey}>
