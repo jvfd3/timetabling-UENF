@@ -48,7 +48,7 @@ function NoOfferedClasses(classStates) {
         alignItems: "center",
       }}
     >
-      <p>Ainda não há turmas cadastradas. Para criar uma turma clique aqui: </p>
+      <p>{pageTexts.noClasses}</p>
       <SmartCreateClassItem {...createStates} />
     </div>
   );

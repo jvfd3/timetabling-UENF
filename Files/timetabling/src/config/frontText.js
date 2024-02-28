@@ -97,13 +97,22 @@ const text = {
     },
     multiClasses: {
       title: "MultiTurmas",
+      noClasses:
+        "Ainda não há turmas cadastradas. Para criar uma turma clique aqui: ",
     },
     ccTable: {},
   },
   component: {
     unexpectedPlaceholder: "Isso não deveria estar vazio. 😅",
     ccTable: {},
-    classTimes: {},
+    classTimesTable: {
+      tableTitles: {
+        room: "Sala",
+        day: "Dia",
+        hour: "Hora de início",
+        duration: "Duração",
+      },
+    },
     nonOfferedSubjects: {
       mainTitle: "Todas as disciplinas do período ímpar foram oferecidas 👍",
       subtitle: "Isso é mesmo possível? Ou o código bugou em algum lugar? 🤔",

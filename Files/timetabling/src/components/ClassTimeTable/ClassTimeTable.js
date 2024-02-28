@@ -19,8 +19,10 @@ import {
   updateClassTime,
   deleteClassTime,
 } from "../../helpers/CRUDFunctions/classTimeCRUD";
+import text from "../../config/frontText";
 
 const defaultClassNames = myStyles.classNames.default;
+const frontText = text.component.classTimesTable.tableTitles;
 
 function ClassTimeRow(classTimeRowStates) {
   const { classTime, conflicts, filteredClasses, index } = classTimeRowStates;
@@ -63,6 +65,24 @@ function ClassTimeRow(classTimeRowStates) {
   );
 }
 
+function ClassTimeHeader(createClassTimeProps) {
+  const { classItem } = createClassTimeProps;
+  const headerKey = `ClassTime Header: ${getId(classItem)}`;
+  return (
+    <thead>
+      <tr key={headerKey}>
+        <th>
+          <SmartCreateClassTime {...createClassTimeProps} />
+        </th>
+        <th>{frontText.day}</th>
+        <th>{frontText.duration}</th>
+        <th>{frontText.hour}</th>
+        <th>{frontText.room}</th>
+      </tr>
+    </thead>
+  );
+}
+
 function ClassTimeTable(classesStates) {
   const { classItem, conflicts } = classesStates;
   const [classTimes, setClassTimes] = useState(classItem?.horarios ?? []);
@@ -75,27 +95,18 @@ function ClassTimeTable(classesStates) {
     },
   };
 
+  // MAYBE THE ERROR IS HERE
   useEffect(() => {
     setClassTimes(classItem?.horarios ?? []);
   }, [classItem?.horarios]);
 
-  const headerKey = `ClassTime Header: ${getId(classItem)}`;
+  const hasClassTimes = classTimes.length > 0;
 
-  return classTimes.length == 0 ? (
+  return !hasClassTimes ? (
     <SmartCreateClassTime {...createClassTimeProps} />
   ) : (
     <table className={defaultClassNames.componentTable}>
-      <thead>
-        <tr key={headerKey}>
-          <th>
-            <SmartCreateClassTime {...createClassTimeProps} />
-          </th>
-          <th>Sala</th>
-          <th>Dia</th>
-          <th>Hora de início</th>
-          <th>Duração</th>
-        </tr>
-      </thead>
+      <ClassTimeHeader {...createClassTimeProps} />
       <tbody>
         {classTimes.map((iterClassTime, index) => {
           const classTimeRowStates = {
