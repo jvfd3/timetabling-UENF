@@ -74,10 +74,10 @@ function ClassTimeHeader(createClassTimeProps) {
         <th>
           <SmartCreateClassTime {...createClassTimeProps} />
         </th>
-        <th>{frontText.day}</th>
-        <th>{frontText.duration}</th>
-        <th>{frontText.hour}</th>
         <th>{frontText.room}</th>
+        <th>{frontText.day}</th>
+        <th>{frontText.hour}</th>
+        <th>{frontText.duration}</th>
       </tr>
     </thead>
   );
