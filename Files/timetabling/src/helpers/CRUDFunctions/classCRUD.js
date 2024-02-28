@@ -13,9 +13,9 @@ import {
   defaultDBDelete,
   defaultHandleError,
 } from "../../DB/defaultAxiosFunctions";
-import { splitTurmas } from "../conflicts/auxConflictFunctions";
 import { createClassTime } from "./classTimeCRUD";
 import configInfo from "../../config/configInfo";
+import { useRef } from "react";
 
 const itemName = "classData";
 
@@ -45,46 +45,51 @@ function createClass(createClassStates) {
     return newClass;
   }
 
-  function getNewClassTimes(newClass) {
-    let classTimesToCreate = [];
-    const newClassTimes = classItem?.horarios ?? [];
-    let graduallyFilledClass = { ...newClass };
-
-    newClassTimes.forEach((iterClassTime) => {
-      // console.log("iterClassTime", iterClassTime);
+  function getNewClassTimes(newClass, newClassTimes) {
+    let tempClass = { ...newClass };
+    async function asyncCreateClassTimeDB(newClassTime) {
       const createClassTimeProps = {
-        classes,
-        classItem: newClass,
+        classes: [...classes, tempClass],
+        classItem: tempClass,
         setClasses,
         setClassItem,
-        // classItem: graduallyFilledClass,
-        newClassTimeValues: { ...iterClassTime },
+        newClassTimeValues: { ...newClassTime },
       };
-      classTimesToCreate.push(createClassTimeProps);
-      graduallyFilledClass.horarios.push(iterClassTime);
-      // createClassTime(createClassTimeProps);
-    });
+      createClassTime(createClassTimeProps);
+    }
 
-    classTimesToCreate.forEach((createClassTimeProps, index) => {
+    async function createClassTimesSequentially(newClassTimes) {
+      for (const iterNewClassTime of newClassTimes) {
+        await asyncCreateClassTimeDB(iterNewClassTime);
+      }
+    }
+
+    createClassTimesSequentially(newClassTimes);
+    /*  newClassTimes.forEach((iterNewClassTime, index) => {
       setTimeout(() => {
-        createClassTime(createClassTimeProps);
+        asyncCreateClassTimeDB(iterNewClassTime);
         // console.log(index);
       }, (index + 1) * configInfo.AWS.defaultRequestDelay);
-    });
+    }); */
 
     return newClassTimes;
   }
 
   function insertNewClass(newId) {
     const newClass = getNewClassItem(newId);
-    newClass.horarios = getNewClassTimes(newClass);
     const newClasses = [...classes, newClass];
-    setClassItem(newClass);
-    setClasses(newClasses);
+    const hasClassTimes = classItem?.horarios.length > 0;
+    if (hasClassTimes) {
+      getNewClassTimes(newClass, classItem?.horarios);
+    } else {
+      setClassItem(newClass);
+      setClasses(newClasses);
+    }
   }
 
+  insertNewClass(null);
   defaultDBCreate(itemName, newClassItem)
-    .then(insertNewClass)
+    .then((id) => insertNewClass(id))
     .catch(defaultHandleError);
 }
 

@@ -56,7 +56,7 @@ const configInfo = {
   AWS: {
     fullEndpoint:
       "https://mckwruc3w1.execute-api.us-east-2.amazonaws.com/timetablingStage",
-    defaultRequestDelay: 200,
+    defaultRequestDelay: 5000,
   },
   defaultIndexes: {
     year: 6, // 10: 2024
