@@ -92,11 +92,11 @@ function SmartUpdateClassItem(updateClassItemProps) {
 
   useEffect(() => {
     const modProps = getModificationsProps(oldClassItem, classItem);
-    // const modProps = getModificationsProps(oldClassItem, classItem);
     const wasUpdated = modProps.updateStatus;
     const newMessage = wasUpdated
       ? baseMessage + modProps.updateText
       : dontUpdateMessage;
+
     setNeedsUpdateStatus(wasUpdated);
     setModifiedMessage(newMessage);
   }, [classItem]);
@@ -191,8 +191,10 @@ function SmartCreateClassTime({ classItem, createClassTimeDB }) {
   return <CreateClassTime createFunc={createClassTimeDB} text={titleText} />;
 }
 
-function SmartUpdateClassTime({ classTime, updateClassTimeDB }) {
-  const oldClassTime = useRef(classTime);
+function SmartUpdateClassTime(updateClassTimeProps) {
+  const { classTime, updateClassTimeDB, oldClassTime, setOldClassTime } =
+    updateClassTimeProps;
+
   const classTimeId = ` (id: ${getId(classTime)})\n`;
 
   let dontUpdateMessage = `Não foram identificadas alterações no horário `;
@@ -209,8 +211,7 @@ function SmartUpdateClassTime({ classTime, updateClassTimeDB }) {
     : defaultColors.CRUD.default;
 
   useEffect(() => {
-    const modProps = getModificationsProps(oldClassTime.current, classTime);
-
+    const modProps = getModificationsProps(oldClassTime, classTime);
     const wasUpdated = modProps.updateStatus;
     const newMessage = wasUpdated
       ? baseMessage + modProps.updateText
@@ -221,6 +222,11 @@ function SmartUpdateClassTime({ classTime, updateClassTimeDB }) {
   }, [classTime]);
 
   function getModificationsProps(oldClassTime, newClassTime) {
+    console.log(oldClassTime, newClassTime);
+
+    const prev = oldClassTime.dia;
+    const curr = newClassTime.dia;
+    console.log(`${prev} -> ${curr}`);
     const oldRoom = getId(oldClassTime?.sala);
     const newRoom = getId(newClassTime?.sala);
     const oldDay = oldClassTime?.dia;
@@ -259,7 +265,7 @@ function SmartUpdateClassTime({ classTime, updateClassTimeDB }) {
 
   function smartUpdateClassTime() {
     setNeedsUpdateStatus(false);
-    oldClassTime.current = classTime;
+    setOldClassTime(classTime);
     updateClassTimeDB();
   }
 

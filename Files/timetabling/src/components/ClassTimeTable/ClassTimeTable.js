@@ -25,7 +25,8 @@ const defaultClassNames = myStyles.classNames.default;
 const frontText = text.component.classTimesTable.tableTitles;
 
 function ClassTimeRow(classTimeRowStates) {
-  const { classTime, conflicts, filteredClasses, index } = classTimeRowStates;
+  const { classTime, conflicts, filteredClasses } = classTimeRowStates;
+  const [oldClassTime, setOldClassTime] = useState(classTime);
 
   const classTimeConflicts = getClassTimeConflicts(
     filteredClasses,
@@ -37,6 +38,8 @@ function ClassTimeRow(classTimeRowStates) {
 
   const CRUDClassTimeProps = {
     classTime,
+    oldClassTime,
+    setOldClassTime,
     deleteClassTimeDB: () => deleteClassTime(classTimeRowStates),
     updateClassTimeDB: () => updateClassTime(classTimeRowStates),
   };
@@ -85,7 +88,6 @@ function ClassTimeHeader(createClassTimeProps) {
 
 function ClassTimeTable(classesStates) {
   const { classItem, conflicts } = classesStates;
-  const [classTimes, setClassTimes] = useState(classItem?.horarios ?? []);
 
   const createClassTimeProps = {
     classItem,
@@ -95,12 +97,7 @@ function ClassTimeTable(classesStates) {
     },
   };
 
-  // MAYBE THE ERROR IS HERE
-  useEffect(() => {
-    setClassTimes(classItem?.horarios ?? []);
-  }, [classItem?.horarios]);
-
-  const hasClassTimes = classTimes.length > 0;
+  const hasClassTimes = classItem?.horarios?.length > 0;
 
   return !hasClassTimes ? (
     <SmartCreateClassTime {...createClassTimeProps} />
@@ -108,14 +105,13 @@ function ClassTimeTable(classesStates) {
     <table className={defaultClassNames.componentTable}>
       <ClassTimeHeader {...createClassTimeProps} />
       <tbody>
-        {classTimes.map((iterClassTime, index) => {
+        {classItem?.horarios?.map((iterClassTime) => {
           const classTimeRowStates = {
             ...classesStates,
             classTime: iterClassTime,
             // shouldUpdate,
-            key: `ClassTimeRow: ${JSON.stringify(iterClassTime)}`,
+            key: `ClassTimeRow: ${getId(iterClassTime)}`,
             conflicts,
-            index,
           };
           return <ClassTimeRow {...classTimeRowStates} />;
         })}
