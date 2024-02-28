@@ -135,11 +135,11 @@ function MultiClasses() {
   };
 
   useEffect(() => {
-    readClassTime(classTimeStates);
+    readRoom(roomStates);
     readClass(classStates);
     readSubject(subjectStates);
     readProfessor(professorStates);
-    readRoom(roomStates);
+    readClassTime(classTimeStates);
   }, []);
 
   return (
