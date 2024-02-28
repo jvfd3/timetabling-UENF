@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import emptyObjects from "../../../config/emptyObjects";
+import createPreFilledClass from "./createPreFilledClass";
 import defaultColors from "../../../config/defaultColors";
 import { getId } from "../../../helpers/auxCRUD";
-import { createClass } from "../../../helpers/CRUDFunctions/classCRUD";
-import { filterSubject } from "../../../helpers/filteringFunc";
-import { createClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
 import {
   CreateClassTime,
   DeleteClassTime,
@@ -18,63 +16,9 @@ import {
   getValueFromObject,
   getDefaultYearSemesterValues,
 } from "../../../helpers/auxFunctions";
-import {
-  getNewClassItem,
-  getNewClassTimes,
-  getUsualInfo,
-} from "../../MultiClasses/NotOfferedSubjects/processInitialValues";
-import configInfo from "../../../config/configInfo";
 
 function SmartInputSubject(inputSubjectProps) {
   const { inputConfig, subjects } = inputSubjectProps;
-
-  function createPreFilledClass(classCreationProps) {
-    const { currentSemester, classTimeStates, classStates, subjects } =
-      classCreationProps;
-
-    let localClasses = [...classStates.classes];
-    let creationStates = [];
-
-    subjects.forEach((iterSubject) => {
-      const sameSubjectClasses = filterSubject(localClasses, iterSubject);
-      const sameSubjectClassTimes = filterSubject(
-        classTimeStates.classTimes,
-        iterSubject
-      );
-
-      const usualInfo = getUsualInfo(sameSubjectClasses, sameSubjectClassTimes);
-
-      const newClassTimes = getNewClassTimes(usualInfo);
-      const newClassItem = getNewClassItem(
-        currentSemester,
-        iterSubject,
-        usualInfo
-      );
-      newClassItem.horarios = newClassTimes;
-
-      const newLocalStates = {
-        ...classStates,
-        classes: localClasses,
-        classItem: newClassItem,
-        newClassTimes: newClassItem?.horarios,
-      };
-
-      creationStates.push(newLocalStates);
-      localClasses.push(newClassItem);
-    });
-
-    function asyncCreateClassDB(creationState) {
-      createClass(creationState);
-      // console.log("Creating Class:", creationState.classItem);
-    }
-
-    creationStates.forEach((interClassStates, index) => {
-      setTimeout(
-        () => asyncCreateClassDB(interClassStates),
-        (index + 1) * configInfo.AWS.defaultRequestDelay
-      );
-    });
-  }
 
   function getMessage(subjects) {
     const subjectsSize = subjects.length;
