@@ -17,12 +17,12 @@ import {
 import {
   defaultLabel,
   getBlockFormatLabel,
-  getDefaultFormatOptionLabelProfessor,
   getLabelStudentSelection,
-  getMultiClassesSubjectLabel,
+  getSubjectFormatLabel,
   getFormatOptionLabelSelectClassItem,
   getRoomItemLabel,
   courseLabel,
+  getProfessorFormatLabel,
 } from "../helpers/visualizationText/textLabels";
 
 const styleWidthFix = myStyles.selects.fullItem;
@@ -358,7 +358,7 @@ function SelectSubject({ outerSubject, setOuterSubject, subjects = [] }) {
       getOptionValue: (subject) => getId(subject),
       getOptionLabel: (subject) => defaultLabel(subject),
       formatOptionLabel: (subject, { context }) =>
-        getMultiClassesSubjectLabel(subject, context),
+        getSubjectFormatLabel(subject, context),
     },
   };
   // console.log("SelectSubject", outerSubject?.apelido);
@@ -392,7 +392,7 @@ function SelectProfessor({
       getOptionValue: (professor) => getId(professor),
       getOptionLabel: (professor) => defaultLabel(professor),
       formatOptionLabel: (professor, { context }) =>
-        getDefaultFormatOptionLabelProfessor(professor, context),
+        getProfessorFormatLabel(professor, context),
     },
   };
 
@@ -858,7 +858,7 @@ function SelectProfessorItem(professorStates) {
       getOptionValue: (professor) => getId(professor),
       getOptionLabel: (professor) => defaultLabel(professor),
       formatOptionLabel: (professor, { context }) =>
-        getDefaultFormatOptionLabelProfessor(professor, context),
+        getProfessorFormatLabel(professor, context),
     },
   };
 

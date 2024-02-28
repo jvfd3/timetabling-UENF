@@ -1,8 +1,9 @@
+import "./ClassItemTable.css";
+
 import React, { useState } from "react";
 import text from "../../config/frontText";
 import myStyles from "../../config/myStyles";
 import ClassTimeTable from "../ClassTimeTable/ClassTimeTable";
-import { getId } from "../../helpers/auxCRUD";
 import { getClassItemConflicts } from "../../helpers/conflicts/centralConflicts";
 import { SelectClassProfessor, SelectClassSubject } from "../mySelects";
 import {
@@ -19,9 +20,11 @@ import {
   SmartDeleteClassItem,
   SmartUpdateClassItem,
 } from "../Buttons/Smart/Smart";
+import { getId } from "../../helpers/auxCRUD";
 
 const frontText = text.component.classItemTable.tableTitles;
-const defaultClassNames = myStyles.classNames.default;
+const defaultClassNames = myStyles.classNames.local.component.classItemTable;
+const hasDenseClassSelects = true;
 
 function ClassTableHeader(createStates) {
   return (
@@ -30,11 +33,36 @@ function ClassTableHeader(createStates) {
         <th>
           <SmartCreateClassItem {...createStates} />
         </th>
-        <th>{frontText.subject}</th>
-        <th>{frontText.professor}</th>
-        <th>{frontText.expectedDemand}</th>
-        <th>{frontText.description}</th>
-        <th colSpan={5}>{frontText.classTimes}</th>
+        {hasDenseClassSelects ? (
+          <>
+            <th>
+              <div className={defaultClassNames.header}>
+                <p>{frontText.subject}</p>
+                <p>/</p>
+                <p>{frontText.professor}</p>
+              </div>
+            </th>
+            <th>
+              <div className={defaultClassNames.header}>
+                <p>{frontText.expectedDemand}</p>
+                <p>/</p>
+                <p>{frontText.description}</p>
+              </div>
+            </th>
+          </>
+        ) : (
+          <>
+            <th>{frontText.subject}</th>
+            <th>{frontText.professor}</th>
+            <th>{frontText.expectedDemand}</th>
+            <th>{frontText.description}</th>
+          </>
+        )}
+        <th colSpan={5}>
+          <div className={defaultClassNames.header}>
+            <p>{frontText.classTimes}</p>
+          </div>
+        </th>
       </tr>
     </thead>
   );
@@ -59,21 +87,64 @@ function ClassItemTableRow(classItemRowStates) {
   return (
     <tr key={classItemRowKey}>
       <td>
-        <SmartDeleteClassItem {...CRUDClassItemProps} />
-        <SmartUpdateClassItem {...CRUDClassItemProps} />
+        <div>
+          <SmartDeleteClassItem {...CRUDClassItemProps} />
+        </div>
+        <div>
+          <SmartUpdateClassItem {...CRUDClassItemProps} />
+        </div>
       </td>
-      <td {...conflicts.styled.subject.merged}>
-        <SelectClassSubject {...classItemRowStates} />
-      </td>
-      <td {...conflicts.styled.professor.merged}>
-        <SelectClassProfessor {...classItemRowStates} />
-      </td>
-      <td {...conflicts.styled.expectedDemand.merged}>
-        <NumberInputMultiClassesExpectedDemand {...classItemRowStates} />
-      </td>
-      <td>
-        <TextInputClassDescription {...classItemRowStates} />
-      </td>
+      {hasDenseClassSelects ? (
+        <>
+          <td>
+            <div>
+              <div
+                className={defaultClassNames.select}
+                {...conflicts.styled.subject.merged}
+              >
+                <SelectClassSubject {...classItemRowStates} />
+              </div>
+              <div
+                className={defaultClassNames.select}
+                {...conflicts.styled.professor.merged}
+              >
+                <SelectClassProfessor {...classItemRowStates} />
+              </div>
+            </div>
+          </td>
+          <td>
+            <div>
+              <div
+                className={defaultClassNames.select}
+                {...conflicts.styled.expectedDemand.merged}
+              >
+                <NumberInputMultiClassesExpectedDemand
+                  {...classItemRowStates}
+                />
+              </div>
+              <div className={defaultClassNames.select}>
+                <TextInputClassDescription {...classItemRowStates} />
+              </div>
+            </div>
+          </td>
+        </>
+      ) : (
+        <>
+          <td {...conflicts.styled.subject.merged}>
+            <SelectClassSubject {...classItemRowStates} />
+          </td>
+          <td {...conflicts.styled.professor.merged}>
+            <SelectClassProfessor {...classItemRowStates} />
+          </td>
+          <td {...conflicts.styled.expectedDemand.merged}>
+            <NumberInputMultiClassesExpectedDemand {...classItemRowStates} />
+          </td>
+          <td>
+            <TextInputClassDescription {...classItemRowStates} />
+          </td>
+        </>
+      )}
+
       <td>
         <ClassTimeTable {...classTimeTableProps} />
       </td>
@@ -90,7 +161,9 @@ function ClassesTable({ classStates, selectStates, currentSemester }) {
   };
 
   return (
-    <table className={defaultClassNames.componentTable}>
+    // <table className="showBasicDataTable">
+    // <table className="Tabelinha">
+    <table>
       <ClassTableHeader {...createStates} />
       <tbody>
         {classStates.filteredClasses.map((iterClassItem) => {
@@ -100,7 +173,7 @@ function ClassesTable({ classStates, selectStates, currentSemester }) {
             subjects: selectStates.subjectStates.subjects,
             rooms: selectStates.roomStates.rooms,
             classItem: iterClassItem,
-            key: `ClassItemTableRow: ${JSON.stringify(iterClassItem)}`,
+            key: `ClassItemTableRow: ${getId(iterClassItem)}`,
           };
           return <ClassItemTableRow {...classItemRowProps} />;
         })}

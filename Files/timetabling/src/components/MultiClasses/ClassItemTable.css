@@ -1,0 +1,27 @@
+.splitHeader {
+
+  display: flex;
+  /* flex-wrap: wrap; */
+  /* justify-content: flex-start; */
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.SelectContainer {
+
+  /* background-color: rgb(60, 187, 60); */
+  /* border: 1px solid black; */
+  /* Debugging /\ */
+
+  height: 50px;
+  /* height: fit-content; */
+  /* height: 70px; */
+  /* display: flex; */
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  /* align-items: stretch; */
+
+  margin: 5px;
+  padding: 15px;
+}

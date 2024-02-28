@@ -15,6 +15,10 @@ const myStyles = {
         },
       },
       component: {
+        classItemTable: {
+          header: "splitHeader",
+          select: "SelectContainer",
+        },
         classTimeViewTable: {
           header: "header",
         },
@@ -65,10 +69,13 @@ const myStyles = {
       control: (css) => ({
         ...css,
         width: "100%",
+        maxWidth: "400px",
       }),
       menu: (css) => ({
+        /* Menu is the opened window */
         ...css,
         minWidth: "max-content",
+        textAlign: "left",
         zIndex: 2,
       }),
       option: (css) => ({

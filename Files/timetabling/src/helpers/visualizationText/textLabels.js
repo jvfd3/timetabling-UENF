@@ -66,18 +66,6 @@ function getBlockLabel(block) {
   return blockLabel;
 }
 
-function getMultiClassesSubjectLabel(subject, context) {
-  const code = checkIndefinition(subject?.codigo);
-  const name = checkIndefinition(subject?.nome);
-  const alias = checkIndefinition(subject?.apelido);
-  let subjectLabel = "";
-
-  subjectLabel += `${code} - `;
-  subjectLabel += menuIsOpen(context) ? `${alias}` : `${name}`;
-
-  return subjectLabel;
-}
-
 /* SUBJECT */
 
 function getSubjectLabel(subject) {
@@ -90,6 +78,60 @@ function getSubjectLabel(subject) {
   let subjectLabel = "";
   subjectLabel += `${subjectText}`;
   subjectLabel = subject ? subjectLabel : "Indef.";
+  return subjectLabel;
+}
+
+function getSubjectFormatLabel(subject, context) {
+  const code = subject?.code ?? subject?.codigo;
+  const name = subject?.name ?? subject?.nome;
+  const alias = subject?.alias ?? subject?.apelido;
+
+  const center = subject?.center ?? subject?.centro;
+  const lab = subject?.laboratory;
+  const expectedSemester = subject?.expectedSemester ?? subject?.periodo;
+
+  const codeText = checkIndefinition(code);
+
+  let semesterLabel = "";
+  if (expectedSemester) {
+    if (0 < expectedSemester && expectedSemester <= 10) {
+      semesterLabel += `Período: ${expectedSemester}`;
+    } else if (expectedSemester === 11) {
+      semesterLabel += "Eletiva Optativa";
+    } else if (expectedSemester === 12) {
+      semesterLabel += "Eletiva Livre";
+    } else if (expectedSemester === 13) {
+      semesterLabel += "Não-CC";
+    } else {
+    }
+  } else {
+    semesterLabel += "Período: " + checkIndefinition(expectedSemester);
+  }
+
+  let preLabel = "";
+  preLabel += "(";
+  preLabel +=
+    center && menuIsOpen(context) ? checkIndefinition(center) + ", " : "";
+  preLabel += lab && menuIsOpen(context) ? checkIndefinition(lab) + ", " : "";
+  preLabel += codeText;
+  preLabel +=
+    expectedSemester && menuIsOpen(context) ? `, ${semesterLabel}` : "";
+  preLabel += ") ";
+
+  const shortSubject = alias
+    ? checkIndefinition(alias)
+    : checkIndefinition(name);
+  const longSubject = checkIndefinition(name);
+
+  let shortName = "";
+  shortName += shortSubject;
+
+  let fullName = "";
+  fullName += fullName += longSubject;
+
+  let subjectLabel = "";
+  subjectLabel += preLabel;
+  subjectLabel += menuIsOpen(context) ? fullName : shortName;
   return subjectLabel;
 }
 
@@ -106,20 +148,24 @@ function getProfessorLabel(professor) {
   return professorLabel;
 }
 
-function getDefaultFormatOptionLabelProfessor(professor, context) {
+function getProfessorFormatLabel(professor, context) {
   const name = professor?.nome;
   const alias = professor?.apelido;
   const course = professor?.curso;
   const center = professor?.centro;
   const lab = professor?.laboratorio;
 
+  const labText = checkIndefinition(lab);
+  const courseText = checkIndefinition(course);
+
   let fullName = "";
   // fullName += checkIndefinition(center) + " - ";
-  fullName += "(" + checkIndefinition(lab) + ", ";
-  fullName += checkIndefinition(course) + ") ";
+  fullName += `(${labText}, `;
+  fullName += courseText + ") ";
   fullName += checkIndefinition(name);
 
   let shortName = "";
+  shortName += `(${labText}) `;
   shortName += alias ? checkIndefinition(alias) : fullName;
 
   let formattedOptionLabel = "";
@@ -278,11 +324,11 @@ export {
   getSubjectLabel,
   checkIndefinition,
   getLabelStudentSelection,
-  getMultiClassesSubjectLabel,
+  getSubjectFormatLabel,
   getFormatOptionLabelSelectClassItem,
   /* PROFESSOR */
   getProfessorLabel,
-  getDefaultFormatOptionLabelProfessor,
+  getProfessorFormatLabel,
   courseLabel,
   /* ROOM */
   getRoomItemLabel,

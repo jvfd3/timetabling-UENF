@@ -68,7 +68,7 @@ notofferedsubject
     variant: "outlined",
     value: mainProp || "",
     onChange: updateValue,
-    style: { width: "100%" }, // Adicionado para garantir que o TextField preencha todo o conteúdo
+    // style: { width: "100%" }, // Adicionado para garantir que o TextField preencha todo o conteúdo
     ...specificIDProps,
     ...specificNumericProps,
     disabled: isId,
@@ -84,7 +84,7 @@ notofferedsubject
         borderColor: "red",
       },
     }, */
-    style: { width: "100%" }, // Adicionado para garantir que o TextField preencha todo o conteúdo
+    // style: { width: "100%" }, // Adicionado para garantir que o TextField preencha todo o conteúdo
   };
 
   return <TextField {...TextFieldProps} />;
