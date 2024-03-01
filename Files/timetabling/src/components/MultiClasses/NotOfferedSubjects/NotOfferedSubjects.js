@@ -5,6 +5,7 @@ import sqlDataFromJson from "../../../DB/dataFromJSON";
 import { SmartInputSubject } from "../../Buttons/Smart/Smart";
 import { getId } from "../../../helpers/auxCRUD";
 import { getDefaultYearSemesterValues } from "../../../helpers/auxFunctions";
+import { sortNotOfferedSubjects } from "../../Sorts/sortingFunctions";
 
 const defaultClassNames = myStyles.classNames.default;
 const frontText = text.component.nonOfferedSubjects;
@@ -143,13 +144,16 @@ function NotOfferedSubjects(multiClassesStates) {
     selectStates.subjectStates.subjects
   );
 
+  const sortedNotOfferedSubjects = sortNotOfferedSubjects(nonOfferedSubjects);
+
   const notOfferedSubjectsProps = {
     classTimeStates,
     classStates,
     currentSemester,
-    subjects: nonOfferedSubjects,
+    subjects: sortedNotOfferedSubjects,
   };
-  const hasSubjects = nonOfferedSubjects.length > 0;
+
+  const hasSubjects = sortedNotOfferedSubjects.length > 0;
 
   return (
     <div>

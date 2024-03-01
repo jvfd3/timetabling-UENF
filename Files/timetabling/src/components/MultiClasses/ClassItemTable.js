@@ -21,6 +21,7 @@ import {
   SmartUpdateClassItem,
 } from "../Buttons/Smart/Smart";
 import { getId } from "../../helpers/auxCRUD";
+import { sortMultiClasses } from "../Sorts/sortingFunctions";
 
 const frontText = text.component.classItemTable.tableTitles;
 const defaultClassNames = myStyles.classNames.local.component.classItemTable;
@@ -160,13 +161,15 @@ function ClassesTable({ classStates, selectStates, currentSemester }) {
     createClassDB: createClass,
   };
 
+  const sortedMultiClasses = sortMultiClasses(classStates.filteredClasses);
+
   return (
     // <table className="showBasicDataTable">
     // <table className="Tabelinha">
     <table>
       <ClassTableHeader {...createStates} />
       <tbody>
-        {classStates.filteredClasses.map((iterClassItem) => {
+        {sortedMultiClasses.map((iterClassItem) => {
           const classItemRowProps = {
             ...classStates,
             professors: selectStates.professorStates.professors,

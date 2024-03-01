@@ -68,7 +68,7 @@ function sortClassTimes(classTimes) {
   return classTimes;
 }
 
-function sortClasses(classes) {
+function sortClassesSelection(classes) {
   const sortOrder = [
     ["ano"],
     ["semestre"],
@@ -80,10 +80,35 @@ function sortClasses(classes) {
   return orderedClasses;
 }
 
+function sortMultiClasses(classes) {
+  const sortOrder = [
+    ["ano"],
+    ["semestre"],
+    ["demandaEstimada"],
+    ["professor", "nome"],
+    ["disciplina", "codigo"],
+    ["id"],
+  ];
+  const orderedClasses = classes.sort((a, b) => mySorting(a, b, sortOrder));
+  return orderedClasses;
+}
+
 function sortRooms(rooms) {
   const sortOrder = [["capacidade"], ["bloco"], ["codigo"], ["id"]];
   const orderedRooms = rooms.sort((a, b) => mySorting(a, b, sortOrder));
   return orderedRooms;
+}
+
+function sortNotOfferedSubjects(subject) {
+  const sortOrder = [
+    ["periodo"],
+    ["center"],
+    ["laboratory"],
+    ["codigo"],
+    ["id"],
+  ];
+  const orderedSubjects = subject.sort((a, b) => mySorting(a, b, sortOrder));
+  return orderedSubjects;
 }
 
 function sortSubjects(subjects) {
@@ -105,4 +130,11 @@ function sortSubjects(subjects) {
   return orderedSubjects;
 }
 
-export { sortClassTimes, sortClasses, sortRooms, sortSubjects };
+export {
+  sortNotOfferedSubjects,
+  sortMultiClasses,
+  sortClassTimes,
+  sortSubjects,
+  sortClassesSelection,
+  sortRooms,
+};
