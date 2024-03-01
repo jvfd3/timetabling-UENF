@@ -182,9 +182,10 @@ function SelectPage({ currentPage, setCurrentPage }) {
     customProps: {
       getOptionValue: ({ url }) => url,
       getOptionLabel: ({ pageName }) => pageName,
-      formatOptionLabel: ({ pageName }) => (
+      formatOptionLabel: ({ pageName }) => pageName,
+      /* formatOptionLabel: ({ pageName }) => (
         <div style={{ display: "flex" }}>{pageName}</div>
-      ),
+      ), */
     },
   };
 
