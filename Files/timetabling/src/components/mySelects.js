@@ -251,7 +251,7 @@ function SelectLab({ outerLab, setOuterLab }) {
     value: outerLab,
     findCorrectObject: findLabObject,
     customProps: {
-      getOptionValue: (lab) => lab?.apelido,
+      getOptionValue: (lab) => getId(lab),
       getOptionLabel: (lab) => defaultLabel(lab),
       formatOptionLabel: (lab, { context }) => getLabFormatLabel(lab, context),
     },
