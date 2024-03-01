@@ -12,6 +12,7 @@ function TopLeft() {
 function TopRow() {
   const daysList = constantValues.days;
   const days = daysList.map((day) => {
+    const headerKey = `HeaderKey: ${day?.label}`;
     return (
       <th key={headerKey} className={localClassNames.daysHeader}>
         {day.label}
@@ -63,7 +64,7 @@ function CellContent({ classTimes }) {
   // console.log(classTimes);
   const classesList = classTimes.map((iterClassTime) => {
     const cellMessage = getCellMessage(iterClassTime);
-    const cellKey = `ChaveCellContent: ${iterClassTime.idTurma}-${iterClassTime.id}`;
+    const cellKey = `ChaveCellContent: ${iterClassTime?.idTurma}-${iterClassTime?.id}`;
     return (
       <div key={cellKey} className={localClassNames.eachClassInCell}>
         {cellMessage}

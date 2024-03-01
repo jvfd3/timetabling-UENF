@@ -43,7 +43,7 @@ function scrollThroughItemList(event, itemStates) {
 function scrollThroughDisciplinas(event, itemStates) {
   const [disciplinas, setDisciplina, disciplina] = itemStates;
   const index = disciplinas.findIndex(
-    (oneOfDisciplinas) => oneOfDisciplinas.codigo === disciplina.codigo
+    (oneOfDisciplinas) => oneOfDisciplinas.codigo === disciplina?.codigo
   );
   const newOption = disciplinas[getNewIndex(index, disciplinas, event)];
   setDisciplina(newOption);
