@@ -116,7 +116,7 @@ function DefaultSelect(defaultProps) {
 
   useEffect(() => {
     const correctObject = findCorrectObject ? findCorrectObject(value) : value;
-    // console.log(value);
+    // console.log(value, currentValue?.name, correctObject);
     setCurrentValue(correctObject);
   }, [value]);
 
@@ -796,7 +796,6 @@ function SelectClassSemester(classStates) {
 function SelectClassSubject(classStates) {
   const { classes, setClasses, classItem, setClassItem, subjects } =
     classStates;
-  // console.log("SelectClassSubject", subjects);
   function updateClassSubject(newSubject) {
     const newClass = { ...classItem, disciplina: newSubject ?? null };
     const newClasses = replaceNewItemInListById(newClass, classes);
@@ -809,8 +808,6 @@ function SelectClassSubject(classStates) {
     setOuterSubject: updateClassSubject,
     subjects,
   };
-
-  // console.log("SelectClassSubject", classItem?.disciplina?.apelido);
 
   return <SelectSubject {...subjectStates} />;
 }
