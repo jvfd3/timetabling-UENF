@@ -7,10 +7,10 @@ import { readClassTime } from "../../helpers/CRUDFunctions/classTimeCRUD";
 import { sortClassTimes } from "../Sorts/sortingFunctions";
 import { ViewTableFilters } from "../Filters/Filters";
 import {
-  getSubjectLabel,
+  getSubjectViewTableText,
   checkIndefinition,
-  getProfessorLabel,
-  getRoomSelectionLabel,
+  getProfessorViewTableText,
+  getRoomFormatLabel,
 } from "../../helpers/visualizationText/textLabels";
 
 const defaultClassNames = myStyles.classNames.default;
@@ -66,11 +66,11 @@ function ClassRow({ classTimes, classTime }) {
     <tr>
       <td>{idTurma}</td>
       <td>{yearSemesterText}</td>
-      <td>{getSubjectLabel(disciplina)}</td>
-      <td>{getProfessorLabel(professor)}</td>
+      <td>{getSubjectViewTableText(disciplina)}</td>
+      <td>{getProfessorViewTableText(professor)}</td>
       <td>{demandaEstimada}</td>
       <td>{idHorario}</td>
-      <td>{getRoomSelectionLabel(sala)}</td>
+      <td>{getRoomFormatLabel(sala)}</td>
       <td>{checkIndefinition(dia)}</td>
       <td>{checkIndefinition(horaInicio)}</td>
       <td>{checkIndefinition(duracao)}</td>

@@ -8,9 +8,9 @@ function checkIndefinition(value) {
 }
 
 function defaultLabel(item) {
-  /* Go through all keys and append them to the current label */
-  /* If the item is a list or an object, it becomes recursive and inserts all items.
-    lists are considered objects with the indices as keys
+  /*  Go through all keys and append them to the current label
+      If the item is a list or an object, it becomes recursive and inserts all items.
+      lists are considered objects with the indices as keys
   */
   let label = "";
   for (const key in item) {
@@ -26,69 +26,7 @@ function defaultLabel(item) {
   return label;
 }
 
-/* MISC */
-
-function getBlockFormatLabel(block, context) {
-  // const blockId = getId(block);
-  const blockCode = block?.code ?? block?.alias;
-  const blockAlias = block?.alias;
-  const blockName = block?.name;
-
-  // let msg = `(${code}) `;
-  // const sameCodigoAndApelido = alias === code;
-  // msg += sameCodigoAndApelido ? `${name}` : `${alias}`;
-  // const finalMessage = isMenuLabel ? msg : `${code}`;
-  // return finalMessage;
-
-  const blockCodeText = checkIndefinition(blockCode);
-
-  const hasSameInfo = blockAlias === blockCode;
-  const blockDescription = hasSameInfo ? blockName : blockAlias;
-
-  const blockDescriptionText =
-    `${blockCodeText} - ` + checkIndefinition(blockDescription);
-
-  const blockLabel = menuIsOpen(context) ? blockDescriptionText : blockCodeText;
-  return blockLabel;
-}
-
-function getBlockLabel(block) {
-  const blockId = getId(block);
-  const blockCode = block?.code;
-  const blockAlias = block?.alias;
-  const blockName = block?.name;
-
-  let blockLabel = "";
-  blockLabel += " " + checkIndefinition(blockId);
-  blockLabel += " " + checkIndefinition(blockCode);
-  blockLabel += " " + checkIndefinition(blockAlias);
-  blockLabel += " " + checkIndefinition(blockName);
-  return blockLabel;
-}
-
-function getLabFormatLabel(lab, context) {
-  // "id": 2,
-  // "centro": "CCT",
-  // "apelido": "LCFIS",
-  // "nome": "Laboratório de Ciências Físicas"
-  const id = getId(lab);
-  const centro = lab?.centro;
-  const apelido = lab?.apelido;
-  const nome = lab?.nome;
-
-  const centerLabel = `(${checkIndefinition(centro)}) `;
-
-  let longLabel = "";
-  longLabel += centerLabel;
-  longLabel += `${checkIndefinition(apelido)} - ${checkIndefinition(nome)}`;
-
-  let shortLabel = "";
-  shortLabel += centerLabel;
-  shortLabel += checkIndefinition(apelido);
-
-  const labLabel = menuIsOpen(context) ? longLabel : shortLabel;
-  return labLabel;
-}
+/* CLASSTIME */
 
 function getStartHourFormatLabel(hour, context) {
   const startHour = hour?.hour ?? hour?.hora;
@@ -168,15 +106,15 @@ function getSubjectFormatLabel(subject, context) {
     : checkIndefinition(name);
   const longSubject = checkIndefinition(name);
 
-  let shortName = "";
-  shortName += shortSubject;
+  let shortLabel = "";
+  shortLabel += shortSubject;
 
-  let fullName = "";
-  fullName += fullName += longSubject;
+  let fullLabel = "";
+  fullLabel += fullLabel += longSubject;
 
   let subjectLabel = "";
   subjectLabel += preLabel;
-  subjectLabel += menuIsOpen(context) ? fullName : shortName;
+  subjectLabel += menuIsOpen(context) ? fullLabel : shortLabel;
   return subjectLabel;
 }
 
@@ -185,10 +123,9 @@ function getSubjectFormatLabel(subject, context) {
 function getProfessorViewTableText(professor) {
   const professorAlias = professor?.alias ?? professor?.apelido;
   const professorAliasText = checkIndefinition(professorAlias);
-  const professorText = `${professorAliasText}`;
 
   let professorLabel = "";
-  professorLabel += `${professorText}`;
+  professorLabel += professorAliasText;
   professorLabel = professor ? professorLabel : "Indef.";
   return professorLabel;
 }
@@ -203,33 +140,65 @@ function getProfessorFormatLabel(professor, context) {
   const labText = checkIndefinition(lab);
   const courseText = checkIndefinition(course);
 
-  let fullName = "";
-  fullName += lab || course ? "(" : "";
-  fullName += lab ? labText : "";
-  fullName += lab && course ? ", " : "";
-  fullName += courseText;
-  fullName += lab || course ? ") " : "";
-  fullName += checkIndefinition(name);
+  let longLabel = "";
+  longLabel += lab || course ? "(" : "";
+  longLabel += lab ? labText : "";
+  longLabel += lab && course ? ", " : "";
+  longLabel += courseText;
+  longLabel += lab || course ? ") " : "";
+  longLabel += checkIndefinition(name);
 
-  let shortName = "";
-  shortName += lab || course ? `(${checkIndefinition(lab ?? course)}) ` : "";
-  shortName += checkIndefinition(alias ?? name);
+  let shortLabel = "";
+  shortLabel += lab || course ? `(${checkIndefinition(lab ?? course)}) ` : "";
+  shortLabel += checkIndefinition(alias ?? name);
 
   let professorLabel = "";
-  professorLabel += menuIsOpen(context) ? fullName : shortName;
+  professorLabel += menuIsOpen(context) ? longLabel : shortLabel;
   professorLabel = professor ? professorLabel : "Prof. Indef.";
   return professorLabel;
 }
 
-function courseLabel(course, context) {
+function getCourseFormatLabel(course, context) {
   const alias = course?.alias;
   const name = course?.name;
 
-  const aliasText = checkIndefinition(alias);
-  const nameText = checkIndefinition(name);
+  const aliasText = checkIndefinition(alias ?? name);
+  const nameText = checkIndefinition(name ?? alias);
 
-  const message = menuIsOpen(context) ? `${aliasText}` : `${nameText}`;
-  return message;
+  let shortLabel = "";
+  shortLabel += aliasText;
+
+  let longLabel = "";
+  longLabel += nameText;
+
+  let courseLabel = "";
+  courseLabel += menuIsOpen(context) ? longLabel : shortLabel;
+  return courseLabel;
+  // return menuIsOpen(context) ? checkIndefinition(course?.alias ?? course?.name) : checkIndefinition(course?.name ?? course?.alias);
+}
+
+function getLabFormatLabel(lab, context) {
+  // "id": 2,
+  // "centro": "CCT",
+  // "apelido": "LCFIS",
+  // "nome": "Laboratório de Ciências Físicas"
+  // const id = getId(lab);
+  const center = lab?.center ?? lab?.centro;
+  const alias = lab?.alias ?? lab?.apelido;
+  const name = lab?.name ?? lab?.nome;
+
+  const centerLabel = `(${checkIndefinition(center)}) `;
+
+  let longLabel = "";
+  longLabel += ` - ${checkIndefinition(name)}`;
+
+  let shortLabel = "";
+
+  let labLabel = "";
+  labLabel += centerLabel;
+  labLabel += checkIndefinition(alias);
+  labLabel += menuIsOpen(context) ? longLabel : shortLabel;
+  return labLabel;
 }
 
 /* CLASSITEM */
@@ -275,7 +244,7 @@ function getClassTimeLabelPlus(classItem, index) {
   return cleanClassTimeLabel + classTimeLabelEnd;
 }
 
-function getFormatOptionLabelSelectClassItem(classItem, context) {
+function getClassItemMainSelectionFormatLabel(classItem, context) {
   const id = getId(classItem);
   const year = classItem?.year ?? classItem?.ano;
   const semester = classItem?.semester ?? classItem?.semestre;
@@ -301,13 +270,13 @@ function getFormatOptionLabelSelectClassItem(classItem, context) {
 
   const classTimeHifen = classTimesLabel ? " - " : "";
 
-  let formattedOptionLabel = "";
-  // formattedOptionLabel += idLabel;
-  formattedOptionLabel += yearSemester;
-  formattedOptionLabel += subjectLabel + " - ";
-  formattedOptionLabel += professorLabel + classTimeHifen;
-  formattedOptionLabel += `${classTimesLabel}`;
-  return formattedOptionLabel;
+  let classItemLabel = "";
+  // classItemLabel += idLabel;
+  classItemLabel += yearSemester;
+  classItemLabel += subjectLabel + " - ";
+  classItemLabel += professorLabel + classTimeHifen;
+  classItemLabel += `${classTimesLabel}`;
+  return classItemLabel;
 }
 
 /* ROOM */
@@ -328,15 +297,18 @@ function getRoomMainSelectionFormatLabel(room, context) {
   const cleanDescription = description ? descriptionText + " - " : "";
 
   // It's the same for now but could be different in the future
-  selectedRoom +=
-    capacityText + blockText + " - " + cleanDescription + codeText;
-  roomOptions += capacityText + blockText + " - " + cleanDescription + codeText;
+  let longLabel = "";
+  longLabel += capacityText + blockText + " - " + cleanDescription + codeText;
 
-  const roomLabel = menuIsOpen(context) ? roomOptions : selectedRoom;
+  let shortLabel = "";
+  shortLabel += longLabel;
+
+  let roomLabel = "";
+  roomLabel += menuIsOpen(context) ? longLabel : shortLabel;
   return roomLabel;
 }
 
-function getRoomSelectionLabel(room, context) {
+function getRoomFormatLabel(room, context) {
   const block = room?.block ?? room?.bloco;
   const capacity = room?.capacity ?? room?.capacidade;
   const code = room?.code ?? room?.codigo;
@@ -347,19 +319,44 @@ function getRoomSelectionLabel(room, context) {
   const capacityLabel = `(${checkIndefinition(capacity)}) `;
 
   let shortLabel = "";
-  shortLabel += checkIndefinition(block) + "-";
-  shortLabel += checkIndefinition(code);
 
   let longLabel = "";
-  longLabel += checkIndefinition(block) + "-";
-  longLabel += checkIndefinition(code) + "-";
+  longLabel += "-";
   longLabel += checkIndefinition(description);
 
   let roomLabel = "";
   roomLabel += capacityLabel;
+  roomLabel += checkIndefinition(block) + "-";
+  roomLabel += checkIndefinition(code);
   roomLabel += menuIsOpen(context) ? longLabel : shortLabel;
   roomLabel = room ? roomLabel : "Sala Indef.";
   return roomLabel;
+}
+
+function getBlockFormatLabel(block, context) {
+  // const blockId = getId(block);
+  const blockCode = block?.code ?? block?.alias;
+  const blockAlias = block?.alias;
+  const blockName = block?.name;
+
+  // let msg = `(${code}) `;
+  // const sameCodigoAndApelido = alias === code;
+  // msg += sameCodigoAndApelido ? `${name}` : `${alias}`;
+  // const finalMessage = isMenuLabel ? msg : `${code}`;
+  // return finalMessage;
+
+  const hasSameInfo = blockAlias === blockCode;
+  const blockDescription = hasSameInfo ? blockName : blockAlias;
+
+  let shortLabel = "";
+
+  let longLabel = "";
+  longLabel += " - " + checkIndefinition(blockDescription);
+
+  let blockLabel = "";
+  blockLabel += checkIndefinition(blockCode);
+  blockLabel += menuIsOpen(context) ? longLabel : shortLabel;
+  return blockLabel;
 }
 
 /* STUDENT */
@@ -375,23 +372,25 @@ function getLabelStudentSelection(student) {
 }
 
 export {
-  getBlockLabel,
-  getBlockFormatLabel,
-  getSubjectLabel,
-  checkIndefinition,
-  getLabelStudentSelection,
-  getSubjectFormatLabel,
-  getFormatOptionLabelSelectClassItem,
-  /* MISC */
-  getLabFormatLabel,
-  getStartHourFormatLabel,
-  /* PROFESSOR */
-  getProfessorLabel,
-  getProfessorFormatLabel,
-  courseLabel,
-  /* ROOM */
-  getRoomItemLabel,
-  getRoomSelectionLabel,
   /* DEFAULT */
+  checkIndefinition,
   defaultLabel,
+  /* MISC */
+  getStartHourFormatLabel,
+  /* CRUD */
+  getClassItemMainSelectionFormatLabel,
+  /* SUBJECT */
+  getSubjectViewTableText,
+  getSubjectFormatLabel,
+  /* PROFESSOR */
+  getProfessorViewTableText,
+  getProfessorFormatLabel,
+  getCourseFormatLabel,
+  getLabFormatLabel,
+  /* ROOM */
+  getRoomMainSelectionFormatLabel,
+  getRoomFormatLabel,
+  getBlockFormatLabel,
+  /* STUDENT */
+  getLabelStudentSelection,
 };

@@ -19,12 +19,12 @@ import {
   getBlockFormatLabel,
   getLabelStudentSelection,
   getSubjectFormatLabel,
-  getFormatOptionLabelSelectClassItem,
-  getRoomItemLabel,
-  courseLabel,
+  getClassItemMainSelectionFormatLabel,
+  getRoomMainSelectionFormatLabel,
+  getCourseFormatLabel,
   getProfessorFormatLabel,
   getLabFormatLabel,
-  getRoomSelectionLabel,
+  getRoomFormatLabel,
   getStartHourFormatLabel,
 } from "../helpers/visualizationText/textLabels";
 
@@ -279,7 +279,8 @@ function SelectCourse({ outerCourse, setOuterCourse }) {
     customProps: {
       getOptionValue: (course) => getId(course),
       getOptionLabel: (course) => defaultLabel(course),
-      formatOptionLabel: (course, { context }) => courseLabel(course, context),
+      formatOptionLabel: (course, { context }) =>
+        getCourseFormatLabel(course, context),
     },
   };
 
@@ -424,7 +425,7 @@ function SelectRoom({
       getOptionValue: (room) => getId(room),
       getOptionLabel: (room) => defaultLabel(room),
       formatOptionLabel: (room, { context }) =>
-        getRoomSelectionLabel(room, context),
+        getRoomFormatLabel(room, context),
     },
   };
 
@@ -746,7 +747,7 @@ function SelectClassItem(classStates) {
       getOptionValue: (classItem) => getId(classItem),
       getOptionLabel: (classItem) => defaultLabel(classItem),
       formatOptionLabel: (classItem, { context }) =>
-        getFormatOptionLabelSelectClassItem(classItem, context),
+        getClassItemMainSelectionFormatLabel(classItem, context),
     },
   };
 
@@ -909,7 +910,8 @@ function SelectRoomItem({ rooms, setRooms, room, setRoom }) {
     customProps: {
       getOptionValue: (room) => getId(room),
       getOptionLabel: (room) => defaultLabel(room),
-      formatOptionLabel: (room, { context }) => getRoomItemLabel(room, context),
+      formatOptionLabel: (room, { context }) =>
+        getRoomMainSelectionFormatLabel(room, context),
     },
   };
 
