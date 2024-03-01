@@ -39,9 +39,9 @@ function getListOfNotOfferedSubjects(classes, semester, subjects = []) {
     ? CSSubjects
     : CSSubjects.filter((subject) => isSameParity(subject, semester));
 
-  const nonOfferedSubjects = semesterSubjects.filter((subject) => {
-    return !offeredSubjectsCodes.includes(subject.codigo);
   // Removes all offered classes
+  const nonOfferedSubjects = semesterSubjects.filter((iterSubject) => {
+    return !offeredSubjectsCodes.includes(iterSubject?.codigo);
   });
 
   return nonOfferedSubjects;
