@@ -20,7 +20,7 @@ function isSameParity(subject, semester) {
 function getListOfNotOfferedSubjects(classes, semester, subjects = []) {
   const allSubjects = subjects.length > 0 ? subjects : sqlDataFromJson.subjects; // Should get from DB
 
-  // Remover disciplinas com período esperado maior que 10
+  // Remove subjects with expectedPeriodo greater than 10
   const notNullSemesterSubjects = allSubjects.filter(
     (subject) => subject?.periodo !== null
   );
@@ -28,21 +28,20 @@ function getListOfNotOfferedSubjects(classes, semester, subjects = []) {
     (subject) => subject.periodo <= 10
   );
 
-  // Neste código, filter(Boolean) remove todos os valores falsy do array, incluindo null e undefined.
+  // Removes all falsy values from array, such as null and undefined.
   const offeredSubjectsCodes = classes
     .map((classItem) => classItem?.disciplina?.codigo)
     .filter(Boolean);
 
-  // Listar todas os código-nomes de disciplinas que são de semestre ímpar
-  // Filtrar todas que são de periodoEsperado%2 == 1
+  // Filter all subjects from expectedSemester%2 == 1
   const isSummerSemester = semester === 3;
   const semesterSubjects = isSummerSemester
     ? CSSubjects
     : CSSubjects.filter((subject) => isSameParity(subject, semester));
 
-  // Percorrer cada disciplina em semesterSubject e, caso o código da disciplina esteja na lista de disciplinas oferecidas, remover da lista.
   const nonOfferedSubjects = semesterSubjects.filter((subject) => {
     return !offeredSubjectsCodes.includes(subject.codigo);
+  // Removes all offered classes
   });
 
   return nonOfferedSubjects;
