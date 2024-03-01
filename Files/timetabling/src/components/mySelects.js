@@ -342,8 +342,8 @@ function SelectSubject({ outerSubject, setOuterSubject, subjects = [] }) {
   const localSubjects = checkDB ? subjects : sqlDataFromJson.subjects;
 
   function findSubjectObject(subject) {
-    const subjectsList = localSubjects;
-    const subjectObject = getItemFromListById(subject, subjectsList);
+    const subjectObject = getItemFromListById(subject, localSubjects);
+    // console.log(subjectObject);
     return subjectObject ? subjectObject : null;
   }
 
