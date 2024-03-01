@@ -18,9 +18,9 @@ function getOnlyNeededValues(classItem) {
       // Also clean subjects?
       const cleanedIterClassItem = {
         id: getId(iterClassItem),
-        year: iterClassItem?.ano,
-        semester: iterClassItem?.semestre,
-        subject: iterClassItem?.disciplina,
+        year: iterClassItem?.year ?? iterClassItem?.ano,
+        semester: iterClassItem?.semester ?? iterClassItem?.semestre,
+        subject: iterClassItem?.subject ?? iterClassItem?.disciplina,
       };
       return cleanedIterClassItem;
     }); // Get only the values needed
@@ -30,8 +30,8 @@ function getOnlyNeededValues(classItem) {
 
 function getMinimalSubjectInfo(classItem) {
   const minimalSubjectInfo = {
-    id: classItem.id,
-    subjectId: classItem?.subject?.id,
+    id: getId(classItem),
+    subjectId: getId(classItem?.subject),
     semester: classItem?.semester,
     expectedSemester: classItem?.subject?.periodo,
   };

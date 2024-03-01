@@ -804,7 +804,7 @@ function SelectClassSubject(classStates) {
   }
 
   const subjectStates = {
-    outerSubject: classItem?.disciplina,
+    outerSubject: classItem?.subject ?? classItem?.disciplina,
     setOuterSubject: updateClassSubject,
     subjects,
   };

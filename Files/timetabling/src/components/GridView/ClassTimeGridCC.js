@@ -12,7 +12,6 @@ function TopLeft() {
 function TopRow() {
   const daysList = constantValues.days;
   const days = daysList.map((day) => {
-    const headerKey = `HeaderKey: ${day.label}`;
     return (
       <th key={headerKey} className={localClassNames.daysHeader}>
         {day.label}
@@ -36,21 +35,25 @@ function Header() {
 
 function getCellMessage(classItem) {
   // console.log("classItem", classItem);
-  const subject = classItem.disciplina;
-  const prof = classItem.professor;
-  const room = classItem.sala;
+  const subject = classItem?.subject ?? classItem?.disciplina;
+  const prof = classItem?.professor;
+  const room = classItem?.room ?? classItem?.sala;
+  const expectedSemester = subject?.expectedSemester ?? subject?.periodo;
+  const subjectAlias = subject?.alias ?? subject?.apelido;
+  const professorAlias = prof?.alias ?? prof?.apelido;
+  const roomBlock = room?.block ?? room?.bloco;
+  const roomCode = room?.code ?? room?.codigo;
+
   const subjectInfo = subject
-    ? `${subject?.periodo ?? "Período indefinido"} - ${
-        subject?.apelido ?? "Apelido Indefinido"
+    ? `${expectedSemester ?? "Período indefinido"} - ${
+        subjectAlias ?? "Apelido Indefinido"
       }`
     : "Discip. indef.";
   const profInfo = prof
-    ? `${prof?.apelido ?? "Apelido Indefinido"}`
+    ? `${professorAlias ?? "Apelido Indefinido"}`
     : "Prof. indef.";
   const roomInfo = room
-    ? `${room?.bloco ?? "Bloco indefinido"}${
-        room?.codigo ? "-" + room?.codigo : ""
-      }`
+    ? `${roomBlock ?? "Bloco indefinido"}${roomCode ? "-" + roomCode : ""}`
     : "Sala indef.";
   const cellMessage = `${subjectInfo} (${profInfo} / ${roomInfo})`;
   return cellMessage;

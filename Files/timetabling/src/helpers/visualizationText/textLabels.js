@@ -111,11 +111,13 @@ function getStartHourFormatLabel(hour, context) {
 
 /* SUBJECT */
 
-function getSubjectLabel(subject) {
-  const subjectCode = subject?.codigo;
-  const subjectAlias = subject?.apelido;
+function getSubjectViewTableText(subject) {
+  const subjectCode = subject?.code ?? subject?.codigo;
+  const subjectAlias = subject?.alias ?? subject?.apelido;
+
   const subjectCodeText = checkIndefinition(subjectCode);
   const subjectNameText = checkIndefinition(subjectAlias);
+
   const subjectText = `${subjectCodeText} - ${subjectNameText}`;
 
   let subjectLabel = "";
@@ -180,8 +182,8 @@ function getSubjectFormatLabel(subject, context) {
 
 /* PROFESSOR */
 
-function getProfessorLabel(professor) {
-  const professorAlias = professor?.apelido;
+function getProfessorViewTableText(professor) {
+  const professorAlias = professor?.alias ?? professor?.apelido;
   const professorAliasText = checkIndefinition(professorAlias);
   const professorText = `${professorAliasText}`;
 
@@ -192,11 +194,11 @@ function getProfessorLabel(professor) {
 }
 
 function getProfessorFormatLabel(professor, context) {
-  const name = professor?.nome;
-  const alias = professor?.apelido;
-  const course = professor?.curso;
-  const center = professor?.centro;
-  const lab = professor?.laboratorio;
+  const name = professor?.name ?? professor?.nome;
+  const alias = professor?.alias ?? professor?.apelido;
+  const course = professor?.course ?? professor?.curso;
+  // const center = professor?.center ?? professor?.centro;
+  const lab = professor?.lab ?? professor?.laboratory ?? professor?.laboratorio;
 
   const labText = checkIndefinition(lab);
   const courseText = checkIndefinition(course);
@@ -233,10 +235,10 @@ function courseLabel(course, context) {
 /* CLASSITEM */
 
 function getClassTimeLabel(classTime) {
-  const room = classTime?.sala;
-  const roomCapacity = room?.capacidade;
-  const roomBlock = room?.bloco;
-  const roomCode = room?.codigo;
+  const room = classTime?.room ?? classTime?.sala;
+  const roomCapacity = room?.capacity ?? room?.capacidade;
+  const roomBlock = room?.block ?? room?.bloco;
+  const roomCode = room?.code ?? room?.codigo;
 
   const capacityLabel = checkIndefinition(roomCapacity);
   const codeBlock =
@@ -264,8 +266,9 @@ function getClassTimeLabel(classTime) {
 }
 
 function getClassTimeLabelPlus(classItem, index) {
-  const nextClassTime = classItem?.horarios?.[index + 1];
-  const classTime = classItem?.horarios?.[index];
+  const classTimes = classItem?.classTimes ?? classItem?.horarios;
+  const classTime = classTimes?.[index];
+  const nextClassTime = classTimes?.[index + 1];
   const classTimeLabel = getClassTimeLabel(classTime);
   const cleanClassTimeLabel = classTime ? classTimeLabel : "";
   const classTimeLabelEnd = nextClassTime ? "; " : "";
@@ -274,9 +277,9 @@ function getClassTimeLabelPlus(classItem, index) {
 
 function getFormatOptionLabelSelectClassItem(classItem, context) {
   const id = getId(classItem);
-  const year = classItem?.ano;
-  const semester = classItem?.semestre;
-  const subject = classItem?.disciplina;
+  const year = classItem?.year ?? classItem?.ano;
+  const semester = classItem?.semester ?? classItem?.semestre;
+  const subject = classItem?.subject ?? classItem?.disciplina;
   const professor = classItem?.professor;
 
   const classTime1 = getClassTimeLabelPlus(classItem, 0);
@@ -285,12 +288,12 @@ function getFormatOptionLabelSelectClassItem(classItem, context) {
   const classTime4 = getClassTimeLabelPlus(classItem, 3);
   const classTimesLabel = classTime1 + classTime2 + classTime3 + classTime4;
 
-  const professorName = professor?.nome;
-  const professorAlias = professor?.apelido;
+  const professorName = professor?.name ?? professor?.nome;
+  const professorAlias = professor?.alias ?? professor?.apelido;
   const professorLabel = checkIndefinition(professorAlias ?? professorName);
 
-  const subjectName = subject?.nome;
-  const subjectAlias = subject?.apelido;
+  const subjectName = subject?.name ?? subject?.nome;
+  const subjectAlias = subject?.alias ?? subject?.apelido;
   const subjectLabel = checkIndefinition(subjectAlias ?? subjectName);
 
   const idLabel = `(id: ${id}) `;
@@ -309,16 +312,13 @@ function getFormatOptionLabelSelectClassItem(classItem, context) {
 
 /* ROOM */
 
-function getRoomItemLabel(room, context) {
-  let selectedRoom = "";
-  let roomOptions = "";
-
+function getRoomMainSelectionFormatLabel(room, context) {
   // const id = getId(room);
   // const idBlock = room?.idBlock;
-  const capacity = room?.capacidade;
-  const block = room?.bloco;
-  const code = room?.codigo;
-  const description = room?.descricao;
+  const capacity = room?.capacity ?? room?.capacidade;
+  const block = room?.block ?? room?.bloco;
+  const code = room?.code ?? room?.codigo;
+  const description = room?.description ?? room?.descricao;
 
   const capacityText = `(${checkIndefinition(capacity)}) `;
   const blockText = checkIndefinition(block);
@@ -365,8 +365,8 @@ function getRoomSelectionLabel(room, context) {
 /* STUDENT */
 
 function getLabelStudentSelection(student) {
-  const enrollment = student?.matricula;
-  const name = student?.nome;
+  const enrollment = student?.enrollment ?? student?.matricula;
+  const name = student?.name ?? student?.nome;
 
   let studentLabel = "";
   studentLabel += enrollment ? enrollment + " - " : "Matrícula Indef. - ";
