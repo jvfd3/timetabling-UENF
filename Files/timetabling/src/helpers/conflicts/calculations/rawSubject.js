@@ -1,4 +1,3 @@
-import conflicts from "../../../config/conflicts";
 import { getId } from "../../auxCRUD";
 
 function getOnlyNeededValues(classItem) {
