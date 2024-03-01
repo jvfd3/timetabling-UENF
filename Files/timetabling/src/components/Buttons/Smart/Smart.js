@@ -222,11 +222,7 @@ function SmartUpdateClassTime(updateClassTimeProps) {
   }, [classTime]);
 
   function getModificationsProps(oldClassTime, newClassTime) {
-    console.log(oldClassTime, newClassTime);
-
-    const prev = oldClassTime.dia;
-    const curr = newClassTime.dia;
-    console.log(`${prev} -> ${curr}`);
+    // console.log(`${oldClassTime.dia} -> ${newClassTime.dia}`);
     const oldRoom = getId(oldClassTime?.sala);
     const newRoom = getId(newClassTime?.sala);
     const oldDay = oldClassTime?.dia;
