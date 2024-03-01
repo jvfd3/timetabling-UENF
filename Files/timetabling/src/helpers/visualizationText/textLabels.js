@@ -159,14 +159,16 @@ function getProfessorFormatLabel(professor, context) {
   const courseText = checkIndefinition(course);
 
   let fullName = "";
-  // fullName += checkIndefinition(center) + " - ";
-  fullName += `(${labText}, `;
-  fullName += courseText + ") ";
+  fullName += lab || course ? "(" : "";
+  fullName += lab ? labText : "";
+  fullName += lab && course ? ", " : "";
+  fullName += courseText;
+  fullName += lab || course ? ") " : "";
   fullName += checkIndefinition(name);
 
   let shortName = "";
-  shortName += `(${labText}) `;
-  shortName += alias ? checkIndefinition(alias) : fullName;
+  shortName += lab || course ? `(${checkIndefinition(lab ?? course)}) ` : "";
+  shortName += checkIndefinition(alias ?? name);
 
   let formattedOptionLabel = "";
   formattedOptionLabel += menuIsOpen(context) ? fullName : shortName;
@@ -291,18 +293,28 @@ function getRoomItemLabel(room, context) {
 }
 
 function getRoomSelectionLabel(room, context) {
-  const block = room?.bloco;
-  const capacity = room?.capacidade;
-  const code = room?.codigo;
-  // const description = room?.descricao;
+  const block = room?.block ?? room?.bloco;
+  const capacity = room?.capacity ?? room?.capacidade;
+  const code = room?.code ?? room?.codigo;
+  const description = room?.description ?? room?.descricao;
   // const id = room?.id;
   // const idBlock = room?.idBlock;
+
+  const capacityLabel = `(${checkIndefinition(capacity)}) `;
+
+  let shortLabel = "";
+  shortLabel += checkIndefinition(block) + "-";
+  shortLabel += checkIndefinition(code);
+
+  let longLabel = "";
+  longLabel += checkIndefinition(block) + "-";
+  longLabel += checkIndefinition(code) + "-";
+  longLabel += checkIndefinition(description);
+
   let roomLabel = "";
-  roomLabel += `(${checkIndefinition(capacity)}) `;
-  roomLabel += `${checkIndefinition(block)}`;
-  roomLabel += ` - `;
-  roomLabel += `${checkIndefinition(code)}`;
-  roomLabel = room ? roomLabel : "Indef.";
+  roomLabel += capacityLabel;
+  roomLabel += menuIsOpen(context) ? longLabel : shortLabel;
+  roomLabel = room ? roomLabel : "Sala Indef.";
   return roomLabel;
 }
 
@@ -326,6 +338,9 @@ export {
   getLabelStudentSelection,
   getSubjectFormatLabel,
   getFormatOptionLabelSelectClassItem,
+  /* MISC */
+  getLabFormatLabel,
+  getStartHourFormatLabel,
   /* PROFESSOR */
   getProfessorLabel,
   getProfessorFormatLabel,

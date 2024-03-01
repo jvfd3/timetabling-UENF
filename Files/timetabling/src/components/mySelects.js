@@ -23,6 +23,9 @@ import {
   getRoomItemLabel,
   courseLabel,
   getProfessorFormatLabel,
+  getLabFormatLabel,
+  getRoomSelectionLabel,
+  getStartHourFormatLabel,
 } from "../helpers/visualizationText/textLabels";
 
 const styleWidthFix = myStyles.selects.fullItem;
@@ -249,12 +252,7 @@ function SelectLab({ outerLab, setOuterLab }) {
     customProps: {
       getOptionValue: (lab) => lab?.apelido,
       getOptionLabel: (lab) => defaultLabel(lab),
-      formatOptionLabel: ({ centro, apelido, nome }, { context }) => {
-        const message = menuIsOpen(context)
-          ? `${apelido}`
-          : `${centro} - ${nome}`;
-        return message;
-      },
+      formatOptionLabel: (lab, { context }) => getLabFormatLabel(lab, context),
     },
   };
 
@@ -424,13 +422,8 @@ function SelectRoom({
     customProps: {
       getOptionValue: (room) => getId(room),
       getOptionLabel: (room) => defaultLabel(room),
-      formatOptionLabel: ({ capacidade, bloco, codigo }, { context }) => {
-        let message = "";
-        message += capacidade ? `(${capacidade})` : "(Cap. indef.)";
-        message += bloco ? ` ${bloco}` : "(Bloco indef.)";
-        message += codigo ? ` - ${codigo}` : " (Cod. indef.)";
-        return message;
-      },
+      formatOptionLabel: (room, { context }) =>
+        getRoomSelectionLabel(room, context),
     },
   };
 
@@ -477,10 +470,8 @@ function SelectStartHour({
     customProps: {
       getOptionValue: (hour) => hour.hora,
       getOptionLabel: (startHour) => defaultLabel(startHour),
-      formatOptionLabel: ({ hora, turno }, { context }) => {
-        const message = menuIsOpen(context) ? `${hora}` : `${hora} (${turno})`;
-        return message;
-      },
+      formatOptionLabel: (hour, { context }) =>
+        getStartHourFormatLabel(hour, context),
     },
   };
 
@@ -965,12 +956,8 @@ function SelectSubjectItem({ subjects, setSubjects, subject, setSubject }) {
     customProps: {
       getOptionValue: (subject) => getId(subject),
       getOptionLabel: (subject) => defaultLabel(subject),
-      formatOptionLabel: ({ codigo, nome }) => {
-        let msg = "";
-        msg += codigo ? `(${codigo})` : "(Cod. indef.)";
-        msg += nome ? ` ${nome}` : " (Nome indef.)";
-        return msg;
-      },
+      formatOptionLabel: (subject, { context }) =>
+        getSubjectFormatLabel(subject, context),
     },
   };
 
