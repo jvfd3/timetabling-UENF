@@ -101,7 +101,7 @@ function sortRooms(rooms) {
   return orderedRooms;
 }
 
-function sortNotOfferedSubjects(subject) {
+function sortNotOfferedSubjects(subjects) {
   const sortOrder = [
     ["periodo"],
     ["center"],
@@ -109,7 +109,7 @@ function sortNotOfferedSubjects(subject) {
     ["codigo"],
     ["id"],
   ];
-  const orderedSubjects = subject.sort((a, b) => mySorting(a, b, sortOrder));
+  const orderedSubjects = subjects.sort((a, b) => mySorting(a, b, sortOrder));
   return orderedSubjects;
 }
 
