@@ -30,20 +30,20 @@ function mySorting(a, b, sortOrder) {
   }
 
   // For each propPath in sortOrder, compare the values of a and b
-  for (const propPath of sortOrder) {
-    const propValueA = getValueFromDataWithPropArray(a, propPath) ?? "";
-    const propValueB = getValueFromDataWithPropArray(b, propPath) ?? "";
+  for (const propPathList of sortOrder) {
+    let newPathList = [...propPathList];
+    const reverse = newPathList[0] === "-";
+    if (reverse) {
+      newPathList.shift();
+    }
+
+    let propValueA = getValueFromDataWithPropArray(a, newPathList) ?? "";
+    let propValueB = getValueFromDataWithPropArray(b, newPathList) ?? "";
+
     if (propValueA !== propValueB) {
-      const comparisonResult = compare(propValueA, propValueB);
-      /*
-      const debug = {
-        path: propPath?.[0],
-        A: propValueA,
-        B: propValueB,
-        result: comparisonResult,
-      };
-      */
-      // console.log(debug);
+      const comparisonResult = reverse
+        ? compare(propValueB, propValueA)
+        : compare(propValueA, propValueB);
       return comparisonResult;
     }
   }
@@ -84,6 +84,8 @@ function sortMultiClasses(classes) {
   const sortOrder = [
     ["ano"],
     ["semestre"],
+    // ["horarios", "length"],
+    ["-", "horarios", "length"],
     ["demandaEstimada"],
     ["professor", "nome"],
     ["disciplina", "codigo"],
