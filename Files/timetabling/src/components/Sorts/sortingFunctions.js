@@ -57,8 +57,18 @@ function sortClassTimes(classTimes) {
   classTimes.forEach((classTime) => {
     classTime.dayOrder = daysOrder[classTime.dia];
   });
-
-  const sortOrder = [["dayOrder"], ["horaInicio"], ["demandaEstimada"], ["id"]];
+  console.log(classTimes);
+  const sortOrder = [
+    ["ano"],
+    ["semestre"],
+    ["dayOrder"],
+    ["horaInicio"],
+    ["disciplina", "periodo"],
+    ["disciplina", "nome"],
+    ["professor", "nome"],
+    ["demandaEstimada"],
+    ["id"],
+  ];
   classTimes.sort((a, b) => mySorting(a, b, sortOrder));
 
   classTimes.forEach((classTime) => {

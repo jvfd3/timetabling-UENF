@@ -3,6 +3,7 @@ import myStyles from "../../config/myStyles";
 import constantValues from "../../config/constantValues";
 import { filterDay, filterHour } from "../../helpers/filteringFunc";
 import { getCCTableClassCellText } from "../../helpers/visualizationText/textLabels";
+import { sortClassTimes } from "../Sorts/sortingFunctions";
 
 const localClassNames = myStyles.classNames.local.component.ClassTimeGridCC;
 
@@ -36,8 +37,9 @@ function Header() {
 }
 
 function CellContent({ classTimes }) {
-  // console.log(classTimes);
-  const classesList = classTimes.map((iterClassTime) => {
+  const sortedClassTimes = sortClassTimes(classTimes);
+
+  const classesList = sortedClassTimes.map((iterClassTime) => {
     const cellText = getCCTableClassCellText(iterClassTime);
     const cellKey = `ChaveCellContent: ${iterClassTime?.idTurma}-${iterClassTime?.id}`;
     return (
@@ -54,18 +56,19 @@ function Row({ hour, classTimes }) {
   // console.log(hour);
   // console.log(classTimes);
 
-  const classTimesHour = filterHour(classTimes, hour);
   const daysList = constantValues.days;
   const rowKey = `Header Row: ${hour}`;
   const rowColKey = `${rowKey}, Header: ${hour}`;
 
   const daysColumn = daysList.map((iterDay) => {
-    const classesDayHour = filterDay(classTimesHour, iterDay.value);
     const cellKey = `Column Key: ${iterDay.value}-${hour}`;
+    const cellProps = {
+      classTimes: filterDay(classTimes, iterDay.value),
+    };
     // console.log(classesDayHour);
     return (
       <td key={cellKey} className={localClassNames.contentCell}>
-        <CellContent classTimes={classesDayHour} />
+        <CellContent {...cellProps} />
       </td>
     );
   });
@@ -86,11 +89,11 @@ function Body({ classTimes }) {
   return (
     <tbody>
       {hoursTangList.map((iterHour) => {
-        const rowKey = `Body Row: ${iterHour.hora}`;
+        const hour = iterHour.hora;
         const rowProps = {
-          hour: iterHour.hora,
-          classTimes,
-          key: rowKey,
+          hour,
+          key: `Body Row: ${hour}`,
+          classTimes: filterHour(classTimes, hour),
         };
         return <Row {...rowProps} />;
       })}
