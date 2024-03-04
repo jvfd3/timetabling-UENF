@@ -1,7 +1,7 @@
 import "./ClassTimeGridCC.css";
+import myStyles from "../../config/myStyles";
 import constantValues from "../../config/constantValues";
 import { filterDay, filterHour } from "../../helpers/filteringFunc";
-import myStyles from "../../config/myStyles";
 import { getCCTableClassCellText } from "../../helpers/visualizationText/textLabels";
 
 const localClassNames = myStyles.classNames.local.component.ClassTimeGridCC;
@@ -90,8 +90,9 @@ function Body({ classTimes }) {
         const rowProps = {
           hour: iterHour.hora,
           classTimes,
+          key: rowKey,
         };
-        return <Row key={rowKey} {...rowProps} />;
+        return <Row {...rowProps} />;
       })}
     </tbody>
   );
