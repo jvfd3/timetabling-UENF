@@ -20,6 +20,7 @@ import {
   updateClassTime,
   deleteClassTime,
 } from "../../helpers/CRUDFunctions/classTimeCRUD";
+import { sortClassTimes } from "../Sorts/sortingFunctions";
 
 const defaultClassNames = myStyles.classNames.default;
 const frontText = text.component.classTimesTable.tableTitles;
@@ -100,13 +101,15 @@ function ClassTimeTable(classesStates) {
 
   const hasClassTimes = classItem?.horarios?.length > 0;
 
+  const sortedClassTimes = sortClassTimes(classItem?.horarios);
+
   return !hasClassTimes ? (
     <SmartCreateClassTime {...createClassTimeProps} />
   ) : (
     <table className={defaultClassNames.componentTable}>
       <ClassTimeHeader {...createClassTimeProps} />
       <tbody>
-        {classItem?.horarios?.map((iterClassTime) => {
+        {sortedClassTimes?.map((iterClassTime) => {
           const classTimeRowStates = {
             ...classesStates,
             classTime: iterClassTime,
