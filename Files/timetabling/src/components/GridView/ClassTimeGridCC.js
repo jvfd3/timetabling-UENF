@@ -2,6 +2,7 @@ import "./ClassTimeGridCC.css";
 import constantValues from "../../config/constantValues";
 import { filterDay, filterHour } from "../../helpers/filteringFunc";
 import myStyles from "../../config/myStyles";
+import { getCCTableClassCellText } from "../../helpers/visualizationText/textLabels";
 
 const localClassNames = myStyles.classNames.local.component.ClassTimeGridCC;
 
@@ -34,40 +35,14 @@ function Header() {
   );
 }
 
-function getCellMessage(classItem) {
-  // console.log("classItem", classItem);
-  const subject = classItem?.subject ?? classItem?.disciplina;
-  const prof = classItem?.professor;
-  const room = classItem?.room ?? classItem?.sala;
-  const expectedSemester = subject?.expectedSemester ?? subject?.periodo;
-  const subjectAlias = subject?.alias ?? subject?.apelido;
-  const professorAlias = prof?.alias ?? prof?.apelido;
-  const roomBlock = room?.block ?? room?.bloco;
-  const roomCode = room?.code ?? room?.codigo;
-
-  const subjectInfo = subject
-    ? `${expectedSemester ?? "Período indefinido"} - ${
-        subjectAlias ?? "Apelido Indefinido"
-      }`
-    : "Discip. indef.";
-  const profInfo = prof
-    ? `${professorAlias ?? "Apelido Indefinido"}`
-    : "Prof. indef.";
-  const roomInfo = room
-    ? `${roomBlock ?? "Bloco indefinido"}${roomCode ? "-" + roomCode : ""}`
-    : "Sala indef.";
-  const cellMessage = `${subjectInfo} (${profInfo} / ${roomInfo})`;
-  return cellMessage;
-}
-
 function CellContent({ classTimes }) {
   // console.log(classTimes);
   const classesList = classTimes.map((iterClassTime) => {
-    const cellMessage = getCellMessage(iterClassTime);
+    const cellText = getCCTableClassCellText(iterClassTime);
     const cellKey = `ChaveCellContent: ${iterClassTime?.idTurma}-${iterClassTime?.id}`;
     return (
       <div key={cellKey} className={localClassNames.eachClassInCell}>
-        {cellMessage}
+        {cellText}
       </div>
     );
   });

@@ -50,6 +50,42 @@ function getAliasNameText(object) {
   return nameAliasText;
 }
 
+/* MISC */
+
+function getCCTableClassCellText(splittedClass) {
+  // console.log("splittedClass", splittedClass);
+  const subject = splittedClass?.subject ?? splittedClass?.disciplina;
+  const professor = splittedClass?.professor;
+  const room = splittedClass?.room ?? splittedClass?.sala;
+
+  const expectedSemester = subject?.expectedSemester ?? subject?.periodo;
+  const subjectAlias = getAliasNameText(subject);
+  const professorAlias = getAliasNameText(professor);
+  const roomBlock = room?.block ?? room?.bloco;
+  const roomCode = room?.code ?? room?.codigo;
+
+  let expectedSemesterText = expectedSemester;
+  if (expectedSemester > 10) {
+    if (expectedSemester === 11) {
+      expectedSemesterText = "OPT";
+    } else if (expectedSemester === 12) {
+      expectedSemesterText = "ELT";
+    } else if (expectedSemester === 13) {
+      expectedSemesterText = "ÑCC";
+    }
+  }
+
+  const subjectInfo = subject
+    ? `${expectedSemesterText ?? "?"} - ${subjectAlias ?? "Apelido Indef"}`
+    : "Discip. Indef";
+  const profInfo = professor ? `${professorAlias}` : "Prof. Indef";
+  const roomInfo = room
+    ? `${roomBlock ?? "Bloco Indef"}${roomCode ? "-" + roomCode : ""}`
+    : "Sala Indef";
+  const cellMessage = `${subjectInfo} (${profInfo} / ${roomInfo})`;
+  return cellMessage;
+}
+
 /* CLASSTIME */
 
 function getStartHourFormatLabel(hour, context) {
@@ -451,11 +487,12 @@ export {
   getNameAliasText,
   getAliasNameText,
   /* MISC */
-  getStartHourFormatLabel,
+  getCCTableClassCellText,
   /* CRUD */
   getClassTimeText,
   /* CLASSITEM */
   getClassItemText,
+  getStartHourFormatLabel,
   getClassItemMainSelectionFormatLabel,
   /* SUBJECT */
   getSubjectViewTableText,
