@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import text from "../../config/frontText";
 import myStyles from "../../config/myStyles";
 import { getId } from "../../helpers/auxCRUD";
 import { getClassTimeConflicts } from "../../helpers/conflicts/centralConflicts";
@@ -19,7 +20,6 @@ import {
   updateClassTime,
   deleteClassTime,
 } from "../../helpers/CRUDFunctions/classTimeCRUD";
-import text from "../../config/frontText";
 
 const defaultClassNames = myStyles.classNames.default;
 const frontText = text.component.classTimesTable.tableTitles;
@@ -39,6 +39,7 @@ function ClassTimeRow(classTimeRowStates) {
   const CRUDClassTimeProps = {
     classTime,
     oldClassTime,
+    filteredClasses,
     setOldClassTime,
     deleteClassTimeDB: () => deleteClassTime(classTimeRowStates),
     updateClassTimeDB: () => updateClassTime(classTimeRowStates),

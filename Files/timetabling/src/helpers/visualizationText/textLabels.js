@@ -26,6 +26,30 @@ function defaultLabel(item) {
   return label;
 }
 
+function getNameAliasText(object) {
+  const name = object?.name ?? object?.nome;
+  const alias = object?.alias ?? object?.apelido;
+  const code = object?.code ?? object?.codigo;
+  const id = getId(object);
+
+  const nameText = checkIndefinition(name ?? alias ?? code ?? id);
+
+  const nameAliasText = object ? nameText : "";
+  return nameAliasText;
+}
+
+function getAliasNameText(object) {
+  const name = object?.name ?? object?.nome;
+  const alias = object?.alias ?? object?.apelido;
+  const code = object?.code ?? object?.codigo;
+  const id = getId(object);
+
+  const nameText = checkIndefinition(alias ?? name ?? code ?? id);
+
+  const nameAliasText = object ? nameText : "";
+  return nameAliasText;
+}
+
 /* CLASSTIME */
 
 function getStartHourFormatLabel(hour, context) {
@@ -35,9 +59,7 @@ function getStartHourFormatLabel(hour, context) {
   const hourLabel = checkIndefinition(startHour);
 
   let longLabel = "";
-  longLabel += `(`;
-  longLabel += checkIndefinition(section);
-  longLabel += `)`;
+  longLabel += ` (${checkIndefinition(section)})`;
 
   let shortLabel = "";
 
@@ -121,18 +143,14 @@ function getSubjectFormatLabel(subject, context) {
 /* PROFESSOR */
 
 function getProfessorViewTableText(professor) {
-  const professorAlias = professor?.alias ?? professor?.apelido;
-  const professorAliasText = checkIndefinition(professorAlias);
-
   let professorLabel = "";
-  professorLabel += professorAliasText;
+  professorLabel += getAliasNameText(professor);
   professorLabel = professor ? professorLabel : "Indef.";
   return professorLabel;
 }
 
 function getProfessorFormatLabel(professor, context) {
   const name = professor?.name ?? professor?.nome;
-  const alias = professor?.alias ?? professor?.apelido;
   const course = professor?.course ?? professor?.curso;
   // const center = professor?.center ?? professor?.centro;
   const lab = professor?.lab ?? professor?.laboratory ?? professor?.laboratorio;
@@ -150,7 +168,7 @@ function getProfessorFormatLabel(professor, context) {
 
   let shortLabel = "";
   shortLabel += lab || course ? `(${checkIndefinition(lab ?? course)}) ` : "";
-  shortLabel += checkIndefinition(alias ?? name);
+  shortLabel += getAliasNameText(professor);
 
   let professorLabel = "";
   professorLabel += menuIsOpen(context) ? longLabel : shortLabel;
@@ -199,6 +217,25 @@ function getLabFormatLabel(lab, context) {
   labLabel += checkIndefinition(alias);
   labLabel += menuIsOpen(context) ? longLabel : shortLabel;
   return labLabel;
+}
+
+/* CLASSTIME */
+
+function getClassTimeText(classTime) {
+  const day = classTime?.day ?? classTime?.dia;
+  const startTime = classTime?.startTime ?? classTime?.horaInicio;
+  const duration = classTime?.duration ?? classTime?.duracao;
+  const room = classTime?.room ?? classTime?.sala;
+
+  const roomText = getRoomText(room);
+  const durationText = startTime + duration;
+
+  const values = [roomText, day, startTime + "~" + durationText];
+  const cleanValues = values.filter((value) => value !== "");
+
+  let classTimeText = "";
+  classTimeText += `(${cleanValues.join(", ")})`;
+  return classTimeText;
 }
 
 /* CLASSITEM */
@@ -279,7 +316,43 @@ function getClassItemMainSelectionFormatLabel(classItem, context) {
   return classItemLabel;
 }
 
+function getClassItemText(classItem) {
+  const year = classItem?.year ?? classItem?.ano;
+  const semester = classItem?.semester ?? classItem?.semestre;
+  const subject = classItem?.subject ?? classItem?.disciplina;
+  const professor = classItem?.professor;
+  const description = classItem?.description ?? classItem?.descricao;
+
+  const dateText = year ? year + "." + semester : "";
+  const subjectText = getAliasNameText(subject);
+  const professorText = getAliasNameText(professor);
+  const descriptionText = description ?? "";
+
+  const texts = [dateText, subjectText, professorText, descriptionText];
+
+  // remove empty texts
+  const cleanTexts = texts.filter((text) => text !== "");
+  const finalText = cleanTexts.join(", ");
+
+  let classItemText = "";
+  classItemText += "(";
+  classItemText += finalText;
+  classItemText += ")";
+  return classItemText;
+}
+
 /* ROOM */
+
+function getRoomText(room) {
+  const block = room?.block ?? room?.bloco;
+  const code = room?.code ?? room?.codigo;
+
+  const codeText = checkIndefinition(code);
+  const blockText = checkIndefinition(block);
+
+  const roomText = room ? blockText + "-" + codeText : "";
+  return roomText;
+}
 
 function getRoomMainSelectionFormatLabel(room, context) {
   // const id = getId(room);
@@ -375,9 +448,14 @@ export {
   /* DEFAULT */
   checkIndefinition,
   defaultLabel,
+  getNameAliasText,
+  getAliasNameText,
   /* MISC */
   getStartHourFormatLabel,
   /* CRUD */
+  getClassTimeText,
+  /* CLASSITEM */
+  getClassItemText,
   getClassItemMainSelectionFormatLabel,
   /* SUBJECT */
   getSubjectViewTableText,
@@ -388,6 +466,7 @@ export {
   getCourseFormatLabel,
   getLabFormatLabel,
   /* ROOM */
+  getRoomText,
   getRoomMainSelectionFormatLabel,
   getRoomFormatLabel,
   getBlockFormatLabel,

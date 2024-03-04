@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import emptyObjects from "../../../config/emptyObjects";
-import createPreFilledClass from "./createPreFilledClass";
 import defaultColors from "../../../config/defaultColors";
+import createPreFilledClass from "./createPreFilledClass";
 import { getId } from "../../../helpers/auxCRUD";
 import {
   CreateClassTime,
@@ -16,6 +16,12 @@ import {
   getValueFromObject,
   getDefaultYearSemesterValues,
 } from "../../../helpers/auxFunctions";
+import {
+  getAliasNameText,
+  getClassItemText,
+  getClassTimeText,
+  getRoomText,
+} from "../../../helpers/visualizationText/textLabels";
 
 function SmartInputSubject(inputSubjectProps) {
   const { inputConfig, subjects } = inputSubjectProps;
@@ -75,13 +81,13 @@ function SmartCreateClassItem(createStates) {
 function SmartUpdateClassItem(updateClassItemProps) {
   const { classItem, updateClassItemDB, oldClassItem, setOldClassItem } =
     updateClassItemProps;
-  const date = `${classItem?.ano}.${classItem?.semestre}`;
-  const classItemId = ` ${date} (id: ${getId(classItem)})\n`;
 
-  const dontUpdateMessage =
-    `Não foram identificadas alterações na turma` + classItemId;
+  const classItemText = getClassItemText(classItem) + "\n";
 
-  const baseMessage = `Atualizar turma` + classItemId;
+  let dontUpdateMessage = `Não foram identificadas alterações na turma `;
+  dontUpdateMessage += classItemText;
+
+  const baseMessage = `Atualizar turma ` + classItemText;
 
   const [modifiedMessage, setModifiedMessage] = useState(dontUpdateMessage);
   const [needsUpdateStatus, setNeedsUpdateStatus] = useState(false);
@@ -102,24 +108,39 @@ function SmartUpdateClassItem(updateClassItemProps) {
   }, [classItem]);
 
   function getModificationsProps(oldClassItem, classItem) {
-    const oldSubject = getId(oldClassItem?.disciplina);
-    const newSubject = getId(classItem?.disciplina);
-    const oldProfessor = getId(oldClassItem?.professor);
-    const newProfessor = getId(classItem?.professor);
-    const oldExpectedDemand = oldClassItem?.demandaEstimada;
-    const newExpectedDemand = classItem?.demandaEstimada;
+    const oldSubject = oldClassItem?.subject ?? oldClassItem?.disciplina;
+    const newSubject = classItem?.subject ?? classItem?.disciplina;
+    const oldProfessor = oldClassItem?.professor;
+    const newProfessor = classItem?.professor;
+
+    const oldSubjectId = getId(oldSubject);
+    const newSubjectId = getId(newSubject);
+
+    const oldProfessorId = getId(oldProfessor);
+    const newProfessorId = getId(newProfessor);
+
+    const oldExpectedDemand =
+      oldClassItem?.expectedDemand ?? oldClassItem?.demandaEstimada;
+    const newExpectedDemand =
+      classItem?.expectedDemand ?? classItem?.demandaEstimada;
+
     const oldDescription = oldClassItem?.description;
     const newDescription = classItem?.description;
 
-    const sameSubject = oldSubject === newSubject;
-    const sameProfessor = oldProfessor === newProfessor;
+    const sameSubject = oldSubjectId === newSubjectId;
+    const sameProfessor = oldProfessorId === newProfessorId;
     const sameExpectedDemand = oldExpectedDemand === newExpectedDemand;
     const sameDescription = oldDescription === newDescription;
 
-    const newSubjectText = `disciplina: ${oldSubject} -> ${newSubject}\n`;
-    const newProfessorText = `professor: ${oldProfessor} -> ${newProfessor}\n`;
-    const newExpectedDemandText = `demandaEstimada: ${oldExpectedDemand} -> ${newExpectedDemand}\n`;
-    const newDescriptionText = `description: ${oldDescription} -> ${newDescription}\n`;
+    const oldSubjectAliasText = getAliasNameText(oldSubject);
+    const newSubjectAliasText = getAliasNameText(newSubject);
+    const oldProfessorAliasText = getAliasNameText(oldProfessor);
+    const newProfessorAliasText = getAliasNameText(newProfessor);
+
+    const newSubjectText = `\t- Disciplina: ${oldSubjectAliasText} -> ${newSubjectAliasText}\n`;
+    const newProfessorText = `\t- Professor: ${oldProfessorAliasText} -> ${newProfessorAliasText}\n`;
+    const newExpectedDemandText = `\t- Demanda estimada: ${oldExpectedDemand} -> ${newExpectedDemand}\n`;
+    const newDescriptionText = `\t- Descrição: ${oldDescription} -> ${newDescription}\n`;
 
     let modifications = "";
     modifications += sameSubject ? "" : newSubjectText;
@@ -179,14 +200,12 @@ function SmartUpdateClassItem(updateClassItemProps) {
 }
 
 function SmartDeleteClassItem({ classItem, deleteClassItemDB }) {
-  const date = `${classItem?.ano}.${classItem?.semestre}`;
-  const titleText = `Remover turma ${date} (id: ${getId(classItem)})`;
-
+  const titleText = "Remover turma " + getClassItemText(classItem);
   return <DeleteItem deleteFunc={deleteClassItemDB} text={titleText} />;
 }
 
 function SmartCreateClassTime({ classItem, createClassTimeDB }) {
-  const titleText = `Adicionar horário à turma id: ${getId(classItem)}`;
+  const titleText = `Adicionar horário à turma ${getClassItemText(classItem)}`;
 
   return <CreateClassTime createFunc={createClassTimeDB} text={titleText} />;
 }
@@ -195,13 +214,11 @@ function SmartUpdateClassTime(updateClassTimeProps) {
   const { classTime, updateClassTimeDB, oldClassTime, setOldClassTime } =
     updateClassTimeProps;
 
-  const classTimeId = ` (id: ${getId(classTime)})\n`;
-
+  const classTimeText = getClassTimeText(classTime);
   let dontUpdateMessage = `Não foram identificadas alterações no horário `;
-  dontUpdateMessage += classTimeId;
+  dontUpdateMessage += classTimeText;
 
-  let baseMessage = `Atualizar horário `;
-  baseMessage += classTimeId + `  -- idTurma: ${classTime?.idTurma})\n`;
+  let baseMessage = `Atualizar horário\n`;
 
   const [modifiedMessage, setModifiedMessage] = useState(dontUpdateMessage);
   const [needsUpdateStatus, setNeedsUpdateStatus] = useState(false);
@@ -223,24 +240,29 @@ function SmartUpdateClassTime(updateClassTimeProps) {
 
   function getModificationsProps(oldClassTime, newClassTime) {
     // console.log(`${oldClassTime.dia} -> ${newClassTime.dia}`);
-    const oldRoom = getId(oldClassTime?.sala);
-    const newRoom = getId(newClassTime?.sala);
-    const oldDay = oldClassTime?.dia;
-    const newDay = newClassTime?.dia;
-    const oldStartHour = oldClassTime?.horaInicio;
-    const newStartHour = newClassTime?.horaInicio;
-    const oldDuration = oldClassTime?.duracao;
-    const newDuration = newClassTime?.duracao;
+    const oldRoom = oldClassTime?.room ?? oldClassTime?.sala;
+    const newRoom = newClassTime?.room ?? newClassTime?.sala;
+    const oldRoomId = getId(oldRoom);
+    const newRoomId = getId(newRoom);
+    const oldDay = oldClassTime?.day ?? oldClassTime?.dia;
+    const newDay = newClassTime?.day ?? newClassTime?.dia;
+    const oldStartHour = oldClassTime?.startHour ?? oldClassTime?.horaInicio;
+    const newStartHour = newClassTime?.startHour ?? newClassTime?.horaInicio;
+    const oldDuration = oldClassTime?.duration ?? oldClassTime?.duracao;
+    const newDuration = newClassTime?.duration ?? newClassTime?.duracao;
 
-    const sameRoom = oldRoom === newRoom;
+    const sameRoom = oldRoomId === newRoomId;
     const sameDay = oldDay === newDay;
     const sameStartHour = oldStartHour === newStartHour;
     const sameDuration = oldDuration === newDuration;
 
-    const newRoomText = `sala: ${oldRoom} -> ${newRoom}\n`;
-    const newDayText = `dia: ${oldDay} -> ${newDay}\n`;
-    const newStartHourText = `horaInicio: ${oldStartHour} -> ${newStartHour}\n`;
-    const newDurationText = `duracao: ${oldDuration} -> ${newDuration}\n`;
+    const AAA = oldRoom === null ? "null" : getRoomText(oldRoom);
+    const BBB = newRoom === null ? "null" : getRoomText(newRoom);
+
+    const newRoomText = `\t- Sala: ${AAA} -> ${BBB}\n`;
+    const newDayText = `\t- Dia: ${oldDay} -> ${newDay}\n`;
+    const newStartHourText = `\t- Hora Início: ${oldStartHour} -> ${newStartHour}\n`;
+    const newDurationText = `\t- Duracao: ${oldDuration} -> ${newDuration}\n`;
 
     let modifications = "";
     modifications += sameRoom ? "" : newRoomText;
@@ -274,9 +296,20 @@ function SmartUpdateClassTime(updateClassTimeProps) {
   );
 }
 
-function SmartDeleteClassTime({ classTime, deleteClassTimeDB }) {
-  let titleText = `Remover horário (id: ${getId(classTime)}):\n`;
-  titleText += `  - idTurma ${classTime?.idTurma}`;
+function SmartDeleteClassTime({
+  classTime,
+  filteredClasses,
+  deleteClassTimeDB,
+}) {
+  const classTimeText = getClassTimeText(classTime);
+  const idClass = classTime?.idTurma;
+
+  // get classItem from filteredClasses
+  const classItem = filteredClasses.find((c) => getId(c) === idClass);
+  const classItemText = getClassItemText(classItem);
+
+  let titleText = `Remover horário ${classTimeText}:\n`;
+  titleText += `\t- turma: ${classItemText}`;
 
   return <DeleteClassTime deleteFunc={deleteClassTimeDB} text={titleText} />;
 }
