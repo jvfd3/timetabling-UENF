@@ -57,7 +57,7 @@ function sortClassTimes(classTimes) {
   classTimes.forEach((classTime) => {
     classTime.dayOrder = daysOrder[classTime.dia];
   });
-  console.log(classTimes);
+
   const sortOrder = [
     ["ano"],
     ["semestre"],
