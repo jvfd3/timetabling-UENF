@@ -8,21 +8,21 @@ const itemName = "ClassData";
 let local = `aws>lambda>Update>${itemName}>handler`;
 const isDebugging = false;
 
-function convertToList(classData) {
-  isDebugging && console.log(local, classData);
+function convertToList(classItem) {
+  isDebugging && console.log(local, classItem);
   /* Vai ser nulo se algum item não for definido */
   const values = [
-    classItem?.year ?? classData?.ano ?? null,
-    classItem?.semester ?? classData?.semestre ?? null,
+    classItem?.year ?? classItem?.ano ?? null,
+    classItem?.semester ?? classItem?.semestre ?? null,
     classItem?.idSubject ??
       classItem?.subject?.id ??
-      classData?.idDisciplina ??
-      classData?.disciplina?.id ??
+      classItem?.idDisciplina ??
+      classItem?.disciplina?.id ??
       null,
     classItem?.idProfessor ?? classItem?.professor?.id ?? null,
-    classItem?.expectedDemand ?? classData?.demandaEstimada ?? null,
-    classData?.description ?? null,
-    classData?.id ?? null,
+    classItem?.expectedDemand ?? classItem?.demandaEstimada ?? null,
+    classItem?.description ?? null,
+    classItem?.id ?? null,
   ];
   isDebugging && console.log(local + ">{newValues: ", values, "}");
   return values;
