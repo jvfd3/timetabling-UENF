@@ -137,10 +137,20 @@ function SmartUpdateClassItem(updateClassItemProps) {
     const oldProfessorAliasText = getAliasNameText(oldProfessor);
     const newProfessorAliasText = getAliasNameText(newProfessor);
 
-    const newSubjectText = `\t- Disciplina: ${oldSubjectAliasText} -> ${newSubjectAliasText}\n`;
-    const newProfessorText = `\t- Professor: ${oldProfessorAliasText} -> ${newProfessorAliasText}\n`;
-    const newExpectedDemandText = `\t- Demanda estimada: ${oldExpectedDemand} -> ${newExpectedDemand}\n`;
-    const newDescriptionText = `\t- Descrição: ${oldDescription} -> ${newDescription}\n`;
+    const notNull = (text) => (text == "" || text == null ? "null" : text);
+
+    const newSubjectText = `\t- Disciplina: ${notNull(
+      oldSubjectAliasText
+    )} -> ${notNull(newSubjectAliasText)}\n`;
+    const newProfessorText = `\t- Professor: ${notNull(
+      oldProfessorAliasText
+    )} -> ${notNull(newProfessorAliasText)}\n`;
+    const newExpectedDemandText = `\t- Demanda estimada: ${notNull(
+      oldExpectedDemand
+    )} -> ${notNull(newExpectedDemand)}\n`;
+    const newDescriptionText = `\t- Descrição: ${notNull(
+      oldDescription
+    )} -> ${notNull(newDescription)}\n`;
 
     let modifications = "";
     modifications += sameSubject ? "" : newSubjectText;
@@ -284,6 +294,7 @@ function SmartUpdateClassTime(updateClassTimeProps) {
   function smartUpdateClassTime() {
     setNeedsUpdateStatus(false);
     setOldClassTime(classTime);
+    setModifiedMessage(dontUpdateMessage);
     updateClassTimeDB();
   }
 

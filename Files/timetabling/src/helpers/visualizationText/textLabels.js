@@ -57,6 +57,8 @@ function getCCTableClassCellText(splittedClass) {
   const subject = splittedClass?.subject ?? splittedClass?.disciplina;
   const professor = splittedClass?.professor;
   const room = splittedClass?.room ?? splittedClass?.sala;
+  const duration = splittedClass?.duration ?? splittedClass?.duracao;
+  const description = splittedClass?.description ?? splittedClass?.descricao;
 
   const expectedSemester = subject?.expectedSemester ?? subject?.periodo;
   const subjectAlias = getAliasNameText(subject);
@@ -75,14 +77,19 @@ function getCCTableClassCellText(splittedClass) {
     }
   }
 
+  const descriptionText = description ? ` - ${description}` : "";
+  const unusualDuration = duration != 2 ? " (" + duration + "h)" : "";
+
   const subjectInfo = subject
-    ? `${expectedSemesterText ?? "?"} - ${subjectAlias ?? "Apelido Indef"}`
-    : "Discip. Indef";
-  const profInfo = professor ? `${professorAlias}` : "Prof. Indef";
+    ? `${expectedSemesterText ?? "?"} - ${
+        subjectAlias ?? "Apelido ?"
+      }${descriptionText}`
+    : "Discip. ?";
+  const profInfo = professor ? `${professorAlias}` : "Prof. ?";
   const roomInfo = room
-    ? `${roomBlock ?? "Bloco Indef"}${roomCode ? "-" + roomCode : ""}`
-    : "Sala Indef";
-  const cellMessage = `${subjectInfo} (${profInfo} / ${roomInfo})`;
+    ? `${roomBlock ?? "Bloco ?"}${roomCode ? "-" + roomCode : ""}`
+    : "Sala ?";
+  const cellMessage = `${subjectInfo} (${profInfo} / ${roomInfo})${unusualDuration}`;
   return cellMessage;
 }
 
