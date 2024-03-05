@@ -11,11 +11,15 @@ function convertToList(classTime) {
   isDebugging && console.log(local, classTime);
   /* Vai ser nulo se algum item não for definido */
   const values = [
-    classTime?.dia ?? null,
-    classTime?.horaInicio ?? null,
-    classTime?.duracao ?? null,
-    classTime?.idTurma ?? null,
-    classTime?.sala?.id ?? classTime?.idSala ?? null,
+    classTime?.day ?? classTime?.dia ?? null,
+    classTime?.startHour ?? classTime?.horaInicio ?? null,
+    classTime?.duration ?? classTime?.duracao ?? null,
+    classTime?.idClass ?? classTime?.idTurma ?? null,
+    classTime?.idRoom ??
+      classTime?.room?.id ??
+      classTime?.sala?.id ??
+      classTime?.idSala ??
+      null,
     classTime?.id ?? null,
   ];
   isDebugging && console.log(local + ">{newValues: ", values, "}");

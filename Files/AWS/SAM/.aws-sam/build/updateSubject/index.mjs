@@ -11,10 +11,10 @@ function convertToList(subject) {
   isDebugging && console.log(local, subject);
   /* Vai ser nulo se algum item não for definido */
   const values = [
-    subject?.nome ?? null,
-    subject?.apelido ?? null,
-    subject?.periodo ?? null,
-    subject?.codigo ?? null,
+    subject?.name ?? subject?.nome ?? null,
+    subject?.alias ?? subject?.apelido ?? null,
+    subject?.expectedSemester ?? subject?.periodo ?? null,
+    subject?.code ?? subject?.codigo ?? null,
     subject?.id ?? null,
   ];
   isDebugging && console.log(local + ">{newValues: ", values, "}");

@@ -11,10 +11,10 @@ function convertToList(professor) {
   isDebugging && console.log(local, professor);
   /* Vai ser nulo se algum item não for definido */
   const values = [
-    professor?.nome ?? null,
-    professor?.apelido ?? null,
-    professor?.curso ?? null,
-    professor?.laboratorio ?? null,
+    professor?.name ?? professor?.nome ?? null,
+    professor?.alias ?? professor?.apelido ?? null,
+    professor?.course ?? professor?.curso ?? null,
+    professor?.laboratory ?? professor?.laboratorio ?? null,
   ];
   isDebugging && console.log(local + ">{newValues: ", values, "}");
   return values;
