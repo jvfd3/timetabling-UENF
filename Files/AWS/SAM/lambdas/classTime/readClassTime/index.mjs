@@ -28,6 +28,7 @@ function getQuery() {
     t.demandaEstimada AS 'demandaEstimada',\
     h.comment AS 'comment',\
     t.id AS 'idTurma',\
+    t.description AS 'description',\
     IF(t.idDisciplina IS NULL, NULL, JSON_OBJECT(\
         'id', d.id,\
         'periodo', d.periodo,\
