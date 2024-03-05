@@ -49,6 +49,7 @@ const constantValues = {
   hoursTang: [
     { hora: 8, turno: "Manhã" },
     { hora: 10, turno: "Manhã" },
+    { hora: 12, turno: "Tarde" },
     { hora: 14, turno: "Tarde" },
     { hora: 16, turno: "Tarde" },
     { hora: 18, turno: "Noite" },
