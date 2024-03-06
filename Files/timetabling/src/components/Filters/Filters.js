@@ -145,13 +145,27 @@ function MultiClassesFilters(globalStates) {
 
   const [year, setYear] = useState(defaultYearSemester.year);
   const [semester, setSemester] = useState(defaultYearSemester.semester);
+  const [expectedSemester, setExpectedSemester] = useState(null);
+  const [professor, setProfessor] = useState(null);
+  const [subject, setSubject] = useState(null);
   const [room, setRoom] = useState(null);
-  const statesToWatchFor = [year, semester, classes, room];
+  const statesToWatchFor = [
+    year,
+    room,
+    subject,
+    classes,
+    semester,
+    professor,
+    expectedSemester,
+  ];
 
   const props = {
     year: { year, setYear },
-    semester: { semester, setSemester },
     room: { rooms, room, setRoom },
+    semester: { semester, setSemester },
+    subject: { subjects, subject, setSubject },
+    professor: { professors, professor, setProfessor },
+    expectedSemester: { expectedSemester, setExpectedSemester },
   };
 
   function filterList(list, year, semester) {
@@ -159,7 +173,10 @@ function MultiClassesFilters(globalStates) {
 
     filteredList = filterYear(filteredList, year);
     filteredList = filterSemester(filteredList, semester);
+    filteredList = filterSubject(filteredList, subject);
+    filteredList = filterProfessor(filteredList, professor);
     filteredList = filterClassTimes(filteredList, filterRoom, room);
+    filteredList = filterExpectedSemester(filteredList, expectedSemester);
 
     return filteredList;
   }
@@ -179,9 +196,12 @@ function MultiClassesFilters(globalStates) {
 
   return (
     <div className={filterStyles.block}>
-      <FilterRoom {...props.room} />
       <FilterYear {...props.year} />
       <FilterSemester {...props.semester} />
+      <FilterSubject {...props.subject} />
+      <FilterExpectedSemester {...props.expectedSemester} />
+      <FilterProfessor {...props.professor} />
+      <FilterRoom {...props.room} />
     </div>
   );
 }
