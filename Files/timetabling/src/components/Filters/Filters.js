@@ -4,13 +4,10 @@ import myStyles from "../../config/myStyles";
 import { useEffect, useState } from "react";
 import { readRoom } from "../../helpers/CRUDFunctions/roomCRUD";
 import { readSubject } from "../../helpers/CRUDFunctions/subjectCRUD";
+import { splitTurmas } from "../../helpers/conflicts/auxConflictFunctions";
 import { readProfessor } from "../../helpers/CRUDFunctions/professorCRUD";
+import { refreshShownItem } from "../../helpers/auxCRUD";
 import { getDefaultYearSemesterValues } from "../../helpers/auxFunctions";
-import {
-  refreshShownItem,
-  getDefaultClassItem,
-  getDefaultClassTime,
-} from "../../helpers/auxCRUD";
 import {
   filterDay,
   filterYear,
@@ -108,48 +105,68 @@ function FilterRoom(filterRoomStates) {
   );
 }
 
-function MultiClassesFilters({ classTimeStates, classStates }) {
-  const { classTimes, setFilteredClassTimes, setClassTime } = classTimeStates;
+function filterClassTimes(classes, filterFunction, filterValue) {
+  let classesToReturn = classes;
+  // Splitted classes are used to filter the classes
+  const splittedClasses = splitTurmas(classes);
+  // Filter classes based on selected value (null by default)
+  const filteredSplittedClasses = filterFunction(splittedClasses, filterValue);
+  // Get the ids of the filtered classes
+  const filteredIds = filteredSplittedClasses.map(
+    (iterSplittedClassItem) => iterSplittedClassItem?.idTurma
+  );
+  // get the classes that have the filtered ids
+  const filteredClasses = classes.filter((iterClassItem) =>
+    filteredIds.includes(iterClassItem?.id)
+  );
+
+  classesToReturn = filteredClasses;
+  if (filterValue === null) {
+    classesToReturn = classes;
+  }
+  /*   const debug = {
+    classes: classes.length,
+    splittedClasses: splittedClasses.length,
+    filteredSplittedClasses: filteredSplittedClasses.length,
+    filteredClasses: filteredClasses.length,
+    classesToReturn: classesToReturn.length,
+  };
+  console.log(debug); */
+  return classesToReturn;
+}
+
+function MultiClassesFilters(globalStates) {
+  const { classTimeStates, classStates, selectStates } = globalStates;
+  // const { classTimes, setFilteredClassTimes, setClassTime } = classTimeStates;
   const { classes, setFilteredClasses, setClassItem } = classStates;
+  const { professors, subjects, rooms } = selectStates;
 
   const defaultYearSemester = getDefaultYearSemesterValues();
 
   const [year, setYear] = useState(defaultYearSemester.year);
   const [semester, setSemester] = useState(defaultYearSemester.semester);
+  const [room, setRoom] = useState(null);
+  const statesToWatchFor = [year, semester, classes, room];
 
   const props = {
     year: { year, setYear },
     semester: { semester, setSemester },
+    room: { rooms, room, setRoom },
   };
 
   function filterList(list, year, semester) {
     let filteredList = list;
+
     filteredList = filterYear(filteredList, year);
     filteredList = filterSemester(filteredList, semester);
+    filteredList = filterClassTimes(filteredList, filterRoom, room);
+
     return filteredList;
   }
 
-  const defaultClassItem = getDefaultClassItem(year, semester);
-  const defaultClassTime = getDefaultClassTime(year, semester);
-
-  const statesToWatchFor = [year, semester, classes];
-
   function updateOuterStates() {
-    const filteredClassTimes = filterList(classTimes, year, semester);
     const filteredClasses = filterList(classes, year, semester);
-
-    const newClassTime = filteredClassTimes?.[0] ?? defaultClassItem;
-    const newClassItem = filteredClasses?.[0] ?? defaultClassTime;
-    // const message = `Turmas: ${filteredClasses.length}`;
-    // const yearValue = year?.value ?? year;
-    // const semesterValue = semester?.value ?? semester;
-    // const finalMessage = `${yearValue}-${semesterValue}: ${message}`;
-    // console.log(finalMessage);
-
-    setFilteredClassTimes(filteredClassTimes);
     setFilteredClasses(filteredClasses);
-    setClassTime(newClassTime);
-    setClassItem(newClassItem);
   }
 
   useEffect(() => {
@@ -162,6 +179,7 @@ function MultiClassesFilters({ classTimeStates, classStates }) {
 
   return (
     <div className={filterStyles.block}>
+      <FilterRoom {...props.room} />
       <FilterYear {...props.year} />
       <FilterSemester {...props.semester} />
     </div>
