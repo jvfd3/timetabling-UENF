@@ -162,7 +162,7 @@ function getNewClassItem(currentSemester, iterSubject, usualInfo) {
     semestre: currentSemester.semester ?? null,
     disciplina: iterSubject ?? null,
     professor: usualInfo?.professor?.[0] ?? usualInfo?.professor ?? null,
-    demandaEstimada: usualInfo?.expectedDemand ?? null,
+    demandaEstimada: /* usualInfo?.expectedDemand ?? */ null,
     description: usualInfo?.description ?? null,
   };
   return newClass;
