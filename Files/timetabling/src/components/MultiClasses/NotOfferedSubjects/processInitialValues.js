@@ -1,6 +1,5 @@
 import emptyObjects from "../../../config/emptyObjects";
 import { getId } from "../../../helpers/auxCRUD";
-import { splitTurmas } from "../../../helpers/conflicts/auxConflictFunctions";
 import { getValueFromDataWithPropArray } from "../../../helpers/auxFunctions";
 
 function getModes(items) {
@@ -136,7 +135,6 @@ function getDescription(sameSubjectClasses, { year, semester }) {
 }
 
 function getUsualInfo(classes, classTimes) {
-  // const splittedClasses = splitTurmas(classes);
   const quantity = getMostFrequentClassTimeSizes(classes);
   const classUsualInfo = {
     professor: getMostFrequentItem(classes, ["professor"]),

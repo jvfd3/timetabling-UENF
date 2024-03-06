@@ -82,6 +82,7 @@ function sortClassesSelection(classes) {
   const sortOrder = [
     ["ano"],
     ["semestre"],
+    // ["disciplina", "periodo"],
     ["disciplina", "nome"],
     ["professor", "nome"],
     ["id"],
@@ -94,11 +95,12 @@ function sortMultiClasses(classes) {
   const sortOrder = [
     ["ano"],
     ["semestre"],
-    // ["horarios", "length"],
+    ["disciplina", "periodo"],
+    ["disciplina", "nome"],
+    ["description"],
     ["-", "horarios", "length"],
     ["demandaEstimada"],
     ["professor", "nome"],
-    ["disciplina", "codigo"],
     ["id"],
   ];
   const orderedClasses = classes.sort((a, b) => mySorting(a, b, sortOrder));
