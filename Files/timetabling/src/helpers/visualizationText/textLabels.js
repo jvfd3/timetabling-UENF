@@ -59,6 +59,8 @@ function getCCTableClassCellText(splittedClass) {
   const room = splittedClass?.room ?? splittedClass?.sala;
   const duration = splittedClass?.duration ?? splittedClass?.duracao;
   const description = splittedClass?.description ?? splittedClass?.descricao;
+  const expectedDemand =
+    splittedClass?.expectedDemand ?? splittedClass?.demandaEstimada;
 
   const expectedSemester = subject?.expectedSemester ?? subject?.periodo;
   const subjectAlias = getAliasNameText(subject);
@@ -79,11 +81,12 @@ function getCCTableClassCellText(splittedClass) {
 
   const descriptionText = description ? ` - ${description}` : "";
   const unusualDuration = duration != 2 ? " (" + duration + "h)" : "";
+  const demandText = expectedDemand ? ` - ${expectedDemand}a` : "";
 
   const subjectInfo = subject
     ? `${expectedSemesterText ?? "?"} - ${
         subjectAlias ?? "Apelido ?"
-      }${descriptionText}`
+      }${descriptionText}${demandText}`
     : "Discip. ?";
   const profInfo = professor ? `${professorAlias}` : "Prof. ?";
   const roomInfo = room
