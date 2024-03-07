@@ -109,7 +109,7 @@ function getCreateClassItemTitle(classItem) {
 
   let title = "";
   title += `Criar turma`;
-  // title += JSON.stringify(classItem);
+  // title += "\n" + JSON.stringify(classItem) + "\n";
   title += ` (${year}.${semester})`;
   title += subject ? `\n\t- Disciplina: ${getAliasNameText(subject)}` : "";
   title += professor ? `\n\t- Professor: ${getAliasNameText(professor)}` : "";
