@@ -15,7 +15,6 @@ import {
 } from "../../DB/defaultAxiosFunctions";
 import { createClassTime } from "./classTimeCRUD";
 import configInfo from "../../config/configInfo";
-import { useRef } from "react";
 
 const itemName = "classData";
 
@@ -57,20 +56,20 @@ function createClass(createClassStates) {
       };
       createClassTime(createClassTimeProps);
     }
-
+    /* 
     async function createClassTimesSequentially(newClassTimes) {
       for (const iterNewClassTime of newClassTimes) {
         await asyncCreateClassTimeDB(iterNewClassTime);
       }
     }
-
     createClassTimesSequentially(newClassTimes);
-    /*  newClassTimes.forEach((iterNewClassTime, index) => {
+    */
+    newClassTimes.forEach((iterNewClassTime, index) => {
       setTimeout(() => {
         asyncCreateClassTimeDB(iterNewClassTime);
         // console.log(index);
       }, (index + 1) * configInfo.AWS.defaultRequestDelay);
-    }); */
+    });
 
     return newClassTimes;
   }
