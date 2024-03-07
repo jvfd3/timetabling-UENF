@@ -245,22 +245,32 @@ function getProfessorFormatLabel(professor, context) {
 }
 
 function getCourseFormatLabel(course, context) {
-  const alias = course?.alias;
-  const name = course?.name;
+  // const id = getId(course);
+  const level = course?.level;
+  const center = course?.center;
+  const modality = course?.modality;
+  const category = course?.category;
 
-  const aliasText = checkIndefinition(alias ?? name);
-  const nameText = checkIndefinition(name ?? alias);
+  const nameText = getNameAliasText(course);
 
   let shortLabel = "";
-  shortLabel += aliasText;
+  shortLabel += nameText;
+
+  const longLabelTexts = [];
+
+  if (level) longLabelTexts.push(checkIndefinition(level));
+  if (center) longLabelTexts.push(checkIndefinition(center));
+  if (modality) longLabelTexts.push(checkIndefinition(modality));
+  if (category) longLabelTexts.push(checkIndefinition(category));
 
   let longLabel = "";
+  longLabel += `(${longLabelTexts.join(", ")}) `;
   longLabel += nameText;
 
   let courseLabel = "";
   courseLabel += menuIsOpen(context) ? longLabel : shortLabel;
   return courseLabel;
-  // return menuIsOpen(context) ? checkIndefinition(course?.alias ?? course?.name) : checkIndefinition(course?.name ?? course?.alias);
+  // return menuIsOpen(context) ? getAliasNameText(course) : getNameAliasText(course);
 }
 
 function getLabFormatLabel(lab, context) {
