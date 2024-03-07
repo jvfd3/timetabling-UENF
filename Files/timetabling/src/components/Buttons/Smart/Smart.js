@@ -20,6 +20,7 @@ import {
   getRoomText,
 } from "../../../helpers/visualizationText/textLabels";
 import text from "../../../config/frontText";
+import { getDefaultYearSemesterValues } from "../../../helpers/auxFunctions";
 
 const defaultText = text.component.classTimesTable.buttons;
 
@@ -58,26 +59,38 @@ function SmartCreateClassItem(createStates) {
   const { classesStates, currentSemester, createClassDB } = createStates;
   const { classItem } = classesStates;
 
-  const year = classItem?.year ?? classItem?.ano ?? currentSemester?.year;
-  const semester =
-    classItem?.semester ?? classItem?.semestre ?? currentSemester?.semester;
+  const defaultYearSemester = getDefaultYearSemesterValues();
 
-  function createClassItemInDB() {
-    const newClass = {
+  const year =
+    classItem?.year ??
+    classItem?.ano ??
+    currentSemester?.year ??
+    defaultYearSemester.year;
+  const semester =
+    classItem?.semester ??
+    classItem?.semestre ??
+    currentSemester?.semester ??
+    defaultYearSemester.semester;
+
+  function getNewClassItem() {
+    const newClassItem = {
       ...emptyObjects.classItem,
       ...classItem,
       ano: year,
       semestre: semester,
     };
+    return newClassItem;
+  }
 
+  function createClassItemInDB() {
     const createClassStates = {
       ...classesStates,
-      classItem: newClass,
+      classItem: getNewClassItem(),
     };
     createClassDB(createClassStates);
   }
 
-  const titleText = getCreateClassItemTitle(classItem);
+  const titleText = getCreateClassItemTitle(getNewClassItem());
   return <CreateItem createFunc={createClassItemInDB} text={titleText} />;
 }
 
