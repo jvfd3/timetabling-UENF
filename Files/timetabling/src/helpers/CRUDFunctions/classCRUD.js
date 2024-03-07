@@ -86,7 +86,6 @@ function createClass(createClassStates) {
     }
   }
 
-  insertNewClass(null);
   defaultDBCreate(itemName, newClassItem)
     .then((id) => insertNewClass(id))
     .catch(defaultHandleError);
