@@ -96,6 +96,28 @@ function getCCTableClassCellText(splittedClass) {
   return cellMessage;
 }
 
+function getCreateClassItemTitle(classItem) {
+  const year = classItem?.year ?? classItem?.ano;
+  const semester = classItem?.semester ?? classItem?.semestre;
+  const subject = classItem?.subject ?? classItem?.disciplina;
+  const professor = classItem?.professor;
+  const classTimes = classItem?.classTimes ?? classItem?.horarios;
+  const classTime = classTimes?.[0];
+  const room = classTime?.room ?? classTime?.sala;
+
+  const hasClassTimes = classTimes?.length > 0;
+
+  let title = "";
+  title += `Criar turma`;
+  // title += JSON.stringify(classItem);
+  title += ` (${year}.${semester})`;
+  title += subject ? `\n\t- Disciplina: ${getAliasNameText(subject)}` : "";
+  title += professor ? `\n\t- Professor: ${getAliasNameText(professor)}` : "";
+  title += hasClassTimes ? `\n\t- Horários:` : "";
+  title += room ? `\n\t\t- Sala: ${getAliasNameText(room)}` : "";
+  return title;
+}
+
 /* CLASSTIME */
 
 function getStartHourFormatLabel(hour, context) {
@@ -498,6 +520,7 @@ export {
   getAliasNameText,
   /* MISC */
   getCCTableClassCellText,
+  getCreateClassItemTitle,
   /* CRUD */
   getClassTimeText,
   /* CLASSITEM */

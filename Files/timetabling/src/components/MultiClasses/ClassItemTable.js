@@ -155,9 +155,8 @@ function ClassItemTableRow(classItemRowStates) {
 
 function ClassesTable({ classStates, selectStates, currentSemester }) {
   const createStates = {
+    currentSemester,
     classesStates: classStates,
-    year: currentSemester.year,
-    semester: currentSemester.semester,
     createClassDB: createClass,
   };
 

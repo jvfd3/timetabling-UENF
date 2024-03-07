@@ -1,6 +1,7 @@
 import "./Filters.css";
 import text from "../../config/frontText";
 import myStyles from "../../config/myStyles";
+import emptyObjects from "../../config/emptyObjects";
 import { useEffect, useState } from "react";
 import { readRoom } from "../../helpers/CRUDFunctions/roomCRUD";
 import { readSubject } from "../../helpers/CRUDFunctions/subjectCRUD";
@@ -181,9 +182,29 @@ function MultiClassesFilters(globalStates) {
     return filteredList;
   }
 
+  function updateClassItem(year, semester, professor, subject, room) {
+    const newClassItem = {
+      ...emptyObjects.classItem,
+      ano: year,
+      semestre: semester,
+      professor: professor,
+      disciplina: subject,
+      horarios: room
+        ? [
+            {
+              ...emptyObjects.classTime,
+              sala: { ...room },
+            },
+          ]
+        : [],
+    };
+    setClassItem(newClassItem);
+  }
+
   function updateOuterStates() {
     const filteredClasses = filterList(classes, year, semester);
     setFilteredClasses(filteredClasses);
+    updateClassItem(year, semester, professor, subject, room);
   }
 
   useEffect(() => {

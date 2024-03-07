@@ -3,6 +3,7 @@ import emptyObjects from "../../../config/emptyObjects";
 import defaultColors from "../../../config/defaultColors";
 import createPreFilledClass from "./createPreFilledClass";
 import { getId } from "../../../helpers/auxCRUD";
+import { getDefaultYearSemesterValues } from "../../../helpers/auxFunctions";
 import {
   CreateClassTime,
   DeleteClassTime,
@@ -13,13 +14,10 @@ import {
   UpdateItem,
 } from "../Dumb/Dumb";
 import {
-  getValueFromObject,
-  getDefaultYearSemesterValues,
-} from "../../../helpers/auxFunctions";
-import {
   getAliasNameText,
   getClassItemText,
   getClassTimeText,
+  getCreateClassItemTitle,
   getRoomText,
 } from "../../../helpers/visualizationText/textLabels";
 
@@ -55,17 +53,20 @@ function SmartInputSubject(inputSubjectProps) {
 
 function SmartCreateClassItem(createStates) {
   /* I could clean this Button */
-  const { classesStates, year, semester, createClassDB } = createStates;
+  const { classesStates, currentSemester, createClassDB } = createStates;
+  const { classItem } = classesStates;
 
-  const yearSemester = getDefaultYearSemesterValues();
-
-  const yearValue = getValueFromObject(year) ?? yearSemester.year;
-  const semesterValue = getValueFromObject(semester) ?? yearSemester.semester;
+  const year = classItem?.year ?? classItem?.ano ?? currentSemester?.year;
+  const semester =
+    classItem?.semester ?? classItem?.semestre ?? currentSemester?.semester;
 
   function createClassItemInDB() {
-    const newClass = emptyObjects.classItem;
-    newClass.ano = yearValue;
-    newClass.semestre = semesterValue;
+    const newClass = {
+      ...emptyObjects.classItem,
+      ...classItem,
+      ano: year,
+      semestre: semester,
+    };
 
     const createClassStates = {
       ...classesStates,
@@ -74,7 +75,7 @@ function SmartCreateClassItem(createStates) {
     createClassDB(createClassStates);
   }
 
-  const titleText = `Adicionar turma ${yearValue}.${semesterValue}`;
+  const titleText = getCreateClassItemTitle(classItem);
   return <CreateItem createFunc={createClassItemInDB} text={titleText} />;
 }
 
