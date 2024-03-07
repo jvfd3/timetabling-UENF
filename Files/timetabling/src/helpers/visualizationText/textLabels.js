@@ -296,13 +296,30 @@ function getClassTimeText(classTime) {
   const room = classTime?.room ?? classTime?.sala;
 
   const roomText = getRoomText(room);
-  const durationText = startTime + duration;
+  const endingTime = startTime + duration;
 
-  const values = [roomText, day, startTime + "~" + durationText];
+  const durationText =
+    duration == 0
+      ? "Sem aula"
+      : startTime + "~" + (duration === null ? "?" : endingTime);
+
+  const values = [];
+  if (room) {
+    values.push(roomText);
+  }
+  if (day) {
+    values.push(day);
+  }
+  if (startTime || duration == 0) {
+    values.push(durationText);
+  }
   const cleanValues = values.filter((value) => value !== "");
+  const hasValues = cleanValues.length > 0;
 
   let classTimeText = "";
-  classTimeText += `(${cleanValues.join(", ")})`;
+  classTimeText += hasValues
+    ? ` (${cleanValues.join(", ")})`
+    : ` ${getId(classTime)}`;
   return classTimeText;
 }
 

@@ -106,6 +106,13 @@ const text = {
     unexpectedPlaceholder: "Isso não deveria estar vazio. 😅",
     ccTable: {},
     classTimesTable: {
+      buttons: {
+        create: "",
+        update: {
+          noChanges: "Não foram identificadas alterações no horário",
+        },
+        delete: "",
+      },
       tableTitles: {
         room: "Sala",
         day: "Dia",

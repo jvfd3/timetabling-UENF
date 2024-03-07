@@ -3,7 +3,6 @@ import emptyObjects from "../../../config/emptyObjects";
 import defaultColors from "../../../config/defaultColors";
 import createPreFilledClass from "./createPreFilledClass";
 import { getId } from "../../../helpers/auxCRUD";
-import { getDefaultYearSemesterValues } from "../../../helpers/auxFunctions";
 import {
   CreateClassTime,
   DeleteClassTime,
@@ -20,6 +19,9 @@ import {
   getCreateClassItemTitle,
   getRoomText,
 } from "../../../helpers/visualizationText/textLabels";
+import text from "../../../config/frontText";
+
+const defaultText = text.component.classTimesTable.buttons;
 
 function SmartInputSubject(inputSubjectProps) {
   const { inputConfig, subjects } = inputSubjectProps;
@@ -226,7 +228,7 @@ function SmartUpdateClassTime(updateClassTimeProps) {
     updateClassTimeProps;
 
   const classTimeText = getClassTimeText(classTime);
-  let dontUpdateMessage = `Não foram identificadas alterações no horário `;
+  let dontUpdateMessage = defaultText.update.noChanges;
   dontUpdateMessage += classTimeText;
 
   let baseMessage = `Atualizar horário\n`;
@@ -251,6 +253,7 @@ function SmartUpdateClassTime(updateClassTimeProps) {
 
   function getModificationsProps(oldClassTime, newClassTime) {
     // console.log(`${oldClassTime.dia} -> ${newClassTime.dia}`);
+
     const oldRoom = oldClassTime?.room ?? oldClassTime?.sala;
     const newRoom = newClassTime?.room ?? newClassTime?.sala;
     const oldRoomId = getId(oldRoom);
@@ -269,6 +272,10 @@ function SmartUpdateClassTime(updateClassTimeProps) {
 
     const AAA = oldRoom === null ? "null" : getRoomText(oldRoom);
     const BBB = newRoom === null ? "null" : getRoomText(newRoom);
+
+    function getNewValueLine(propName, oldValue, newValue) {
+      return `\t- ${propName}: ${oldValue} -> ${newValue}\n`;
+    }
 
     const newRoomText = `\t- Sala: ${AAA} -> ${BBB}\n`;
     const newDayText = `\t- Dia: ${oldDay} -> ${newDay}\n`;
@@ -313,15 +320,13 @@ function SmartDeleteClassTime({
   filteredClasses,
   deleteClassTimeDB,
 }) {
-  const classTimeText = getClassTimeText(classTime);
-  const idClass = classTime?.idTurma;
-
   // get classItem from filteredClasses
-  const classItem = filteredClasses.find((c) => getId(c) === idClass);
-  const classItemText = getClassItemText(classItem);
+  const classItem = filteredClasses.find(
+    (iterClassItem) => getId(iterClassItem) === classTime?.idTurma
+  );
 
-  let titleText = `Remover horário ${classTimeText}:\n`;
-  titleText += `\t- turma: ${classItemText}`;
+  let titleText = `Remover horário${getClassTimeText(classTime)}:`;
+  titleText += `\n\t- turma: ${getClassItemText(classItem)}`;
 
   return <DeleteClassTime deleteFunc={deleteClassTimeDB} text={titleText} />;
 }
