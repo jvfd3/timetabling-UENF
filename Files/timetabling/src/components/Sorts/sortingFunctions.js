@@ -52,8 +52,8 @@ function mySorting(a, b, sortOrder) {
 }
 
 function sortClassTimes(classTimes) {
+  classTimes = classTimes ?? [];
   const daysOrder = { SEG: 1, TER: 2, QUA: 3, QUI: 4, SEX: 5 };
-
   classTimes.forEach((classTime) => {
     classTime.dayOrder = daysOrder[classTime.dia];
   });
