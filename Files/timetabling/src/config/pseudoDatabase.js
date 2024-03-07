@@ -34,7 +34,8 @@ const pseudoDatabase = {
       alias: "Bac Bio",
       modality: "presencial",
       category: "bacharelado",
-      name: "Ciências Biológicas (bacharelado)",
+      name: "Ciências Biológicas",
+      // name: "Ciências Biológicas (bacharelado)",
     },
     {
       id: 5,
@@ -115,7 +116,8 @@ const pseudoDatabase = {
       alias: "Lic Bio",
       modality: "presencial",
       category: "licenciatura",
-      name: "Biologia (Licenciatura)",
+      name: "Biologia",
+      // name: "Biologia (Licenciatura)",
     },
     {
       id: 14,
@@ -124,7 +126,8 @@ const pseudoDatabase = {
       alias: "Lic Fís",
       modality: "presencial",
       category: "licenciatura",
-      name: "Física (licenciatura)",
+      name: "Física",
+      // name: "Física (licenciatura)",
     },
     {
       id: 15,
@@ -133,7 +136,8 @@ const pseudoDatabase = {
       alias: "Lic Mat",
       modality: "presencial",
       category: "licenciatura",
-      name: "Matemática (Licenciatura)",
+      name: "Matemática",
+      // name: "Matemática (Licenciatura)",
     },
     {
       id: 16,
@@ -142,7 +146,8 @@ const pseudoDatabase = {
       alias: "Lic Pedag",
       modality: "presencial",
       category: "licenciatura",
-      name: "Pedagogia (Licenciatura)",
+      name: "Pedagogia",
+      // name: "Pedagogia (Licenciatura)",
     },
     {
       id: 17,
@@ -151,7 +156,8 @@ const pseudoDatabase = {
       alias: "Lic Quim",
       modality: "presencial",
       category: "licenciatura",
-      name: "Química (Licenciatura)",
+      name: "Química",
+      // name: "Química (Licenciatura)",
     },
     {
       id: 18,
@@ -160,7 +166,8 @@ const pseudoDatabase = {
       alias: "Lic EAD Bio",
       modality: "EAD",
       category: "licenciatura",
-      name: "Ciências Biológicas (Licenciatura – EaD)",
+      name: "Ciências Biológicas",
+      // name: "Ciências Biológicas (Licenciatura – EaD)",
     },
     {
       id: 19,
@@ -169,7 +176,8 @@ const pseudoDatabase = {
       alias: "Lic EAD Pedag",
       modality: "EAD",
       category: "licenciatura",
-      name: "Pedagogia (Licenciatura – EaD)",
+      name: "Pedagogia",
+      // name: "Pedagogia (Licenciatura – EaD)",
     },
     {
       id: 20,
@@ -178,7 +186,8 @@ const pseudoDatabase = {
       alias: "Lic EAD Quim",
       modality: "EAD",
       category: "licenciatura",
-      name: "Química (Licenciatura – EaD)",
+      name: "Química",
+      // name: "Química (Licenciatura – EaD)",
     },
     {
       id: 21,
@@ -286,7 +295,7 @@ const pseudoDatabase = {
       alias: "PROFMAT",
       modality: null,
       category: null,
-      name: "Matemática em Rede Nacional (UENF) (SBM)",
+      name: "Mestrado Profissional em Matemática em Rede Nacional",
     },
     {
       id: 33,
