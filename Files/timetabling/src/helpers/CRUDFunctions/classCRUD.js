@@ -76,13 +76,12 @@ function createClass(createClassStates) {
 
   function insertNewClass(newId) {
     const newClass = getNewClassItem(newId);
-    const newClasses = [...classes, newClass];
     const hasClassTimes = classItem?.horarios.length > 0;
     if (hasClassTimes) {
       getNewClassTimes(newClass, classItem?.horarios);
     } else {
       setClassItem(newClass);
-      setClasses(newClasses);
+      setClasses((oldClasses) => [...oldClasses, newClass]);
     }
   }
 
