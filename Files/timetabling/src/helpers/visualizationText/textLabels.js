@@ -181,26 +181,25 @@ function getSubjectFormatLabel(subject, context) {
     semesterLabel += "Período: " + checkIndefinition(expectedSemester);
   }
 
-  let preLabel = "";
-  preLabel += "(";
-  preLabel +=
-    center && menuIsOpen(context) ? checkIndefinition(center) + ", " : "";
-  preLabel += lab && menuIsOpen(context) ? checkIndefinition(lab) + ", " : "";
-  preLabel += codeText;
-  preLabel +=
-    expectedSemester && menuIsOpen(context) ? `, ${semesterLabel}` : "";
-  preLabel += ") ";
+  const preLabelTexts = [];
 
-  const shortSubject = alias
-    ? checkIndefinition(alias)
-    : checkIndefinition(name);
-  const longSubject = checkIndefinition(name);
+  if (menuIsOpen(context)) {
+    if (center) preLabelTexts.push(checkIndefinition(center));
+    if (lab) preLabelTexts.push(checkIndefinition(lab));
+    if (expectedSemester) preLabelTexts.push(semesterLabel);
+  }
 
-  let shortLabel = "";
-  shortLabel += shortSubject;
+  const hasPreLabel = preLabelTexts.length > 0;
+  const preLabel = hasPreLabel ? `(${preLabelTexts.join(", ")}) ` : "";
+
+  const shortSubject = getAliasNameText(subject);
+  const longSubject = getNameAliasText(subject);
+
+  let shortLabel = shortSubject;
 
   let fullLabel = "";
-  fullLabel += fullLabel += longSubject;
+  fullLabel += codeText + " - ";
+  fullLabel += longSubject;
 
   let subjectLabel = "";
   subjectLabel += preLabel;
