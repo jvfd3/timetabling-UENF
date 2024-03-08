@@ -25,6 +25,7 @@ import { sortMultiClasses } from "../Sorts/sortingFunctions";
 
 const frontText = text.component.classItemTable.tableTitles;
 const defaultClassNames = myStyles.classNames.local.component.classItemTable;
+const tableClassName = myStyles.classNames.default.componentTable;
 const hasDenseClassSelects = true;
 
 function ClassTableHeader(createStates) {
@@ -163,9 +164,7 @@ function ClassesTable({ classStates, selectStates, currentSemester }) {
   const sortedMultiClasses = sortMultiClasses(classStates.filteredClasses);
 
   return (
-    // <table className="showBasicDataTable">
-    // <table className="Tabelinha">
-    <table>
+    <table className={tableClassName}>
       <ClassTableHeader {...createStates} />
       <tbody>
         {sortedMultiClasses.map((iterClassItem) => {
