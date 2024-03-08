@@ -156,8 +156,6 @@ function getSubjectViewTableText(subject) {
 
 function getSubjectFormatLabel(subject, context) {
   const code = subject?.code ?? subject?.codigo;
-  const name = subject?.name ?? subject?.nome;
-  const alias = subject?.alias ?? subject?.apelido;
 
   const center = subject?.center ?? subject?.centro;
   const lab = subject?.laboratory;
