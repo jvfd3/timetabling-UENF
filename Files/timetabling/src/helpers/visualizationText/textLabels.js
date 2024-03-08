@@ -226,12 +226,10 @@ function getProfessorFormatLabel(professor, context) {
   const labText = checkIndefinition(lab);
   const courseText = checkIndefinition(course);
 
+  const elements = [labText, courseText].filter(Boolean);
+
   let longLabel = "";
-  longLabel += lab || course ? "(" : "";
-  longLabel += lab ? labText : "";
-  longLabel += lab && course ? ", " : "";
-  longLabel += courseText;
-  longLabel += lab || course ? ") " : "";
+  longLabel += elements.length ? `(${elements.join(", ")}) ` : "";
   longLabel += checkIndefinition(name);
 
   let shortLabel = "";
