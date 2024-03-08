@@ -14,12 +14,7 @@ import {
 
 const itemName = "professor";
 
-function createProfessor({
-  professors,
-  setProfessors,
-  professor,
-  setProfessor,
-}) {
+function createProfessor({ setProfessors, setProfessor }) {
   const emptyProfessor = emptyObjects.professor;
 
   function getNewProfessor(newId) {
@@ -38,16 +33,17 @@ function createProfessor({
     .catch(defaultHandleError);
 }
 
-function readProfessor({ professors, setProfessors, setProfessor, professor }) {
+function readProfessor({ professors, setProfessors, setProfessor }) {
   function insertNewProfessorsFromDB(professoresFromDB) {
     setProfessors(professoresFromDB);
-
-    const showedProfessor = refreshShownItem(
-      professor,
-      professors,
-      professoresFromDB
-    );
-    setProfessor(showedProfessor);
+    setProfessor((oldProfessor) => {
+      const showedProfessor = refreshShownItem(
+        oldProfessor,
+        professors,
+        professoresFromDB
+      );
+      return showedProfessor;
+    });
   }
 
   defaultDBRead(itemName)
@@ -55,7 +51,7 @@ function readProfessor({ professors, setProfessors, setProfessor, professor }) {
     .catch(defaultHandleError);
 }
 
-function updateProfessor({ professors, setProfessors, professor }) {
+function updateProfessor({ setProfessors, professor }) {
   function updateProfessorOnList(newProfessor) {
     // setProfessor(newProfessor);
     setProfessors((oldProfessors) => {
@@ -72,12 +68,7 @@ function updateProfessor({ professors, setProfessors, professor }) {
     .catch(defaultHandleError);
 }
 
-function deleteProfessor({
-  professors,
-  setProfessors,
-  professor,
-  setProfessor,
-}) {
+function deleteProfessor({ setProfessors, professor, setProfessor }) {
   function deleteProfessorOnList(deletedProfessor) {
     if (deletedProfessor) {
       setProfessors((oldProfessors) => {
@@ -85,19 +76,14 @@ function deleteProfessor({
           deletedProfessor,
           oldProfessors
         );
+        const showedProfessor = refreshShownItem(
+          professor,
+          oldProfessors,
+          updatedProfessorList
+        );
+        setProfessor(showedProfessor);
         return updatedProfessorList;
       });
-
-      const updatedProfessorList = removeItemInListById(
-        deletedProfessor,
-        professors
-      );
-      const newProfessor = refreshShownItem(
-        professor,
-        professors,
-        updatedProfessorList
-      );
-      setProfessor(newProfessor);
     }
   }
 

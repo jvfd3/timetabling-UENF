@@ -14,7 +14,7 @@ import {
 
 const itemName = "student";
 
-function createStudent({ students, setStudents, student, setStudent }) {
+function createStudent({ setStudents, setStudent }) {
   const emptyStudent = emptyObjects.student;
 
   function getNewStudent(newId) {
@@ -34,12 +34,18 @@ function createStudent({ students, setStudents, student, setStudent }) {
     .catch(defaultHandleError);
 }
 
-function readStudent({ students, setStudents, setStudent, student }) {
+function readStudent({ students, setStudents, setStudent }) {
   function insertNewStudentsFromDB(studentsFromDB) {
     setStudents(studentsFromDB);
 
-    const showedStudent = refreshShownItem(student, students, studentsFromDB);
-    setStudent(showedStudent);
+    setStudent((oldStudent) => {
+      const showedStudent = refreshShownItem(
+        oldStudent,
+        students,
+        studentsFromDB
+      );
+      return showedStudent;
+    });
   }
 
   defaultDBRead(itemName)
@@ -47,7 +53,7 @@ function readStudent({ students, setStudents, setStudent, student }) {
     .catch(defaultHandleError);
 }
 
-function updateStudent({ students, setStudents, student }) {
+function updateStudent({ setStudents, student }) {
   function updateStudentOnList(newStudent) {
     // setStudent(newStudent);
     setStudents((oldStudents) => {
@@ -61,7 +67,7 @@ function updateStudent({ students, setStudents, student }) {
     .catch(defaultHandleError);
 }
 
-function deleteStudent({ students, setStudents, student, setStudent }) {
+function deleteStudent({ setStudents, student, setStudent }) {
   function deleteStudentOnList(deletedStudent) {
     if (deletedStudent) {
       setStudents((oldStudents) => {
@@ -69,16 +75,14 @@ function deleteStudent({ students, setStudents, student, setStudent }) {
           deletedStudent,
           oldStudents
         );
+        const showedStudent = refreshShownItem(
+          student,
+          oldStudents,
+          updatedStudents
+        );
+        setStudent(showedStudent);
         return updatedStudents;
       });
-
-      const updatedStudents = removeItemInListById(deletedStudent, students);
-      const showedStudent = refreshShownItem(
-        student,
-        students,
-        updatedStudents
-      );
-      setStudent(showedStudent);
     }
   }
 

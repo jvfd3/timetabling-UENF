@@ -14,7 +14,7 @@ import {
 
 const itemName = "room";
 
-function createRoom({ rooms, setRooms, room, setRoom }) {
+function createRoom({ setRooms, setRoom }) {
   const emptyRoom = emptyObjects.room;
 
   function getNewRoom(newId) {
@@ -33,18 +33,19 @@ function createRoom({ rooms, setRooms, room, setRoom }) {
     .catch(defaultHandleError);
 }
 
-function readRoom({ rooms, setRooms, setRoom, room }) {
+function readRoom({ rooms, setRooms, setRoom }) {
   function insertNewRoomsFromDB(roomsFromDB) {
     setRooms(roomsFromDB);
-
-    const showedRoom = refreshShownItem(room, rooms, roomsFromDB);
-    setRoom(showedRoom);
+    setRoom((oldRoom) => {
+      const showedRoom = refreshShownItem(oldRoom, rooms, roomsFromDB);
+      return showedRoom;
+    });
   }
 
   defaultDBRead(itemName).then(insertNewRoomsFromDB).catch(defaultHandleError);
 }
 
-function updateRoom({ rooms, setRooms, room }) {
+function updateRoom({ setRooms, room }) {
   function updateRoomOnList(newRoom) {
     // setRoom(newRoom);
     setRooms((oldRooms) => {
@@ -63,12 +64,10 @@ function deleteRoom({ rooms, setRooms, room, setRoom }) {
     if (deletedRoom) {
       setRooms((oldRooms) => {
         const updatedRooms = removeItemInListById(deletedRoom, oldRooms);
+        const showedRoom = refreshShownItem(room, rooms, updatedRooms);
+        setRoom(showedRoom);
         return updatedRooms;
       });
-
-      const deletedRoomList = removeItemInListById(deletedRoom, rooms);
-      const showedRoom = refreshShownItem(room, rooms, deletedRoomList);
-      setRoom(showedRoom);
     }
   }
 

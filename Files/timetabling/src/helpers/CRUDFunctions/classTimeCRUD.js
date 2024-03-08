@@ -16,17 +16,17 @@ import {
 const itemName = "classTime";
 
 function createClassTime(classTimeStates) {
-  const { classes, setClasses, classItem, setClassItem, newClassTimeValues } =
+  const { setClasses, classItem, setClassItem, newClassTimeValues } =
     classTimeStates;
 
   const baseClassTime = {
     ...emptyObjects.classTime,
-    idTurma: getId(classItem),
+    idTurma: newClassTimeValues?.idTurma ?? getId(classItem),
     duracao: newClassTimeValues?.duration ?? newClassTimeValues?.duracao ?? 2,
+    sala: newClassTimeValues?.room ?? newClassTimeValues?.sala ?? null,
     dia: newClassTimeValues?.day ?? newClassTimeValues?.dia ?? null,
     horaInicio:
       newClassTimeValues?.startHour ?? newClassTimeValues?.horaInicio ?? null,
-    sala: newClassTimeValues?.room ?? newClassTimeValues?.sala ?? null,
   };
 
   function getNewClassTime(newId) {
@@ -38,12 +38,12 @@ function createClassTime(classTimeStates) {
     setClassItem((oldClassItem) => {
       const newClassTime = getNewClassTime(newId);
       const newClassTimes = [...oldClassItem.horarios, newClassTime];
-      const newItem = { ...oldClassItem, horarios: newClassTimes };
+      const newClassItem = { ...oldClassItem, horarios: newClassTimes };
       setClasses((oldClasses) => {
-        const newClasses = replaceNewItemInListById(newItem, oldClasses);
+        const newClasses = replaceNewItemInListById(newClassItem, oldClasses);
         return newClasses;
       });
-      return newItem;
+      return newClassItem;
     });
   }
 
@@ -66,7 +66,6 @@ function readClassTime({ classTimes, setClassTimes, setClassTime }) {
     });
   }
 
-  // console.log("readingClassTime");
   defaultDBRead(itemName)
     .then(insertNewClassTimesFromDB)
     .catch(defaultHandleError);
@@ -76,20 +75,19 @@ function updateClassTime({ setClasses, setClassItem, classTime }) {
   function updateClassTimeFromDB(newClassTime) {
     setClassItem((oldClassItem) => {
       const oldClassTimes = oldClassItem?.horarios ?? [];
-      const updatedClassTimes = replaceNewItemInListById(
+      const newClassTimes = replaceNewItemInListById(
         newClassTime,
         oldClassTimes
       );
-      const newClassItem = { ...oldClassItem, horarios: updatedClassTimes };
+      const newClassItem = { ...oldClassItem, horarios: newClassTimes };
       setClasses((oldClasses) => {
-        // Maybe I should put this setClasses inside the setClassItem callback function to deal with the async nature of the state update
         const updatedClasses = replaceNewItemInListById(
           newClassItem,
           oldClasses
         );
         return updatedClasses;
       });
-      return newItem;
+      return newClassItem;
     });
   }
 
@@ -98,38 +96,29 @@ function updateClassTime({ setClasses, setClassItem, classTime }) {
     .catch(defaultHandleError);
 }
 
-function deleteClassTime(classTimeStates) {
-  const { classes, setClasses, classItem, setClassItem, classTime } =
-    classTimeStates;
-
+function deleteClassTime({ setClasses, setClassItem, classTime }) {
   function deleteClassTimeFromDB(deletedClassTime) {
-    const classTimes = classItem?.horarios ?? [];
-    const updatedClassTimes = removeItemInListById(
-      deletedClassTime,
-      classTimes
-    );
-    const newClassItem = { ...classItem, horarios: updatedClassTimes };
-
     setClassItem((oldClassItem) => {
       const oldClassTimes = oldClassItem?.horarios ?? [];
-      const updatedClassTimes = removeItemInListById(
+      const newClassTimes = removeItemInListById(
         deletedClassTime,
         oldClassTimes
       );
-      const newItem = { ...oldClassItem, horarios: updatedClassTimes };
-      return newItem;
-    });
-
-    setClasses((oldClasses) => {
-      // Maybe I should put this setClasses inside the setClassItem callback function to deal with the async nature of the state update
-      const updatedClasses = replaceNewItemInListById(newClassItem, oldClasses);
-      return updatedClasses;
+      const newClassItem = { ...oldClassItem, horarios: newClassTimes };
+      setClasses((oldClasses) => {
+        const newClasses = replaceNewItemInListById(newClassItem, oldClasses);
+        return newClasses;
+      });
+      return newClassItem;
     });
   }
 
   defaultDBDelete(itemName, classTime)
     .then(deleteClassTimeFromDB)
-    .catch(defaultHandleError);
+    .catch((error) => {
+      defaultHandleError(error);
+      deleteClassTimeFromDB(classTime);
+    });
 }
 
 export { createClassTime, readClassTime, updateClassTime, deleteClassTime };

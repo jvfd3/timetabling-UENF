@@ -24,7 +24,7 @@ function createClass(createClassStates) {
 
   const currentSemester = getDefaultYearSemesterValues();
 
-  const newClassItem = {
+  const baseClassItem = {
     ...emptyObjects.classItem,
     ano: year ?? classItem?.year ?? classItem?.ano ?? currentSemester.year,
     semestre:
@@ -40,52 +40,39 @@ function createClass(createClassStates) {
   };
 
   function getNewClassItem(newId) {
-    const newClass = { ...newClassItem, id: newId };
+    const newClass = { ...baseClassItem, id: newId };
     return newClass;
   }
 
-  function getNewClassTimes(newClass, newClassTimes) {
-    let tempClass = { ...newClass };
+  function getNewClassTimes(timelessClassItem, classTimes) {
     async function asyncCreateClassTimeDB(newClassTime) {
       const createClassTimeProps = {
-        classes: [...classes, tempClass],
-        classItem: tempClass,
         setClasses,
         setClassItem,
-        newClassTimeValues: { ...newClassTime },
+        newClassTimeValues: {
+          ...newClassTime,
+          idTurma: getId(timelessClassItem),
+        },
       };
       createClassTime(createClassTimeProps);
     }
-    /* 
-    async function createClassTimesSequentially(newClassTimes) {
-      for (const iterNewClassTime of newClassTimes) {
-        await asyncCreateClassTimeDB(iterNewClassTime);
-      }
-    }
-    createClassTimesSequentially(newClassTimes);
-    */
-    newClassTimes.forEach((iterNewClassTime, index) => {
+    classTimes.forEach((iterNewClassTime, index) => {
       setTimeout(() => {
         asyncCreateClassTimeDB(iterNewClassTime);
-        // console.log(index);
       }, (index + 1) * configInfo.AWS.defaultRequestDelay);
     });
-
-    return newClassTimes;
   }
 
   function insertNewClass(newId) {
-    const newClass = getNewClassItem(newId);
-    const hasClassTimes = classItem?.horarios.length > 0;
-    if (hasClassTimes) {
-      getNewClassTimes(newClass, classItem?.horarios);
-    } else {
-      setClassItem(newClass);
-      setClasses((oldClasses) => [...oldClasses, newClass]);
-    }
+    const newClassItem = getNewClassItem(newId);
+    const classTimes = newClassItem?.classTimes ?? newClassItem?.horarios ?? [];
+    const timelessClassItem = { ...newClassItem, horarios: [] };
+    setClassItem(timelessClassItem);
+    setClasses((oldClasses) => [...oldClasses, newClassItem]);
+    getNewClassTimes(timelessClassItem, classTimes);
   }
 
-  defaultDBCreate(itemName, newClassItem)
+  defaultDBCreate(itemName, baseClassItem)
     .then(insertNewClass)
     .catch(defaultHandleError);
 }
@@ -127,14 +114,14 @@ function deleteClass({ setClasses, classItem, setClassItem }) {
   function deleteClassOnList(classToDelete) {
     if (classToDelete) {
       setClasses((oldClasses) => {
-        const filteredClasses = removeItemInListById(classToDelete, oldClasses);
-        const newItem = refreshShownItem(
+        const newClasses = removeItemInListById(classToDelete, oldClasses);
+        const newClassItem = refreshShownItem(
           classItem,
           oldClasses,
-          filteredClasses
+          newClasses
         );
-        setClassItem(newItem);
-        return filteredClasses;
+        setClassItem(newClassItem);
+        return newClasses;
       });
     }
   }
