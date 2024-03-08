@@ -529,13 +529,31 @@ function getBlockFormatLabel(block, context) {
 
 /* STUDENT */
 
-function getLabelStudentSelection(student) {
+function getLabelStudentSelection(student, context) {
+  // const id = getId(student);
+  const entryYear = student?.entryYear ?? student?.anoEntrada;
+  const course = student?.course ?? student?.curso;
   const enrollment = student?.enrollment ?? student?.matricula;
   const name = student?.name ?? student?.nome;
+  const nameText = getNameAliasText(student);
+
+  const longLabelTexts = [];
+  if (entryYear) longLabelTexts.push(checkIndefinition(entryYear));
+  if (course) longLabelTexts.push(checkIndefinition(course));
+
+  const hasLongLabel = longLabelTexts.length > 0;
+  let longLabel = "";
+  longLabel += hasLongLabel ? `(${longLabelTexts.join(", ")}) ` : "";
+
+  const shortLabelTexts = [];
+  if (enrollment) shortLabelTexts.push(checkIndefinition(enrollment));
+  if (name) shortLabelTexts.push(nameText);
+
+  let shortLabel = "";
 
   let studentLabel = "";
-  studentLabel += enrollment ? enrollment + " - " : "Matrícula Indef. - ";
-  studentLabel += name ? name : "Nome Indef.";
+  studentLabel += menuIsOpen(context) ? longLabel : shortLabel;
+  studentLabel += shortLabelTexts.join(" - ");
   return studentLabel;
 }
 

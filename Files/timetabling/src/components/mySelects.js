@@ -992,7 +992,8 @@ function SelectStudentItem({ students, setStudents, student, setStudent }) {
     customProps: {
       getOptionValue: (student) => getId(student),
       getOptionLabel: (student) => defaultLabel(student),
-      formatOptionLabel: (student) => getLabelStudentSelection(student),
+      formatOptionLabel: (student, { context }) =>
+        getLabelStudentSelection(student, context),
     },
   };
 
