@@ -366,28 +366,24 @@ function getClassTimeLabel(classTime) {
   return classTimeLabel;
 }
 
-function getClassTimeLabelPlus(classItem, index) {
-  const classTimes = classItem?.classTimes ?? classItem?.horarios;
-  const classTime = classTimes?.[index];
-  const nextClassTime = classTimes?.[index + 1];
-  const classTimeLabel = getClassTimeLabel(classTime);
-  const cleanClassTimeLabel = classTime ? classTimeLabel : "";
-  const classTimeLabelEnd = nextClassTime ? "; " : "";
-  return cleanClassTimeLabel + classTimeLabelEnd;
-}
-
 function getClassItemMainSelectionFormatLabel(classItem, context) {
   const id = getId(classItem);
   const year = classItem?.year ?? classItem?.ano;
   const semester = classItem?.semester ?? classItem?.semestre;
   const subject = classItem?.subject ?? classItem?.disciplina;
   const professor = classItem?.professor;
+  const classTimes = classItem?.classTimes ?? classItem?.horarios;
 
-  const classTime1 = getClassTimeLabelPlus(classItem, 0);
-  const classTime2 = getClassTimeLabelPlus(classItem, 1);
-  const classTime3 = getClassTimeLabelPlus(classItem, 2);
-  const classTime4 = getClassTimeLabelPlus(classItem, 3);
-  const classTimesLabel = classTime1 + classTime2 + classTime3 + classTime4;
+  let classTimesLabels = [];
+  classTimes.forEach((classTime) => {
+    const newLabel = getClassTimeLabel(classTime);
+    classTimesLabels.push(newLabel);
+  });
+
+  const hasClassTimes = classTimes?.length > 0;
+  const classTimesLabel = hasClassTimes
+    ? ` - Horários: [${classTimesLabels.join("; ")}]`
+    : "";
 
   const professorName = professor?.name ?? professor?.nome;
   const professorAlias = professor?.alias ?? professor?.apelido;
@@ -400,14 +396,12 @@ function getClassItemMainSelectionFormatLabel(classItem, context) {
   const idLabel = `(id: ${id}) `;
   const yearSemester = `${year}.${semester} - `;
 
-  const classTimeHifen = classTimesLabel ? " - " : "";
-
   let classItemLabel = "";
   // classItemLabel += idLabel;
   classItemLabel += yearSemester;
   classItemLabel += subjectLabel + " - ";
-  classItemLabel += professorLabel + classTimeHifen;
-  classItemLabel += `${classTimesLabel}`;
+  classItemLabel += professorLabel;
+  classItemLabel += classTimesLabel;
   return classItemLabel;
 }
 
