@@ -86,16 +86,22 @@ function createClass(createClassStates) {
   }
 
   defaultDBCreate(itemName, newClassItem)
-    .then((id) => insertNewClass(id))
+    .then(insertNewClass)
     .catch(defaultHandleError);
 }
 
-function readClass({ classes, setClasses, classItem, setClassItem }) {
-  function insertNewClassesFromDB(dataFromDB) {
-    setClasses(dataFromDB);
+function readClass({ classes, setClasses, setClassItem }) {
+  function insertNewClassesFromDB(classesFromDB) {
+    setClasses(classesFromDB);
 
-    const showedClassItem = refreshShownItem(classItem, classes, dataFromDB);
-    setClassItem(showedClassItem);
+    setClassItem((oldClassItem) => {
+      const showedClassItem = refreshShownItem(
+        oldClassItem,
+        classes,
+        classesFromDB
+      );
+      return showedClassItem;
+    });
   }
 
   defaultDBRead(itemName)
@@ -103,13 +109,13 @@ function readClass({ classes, setClasses, classItem, setClassItem }) {
     .catch(defaultHandleError);
 }
 
-function updateClass(classStates) {
-  const { classes, setClasses, classItem, setClassItem } = classStates;
-
+function updateClass({ setClasses, classItem }) {
   function updateClassOnList(newClass) {
-    const updatedClasses = replaceNewItemInListById(newClass, classes);
     // setClassItem(newClass);
-    setClasses(updatedClasses);
+    setClasses((oldClasses) => {
+      const updatedClasses = replaceNewItemInListById(newClass, oldClasses);
+      return updatedClasses;
+    });
   }
 
   defaultDBUpdate(itemName, classItem)
@@ -117,14 +123,19 @@ function updateClass(classStates) {
     .catch(defaultHandleError);
 }
 
-function deleteClass({ classes, setClasses, classItem, setClassItem }) {
+function deleteClass({ setClasses, classItem, setClassItem }) {
   function deleteClassOnList(classToDelete) {
     if (classToDelete) {
-      const filteredClasses = removeItemInListById(classToDelete, classes);
-      setClasses(filteredClasses);
-
-      const newItem = refreshShownItem(classItem, classes, filteredClasses);
-      setClassItem(newItem);
+      setClasses((oldClasses) => {
+        const filteredClasses = removeItemInListById(classToDelete, oldClasses);
+        const newItem = refreshShownItem(
+          classItem,
+          oldClasses,
+          filteredClasses
+        );
+        setClassItem(newItem);
+        return filteredClasses;
+      });
     }
   }
 

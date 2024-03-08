@@ -29,9 +29,8 @@ function createProfessor({
 
   function insertNewProfessorFromDB(newId) {
     const newProfessor = getNewProfessor(newId);
-    const newProfessors = [...professors, newProfessor];
     setProfessor(newProfessor);
-    setProfessors(newProfessors);
+    setProfessors((oldProfessors) => [...oldProfessors, newProfessor]);
   }
 
   defaultDBCreate(itemName, emptyProfessor)
@@ -58,12 +57,14 @@ function readProfessor({ professors, setProfessors, setProfessor, professor }) {
 
 function updateProfessor({ professors, setProfessors, professor }) {
   function updateProfessorOnList(newProfessor) {
-    const updatedProfessors = replaceNewItemInListById(
-      newProfessor,
-      professors
-    );
     // setProfessor(newProfessor);
-    setProfessors(updatedProfessors);
+    setProfessors((oldProfessors) => {
+      const updatedProfessors = replaceNewItemInListById(
+        newProfessor,
+        oldProfessors
+      );
+      return updatedProfessors;
+    });
   }
 
   defaultDBUpdate(itemName, professor)
@@ -79,12 +80,18 @@ function deleteProfessor({
 }) {
   function deleteProfessorOnList(deletedProfessor) {
     if (deletedProfessor) {
+      setProfessors((oldProfessors) => {
+        const updatedProfessorList = removeItemInListById(
+          deletedProfessor,
+          oldProfessors
+        );
+        return updatedProfessorList;
+      });
+
       const updatedProfessorList = removeItemInListById(
         deletedProfessor,
         professors
       );
-      setProfessors(updatedProfessorList);
-
       const newProfessor = refreshShownItem(
         professor,
         professors,

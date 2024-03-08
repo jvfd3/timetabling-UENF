@@ -24,9 +24,8 @@ function createRoom({ rooms, setRooms, room, setRoom }) {
 
   function insertNewRoomFromDB(newId) {
     const newRoom = getNewRoom(newId);
-    const newRooms = [...rooms, newRoom];
     setRoom(newRoom);
-    setRooms(newRooms);
+    setRooms((oldRooms) => [...oldRooms, newRoom]);
   }
 
   defaultDBCreate(itemName, emptyRoom)
@@ -47,9 +46,11 @@ function readRoom({ rooms, setRooms, setRoom, room }) {
 
 function updateRoom({ rooms, setRooms, room }) {
   function updateRoomOnList(newRoom) {
-    const updatedRooms = replaceNewItemInListById(newRoom, rooms);
     // setRoom(newRoom);
-    setRooms(updatedRooms);
+    setRooms((oldRooms) => {
+      const updatedRooms = replaceNewItemInListById(newRoom, oldRooms);
+      return updatedRooms;
+    });
   }
 
   defaultDBUpdate(itemName, room)
@@ -60,9 +61,12 @@ function updateRoom({ rooms, setRooms, room }) {
 function deleteRoom({ rooms, setRooms, room, setRoom }) {
   function deleteRoomOnList(deletedRoom) {
     if (deletedRoom) {
-      const deletedRoomList = removeItemInListById(deletedRoom, rooms);
-      setRooms(deletedRoomList);
+      setRooms((oldRooms) => {
+        const updatedRooms = removeItemInListById(deletedRoom, oldRooms);
+        return updatedRooms;
+      });
 
+      const deletedRoomList = removeItemInListById(deletedRoom, rooms);
       const showedRoom = refreshShownItem(room, rooms, deletedRoomList);
       setRoom(showedRoom);
     }

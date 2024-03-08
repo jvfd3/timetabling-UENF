@@ -7,7 +7,6 @@ import {
   defaultHandleError,
 } from "../../DB/defaultAxiosFunctions";
 import {
-  getId,
   refreshShownItem,
   removeItemInListById,
   replaceNewItemInListById,
@@ -26,9 +25,8 @@ function createStudent({ students, setStudents, student, setStudent }) {
 
   function insertNewStudentFromDB(newId) {
     const newStudent = getNewStudent(newId);
-    const newStudents = [...students, newStudent];
     setStudent(newStudent);
-    setStudents(newStudents);
+    setStudents((oldStudents) => [...oldStudents, newStudent]);
   }
 
   defaultDBCreate(itemName, emptyStudent)
@@ -51,9 +49,11 @@ function readStudent({ students, setStudents, setStudent, student }) {
 
 function updateStudent({ students, setStudents, student }) {
   function updateStudentOnList(newStudent) {
-    const updatedStudents = replaceNewItemInListById(newStudent, students);
     // setStudent(newStudent);
-    setStudents(updatedStudents);
+    setStudents((oldStudents) => {
+      const updatedStudents = replaceNewItemInListById(newStudent, oldStudents);
+      return updatedStudents;
+    });
   }
 
   defaultDBUpdate(itemName, student)
@@ -64,9 +64,15 @@ function updateStudent({ students, setStudents, student }) {
 function deleteStudent({ students, setStudents, student, setStudent }) {
   function deleteStudentOnList(deletedStudent) {
     if (deletedStudent) {
-      const updatedStudents = removeItemInListById(deletedStudent, students);
-      setStudents(updatedStudents);
+      setStudents((oldStudents) => {
+        const updatedStudents = removeItemInListById(
+          deletedStudent,
+          oldStudents
+        );
+        return updatedStudents;
+      });
 
+      const updatedStudents = removeItemInListById(deletedStudent, students);
       const showedStudent = refreshShownItem(
         student,
         students,

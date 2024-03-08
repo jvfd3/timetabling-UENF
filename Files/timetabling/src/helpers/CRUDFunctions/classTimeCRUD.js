@@ -35,12 +35,16 @@ function createClassTime(classTimeStates) {
   }
 
   function insertNewClassTime(newId) {
-    const newClassTime = getNewClassTime(newId);
-    const newClassTimes = [...classItem.horarios, newClassTime];
-    const newClassItem = { ...classItem, horarios: newClassTimes };
-    const newClasses = replaceNewItemInListById(newClassItem, classes);
-    setClassItem(newClassItem);
-    setClasses(newClasses);
+    setClassItem((oldClassItem) => {
+      const newClassTime = getNewClassTime(newId);
+      const newClassTimes = [...oldClassItem.horarios, newClassTime];
+      const newItem = { ...oldClassItem, horarios: newClassTimes };
+      setClasses((oldClasses) => {
+        const newClasses = replaceNewItemInListById(newItem, oldClasses);
+        return newClasses;
+      });
+      return newItem;
+    });
   }
 
   defaultDBCreate(itemName, baseClassTime)
@@ -48,37 +52,45 @@ function createClassTime(classTimeStates) {
     .catch(defaultHandleError);
 }
 
-function readClassTime({ classTimes, setClassTimes, classTime, setClassTime }) {
+function readClassTime({ classTimes, setClassTimes, setClassTime }) {
   function insertNewClassTimesFromDB(dataFromDB) {
     setClassTimes(dataFromDB);
 
-    const showedClassTime = refreshShownItem(classTime, classTimes, dataFromDB);
-    setClassTime(showedClassTime);
+    setClassTime((oldClassTime) => {
+      const showedClassTime = refreshShownItem(
+        oldClassTime,
+        classTimes,
+        dataFromDB
+      );
+      return showedClassTime;
+    });
   }
 
   // console.log("readingClassTime");
   defaultDBRead(itemName)
-    .then((data) => {
-      // console.log(data.length);
-      insertNewClassTimesFromDB(data);
-    })
+    .then(insertNewClassTimesFromDB)
     .catch(defaultHandleError);
 }
 
-function updateClassTime(classTimeStates) {
-  const { classes, setClasses, classItem, setClassItem, classTime } =
-    classTimeStates;
-
+function updateClassTime({ setClasses, setClassItem, classTime }) {
   function updateClassTimeFromDB(newClassTime) {
-    const classTimes = classItem?.horarios ?? [];
-    const updatedClassTimes = replaceNewItemInListById(
-      newClassTime,
-      classTimes
-    );
-    const newClassItem = { ...classItem, horarios: updatedClassTimes };
-    const updatedClasses = replaceNewItemInListById(newClassItem, classes);
-    setClassItem(newClassItem);
-    setClasses(updatedClasses);
+    setClassItem((oldClassItem) => {
+      const oldClassTimes = oldClassItem?.horarios ?? [];
+      const updatedClassTimes = replaceNewItemInListById(
+        newClassTime,
+        oldClassTimes
+      );
+      const newClassItem = { ...oldClassItem, horarios: updatedClassTimes };
+      setClasses((oldClasses) => {
+        // Maybe I should put this setClasses inside the setClassItem callback function to deal with the async nature of the state update
+        const updatedClasses = replaceNewItemInListById(
+          newClassItem,
+          oldClasses
+        );
+        return updatedClasses;
+      });
+      return newItem;
+    });
   }
 
   defaultDBUpdate(itemName, classTime)
@@ -97,9 +109,22 @@ function deleteClassTime(classTimeStates) {
       classTimes
     );
     const newClassItem = { ...classItem, horarios: updatedClassTimes };
-    const updatedClasses = replaceNewItemInListById(newClassItem, classes);
-    setClassItem(newClassItem);
-    setClasses(updatedClasses);
+
+    setClassItem((oldClassItem) => {
+      const oldClassTimes = oldClassItem?.horarios ?? [];
+      const updatedClassTimes = removeItemInListById(
+        deletedClassTime,
+        oldClassTimes
+      );
+      const newItem = { ...oldClassItem, horarios: updatedClassTimes };
+      return newItem;
+    });
+
+    setClasses((oldClasses) => {
+      // Maybe I should put this setClasses inside the setClassItem callback function to deal with the async nature of the state update
+      const updatedClasses = replaceNewItemInListById(newClassItem, oldClasses);
+      return updatedClasses;
+    });
   }
 
   defaultDBDelete(itemName, classTime)

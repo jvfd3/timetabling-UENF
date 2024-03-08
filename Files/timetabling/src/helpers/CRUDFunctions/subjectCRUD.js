@@ -14,7 +14,7 @@ import {
 
 const itemName = "subject";
 
-function createSubject({ subjects, setSubjects, subject, setSubject }) {
+function createSubject({ setSubjects, setSubject }) {
   const emptySubject = emptyObjects.subject;
 
   function getNewSubject(newId) {
@@ -24,9 +24,8 @@ function createSubject({ subjects, setSubjects, subject, setSubject }) {
 
   function insertNewSubjectFromDB(newId) {
     const newSubject = getNewSubject(newId);
-    const newSubjects = [...subjects, newSubject];
     setSubject(newSubject);
-    setSubjects(newSubjects);
+    setSubjects((oldSubjects) => [...oldSubjects, newSubject]);
   }
 
   defaultDBCreate(itemName, emptySubject)
@@ -34,12 +33,18 @@ function createSubject({ subjects, setSubjects, subject, setSubject }) {
     .catch(defaultHandleError);
 }
 
-function readSubject({ subjects, setSubjects, setSubject, subject }) {
+function readSubject({ subjects, setSubjects, setSubject }) {
   function insertNewSubjectsFromDB(subjectsFromDB) {
     setSubjects(subjectsFromDB);
 
-    const showedSubject = refreshShownItem(subject, subjects, subjectsFromDB);
-    setSubject(showedSubject);
+    setSubject((oldSubject) => {
+      const showedSubject = refreshShownItem(
+        oldSubject,
+        subjects,
+        subjectsFromDB
+      );
+      return showedSubject;
+    });
   }
 
   defaultDBRead(itemName)
@@ -47,11 +52,13 @@ function readSubject({ subjects, setSubjects, setSubject, subject }) {
     .catch(defaultHandleError);
 }
 
-function updateSubject({ subjects, setSubjects, subject }) {
+function updateSubject({ setSubjects, subject }) {
   function updateSubjectOnList(newSubject) {
-    const updatedSubjects = replaceNewItemInListById(newSubject, subjects);
     // setSubject(newSubject);
-    setSubjects(updatedSubjects);
+    setSubjects((oldSubjects) => {
+      const updatedSubjects = replaceNewItemInListById(newSubject, oldSubjects);
+      return updatedSubjects;
+    });
   }
 
   defaultDBUpdate(itemName, subject)
@@ -59,18 +66,22 @@ function updateSubject({ subjects, setSubjects, subject }) {
     .catch(defaultHandleError);
 }
 
-function deleteSubject({ subjects, setSubjects, subject, setSubject }) {
+function deleteSubject({ setSubjects, subject, setSubject }) {
   function deleteSubjectOnList(deletedSubject) {
     if (deletedSubject) {
-      const updatedSubjects = removeItemInListById(deletedSubject, subjects);
-      setSubjects(updatedSubjects);
-
-      const showedSubject = refreshShownItem(
-        subject,
-        subjects,
-        updatedSubjects
-      );
-      setSubject(showedSubject);
+      setSubjects((oldSubjects) => {
+        const updatedSubjects = removeItemInListById(
+          deletedSubject,
+          oldSubjects
+        );
+        const showedSubject = refreshShownItem(
+          subject,
+          oldSubjects,
+          updatedSubjects
+        );
+        setSubject(showedSubject);
+        return updatedSubjects;
+      });
     }
   }
 
