@@ -227,7 +227,7 @@ function getProfessorFormatLabel(professor, context) {
 
   let longLabel = "";
   longLabel += elements.length ? `(${elements.join(", ")}) ` : "";
-  longLabel += checkIndefinition(name);
+  longLabel += getNameAliasText(professor);
 
   let shortLabel = "";
   shortLabel += lab || course ? `(${checkIndefinition(lab ?? course)}) ` : "";
@@ -235,7 +235,8 @@ function getProfessorFormatLabel(professor, context) {
 
   let professorLabel = "";
   professorLabel += menuIsOpen(context) ? longLabel : shortLabel;
-  professorLabel = professor ? professorLabel : "Prof. Indef.";
+  professorLabel =
+    professor && professorLabel.length > 0 ? professorLabel : "Prof. Indef.";
   return professorLabel;
 }
 
@@ -446,7 +447,7 @@ function getRoomMainSelectionFormatLabel(room, context) {
   const code = room?.code ?? room?.codigo;
   const description = room?.description ?? room?.descricao;
 
-  const capacityText = `(${checkIndefinition(capacity)}) `;
+  const capacityText = `(${capacity ?? "??"}) `;
   const blockText = checkIndefinition(block);
   const codeText = checkIndefinition(code);
   const descriptionText = checkIndefinition(description);
@@ -549,6 +550,7 @@ function getLabelStudentSelection(student, context) {
   let studentLabel = "";
   studentLabel += menuIsOpen(context) ? longLabel : shortLabel;
   studentLabel += shortLabelTexts.join(" - ");
+  studentLabel = student && studentLabel.length > 0 ? studentLabel : "Indef.";
   return studentLabel;
 }
 
