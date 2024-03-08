@@ -470,22 +470,28 @@ function getRoomFormatLabel(room, context) {
   const capacity = room?.capacity ?? room?.capacidade;
   const code = room?.code ?? room?.codigo;
   const description = room?.description ?? room?.descricao;
-  // const id = room?.id;
+  // const id = getId(room);
   // const idBlock = room?.idBlock;
 
-  const capacityLabel = `(${checkIndefinition(capacity)}) `;
+  const capacityLabel = `(${capacity ?? "?"}) `;
 
   let shortLabel = "";
 
   let longLabel = "";
-  longLabel += "-";
-  longLabel += checkIndefinition(description);
+  longLabel += description ?? "";
+
+  let labelTexts = [];
+  if (block) labelTexts.push(checkIndefinition(block));
+  if (code) labelTexts.push(checkIndefinition(code));
+  labelTexts.push(menuIsOpen(context) ? longLabel : shortLabel);
+
+  // filter all empty texts
+
+  const filteredTexts = labelTexts.filter((text) => text !== "");
 
   let roomLabel = "";
   roomLabel += capacityLabel;
-  roomLabel += checkIndefinition(block) + "-";
-  roomLabel += checkIndefinition(code);
-  roomLabel += menuIsOpen(context) ? longLabel : shortLabel;
+  roomLabel += filteredTexts.join(" - ");
   roomLabel = room ? roomLabel : "Sala Indef.";
   return roomLabel;
 }
