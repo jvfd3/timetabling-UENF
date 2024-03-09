@@ -19,18 +19,29 @@ function createClassTime(classTimeStates) {
   const { setClasses, classItem, setClassItem, newClassTimeValues } =
     classTimeStates;
 
-  const baseClassTime = {
-    ...emptyObjects.classTime,
-    idTurma: newClassTimeValues?.idTurma ?? getId(classItem),
-    duracao: newClassTimeValues?.duration ?? newClassTimeValues?.duracao ?? 2,
-    sala: newClassTimeValues?.room ?? newClassTimeValues?.sala ?? null,
-    dia: newClassTimeValues?.day ?? newClassTimeValues?.dia ?? null,
-    horaInicio:
-      newClassTimeValues?.startHour ?? newClassTimeValues?.horaInicio ?? null,
-  };
+  function getBaseClassTime(parClassItem) {
+    const currClass = parClassItem ?? classItem;
+    const room = newClassTimeValues?.room ?? newClassTimeValues?.sala;
+    const day = newClassTimeValues?.day ?? newClassTimeValues?.dia;
+    const duration =
+      newClassTimeValues?.duration ?? newClassTimeValues?.duracao;
+    const startHour =
+      newClassTimeValues?.startHour ?? newClassTimeValues?.horaInicio;
+
+    const baseClassTime = {
+      ...emptyObjects.classTime,
+      idTurma: newClassTimeValues?.idTurma ?? getId(currClass),
+      duracao: duration ?? 2,
+      sala: room ?? null,
+      dia: day ?? null,
+      horaInicio: startHour ?? null,
+    };
+
+    return baseClassTime;
+  }
 
   function getNewClassTime(newId) {
-    const newClassTime = { ...baseClassTime, id: newId };
+    const newClassTime = { ...getBaseClassTime(), id: newId };
     return newClassTime;
   }
 
@@ -47,7 +58,7 @@ function createClassTime(classTimeStates) {
     });
   }
 
-  defaultDBCreate(itemName, baseClassTime)
+  defaultDBCreate(itemName, getBaseClassTime())
     .then(insertNewClassTime)
     .catch(defaultHandleError);
 }
