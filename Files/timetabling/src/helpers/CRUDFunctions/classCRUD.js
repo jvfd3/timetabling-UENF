@@ -19,28 +19,36 @@ import configInfo from "../../config/configInfo";
 const itemName = "classData";
 
 function createClass(createClassStates) {
-  const { classes, setClasses, classItem, setClassItem, year, semester } =
+  const { setClasses, classItem, setClassItem, year, semester } =
     createClassStates;
 
-  const currentSemester = getDefaultYearSemesterValues();
+  function getBaseClassItem(parClassItem) {
+    const currentSemester = getDefaultYearSemesterValues();
+    const currClassItem = parClassItem ?? classItem;
 
-  const baseClassItem = {
-    ...emptyObjects.classItem,
-    ano: year ?? classItem?.year ?? classItem?.ano ?? currentSemester.year,
-    semestre:
-      semester ??
-      classItem?.semester ??
-      classItem?.semestre ??
-      currentSemester.semester,
-    disciplina: classItem?.subject ?? classItem?.disciplina ?? null,
-    professor: classItem?.professor ?? null,
-    demandaEstimada:
-      classItem?.expectedDemand ?? classItem?.demandaEstimada ?? null,
-    description: classItem?.description ?? null,
-  };
+    const currYear = currClassItem?.year ?? currClassItem?.ano;
+    const currSemester = currClassItem?.semester ?? currClassItem?.semestre;
+    const currSubject = currClassItem?.subject ?? currClassItem?.disciplina;
+    const currExpectedDemand =
+      currClassItem?.expectedDemand ?? currClassItem?.demandaEstimada;
+    const currClassTimes = currClassItem?.classTimes ?? currClassItem?.horarios;
+
+    const baseClassItem = {
+      ...emptyObjects.classItem,
+      ano: year ?? currYear ?? currentSemester.year,
+      semestre: semester ?? currSemester ?? currentSemester.semester,
+      disciplina: currSubject ?? null,
+      demandaEstimada: currExpectedDemand ?? null,
+      professor: currClassItem?.professor ?? null,
+      description: currClassItem?.description ?? null,
+      horarios: currClassTimes ?? [],
+    };
+
+    return baseClassItem;
+  }
 
   function getNewClassItem(newId) {
-    const newClass = { ...baseClassItem, id: newId };
+    const newClass = { ...getBaseClassItem(), id: newId };
     return newClass;
   }
 
@@ -56,10 +64,12 @@ function createClass(createClassStates) {
       };
       createClassTime(createClassTimeProps);
     }
+
     classTimes.forEach((iterNewClassTime, index) => {
+      const delay = (index + 1) * configInfo.AWS.defaultRequestDelay;
       setTimeout(() => {
         asyncCreateClassTimeDB(iterNewClassTime);
-      }, (index + 1) * configInfo.AWS.defaultRequestDelay);
+      }, delay);
     });
   }
 
@@ -72,7 +82,7 @@ function createClass(createClassStates) {
     getNewClassTimes(timelessClassItem, classTimes);
   }
 
-  defaultDBCreate(itemName, baseClassItem)
+  defaultDBCreate(itemName, getBaseClassItem())
     .then(insertNewClass)
     .catch(defaultHandleError);
 }
