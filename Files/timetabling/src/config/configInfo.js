@@ -59,7 +59,7 @@ const configInfo = {
     defaultRequestDelay: 200,
   },
   defaultIndexes: {
-    year: 10, // 10: 2024
+    year: 11, // 10: 2024
     semester: 0, // 1
     professor: 2, // Tang
     student: 38, // João Vítor Fernandes Dias
