@@ -8,7 +8,10 @@ import { readRoom } from "../../../helpers/CRUDFunctions/roomCRUD";
 import { readSubject } from "../../../helpers/CRUDFunctions/subjectCRUD";
 import { readClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
 import { readProfessor } from "../../../helpers/CRUDFunctions/professorCRUD";
-import { MultiClassesFilters } from "../../../components/Filters/Filters";
+import {
+  MultiClassesFilters,
+  MultiClassesFilters2,
+} from "../../../components/Filters/Filters";
 import { SmartCreateClassItem } from "../../../components/Buttons/Smart/Smart";
 import {
   createClass,
@@ -23,10 +26,12 @@ const defaultClassNames = myStyles.classNames.default;
 const pageTexts = text.page.multiClasses;
 
 function MultiClassesCardHeader(globalStates) {
+  const { filterStates } = globalStates;
   return (
     <div className={myStyles.classNames.local.page.multiClasses.header}>
       <h2>{pageTexts.title}</h2>
-      <MultiClassesFilters {...globalStates} />
+      {/* <MultiClassesFilters {...globalStates} /> */}
+      <MultiClassesFilters2 {...filterStates} />
     </div>
   );
 }
@@ -80,6 +85,9 @@ function MultiClasses() {
   const [filteredClasses, setFilteredClasses] = useState([]);
   const [classItem, setClassItem] = useState(getDefaultClassItem());
 
+  const [classItemFilter, setClassItemFilter] = useState(getDefaultClassItem());
+  // const [classTimeFilter, setClassTimeFilter] = useState(getDefaultClassTime());
+
   const [professors, setProfessors] = useState([]);
   const [subjects, setSubjects] = useState([]);
   const [rooms, setRooms] = useState([]);
@@ -119,17 +127,21 @@ function MultiClasses() {
     setRoom: () => {},
   };
   const currentSemester = {
-    year: classItem?.ano,
-    semester: classItem?.semestre,
+    year: classItemFilter?.ano,
+    semester: classItemFilter?.semestre,
   };
-  const selectStates = {
-    professorStates,
-    subjectStates,
-    roomStates,
+  const selectStates = { professorStates, subjectStates, roomStates };
+  const filterStates = {
+    setFilteredClasses,
+    setClassItemFilter,
+    classItemFilter,
+    classes,
+    selectStates,
   };
   const globalStates = {
     classStates,
     selectStates,
+    filterStates,
     classTimeStates,
     currentSemester,
   };

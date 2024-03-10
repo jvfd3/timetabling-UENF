@@ -34,7 +34,26 @@ const filterStyles = myStyles.classNames.local.component.filters;
 const frontText = text.component.filters;
 
 function FilterYear(filterYearStates) {
-  // console.log("filterYearStates", filterYearStates);
+  return (
+    <div className={filterStyles.item}>
+      {frontText.year}
+      <SelectFilterYear {...filterYearStates} />
+    </div>
+  );
+}
+
+function FilterYear2({ setClassItemFilter }) {
+  const defaultYearSemester = getDefaultYearSemesterValues();
+  const [year, setYear] = useState(defaultYearSemester.year);
+  const filterYearStates = { year, setYear };
+
+  useEffect(() => {
+    setClassItemFilter((prevClassItem) => ({
+      ...prevClassItem,
+      ano: year,
+    }));
+  }, [year]);
+
   return (
     <div className={filterStyles.item}>
       {frontText.year}
@@ -218,6 +237,104 @@ function MultiClassesFilters(globalStates) {
   return (
     <div className={filterStyles.block}>
       <FilterYear {...props.year} />
+      <FilterSemester {...props.semester} />
+      <FilterSubject {...props.subject} />
+      <FilterExpectedSemester {...props.expectedSemester} />
+      <FilterProfessor {...props.professor} />
+      <FilterRoom {...props.room} />
+    </div>
+  );
+}
+
+function MultiClassesFilters2(filterStates) {
+  const {
+    setFilteredClasses,
+    setClassItemFilter,
+    classItemFilter,
+    classes,
+    selectStates,
+  } = filterStates;
+  const { professors, subjects, rooms } = selectStates;
+
+  const filterFunc = { setClassItemFilter };
+
+  const defaultYearSemester = getDefaultYearSemesterValues();
+
+  // const [year, setYear] = useState(defaultYearSemester.year);
+  const [semester, setSemester] = useState(defaultYearSemester.semester);
+  const [expectedSemester, setExpectedSemester] = useState(null);
+  const [professor, setProfessor] = useState(null);
+  const [subject, setSubject] = useState(null);
+  const [room, setRoom] = useState(null);
+  const statesToWatchFor = [
+    // year,
+    classItemFilter,
+    room,
+    subject,
+    classes,
+    semester,
+    professor,
+    expectedSemester,
+  ];
+
+  const props = {
+    // year: { year, setYear },
+    room: { rooms, room, setRoom },
+    semester: { semester, setSemester },
+    subject: { subjects, subject, setSubject },
+    professor: { professors, professor, setProfessor },
+    expectedSemester: { expectedSemester, setExpectedSemester },
+  };
+
+  function filterList(classList, classItemFilter) {
+    let filteredList = classList;
+
+    filteredList = filterYear(filteredList, classItemFilter?.ano);
+    filteredList = filterSemester(filteredList, semester);
+    filteredList = filterSubject(filteredList, subject);
+    filteredList = filterProfessor(filteredList, professor);
+    filteredList = filterClassTimes(filteredList, filterRoom, room);
+    filteredList = filterExpectedSemester(filteredList, expectedSemester);
+
+    return filteredList;
+  }
+
+  function updateClassItemFilter(year, semester, professor, subject, room) {
+    const newClassItem = {
+      ...emptyObjects.classItem,
+      ano: year,
+      semestre: semester,
+      professor: professor,
+      disciplina: subject,
+      horarios: room
+        ? [
+            {
+              ...emptyObjects.classTime,
+              sala: { ...room },
+            },
+          ]
+        : [],
+    };
+    setClassItemFilter(newClassItem);
+  }
+
+  function updateOuterStates() {
+    const filteredClasses = filterList(classes, classItemFilter);
+    setFilteredClasses(filteredClasses);
+  }
+
+  useEffect(() => {
+    updateOuterStates();
+  }, []);
+
+  useEffect(() => {
+    updateOuterStates();
+  }, statesToWatchFor);
+
+  return (
+    <div className={filterStyles.block}>
+      {/* <FilterYear {...props.year} /> */}
+      <FilterYear2 {...filterFunc} />
       <FilterSemester {...props.semester} />
       <FilterSubject {...props.subject} />
       <FilterExpectedSemester {...props.expectedSemester} />
@@ -424,6 +541,7 @@ function ViewTableFilters(classTimeStates) {
 
 export {
   MultiClassesFilters,
+  MultiClassesFilters2,
   CCTableFilters,
   ClassesFilters,
   ViewTableFilters,
