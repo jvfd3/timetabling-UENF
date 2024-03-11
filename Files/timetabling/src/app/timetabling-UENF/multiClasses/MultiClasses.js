@@ -4,14 +4,8 @@ import text from "../../../config/frontText";
 import myStyles from "../../../config/myStyles";
 import ClassesTable from "../../../components/MultiClasses/ClassItemTable";
 import NotOfferedSubjects from "../../../components/MultiClasses/NotOfferedSubjects/NotOfferedSubjects";
-import { readRoom } from "../../../helpers/CRUDFunctions/roomCRUD";
-import { readSubject } from "../../../helpers/CRUDFunctions/subjectCRUD";
 import { readClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
-import { readProfessor } from "../../../helpers/CRUDFunctions/professorCRUD";
-import {
-  MultiClassesFilters,
-  MultiClassesFilters2,
-} from "../../../components/Filters/Filters";
+import { MultiClassesFilters } from "../../../components/Filters/Filters";
 import { SmartCreateClassItem } from "../../../components/Buttons/Smart/Smart";
 import {
   createClass,
@@ -20,18 +14,17 @@ import {
 import {
   getDefaultClassItem,
   getDefaultClassTime,
+  getSelectStates,
 } from "../../../helpers/auxCRUD";
 
 const defaultClassNames = myStyles.classNames.default;
 const pageTexts = text.page.multiClasses;
 
-function MultiClassesCardHeader(globalStates) {
-  const { filterStates } = globalStates;
+function MultiClassesCardHeader({ filterStates }) {
   return (
     <div className={myStyles.classNames.local.page.multiClasses.header}>
       <h2>{pageTexts.title}</h2>
-      {/* <MultiClassesFilters {...globalStates} /> */}
-      <MultiClassesFilters2 {...filterStates} />
+      <MultiClassesFilters {...filterStates} />
     </div>
   );
 }
@@ -88,9 +81,7 @@ function MultiClasses() {
   const [classItemFilter, setClassItemFilter] = useState(getDefaultClassItem());
   // const [classTimeFilter, setClassTimeFilter] = useState(getDefaultClassTime());
 
-  const [professors, setProfessors] = useState([]);
-  const [subjects, setSubjects] = useState([]);
-  const [rooms, setRooms] = useState([]);
+  const selectStates = getSelectStates();
 
   const classTimeStates = {
     classTimes,
@@ -107,30 +98,13 @@ function MultiClasses() {
     setFilteredClasses,
     classItem,
     setClassItem,
-  };
-  const professorStates = {
-    professors,
-    setProfessors,
-    professor: {},
-    setProfessor: () => {},
-  };
-  const subjectStates = {
-    subjects,
-    setSubjects,
-    subject: {},
-    setSubject: () => {},
-  };
-  const roomStates = {
-    rooms,
-    setRooms,
-    room: {},
-    setRoom: () => {},
+    classItemFilter,
+    setClassItemFilter,
   };
   const currentSemester = {
     year: classItemFilter?.ano,
     semester: classItemFilter?.semestre,
   };
-  const selectStates = { professorStates, subjectStates, roomStates };
   const filterStates = {
     setFilteredClasses,
     setClassItemFilter,
@@ -147,10 +121,7 @@ function MultiClasses() {
   };
 
   useEffect(() => {
-    readRoom(roomStates);
     readClass(classStates);
-    readSubject(subjectStates);
-    readProfessor(professorStates);
     readClassTime(classTimeStates);
   }, []);
 

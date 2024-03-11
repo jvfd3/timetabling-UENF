@@ -4,6 +4,7 @@ import constantValues from "../../config/constantValues";
 import { filterDay, filterHour } from "../../helpers/filteringFunc";
 import { getCCTableClassCellText } from "../../helpers/visualizationText/textLabels";
 import { sortClassTimes } from "../Sorts/sortingFunctions";
+import { splitTurmas } from "../../helpers/conflicts/auxConflictFunctions";
 
 const localClassNames = myStyles.classNames.local.component.ClassTimeGridCC;
 
@@ -83,8 +84,9 @@ function Row({ hour, classTimes }) {
   );
 }
 
-function Body({ classTimes }) {
-  // console.log(classTimes);
+function Body({ filteredClasses }) {
+  // console.log(filteredClasses);
+  const classTimes = splitTurmas(filteredClasses);
   const hoursTangList = constantValues.hoursTang;
   return (
     <tbody>
@@ -101,12 +103,12 @@ function Body({ classTimes }) {
   );
 }
 
-function ClassTimeGridCC(classTimes) {
-  // console.log(classTimes);
+function ClassTimeGridCC(classStates) {
+  // console.log(classStates);
   return (
     <table className={localClassNames.table}>
       <Header />
-      <Body {...classTimes} />
+      <Body {...classStates} />
     </table>
   );
 }

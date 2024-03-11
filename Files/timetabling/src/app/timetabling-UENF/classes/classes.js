@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import text from "../../../config/frontText";
 import myStyles from "../../../config/myStyles";
-import configInfo from "../../../config/configInfo";
 import ClassTimeTable from "../../../components/ClassTimeTable/ClassTimeTable";
-import { readRoom } from "../../../helpers/CRUDFunctions/roomCRUD";
-import { readSubject } from "../../../helpers/CRUDFunctions/subjectCRUD";
-import { readProfessor } from "../../../helpers/CRUDFunctions/professorCRUD";
 import { ClassesFilters } from "../../../components/Filters/Filters";
 import { sortClassesSelection } from "../../../components/Sorts/sortingFunctions";
 import { CRUDButtonsContainer } from "../../../components/CRUDButtons";
@@ -28,19 +24,20 @@ import {
   TextInputClassExpectedDemand,
   TextInputClassId,
 } from "../../../components/MyTextFields";
+import {
+  getDefaultClassItem,
+  getSelectStates,
+  replaceNewItemInListById,
+} from "../../../helpers/auxCRUD";
 
 const defaultClassNames = myStyles.classNames.default;
 const pageTexts = text.page.classes;
 
-function ClassSelection(classStates) {
+function ClassSelection({ classStates }) {
   /* It just contains the selection an maybe allows scrolling selection */
   const createStates = {
     ...classStates,
     classes: sortClassesSelection(classStates.classes),
-    classItem: {
-      ...classStates.classItem,
-      disciplina: null,
-    },
   };
 
   const ClassCRUDFunctions = {
@@ -53,14 +50,22 @@ function ClassSelection(classStates) {
   return (
     <div className={defaultClassNames.containerItemSelection}>
       <CRUDButtonsContainer {...ClassCRUDFunctions} />
-      <SelectClassItem {...classStates} />
-      <ClassesFilters {...classStates} />
+      <SelectClassItem {...createStates} />
+      <ClassesFilters {...createStates} />
     </div>
   );
 }
 
-function BaseInfoCard(classesStates) {
-  const conflictStyles = classesStates.conflicts.styled;
+function BaseInfoCard(oldClassesStates) {
+  const { classStates, selectStates, conflicts } = oldClassesStates;
+  const classesStates = {
+    ...classStates,
+    professors: selectStates.professorStates.professors,
+    subjects: selectStates.subjectStates.subjects,
+    rooms: selectStates.roomStates.rooms,
+  };
+  const conflictStyles = conflicts.styled;
+
   return (
     <div className={defaultClassNames.containerCardBaseInfo}>
       <h3>{pageTexts.title}</h3>
@@ -115,8 +120,12 @@ function BaseInfoCard(classesStates) {
   );
 }
 
-function ClassTimesTable(classesStates) {
-  const classTimes = classesStates?.classItem?.horarios ?? [];
+function ClassTimesTable({ classStates, conflicts }) {
+  const classTimes = classStates?.classItem?.horarios ?? [];
+  const classTimeTableStates = {
+    ...classStates,
+    conflicts,
+  };
 
   return (
     <div className={defaultClassNames.containerCardBaseInfo}>
@@ -125,62 +134,59 @@ function ClassTimesTable(classesStates) {
           ? pageTexts.classTimeTitles.classTimes
           : pageTexts.classTimeTitles.addClassTime}
       </h3>
-      <ClassTimeTable {...classesStates} />
+      <ClassTimeTable {...classTimeTableStates} />
     </div>
   );
 }
 
 function Classes() {
-  const defaultClasses = [];
-  const [classes, setClasses] = useState(defaultClasses);
+  const [classes, setClasses] = useState([]);
   const [filteredClasses, setFilteredClasses] = useState([]);
-  const [classItem, setClassItem] = useState(
-    classes?.[configInfo.defaultIndexes.classItem] ?? classes?.[0]
-  );
-  const [professors, setProfessors] = useState([]);
-  const [subjects, setSubjects] = useState([]);
-  const [rooms, setRooms] = useState([]);
+  const [classItemFilter, setClassItemFilter] = useState(getDefaultClassItem());
 
-  const selectStates = {
-    professors,
-    setProfessors,
-    professor: {},
-    setProfessor: () => {},
-    subjects,
-    setSubjects,
-    subject: {},
-    setSubject: () => {},
-    rooms,
-    setRooms,
-    room: {},
-    setRoom: () => {},
-  };
+  const selectStates = getSelectStates();
+
+  const [classItem, setClassItem] = useState(null);
 
   const conflicts = getClassItemConflicts(filteredClasses, classItem);
-  const classesStates = {
-    ...selectStates,
+
+  const classStates = {
+    classItem,
+    setClassItem,
     classes,
     setClasses,
     filteredClasses,
     setFilteredClasses,
-    classItem,
-    setClassItem,
+    classItemFilter,
+    setClassItemFilter,
+  };
+
+  const globalStates = {
+    selectStates,
+    classStates,
     conflicts,
   };
 
+  const readClassProps = {
+    classes,
+    setClasses,
+    setClassItem: setClassItem,
+  };
+
   useEffect(() => {
-    readClass(classesStates);
-    readProfessor(selectStates);
-    readSubject(selectStates);
-    readRoom(selectStates);
+    readClass(readClassProps);
   }, []);
+
+  useEffect(() => {
+    setClasses((oldClasses) => replaceNewItemInListById(classItem, oldClasses));
+  }, [classItem]);
 
   return (
     <div className={defaultClassNames.containerCards}>
-      <ClassSelection {...classesStates} />
+      <ClassSelection {...globalStates} />
       <div className={defaultClassNames.containerCardsHolder}>
-        <BaseInfoCard {...classesStates} />
-        <ClassTimesTable {...classesStates} />
+        <BaseInfoCard {...globalStates} />
+        <ClassTimesTable {...globalStates} />
         {/* <Participants /> */}
       </div>
     </div>

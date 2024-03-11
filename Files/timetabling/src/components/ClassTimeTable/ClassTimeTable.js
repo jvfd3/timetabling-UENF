@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import text from "../../config/frontText";
 import myStyles from "../../config/myStyles";
 import { getId } from "../../helpers/auxCRUD";
+import { sortClassTimes } from "../Sorts/sortingFunctions";
 import { getClassTimeConflicts } from "../../helpers/conflicts/centralConflicts";
 import {
   SelectClassTimeDay,
@@ -20,7 +21,6 @@ import {
   updateClassTime,
   deleteClassTime,
 } from "../../helpers/CRUDFunctions/classTimeCRUD";
-import { sortClassTimes } from "../Sorts/sortingFunctions";
 
 const defaultClassNames = myStyles.classNames.default;
 const frontText = text.component.classTimesTable.tableTitles;
@@ -88,15 +88,13 @@ function ClassTimeHeader(createClassTimeProps) {
   );
 }
 
-function ClassTimeTable(classesStates) {
-  const { classItem, conflicts } = classesStates;
+function ClassTimeTable(classStates) {
+  console.log(classStates);
+  const { classItem, conflicts } = classStates;
 
   const createClassTimeProps = {
     classItem,
-    createClassTimeDB: () => {
-      // console.log("classesStates", classesStates);
-      createClassTime(classesStates);
-    },
+    createClassTimeDB: () => createClassTime(classStates),
   };
 
   const hasClassTimes = classItem?.horarios?.length > 0;
@@ -111,7 +109,7 @@ function ClassTimeTable(classesStates) {
       <tbody>
         {sortedClassTimes?.map((iterClassTime) => {
           const classTimeRowStates = {
-            ...classesStates,
+            ...classStates,
             classTime: iterClassTime,
             // shouldUpdate,
             key: `ClassTimeRow: ${getId(iterClassTime)}`,

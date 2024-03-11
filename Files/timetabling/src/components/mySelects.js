@@ -7,7 +7,7 @@ import defaultColors from "../config/defaultColors";
 import constantValues from "../config/constantValues";
 import pseudoDatabase from "../config/pseudoDatabase";
 import sqlDataFromJson from "../DB/dataFromJSON";
-import { getValueFromObject, menuIsOpen } from "../helpers/auxFunctions";
+import { getValueFromObject } from "../helpers/auxFunctions";
 import { LockedProp, UnlockedProp } from "./Buttons/Dumb/Dumb";
 import {
   getId,
@@ -116,9 +116,15 @@ function DefaultSelect(defaultProps) {
 
   useEffect(() => {
     const correctObject = findCorrectObject ? findCorrectObject(value) : value;
-    // console.log(value, currentValue?.name, correctObject);
+    // if (findCorrectObject) {
+    //   console.log("function", findCorrectObject);
+    //   console.log("correct", correctObject);
+    //   console.log("value", value);
+    // }
     setCurrentValue(correctObject);
   }, [value]);
+
+  // console.log(value, currentValue);
 
   return (
     <Select
@@ -337,19 +343,23 @@ function SelectExpectedSemester({
   return <DefaultSelect {...SelectExpectedSemesterStates} />;
 }
 
-function SelectSubject({ outerSubject, setOuterSubject, subjects = [] }) {
+function SelectSubject({
+  outerSubject,
+  setOuterSubject,
+  outerIsClearable = true,
+  subjects = [],
+}) {
   const checkDB = subjects.length > 0;
   const localSubjects = checkDB ? subjects : sqlDataFromJson.subjects;
 
   function findSubjectObject(subject) {
     const subjectObject = getItemFromListById(subject, localSubjects);
-    // console.log(subjectObject);
     return subjectObject ? subjectObject : null;
   }
 
   const SelectSubjectStates = {
     placeHolderText: placeHolders.subject,
-    isClearable: true,
+    isClearable: outerIsClearable,
     options: localSubjects,
     setOuterValue: setOuterSubject,
     value: outerSubject,
@@ -361,7 +371,6 @@ function SelectSubject({ outerSubject, setOuterSubject, subjects = [] }) {
         getSubjectFormatLabel(subject, context),
     },
   };
-  // console.log("SelectSubject", outerSubject?.apelido);
 
   return <DefaultSelect {...SelectSubjectStates} />;
 }
@@ -376,9 +385,8 @@ function SelectProfessor({
   const localProfessors = checkDB ? professors : sqlDataFromJson.professors;
 
   function findProfessorObject(professor) {
-    const professorsList = localProfessors; // get from DB
-    const professorObject = getItemFromListById(professor, professorsList);
-    return professorObject ?? null;
+    const professorObject = getItemFromListById(professor, localProfessors);
+    return professorObject ? professorObject : null;
   }
 
   const SelectProfessorStates = {
@@ -735,7 +743,7 @@ function SelectClassTimeDuration(classTimeStates) {
 /* \ Classes / */
 
 function SelectClassItem(classStates) {
-  const { filteredClasses, setClasses, classItem, setClassItem } = classStates;
+  const { filteredClasses, classItem, setClassItem } = classStates;
 
   const SelectClassItemStates = {
     placeHolderText: placeHolders.classItem,
@@ -796,6 +804,7 @@ function SelectClassSemester(classStates) {
 function SelectClassSubject(classStates) {
   const { classes, setClasses, classItem, setClassItem, subjects } =
     classStates;
+
   function updateClassSubject(newSubject) {
     const newClass = { ...classItem, disciplina: newSubject ?? null };
     const newClasses = replaceNewItemInListById(newClass, classes);

@@ -1,5 +1,9 @@
+import { useEffect, useState } from "react";
 import emptyObjects from "../config/emptyObjects";
 import { getDefaultYearSemesterValues } from "./auxFunctions";
+import { readRoom } from "./CRUDFunctions/roomCRUD";
+import { readSubject } from "./CRUDFunctions/subjectCRUD";
+import { readProfessor } from "./CRUDFunctions/professorCRUD";
 
 function getId(item) {
   const id =
@@ -112,6 +116,41 @@ function refreshShownItem(item, oldItems, newItems) {
   return showedItem;
 }
 
+function getSelectStates() {
+  const [professors, setProfessors] = useState([]);
+  const [subjects, setSubjects] = useState([]);
+  const [rooms, setRooms] = useState([]);
+
+  const professorStates = {
+    professors,
+    setProfessors,
+    professor: {},
+    setProfessor: () => {},
+  };
+  const subjectStates = {
+    subjects,
+    setSubjects,
+    subject: {},
+    setSubject: () => {},
+  };
+  const roomStates = {
+    rooms,
+    setRooms,
+    room: {},
+    setRoom: () => {},
+  };
+
+  useEffect(() => {
+    readRoom(roomStates);
+    readSubject(subjectStates);
+    readProfessor(professorStates);
+  }, []);
+
+  const selectStates = { professorStates, subjectStates, roomStates };
+
+  return selectStates;
+}
+
 export {
   // replaceNewClassTimeInList,
   // replaceNewClassItemInList,
@@ -123,4 +162,5 @@ export {
   getDefaultClassItem, // CreateClass
   getDefaultClassTime, // CreateClass
   getId, // Many places
+  getSelectStates, // Everywhere that needs DB select values
 };
