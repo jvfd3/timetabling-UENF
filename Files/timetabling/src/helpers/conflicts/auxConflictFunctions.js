@@ -105,7 +105,7 @@ function splitTurmas(classes) {
     );
     return splittedClasses;
   } */
-  const newSplittedTurmas = [];
+  const newSplittedClasses = [];
   classes?.forEach((iterClassItem) => {
     if (
       iterClassItem?.horarios !== null &&
@@ -113,7 +113,7 @@ function splitTurmas(classes) {
     ) {
       iterClassItem?.horarios.forEach((iterClassTime) => {
         const newClassItem = flattenTurma(iterClassItem, iterClassTime);
-        newSplittedTurmas.push(newClassItem);
+        newSplittedClasses.push(newClassItem);
       });
     } else {
       const newClassItem = {
@@ -122,11 +122,11 @@ function splitTurmas(classes) {
         ...iterClassItem,
       };
       delete newClassItem?.horarios;
-      newSplittedTurmas.push(newClassItem);
+      newSplittedClasses.push(newClassItem);
     }
   });
 
-  return newSplittedTurmas;
+  return newSplittedClasses;
 }
 
 export {
