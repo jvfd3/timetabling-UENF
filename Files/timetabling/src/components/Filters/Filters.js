@@ -48,8 +48,8 @@ function FilterYear2({ setClassItemFilter }) {
   const filterYearStates = { year, setYear };
 
   useEffect(() => {
-    setClassItemFilter((prevClassItem) => ({
-      ...prevClassItem,
+    setClassItemFilter((prevClassItemFilter) => ({
+      ...prevClassItemFilter,
       ano: year,
     }));
   }, [year]);
@@ -63,6 +63,26 @@ function FilterYear2({ setClassItemFilter }) {
 }
 
 function FilterSemester(filterSemesterStates) {
+  return (
+    <div className={filterStyles.item}>
+      {frontText.semester}
+      <SelectFilterSemester {...filterSemesterStates} />
+    </div>
+  );
+}
+
+function FilterSemester2({ setClassItemFilter }) {
+  const defaultYearSemester = getDefaultYearSemesterValues();
+  const [semester, setSemester] = useState(defaultYearSemester.semester);
+  const filterSemesterStates = { semester, setSemester };
+
+  useEffect(() => {
+    setClassItemFilter((prevClassItemFilter) => ({
+      ...prevClassItemFilter,
+      semestre: semester,
+    }));
+  }, [semester]);
+
   return (
     <div className={filterStyles.item}>
       {frontText.semester}
@@ -98,7 +118,48 @@ function FilterExpectedSemester(filterExpectedSemesterStates) {
   );
 }
 
+function FilterExpectedSemester2({ setClassItemFilter }) {
+  const [expectedSemester, setExpectedSemester] = useState(1);
+  const filterExpectedSemesterStates = {
+    expectedSemester,
+    setExpectedSemester,
+  };
+
+  useEffect(() => {
+    setClassItemFilter((prevClassItemFilter) => ({
+      ...prevClassItemFilter,
+      expectedSemester: expectedSemester,
+    }));
+  }, [expectedSemester]);
+
+  return (
+    <div className={filterStyles.item}>
+      {frontText.expectedSemester}
+      <SelectFilterExpectedSemester {...filterExpectedSemesterStates} />
+    </div>
+  );
+}
+
 function FilterSubject(filterSubjectStates) {
+  return (
+    <div className={filterStyles.item}>
+      {frontText.subject}
+      <SelectFilterSubject {...filterSubjectStates} />
+    </div>
+  );
+}
+
+function FilterSubject2({ setClassItemFilter }) {
+  const [subject, setSubject] = useState(null);
+  const filterSubjectStates = { subject, setSubject };
+
+  useEffect(() => {
+    setClassItemFilter((prevClassItemFilter) => ({
+      ...prevClassItemFilter,
+      disciplina: subject,
+    }));
+  }, [subject]);
+
   return (
     <div className={filterStyles.item}>
       {frontText.subject}
@@ -116,6 +177,25 @@ function FilterProfessor(filterProfessorStates) {
   );
 }
 
+function FilterProfessor2({ setClassItemFilter, professors }) {
+  const [professor, setProfessor] = useState(null);
+  const filterProfessorStates = { professor, setProfessor, professors };
+
+  useEffect(() => {
+    setClassItemFilter((prevClassItemFilter) => ({
+      ...prevClassItemFilter,
+      professor: professor,
+    }));
+  }, [professor]);
+
+  return (
+    <div className={filterStyles.item}>
+      {frontText.professor}
+      <SelectFilterProfessor {...filterProfessorStates} />
+    </div>
+  );
+}
+
 function FilterRoom(filterRoomStates) {
   return (
     <div className={filterStyles.item}>
@@ -125,8 +205,37 @@ function FilterRoom(filterRoomStates) {
   );
 }
 
+function FilterRoom2({ setClassItemFilter, rooms }) {
+  const [room, setRoom] = useState(null);
+  const filterRoomStates = { room, setRoom, rooms };
+
+  useEffect(() => {
+    setClassItemFilter((prevClassItemFilter) => ({
+      ...prevClassItemFilter,
+      horarios: room
+        ? [
+            {
+              ...emptyObjects.classTime,
+              sala: { ...room },
+            },
+          ]
+        : [],
+    }));
+  }, [room]);
+
+  return (
+    <div className={filterStyles.item}>
+      {frontText.room}
+      <SelectFilterRoom {...filterRoomStates} />
+    </div>
+  );
+}
+
 function filterClassTimes(classes, filterFunction, filterValue) {
-  let classesToReturn = classes;
+  if (filterValue === null || filterValue === undefined) {
+    return classes;
+  }
+
   // Splitted classes are used to filter the classes
   const splittedClasses = splitTurmas(classes);
   // Filter classes based on selected value (null by default)
@@ -140,19 +249,17 @@ function filterClassTimes(classes, filterFunction, filterValue) {
     filteredIds.includes(iterClassItem?.id)
   );
 
-  classesToReturn = filteredClasses;
-  if (filterValue === null) {
-    classesToReturn = classes;
-  }
-  /*   const debug = {
+  /*
+  const debug = {
     classes: classes.length,
     splittedClasses: splittedClasses.length,
     filteredSplittedClasses: filteredSplittedClasses.length,
     filteredClasses: filteredClasses.length,
     classesToReturn: classesToReturn.length,
   };
-  console.log(debug); */
-  return classesToReturn;
+  console.log(debug);
+  */
+  return filteredClasses;
 }
 
 function MultiClassesFilters(globalStates) {
@@ -254,68 +361,24 @@ function MultiClassesFilters2(filterStates) {
     classes,
     selectStates,
   } = filterStates;
-  const { professors, subjects, rooms } = selectStates;
 
-  const filterFunc = { setClassItemFilter };
-
-  const defaultYearSemester = getDefaultYearSemesterValues();
-
-  // const [year, setYear] = useState(defaultYearSemester.year);
-  const [semester, setSemester] = useState(defaultYearSemester.semester);
-  const [expectedSemester, setExpectedSemester] = useState(null);
-  const [professor, setProfessor] = useState(null);
-  const [subject, setSubject] = useState(null);
-  const [room, setRoom] = useState(null);
-  const statesToWatchFor = [
-    // year,
-    classItemFilter,
-    room,
-    subject,
-    classes,
-    semester,
-    professor,
-    expectedSemester,
-  ];
-
-  const props = {
-    // year: { year, setYear },
-    room: { rooms, room, setRoom },
-    semester: { semester, setSemester },
-    subject: { subjects, subject, setSubject },
-    professor: { professors, professor, setProfessor },
-    expectedSemester: { expectedSemester, setExpectedSemester },
-  };
+  const filterProps = { ...selectStates, setClassItemFilter };
+  const statesToWatchFor = [classes, classItemFilter];
 
   function filterList(classList, classItemFilter) {
     let filteredList = classList;
 
+    const room = classItemFilter?.horarios?.[0]?.sala;
+    const expectedSemester = classItemFilter?.expectedSemester;
+
     filteredList = filterYear(filteredList, classItemFilter?.ano);
-    filteredList = filterSemester(filteredList, semester);
-    filteredList = filterSubject(filteredList, subject);
-    filteredList = filterProfessor(filteredList, professor);
+    filteredList = filterSemester(filteredList, classItemFilter?.semestre);
+    filteredList = filterSubject(filteredList, classItemFilter?.disciplina);
+    filteredList = filterProfessor(filteredList, classItemFilter?.professor);
     filteredList = filterClassTimes(filteredList, filterRoom, room);
     filteredList = filterExpectedSemester(filteredList, expectedSemester);
 
     return filteredList;
-  }
-
-  function updateClassItemFilter(year, semester, professor, subject, room) {
-    const newClassItem = {
-      ...emptyObjects.classItem,
-      ano: year,
-      semestre: semester,
-      professor: professor,
-      disciplina: subject,
-      horarios: room
-        ? [
-            {
-              ...emptyObjects.classTime,
-              sala: { ...room },
-            },
-          ]
-        : [],
-    };
-    setClassItemFilter(newClassItem);
   }
 
   function updateOuterStates() {
@@ -325,21 +388,16 @@ function MultiClassesFilters2(filterStates) {
 
   useEffect(() => {
     updateOuterStates();
-  }, []);
-
-  useEffect(() => {
-    updateOuterStates();
   }, statesToWatchFor);
 
   return (
     <div className={filterStyles.block}>
-      {/* <FilterYear {...props.year} /> */}
-      <FilterYear2 {...filterFunc} />
-      <FilterSemester {...props.semester} />
-      <FilterSubject {...props.subject} />
-      <FilterExpectedSemester {...props.expectedSemester} />
-      <FilterProfessor {...props.professor} />
-      <FilterRoom {...props.room} />
+      <FilterYear2 {...filterProps} />
+      <FilterSemester2 {...filterProps} />
+      <FilterSubject2 {...filterProps} />
+      <FilterExpectedSemester2 {...filterProps} />
+      <FilterProfessor2 {...filterProps} />
+      <FilterRoom2 {...filterProps} />
     </div>
   );
 }
