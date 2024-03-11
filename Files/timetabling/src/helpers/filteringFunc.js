@@ -5,8 +5,8 @@ import {
 } from "./auxFunctions";
 
 function generalFilter(originData, originPropArray, propValueToFind) {
-  const filteredData = originData.filter((data) => {
-    const propValue = getValueFromDataWithPropArray(data, originPropArray);
+  const filteredData = originData.filter((iterData) => {
+    const propValue = getValueFromDataWithPropArray(iterData, originPropArray);
     const found = propValue === propValueToFind;
     return found;
   });
