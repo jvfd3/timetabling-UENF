@@ -142,7 +142,7 @@ function getClassTimePropValue(prevClassItemFilter, propName, propValue) {
     horarios: [{ ...oldClassTimeFilter, [propName]: newPropValue }],
   };
 
-  console.log(newClassItemFilter);
+  // console.log(newClassItemFilter);
   return newClassItemFilter;
 }
 
