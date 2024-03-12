@@ -47,8 +47,9 @@ function createClassTime(classTimeStates) {
 
   function insertNewClassTime(newId) {
     setClassItem((oldClassItem) => {
+      const oldClassTimes = oldClassItem?.horarios ?? [];
       const newClassTime = getNewClassTime(newId);
-      const newClassTimes = [...oldClassItem.horarios, newClassTime];
+      const newClassTimes = [...oldClassTimes, newClassTime];
       const newClassItem = { ...oldClassItem, horarios: newClassTimes };
       setClasses((oldClasses) => {
         const newClasses = replaceNewItemInListById(newClassItem, oldClasses);

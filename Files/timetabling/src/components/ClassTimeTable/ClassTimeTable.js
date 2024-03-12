@@ -89,7 +89,6 @@ function ClassTimeHeader(createClassTimeProps) {
 }
 
 function ClassTimeTable(classStates) {
-  console.log(classStates);
   const { classItem, conflicts } = classStates;
 
   const createClassTimeProps = {

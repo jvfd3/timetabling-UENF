@@ -13,24 +13,22 @@ function createPreFilledClass({ classStates, subjects }) {
   function asyncCreateClassDB(iterSubject) {
     const sameSubjectClasses = filterSubject(classes, iterSubject);
     const usualInfo = getUsualInfo(sameSubjectClasses);
-
     const newClassItem = getNewClassItem(
       classItemFilter,
       iterSubject,
       usualInfo
     );
-    newClassItem.horarios = getNewClassTimes(usualInfo);
+    newClassItem.horarios = getNewClassTimes(usualInfo.classTime);
 
-    const newLocalStates = { ...classStates, classItem: newClassItem };
+    const newLocalStates = { ...classStates, classItemFilter: newClassItem };
 
     createClass(newLocalStates);
   }
 
   subjects.forEach((iterSubject, index) => {
-    setTimeout(
-      () => asyncCreateClassDB(iterSubject),
-      (index + 1) * configInfo.AWS.defaultRequestDelay
-    );
+    const delayedFunction = () => asyncCreateClassDB(iterSubject);
+    const delay = (index + 1) * configInfo.AWS.defaultRequestDelay;
+    setTimeout(delayedFunction, delay);
   });
 }
 

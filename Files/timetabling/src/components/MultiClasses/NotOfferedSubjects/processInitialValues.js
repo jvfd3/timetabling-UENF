@@ -162,30 +162,30 @@ function getUsualInfo(classes) {
 
 function getNewClassItem(classItemFilter, iterSubject, usualInfo) {
   const defaultYearSemester = getDefaultYearSemesterValues();
-  const year =
-    classItemFilter.year ??
-    classItemFilter.ano ??
-    defaultYearSemester.year ??
-    null;
-  const semester =
-    classItemFilter.semester ??
-    classItemFilter.semestre ??
-    defaultYearSemester.semester ??
-    null;
+
+  const yearValue = classItemFilter?.year ?? classItemFilter?.ano;
+  const semesterValue = classItemFilter?.semester ?? classItemFilter?.semestre;
+
+  const year = yearValue ?? defaultYearSemester.year;
+  const semester = semesterValue ?? defaultYearSemester.semester;
 
   const newClass = {
     ...emptyObjects.classItem,
     ano: year,
     semestre: semester,
     disciplina: iterSubject ?? null,
-    professor: usualInfo?.professor?.[0] ?? usualInfo?.professor ?? null,
+    professor:
+      usualInfo?.professor?.[0] ??
+      usualInfo?.professor ??
+      classItemFilter?.professor ??
+      null,
     demandaEstimada: /* usualInfo?.expectedDemand ?? */ null,
     description: usualInfo?.description ?? null,
   };
   return newClass;
 }
 
-function getNewClassTimes({ classTime }) {
+function getNewClassTimes(classTime) {
   const classTimes = [];
   // console.log("classTime", classTime);
   for (let i = 0; i < classTime?.quantity; i++) {
