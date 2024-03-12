@@ -111,7 +111,15 @@ function Rooms() {
   return (
     <div className={defaultClassNames.containerCards}>
       <RoomSelection {...roomStates} />
-      <RoomCard {...roomStates} />
+      {room ? (
+        <RoomCard {...roomStates} />
+      ) : (
+        <div className={defaultClassNames.containerCardsHolder}>
+          <div className={defaultClassNames.containerCardBaseInfo}>
+            <h2>Selecione um sala</h2>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

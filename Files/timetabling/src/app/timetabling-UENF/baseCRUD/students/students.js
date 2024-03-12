@@ -108,7 +108,15 @@ function Students() {
   return (
     <div className={defaultClassNames.containerCards}>
       <StudentSelection {...studentStates} />
-      <StudentCard {...studentStates} />
+      {student ? (
+        <StudentCard {...studentStates} />
+      ) : (
+        <div className={defaultClassNames.containerCardsHolder}>
+          <div className={defaultClassNames.containerCardBaseInfo}>
+            <h2>Selecione um aluno</h2>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -117,7 +117,15 @@ function Subjects() {
   return (
     <div className={defaultClassNames.containerCards}>
       <SubjectSelection {...subjectStates} />
-      <SubjectCard {...subjectStates} />
+      {subject ? (
+        <SubjectCard {...subjectStates} />
+      ) : (
+        <div className={defaultClassNames.containerCardsHolder}>
+          <div className={defaultClassNames.containerCardBaseInfo}>
+            <h2>Selecione uma disciplina</h2>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

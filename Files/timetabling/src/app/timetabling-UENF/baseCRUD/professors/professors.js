@@ -112,7 +112,15 @@ function Professors() {
   return (
     <div className={defaultClassNames.containerCards}>
       <ProfessorSelection {...professorStates} />
-      <ProfessorCard {...professorStates} />
+      {professor ? (
+        <ProfessorCard {...professorStates} />
+      ) : (
+        <div className={defaultClassNames.containerCardsHolder}>
+          <div className={defaultClassNames.containerCardBaseInfo}>
+            <h2>Selecione um professor</h2>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -136,6 +136,16 @@ function ClassTimesTable({ classStates, conflicts }) {
   );
 }
 
+function ClassCard(globalStates) {
+  return (
+    <div className={defaultClassNames.containerCardsHolder}>
+      <BaseInfoCard {...globalStates} />
+      <ClassTimesTable {...globalStates} />
+      {/* <Participants /> */}
+    </div>
+  );
+}
+
 function Classes() {
   const [classes, setClasses] = useState([]);
   const [filteredClasses, setFilteredClasses] = useState([]);
@@ -181,11 +191,15 @@ function Classes() {
   return (
     <div className={defaultClassNames.containerCards}>
       <ClassSelection {...globalStates} />
-      <div className={defaultClassNames.containerCardsHolder}>
-        <BaseInfoCard {...globalStates} />
-        <ClassTimesTable {...globalStates} />
-        {/* <Participants /> */}
-      </div>
+      {classItem ? (
+        <ClassCard {...globalStates} />
+      ) : (
+        <div className={defaultClassNames.containerCardsHolder}>
+          <div className={defaultClassNames.containerCardBaseInfo}>
+            <h2>Selecione uma turma</h2>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
