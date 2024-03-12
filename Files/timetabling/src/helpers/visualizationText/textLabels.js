@@ -113,7 +113,7 @@ function getCreateClassItemTitle(classItem) {
   title += ` (${year}.${semester})`;
   title += subject ? `\n\t- Disciplina: ${getAliasNameText(subject)}` : "";
   title += professor ? `\n\t- Professor: ${getAliasNameText(professor)}` : "";
-  title += hasClassTimes ? `\n\t- Horários:` : "";
+  title += hasClassTimes && room ? `\n\t- Horários:` : "";
   title += room ? `\n\t\t- Sala: ${getAliasNameText(room)}` : "";
   return title;
 }

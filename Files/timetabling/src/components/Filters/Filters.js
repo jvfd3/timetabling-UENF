@@ -131,8 +131,9 @@ function FilterProfessor({ setClassItemFilter, professorStates }) {
 }
 
 function getClassTimePropValue(prevClassItemFilter, propName, propValue) {
-  const oldClassTimeFilter = { ...prevClassItemFilter?.horarios?.[0] } ?? {
+  const oldClassTimeFilter = {
     ...emptyObjects.classTime,
+    ...prevClassItemFilter?.horarios?.[0],
   };
   const newPropValue = !propValue ? null : propValue;
 
@@ -147,10 +148,11 @@ function getClassTimePropValue(prevClassItemFilter, propName, propValue) {
 function FilterRoom({ setClassItemFilter, roomStates }) {
   const [room, setRoom] = useState(null);
   const filterRoomStates = { ...roomStates, room, setRoom };
+  const propName = "sala";
 
   useEffect(() => {
     setClassItemFilter((prevClassItemFilter) =>
-      getClassTimePropValue(prevClassItemFilter, "sala", room)
+      getClassTimePropValue(prevClassItemFilter, propName, room)
     );
   }, [room]);
 
