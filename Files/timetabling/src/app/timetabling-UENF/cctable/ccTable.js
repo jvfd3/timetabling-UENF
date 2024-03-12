@@ -11,12 +11,15 @@ function CCTableView() {
   const [classes, setClasses] = useState([]);
   const [filteredClasses, setFilteredClasses] = useState([]);
   const [classItemFilter, setClassItemFilter] = useState(getDefaultClassItem());
+  const [classItem, setClassItem] = useState(null);
 
   const selectStates = getSelectStates();
 
   const classStates = {
     classes,
     setClasses,
+    classItem,
+    setClassItem,
     filteredClasses,
     setFilteredClasses,
     classItemFilter,
