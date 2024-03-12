@@ -338,7 +338,7 @@ function ViewTableFilters(filterStates) {
   // console.log(baseFilter, baseValueToFilter);
 
   const filterProps = { setClassItemFilter };
-  const statesToWatchFor = [classes, classItemFilter];
+  const statesToWatchFor = [classes, classItemFilter, baseValueToFilter];
 
   function filterList(classList, classItemFilter) {
     const dayValue = classItemFilter?.horarios?.[0]?.dia;
