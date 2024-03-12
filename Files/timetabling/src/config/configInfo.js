@@ -1,6 +1,15 @@
 const configInfo = {
   iconButtons: true,
   hasDenseClassSelects: true,
+  defaultIndexes: {
+    year: 9, // 5: 2019; 10: 2024
+    semester: 0, // 1
+    professor: 2, // Tang
+    student: 38, // João Vítor Fernandes Dias
+    subject: 58, // Monografia
+    room: 1, // Inf. 1
+    classItem: 10,
+  },
   toast: {
     autoClose: 2000,
     position: "bottom-right",
@@ -58,15 +67,6 @@ const configInfo = {
     fullEndpoint:
       "https://mckwruc3w1.execute-api.us-east-2.amazonaws.com/timetablingStage",
     defaultRequestDelay: 200,
-  },
-  defaultIndexes: {
-    year: 11, // 5: 2019; 10: 2024
-    semester: 0, // 1
-    professor: 2, // Tang
-    student: 38, // João Vítor Fernandes Dias
-    subject: 58, // Monografia
-    room: 1, // Inf. 1
-    classItem: 10,
   },
 };
 
