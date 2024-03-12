@@ -3,6 +3,7 @@ import "./ClassItemTable.css";
 import React, { useState } from "react";
 import text from "../../config/frontText";
 import myStyles from "../../config/myStyles";
+import configInfo from "../../config/configInfo";
 import ClassTimeTable from "../ClassTimeTable/ClassTimeTable";
 import { getId } from "../../helpers/auxCRUD";
 import { sortMultiClasses } from "../Sorts/sortingFunctions";
@@ -26,7 +27,6 @@ import {
 const frontText = text.component.classItemTable.tableTitles;
 const defaultClassNames = myStyles.classNames.local.component.classItemTable;
 const tableClassName = myStyles.classNames.default.componentTable;
-const hasDenseClassSelects = true;
 
 function ClassTableHeader({ createClassItemStates }) {
   return (
@@ -35,7 +35,7 @@ function ClassTableHeader({ createClassItemStates }) {
         <th>
           <SmartCreateClassItem {...createClassItemStates} />
         </th>
-        {hasDenseClassSelects ? (
+        {configInfo.hasDenseClassSelects ? (
           <>
             <th>
               <div className={defaultClassNames.header}>
@@ -96,7 +96,7 @@ function ClassItemTableRow(classItemRowStates) {
           <SmartUpdateClassItem {...CRUDClassItemProps} />
         </div>
       </td>
-      {hasDenseClassSelects ? (
+      {configInfo.hasDenseClassSelects ? (
         <>
           <td>
             <div>

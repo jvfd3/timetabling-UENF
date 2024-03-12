@@ -1,5 +1,6 @@
 const configInfo = {
   iconButtons: true,
+  hasDenseClassSelects: true,
   toast: {
     autoClose: 2000,
     position: "bottom-right",
