@@ -149,7 +149,11 @@ function ClassItemTableRow(classItemRowStates) {
         </>
       )}
 
-      <td>
+      <td
+        className={
+          myStyles.classNames.local.component.classItemTable.classTimes
+        }
+      >
         <ClassTimeTable {...classTimeTableProps} />
       </td>
     </tr>

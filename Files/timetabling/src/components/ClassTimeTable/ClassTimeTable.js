@@ -1,3 +1,4 @@
+import "./ClassTimeTable.css";
 import React, { useState } from "react";
 import text from "../../config/frontText";
 import myStyles from "../../config/myStyles";
@@ -87,7 +88,9 @@ function ClassTimeTable(classStates) {
   const sortedClassTimes = sortClassTimes(classTimes);
 
   return !hasClassTimes ? (
-    <SmartCreateClassTime {...classStates} />
+    <div className={myStyles.classNames.local.component.classTimeTable.padding}>
+      <SmartCreateClassTime {...classStates} />
+    </div>
   ) : (
     <table className={defaultClassNames.componentTable}>
       <ClassTimeHeader {...classStates} />

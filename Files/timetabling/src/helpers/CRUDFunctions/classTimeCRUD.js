@@ -129,6 +129,7 @@ function deleteClassTime({ setClasses, classTime }) {
     });
   }
 
+  deleteClassTimeFromDB(classTime); // optimistic delete (deletes even if there is an error in the server)
   defaultDBDelete(itemName, classTime)
     .then(deleteClassTimeFromDB)
     .catch((error) => {

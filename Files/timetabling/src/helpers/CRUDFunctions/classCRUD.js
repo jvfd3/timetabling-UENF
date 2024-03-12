@@ -121,22 +121,15 @@ function updateClass({ setClasses, classItem }) {
 
 function deleteClass({ setClasses, classItem, setClassItem }) {
   function deleteClassOnList(classToDelete) {
-    if (classToDelete) {
-      setClasses((oldClasses) => {
-        const newClasses = removeItemInListById(classToDelete, oldClasses);
-        const newClassItem = refreshShownItem(
-          classItem,
-          oldClasses,
-          newClasses
-        );
-        setClassItem(newClassItem);
-        return newClasses;
-      });
-    }
+    setClasses((oldClasses) => {
+      const newClasses = removeItemInListById(classToDelete, oldClasses);
+      const newClassItem = refreshShownItem(classItem, oldClasses, newClasses);
+      setClassItem(newClassItem);
+      return newClasses;
+    });
   }
 
-  // deleteItemOnList(classItem, classes);
-  classItem.id = getId(classItem);
+  deleteClassOnList(classItem); // optimistic delete (deletes even if there is an error in the server)
   defaultDBDelete(itemName, classItem)
     .then(deleteClassOnList)
     .catch((error) => {

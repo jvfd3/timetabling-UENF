@@ -25,12 +25,16 @@ const myStyles = {
         classItemTable: {
           header: "splitHeader",
           select: "SelectContainer",
+          classTimes: "ClassTimes",
         },
         classTimeViewTable: {
           header: "header",
         },
         notOfferedSubjects: {
           highlight: "FirstExpectedSemesterHighlight",
+        },
+        classTimeTable: {
+          padding: "SmallPadding",
         },
         ClassTimeGridCC: {
           table: "TabelaCC",
