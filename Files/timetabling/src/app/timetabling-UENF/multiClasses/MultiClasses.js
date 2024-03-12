@@ -23,15 +23,7 @@ function MultiClassesCardHeader({ filterStates }) {
 
 function NoOfferedClasses(createClassItemStates) {
   return (
-    <div
-      className={defaultClassNames.containerCardBaseInfo}
-      style={{
-        display: "flex",
-        flexDirection: "row",
-        textAlignLast: "center",
-        alignItems: "center",
-      }}
-    >
+    <div className={myStyles.classNames.local.page.multiClasses.noClasses}>
       <p>{pageTexts.noClasses}</p>
       <SmartCreateClassItem {...createClassItemStates} />
     </div>

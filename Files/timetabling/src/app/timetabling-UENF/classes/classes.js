@@ -1,3 +1,4 @@
+import "./classes.css";
 import React, { useEffect, useState } from "react";
 import text from "../../../config/frontText";
 import myStyles from "../../../config/myStyles";
@@ -74,11 +75,7 @@ function BaseInfoCard(oldClassesStates) {
           <tr>
             <th>{pageTexts.tableTitles.yearSemester}</th>
             <td
-              style={{
-                gap: 5,
-                display: "flex",
-                flexDirection: "row",
-              }}
+              className={myStyles.classNames.local.page.classes.horizontalIcons}
             >
               <SelectClassYear {...classesStates} />
               <SelectClassSemester {...classesStates} />

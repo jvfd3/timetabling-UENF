@@ -4,3 +4,17 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.NoOfferedClasses {
+    background-color: #fbcd94;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px;
+    margin-bottom: 0;
+    width: fit-content;
+    text-align: center;
+    align-items: center;
+}

@@ -1,3 +1,4 @@
+import "./main.css";
 import React from "react";
 import text from "../../../config/frontText";
 import myStyles from "../../../config/myStyles";
@@ -6,13 +7,12 @@ const defaultClassNames = myStyles.classNames.default;
 const pageTexts = text.page.main;
 
 function Logo() {
-  return (
-    <img
-      src={process.env.PUBLIC_URL + "/OurClass.png"}
-      alt="Logo OurClass"
-      style={{ width: "30%", margin: "auto", display: "block" }}
-    />
-  );
+  const logoProps = {
+    src: process.env.PUBLIC_URL + "/OurClass.png",
+    alt: "Logo OurClass",
+    className: myStyles.classNames.local.page.main.logo,
+  };
+  return <img {...logoProps} />;
 }
 
 function Instructions() {

@@ -12,6 +12,13 @@ const myStyles = {
       page: {
         multiClasses: {
           header: "Title",
+          noClasses: "NoOfferedClasses",
+        },
+        classes: {
+          horizontalIcons: "HorizontalIcons",
+        },
+        main: {
+          logo: "Logo",
         },
       },
       component: {
