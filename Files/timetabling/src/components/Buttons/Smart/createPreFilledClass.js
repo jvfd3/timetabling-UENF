@@ -7,19 +7,15 @@ import {
   getUsualInfo,
 } from "../../MultiClasses/NotOfferedSubjects/processInitialValues";
 
-function createPreFilledClass(classCreationProps) {
-  const { currentSemester, classTimeStates, classStates, subjects } =
-    classCreationProps;
-  const { classes } = classStates;
-  const { classTimes } = classTimeStates;
+function createPreFilledClass({ classStates, subjects }) {
+  const { classItemFilter, classes } = classStates;
 
   function asyncCreateClassDB(iterSubject) {
     const sameSubjectClasses = filterSubject(classes, iterSubject);
-    const sameSubjectClassTimes = filterSubject(classTimes, iterSubject);
-    const usualInfo = getUsualInfo(sameSubjectClasses, sameSubjectClassTimes);
+    const usualInfo = getUsualInfo(sameSubjectClasses);
 
     const newClassItem = getNewClassItem(
-      currentSemester,
+      classItemFilter,
       iterSubject,
       usualInfo
     );

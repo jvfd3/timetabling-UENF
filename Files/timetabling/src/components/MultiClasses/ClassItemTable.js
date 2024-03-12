@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import text from "../../config/frontText";
 import myStyles from "../../config/myStyles";
 import ClassTimeTable from "../ClassTimeTable/ClassTimeTable";
+import { getId } from "../../helpers/auxCRUD";
+import { sortMultiClasses } from "../Sorts/sortingFunctions";
 import { getClassItemConflicts } from "../../helpers/conflicts/centralConflicts";
 import { SelectClassProfessor, SelectClassSubject } from "../mySelects";
 import {
@@ -20,20 +22,18 @@ import {
   SmartDeleteClassItem,
   SmartUpdateClassItem,
 } from "../Buttons/Smart/Smart";
-import { getId } from "../../helpers/auxCRUD";
-import { sortMultiClasses } from "../Sorts/sortingFunctions";
 
 const frontText = text.component.classItemTable.tableTitles;
 const defaultClassNames = myStyles.classNames.local.component.classItemTable;
 const tableClassName = myStyles.classNames.default.componentTable;
 const hasDenseClassSelects = true;
 
-function ClassTableHeader(createStates) {
+function ClassTableHeader({ createClassItemStates }) {
   return (
     <thead>
       <tr>
         <th>
-          <SmartCreateClassItem {...createStates} />
+          <SmartCreateClassItem {...createClassItemStates} />
         </th>
         {hasDenseClassSelects ? (
           <>
@@ -154,25 +154,17 @@ function ClassItemTableRow(classItemRowStates) {
   );
 }
 
-function ClassesTable({ classStates, selectStates, currentSemester }) {
-  const createStates = {
-    currentSemester,
-    classesStates: classStates,
-    createClassDB: createClass,
-  };
-
-  const sortedMultiClasses = sortMultiClasses(classStates.filteredClasses);
+function ClassesTable(globalStates) {
+  const filteredClasses = globalStates.classStates.filteredClasses;
+  const sortedMultiClasses = sortMultiClasses(filteredClasses);
 
   return (
     <table className={tableClassName}>
-      <ClassTableHeader {...createStates} />
+      <ClassTableHeader {...globalStates} />
       <tbody>
         {sortedMultiClasses.map((iterClassItem) => {
           const classItemRowProps = {
-            ...classStates,
-            professors: selectStates.professorStates.professors,
-            subjects: selectStates.subjectStates.subjects,
-            rooms: selectStates.roomStates.rooms,
+            ...globalStates.classStates,
             classItem: iterClassItem,
             key: `ClassItemTableRow: ${getId(iterClassItem)}`,
           };

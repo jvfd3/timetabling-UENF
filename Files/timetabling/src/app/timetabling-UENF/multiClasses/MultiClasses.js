@@ -4,18 +4,13 @@ import text from "../../../config/frontText";
 import myStyles from "../../../config/myStyles";
 import ClassesTable from "../../../components/MultiClasses/ClassItemTable";
 import NotOfferedSubjects from "../../../components/MultiClasses/NotOfferedSubjects/NotOfferedSubjects";
-import { readClassTime } from "../../../helpers/CRUDFunctions/classTimeCRUD";
 import { MultiClassesFilters } from "../../../components/Filters/Filters";
 import { SmartCreateClassItem } from "../../../components/Buttons/Smart/Smart";
+import { getDefaultClassItem, getSelectStates } from "../../../helpers/auxCRUD";
 import {
   createClass,
   readClass,
 } from "../../../helpers/CRUDFunctions/classCRUD";
-import {
-  getDefaultClassItem,
-  getDefaultClassTime,
-  getSelectStates,
-} from "../../../helpers/auxCRUD";
 
 const defaultClassNames = myStyles.classNames.default;
 const pageTexts = text.page.multiClasses;
@@ -29,13 +24,7 @@ function MultiClassesCardHeader({ filterStates }) {
   );
 }
 
-function NoOfferedClasses(classStates) {
-  const createStates = {
-    classesStates: classStates,
-    year: classStates.classItem?.ano,
-    semester: classStates.classItem?.semestre,
-    createClassDB: createClass,
-  };
+function NoOfferedClasses(createClassItemStates) {
   return (
     <div
       className={defaultClassNames.containerCardBaseInfo}
@@ -47,14 +36,13 @@ function NoOfferedClasses(classStates) {
       }}
     >
       <p>{pageTexts.noClasses}</p>
-      <SmartCreateClassItem {...createStates} />
+      <SmartCreateClassItem {...createClassItemStates} />
     </div>
   );
 }
 
 function MultiClassesCard(globalStates) {
-  const { classStates } = globalStates;
-  const hasClasses = classStates.filteredClasses.length > 0;
+  const hasClasses = globalStates.classStates.filteredClasses.length > 0;
   return (
     <div className={defaultClassNames.containerCardsHolder}>
       <MultiClassesCardHeader {...globalStates} />
@@ -62,7 +50,7 @@ function MultiClassesCard(globalStates) {
         {hasClasses ? (
           <ClassesTable {...globalStates} />
         ) : (
-          <NoOfferedClasses {...classStates} />
+          <NoOfferedClasses {...globalStates.createClassItemStates} />
         )}
       </div>
     </div>
@@ -70,27 +58,13 @@ function MultiClassesCard(globalStates) {
 }
 
 function MultiClasses() {
-  const [classTimes, setClassTimes] = useState([]);
-  const [filteredClassTimes, setFilteredClassTimes] = useState([]);
-  const [classTime, setClassTime] = useState(getDefaultClassTime());
-
   const [classes, setClasses] = useState([]);
   const [filteredClasses, setFilteredClasses] = useState([]);
   const [classItem, setClassItem] = useState(getDefaultClassItem());
-
   const [classItemFilter, setClassItemFilter] = useState(getDefaultClassItem());
-  // const [classTimeFilter, setClassTimeFilter] = useState(getDefaultClassTime());
 
   const selectStates = getSelectStates();
 
-  const classTimeStates = {
-    classTimes,
-    setClassTimes,
-    filteredClassTimes,
-    setFilteredClassTimes,
-    classTime,
-    setClassTime,
-  };
   const classStates = {
     classes,
     setClasses,
@@ -101,10 +75,6 @@ function MultiClasses() {
     classItemFilter,
     setClassItemFilter,
   };
-  const currentSemester = {
-    year: classItemFilter?.ano,
-    semester: classItemFilter?.semestre,
-  };
   const filterStates = {
     setFilteredClasses,
     setClassItemFilter,
@@ -112,17 +82,18 @@ function MultiClasses() {
     classes,
     selectStates,
   };
+  const createClassItemStates = { setClasses, setClassItem, classItemFilter };
   const globalStates = {
     classStates,
-    selectStates,
     filterStates,
-    classTimeStates,
-    currentSemester,
+    createClassItemStates,
+    rooms: [...selectStates.roomStates.rooms],
+    subjects: [...selectStates.subjectStates.subjects],
+    professors: [...selectStates.professorStates.professors],
   };
 
   useEffect(() => {
     readClass(classStates);
-    readClassTime(classTimeStates);
   }, []);
 
   return (

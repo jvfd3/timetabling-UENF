@@ -57,8 +57,7 @@ function AllSubjectsWereOffered() {
 }
 
 function NotOfferedSubjectRow(notOfferedSubjectProps) {
-  const { subjects } = notOfferedSubjectProps;
-  const subject = subjects?.[0];
+  const subject = notOfferedSubjectProps?.subjects?.[0];
   const code = subject?.codigo;
   const semester = subject?.periodo;
   const name = subject?.nome;
@@ -85,33 +84,17 @@ function NotOfferedSubjectRow(notOfferedSubjectProps) {
   );
 }
 
-function NonOfferedSubjectsTable(unofferedSubjectsProps) {
-  const { currentSemester, subjects } = unofferedSubjectsProps;
-
-  const semesterMessages = {
-    1: "do período ímpar",
-    2: "do período par",
-    3: "dos períodos",
-  };
-
-  const semesterMessage = semesterMessages[currentSemester.semester] || "";
-
-  const inputProps = {
-    ...unofferedSubjectsProps,
-    inputConfig: {
-      text: semesterMessage,
-      size: "4em",
-    },
-  };
+function NonOfferedSubjectsTable(notOfferedSubjectsProps) {
+  const { inputConfig, subjects } = notOfferedSubjectsProps;
 
   return (
     <div className={defaultClassNames.containerCardBaseInfo}>
-      <h1>{frontText.baseMessage + semesterMessage}</h1>
+      <h1>{frontText.baseMessage + inputConfig.text}</h1>
       <table className={defaultClassNames.componentTable}>
         <thead>
           <tr>
             <th>
-              <SmartInputSubject {...inputProps} />
+              <SmartInputSubject {...notOfferedSubjectsProps} />
             </th>
             <th>{frontText.header.expectedSemester}</th>
             <th>{frontText.header.code}</th>
@@ -120,12 +103,12 @@ function NonOfferedSubjectsTable(unofferedSubjectsProps) {
         </thead>
         <tbody>
           {subjects.map((iterSubject) => {
-            const notOfferedSubjectProps = {
-              ...inputProps,
+            const iterSubjectProps = {
+              ...notOfferedSubjectsProps,
               subjects: [iterSubject],
               key: getId(iterSubject),
             };
-            return <NotOfferedSubjectRow {...notOfferedSubjectProps} />;
+            return <NotOfferedSubjectRow {...iterSubjectProps} />;
           })}
         </tbody>
       </table>
@@ -133,23 +116,32 @@ function NonOfferedSubjectsTable(unofferedSubjectsProps) {
   );
 }
 
-function NotOfferedSubjects(multiClassesStates) {
-  const { classStates, classTimeStates, selectStates, currentSemester } =
-    multiClassesStates;
+function NotOfferedSubjects({ classStates, subjects }) {
+  const semester = classStates.classItemFilter.semestre;
 
   const nonOfferedSubjects = getListOfNotOfferedSubjects(
     classStates.filteredClasses,
-    currentSemester.semester,
-    selectStates.subjectStates.subjects
+    semester,
+    subjects
   );
 
   const sortedNotOfferedSubjects = sortNotOfferedSubjects(nonOfferedSubjects);
 
+  const semesterMessages = {
+    1: "do período ímpar",
+    2: "do período par",
+    3: "dos períodos",
+  };
+
+  const semesterMessage = semesterMessages[semester] || "";
+
   const notOfferedSubjectsProps = {
-    classTimeStates,
     classStates,
-    currentSemester,
     subjects: sortedNotOfferedSubjects,
+    inputConfig: {
+      text: semesterMessage,
+      size: "4em",
+    },
   };
 
   const hasSubjects = sortedNotOfferedSubjects.length > 0;

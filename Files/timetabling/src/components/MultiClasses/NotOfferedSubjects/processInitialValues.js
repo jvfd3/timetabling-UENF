@@ -1,6 +1,10 @@
 import emptyObjects from "../../../config/emptyObjects";
 import { getId } from "../../../helpers/auxCRUD";
-import { getValueFromDataWithPropArray } from "../../../helpers/auxFunctions";
+import {
+  getDefaultYearSemesterValues,
+  getValueFromDataWithPropArray,
+} from "../../../helpers/auxFunctions";
+import { splitTurmas } from "../../../helpers/conflicts/auxConflictFunctions";
 
 function getModes(items) {
   const frequency = {};
@@ -134,7 +138,8 @@ function getDescription(sameSubjectClasses, { year, semester }) {
   return classItemDescription;
 }
 
-function getUsualInfo(classes, classTimes) {
+function getUsualInfo(classes) {
+  const splittedClasses = splitTurmas(classes);
   const quantity = getMostFrequentClassTimeSizes(classes);
   const classUsualInfo = {
     professor: getMostFrequentItem(classes, ["professor"]),
@@ -143,10 +148,10 @@ function getUsualInfo(classes, classTimes) {
     description: null,
     classTime: {
       quantity,
-      day: getMostFrequentItem(classTimes, ["dia"], quantity),
-      room: getMostFrequentItem(classTimes, ["sala"], quantity),
-      duration: getMostFrequentItem(classTimes, ["duracao"], quantity),
-      startHour: getMostFrequentItem(classTimes, ["horaInicio"], quantity),
+      day: getMostFrequentItem(splittedClasses, ["dia"], quantity),
+      room: getMostFrequentItem(splittedClasses, ["sala"], quantity),
+      duration: getMostFrequentItem(splittedClasses, ["duracao"], quantity),
+      startHour: getMostFrequentItem(splittedClasses, ["horaInicio"], quantity),
     },
   };
 
@@ -155,11 +160,23 @@ function getUsualInfo(classes, classTimes) {
   return classUsualInfo;
 }
 
-function getNewClassItem(currentSemester, iterSubject, usualInfo) {
+function getNewClassItem(classItemFilter, iterSubject, usualInfo) {
+  const defaultYearSemester = getDefaultYearSemesterValues();
+  const year =
+    classItemFilter.year ??
+    classItemFilter.ano ??
+    defaultYearSemester.year ??
+    null;
+  const semester =
+    classItemFilter.semester ??
+    classItemFilter.semestre ??
+    defaultYearSemester.semester ??
+    null;
+
   const newClass = {
     ...emptyObjects.classItem,
-    ano: currentSemester.year ?? null,
-    semestre: currentSemester.semester ?? null,
+    ano: year,
+    semestre: semester,
     disciplina: iterSubject ?? null,
     professor: usualInfo?.professor?.[0] ?? usualInfo?.professor ?? null,
     demandaEstimada: /* usualInfo?.expectedDemand ?? */ null,

@@ -19,28 +19,27 @@ import configInfo from "../../config/configInfo";
 const itemName = "classData";
 
 function createClass(createClassStates) {
-  const { setClasses, classItem, setClassItem, year, semester } =
-    createClassStates;
+  const { setClasses, setClassItem, classItemFilter } = createClassStates;
 
-  function getBaseClassItem(parClassItem) {
-    const currentSemester = getDefaultYearSemesterValues();
-    const currClassItem = parClassItem ?? classItem;
+  function getBaseClassItem() {
+    const defaultYearSemester = getDefaultYearSemesterValues();
 
-    const currYear = currClassItem?.year ?? currClassItem?.ano;
-    const currSemester = currClassItem?.semester ?? currClassItem?.semestre;
-    const currSubject = currClassItem?.subject ?? currClassItem?.disciplina;
+    const currYear = classItemFilter?.year ?? classItemFilter?.ano;
+    const currSemester = classItemFilter?.semester ?? classItemFilter?.semestre;
+    const currSubject = classItemFilter?.subject ?? classItemFilter?.disciplina;
     const currExpectedDemand =
-      currClassItem?.expectedDemand ?? currClassItem?.demandaEstimada;
-    const currClassTimes = currClassItem?.classTimes ?? currClassItem?.horarios;
+      classItemFilter?.expectedDemand ?? classItemFilter?.demandaEstimada;
+    const currClassTimes =
+      classItemFilter?.classTimes ?? classItemFilter?.horarios;
 
     const baseClassItem = {
       ...emptyObjects.classItem,
-      ano: year ?? currYear ?? currentSemester.year,
-      semestre: semester ?? currSemester ?? currentSemester.semester,
+      ano: currYear ?? defaultYearSemester.year,
+      semestre: currSemester ?? defaultYearSemester.semester,
       disciplina: currSubject ?? null,
       demandaEstimada: currExpectedDemand ?? null,
-      professor: currClassItem?.professor ?? null,
-      description: currClassItem?.description ?? null,
+      professor: classItemFilter?.professor ?? null,
+      description: classItemFilter?.description ?? null,
       horarios: currClassTimes ?? [],
     };
 
@@ -87,17 +86,18 @@ function createClass(createClassStates) {
     .catch(defaultHandleError);
 }
 
-function readClass({ classes, setClasses, setClassItem }) {
+function readClass({ setClasses, setClassItem }) {
   function insertNewClassesFromDB(classesFromDB) {
-    setClasses(classesFromDB);
-
-    setClassItem((oldClassItem) => {
-      const showedClassItem = refreshShownItem(
-        oldClassItem,
-        classes,
-        classesFromDB
-      );
-      return showedClassItem;
+    setClasses((oldClasses) => {
+      setClassItem((oldClassItem) => {
+        const showedClassItem = refreshShownItem(
+          oldClassItem,
+          oldClasses,
+          classesFromDB
+        );
+        return showedClassItem;
+      });
+      return classesFromDB;
     });
   }
 

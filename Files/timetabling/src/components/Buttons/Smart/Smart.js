@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import emptyObjects from "../../../config/emptyObjects";
+import text from "../../../config/frontText";
 import defaultColors from "../../../config/defaultColors";
 import createPreFilledClass from "./createPreFilledClass";
 import { getId } from "../../../helpers/auxCRUD";
+import { createClass } from "../../../helpers/CRUDFunctions/classCRUD";
 import {
   CreateClassTime,
   DeleteClassTime,
@@ -19,8 +20,6 @@ import {
   getCreateClassItemTitle,
   getRoomText,
 } from "../../../helpers/visualizationText/textLabels";
-import text from "../../../config/frontText";
-import { getDefaultYearSemesterValues } from "../../../helpers/auxFunctions";
 
 const defaultText = text.component.classTimesTable.buttons;
 
@@ -46,51 +45,21 @@ function SmartInputSubject(inputSubjectProps) {
   const inputProps = {
     text: getMessage(subjects),
     size: inputConfig?.size ?? "2em",
-    createFunc: () => {
-      createPreFilledClass(inputSubjectProps);
-    },
+    createFunc: () => createPreFilledClass(inputSubjectProps),
   };
 
   return <InputSubject {...inputProps} />;
 }
 
-function SmartCreateClassItem(createStates) {
-  /* I could clean this Button */
-  const { classesStates, currentSemester, createClassDB } = createStates;
-  const { classItem } = classesStates;
-
-  const defaultYearSemester = getDefaultYearSemesterValues();
-
-  const year =
-    classItem?.year ??
-    classItem?.ano ??
-    currentSemester?.year ??
-    defaultYearSemester.year;
-  const semester =
-    classItem?.semester ??
-    classItem?.semestre ??
-    currentSemester?.semester ??
-    defaultYearSemester.semester;
-
-  function getNewClassItem() {
-    const newClassItem = {
-      ...emptyObjects.classItem,
-      ...classItem,
-      ano: year,
-      semestre: semester,
-    };
-    return newClassItem;
-  }
-
+function SmartCreateClassItem(createClassItemStates) {
   function createClassItemInDB() {
-    const createClassStates = {
-      ...classesStates,
-      classItem: getNewClassItem(),
-    };
-    createClassDB(createClassStates);
+    createClass(createClassItemStates);
   }
 
-  const titleText = getCreateClassItemTitle(getNewClassItem());
+  const titleText = getCreateClassItemTitle(
+    createClassItemStates.classItemFilter
+  );
+
   return <CreateItem createFunc={createClassItemInDB} text={titleText} />;
 }
 
