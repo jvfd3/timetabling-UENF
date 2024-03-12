@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Select, { components } from "react-select";
 import text from "../config/frontText";
+import Select from "react-select";
 import myStyles from "../config/myStyles";
 import configInfo from "../config/configInfo";
-import defaultColors from "../config/defaultColors";
 import constantValues from "../config/constantValues";
 import pseudoDatabase from "../config/pseudoDatabase";
 import sqlDataFromJson from "../DB/dataFromJSON";
 import { getValueFromObject } from "../helpers/auxFunctions";
-import { LockedProp, UnlockedProp } from "./Buttons/Dumb/Dumb";
 import {
   getId,
   getItemFromListById,
@@ -31,70 +29,6 @@ import {
 const styleWidthFix = myStyles.selects.fullItem;
 const placeHolders = text.component.SelectPlaceholder;
 /* \\ Internal-use Selects // */
-
-function LockableSelect(extProps) {
-  const {
-    placeholder,
-    options,
-    value,
-    onChange,
-    getOptionValue,
-    getOptionLabel,
-    formatOptionLabel,
-    lockStates,
-  } = extProps;
-
-  const { isLocked, setIsLocked, title } = lockStates;
-
-  function LockSelect() {
-    function toggleLock() {
-      setIsLocked(!isLocked);
-    }
-
-    return (
-      <div
-        onClick={toggleLock}
-        style={{
-          pointerEvents: "auto",
-          color: isLocked
-            ? defaultColors.locker.locked
-            : defaultColors.locker.unlocked,
-          cursor: "pointer",
-        }}
-      >
-        {isLocked ? <LockedProp text={title} /> : <UnlockedProp text={title} />}
-      </div>
-    );
-  }
-
-  function ValueWithLock(props) {
-    return (
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <LockSelect {...lockStates} />
-        <components.ValueContainer {...props} />
-      </div>
-    );
-  }
-
-  return (
-    <div style={{ display: "flex" }}>
-      <Select
-        placeholder={placeholder}
-        options={options}
-        value={value}
-        onChange={onChange}
-        getOptionValue={getOptionValue}
-        getOptionLabel={getOptionLabel}
-        className={myStyles.selects.className}
-        styles={styleWidthFix}
-        isDisabled={isLocked}
-        isClearable={true}
-        components={{ ValueContainer: ValueWithLock }}
-        formatOptionLabel={formatOptionLabel}
-      />
-    </div>
-  );
-}
 
 function DefaultSelect(defaultProps) {
   const {
@@ -189,9 +123,6 @@ function SelectPage({ currentPage, setCurrentPage }) {
       getOptionValue: ({ url }) => url,
       getOptionLabel: ({ pageName }) => pageName,
       formatOptionLabel: ({ pageName }) => pageName,
-      /* formatOptionLabel: ({ pageName }) => (
-        <div style={{ display: "flex" }}>{pageName}</div>
-      ), */
     },
   };
 
