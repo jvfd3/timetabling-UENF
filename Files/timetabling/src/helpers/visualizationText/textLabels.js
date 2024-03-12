@@ -118,6 +118,22 @@ function getCreateClassItemTitle(classItem) {
   return title;
 }
 
+function getSubjectInputMessage(inputConfig, subjects) {
+  const subjectsSize = subjects.length;
+  const offerAllSubjectsMessage = `Adicionar todas as ${subjectsSize} turmas pendentes `;
+  const extraText = inputConfig?.text ?? "";
+
+  let oneSubjectClassMessage = `Adicionar turma da disciplina`;
+  let finalMessage = offerAllSubjectsMessage + extraText;
+
+  if (subjects.length === 1) {
+    oneSubjectClassMessage += ` ${subjects?.[0]?.codigo}`;
+    finalMessage = oneSubjectClassMessage;
+  }
+
+  return finalMessage;
+}
+
 /* CLASSTIME */
 
 function getStartHourFormatLabel(hour, context) {
@@ -563,6 +579,7 @@ export {
   /* MISC */
   getCCTableClassCellText,
   getCreateClassItemTitle,
+  getSubjectInputMessage,
   /* CRUD */
   getClassTimeText,
   /* CLASSITEM */

@@ -23,6 +23,7 @@ import {
   getClassTimeText,
   getCreateClassItemTitle,
   getRoomText,
+  getSubjectInputMessage,
 } from "../../../helpers/visualizationText/textLabels";
 import {
   createClassTime,
@@ -35,24 +36,8 @@ const defaultText = text.component.classTimesTable.buttons;
 function SmartInputSubject(inputSubjectProps) {
   const { inputConfig, subjects } = inputSubjectProps;
 
-  function getMessage(subjects) {
-    const subjectsSize = subjects.length;
-    const offerAllSubjectsMessage = `Adicionar todas as ${subjectsSize} turmas pendentes `;
-    const extraText = inputConfig?.text ?? "";
-
-    let oneSubjectClassMessage = `Adicionar turma da disciplina`;
-    let finalMessage = offerAllSubjectsMessage + extraText;
-
-    if (subjects.length === 1) {
-      oneSubjectClassMessage += ` ${subjects?.[0]?.codigo}`;
-      finalMessage = oneSubjectClassMessage;
-    }
-
-    return finalMessage;
-  }
-
   const inputProps = {
-    text: getMessage(subjects),
+    text: getSubjectInputMessage(inputConfig, subjects),
     size: inputConfig?.size ?? "2em",
     createFunc: () => createPreFilledClass(inputSubjectProps),
   };
