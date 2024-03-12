@@ -14,11 +14,6 @@ import {
   TextInputClassDescription,
 } from "../MyTextFields";
 import {
-  createClass,
-  deleteClass,
-  updateClass,
-} from "../../helpers/CRUDFunctions/classCRUD";
-import {
   SmartCreateClassItem,
   SmartDeleteClassItem,
   SmartUpdateClassItem,
@@ -80,8 +75,7 @@ function ClassItemTableRow(classItemRowStates) {
     classItem,
     oldClassItem,
     setOldClassItem,
-    deleteClassItemDB: () => deleteClass(classItemRowStates),
-    updateClassItemDB: () => updateClass(classItemRowStates),
+    classItemRowStates,
   };
 
   const classItemRowKey = `ClassItemTableRow: ${getId(classItem)}`;

@@ -3,7 +3,11 @@ import text from "../../../config/frontText";
 import defaultColors from "../../../config/defaultColors";
 import createPreFilledClass from "./createPreFilledClass";
 import { getId } from "../../../helpers/auxCRUD";
-import { createClass } from "../../../helpers/CRUDFunctions/classCRUD";
+import {
+  createClass,
+  deleteClass,
+  updateClass,
+} from "../../../helpers/CRUDFunctions/classCRUD";
 import {
   CreateClassTime,
   DeleteClassTime,
@@ -52,20 +56,21 @@ function SmartInputSubject(inputSubjectProps) {
 }
 
 function SmartCreateClassItem(createClassItemStates) {
-  function createClassItemInDB() {
-    createClass(createClassItemStates);
-  }
+  const createItemProps = {
+    createFunc: () => createClass(createClassItemStates),
+    text: getCreateClassItemTitle(createClassItemStates.classItemFilter),
+  };
 
-  const titleText = getCreateClassItemTitle(
-    createClassItemStates.classItemFilter
-  );
-
-  return <CreateItem createFunc={createClassItemInDB} text={titleText} />;
+  return <CreateItem {...createItemProps} />;
 }
 
 function SmartUpdateClassItem(updateClassItemProps) {
-  const { classItem, updateClassItemDB, oldClassItem, setOldClassItem } =
+  const { classItem, classItemRowStates, oldClassItem, setOldClassItem } =
     updateClassItemProps;
+
+  function updateClassItemDB() {
+    updateClass(classItemRowStates);
+  }
 
   const classItemText = getClassItemText(classItem) + "\n";
 
@@ -76,10 +81,6 @@ function SmartUpdateClassItem(updateClassItemProps) {
 
   const [modifiedMessage, setModifiedMessage] = useState(dontUpdateMessage);
   const [needsUpdateStatus, setNeedsUpdateStatus] = useState(false);
-
-  const iconColor = needsUpdateStatus
-    ? defaultColors.CRUD.update
-    : defaultColors.CRUD.default;
 
   useEffect(() => {
     const modProps = getModificationsProps(oldClassItem, classItem);
@@ -185,29 +186,37 @@ function SmartUpdateClassItem(updateClassItemProps) {
     updateClassItemDB();
   }
 
-  return (
-    <UpdateItem
-      updateFunc={smartUpdateClassItem}
-      text={modifiedMessage}
-      color={iconColor}
-    />
-  );
+  const updateProps = {
+    updateFunc: smartUpdateClassItem,
+    text: modifiedMessage,
+    color: needsUpdateStatus
+      ? defaultColors.CRUD.update
+      : defaultColors.CRUD.default,
+  };
+
+  return <UpdateItem {...updateProps} />;
 }
 
-function SmartDeleteClassItem({ classItem, deleteClassItemDB }) {
-  const titleText = "Remover turma " + getClassItemText(classItem);
-  return <DeleteItem deleteFunc={deleteClassItemDB} text={titleText} />;
+function SmartDeleteClassItem({ classItem, classItemRowStates }) {
+  const deleteProps = {
+    deleteFunc: () => deleteClass(classItemRowStates),
+    text: "Remover turma " + getClassItemText(classItem),
+  };
+
+  return <DeleteItem {...deleteProps} />;
 }
 
 function SmartCreateClassTime({ classItem, createClassTimeDB }) {
-  const titleText = `Adicionar horário à turma ${getClassItemText(classItem)}`;
-
-  return <CreateClassTime createFunc={createClassTimeDB} text={titleText} />;
+  const createClassTimeProps = {
+    createFunc: createClassTimeDB,
+    text: `Adicionar horário à turma ${getClassItemText(classItem)}`,
+  };
+  return <CreateClassTime {...createClassTimeProps} />;
 }
 
-function SmartUpdateClassTime(updateClassTimeProps) {
+function SmartUpdateClassTime(updateClassTimeStates) {
   const { classTime, updateClassTimeDB, oldClassTime, setOldClassTime } =
-    updateClassTimeProps;
+    updateClassTimeStates;
 
   const classTimeText = getClassTimeText(classTime);
   let dontUpdateMessage = defaultText.update.noChanges;
@@ -217,10 +226,6 @@ function SmartUpdateClassTime(updateClassTimeProps) {
 
   const [modifiedMessage, setModifiedMessage] = useState(dontUpdateMessage);
   const [needsUpdateStatus, setNeedsUpdateStatus] = useState(false);
-
-  const iconColor = needsUpdateStatus
-    ? defaultColors.CRUD.update
-    : defaultColors.CRUD.default;
 
   useEffect(() => {
     const modProps = getModificationsProps(oldClassTime, classTime);
@@ -288,13 +293,15 @@ function SmartUpdateClassTime(updateClassTimeProps) {
     updateClassTimeDB();
   }
 
-  return (
-    <UpdateClassTime
-      updateFunc={smartUpdateClassTime}
-      text={modifiedMessage}
-      color={iconColor}
-    />
-  );
+  const updateClassTimeProps = {
+    updateFunc: smartUpdateClassTime,
+    text: modifiedMessage,
+    color: needsUpdateStatus
+      ? defaultColors.CRUD.update
+      : defaultColors.CRUD.default,
+  };
+
+  return <UpdateClassTime {...updateClassTimeProps} />;
 }
 
 function SmartDeleteClassTime({
@@ -307,10 +314,15 @@ function SmartDeleteClassTime({
     (iterClassItem) => getId(iterClassItem) === classTime?.idTurma
   );
 
-  let titleText = `Remover horário${getClassTimeText(classTime)}:`;
-  titleText += `\n\t- turma: ${getClassItemText(classItem)}`;
+  const timeText = getClassTimeText(classTime);
+  const classText = getClassItemText(classItem);
 
-  return <DeleteClassTime deleteFunc={deleteClassTimeDB} text={titleText} />;
+  const deleteClassTimeProps = {
+    deleteFunc: deleteClassTimeDB,
+    text: `Remover horário${timeText}:\n\t- turma: ${classText}`,
+  };
+
+  return <DeleteClassTime {...deleteClassTimeProps} />;
 }
 
 export {
