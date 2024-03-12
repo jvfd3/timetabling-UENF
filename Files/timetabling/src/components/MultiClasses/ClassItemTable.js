@@ -1,11 +1,11 @@
 import "./ClassItemTable.css";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import text from "../../config/frontText";
 import myStyles from "../../config/myStyles";
 import configInfo from "../../config/configInfo";
 import ClassTimeTable from "../ClassTimeTable/ClassTimeTable";
-import { getId } from "../../helpers/auxCRUD";
+import { getId, replaceNewItemInListById } from "../../helpers/auxCRUD";
 import { sortMultiClasses } from "../Sorts/sortingFunctions";
 import { getClassItemConflicts } from "../../helpers/conflicts/centralConflicts";
 import { SelectClassProfessor, SelectClassSubject } from "../mySelects";
@@ -66,19 +66,28 @@ function ClassTableHeader({ createClassItemStates }) {
 }
 
 function ClassItemTableRow(classItemRowStates) {
-  const { classItem, filteredClasses } = classItemRowStates;
-  const [oldClassItem, setOldClassItem] = useState(classItem);
-  const conflicts = getClassItemConflicts(filteredClasses, classItem);
+  const { iterClassItem, filteredClasses } = classItemRowStates;
+  const [rowClassItem, setRowClassItem] = useState({ ...iterClassItem });
+  const conflicts = getClassItemConflicts(filteredClasses, iterClassItem);
   const classTimeTableProps = { ...classItemRowStates, conflicts };
 
+  function updateClasses(setClasses, newClassItem) {
+    setClasses((oldClasses) =>
+      replaceNewItemInListById(newClassItem, oldClasses)
+    );
+  }
+
+  useEffect(() => {
+    updateClasses(classItemRowStates.setClasses, rowClassItem);
+  }, [rowClassItem]);
+
   const CRUDClassItemProps = {
-    classItem,
-    oldClassItem,
-    setOldClassItem,
+    rowClassItem,
+    setRowClassItem,
     classItemRowStates,
   };
 
-  const classItemRowKey = `ClassItemTableRow: ${getId(classItem)}`;
+  const classItemRowKey = `ClassItemTableRow: ${getId(iterClassItem)}`;
 
   return (
     <tr key={classItemRowKey}>
@@ -160,6 +169,7 @@ function ClassesTable(globalStates) {
           const classItemRowProps = {
             ...globalStates.classStates,
             classItem: iterClassItem,
+            iterClassItem,
             key: `ClassItemTableRow: ${getId(iterClassItem)}`,
           };
           return <ClassItemTableRow {...classItemRowProps} />;

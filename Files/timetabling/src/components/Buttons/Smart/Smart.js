@@ -65,14 +65,11 @@ function SmartCreateClassItem(createClassItemStates) {
 }
 
 function SmartUpdateClassItem(updateClassItemProps) {
-  const { classItem, classItemRowStates, oldClassItem, setOldClassItem } =
+  const { classItemRowStates, rowClassItem, setRowClassItem } =
     updateClassItemProps;
+  const { iterClassItem } = classItemRowStates;
 
-  function updateClassItemDB() {
-    updateClass(classItemRowStates);
-  }
-
-  const classItemText = getClassItemText(classItem) + "\n";
+  const classItemText = getClassItemText(iterClassItem) + "\n";
 
   let dontUpdateMessage = `Não foram identificadas alterações na turma `;
   dontUpdateMessage += classItemText;
@@ -83,107 +80,70 @@ function SmartUpdateClassItem(updateClassItemProps) {
   const [needsUpdateStatus, setNeedsUpdateStatus] = useState(false);
 
   useEffect(() => {
-    const modProps = getModificationsProps(oldClassItem, classItem);
-    const wasUpdated = modProps.updateStatus;
+    const modProps = getModificationsProps(rowClassItem, iterClassItem);
+
+    const wasUpdated = modProps.hasChanges;
     const newMessage = wasUpdated
       ? baseMessage + modProps.updateText
       : dontUpdateMessage;
 
     setNeedsUpdateStatus(wasUpdated);
     setModifiedMessage(newMessage);
-  }, [classItem]);
+  }, [iterClassItem]);
 
-  function getModificationsProps(oldClassItem, classItem) {
-    const oldSubject = oldClassItem?.subject ?? oldClassItem?.disciplina;
-    const newSubject = classItem?.subject ?? classItem?.disciplina;
-    const oldProfessor = oldClassItem?.professor;
-    const newProfessor = classItem?.professor;
+  function getModificationsProps(classItem, rowClassItem) {
+    function getDiffText(key, oldText, rowText) {
+      let diffText = "";
 
-    const oldSubjectId = getId(oldSubject);
-    const newSubjectId = getId(newSubject);
-
-    const oldProfessorId = getId(oldProfessor);
-    const newProfessorId = getId(newProfessor);
-
-    const oldExpectedDemand =
-      oldClassItem?.expectedDemand ?? oldClassItem?.demandaEstimada;
-    const newExpectedDemand =
-      classItem?.expectedDemand ?? classItem?.demandaEstimada;
-
-    const oldDescription = oldClassItem?.description;
-    const newDescription = classItem?.description;
-
-    const sameSubject = oldSubjectId === newSubjectId;
-    const sameProfessor = oldProfessorId === newProfessorId;
-    const sameExpectedDemand = oldExpectedDemand === newExpectedDemand;
-    const sameDescription = oldDescription === newDescription;
-
-    const oldSubjectAliasText = getAliasNameText(oldSubject);
-    const newSubjectAliasText = getAliasNameText(newSubject);
-    const oldProfessorAliasText = getAliasNameText(oldProfessor);
-    const newProfessorAliasText = getAliasNameText(newProfessor);
-
-    const notNull = (text) => (text == "" || text == null ? "null" : text);
-
-    const newSubjectText = `\t- Disciplina: ${notNull(
-      oldSubjectAliasText
-    )} -> ${notNull(newSubjectAliasText)}\n`;
-    const newProfessorText = `\t- Professor: ${notNull(
-      oldProfessorAliasText
-    )} -> ${notNull(newProfessorAliasText)}\n`;
-    const newExpectedDemandText = `\t- Demanda estimada: ${notNull(
-      oldExpectedDemand
-    )} -> ${notNull(newExpectedDemand)}\n`;
-    const newDescriptionText = `\t- Descrição: ${notNull(
-      oldDescription
-    )} -> ${notNull(newDescription)}\n`;
-
-    let modifications = "";
-    modifications += sameSubject ? "" : newSubjectText;
-    modifications += sameProfessor ? "" : newProfessorText;
-    modifications += sameExpectedDemand ? "" : newExpectedDemandText;
-    modifications += sameDescription ? "" : newDescriptionText;
-
-    /*
-    const properties = [
-      { name: 'disciplina', old: oldSubject, new: newSubject, same: sameSubject },
-      { name: 'professor', old: oldProfessor, new: newProfessor, same: sameProfessor },
-      { name: 'demandaEstimada', old: oldExpectedDemand, new: newExpectedDemand, same: sameExpectedDemand },
-    ];
-
-    let modifications = "";
-
-    for (const prop of properties) {
-      if (!prop.same) {
-        modifications += `${prop.name}: ${prop.old} -> ${prop.new}\n`;
-      }
+      const notNull = (text) => (text == "" || text == null ? "null" : text);
+      diffText += `\t- ${key}: ${notNull(oldText)} -> ${notNull(rowText)}\n`;
+      return diffText;
     }
 
-    const hasChanges = modifications.length > 0;
+    const modObject = { updateText: "", hasChanges: false };
 
-    const modificationsObject = {
-      updateText: modifications,
-      updateStatus: hasChanges,
-    };
-    */
-    // console.log(newSubjectText);
-
-    // const hasChanges = !sameSubject || !sameProfessor || !sameExpectedDemand;
-    const hasChanges = modifications.length > 0;
-
-    const modificationsObject = {
-      updateText: modifications,
-      updateStatus: hasChanges,
+    const keysToCheck = {
+      subject: "Disciplina",
+      disciplina: "Disciplina",
+      professor: "Professor",
+      expectedDemand: "Demanda estimada",
+      demandaEstimada: "Demanda estimada",
+      description: "Descrição",
+      descricao: "Descrição",
     };
 
-    return modificationsObject;
+    for (let key of Object.keys(keysToCheck)) {
+      if (classItem.hasOwnProperty(key)) {
+        const oldItem = classItem[key];
+        const rowItem = rowClassItem[key];
+
+        const checkObject = (value) => typeof value === "object";
+
+        const oldText = checkObject(oldItem)
+          ? getAliasNameText(oldItem)
+          : oldItem;
+        const rowText = checkObject(rowItem)
+          ? getAliasNameText(rowItem)
+          : rowItem;
+
+        if (oldText !== rowText) {
+          modObject.hasChanges = true;
+          modObject.updateText += getDiffText(
+            keysToCheck[key],
+            oldText,
+            rowText
+          );
+        }
+      }
+    }
+    return modObject;
   }
 
   function smartUpdateClassItem() {
     setNeedsUpdateStatus(false);
     setModifiedMessage(dontUpdateMessage);
-    setOldClassItem(classItem); // Maybe unnecessary
-    updateClassItemDB();
+    setRowClassItem(iterClassItem); // Maybe unnecessary
+    updateClass(classItemRowStates);
   }
 
   const updateProps = {
@@ -197,10 +157,10 @@ function SmartUpdateClassItem(updateClassItemProps) {
   return <UpdateItem {...updateProps} />;
 }
 
-function SmartDeleteClassItem({ classItem, classItemRowStates }) {
+function SmartDeleteClassItem({ classItemRowStates }) {
   const deleteProps = {
     deleteFunc: () => deleteClass(classItemRowStates),
-    text: "Remover turma " + getClassItemText(classItem),
+    text: "Remover turma " + getClassItemText(classItemRowStates.classItem),
   };
 
   return <DeleteItem {...deleteProps} />;
