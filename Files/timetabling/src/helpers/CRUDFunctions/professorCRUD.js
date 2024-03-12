@@ -1,3 +1,4 @@
+import { sortProfessors } from "../../components/Sorts/sortingFunctions";
 import emptyObjects from "../../config/emptyObjects";
 import {
   defaultDBCreate,
@@ -35,12 +36,14 @@ function createProfessor({ setProfessors, setProfessor }) {
 
 function readProfessor({ professors, setProfessors, setProfessor }) {
   function insertNewProfessorsFromDB(professoresFromDB) {
-    setProfessors(professoresFromDB);
+    const defaultSortedProfessors = sortProfessors(professoresFromDB);
+    setProfessors(defaultSortedProfessors);
+
     setProfessor((oldProfessor) => {
       const showedProfessor = refreshShownItem(
         oldProfessor,
         professors,
-        professoresFromDB
+        defaultSortedProfessors
       );
       return showedProfessor;
     });

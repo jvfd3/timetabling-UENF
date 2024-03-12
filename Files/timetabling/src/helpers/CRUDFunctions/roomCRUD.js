@@ -1,3 +1,4 @@
+import { sortRooms } from "../../components/Sorts/sortingFunctions";
 import emptyObjects from "../../config/emptyObjects";
 import {
   defaultDBCreate,
@@ -35,9 +36,10 @@ function createRoom({ setRooms, setRoom }) {
 
 function readRoom({ rooms, setRooms, setRoom }) {
   function insertNewRoomsFromDB(roomsFromDB) {
-    setRooms(roomsFromDB);
+    const defaultSortedRooms = sortRooms(roomsFromDB);
+    setRooms(defaultSortedRooms);
     setRoom((oldRoom) => {
-      const showedRoom = refreshShownItem(oldRoom, rooms, roomsFromDB);
+      const showedRoom = refreshShownItem(oldRoom, rooms, defaultSortedRooms);
       return showedRoom;
     });
   }

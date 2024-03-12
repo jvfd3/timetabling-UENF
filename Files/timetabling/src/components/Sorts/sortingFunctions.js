@@ -144,6 +144,14 @@ function sortSubjects(subjects) {
   return orderedSubjects;
 }
 
+function sortProfessors(professors) {
+  const sortOrder = [["laboratorio"], ["curso"], ["nome"], ["id"]];
+  const orderedProfessors = professors.sort((a, b) =>
+    mySorting(a, b, sortOrder)
+  );
+  return orderedProfessors;
+}
+
 export {
   sortNotOfferedSubjects,
   sortMultiClasses,
@@ -151,4 +159,5 @@ export {
   sortSubjects,
   sortClassesSelection,
   sortRooms,
+  sortProfessors,
 };

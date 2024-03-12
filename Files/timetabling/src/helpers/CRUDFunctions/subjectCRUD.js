@@ -1,3 +1,4 @@
+import { sortSubjects } from "../../components/Sorts/sortingFunctions";
 import emptyObjects from "../../config/emptyObjects";
 import {
   defaultDBCreate,
@@ -35,13 +36,14 @@ function createSubject({ setSubjects, setSubject }) {
 
 function readSubject({ subjects, setSubjects, setSubject }) {
   function insertNewSubjectsFromDB(subjectsFromDB) {
-    setSubjects(subjectsFromDB);
+    const defaultSortedSubjects = sortSubjects(subjectsFromDB);
+    setSubjects(defaultSortedSubjects);
 
     setSubject((oldSubject) => {
       const showedSubject = refreshShownItem(
         oldSubject,
         subjects,
-        subjectsFromDB
+        defaultSortedSubjects
       );
       return showedSubject;
     });
