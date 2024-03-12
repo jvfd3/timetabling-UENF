@@ -1,5 +1,4 @@
 import "./ClassItemTable.css";
-
 import React, { useEffect, useState } from "react";
 import text from "../../config/frontText";
 import myStyles from "../../config/myStyles";

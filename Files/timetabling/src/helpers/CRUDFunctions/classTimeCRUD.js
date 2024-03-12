@@ -8,6 +8,7 @@ import {
 } from "../../DB/defaultAxiosFunctions";
 import {
   getId,
+  getItemFromListById,
   refreshShownItem,
   removeItemInListById,
   replaceNewItemInListById,
@@ -16,11 +17,13 @@ import {
 const itemName = "classTime";
 
 function createClassTime(classTimeStates) {
-  const { setClasses, classItem, setClassItem, newClassTimeValues } =
+  // const { setClasses, classItem, setClassItem, newClassTimeValues } =
+  //   classTimeStates;
+
+  const { setClasses, classItemFilter, classItem, newClassTimeValues } =
     classTimeStates;
 
-  function getBaseClassTime(parClassItem) {
-    const currClass = parClassItem ?? classItem;
+  function getBaseClassTime() {
     const room = newClassTimeValues?.room ?? newClassTimeValues?.sala;
     const day = newClassTimeValues?.day ?? newClassTimeValues?.dia;
     const duration =
@@ -28,9 +31,12 @@ function createClassTime(classTimeStates) {
     const startHour =
       newClassTimeValues?.startHour ?? newClassTimeValues?.horaInicio;
 
+    const debug = { room: classItemFilter };
+    // console.log(debug);
+
     const baseClassTime = {
       ...emptyObjects.classTime,
-      idTurma: newClassTimeValues?.idTurma ?? getId(currClass),
+      idTurma: newClassTimeValues?.idTurma ?? getId(classItem),
       duracao: duration ?? 2,
       sala: room ?? null,
       dia: day ?? null,
@@ -46,16 +52,15 @@ function createClassTime(classTimeStates) {
   }
 
   function insertNewClassTime(newId) {
-    setClassItem((oldClassItem) => {
+    const newClassTime = getNewClassTime(newId);
+    const fakeClassItem = { id: newClassTime.idTurma };
+    setClasses((oldClasses) => {
+      const oldClassItem = getItemFromListById(fakeClassItem, oldClasses);
       const oldClassTimes = oldClassItem?.horarios ?? [];
-      const newClassTime = getNewClassTime(newId);
       const newClassTimes = [...oldClassTimes, newClassTime];
       const newClassItem = { ...oldClassItem, horarios: newClassTimes };
-      setClasses((oldClasses) => {
-        const newClasses = replaceNewItemInListById(newClassItem, oldClasses);
-        return newClasses;
-      });
-      return newClassItem;
+      const newClasses = replaceNewItemInListById(newClassItem, oldClasses);
+      return newClasses;
     });
   }
 
@@ -108,20 +113,32 @@ function updateClassTime({ setClasses, setClassItem, classTime }) {
     .catch(defaultHandleError);
 }
 
-function deleteClassTime({ setClasses, setClassItem, classTime }) {
+function deleteClassTime({ setClasses, classTime }) {
+  function insertNewClassTime(newId) {
+    const newClassTime = getNewClassTime(newId);
+    const fakeClassItem = { id: newClassTime.idTurma };
+    setClasses((oldClasses) => {
+      const oldClassItem = getItemFromListById(fakeClassItem, oldClasses);
+      const oldClassTimes = oldClassItem?.horarios ?? [];
+      const newClassTimes = [...oldClassTimes, newClassTime];
+      const newClassItem = { ...oldClassItem, horarios: newClassTimes };
+      const newClasses = replaceNewItemInListById(newClassItem, oldClasses);
+      return newClasses;
+    });
+  }
+
   function deleteClassTimeFromDB(deletedClassTime) {
-    setClassItem((oldClassItem) => {
+    setClasses((oldClasses) => {
+      const fakeClassItem = { id: deletedClassTime.idTurma };
+      const oldClassItem = getItemFromListById(fakeClassItem, oldClasses);
       const oldClassTimes = oldClassItem?.horarios ?? [];
       const newClassTimes = removeItemInListById(
         deletedClassTime,
         oldClassTimes
       );
       const newClassItem = { ...oldClassItem, horarios: newClassTimes };
-      setClasses((oldClasses) => {
-        const newClasses = replaceNewItemInListById(newClassItem, oldClasses);
-        return newClasses;
-      });
-      return newClassItem;
+      const newClasses = replaceNewItemInListById(newClassItem, oldClasses);
+      return newClasses;
     });
   }
 

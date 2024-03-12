@@ -24,23 +24,26 @@ function createClass(createClassStates) {
   function getBaseClassItem() {
     const defaultYearSemester = getDefaultYearSemesterValues();
 
-    const currYear = classItemFilter?.year ?? classItemFilter?.ano;
-    const currSemester = classItemFilter?.semester ?? classItemFilter?.semestre;
-    const currSubject = classItemFilter?.subject ?? classItemFilter?.disciplina;
-    const currExpectedDemand =
+    const filterYear = classItemFilter?.year ?? classItemFilter?.ano;
+    const filterSemester =
+      classItemFilter?.semester ?? classItemFilter?.semestre;
+    const filterSubject =
+      classItemFilter?.subject ?? classItemFilter?.disciplina;
+    const filterExpectedDemand = // Cames from createPreFilledClass
       classItemFilter?.expectedDemand ?? classItemFilter?.demandaEstimada;
-    const currClassTimes =
+    const filterClassTimes =
       classItemFilter?.classTimes ?? classItemFilter?.horarios;
 
     const baseClassItem = {
       ...emptyObjects.classItem,
-      ano: currYear ?? defaultYearSemester.year,
-      semestre: currSemester ?? defaultYearSemester.semester,
-      disciplina: currSubject ?? null,
-      demandaEstimada: currExpectedDemand ?? null,
+      id: "initial empty id", // Will be replaced by the DB query
+      ano: filterYear ?? defaultYearSemester.year,
+      semestre: filterSemester ?? defaultYearSemester.semester,
+      disciplina: filterSubject ?? null,
+      demandaEstimada: filterExpectedDemand ?? null,
       professor: classItemFilter?.professor ?? null,
       description: classItemFilter?.description ?? null,
-      horarios: currClassTimes ?? [],
+      horarios: filterClassTimes ?? [],
     };
 
     return baseClassItem;
@@ -51,24 +54,18 @@ function createClass(createClassStates) {
     return newClass;
   }
 
-  function getNewClassTimes(timelessClassItem, classTimes) {
-    async function asyncCreateClassTimeDB(newClassTime) {
-      const createClassTimeProps = {
-        setClasses,
-        setClassItem,
-        newClassTimeValues: {
-          ...newClassTime,
-          idTurma: getId(timelessClassItem),
-        },
-      };
-      createClassTime(createClassTimeProps);
-    }
+  function getNewClassTimes(classTimes, classItemId) {
+    const createClassTimeProps = { setClasses, setClassItem };
 
     classTimes.forEach((iterNewClassTime, index) => {
+      createClassTimeProps.newClassTimeValues = {
+        ...iterNewClassTime,
+        idTurma: classItemId,
+      };
+
       const delay = (index + 1) * configInfo.AWS.defaultRequestDelay;
-      setTimeout(() => {
-        asyncCreateClassTimeDB(iterNewClassTime);
-      }, delay);
+      const delayedFunction = () => createClassTime(createClassTimeProps);
+      setTimeout(delayedFunction, delay);
     });
   }
 
@@ -76,9 +73,11 @@ function createClass(createClassStates) {
     const newClassItem = getNewClassItem(newId);
     const classTimes = newClassItem?.classTimes ?? newClassItem?.horarios ?? [];
     const timelessClassItem = { ...newClassItem, horarios: [] };
-    setClassItem(timelessClassItem);
-    setClasses((oldClasses) => [...oldClasses, newClassItem]);
-    getNewClassTimes(timelessClassItem, classTimes);
+
+    // classes should use that, but not multiclasses. But why the timelessClassItem?
+    setClassItem && setClassItem(timelessClassItem);
+    setClasses((oldClasses) => [...oldClasses, timelessClassItem]);
+    getNewClassTimes(classTimes, getId(timelessClassItem));
   }
 
   defaultDBCreate(itemName, getBaseClassItem())

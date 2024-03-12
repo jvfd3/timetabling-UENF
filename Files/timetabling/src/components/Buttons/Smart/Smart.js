@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import text from "../../../config/frontText";
 import defaultColors from "../../../config/defaultColors";
 import createPreFilledClass from "./createPreFilledClass";
-import { getId } from "../../../helpers/auxCRUD";
+import { getId, getItemFromListById } from "../../../helpers/auxCRUD";
 import {
   createClass,
   deleteClass,
@@ -24,6 +24,11 @@ import {
   getCreateClassItemTitle,
   getRoomText,
 } from "../../../helpers/visualizationText/textLabels";
+import {
+  createClassTime,
+  deleteClassTime,
+  updateClassTime,
+} from "../../../helpers/CRUDFunctions/classTimeCRUD";
 
 const defaultText = text.component.classTimesTable.buttons;
 
@@ -166,17 +171,17 @@ function SmartDeleteClassItem({ classItemRowStates }) {
   return <DeleteItem {...deleteProps} />;
 }
 
-function SmartCreateClassTime({ classItem, createClassTimeDB }) {
+function SmartCreateClassTime(classStates) {
+  const classItemText = getClassItemText(classStates.classItem);
   const createClassTimeProps = {
-    createFunc: createClassTimeDB,
-    text: `Adicionar horário à turma ${getClassItemText(classItem)}`,
+    createFunc: () => createClassTime(classStates),
+    text: `Adicionar horário à turma ${classItemText}`,
   };
   return <CreateClassTime {...createClassTimeProps} />;
 }
 
 function SmartUpdateClassTime(updateClassTimeStates) {
-  const { classTime, updateClassTimeDB, oldClassTime, setOldClassTime } =
-    updateClassTimeStates;
+  const { classTime, oldClassTime, setOldClassTime } = updateClassTimeStates;
 
   const classTimeText = getClassTimeText(classTime);
   let dontUpdateMessage = defaultText.update.noChanges;
@@ -250,7 +255,7 @@ function SmartUpdateClassTime(updateClassTimeStates) {
     setNeedsUpdateStatus(false);
     setOldClassTime(classTime);
     setModifiedMessage(dontUpdateMessage);
-    updateClassTimeDB();
+    updateClassTime(updateClassTimeStates);
   }
 
   const updateClassTimeProps = {
@@ -264,21 +269,18 @@ function SmartUpdateClassTime(updateClassTimeStates) {
   return <UpdateClassTime {...updateClassTimeProps} />;
 }
 
-function SmartDeleteClassTime({
-  classTime,
-  filteredClasses,
-  deleteClassTimeDB,
-}) {
+function SmartDeleteClassTime(classTimeRowStates) {
+  const { classTime, filteredClasses } = classTimeRowStates;
   // get classItem from filteredClasses
-  const classItem = filteredClasses.find(
-    (iterClassItem) => getId(iterClassItem) === classTime?.idTurma
-  );
+
+  const fakeClassItem = { id: classTime.idTurma };
+  const classItem = getItemFromListById(fakeClassItem, filteredClasses);
 
   const timeText = getClassTimeText(classTime);
   const classText = getClassItemText(classItem);
 
   const deleteClassTimeProps = {
-    deleteFunc: deleteClassTimeDB,
+    deleteFunc: () => deleteClassTime(classTimeRowStates),
     text: `Remover horário${timeText}:\n\t- turma: ${classText}`,
   };
 

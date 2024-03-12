@@ -15,12 +15,6 @@ import {
   SmartDeleteClassTime,
   SmartUpdateClassTime,
 } from "../Buttons/Smart/Smart";
-import {
-  createClassTime,
-  // readClassTime,
-  updateClassTime,
-  deleteClassTime,
-} from "../../helpers/CRUDFunctions/classTimeCRUD";
 
 const defaultClassNames = myStyles.classNames.default;
 const frontText = text.component.classTimesTable.tableTitles;
@@ -38,12 +32,9 @@ function ClassTimeRow(classTimeRowStates) {
   const conflictStyles = classTimeConflicts.timeConflicts.styled;
 
   const CRUDClassTimeProps = {
-    classTime,
+    ...classTimeRowStates,
     oldClassTime,
-    filteredClasses,
     setOldClassTime,
-    deleteClassTimeDB: () => deleteClassTime(classTimeRowStates),
-    updateClassTimeDB: () => updateClassTime(classTimeRowStates),
   };
 
   const classTimeTableRowKey = `ClassTimeTableRow: ${getId(classTime)}`;
@@ -70,14 +61,13 @@ function ClassTimeRow(classTimeRowStates) {
   );
 }
 
-function ClassTimeHeader(createClassTimeProps) {
-  const { classItem } = createClassTimeProps;
-  const headerKey = `ClassTime Header: ${getId(classItem)}`;
+function ClassTimeHeader(classStates) {
+  const headerKey = `ClassTime Header: ${getId(classStates.classItem)}`;
   return (
     <thead>
       <tr key={headerKey}>
         <th>
-          <SmartCreateClassTime {...createClassTimeProps} />
+          <SmartCreateClassTime {...classStates} />
         </th>
         <th>{frontText.room}</th>
         <th>{frontText.day}</th>
@@ -91,20 +81,16 @@ function ClassTimeHeader(createClassTimeProps) {
 function ClassTimeTable(classStates) {
   const { classItem, conflicts } = classStates;
 
-  const createClassTimeProps = {
-    classItem,
-    createClassTimeDB: () => createClassTime(classStates),
-  };
+  const classTimes = classItem?.classTimes ?? classItem?.horarios;
+  const hasClassTimes = classTimes?.length > 0;
 
-  const hasClassTimes = classItem?.horarios?.length > 0;
-
-  const sortedClassTimes = sortClassTimes(classItem?.horarios);
+  const sortedClassTimes = sortClassTimes(classTimes);
 
   return !hasClassTimes ? (
-    <SmartCreateClassTime {...createClassTimeProps} />
+    <SmartCreateClassTime {...classStates} />
   ) : (
     <table className={defaultClassNames.componentTable}>
-      <ClassTimeHeader {...createClassTimeProps} />
+      <ClassTimeHeader {...classStates} />
       <tbody>
         {sortedClassTimes?.map((iterClassTime) => {
           const classTimeRowStates = {

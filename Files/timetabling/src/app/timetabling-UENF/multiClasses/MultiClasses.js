@@ -4,13 +4,10 @@ import text from "../../../config/frontText";
 import myStyles from "../../../config/myStyles";
 import ClassesTable from "../../../components/MultiClasses/ClassItemTable";
 import NotOfferedSubjects from "../../../components/MultiClasses/NotOfferedSubjects/NotOfferedSubjects";
+import { readClass } from "../../../helpers/CRUDFunctions/classCRUD";
 import { MultiClassesFilters } from "../../../components/Filters/Filters";
 import { SmartCreateClassItem } from "../../../components/Buttons/Smart/Smart";
 import { getDefaultClassItem, getSelectStates } from "../../../helpers/auxCRUD";
-import {
-  createClass,
-  readClass,
-} from "../../../helpers/CRUDFunctions/classCRUD";
 
 const defaultClassNames = myStyles.classNames.default;
 const pageTexts = text.page.multiClasses;
@@ -82,7 +79,8 @@ function MultiClasses() {
     classes,
     selectStates,
   };
-  const createClassItemStates = { setClasses, setClassItem, classItemFilter };
+  // I want to remove this setClassItem
+  const createClassItemStates = { setClasses, classItemFilter };
   const globalStates = {
     classStates,
     filterStates,
@@ -99,7 +97,7 @@ function MultiClasses() {
   return (
     <div className={defaultClassNames.containerCards}>
       <MultiClassesCard {...globalStates} />
-      <NotOfferedSubjects {...globalStates} />
+      {/* <NotOfferedSubjects {...globalStates} /> */}
     </div>
   );
 }
