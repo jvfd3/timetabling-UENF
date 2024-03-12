@@ -161,6 +161,9 @@ function ClassesTable(globalStates) {
         {sortedMultiClasses.map((iterClassItem) => {
           const classItemRowProps = {
             ...globalStates.classStates,
+            rooms: globalStates.rooms,
+            professors: globalStates.professors,
+            subjects: globalStates.subjects,
             classItem: iterClassItem,
             iterClassItem,
             key: `ClassItemTableRow: ${getId(iterClassItem)}`,
