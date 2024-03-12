@@ -131,10 +131,13 @@ function ClassesTableView(customPageStates) {
   const [filteredClasses, setFilteredClasses] = useState([]);
   const [classItemFilter, setClassItemFilter] = useState(getDefaultClassItem());
   const [splittedClasses, setSplittedClasses] = useState([]);
+  const [classItem, setClassItem] = useState(null);
 
   const classStates = {
     classes,
     setClasses,
+    classItem,
+    setClassItem,
     filteredClasses,
     setFilteredClasses,
     classItemFilter,
