@@ -160,7 +160,7 @@ function getUsualInfo(classes) {
   return classUsualInfo;
 }
 
-function getNewClassItem(classItemFilter, iterSubject, usualInfo) {
+function getPreFilledClassItem(classItemFilter, iterSubject, usualInfo) {
   const defaultYearSemester = getDefaultYearSemesterValues();
 
   const yearValue = classItemFilter?.year ?? classItemFilter?.ano;
@@ -185,14 +185,14 @@ function getNewClassItem(classItemFilter, iterSubject, usualInfo) {
   return newClass;
 }
 
-function getNewClassTimes(classTime) {
+function getPreFilledClassTimes(classTime) {
   const classTimes = [];
   // console.log("classTime", classTime);
   for (let i = 0; i < classTime?.quantity; i++) {
     const newClassTime = {
       ...emptyObjects.classTime,
-      id: "tempId-" + i,
-      idTurma: "tempIdClass-" + i,
+      // id: "tempId-" + i,
+      // idTurma: "tempIdClass-" + i,
       dia: classTime?.day?.[i],
       duracao: classTime?.duration?.[0],
       horaInicio: classTime?.startHour?.[0],
@@ -205,4 +205,4 @@ function getNewClassTimes(classTime) {
   return classTimes;
 }
 
-export { getNewClassItem, getNewClassTimes, getUsualInfo };
+export { getPreFilledClassItem, getPreFilledClassTimes, getUsualInfo };

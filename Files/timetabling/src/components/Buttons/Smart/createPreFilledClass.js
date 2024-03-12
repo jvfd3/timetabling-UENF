@@ -2,31 +2,27 @@ import configInfo from "../../../config/configInfo";
 import { createClass } from "../../../helpers/CRUDFunctions/classCRUD";
 import { filterSubject } from "../../../helpers/filteringFunc";
 import {
-  getNewClassItem,
-  getNewClassTimes,
+  getPreFilledClassItem,
+  getPreFilledClassTimes,
   getUsualInfo,
 } from "../../MultiClasses/NotOfferedSubjects/processInitialValues";
 
 function createPreFilledClass({ classStates, subjects }) {
   const { classItemFilter, classes } = classStates;
 
-  function asyncCreateClassDB(iterSubject) {
+  subjects.forEach((iterSubject, index) => {
     const sameSubjectClasses = filterSubject(classes, iterSubject);
     const usualInfo = getUsualInfo(sameSubjectClasses);
-    const newClassItem = getNewClassItem(
+    const newClassItem = getPreFilledClassItem(
       classItemFilter,
       iterSubject,
       usualInfo
     );
-    newClassItem.horarios = getNewClassTimes(usualInfo.classTime);
+    newClassItem.horarios = getPreFilledClassTimes(usualInfo.classTime);
 
     const newLocalStates = { ...classStates, classItemFilter: newClassItem };
 
-    createClass(newLocalStates);
-  }
-
-  subjects.forEach((iterSubject, index) => {
-    const delayedFunction = () => asyncCreateClassDB(iterSubject);
+    const delayedFunction = () => createClass(newLocalStates);
     const delay = (index + 1) * configInfo.AWS.defaultRequestDelay;
     setTimeout(delayedFunction, delay);
   });

@@ -58,13 +58,17 @@ function createClass(createClassStates) {
     const createClassTimeProps = { setClasses, setClassItem };
 
     classTimes.forEach((iterNewClassTime, index) => {
-      createClassTimeProps.newClassTimeValues = {
-        ...iterNewClassTime,
-        idTurma: classItemId,
-      };
+      function asyncCreateClassTime() {
+        createClassTimeProps.newClassTimeValues = {
+          ...iterNewClassTime,
+          idTurma: classItemId,
+        };
+
+        createClassTime(createClassTimeProps);
+      }
 
       const delay = (index + 1) * configInfo.AWS.defaultRequestDelay;
-      const delayedFunction = () => createClassTime(createClassTimeProps);
+      const delayedFunction = asyncCreateClassTime;
       setTimeout(delayedFunction, delay);
     });
   }
@@ -77,7 +81,7 @@ function createClass(createClassStates) {
     // classes should use that, but not multiclasses. But why the timelessClassItem?
     setClassItem && setClassItem(timelessClassItem);
     setClasses((oldClasses) => [...oldClasses, timelessClassItem]);
-    getNewClassTimes(classTimes, getId(timelessClassItem));
+    getNewClassTimes(classTimes, newId);
   }
 
   defaultDBCreate(itemName, getBaseClassItem())
