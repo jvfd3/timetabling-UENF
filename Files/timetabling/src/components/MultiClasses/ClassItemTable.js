@@ -70,16 +70,6 @@ function ClassItemTableRow(classItemRowStates) {
   const conflicts = getClassItemConflicts(filteredClasses, iterClassItem);
   const classTimeTableProps = { ...classItemRowStates, conflicts };
 
-  function updateClasses(setClasses, newClassItem) {
-    setClasses((oldClasses) =>
-      replaceNewItemInListById(newClassItem, oldClasses)
-    );
-  }
-
-  useEffect(() => {
-    updateClasses(classItemRowStates.setClasses, rowClassItem);
-  }, [rowClassItem]);
-
   const CRUDClassItemProps = {
     rowClassItem,
     setRowClassItem,
