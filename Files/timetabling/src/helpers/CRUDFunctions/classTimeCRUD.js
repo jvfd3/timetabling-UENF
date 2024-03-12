@@ -31,7 +31,7 @@ function createClassTime(classTimeStates) {
     const startHour =
       newClassTimeValues?.startHour ?? newClassTimeValues?.horaInicio;
 
-    const debug = { room: classItemFilter };
+    // const debug = { room: classItemFilter };
     // console.log(debug);
 
     const baseClassTime = {
