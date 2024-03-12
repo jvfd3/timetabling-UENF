@@ -89,7 +89,7 @@ function MultiClasses() {
   return (
     <div className={defaultClassNames.containerCards}>
       <MultiClassesCard {...globalStates} />
-      {/* <NotOfferedSubjects {...globalStates} /> */}
+      <NotOfferedSubjects {...globalStates} />
     </div>
   );
 }
