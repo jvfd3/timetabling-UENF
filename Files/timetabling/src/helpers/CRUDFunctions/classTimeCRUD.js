@@ -114,19 +114,6 @@ function updateClassTime({ setClasses, setClassItem, classTime }) {
 }
 
 function deleteClassTime({ setClasses, classTime }) {
-  function insertNewClassTime(newId) {
-    const newClassTime = getNewClassTime(newId);
-    const fakeClassItem = { id: newClassTime.idTurma };
-    setClasses((oldClasses) => {
-      const oldClassItem = getItemFromListById(fakeClassItem, oldClasses);
-      const oldClassTimes = oldClassItem?.horarios ?? [];
-      const newClassTimes = [...oldClassTimes, newClassTime];
-      const newClassItem = { ...oldClassItem, horarios: newClassTimes };
-      const newClasses = replaceNewItemInListById(newClassItem, oldClasses);
-      return newClasses;
-    });
-  }
-
   function deleteClassTimeFromDB(deletedClassTime) {
     setClasses((oldClasses) => {
       const fakeClassItem = { id: deletedClassTime.idTurma };
