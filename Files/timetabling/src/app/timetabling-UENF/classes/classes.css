@@ -1,5 +1,5 @@
 .HorizontalIcons {
-  gap: 5;
-  display: "flex";
-  flex-direction: "row";
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
 }
