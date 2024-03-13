@@ -417,21 +417,23 @@ function getClassItemMainSelectionFormatLabel(classItem, context) {
 
   const hasClassTimes = classTimes?.length > 0;
   const classTimesLabel = hasClassTimes
-    ? ` - Horários: [${classTimesLabels.join("; ")}]`
+    ? `Horários: [${classTimesLabels.join("; ")}]`
     : "";
 
   const professorLabel = getAliasNameText(professor);
   const subjectLabel = getAliasNameText(subject);
 
   const idLabel = `(id: ${id}) `;
-  const yearSemester = `${year}.${semester} - `;
+  const yearSemester = `${year}.${semester}`;
+
+  const texts = [yearSemester, subjectLabel, professorLabel, classTimesLabel];
+  // remove empty texts
+  const cleanTexts = texts.filter((text) => text !== "");
+  const classItemLabelValues = cleanTexts.join(" - ");
 
   let classItemLabel = "";
   // classItemLabel += idLabel;
-  classItemLabel += yearSemester;
-  classItemLabel += subjectLabel + " - ";
-  classItemLabel += professorLabel;
-  classItemLabel += classTimesLabel;
+  classItemLabel += classItemLabelValues;
   return classItemLabel;
 }
 
