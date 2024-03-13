@@ -135,25 +135,6 @@ function getSubjectInputMessage(inputConfig, subjects) {
   return finalMessage;
 }
 
-/* CLASSTIME */
-
-function getStartHourFormatLabel(hour, context) {
-  const startHour = hour?.hour ?? hour?.hora;
-  const section = hour?.section ?? hour?.turno;
-
-  const hourLabel = checkIndefinition(startHour);
-
-  let longLabel = "";
-  longLabel += ` (${checkIndefinition(section)})`;
-
-  let shortLabel = "";
-
-  let startHourLabel = "";
-  startHourLabel += hourLabel;
-  startHourLabel += menuIsOpen(context) ? longLabel : shortLabel;
-  return startHourLabel;
-}
-
 /* SUBJECT */
 
 function getSubjectViewTableText(subject) {
@@ -309,6 +290,23 @@ function getLabFormatLabel(lab, context) {
 }
 
 /* CLASSTIME */
+
+function getStartHourFormatLabel(hour, context) {
+  const startHour = hour?.hour ?? hour?.hora;
+  const section = hour?.section ?? hour?.turno;
+
+  const hourLabel = checkIndefinition(startHour);
+
+  let longLabel = "";
+  longLabel += ` (${checkIndefinition(section)})`;
+
+  let shortLabel = "";
+
+  let startHourLabel = "";
+  startHourLabel += hourLabel;
+  startHourLabel += menuIsOpen(context) ? longLabel : shortLabel;
+  return startHourLabel;
+}
 
 function getClassTimeText(classTime) {
   const day = getDay(classTime);
