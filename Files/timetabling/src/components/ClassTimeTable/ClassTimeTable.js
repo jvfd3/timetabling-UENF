@@ -18,7 +18,7 @@ import {
 } from "../Buttons/Smart/Smart";
 
 const defaultClassNames = myStyles.classNames.default;
-const frontText = text.component.classTimesTable.tableTitles;
+const frontText = text.component.classTimesTable;
 
 function ClassTimeRow(classTimeRowStates) {
   const { classTime, conflicts, filteredClasses } = classTimeRowStates;
@@ -70,10 +70,10 @@ function ClassTimeHeader(classStates) {
         <th>
           <SmartCreateClassTime {...classStates} />
         </th>
-        <th>{frontText.room}</th>
-        <th>{frontText.day}</th>
-        <th>{frontText.hour}</th>
-        <th>{frontText.duration}</th>
+        <th>{frontText.tableTitles.room}</th>
+        <th>{frontText.tableTitles.day}</th>
+        <th>{frontText.tableTitles.hour}</th>
+        <th>{frontText.tableTitles.duration}</th>
       </tr>
     </thead>
   );
