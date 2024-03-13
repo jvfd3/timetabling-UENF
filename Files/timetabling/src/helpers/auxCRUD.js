@@ -69,6 +69,14 @@ function getDefaultClassItem(year, semester) {
   return defaultClassItem;
 }
 
+function getDefaultClassItemFilter() {
+  const defaultClassItemFilter = {
+    ...getDefaultClassItem(),
+    expectedSemester: 14,
+  };
+  return defaultClassItemFilter;
+}
+
 function getDefaultClassTime(year, semester) {
   const defaultYearSemester = getDefaultYearSemesterValues();
 
@@ -154,6 +162,7 @@ function getSelectStates() {
 export {
   // replaceNewClassTimeInList,
   // replaceNewClassItemInList,
+  getDefaultClassItemFilter, // MultiClasses and CCTable Filters
   refreshShownItem,
   getItemFromListById, // Room Select
   getItemIndexInListById, // Read

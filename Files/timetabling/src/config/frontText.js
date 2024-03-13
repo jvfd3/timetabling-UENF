@@ -142,6 +142,7 @@ const text = {
       day: "Dia:",
       hour: "Hora:",
       expectedSemester: "Período Esperado:",
+      expectedCategory: "Categoria:",
       subject: "Disciplina:",
       professor: "Professor:",
       room: "Sala:",

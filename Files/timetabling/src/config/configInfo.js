@@ -2,7 +2,7 @@ const configInfo = {
   iconButtons: true,
   hasDenseClassSelects: true,
   defaultIndexes: {
-    year: 9, // 5: 2019; 10: 2024
+    year: 11, // 5: 2019; 10: 2024
     semester: 0, // 1
     professor: 2, // Tang
     student: 38, // João Vítor Fernandes Dias

@@ -7,7 +7,11 @@ import NotOfferedSubjects from "../../../components/MultiClasses/NotOfferedSubje
 import { readClass } from "../../../helpers/CRUDFunctions/classCRUD";
 import { MultiClassesFilters } from "../../../components/Filters/Filters";
 import { SmartCreateClassItem } from "../../../components/Buttons/Smart/Smart";
-import { getDefaultClassItem, getSelectStates } from "../../../helpers/auxCRUD";
+import {
+  getDefaultClassItem,
+  getDefaultClassItemFilter,
+  getSelectStates,
+} from "../../../helpers/auxCRUD";
 
 const defaultClassNames = myStyles.classNames.default;
 const pageTexts = text.page.multiClasses;
@@ -47,10 +51,11 @@ function MultiClassesCard(globalStates) {
 }
 
 function MultiClasses() {
+  const defaultItemFilter = getDefaultClassItemFilter();
   const [classes, setClasses] = useState([]);
   const [filteredClasses, setFilteredClasses] = useState([]);
   const [classItem, setClassItem] = useState(getDefaultClassItem());
-  const [classItemFilter, setClassItemFilter] = useState(getDefaultClassItem());
+  const [classItemFilter, setClassItemFilter] = useState(defaultItemFilter);
 
   const selectStates = getSelectStates();
 

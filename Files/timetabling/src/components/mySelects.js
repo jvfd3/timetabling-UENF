@@ -251,10 +251,13 @@ function SelectBlock({ outerBlock, setOuterBlock, outerIsClearable = false }) {
 function SelectExpectedSemester({
   outerExpectedSemester,
   setOuterExpectedSemester,
+  otherOptions,
   outerIsClearable = false,
 }) {
+  const localOptions = otherOptions ?? constantValues.expectedSemester;
+
   function findExpectedSemesterObject(expectedSemester) {
-    const expectedSemesters = constantValues.expectedSemester;
+    const expectedSemesters = localOptions;
     const expectedSemesterObject = expectedSemesters.find(
       (iterExpectedSemester) => iterExpectedSemester.value == expectedSemester
     );
@@ -264,7 +267,7 @@ function SelectExpectedSemester({
   const SelectExpectedSemesterStates = {
     placeHolderText: placeHolders.expectedSemester,
     isClearable: outerIsClearable,
-    options: constantValues.expectedSemester,
+    options: localOptions,
     setOuterValue: setOuterExpectedSemester,
     value: outerExpectedSemester,
     findCorrectObject: findExpectedSemesterObject,
@@ -510,9 +513,15 @@ function SelectFilterExpectedSemester({
     setExpectedSemester(newExpectedSemesterValue);
   }
 
+  const localOptions = [
+    ...constantValues.expectedSemester,
+    { value: 14, label: "Disciplinas CC" },
+  ];
+
   const expectedSemesterStates = {
     outerExpectedSemester: expectedSemester,
     setOuterExpectedSemester: updateOuterExpectedSemester,
+    otherOptions: localOptions,
     outerIsClearable: true,
   };
 

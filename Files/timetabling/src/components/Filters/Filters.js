@@ -5,7 +5,10 @@ import emptyObjects from "../../config/emptyObjects";
 import { useEffect, useState } from "react";
 import { splitTurmas } from "../../helpers/conflicts/auxConflictFunctions";
 import { refreshShownItem } from "../../helpers/auxCRUD";
-import { getDefaultYearSemesterValues } from "../../helpers/auxFunctions";
+import {
+  getDefaultYearSemesterValues,
+  getValueFromDataWithPropArray,
+} from "../../helpers/auxFunctions";
 import {
   filterDay,
   filterYear,
@@ -70,23 +73,28 @@ function FilterSemester({ setClassItemFilter }) {
   );
 }
 
-function FilterExpectedSemester({ setClassItemFilter }) {
-  const [expectedSemester, setExpectedSemester] = useState(null);
+function FilterExpectedSemester({ classItemFilter, setClassItemFilter }) {
+  const defaultSemester = classItemFilter?.expectedSemester;
+  const [expectedSemester, setExpectedSemester] = useState(defaultSemester);
   const filterExpectedSemesterStates = {
     expectedSemester,
     setExpectedSemester,
   };
 
-  useEffect(() => {
+  function updateClassItemFilter() {
     setClassItemFilter((prevClassItemFilter) => ({
       ...prevClassItemFilter,
       expectedSemester: expectedSemester,
     }));
+  }
+
+  useEffect(() => {
+    updateClassItemFilter();
   }, [expectedSemester]);
 
   return (
     <div className={filterStyles.item}>
-      {frontText.expectedSemester}
+      {frontText.expectedCategory}
       <SelectFilterExpectedSemester {...filterExpectedSemesterStates} />
     </div>
   );
@@ -232,6 +240,27 @@ function filterClassTimes(classes, filterFunction, filterValue) {
   return filteredClasses;
 }
 
+function filterClassCategory(classes, expectedSemester) {
+  let filtering = classes;
+
+  filtering = filterExpectedSemester(filtering, expectedSemester);
+  if (expectedSemester === 14) {
+    filtering = classes.filter((iterClass) => {
+      const valueToCheck = getValueFromDataWithPropArray(iterClass, [
+        ["disciplina"],
+        ["periodo"],
+      ]);
+
+      const isValidValue = valueToCheck !== null && valueToCheck !== undefined;
+      const isCSSubject = valueToCheck <= 12 && isValidValue;
+
+      return isCSSubject;
+    });
+  }
+
+  return filtering;
+}
+
 function MultiClassesFilters(filterStates) {
   const {
     classes,
@@ -241,7 +270,7 @@ function MultiClassesFilters(filterStates) {
     setFilteredClasses,
   } = filterStates;
 
-  const filterProps = { ...selectStates, setClassItemFilter };
+  const filterProps = { ...selectStates, classItemFilter, setClassItemFilter };
   const statesToWatchFor = [classes, classItemFilter];
 
   function filterList(classList, classItemFilter) {
@@ -254,7 +283,7 @@ function MultiClassesFilters(filterStates) {
     filtering = filterSemester(filtering, classItemFilter?.semestre);
     filtering = filterSubject(filtering, classItemFilter?.disciplina);
     filtering = filterProfessor(filtering, classItemFilter?.professor);
-    filtering = filterExpectedSemester(filtering, expectedSemester);
+    filtering = filterClassCategory(filtering, expectedSemester);
     filtering = filterClassTimes(filtering, filterRoom, roomValue);
 
     return filtering;
@@ -273,8 +302,8 @@ function MultiClassesFilters(filterStates) {
     <div className={filterStyles.block}>
       <FilterYear {...filterProps} />
       <FilterSemester {...filterProps} />
-      <FilterSubject {...filterProps} />
       <FilterExpectedSemester {...filterProps} />
+      <FilterSubject {...filterProps} />
       <FilterProfessor {...filterProps} />
       <FilterRoom {...filterProps} />
     </div>
