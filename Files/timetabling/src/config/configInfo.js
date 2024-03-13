@@ -3,7 +3,7 @@ const configInfo = {
   hasDenseClassSelects: true,
   defaultIndexes: {
     year: 11, // 5: 2019; 10: 2024
-    semester: 0, // 1
+    semester: 1, // 0: 1, 1: 2, 2: verão
     professor: 2, // Tang
     student: 38, // João Vítor Fernandes Dias
     subject: 58, // Monografia
