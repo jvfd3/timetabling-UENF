@@ -187,12 +187,9 @@ function TextInputClassExpectedDemand({
 
 /* \ Professor / */
 
-function TextInputProfessorName({
-  professors,
-  setProfessors,
-  professor,
-  setProfessor,
-}) {
+function TextInputProfessorName(professorStates) {
+  const { professors, setProfessors, professor, setProfessor } =
+    professorStates;
   const generalStates = {
     items: professors,
     setItems: setProfessors,
@@ -208,12 +205,9 @@ function TextInputProfessorName({
   return <TextInputDefault {...nomeStates} />;
 }
 
-function TextinputProfessorAlias({
-  professors,
-  setProfessors,
-  professor,
-  setProfessor,
-}) {
+function TextinputProfessorAlias(professorStates) {
+  const { professors, setProfessors, professor, setProfessor } =
+    professorStates;
   const generalStates = {
     items: professors,
     setItems: setProfessors,
