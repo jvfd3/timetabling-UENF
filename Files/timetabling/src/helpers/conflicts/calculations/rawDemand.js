@@ -1,5 +1,6 @@
 import conflicts from "../../../config/conflicts";
 import { getId } from "../../auxCRUD";
+import { getClassTimeText } from "../../visualizationText/textLabels";
 
 function getSingleClassDemandConflict(demandClassData) {
   const singleClassDemandConflicts = [];
@@ -28,6 +29,7 @@ function getSingleClassDemandConflict(demandClassData) {
         type: conflicts.roomCapacity,
         idClass: iterClass.idClass,
         idClassTime: iterClass.idClassTime,
+        classTimeLabel: getClassTimeText(iterClass),
         idRoom: iterClass.idRoom,
         room: iterClass.room,
       };
@@ -53,6 +55,9 @@ function getDemandNeededData(classItem) {
       roomCapacity: classTime?.sala?.capacidade,
       idClassTime: getId(classTime),
       room: classTime?.sala,
+      day: classTime?.dia,
+      startTime: classTime?.horaInicio,
+      duration: classTime?.duracao,
       ...cleanedTurma,
     };
     // console.log("newFlattenedData.idRoom", newFlattenedData.idRoom);
