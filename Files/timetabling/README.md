@@ -15,4 +15,11 @@
 - Select
   1. Problema no select de curso
 
-## Próximas mudanças
+## [Próximas mudanças](https://github.com/jvfd3/timetabling-UENF/issues/461)
+
+- Pró-reitoria de graduação são os donos dos dados?
+- adicionar coluna descritor turma
+- CCTable: forçar a exibição de disciplinas, mesmo que não seja dos horários pares.
+- Problema geral/problema específico
+- Em Marco teórico: que metodologias, tecnologias, banco de dados, etc.
+- Pesquisar sobre o LECIV 2018.2
