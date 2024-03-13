@@ -1,6 +1,33 @@
 import { getId } from "../auxCRUD";
 import { menuIsOpen } from "../auxFunctions";
-import { getDay, getDuration, getRoom, getStartTime } from "./multiGetValues";
+import {
+  getAlias,
+  getBlock,
+  getCapacity,
+  getCategory,
+  getCenter,
+  getClassTimes,
+  getCode,
+  getCourse,
+  getDay,
+  getDescription,
+  getDuration,
+  getEnrollment,
+  getEntryYear,
+  getExpectedDemand,
+  getExpectedSemester,
+  getLab,
+  getLevel,
+  getModality,
+  getName,
+  getProfessor,
+  getRoom,
+  getSection,
+  getSemester,
+  getStartTime,
+  getSubject,
+  getYear,
+} from "./multiGetValues";
 
 /* DEFAULT */
 
@@ -28,9 +55,9 @@ function defaultLabel(item) {
 }
 
 function getNameAliasText(object) {
-  const name = object?.name ?? object?.nome;
-  const alias = object?.alias ?? object?.apelido;
-  const code = object?.code ?? object?.codigo;
+  const name = getName(object);
+  const alias = getAlias(object);
+  const code = getCode(object);
   const id = getId(object);
 
   const nameText = checkIndefinition(name ?? alias ?? code ?? id);
@@ -40,9 +67,9 @@ function getNameAliasText(object) {
 }
 
 function getAliasNameText(object) {
-  const name = object?.name ?? object?.nome;
-  const alias = object?.alias ?? object?.apelido;
-  const code = object?.code ?? object?.codigo;
+  const name = getName(object);
+  const alias = getAlias(object);
+  const code = getCode(object);
   const id = getId(object);
 
   const nameText = checkIndefinition(alias ?? name ?? code ?? id);
@@ -55,19 +82,18 @@ function getAliasNameText(object) {
 
 function getCCTableClassCellText(splittedClass) {
   // console.log("splittedClass", splittedClass);
-  const subject = splittedClass?.subject ?? splittedClass?.disciplina;
-  const professor = splittedClass?.professor;
-  const room = splittedClass?.room ?? splittedClass?.sala;
-  const duration = splittedClass?.duration ?? splittedClass?.duracao;
-  const description = splittedClass?.description ?? splittedClass?.descricao;
-  const expectedDemand =
-    splittedClass?.expectedDemand ?? splittedClass?.demandaEstimada;
+  const subject = getSubject(splittedClass);
+  const professor = getProfessor(splittedClass);
+  const room = getRoom(splittedClass);
+  const duration = getDuration(splittedClass);
+  const description = getDescription(splittedClass);
+  const expectedDemand = getExpectedDemand(splittedClass);
 
-  const expectedSemester = subject?.expectedSemester ?? subject?.periodo;
+  const expectedSemester = getExpectedSemester(subject);
   const subjectAlias = getAliasNameText(subject);
   const professorAlias = getAliasNameText(professor);
-  const roomBlock = room?.block ?? room?.bloco;
-  const roomCode = room?.code ?? room?.codigo;
+  const roomBlock = getBlock(room);
+  const roomCode = getCode(room);
 
   let expectedSemesterText = expectedSemester;
   if (expectedSemester > 10) {
@@ -98,13 +124,13 @@ function getCCTableClassCellText(splittedClass) {
 }
 
 function getCreateClassItemTitle(classItem) {
-  const year = classItem?.year ?? classItem?.ano;
-  const semester = classItem?.semester ?? classItem?.semestre;
-  const subject = classItem?.subject ?? classItem?.disciplina;
-  const professor = classItem?.professor;
-  const classTimes = classItem?.classTimes ?? classItem?.horarios;
+  const year = getYear(classItem);
+  const semester = getSemester(classItem);
+  const subject = getSubject(classItem);
+  const professor = getProfessor(classItem);
+  const classTimes = getClassTimes(classItem);
   const classTime = classTimes?.[0];
-  const room = classTime?.room ?? classTime?.sala;
+  const room = getRoom(classTime);
 
   const hasClassTimes = classTimes?.length > 0;
 
@@ -138,7 +164,7 @@ function getSubjectInputMessage(inputConfig, subjects) {
 /* SUBJECT */
 
 function getSubjectViewTableText(subject) {
-  const subjectCode = subject?.code ?? subject?.codigo;
+  const subjectCode = getCode(subject);
 
   const subjectCodeText = checkIndefinition(subjectCode);
   const subjectNameText = getAliasNameText(subject);
@@ -152,11 +178,11 @@ function getSubjectViewTableText(subject) {
 }
 
 function getSubjectFormatLabel(subject, context) {
-  const code = subject?.code ?? subject?.codigo;
+  const code = getCode(subject);
 
-  const center = subject?.center ?? subject?.centro;
-  const lab = subject?.laboratory;
-  const expectedSemester = subject?.expectedSemester ?? subject?.periodo;
+  const center = getCenter(subject);
+  const lab = getLab(subject);
+  const expectedSemester = getExpectedSemester(subject);
 
   const codeText = checkIndefinition(code);
 
@@ -212,9 +238,9 @@ function getProfessorViewTableText(professor) {
 }
 
 function getProfessorFormatLabel(professor, context) {
-  const course = professor?.course ?? professor?.curso;
-  // const center = professor?.center ?? professor?.centro;
-  const lab = professor?.lab ?? professor?.laboratory ?? professor?.laboratorio;
+  const course = getCourse(professor);
+  // const center = getCenter(professor);
+  const lab = getLab(professor);
 
   const labText = checkIndefinition(lab);
   const courseText = checkIndefinition(course);
@@ -238,10 +264,10 @@ function getProfessorFormatLabel(professor, context) {
 
 function getCourseFormatLabel(course, context) {
   // const id = getId(course);
-  const level = course?.level;
-  const center = course?.center;
-  const modality = course?.modality;
-  const category = course?.category;
+  const level = getLevel(course);
+  const center = getCenter(course);
+  const modality = getModality(course);
+  const category = getCategory(course);
 
   const nameText = getNameAliasText(course);
 
@@ -271,9 +297,9 @@ function getLabFormatLabel(lab, context) {
   // "apelido": "LCFIS",
   // "nome": "Laboratório de Ciências Físicas"
   // const id = getId(lab);
-  const center = lab?.center ?? lab?.centro;
-  const alias = lab?.alias ?? lab?.apelido;
-  const name = lab?.name ?? lab?.nome;
+  const center = getCenter(lab);
+  const alias = getAlias(lab);
+  const name = getName(lab);
 
   const centerLabel = `(${checkIndefinition(center)}) `;
 
@@ -292,8 +318,8 @@ function getLabFormatLabel(lab, context) {
 /* CLASSTIME */
 
 function getStartHourFormatLabel(hour, context) {
-  const startHour = hour?.hour ?? hour?.hora;
-  const section = hour?.section ?? hour?.turno;
+  const startHour = getStartTime(hour);
+  const section = getSection(hour);
 
   const hourLabel = checkIndefinition(startHour);
 
@@ -345,10 +371,10 @@ function getClassTimeText(classTime) {
 /* CLASSITEM */
 
 function getClassTimeLabel(classTime) {
-  const room = classTime?.room ?? classTime?.sala;
-  const roomCapacity = room?.capacity ?? room?.capacidade;
-  const roomBlock = room?.block ?? room?.bloco;
-  const roomCode = room?.code ?? room?.codigo;
+  const room = getRoom(classTime);
+  const roomCapacity = getCapacity(room);
+  const roomBlock = getBlock(room);
+  const roomCode = getCode(room);
 
   const capacityLabel = checkIndefinition(roomCapacity);
   const codeBlock =
@@ -357,13 +383,13 @@ function getClassTimeLabel(classTime) {
   const midRoomLabel = codeBlock;
   const finalRoomLabel = room ? midRoomLabel : "Indef.";
 
-  const day = classTime?.dia;
+  const day = getDay(classTime);
   const dayLabel = checkIndefinition(day);
 
-  const startTime = classTime?.horaInicio;
+  const startTime = getStartTime(classTime);
   const startTimeLabel = checkIndefinition(startTime);
 
-  const endTime = startTime + classTime?.duracao;
+  const endTime = startTime + getDuration(classTime);
   const endTimeLabel = checkIndefinition(endTime);
 
   const timeLabel = `${dayLabel}: ${startTimeLabel}~${endTimeLabel}`;
@@ -377,11 +403,11 @@ function getClassTimeLabel(classTime) {
 
 function getClassItemMainSelectionFormatLabel(classItem, context) {
   const id = getId(classItem);
-  const year = classItem?.year ?? classItem?.ano;
-  const semester = classItem?.semester ?? classItem?.semestre;
-  const subject = classItem?.subject ?? classItem?.disciplina;
-  const professor = classItem?.professor;
-  const classTimes = classItem?.classTimes ?? classItem?.horarios;
+  const year = getYear(classItem);
+  const semester = getSemester(classItem);
+  const subject = getSubject(classItem);
+  const professor = getProfessor(classItem);
+  const classTimes = getClassTimes(classItem);
 
   let classTimesLabels = [];
   classTimes.forEach((classTime) => {
@@ -394,13 +420,8 @@ function getClassItemMainSelectionFormatLabel(classItem, context) {
     ? ` - Horários: [${classTimesLabels.join("; ")}]`
     : "";
 
-  const professorName = professor?.name ?? professor?.nome;
-  const professorAlias = professor?.alias ?? professor?.apelido;
-  const professorLabel = checkIndefinition(professorAlias ?? professorName);
-
-  const subjectName = subject?.name ?? subject?.nome;
-  const subjectAlias = subject?.alias ?? subject?.apelido;
-  const subjectLabel = checkIndefinition(subjectAlias ?? subjectName);
+  const professorLabel = getAliasNameText(professor);
+  const subjectLabel = getAliasNameText(subject);
 
   const idLabel = `(id: ${id}) `;
   const yearSemester = `${year}.${semester} - `;
@@ -415,11 +436,11 @@ function getClassItemMainSelectionFormatLabel(classItem, context) {
 }
 
 function getClassItemText(classItem) {
-  const year = classItem?.year ?? classItem?.ano;
-  const semester = classItem?.semester ?? classItem?.semestre;
-  const subject = classItem?.subject ?? classItem?.disciplina;
-  const professor = classItem?.professor;
-  const description = classItem?.description ?? classItem?.descricao;
+  const year = getYear(classItem);
+  const semester = getSemester(classItem);
+  const subject = getSubject(classItem);
+  const professor = getProfessor(classItem);
+  const description = getDescription(classItem);
 
   const dateText = year ? year + "." + semester : "";
   const subjectText = getAliasNameText(subject);
@@ -442,8 +463,8 @@ function getClassItemText(classItem) {
 /* ROOM */
 
 function getRoomText(room) {
-  const block = room?.block ?? room?.bloco;
-  const code = room?.code ?? room?.codigo;
+  const block = getBlock(room);
+  const code = getCode(room);
 
   const codeText = checkIndefinition(code);
   const blockText = checkIndefinition(block);
@@ -455,10 +476,10 @@ function getRoomText(room) {
 function getRoomMainSelectionFormatLabel(room, context) {
   // const id = getId(room);
   // const idBlock = room?.idBlock;
-  const capacity = room?.capacity ?? room?.capacidade;
-  const block = room?.block ?? room?.bloco;
-  const code = room?.code ?? room?.codigo;
-  const description = room?.description ?? room?.descricao;
+  const capacity = getCapacity(room);
+  const block = getBlock(room);
+  const code = getCode(room);
+  const description = getDescription(room);
 
   const capacityText = `(${capacity ?? "??"}) `;
   const blockText = checkIndefinition(block);
@@ -480,10 +501,10 @@ function getRoomMainSelectionFormatLabel(room, context) {
 }
 
 function getRoomFormatLabel(room, context) {
-  const block = room?.block ?? room?.bloco;
-  const capacity = room?.capacity ?? room?.capacidade;
-  const code = room?.code ?? room?.codigo;
-  const description = room?.description ?? room?.descricao;
+  const block = getBlock(room);
+  const capacity = getCapacity(room);
+  const code = getCode(room);
+  const description = getDescription(room);
   // const id = getId(room);
   // const idBlock = room?.idBlock;
 
@@ -512,9 +533,9 @@ function getRoomFormatLabel(room, context) {
 
 function getBlockFormatLabel(block, context) {
   // const blockId = getId(block);
-  const blockCode = block?.code ?? block?.alias;
-  const blockAlias = block?.alias;
-  const blockName = block?.name;
+  const blockCode = getCode(block) ?? getAlias(block);
+  const blockAlias = getAlias(block);
+  const blockName = getName(block);
 
   // let msg = `(${code}) `;
   // const sameCodigoAndApelido = alias === code;
@@ -540,10 +561,11 @@ function getBlockFormatLabel(block, context) {
 
 function getLabelStudentSelection(student, context) {
   // const id = getId(student);
-  const entryYear = student?.entryYear ?? student?.anoEntrada;
-  const course = student?.course ?? student?.curso;
-  const enrollment = student?.enrollment ?? student?.matricula;
-  const name = student?.name ?? student?.nome;
+  const entryYear = getEntryYear(student);
+  const course = getCourse(student);
+  const enrollment = getEnrollment(student);
+  const name = getName(student);
+
   const nameText = getNameAliasText(student);
 
   const longLabelTexts = [];
