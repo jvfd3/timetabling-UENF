@@ -19,8 +19,7 @@ const localClassNames = myStyles.classNames.local.component.classTimeViewTable;
 const frontText = text.component.classTimeViewTable.tableTitles;
 
 function NoSelectedItem({ customPageStates }) {
-  const { specificTexts } = customPageStates;
-  return <h2>{specificTexts.noSelectedItem}</h2>;
+  return <h2>{customPageStates.specificTexts.noSelectedObject}</h2>;
 }
 
 function NoClasses({ customPageStates }) {
