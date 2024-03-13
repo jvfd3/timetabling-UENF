@@ -180,6 +180,7 @@ const text = {
         subject: "Disciplina",
         professor: "Professor",
         demand: "Demanda Estimada",
+        description: "Descrição",
         idHorario: "idHorario",
         room: "Sala",
         day: "Dia",

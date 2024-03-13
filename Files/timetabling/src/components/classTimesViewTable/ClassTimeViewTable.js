@@ -35,6 +35,7 @@ function TableHeader() {
         <th>{frontText.subject}</th>
         <th>{frontText.professor}</th>
         <th>{frontText.demand}</th>
+        <th>{frontText.description}</th>
         <th>{frontText.idHorario}</th>
         <th>{frontText.room}</th>
         <th>{frontText.day}</th>
@@ -53,6 +54,7 @@ function ClassRow({ splittedClassItem }) {
     disciplina,
     professor,
     demandaEstimada,
+    description,
     idHorario,
     id,
     sala,
@@ -71,6 +73,7 @@ function ClassRow({ splittedClassItem }) {
       <td>{getSubjectViewTableText(disciplina)}</td>
       <td>{getProfessorViewTableText(professor)}</td>
       <td>{demandaEstimada}</td>
+      <td>{description}</td>
       <td>{id ?? idHorario}</td>
       <td>{getRoomFormatLabel(sala)}</td>
       <td>{checkIndefinition(dia)}</td>
