@@ -8,19 +8,19 @@ import {
 } from "../auxConflictFunctions";
 
 function getOnlyNeededValues(splittedClasses) {
-  const cleanedClasses = splittedClasses
-    // .filter(
-    //   (classItem) =>
-    //     classItem.dia &&
-    //     classItem.duracao &&
-    //     classItem.horaInicio &&
-    //     classItem.id
-    //   // && classItem.sala
-    // ) // Get only classes with all values filled
-    .map((classItem) => {
-      const { dia, duracao, horaInicio, id, sala, idTurma } = classItem;
-      return { id, sala, dia, horaInicio, duracao, idTurma };
-    }); // Get only the values needed
+  const cleanedClasses = splittedClasses;
+  // .filter(
+  //   (classItem) =>
+  //     classItem.dia &&
+  //     classItem.duracao &&
+  //     classItem.horaInicio &&
+  //     classItem.id
+  //   // && classItem.sala
+  // ) // Get only classes with all values filled
+  // .map((classItem) => {
+  //   const { dia, duracao, horaInicio, id, sala, idTurma } = classItem;
+  //   return { id, sala, dia, horaInicio, duracao, idTurma };
+  // }); // Get only the values needed
   // console.log(cleanedClasses);
   return cleanedClasses;
 }

@@ -8,12 +8,18 @@ const defaultTitles = text.conflicts.room;
 function getRoomAllocMessage(conflictObject) {
   const { type, to } = conflictObject;
   let conflictMessage = `❌ Conflito: ${type?.name}\n`;
-  conflictMessage += `\t- Sala sobreposta com ${to?.length} turmas\n`;
+  const size = to?.length;
+  const plural = size > 1 ? "s" : "";
+  conflictMessage += `\t- Sala sobreposta com ${size} turma${plural}\n`;
 
   to.forEach((classTime) => {
-    const classItem = `\t\t- Turma: ${classTime.idTurma}, horários: `;
-    const classTimes = JSON.stringify(classTime.idHorario);
-    conflictMessage += classItem + classTimes + "\n";
+    console.log(classTime);
+    const classItemLabel = classTime.classItemLabel;
+    const classItem = `\t\t- Turma: ${classItemLabel};`;
+    const timeLabels = classTime.classTimesLabels;
+    const timeLabelsText = ` horários: [${timeLabels.join(", ")}]`;
+    // const classTimes = JSON.stringify(classTime.idHorario);
+    conflictMessage += classItem + timeLabelsText + "\n";
   });
 
   return conflictMessage;
