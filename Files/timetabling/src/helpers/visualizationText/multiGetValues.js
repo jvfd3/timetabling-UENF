@@ -1,8 +1,3 @@
-function getDay(classTime) {
-  const day = classTime?.day ?? classTime?.dia;
-  return day;
-}
-
 function getStartTime(classTime) {
   const startTime =
     classTime?.startTime ??
@@ -13,64 +8,9 @@ function getStartTime(classTime) {
   return startTime;
 }
 
-function getDuration(classTime) {
-  const duration = classTime?.duration ?? classTime?.duracao;
-  return duration;
-}
-
-function getRoom(classTime) {
-  const room = classTime?.room ?? classTime?.sala;
-  return room;
-}
-
-function getCapacity(room) {
-  const capacity = room?.capacity ?? room?.capacidade;
-  return capacity;
-}
-
-function getBlock(room) {
-  const block = room?.block ?? room?.bloco;
-  return block;
-}
-
-function getYear(classItem) {
-  const year = classItem?.year ?? classItem?.ano;
-  return year;
-}
-
-function getSemester(classItem) {
-  const semester = classItem?.semester ?? classItem?.semestre;
-  return semester;
-}
-
-function getProfessor(classItem) {
-  const professor = classItem?.professor;
-  return professor;
-}
-
-function getSubject(classItem) {
-  const subject = classItem?.subject ?? classItem?.disciplina;
-  return subject;
-}
-
 function getDescription(classItem) {
   const description = classItem?.description ?? classItem?.descricao;
   return description;
-}
-
-function getCode(object) {
-  const code = object?.code ?? object?.codigo;
-  return code;
-}
-
-function getName(object) {
-  const name = object?.name ?? object?.nome;
-  return name;
-}
-
-function getAlias(object) {
-  const alias = object?.alias ?? object?.apelido;
-  return alias;
 }
 
 function getExpectedDemand(classItem) {
@@ -93,50 +33,33 @@ function getClassTimes(classItem) {
   return classTimes;
 }
 
-function getCenter(subject) {
-  const center = subject?.center ?? subject?.centro;
-  return center;
-}
-
 function getLab(subject) {
   const lab = subject?.lab ?? subject?.laboratory ?? subject?.laboratorio;
   return lab;
 }
 
-function getCourse(professor) {
-  const course = professor?.course ?? professor?.curso;
-  return course;
-}
-
-function getLevel(course) {
-  const level = course?.level ?? course?.nivel;
-  return level;
-}
-function getModality(course) {
-  const modality = course?.modality ?? course?.modalidade;
-  return modality;
-}
-function getCategory(course) {
-  const category = course?.category ?? course?.categoria;
-  return category;
-}
-
-function getSection(hour) {
-  const section = hour?.section ?? hour?.turno;
-  return section;
-}
+const getProfessor = (classItem) => classItem?.professor;
+const getDuration = (classTime) => classTime?.duration ?? classTime?.duracao;
+const getCapacity = (room) => room?.capacity ?? room?.capacidade;
+const getSemester = (classItem) => classItem?.semester ?? classItem?.semestre;
+const getModality = (course) => course?.modality ?? course?.modalidade;
+const getCategory = (course) => course?.category ?? course?.categoria;
+const getSubject = (classItem) => classItem?.subject ?? classItem?.disciplina;
+const getSection = (hour) => hour?.section ?? hour?.turno;
+const getCenter = (subject) => subject?.center ?? subject?.centro;
+const getCourse = (professor) => professor?.course ?? professor?.curso;
+const getAlias = (object) => object?.alias ?? object?.apelido;
+const getBlock = (room) => room?.block ?? room?.bloco;
+const getLevel = (course) => course?.level ?? course?.nivel;
+const getYear = (classItem) => classItem?.year ?? classItem?.ano;
+const getRoom = (classTime) => classTime?.room ?? classTime?.sala;
+const getCode = (object) => object?.code ?? object?.codigo;
+const getName = (object) => object?.name ?? object?.nome;
+const getDay = (classTime) => classTime?.day ?? classTime?.dia;
 
 /* STUDENT */
-
-function getEntryYear(student) {
-  const entryYear = student?.entryYear ?? student?.anoEntrada;
-  return entryYear;
-}
-
-function getEnrollment(student) {
-  const enrollment = student?.enrollment ?? student?.matricula;
-  return enrollment;
-}
+const getEnrollment = (student) => student?.enrollment ?? student?.matricula;
+const getEntryYear = (student) => student?.entryYear ?? student?.anoEntrada;
 
 export {
   /* MULTIPLE */
