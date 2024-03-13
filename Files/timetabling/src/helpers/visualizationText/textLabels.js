@@ -1,5 +1,6 @@
 import { getId } from "../auxCRUD";
 import { menuIsOpen } from "../auxFunctions";
+import { getDay, getDuration, getRoom, getStartTime } from "./multiGetValues";
 
 /* DEFAULT */
 
@@ -310,10 +311,10 @@ function getLabFormatLabel(lab, context) {
 /* CLASSTIME */
 
 function getClassTimeText(classTime) {
-  const day = classTime?.day ?? classTime?.dia;
-  const startTime = classTime?.startTime ?? classTime?.horaInicio;
-  const duration = classTime?.duration ?? classTime?.duracao;
-  const room = classTime?.room ?? classTime?.sala;
+  const day = getDay(classTime);
+  const startTime = getStartTime(classTime);
+  const duration = getDuration(classTime);
+  const room = getRoom(classTime);
 
   const roomText = getRoomText(room);
   const endingTime = startTime + duration;
