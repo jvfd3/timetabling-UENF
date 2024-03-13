@@ -54,10 +54,13 @@ function getProfessorAllocMessage(profAllocConflict) {
   */
 
   profAllocConflict.forEach((conflict) => {
-    conflictMessage += `\t- Horário: ${conflict.from.id}\n`;
+    // console.log(conflict);
+    conflictMessage += `\t- Horário: ${conflict.from.classItemLabel}\n`;
     conflict.to.forEach((classTimeIdTarget) => {
-      conflictMessage += `\t\t- Turma: ${classTimeIdTarget.idTurma}, horários: `;
-      conflictMessage += JSON.stringify(classTimeIdTarget.idHorario) + "\n";
+      const timeLabels = classTimeIdTarget.classTimesLabels;
+      const timeLabelsText = `[${timeLabels.join(", ")}]`;
+      conflictMessage += `\t\t- Turma: ${classTimeIdTarget.classItemLabel}, horários: `;
+      conflictMessage += timeLabelsText + "\n";
     });
   });
   return conflictMessage;

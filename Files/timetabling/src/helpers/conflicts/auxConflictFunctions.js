@@ -1,5 +1,9 @@
 import emptyObjects from "../../config/emptyObjects";
 import { filterDay } from "../filteringFunc";
+import {
+  getClassItemText,
+  getClassTimeText,
+} from "../visualizationText/textLabels";
 
 function removeSameId(classes, id) {
   const filteredClasses = classes.filter((iterClass) => iterClass.id !== id);
@@ -75,10 +79,14 @@ function getTargetClasses(filteredClasses) {
 
     if (existingClassTime) {
       existingClassTime.idHorario.push(classTime.id);
+      existingClassTime.classTimesLabels.push(getClassTimeText(classTime));
     } else {
+      // console.log(classTime);
       acc.push({
         idTurma: classTime.idTurma,
         idHorario: [classTime.id],
+        classItemLabel: getClassItemText(classTime),
+        classTimesLabels: [getClassTimeText(classTime)],
       });
     }
 

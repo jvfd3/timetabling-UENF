@@ -363,8 +363,8 @@ function getClassTimeText(classTime) {
 
   let classTimeText = "";
   classTimeText += hasValues
-    ? ` (${cleanValues.join(", ")})`
-    : ` ${getId(classTime)}`;
+    ? `(${cleanValues.join(", ")})`
+    : `${getId(classTime)}`;
   return classTimeText;
 }
 

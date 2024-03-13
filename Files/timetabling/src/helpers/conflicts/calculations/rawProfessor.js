@@ -2,6 +2,10 @@ import conflicts from "../../../config/conflicts";
 import { getId } from "../../auxCRUD";
 import { filterProfessor } from "../../filteringFunc";
 import {
+  getClassItemText,
+  getClassTimeText,
+} from "../../visualizationText/textLabels";
+import {
   splitTurmas,
   removeSameId,
   getTargetClasses,
@@ -9,20 +13,19 @@ import {
 } from "../auxConflictFunctions";
 
 function getOnlyNeededValues(splittedClasses) {
-  const cleanedClasses = splittedClasses
-    .filter(
-      (classItem) =>
-        classItem.dia &&
-        classItem.duracao &&
-        classItem.horaInicio &&
-        classItem.id &&
-        classItem.idTurma &&
-        classItem.professor
-    ) // Get only classes with all values filled
-    .map((classItem) => {
-      const { dia, duracao, horaInicio, id, professor, idTurma } = classItem;
-      return { id, professor, dia, horaInicio, duracao, idTurma };
-    }); // Get only the values needed
+  const cleanedClasses = splittedClasses.filter(
+    (classItem) =>
+      classItem.dia &&
+      classItem.duracao &&
+      classItem.horaInicio &&
+      classItem.id &&
+      classItem.idTurma &&
+      classItem.professor
+  ); // Get only classes with all values filled
+  // .map((classItem) => {
+  //   const { dia, duracao, horaInicio, id, professor, idTurma } = classItem;
+  //   return { id, professor, dia, horaInicio, duracao, idTurma };
+  // }); // Get only the values needed
   return cleanedClasses;
 }
 
@@ -32,10 +35,12 @@ function getAllocConflictObject(classes, classItem) {
   filteredClasses = filterProfessor(filteredClasses, classItem.professor);
   filteredClasses = getOverlappingClasses(filteredClasses, classItem);
 
+  // console.log(classItem);
   const allocConflict = {
     type: conflicts.professorAlloc,
     from: {
       id: getId(classItem),
+      classItemLabel: getClassTimeText(classItem),
       professor: classItem.professor,
       day: classItem.dia,
       hour: classItem.horaInicio,
