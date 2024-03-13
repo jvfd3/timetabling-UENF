@@ -36,7 +36,7 @@ function createClassTime(classTimeStates) {
 
     const baseClassTime = {
       ...emptyObjects.classTime,
-      idTurma: newClassTimeValues?.idTurma ?? getId(classItem),
+      idTurma: newClassTimeValues?.idTurma ?? getId(classItem) ?? null,
       duracao: duration ?? 2,
       sala: room ?? null,
       dia: day ?? null,
