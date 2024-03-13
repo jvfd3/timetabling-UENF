@@ -80,7 +80,7 @@ const pseudoDatabase = {
       alias: "Eng Metal",
       modality: "presencial",
       category: "bacharelado",
-      name: "Engenharia Metalúrgica",
+      name: "Engenharia Metalúrgica (e Materiais)",
     },
     {
       id: 10,
@@ -220,7 +220,7 @@ const pseudoDatabase = {
       id: 24,
       level: "pós-graduação",
       center: "CCT",
-      alias: "PGCN",
+      alias: "PPGCN",
       modality: null,
       category: null,
       name: "Ciências Naturais",

@@ -42,6 +42,8 @@ notofferedsubject
     // function updateValue({ target: { value } }) {
     let newValue = event.target.value;
     newValue = isNumeric ? numericValueFilter(newValue) : newValue;
+    newValue = newValue === "" ? null : newValue;
+
     const newItem = getNewItemObject(newValue);
     const newItems = replaceNewItemInListById(newItem, items);
     setMainProp(newValue);
@@ -71,7 +73,7 @@ notofferedsubject
     // style: { width: "100%" }, // Adicionado para garantir que o TextField preencha todo o conteúdo
     ...specificIDProps,
     ...specificNumericProps,
-    disabled: isId,
+    disabled: isId || mainValue === undefined,
     // readOnly: true,
     /* InputLabelProps: {
       style: {

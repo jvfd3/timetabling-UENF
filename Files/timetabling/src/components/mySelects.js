@@ -39,6 +39,7 @@ function DefaultSelect(defaultProps) {
     value,
     findCorrectObject,
     customProps,
+    isDisabled = false,
   } = defaultProps;
 
   const [currentValue, setCurrentValue] = useState(value);
@@ -50,15 +51,8 @@ function DefaultSelect(defaultProps) {
 
   useEffect(() => {
     const correctObject = findCorrectObject ? findCorrectObject(value) : value;
-    // if (findCorrectObject) {
-    //   console.log("function", findCorrectObject);
-    //   console.log("correct", correctObject);
-    //   console.log("value", value);
-    // }
     setCurrentValue(correctObject);
   }, [value]);
-
-  // console.log(value, currentValue);
 
   return (
     <Select
@@ -70,6 +64,7 @@ function DefaultSelect(defaultProps) {
       {...customProps}
       className={myStyles.selects.className}
       styles={styleWidthFix}
+      isDisabled={isDisabled || value === undefined}
     />
   );
 }
@@ -173,8 +168,9 @@ function SelectSemester({
   return <DefaultSelect {...SelectSemesterStates} />;
 }
 
-function SelectLab({ outerLab, setOuterLab }) {
+function SelectLab({ outerLab, setOuterLab, isDisabled = false }) {
   function findLabObject(labAlias) {
+    labAlias = labAlias ?? null;
     const labs = pseudoDatabase.labs;
     const labObject = labs.find((iterLab) => iterLab.apelido === labAlias);
     return labObject ?? null;
@@ -186,6 +182,7 @@ function SelectLab({ outerLab, setOuterLab }) {
     options: pseudoDatabase.labs,
     setOuterValue: setOuterLab,
     value: outerLab,
+    isDisabled,
     findCorrectObject: findLabObject,
     customProps: {
       getOptionValue: (lab) => getId(lab),
@@ -197,11 +194,12 @@ function SelectLab({ outerLab, setOuterLab }) {
   return <DefaultSelect {...SelectLabStates} />;
 }
 
-function SelectCourse({ outerCourse, setOuterCourse }) {
+function SelectCourse({ outerCourse, setOuterCourse, isDisabled = false }) {
   function findCourseObject(course) {
+    course = course ?? null;
     const courses = pseudoDatabase.courses;
     const courseObject = courses.find(
-      (iterCourse) => iterCourse?.apelido === course
+      (iterCourse) => iterCourse?.name === course
     );
     return courseObject ?? null;
   }
@@ -212,6 +210,7 @@ function SelectCourse({ outerCourse, setOuterCourse }) {
     options: pseudoDatabase.courses,
     setOuterValue: setOuterCourse,
     value: outerCourse,
+    isDisabled,
     findCorrectObject: findCourseObject,
     customProps: {
       getOptionValue: (course) => getId(course),
@@ -774,10 +773,7 @@ function SelectClassProfessor(classStates) {
 
 /* \ Professors / */
 
-function SelectProfessorItem(professorStates) {
-  const { professors, setProfessors, professor, setProfessor } =
-    professorStates;
-
+function SelectProfessorItem({ professors, professor, setProfessor }) {
   const SelectProfessorItemStates = {
     placeHolderText: placeHolders.professor,
     isClearable: false,
@@ -795,14 +791,25 @@ function SelectProfessorItem(professorStates) {
   return <DefaultSelect {...SelectProfessorItemStates} />;
 }
 
-function SelectProfessorLab(professorStates) {
-  const { professors, setProfessors, professor, setProfessor } =
-    professorStates;
+function SelectProfessorLab({ setProfessors, professor, setProfessor }) {
   function updateProfessorLab(newLab) {
-    const newProfessor = { ...professor, laboratorio: newLab?.apelido ?? null };
-    const newProfessors = replaceNewItemInListById(newProfessor, professors);
-    setProfessor(newProfessor);
-    setProfessors(newProfessors);
+    if (!professor) {
+      return;
+    }
+    setProfessor((oldProfessor) => {
+      const newProfessor = {
+        ...oldProfessor,
+        laboratorio: newLab?.apelido ?? null,
+      };
+      setProfessors((oldProfessors) => {
+        const newProfessors = replaceNewItemInListById(
+          newProfessor,
+          oldProfessors
+        );
+        return newProfessors;
+      });
+      return newProfessor;
+    });
   }
 
   const labStates = {
@@ -813,17 +820,22 @@ function SelectProfessorLab(professorStates) {
   return <SelectLab {...labStates} />;
 }
 
-function SelectProfessorCourse({
-  professors,
-  setProfessors,
-  professor,
-  setProfessor,
-}) {
+function SelectProfessorCourse({ setProfessors, professor, setProfessor }) {
   function updateProfessorCourse(newCourse) {
-    const newProfessor = { ...professor, curso: newCourse?.name ?? null };
-    const newProfessors = replaceNewItemInListById(newProfessor, professors);
-    setProfessor(newProfessor);
-    setProfessors(newProfessors);
+    if (!professor) {
+      return;
+    }
+    setProfessor((oldProfessor) => {
+      const newProfessor = { ...oldProfessor, curso: newCourse?.name ?? null };
+      setProfessors((oldProfessors) => {
+        const newProfessors = replaceNewItemInListById(
+          newProfessor,
+          oldProfessors
+        );
+        return newProfessors;
+      });
+      return newProfessor;
+    });
   }
 
   const courseStates = {
