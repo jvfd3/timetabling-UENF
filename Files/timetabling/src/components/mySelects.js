@@ -489,7 +489,7 @@ function SelectFilterDay({ day, setDay }) {
 function SelectFilterHour({ hour, setHour }) {
   function updateOuterStartHour(newStartHour) {
     const newStartHourValue = getValueFromObject(newStartHour);
-    console.log(newStartHourValue);
+    // console.log(newStartHourValue);
     setHour(newStartHourValue);
   }
 
