@@ -13,7 +13,6 @@ function getRoomAllocMessage(conflictObject) {
   conflictMessage += `\t- Sala sobreposta com ${size} turma${plural}\n`;
 
   to.forEach((classTime) => {
-    console.log(classTime);
     const classItemLabel = classTime.classItemLabel;
     const classItem = `\t\t- Turma: ${classItemLabel};`;
     const timeLabels = classTime.classTimesLabels;
