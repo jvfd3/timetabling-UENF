@@ -21,6 +21,7 @@ import {
   updateRoom,
   deleteRoom,
 } from "../../../../helpers/CRUDFunctions/roomCRUD";
+import NoSelectedObject from "../../../../components/Dumb/NoSelectedObject";
 
 const defaultClassNames = myStyles.classNames.default;
 const pageTexts = text.page.rooms;
@@ -103,6 +104,7 @@ function Rooms() {
   const [room, setRoom] = useState(null);
 
   const roomStates = { rooms, setRooms, room, setRoom };
+  const noRoom = { title: pageTexts.noSelectedObject };
 
   useEffect(() => {
     readRoom(roomStates);
@@ -111,15 +113,7 @@ function Rooms() {
   return (
     <div className={defaultClassNames.containerCards}>
       <RoomSelection {...roomStates} />
-      {room ? (
-        <RoomCard {...roomStates} />
-      ) : (
-        <div className={defaultClassNames.containerCardsHolder}>
-          <div className={defaultClassNames.containerCardBaseInfo}>
-            <h2>Selecione um sala</h2>
-          </div>
-        </div>
-      )}
+      {room ? <RoomCard {...roomStates} /> : <NoSelectedObject {...noRoom} />}
     </div>
   );
 }

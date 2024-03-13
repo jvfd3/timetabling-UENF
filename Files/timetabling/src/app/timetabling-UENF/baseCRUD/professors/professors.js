@@ -21,6 +21,7 @@ import {
   updateProfessor,
   deleteProfessor,
 } from "../../../../helpers/CRUDFunctions/professorCRUD";
+import NoSelectedObject from "../../../../components/Dumb/NoSelectedObject";
 
 const defaultClassNames = myStyles.classNames.default;
 const pageTexts = text.page.professors;
@@ -105,6 +106,8 @@ function Professors() {
     setProfessor,
   };
 
+  const noProfessor = { title: pageTexts.noSelectedObject };
+
   useEffect(() => {
     readProfessor(professorStates);
   }, []);
@@ -115,11 +118,7 @@ function Professors() {
       {professor ? (
         <ProfessorCard {...professorStates} />
       ) : (
-        <div className={defaultClassNames.containerCardsHolder}>
-          <div className={defaultClassNames.containerCardBaseInfo}>
-            <h2>Selecione um professor</h2>
-          </div>
-        </div>
+        <NoSelectedObject {...noProfessor} />
       )}
     </div>
   );

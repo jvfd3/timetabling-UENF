@@ -2,6 +2,7 @@ const text = {
   page: {
     rooms: {
       title: "INFORMAÇÕES DA SALA",
+      noSelectedObject: "Selecione uma sala",
       tableTitles: {
         block: "Bloco",
         description: "Descrição",
@@ -12,6 +13,7 @@ const text = {
     },
     students: {
       title: "INFORMAÇÕES DO ALUNO",
+      noSelectedObject: "Selecione um aluno",
       tableTitles: {
         year: "Ano de entrada",
         course: "Curso",
@@ -22,6 +24,7 @@ const text = {
     },
     subjects: {
       title: "INFORMAÇÕES DA DISCIPLINA",
+      noSelectedObject: "Selecione uma disciplina",
       tableTitles: {
         code: "Código",
         name: "Nome",
@@ -32,6 +35,7 @@ const text = {
     },
     professors: {
       title: "INFORMAÇÕES DO PROFESSOR",
+      noSelectedObject: "Selecione um professor",
       tableTitles: {
         lab: "laboratório",
         course: "curso",
@@ -78,6 +82,7 @@ const text = {
     },
     classes: {
       title: "INFORMAÇÕES DA TURMA",
+      noSelectedObject: "Selecione uma turma",
       tableTitles: {
         yearSemester: "Ano/Semestre",
         subject: "Disciplina",
@@ -106,6 +111,7 @@ const text = {
     unexpectedPlaceholder: "Isso não deveria estar vazio. 😅",
     ccTable: {},
     classTimesTable: {
+      noSelectedObject: "Selecione uma turma para ver seus horários",
       buttons: {
         create: "",
         update: {
@@ -154,17 +160,17 @@ const text = {
         room: {
           headerTitle: "Turmas nesta sala: ",
           noClassesTitle: "Não há turmas nesta sala",
-          noSelectedItem: "Selecione uma sala para ver suas turmas",
+          noSelectedObject: "Selecione uma sala para ver suas turmas",
         },
         professor: {
           headerTitle: "Turmas desse professor: ",
           noClassesTitle: "Não há turmas para este professor",
-          noSelectedItem: "Selecione um professor para ver suas turmas",
+          noSelectedObject: "Selecione um professor para ver suas turmas",
         },
         subject: {
           headerTitle: "Turmas desta disciplina: ",
           noClassesTitle: "Não há turmas para esta disciplina",
-          noSelectedItem: "Selecione uma disciplina para ver suas turmas",
+          noSelectedObject: "Selecione uma disciplina para ver suas turmas",
         },
       },
       tableTitles: {

@@ -86,10 +86,15 @@ function ClassTimeTable(classStates) {
   const hasClassTimes = classTimes?.length > 0;
 
   const sortedClassTimes = sortClassTimes(classTimes);
+  const classItemNotSet = !classItem;
 
   return !hasClassTimes ? (
     <div className={myStyles.classNames.local.component.classTimeTable.padding}>
-      <SmartCreateClassTime {...classStates} />
+      {classItemNotSet ? (
+        frontText.noSelectedObject
+      ) : (
+        <SmartCreateClassTime {...classStates} />
+      )}
     </div>
   ) : (
     <table className={defaultClassNames.componentTable}>

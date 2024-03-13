@@ -23,6 +23,7 @@ import {
   deleteSubject,
 } from "../../../../helpers/CRUDFunctions/subjectCRUD";
 import { sortSubjects } from "../../../../components/Sorts/sortingFunctions";
+import NoSelectedObject from "../../../../components/Dumb/NoSelectedObject";
 
 const defaultClassNames = myStyles.classNames.default;
 const pageTexts = text.page.subjects;
@@ -109,6 +110,7 @@ function Subjects() {
   const [subject, setSubject] = useState(null);
 
   const subjectStates = { subjects, setSubjects, subject, setSubject };
+  const noSubject = { title: pageTexts.noSelectedObject };
 
   useEffect(() => {
     readSubject(subjectStates);
@@ -120,11 +122,7 @@ function Subjects() {
       {subject ? (
         <SubjectCard {...subjectStates} />
       ) : (
-        <div className={defaultClassNames.containerCardsHolder}>
-          <div className={defaultClassNames.containerCardBaseInfo}>
-            <h2>Selecione uma disciplina</h2>
-          </div>
-        </div>
+        <NoSelectedObject {...noSubject} />
       )}
     </div>
   );

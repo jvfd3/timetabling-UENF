@@ -30,6 +30,7 @@ import {
   getSelectStates,
   replaceNewItemInListById,
 } from "../../../helpers/auxCRUD";
+import NoSelectedObject from "../../../components/Dumb/NoSelectedObject";
 
 const defaultClassNames = myStyles.classNames.default;
 const pageTexts = text.page.classes;
@@ -174,6 +175,8 @@ function Classes() {
     conflicts,
   };
 
+  const noClass = { title: pageTexts.noSelectedObject };
+
   const readClassProps = {
     classes,
     setClasses,
@@ -194,11 +197,7 @@ function Classes() {
       {classItem ? (
         <ClassCard {...globalStates} />
       ) : (
-        <div className={defaultClassNames.containerCardsHolder}>
-          <div className={defaultClassNames.containerCardBaseInfo}>
-            <h2>Selecione uma turma</h2>
-          </div>
-        </div>
+        <NoSelectedObject {...noClass} />
       )}
     </div>
   );

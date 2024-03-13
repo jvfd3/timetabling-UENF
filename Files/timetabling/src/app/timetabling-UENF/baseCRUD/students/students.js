@@ -21,6 +21,7 @@ import {
   updateStudent,
   deleteStudent,
 } from "../../../../helpers/CRUDFunctions/studentCRUD";
+import NoSelectedObject from "../../../../components/Dumb/NoSelectedObject";
 
 const defaultClassNames = myStyles.classNames.default;
 const pageTexts = text.page.students;
@@ -100,6 +101,7 @@ function Students() {
   const [student, setStudent] = useState(null);
 
   const studentStates = { students, setStudents, student, setStudent };
+  const noStudent = { title: pageTexts.noSelectedObject };
 
   useEffect(() => {
     readStudent(studentStates);
@@ -111,11 +113,7 @@ function Students() {
       {student ? (
         <StudentCard {...studentStates} />
       ) : (
-        <div className={defaultClassNames.containerCardsHolder}>
-          <div className={defaultClassNames.containerCardBaseInfo}>
-            <h2>Selecione um aluno</h2>
-          </div>
-        </div>
+        <NoSelectedObject {...noStudent} />
       )}
     </div>
   );
