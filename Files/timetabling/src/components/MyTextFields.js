@@ -20,7 +20,6 @@ classitemtable
 classtimeviewtable
 classtimetable
 notofferedsubject
-
 */
 
   const [mainProp, setMainProp] = useState(mainValue);
@@ -201,8 +200,8 @@ function TextInputProfessorName(professorStates) {
     getNewItemObject: (newValue) => ({ ...professor, nome: newValue }),
     title: placeHolders.name,
   };
-  const nomeStates = { generalStates, specificValues };
-  return <TextInputDefault {...nomeStates} />;
+  const nameStates = { generalStates, specificValues };
+  return <TextInputDefault {...nameStates} />;
 }
 
 function TextinputProfessorAlias(professorStates) {
