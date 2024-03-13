@@ -157,10 +157,9 @@ function getStartHourFormatLabel(hour, context) {
 
 function getSubjectViewTableText(subject) {
   const subjectCode = subject?.code ?? subject?.codigo;
-  const subjectAlias = subject?.alias ?? subject?.apelido;
 
   const subjectCodeText = checkIndefinition(subjectCode);
-  const subjectNameText = checkIndefinition(subjectAlias);
+  const subjectNameText = getAliasNameText(subject);
 
   const subjectText = `${subjectCodeText} - ${subjectNameText}`;
 
@@ -231,7 +230,6 @@ function getProfessorViewTableText(professor) {
 }
 
 function getProfessorFormatLabel(professor, context) {
-  const name = professor?.name ?? professor?.nome;
   const course = professor?.course ?? professor?.curso;
   // const center = professor?.center ?? professor?.centro;
   const lab = professor?.lab ?? professor?.laboratory ?? professor?.laboratorio;
