@@ -1,19 +1,18 @@
 import "./ClassTimeViewTable.css";
 import text from "../../config/frontText";
 import myStyles from "../../config/myStyles";
-import { useEffect, useState } from "react";
-import { getDefaultClassItem, getId } from "../../helpers/auxCRUD";
-import { readClassTime } from "../../helpers/CRUDFunctions/classTimeCRUD";
+import { readClass } from "../../helpers/CRUDFunctions/classCRUD";
+import { splitTurmas } from "../../helpers/conflicts/auxConflictFunctions";
 import { sortClassTimes } from "../Sorts/sortingFunctions";
 import { ViewTableFilters } from "../Filters/Filters";
+import { useEffect, useState } from "react";
+import { getDefaultClassItem, getId } from "../../helpers/auxCRUD";
 import {
   getSubjectViewTableText,
   checkIndefinition,
   getProfessorViewTableText,
   getRoomFormatLabel,
 } from "../../helpers/visualizationText/textLabels";
-import { readClass } from "../../helpers/CRUDFunctions/classCRUD";
-import { splitTurmas } from "../../helpers/conflicts/auxConflictFunctions";
 
 const defaultClassNames = myStyles.classNames.default;
 const localClassNames = myStyles.classNames.local.component.classTimeViewTable;
