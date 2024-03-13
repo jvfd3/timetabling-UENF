@@ -12,8 +12,7 @@ function getDemandMessage(conflicts) {
     const diff = iterConflict.expectedDemand - iterConflict.capacity;
     // const room = iterConflict.room;
     // const roomName = room?.bloco + " - " + room?.codigo;
-    titleMessage += `\t\t-- `;
-    titleMessage += `No horário${iterConflict.classTimeLabel} `;
+    titleMessage += `\t\t- No horário${iterConflict.classTimeLabel} `;
     titleMessage += `sobraram ${diff} alunos `;
     // titleMessage += `da Turma ${iterConflict.idClass}`;
     titleMessage += `\n`;
