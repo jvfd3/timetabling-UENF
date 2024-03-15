@@ -1,6 +1,6 @@
 # Latest Changes
 
-## Mudanças desde o último deploy
+## Deploy pre 15/03/2024
 
 - Multiturmas:
   1. Adição de filtros: disciplina, período esperado, professor, sala
@@ -13,13 +13,6 @@
 - CRUD (Turmas, Professores, Alunos, Salas, Disciplinas):
   1. Omitir o item quando a seleção for nula
 - Select
-  1. Problema no select de curso
+  1. Corrigido o problema na seleção de curso
 
 ## [Próximas mudanças](https://github.com/jvfd3/timetabling-UENF/issues/461)
-
-- Pró-reitoria de graduação são os donos dos dados?
-- adicionar coluna descritor turma
-- CCTable: forçar a exibição de disciplinas, mesmo que não seja dos horários pares.
-- Problema geral/problema específico
-- Em Marco teórico: que metodologias, tecnologias, banco de dados, etc.
-- Pesquisar sobre o LECIV 2018.2
