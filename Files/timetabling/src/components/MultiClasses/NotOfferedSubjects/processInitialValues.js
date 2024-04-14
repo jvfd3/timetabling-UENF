@@ -179,7 +179,7 @@ function getPreFilledClassItem(classItemFilter, iterSubject, usualInfo) {
       usualInfo?.professor ??
       classItemFilter?.professor ??
       null,
-    demandaEstimada: /* usualInfo?.expectedDemand ?? */ null,
+    demandaEstimada: usualInfo?.expectedDemand ?? null,
     description: usualInfo?.description ?? null,
   };
   return newClass;
