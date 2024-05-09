@@ -58,7 +58,7 @@ const text = {
             key: 2,
             title: "Como usar:",
             description:
-              "Adicione as informações de disciplina, salas, professores, turmas e horários. Veja os conflitos que surgem na página MultiTurmas e resolva-os. A grade final criada pode ser visualizada na página ccTable.",
+              "Adicione as informações de disciplina, salas, professores, turmas e horários. Veja os conflitos que surgem na página MultiTurmas e resolva-os. A grade final criada pode ser visualizada na página Grade de Horários.",
           },
         ],
       },
