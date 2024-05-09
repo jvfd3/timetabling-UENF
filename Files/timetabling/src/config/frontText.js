@@ -71,12 +71,12 @@ const text = {
             description:
               "passar o mouse por cima do menu no canto superior esquerdo da tela e usar o scroll do mouse",
           },
-          {
+          /* {
             key: 2,
             title: "Selecionar um item:",
             description:
               "passar o mouse por cima da seleção de itens e usar o scroll do mouse",
-          },
+          }, */
         ],
       },
     },
