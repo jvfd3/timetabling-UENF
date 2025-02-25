@@ -13,7 +13,7 @@ import {
   replaceNewItemInListById,
 } from "../auxCRUD";
 
-const itemName = "room";
+const itemName = "salas";
 
 function createRoom({ setRooms, setRoom }) {
   const emptyRoom = emptyObjects.room;

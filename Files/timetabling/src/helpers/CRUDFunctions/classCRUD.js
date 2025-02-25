@@ -16,7 +16,8 @@ import {
 import { createClassTime } from "./classTimeCRUD";
 import configInfo from "../../config/configInfo";
 
-const itemName = "classData";
+// const itemName = "classData";
+const itemName = "turmas";
 
 function createClass(createClassStates) {
   const { setClasses, setClassItem, classItemFilter } = createClassStates;

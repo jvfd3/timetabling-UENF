@@ -13,7 +13,7 @@ import {
   replaceNewItemInListById,
 } from "../auxCRUD";
 
-const itemName = "subject";
+const itemName = "disciplinas";
 
 function createSubject({ setSubjects, setSubject }) {
   const emptySubject = emptyObjects.subject;

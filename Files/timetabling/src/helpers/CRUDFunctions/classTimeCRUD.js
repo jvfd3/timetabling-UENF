@@ -14,7 +14,8 @@ import {
   replaceNewItemInListById,
 } from "../auxCRUD";
 
-const itemName = "classTime";
+// const itemName = "classTime";
+const itemName = "horarios";
 
 function createClassTime(classTimeStates) {
   // const { setClasses, classItem, setClassItem, newClassTimeValues } =

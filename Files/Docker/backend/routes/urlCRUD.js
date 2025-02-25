@@ -3,18 +3,22 @@ import {
   createDisciplina,
   createProfessor,
   createTurma,
+  createAluno,
   createSala,
   readDisciplinas,
   readProfessores,
   readTurmas,
+  readAlunos,
   readSalas,
   updateDisciplina,
   updateProfessor,
   updateTurma,
+  updateAluno,
   updateSala,
   deleteDisciplina,
   deleteProfessor,
   deleteTurma,
+  deleteAluno,
   deleteSala,
 } from "../controllers/dbConnector.js";
 
@@ -39,5 +43,10 @@ router.post("/sala", createSala);
 router.get("/salas", readSalas);
 router.put("/sala/:id", updateSala);
 router.delete("/sala/:id", deleteSala);
+
+router.post("/aluno", createAluno);
+router.get("/alunos", readAlunos);
+router.put("/aluno/:id", updateAluno);
+router.delete("/aluno/:id", deleteAluno);
 
 export default router;

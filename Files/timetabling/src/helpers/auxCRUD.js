@@ -29,7 +29,7 @@ function getItemIndexInListById(item, oldArray) {
   traverse list of items, find item with same id, and return index of that item. If not found, returns -1.
   */
   const idItem = getId(item);
-  const index = oldArray.findIndex((iterItem) => {
+  const index = oldArray?.findIndex((iterItem) => {
     const idIterItem = getId(iterItem);
     const hasSameId = idIterItem === idItem;
     return hasSameId;
@@ -103,7 +103,7 @@ function refreshShownItem(item, oldItems, newItems) {
     // READING
     // console.log("keepCurrent");
     // The current item is in the new list, so keep it
-    showedItem = newItems[indexInNew];
+    showedItem = newItems[indexInNew] ?? null;
   } else if (indexInOld !== -1 && newItems.length > 0) {
     // DELETING
     if (indexInOld >= newItems.length) {

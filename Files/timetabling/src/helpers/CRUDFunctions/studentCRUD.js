@@ -12,7 +12,8 @@ import {
   replaceNewItemInListById,
 } from "../auxCRUD";
 
-const itemName = "student";
+// const itemName = "student";
+const itemName = "alunos";
 
 function createStudent({ setStudents, setStudent }) {
   const emptyStudent = emptyObjects.student;

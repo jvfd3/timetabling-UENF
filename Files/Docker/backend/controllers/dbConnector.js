@@ -48,6 +48,20 @@ function createTurma(req, res) {
   defaultCreate(q, values, req, res);
 }
 
+function createAluno(req, res) {
+  const q =
+    "INSERT INTO alunos(`nomeAluno`, `apelidoAluno`, `curso`, `periodo`, `matricula`) VALUES(?);";
+  /* Dá para usar o "...req.body"? */
+  const values = [
+    req.body.nomeAluno,
+    req.body.apelidoAluno,
+    req.body.curso,
+    req.body.periodo,
+    req.body.matricula,
+  ];
+  defaultCreate(q, values, req, res);
+}
+
 function createSala(req, res) {
   const q =
     "INSERT INTO salas(`blocoSala`, `capacidade`, `bloco`, `codigoSala`, `descricaoBloco`) VALUES(?);";
@@ -81,6 +95,11 @@ function readDisciplinas(_, res) {
 
 function readTurmas(_, res) {
   const q = "SELECT * FROM turmas;";
+  defaultRead(res, q);
+}
+
+function readAlunos(_, res) {
+  const q = "SELECT * FROM alunos;";
   defaultRead(res, q);
 }
 
@@ -137,6 +156,19 @@ function updateTurma(req, res) {
   defaultUpdate(q, values, req, res);
 }
 
+function updateAluno(req, res) {
+  const q =
+    "UPDATE alunos SET `nomeAluno` = ?, `apelidoAluno` = ?, `curso` = ?, `periodo` = ?, `matricula` = ? WHERE `idaluno` = ?;";
+  const values = [
+    req.body.nomeAluno,
+    req.body.apelidoAluno,
+    req.body.curso,
+    req.body.periodo,
+    req.body.matricula,
+  ];
+  defaultUpdate(q, values, req, res);
+}
+
 function updateSala(req, res) {
   const q =
     "UPDATE salas SET `blocoSala` = ?, `capacidade` = ?, `bloco` = ?, `codigoSala` = ?, `descricaoBloco` = ? WHERE `idsala` = ?;";
@@ -173,6 +205,11 @@ function deleteTurma(req, res) {
   defaultDelete(q, req.params.id, req, res);
 }
 
+function deleteAluno(req, res) {
+  const q = "DELETE FROM alunos WHERE `idaluno` = ?;";
+  defaultDelete(q, req.params.id, req, res);
+}
+
 function deleteSala(req, res) {
   const q = "DELETE FROM salas WHERE `idsala` = ?;";
   defaultDelete(q, req.params.id, req, res);
@@ -182,17 +219,21 @@ export {
   createDisciplina,
   createProfessor,
   createTurma,
+  createAluno,
   createSala,
   readDisciplinas,
   readProfessores,
   readTurmas,
+  readAlunos,
   readSalas,
   updateDisciplina,
   updateProfessor,
   updateTurma,
+  updateAluno,
   updateSala,
   deleteDisciplina,
   deleteProfessor,
   deleteTurma,
+  deleteAluno,
   deleteSala,
 };

@@ -68,6 +68,10 @@ const configInfo = {
       "https://mckwruc3w1.execute-api.us-east-2.amazonaws.com/timetablingStage",
     defaultRequestDelay: 200,
   },
+  local: {
+    fullEndpoint: "http://localhost:8800",
+    defaultRequestDelay: 200,
+  }
 };
 
 export default configInfo;
