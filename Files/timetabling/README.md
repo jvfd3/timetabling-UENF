@@ -16,3 +16,10 @@
   1. Corrigido o problema na seleção de curso
 
 ## [Próximas mudanças](https://github.com/jvfd3/timetabling-UENF/issues/461)
+
+## Para ligar
+
+- Acesse a pasta
+  - `cd B:\GitHub\UENF\timetabling-UENF\Files\timetabling`
+- Rode o projeto do front
+  - `npm start`
