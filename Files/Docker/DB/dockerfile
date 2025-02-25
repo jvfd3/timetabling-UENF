@@ -1,0 +1,9 @@
+# Derivando da imagem oficial do MySQL
+FROM mysql:5.7
+
+# Carregando variáveis de ambiente do arquivo
+ENV $(cat db_access_info.env | xargs)
+# REM - LegacyKeyValueFormat: "ENV key=value" should be used instead of legacy "ENV key value" format (line 5) 
+
+# Adicionando os scripts SQL para serem executados na criação do banco
+COPY ./StartingDB/ /docker-entrypoint-initdb.d/

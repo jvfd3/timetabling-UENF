@@ -36,6 +36,10 @@ Tenho o seguinte banco de dados:
   - idSala (INT, FK)
 */
 
+CREATE DATABASE ourclass;
+
+USE ourclass;
+
 CREATE TABLE `alunos` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `anoEntrada` int DEFAULT NULL,
@@ -53,7 +57,7 @@ CREATE TABLE `disciplinas` (
   `nome` varchar(255),
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=776 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `professores` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
@@ -61,6 +65,7 @@ CREATE TABLE `professores` (
   `curso` varchar(255),
   `apelido` varchar(255),
   `nome` varchar(255),
+  `centro` ENUM('CCT', 'CCH', 'CBB', 'CCTA'),
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -105,4 +110,29 @@ CREATE TABLE `horarios` (
   KEY `idHorarioTurma_idx` (`idTurma`),
   CONSTRAINT `idHorarioSala` FOREIGN KEY (`idSala`) REFERENCES `salas` (`id`),
   CONSTRAINT `idHorarioTurma` FOREIGN KEY (`idTurma`) REFERENCES `turmas` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2028030895 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2028030833 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `centers` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `alias` ENUM('CCT', 'CCH', 'CBB', 'CCTA'),
+  `name` varchar(255),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `laboratories` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `center` ENUM('CCT', 'CCH', 'CBB', 'CCTA'),
+  `alias` varchar(255),
+  `name` varchar(255),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `subjects` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `periodo` int unsigned DEFAULT NULL,
+  `codigo` varchar(255),
+  `apelido` varchar(255),
+  `nome` varchar(255),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=776 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
