@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import timetablingRoutes from "./routes/urlCRUD.js";
+import timetablingRoutes from "./src/routes/urlCRUD.js";
 
 const app = express();
 app.use(express.json()); // Habilitar algo de json
