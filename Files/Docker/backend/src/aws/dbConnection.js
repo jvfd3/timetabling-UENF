@@ -1,16 +1,19 @@
-const mysql = require("mysql2/promise");
+// const mysql = require("mysql2/promise");
+
+import mysql from "mysql2/promise";
 
 let local = "db.js>";
 const isDebugging = true;
 
 function getDbConfig() {
-  const dbConfig = {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PSWD,
-    database: process.env.DB_NAME,
+  const dbTeste = {
+    host: "localhost",
+    user: "root",
+    password: "root",
+    // password: "timetabling",
+    database: "OurClassDB",
   };
-  return dbConfig;
+  return dbTeste;
 }
 
 async function createDbConnection() {
@@ -231,7 +234,7 @@ async function defaultDelete(query, queryValues, exists) {
   );
 }
 
-export default {
+export {
   dbExecute,
   checkExistance,
   getPayloadResponse,

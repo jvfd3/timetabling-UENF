@@ -33,4 +33,4 @@ async function defaultCreate(query, queryValues) {
   );
 }
 
-module.exports = { defaultCreate };
+export default { defaultCreate };

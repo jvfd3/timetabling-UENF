@@ -26,4 +26,4 @@ function getPayloadResponse(
   return payloadResponse;
 }
 
-module.exports = { getPayloadResponse };
+export default { getPayloadResponse };
