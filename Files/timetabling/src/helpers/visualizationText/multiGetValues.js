@@ -29,7 +29,7 @@ function getExpectedSemester(subject) {
 }
 
 function getClassTimes(classItem) {
-  const classTimes = classItem?.classTimes ?? classItem?.horarios;
+  const classTimes = classItem?.classTimes ?? classItem?.horarios ?? [];
   return classTimes;
 }
 
