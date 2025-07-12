@@ -3,7 +3,7 @@
 import mysql from "mysql2/promise";
 
 let local = "db.js>";
-const isDebugging = true;
+const isDebugging = false;
 
 function getDbConfig() {
   const dbTeste = {
@@ -81,8 +81,8 @@ function getPayloadResponse(
     statusCode: statusCode ?? null,
     headers: {
       "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*", // Permite que qualquer origem acesse
-      "Access-Control-Allow-Credentials": true, // Permite o envio de cookies
+      // "Access-Control-Allow-Origin": "*", // Permite que qualquer origem acesse
+      // "Access-Control-Allow-Credentials": true, // Permite o envio de cookies
     },
     body: JSON.stringify(myBody ?? null),
   };
@@ -132,11 +132,12 @@ async function defaultRead(query, queryValues, exists) {
   let queryResult = null;
   let localError = null;
   let statusCode = 200;
-
   if (!exists) {
   } else {
     try {
+      // console.log("pre chamada bd");
       queryResult = await dbExecute(query, queryValues);
+      // console.log("pos chamada bd");
       message += successMessage + `${queryResult.length}`;
       isDebugging && console.log(message, statusCode, queryResult?.[0]);
     } catch (error) {
@@ -146,14 +147,45 @@ async function defaultRead(query, queryValues, exists) {
       isDebugging && console.error(message, statusCode, error);
     }
   }
-  return getPayloadResponse(
+  // console.log("pre saída BD");
+
+  const small = [
+    {
+      id: 1,
+      anoEntrada: 2014,
+      curso: "Ciência da Computação",
+      matricula: "00114110001",
+      nome: "Augusto Amaral Pereira",
+    },
+    {
+      id: 2,
+      anoEntrada: 2015,
+      curso: "Ciência da Computação",
+      matricula: "00115110002",
+      nome: "Mateus Nunes Schulz",
+    },
+    {
+      id: 3,
+      anoEntrada: 2015,
+      curso: "Ciência da Computação",
+      matricula: "00115110003",
+      nome: "Ralf Cruz Mateus",
+    },
+  ];
+
+  const payload = getPayloadResponse(
     message,
     query,
     queryValues,
-    queryResult,
+    // queryResult,
+    small,
     localError,
     statusCode
   );
+
+  // console.log("payload", payload);
+
+  return payload;
 }
 
 async function defaultUpdate(query, queryValues, exists) {

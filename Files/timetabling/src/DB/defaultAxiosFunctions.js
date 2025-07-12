@@ -25,7 +25,26 @@ function getAxios() {
   async function readTest(itemName = null, itemToSend = null) {
     testing(itemToSend, itemName, "read");
     const localUrl = url + itemName; // I may need to change this slash
-    return await axios.get(localUrl, itemToSend);
+
+    console.log("pre axios.get; url: ", localUrl);
+
+    try {
+      console.log("Iniciando chamada para:", localUrl);
+      const response = await axios.get(localUrl);
+      console.log("Status da resposta:", response.status);
+      console.log("Headers:", response.headers);
+      console.log("Dados completos:", response.data);
+      return response.data;
+    } catch (erro) {
+      console.error("Erro detalhado:", {
+        message: erro.message,
+        status: erro.response?.status,
+        data: erro.response?.data,
+      });
+      throw erro;
+    }
+
+    return dados;
   }
   async function updateTest(itemName = null, itemToSend = null) {
     testing(itemToSend, itemName, "updat");
@@ -132,11 +151,12 @@ async function defaultDBRead(itemName) {
   if (false) {
   } else {
     try {
-      // console.log("preRead", itemName);
+      console.log("pre query");
       const response = await myAxios.read(itemName);
-      // console.log("response", response);
+      console.log("postquery");
       isDebugging && debugPayload(response); // Only Executes if isDebugging is true
       returnedData = response.data.queryResult;
+      console.log("returnedData", returnedData);
       const statusCode = response.status;
       if (statusCode === 200) {
         //Everything is OK

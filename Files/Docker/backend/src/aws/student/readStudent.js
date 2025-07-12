@@ -9,13 +9,20 @@ const isDebugging = false;
 async function readStudent(event) {
   isDebugging && console.log(local + ">{event: ", event, "}");
 
-  return await readItems();
+  console.log("BACKEND");
+  const promessa = await readItems();
+  console.log("promessa que sai: ", promessa);
+  console.log("saindo do BE");
+
+  return promessa;
 }
 
 async function readItems() {
   local += `>read${itemName}`;
   const itemList = null;
   const exists = true;
-  return await defaultRead(readItemsQuery, itemList, exists);
+  const promessa = await defaultRead(readItemsQuery, itemList, exists);
+
+  return promessa;
 }
 export { readStudent };

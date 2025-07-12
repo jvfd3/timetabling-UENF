@@ -49,7 +49,7 @@ function readStudent({ students, setStudents, setStudent }) {
       return showedStudent;
     });
   }
-
+  console.log("Pré defaultDBRead");
   defaultDBRead(itemName)
     .then(insertNewStudentsFromDB)
     .catch(defaultHandleError);
