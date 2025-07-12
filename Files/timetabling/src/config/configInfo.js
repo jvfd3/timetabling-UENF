@@ -69,7 +69,7 @@ const configInfo = {
     defaultRequestDelay: 200,
   },
   local: {
-    fullEndpoint: "http://localhost:8800",
+    fullEndpoint: "http://localhost:8800/api",
     defaultRequestDelay: 200,
   },
   endpoints: {
