@@ -13,7 +13,9 @@ import {
   replaceNewItemInListById,
 } from "../auxCRUD";
 
-const itemName = "disciplinas";
+import configInfo from "../../config/configInfo";
+
+const itemName = configInfo.endpoints.subject;
 
 function createSubject({ setSubjects, setSubject }) {
   const emptySubject = emptyObjects.subject;

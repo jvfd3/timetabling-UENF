@@ -71,7 +71,15 @@ const configInfo = {
   local: {
     fullEndpoint: "http://localhost:8800",
     defaultRequestDelay: 200,
-  }
+  },
+  endpoints: {
+    classData: "classData",
+    classTime: "classTime",
+    professor: "professor",
+    room: "room",
+    student: "student",
+    subject: "subject",
+  },
 };
 
 export default configInfo;

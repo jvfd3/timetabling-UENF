@@ -14,8 +14,9 @@ import {
   replaceNewItemInListById,
 } from "../auxCRUD";
 
-// const itemName = "classTime";
-const itemName = "horarios";
+import configInfo from "../../config/configInfo";
+
+const itemName = configInfo.endpoints.classTime;
 
 function createClassTime(classTimeStates) {
   // const { setClasses, classItem, setClassItem, newClassTimeValues } =

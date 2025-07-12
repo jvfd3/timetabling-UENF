@@ -13,7 +13,9 @@ import {
   replaceNewItemInListById,
 } from "../auxCRUD";
 
-const itemName = "professores";
+import configInfo from "../../config/configInfo";
+
+const itemName = configInfo.endpoints.professor;
 
 function createProfessor({ setProfessors, setProfessor }) {
   const emptyProfessor = emptyObjects.professor;

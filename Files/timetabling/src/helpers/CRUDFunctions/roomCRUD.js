@@ -13,7 +13,9 @@ import {
   replaceNewItemInListById,
 } from "../auxCRUD";
 
-const itemName = "salas";
+import configInfo from "../../config/configInfo";
+
+const itemName = configInfo.endpoints.room;
 
 function createRoom({ setRooms, setRoom }) {
   const emptyRoom = emptyObjects.room;

@@ -14,10 +14,10 @@ import {
   defaultHandleError,
 } from "../../DB/defaultAxiosFunctions";
 import { createClassTime } from "./classTimeCRUD";
+
 import configInfo from "../../config/configInfo";
 
-// const itemName = "classData";
-const itemName = "turmas";
+const itemName = configInfo.endpoints.classData;
 
 function createClass(createClassStates) {
   const { setClasses, setClassItem, classItemFilter } = createClassStates;
