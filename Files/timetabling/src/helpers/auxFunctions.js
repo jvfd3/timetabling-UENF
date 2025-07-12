@@ -1,5 +1,6 @@
 import configInfo from "../config/configInfo";
 import constantValues from "../config/constantValues";
+import { getId } from "./auxCRUD";
 
 function getValueFromObject(myObject) {
   const objectValue = myObject?.hora ?? myObject?.value ?? myObject ?? null;
@@ -49,9 +50,26 @@ function menuIsOpen(context) {
   return context === possibleContexts[1];
 }
 
+function mergeClassesToClassTimes(classes, classTimes) {
+  // WIP
+  let newClasses = [];
+  for (let idx in classes) {
+    const classItem = classes[idx];
+    const classItemId = getId(classItem);
+    const classTimesForClass = classTimes.filter(
+      (classTime) => classTime?.idTurma === classItemId
+    );
+    classItem.horarios = classTimesForClass;
+    console.log(classTimesForClass);
+    newClasses.push(classItem);
+  }
+  return newClasses;
+}
+
 export {
   menuIsOpen,
   getValueFromObject,
+  mergeClassesToClassTimes,
   getDefaultYearSemesterValues,
   getValueFromDataWithPropArray,
 };

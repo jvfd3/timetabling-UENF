@@ -31,6 +31,9 @@ import {
   replaceNewItemInListById,
 } from "../../../helpers/auxCRUD";
 import NoSelectedObject from "../../../components/Dumb/NoSelectedObject";
+import sqlDataFromJson from "../../../DB/dataFromJSON";
+import { mergeClassesToClassTimes } from "../../../helpers/auxFunctions";
+import configInfo from "../../../config/configInfo";
 
 const defaultClassNames = myStyles.classNames.default;
 const pageTexts = text.page.classes;
@@ -148,13 +151,25 @@ function ClassCard(globalStates) {
 }
 
 function Classes() {
-  const [classes, setClasses] = useState([]);
-  const [filteredClasses, setFilteredClasses] = useState([]);
+  let classTimes = [];
+  let onlyClasses = [];
+  let defaultClasses = [];
+  let defaultClassItem = null;
+
+  if (configInfo.usesLocalJSON) {
+    onlyClasses = sqlDataFromJson.classes;
+    classTimes = sqlDataFromJson.classtimes;
+    defaultClasses = mergeClassesToClassTimes(onlyClasses, classTimes);
+    defaultClassItem = defaultClasses[0];
+  }
+
+  const [classes, setClasses] = useState(defaultClasses);
+  const [filteredClasses, setFilteredClasses] = useState(defaultClasses);
   const [classItemFilter, setClassItemFilter] = useState(getDefaultClassItem());
 
   const selectStates = getSelectStates();
 
-  const [classItem, setClassItem] = useState(null);
+  const [classItem, setClassItem] = useState(defaultClassItem);
 
   const conflicts = getClassItemConflicts(filteredClasses, classItem);
 

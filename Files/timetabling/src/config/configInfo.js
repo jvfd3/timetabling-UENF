@@ -1,6 +1,7 @@
 const configInfo = {
   iconButtons: true,
   hasDenseClassSelects: true,
+  usesLocalJSON: false,
   defaultIndexes: {
     year: 10, // 5: 2019; 10: 2024
     semester: 0, // 0: 1, 1: 2, 2: verão
