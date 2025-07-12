@@ -39,14 +39,14 @@ function getModes(items) {
     });
   }
 
-  const debug = {
-    items,
-    frequency,
-    isObject,
-    frequencyList,
-    // modes,
-    // modesValueList,
-  };
+  // const debug = {
+  //   items,
+  //   frequency,
+  //   isObject,
+  //   frequencyList,
+  //   modes,
+  //   modesValueList,
+  // };
   // console.log(debug);
 
   return frequencyList;
@@ -61,13 +61,13 @@ function getMostFrequentItem(objArray, propList, numberOfFrequentItems = 1) {
   const slicedModes = modes.slice(0, numberOfFrequentItems);
   const modesValueList = slicedModes.map((mode) => mode.value);
 
-  const debug = {
-    objArray,
-    itemList,
-    modes,
-    slicedModes,
-    modesValueList,
-  };
+  // const debug = {
+  //   objArray,
+  //   itemList,
+  //   modes,
+  //   slicedModes,
+  //   modesValueList,
+  // };
   // console.log(debug);
 
   return modesValueList;
@@ -80,10 +80,10 @@ function getMostFrequentClassTimeSizes(classes) {
 
   const mostFrequentValue = getModes(classTimeSizes)?.[0]?.["value"];
 
-  const debug = {
-    classTimeSizes,
-    mostFrequentValue,
-  };
+  // const debug = {
+  //   classTimeSizes,
+  //   mostFrequentValue,
+  // };
   // console.log(debug);
 
   return mostFrequentValue;
@@ -112,16 +112,16 @@ function getMeanDemand(sameSubjectClasses) {
   const size = uniqueYearSemesters.length;
   const meanDemand = size > 0 ? Math.round(sum / size) : null;
 
-  const debug = {
-    sameSubjectClasses,
-    cleanItems,
-    demands,
-    yearSemesters,
-    uniqueYearSemesters,
-    sum,
-    size,
-    meanDemand,
-  };
+  // const debug = {
+  //   sameSubjectClasses,
+  //   cleanItems,
+  //   demands,
+  //   yearSemesters,
+  //   uniqueYearSemesters,
+  //   sum,
+  //   size,
+  //   meanDemand,
+  // };
   // console.log(debug);
 
   return meanDemand;

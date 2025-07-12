@@ -227,16 +227,15 @@ function filterClassTimes(classes, filterFunction, filterValue) {
     filteredIds.includes(iterClassItem?.id)
   );
 
-  /*
-  const debug = {
-    classes: classes.length,
-    splittedClasses: splittedClasses.length,
-    filteredSplittedClasses: filteredSplittedClasses.length,
-    filteredClasses: filteredClasses.length,
-    classesToReturn: classesToReturn.length,
-  };
-  console.log(debug);
-  */
+  // const debug = {
+  //   classes: classes.length,
+  //   splittedClasses: splittedClasses.length,
+  //   filteredSplittedClasses: filteredSplittedClasses.length,
+  //   filteredClasses: filteredClasses.length,
+  //   classesToReturn: classesToReturn.length,
+  // };
+  // console.log(debug);
+
   return filteredClasses;
 }
 

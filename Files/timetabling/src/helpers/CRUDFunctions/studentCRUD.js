@@ -15,6 +15,7 @@ import {
 import configInfo from "../../config/configInfo";
 
 const itemName = configInfo.endpoints.student;
+const isDebugging = configInfo.isDebugging;
 
 function createStudent({ setStudents, setStudent }) {
   const emptyStudent = emptyObjects.student;
@@ -49,7 +50,7 @@ function readStudent({ students, setStudents, setStudent }) {
       return showedStudent;
     });
   }
-  console.log("Pré defaultDBRead");
+  isDebugging && console.log("Pré defaultDBRead");
   defaultDBRead(itemName)
     .then(insertNewStudentsFromDB)
     .catch(defaultHandleError);

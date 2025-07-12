@@ -6,7 +6,7 @@ import { getId } from "../helpers/auxCRUD";
 // const url = configInfo.AWS.fullEndpoint + "/";
 const url = configInfo.local.fullEndpoint + "/";
 const debuggingLocal = "newAxios.js>";
-const isDebugging = false;
+const isDebugging = configInfo.isDebugging;
 
 function getAxios() {
   function testing(itemToSend = null, itemName = null, action = "test") {
@@ -26,14 +26,14 @@ function getAxios() {
     testing(itemToSend, itemName, "read");
     const localUrl = url + itemName; // I may need to change this slash
 
-    console.log("pre axios.get; url: ", localUrl);
+    isDebugging && console.log("localUrl", localUrl);
 
     try {
-      console.log("Iniciando chamada para:", localUrl);
+      isDebugging && console.log("Iniciando chamada para:", localUrl);
       const response = await axios.get(localUrl);
-      console.log("Status da resposta:", response.status);
-      console.log("Headers:", response.headers);
-      console.log("Dados completos:", response.data);
+      isDebugging && console.log("Status da resposta:", response.status);
+      isDebugging && console.log("Headers:", response.headers);
+      isDebugging && console.log("Dados completos:", response.data);
       return response.data;
     } catch (erro) {
       console.error("Erro detalhado:", {
@@ -77,7 +77,8 @@ function defaultHandleError(error) {
 
 function debugPayload(payload) {
   const local = debuggingLocal + "debugPayload>";
-  console.log(`${local}payload: \n\n{\n\n`, payload, "\n\n}\n\n");
+  let msg = `${local}payload: \n\n{\n\n`;
+  isDebugging && console.log(msg, payload, "\n\n}\n\n");
 }
 
 async function defaultDBCreate(itemName, itemToSend) {
@@ -151,12 +152,12 @@ async function defaultDBRead(itemName) {
   if (false) {
   } else {
     try {
-      console.log("pre query");
+      isDebugging && console.log("pre query");
       const response = await myAxios.read(itemName);
-      console.log("postquery");
+      isDebugging && console.log("post query");
       isDebugging && debugPayload(response); // Only Executes if isDebugging is true
       returnedData = response.data.queryResult;
-      console.log("returnedData", returnedData);
+      isDebugging && console.log("returnedData", returnedData);
       const statusCode = response.status;
       if (statusCode === 200) {
         //Everything is OK

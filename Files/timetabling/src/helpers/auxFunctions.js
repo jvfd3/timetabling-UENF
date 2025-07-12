@@ -2,6 +2,8 @@ import configInfo from "../config/configInfo";
 import constantValues from "../config/constantValues";
 import { getId } from "./auxCRUD";
 
+const isDebugging = configInfo.isDebugging;
+
 function getValueFromObject(myObject) {
   const objectValue = myObject?.hora ?? myObject?.value ?? myObject ?? null;
   return objectValue;
@@ -60,7 +62,7 @@ function mergeClassesToClassTimes(classes, classTimes) {
       (classTime) => classTime?.idTurma === classItemId
     );
     classItem.horarios = classTimesForClass;
-    console.log(classTimesForClass);
+    isDebugging && console.log(classTimesForClass);
     newClasses.push(classItem);
   }
   return newClasses;
