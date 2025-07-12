@@ -37,7 +37,7 @@ function MyRouting() {
 
   return (
     <div className={defaultClassNames.background}>
-      <BrowserRouter basename="/">
+      <BrowserRouter basename="/" future={{ v7_startTransition: true }}>
         <PageSelection />
         <Routes>
           <Route element={<Main />} index />
