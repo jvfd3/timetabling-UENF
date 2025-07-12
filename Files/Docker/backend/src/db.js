@@ -2,9 +2,9 @@ import mysql from "mysql2";
 
 // Faz conexão com o banco de dados SQL
 
-let isLocal = true;
+const isLocal = true;
 
-let dbTeste = {
+const dbTeste = {
   host: "localhost",
   user: "root",
   password: "root",
@@ -12,17 +12,17 @@ let dbTeste = {
   database: "OurClassDB",
 };
 
-let dbAWS = {
+const dbAWS = {
   host: "dbtimetabling.cgsgwtemx5r8.us-east-2.rds.amazonaws.com",
   port: "3306",
   user: "tang",
   password: "annabell",
   database: "timetabling",
 };
-let dbInfo = [dbTeste, dbAWS];
-let dbToConnect = dbInfo[isLocal ? 0 : 1];
 
-let db = mysql.createConnection(dbToConnect);
+const dbToConnect = isLocal ? dbTeste : dbAWS;
+
+const db = mysql.createConnection(dbToConnect);
 
 db.connect((err) => {
   if (err) throw err;
