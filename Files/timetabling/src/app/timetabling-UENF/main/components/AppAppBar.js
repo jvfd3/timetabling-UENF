@@ -56,25 +56,9 @@ export default function AppAppBar() {
         bgcolor: "transparent",
         backgroundImage: "none",
         mt: "calc(var(--template-frame-height, 0px) + 28px)",
-        left: 0,
-        right: 0,
-        width: "100vw",
-        maxWidth: "100%",
-        margin: 0,
-        padding: 0,
       }}
     >
-      <Container 
-        maxWidth="lg" 
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-          margin: "0 auto",
-          padding: { xs: "0 16px", sm: "0 24px" },
-        }}
-      >
+      <Container maxWidth="lg">
         <StyledToolbar variant="dense" disableGutters>
           <Box
             sx={{ flexGrow: 1, display: "flex", alignItems: "center", px: 0 }}
