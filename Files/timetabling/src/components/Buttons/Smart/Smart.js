@@ -207,14 +207,14 @@ function SmartUpdateClassTime(updateClassTimeStates) {
     const sameStartHour = oldStartHour === newStartHour;
     const sameDuration = oldDuration === newDuration;
 
-    const AAA = oldRoom === null ? "null" : getRoomText(oldRoom);
-    const BBB = newRoom === null ? "null" : getRoomText(newRoom);
+    const oldRoomInfo = oldRoom === null ? "null" : getRoomText(oldRoom);
+    const newRoomInfo = newRoom === null ? "null" : getRoomText(newRoom);
 
     function getNewValueLine(propName, oldValue, newValue) {
       return `\t- ${propName}: ${oldValue} -> ${newValue}\n`;
     }
 
-    const newRoomText = `\t- Sala: ${AAA} -> ${BBB}\n`;
+    const newRoomText = `\t- Sala: ${oldRoomInfo} -> ${newRoomInfo}\n`;
     const newDayText = `\t- Dia: ${oldDay} -> ${newDay}\n`;
     const newStartHourText = `\t- Hora Início: ${oldStartHour} -> ${newStartHour}\n`;
     const newDurationText = `\t- Duracao: ${oldDuration} -> ${newDuration}\n`;
