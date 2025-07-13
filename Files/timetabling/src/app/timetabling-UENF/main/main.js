@@ -2,6 +2,7 @@ import "./main.css";
 import React from "react";
 import text from "../../../config/frontText";
 import myStyles from "../../../config/myStyles";
+import MarketingPage from "./main_upgrade";
 
 const defaultClassNames = myStyles.classNames.default;
 const pageTexts = text.page.main;
@@ -46,11 +47,12 @@ function Shortcuts() {
 
 function Main() {
   return (
-    <div className={defaultClassNames.containerCards}>
-      <Logo />
-      <Instructions />
-      <Shortcuts />
-    </div>
+    // <div className={defaultClassNames.containerCards}>
+    //   <Logo />
+    //   <Instructions />
+    //   <Shortcuts />
+    // </div>
+    <MarketingPage />
   );
 }
 
