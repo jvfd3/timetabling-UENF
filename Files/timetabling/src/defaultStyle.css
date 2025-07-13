@@ -3,6 +3,14 @@ body {
   background-color: #000;
   margin: 0;
   font-family: 'Segoe UI';
+  /* Previne o shift da scrollbar */
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
+/* Alternativa para navegadores que não suportam scrollbar-gutter */
+html {
+  margin-left: calc(100vw - 100%);
 }
 
 .background {
