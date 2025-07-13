@@ -6,10 +6,13 @@ const itemName = "Professor";
 let local = `aws>lambda>Read>${itemName}>handler`;
 const isDebugging = false;
 
-async function readProfessor(event) {
-  isDebugging && console.log(local + ">{event: ", event, "}");
-
-  return await readItems();
+async function readProfessor(req, res) {
+  // isDebugging && console.log(local + ">{event: ", event, "}");
+  const payload = await readItems();
+  // isDebugging && console.log(local + ">{req: ", req, "}");
+  isDebugging && console.log(local + payload);
+  res.status(payload.statusCode).json(payload);
+  // return payload;
 }
 
 async function readItems() {

@@ -3,7 +3,7 @@ import { defaultRead } from "../dbConnection.js";
 const itemName = "Student";
 let readItemsQuery = "SELECT * FROM alunos";
 let local = `aws>lambda>Read>${itemName}>handler`;
-const isDebugging = true;
+const isDebugging = false;
 
 // async function readStudent(event) {
 // isDebugging && console.log(local + ">{event: ", event, "}");
@@ -16,7 +16,7 @@ async function readStudent(req, res) {
   const payload = await readItems();
   isDebugging && console.log(local + ">{payload: ", payload, "}");
   isDebugging && console.log("Pre response");
-  res.status(payload.statusCode).json(JSON.parse(payload.body));
+  res.status(payload.statusCode).json(payload);
   isDebugging && console.log("saindo do BE");
 }
 

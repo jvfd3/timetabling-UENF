@@ -1,7 +1,7 @@
 const mysql = require("mysql2/promise");
 
 let local = "db.js>";
-const isDebugging = true;
+const isDebugging = false;
 
 function getDbConfig() {
   const dbConfig = {

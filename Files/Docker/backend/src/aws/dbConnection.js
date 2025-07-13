@@ -1,7 +1,7 @@
 import { pool } from "../db.js";
 
 let local = "db.js>";
-const isDebugging = true;
+const isDebugging = false;
 
 async function dbExecute(query, values = null) {
   local += "dbExecute>";
@@ -22,7 +22,8 @@ async function dbExecute(query, values = null) {
     isDebugging && console.log(local, `Query Result (rows):`, rows);
     isDebugging && console.log(local, `Query Result (fields):`, fields);
 
-    return [rows, fields]; // Retorna tanto as linhas quanto os metadados dos campos
+    // return [rows, fields]; // Retorna tanto as linhas quanto os metadados dos campos
+    return rows; // Retorna tanto as linhas quanto os metadados dos campos
   } catch (err) {
     isDebugging && console.error(local, `Erro ao executar query:`, err);
     throw err; // Relança o erro para que a função chamadora possa tratá-lo
@@ -70,9 +71,12 @@ function getPayloadResponse(
       // "Access-Control-Allow-Origin": "*", // Permite que qualquer origem acesse
       // "Access-Control-Allow-Credentials": true, // Permite o envio de cookies
     },
-    body: JSON.stringify(myBody ?? null),
+    // body: JSON.stringify(myBody ?? null),
+    body: myBody ?? null,
   };
-  isDebugging && console.log("[getPayloadResponse]", payloadResponse);
+  // isDebugging && console.log("[getPayloadResponse]", payloadResponse);
+  // isDebugging &&
+  //   console.log("[getPayloadResponse]", payloadResponse.body.queryResult);
   return payloadResponse;
 }
 
@@ -121,11 +125,11 @@ async function defaultRead(query, queryValues, exists) {
   if (!exists) {
   } else {
     try {
-      // console.log("pre chamada bd");
+      // isDebugging && console.log("pre chamada bd");
       queryResult = await dbExecute(query, queryValues);
-      // console.log("pos chamada bd");
+      isDebugging && console.log("pos chamada bd");
       message += successMessage + `${queryResult.length}`;
-      isDebugging && console.log(message, statusCode, queryResult?.[0]);
+      // isDebugging && console.log(local, message, statusCode, queryResult);
     } catch (error) {
       statusCode = 500;
       localError = error;

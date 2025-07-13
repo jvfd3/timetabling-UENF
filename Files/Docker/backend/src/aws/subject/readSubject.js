@@ -5,10 +5,10 @@ const itemName = "Subject";
 let local = `aws>lambda>Read>${itemName}>handler`;
 const isDebugging = false;
 
-async function readSubject(event) {
-  isDebugging && console.log(local + ">{event: ", event, "}");
-
-  return await readItems();
+async function readSubject(req, res) {
+  isDebugging && console.log(local + ">{event: ", req, "}");
+  const payload = await readItems();
+  res.status(payload.statusCode).json(payload);
 }
 
 async function readItems() {

@@ -14,6 +14,11 @@ function getId(item) {
   return id;
 }
 
+function getStatusCode(item) {
+  const statusCode = item?.statusCode ?? item?.status ?? null;
+  return statusCode;
+}
+
 function getItemFromListById(item, items) {
   const idItem = getId(item);
   const foundItem = items.find((iterItem) => {
@@ -172,4 +177,5 @@ export {
   getDefaultClassTime, // CreateClass
   getId, // Many places
   getSelectStates, // Everywhere that needs DB select values
+  getStatusCode, // defaultAxiosFunctions
 };

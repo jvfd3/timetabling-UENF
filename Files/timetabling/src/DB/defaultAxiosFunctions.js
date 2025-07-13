@@ -1,7 +1,7 @@
 import axios from "axios";
 import configInfo from "../config/configInfo";
 import { toast } from "react-toastify";
-import { getId } from "../helpers/auxCRUD";
+import { getId, getStatusCode } from "../helpers/auxCRUD";
 
 // const url = configInfo.AWS.fullEndpoint + "/";
 const url = configInfo.local.fullEndpoint + "/";
@@ -31,14 +31,15 @@ function getAxios() {
     try {
       isDebugging && console.log("Iniciando chamada para:", localUrl);
       const response = await axios.get(localUrl);
-      isDebugging && console.log("Status da resposta:", response.status);
-      isDebugging && console.log("Headers:", response.headers);
-      isDebugging && console.log("Dados completos:", response.data);
-      return response.data;
+      isDebugging &&
+        console.log("Status da resposta:", getStatusCode(response));
+      isDebugging && console.log("Headers:", response?.headers);
+      isDebugging && console.log("Dados completos:", response?.data);
+      return response?.data;
     } catch (erro) {
       console.error("Erro detalhado:", {
         message: erro.message,
-        status: erro.response?.status,
+        status: erro.getStatusCode(response),
         data: erro.response?.data,
       });
       throw erro;
@@ -104,16 +105,20 @@ async function defaultDBCreate(itemName, itemToSend) {
     try {
       const response = await myAxios.create(itemName, itemToSend);
       isDebugging && debugPayload(response); // Only Executes if isDebugging is true
-      const statusCode = response.status;
+      const statusCode = getStatusCode(response);
       if (statusCode === 201) {
-        returnedData = response.data.queryResult.insertId;
+        returnedData = response?.queryResult?.insertId;
         const debugMessage = `${localMessage}>The ${itemName} was ${action}ed with id ${returnedData}. The data is: ${itemToSend}`;
         const prettyMessage = `The ${itemName} was successfully ${action}ed! with id ${returnedData}.`;
         toastMessages.debug.push(debugMessage);
         toastMessages.pretty = prettyMessage;
         toastToUse = toast.success;
       } else {
-        const debugMessage = `${localMessage}>ServerError ${statusCode}, ${response.status} while ${action}ing the ${itemName}.\nThe error message: ${response.data.body?.error}`;
+        const debugMessage = `${localMessage}>ServerError ${statusCode}, ${getStatusCode(
+          response
+        )} while ${action}ing the ${itemName}.\nThe error message: ${
+          response?.body?.error
+        }`;
         const prettyMessage = `Error while ${action}ing the ${itemName}.`;
         toastMessages.debug.push(debugMessage);
         toastMessages.pretty = prettyMessage;
@@ -156,19 +161,26 @@ async function defaultDBRead(itemName) {
       const response = await myAxios.read(itemName);
       isDebugging && console.log("post query");
       isDebugging && debugPayload(response); // Only Executes if isDebugging is true
-      returnedData = response.data.queryResult;
-      isDebugging && console.log("returnedData", returnedData);
-      const statusCode = response.status;
+      // const parsedResponse = JSON.parse(response);
+      returnedData = response?.body?.queryResult;
+      // isDebugging && console.log("returnedData", parsedResponse);
+      const statusCode = getStatusCode(response);
       if (statusCode === 200) {
         //Everything is OK
-        // const currentId = response.data.queryResult.insertId;
-        const debugMessage = `${localMessage}>The ${itemName} was ${action}ed The data is: ${returnedData}`;
+        // const currentId = response?.queryResult.insertId;
+        const debugMessage = `${localMessage}The ${itemName} was ${action}ed The data is: ${returnedData}`;
         const prettyMessage = `The ${itemName} was successfully ${action}ed!`;
+        isDebugging && console.log(localMessage, debugMessage);
         toastMessages.debug.push(debugMessage);
         toastMessages.pretty = prettyMessage;
         toastToUse = toast.success;
       } else {
-        const debugMessage = `${localMessage}>ServerError ${statusCode}, ${response.status} while ${action}ing the ${itemName}.\nThe error message: ${response.data.body.error}`;
+        const debugMessage = `${localMessage}>ServerError ${statusCode}, ${getStatusCode(
+          response
+        )} while ${action}ing the ${itemName}.\nThe error message: ${
+          response?.body?.error
+        }`;
+        isDebugging && console.log(localMessage, debugMessage);
         const prettyMessage = `Error while ${action}ing the ${itemName}.`;
         toastMessages.debug.push(debugMessage);
         toastMessages.pretty = prettyMessage;
@@ -177,6 +189,7 @@ async function defaultDBRead(itemName) {
       }
     } catch (error) {
       const debugMessage = `${localMessage}>CatchedServerError> ${error}}`;
+      isDebugging && console.log(debugMessage);
       const prettyMessage = `Error while ${action}ing the ${itemName}.`;
       toastMessages.debug.push(debugMessage);
       toastMessages.pretty = prettyMessage;
@@ -215,7 +228,7 @@ async function defaultDBUpdate(itemName, itemToSend) {
     try {
       const response = await myAxios.update(itemName, itemToSend);
       isDebugging && debugPayload(response); // Only Executes if isDebugging is true
-      const statusCode = response.status;
+      const statusCode = getStatusCode(response);
       if (statusCode === 200) {
         // Everything is OK
         returnedData = itemToSend;
@@ -228,7 +241,11 @@ async function defaultDBUpdate(itemName, itemToSend) {
         toastToUse = toast.success;
       } else if (statusCode === 404) {
         // Not found
-        const debugMessage = `${localMessage}>ServerError ${statusCode}, ${response.status} while ${action}ing the ${itemName}.\nThe error message: ${response.data.body.error}`;
+        const debugMessage = `${localMessage}>ServerError ${statusCode}, ${getStatusCode(
+          response
+        )} while ${action}ing the ${itemName}.\nThe error message: ${
+          response?.body?.error
+        }`;
         const prettyMessage = `Error while ${action}ing the ${itemName}.`;
         toastMessages.debug.push(debugMessage);
         toastMessages.pretty = prettyMessage;
@@ -236,7 +253,11 @@ async function defaultDBUpdate(itemName, itemToSend) {
         localError = new Error(toastMessages.debug);
       } else {
         // Other cases
-        const debugMessage = `${localMessage}>ServerError ${statusCode}, ${response.status} while ${action}ing the ${itemName}.\nThe error message: ${response.data.body.error}`;
+        const debugMessage = `${localMessage}>ServerError ${statusCode}, ${getStatusCode(
+          response
+        )} while ${action}ing the ${itemName}.\nThe error message: ${
+          response?.body?.error
+        }`;
         const prettyMessage = `Error while ${action}ing the ${itemName}.`;
         toastMessages.debug.push(debugMessage);
         toastMessages.pretty = prettyMessage;
@@ -283,8 +304,8 @@ async function defaultDBDelete(itemName, itemToSend) {
     try {
       const response = await myAxios.delete(itemName, itemToSend);
       isDebugging && debugPayload(response); // Only Executes if isDebugging is true
-      const statusCode = response.status;
-      const body = response.data.body;
+      const statusCode = getStatusCode(response);
+      const body = response?.body;
       if (statusCode === 200) {
         // Everything is OK
         returnedData = itemToSend;
@@ -301,7 +322,11 @@ async function defaultDBDelete(itemName, itemToSend) {
         toastToUse = toast.success;
       } else if (statusCode === 404) {
         // Not found
-        const debugMessage = `${localMessage}>ServerError ${statusCode}, ${response.status} while ${action}ing the ${itemName}.\nThe error message: ${response.data.body.error}`;
+        const debugMessage = `${localMessage}>ServerError ${statusCode}, ${getStatusCode(
+          response
+        )} while ${action}ing the ${itemName}.\nThe error message: ${
+          response?.body?.error
+        }`;
         const prettyMessage = `Error while ${action}ing the ${itemName}.`;
         toastMessages.debug.push(debugMessage);
         toastMessages.pretty = prettyMessage;
@@ -309,10 +334,10 @@ async function defaultDBDelete(itemName, itemToSend) {
         localError = new Error(toastMessages.debug);
       } else {
         // Other cases
-        const debugMessage = `${localMessage}>ServerError ${statusCode}, ${
-          response.status
-        } while ${action}ing the ${itemName}.\nThe error message: ${
-          response.data.body.error
+        const debugMessage = `${localMessage}>ServerError ${statusCode}, ${getStatusCode(
+          response
+        )} while ${action}ing the ${itemName}.\nThe error message: ${
+          response?.body?.error
         }. The response body is: ${JSON.stringify(body)}`;
         const prettyMessage = `Error while ${action}ing the ${itemName}.`;
         toastMessages.debug.push(debugMessage);
