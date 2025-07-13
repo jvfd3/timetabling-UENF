@@ -9,12 +9,9 @@ import Features from "./components/Features";
 export default function MarketingPage(props) {
   return (
     <AppTheme {...props}>
-      <CssBaseline enableColorScheme />
-
-      <AppAppBar />
       <Hero />
-      <Features />
-      <Divider />
+      {/* <Features /> */}
+      {/* <Divider /> */}
     </AppTheme>
   );
 }
