@@ -14,6 +14,9 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import ColorModeIconDropdown from "../../shared-theme/ColorModeIconDropdown";
 import Sitemark from "./SitemarkIcon";
 
+// Importar o hook useNavigate do React Router Dom
+import { useNavigate } from "react-router-dom";
+
 const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -32,9 +35,16 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 export default function AppAppBar() {
   const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate(); // Inicializa o hook useNavigate
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
+  };
+
+  // Função para lidar com a navegação dos botões
+  const handleNavigation = (path) => () => {
+    navigate(path);
+    setOpen(false); // Fecha o drawer após a navegação em dispositivos móveis
   };
 
   return (
@@ -46,42 +56,95 @@ export default function AppAppBar() {
         bgcolor: "transparent",
         backgroundImage: "none",
         mt: "calc(var(--template-frame-height, 0px) + 28px)",
+        left: 0,
+        right: 0,
+        width: "100vw",
+        maxWidth: "100%",
+        margin: 0,
+        padding: 0,
       }}
     >
-      <Container maxWidth="lg">
+      <Container 
+        maxWidth="lg" 
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          margin: "0 auto",
+          padding: { xs: "0 16px", sm: "0 24px" },
+        }}
+      >
         <StyledToolbar variant="dense" disableGutters>
           <Box
             sx={{ flexGrow: 1, display: "flex", alignItems: "center", px: 0 }}
           >
             <Sitemark />
             <Box sx={{ display: { xs: "none", md: "flex" } }}>
-              <Button variant="text" color="info" size="small">
-                Features
-              </Button>
-              <Button variant="text" color="info" size="small">
-                Testimonials
-              </Button>
-              <Button variant="text" color="info" size="small">
-                Highlights
-              </Button>
-              <Button variant="text" color="info" size="small">
-                Pricing
+              {/* Botões de navegação para Desktop */}
+              <Button
+                variant="text"
+                color="info"
+                size="small"
+                onClick={handleNavigation("/timetabling-UENF")}
+              >
+                Main
               </Button>
               <Button
                 variant="text"
                 color="info"
                 size="small"
-                sx={{ minWidth: 0 }}
+                onClick={handleNavigation("/timetabling-UENF/multiturmas")}
               >
-                FAQ
+                MultiTurmas
               </Button>
               <Button
                 variant="text"
                 color="info"
                 size="small"
-                sx={{ minWidth: 0 }}
+                onClick={handleNavigation("/timetabling-UENF/cctable")}
               >
-                Blog
+                Grade de Horários
+              </Button>
+              <Button
+                variant="text"
+                color="info"
+                size="small"
+                onClick={handleNavigation("/timetabling-UENF/turmas")}
+              >
+                Turmas
+              </Button>
+              <Button
+                variant="text"
+                color="info"
+                size="small"
+                onClick={handleNavigation("/timetabling-UENF/professores")}
+              >
+                Professores
+              </Button>
+              <Button
+                variant="text"
+                color="info"
+                size="small"
+                onClick={handleNavigation("/timetabling-UENF/salas")}
+              >
+                Salas
+              </Button>
+              <Button
+                variant="text"
+                color="info"
+                size="small"
+                onClick={handleNavigation("/timetabling-UENF/disciplinas")}
+              >
+                Disciplinas
+              </Button>
+              <Button
+                variant="text"
+                color="info"
+                size="small"
+                onClick={handleNavigation("/timetabling-UENF/alunos")}
+              >
+                Alunos
               </Button>
             </Box>
           </Box>
@@ -92,12 +155,6 @@ export default function AppAppBar() {
               alignItems: "center",
             }}
           >
-            <Button color="primary" variant="text" size="small">
-              Sign in
-            </Button>
-            <Button color="primary" variant="contained" size="small">
-              Sign up
-            </Button>
             <ColorModeIconDropdown />
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" }, gap: 1 }}>
@@ -109,9 +166,11 @@ export default function AppAppBar() {
               anchor="top"
               open={open}
               onClose={toggleDrawer(false)}
-              PaperProps={{
-                sx: {
-                  top: "var(--template-frame-height, 0px)",
+              slotProps={{
+                paper: {
+                  sx: {
+                    top: "var(--template-frame-height, 0px)",
+                  },
                 },
               }}
             >
@@ -127,23 +186,45 @@ export default function AppAppBar() {
                   </IconButton>
                 </Box>
 
-                <MenuItem>Features</MenuItem>
-                <MenuItem>Testimonials</MenuItem>
-                <MenuItem>Highlights</MenuItem>
-                <MenuItem>Pricing</MenuItem>
-                <MenuItem>FAQ</MenuItem>
-                <MenuItem>Blog</MenuItem>
+                {/* Itens de navegação para Mobile (Drawer) */}
+                <MenuItem onClick={handleNavigation("/timetabling-UENF")}>
+                  Main
+                </MenuItem>
+                <MenuItem
+                  onClick={handleNavigation("/timetabling-UENF/multiturmas")}
+                >
+                  MultiTurmas
+                </MenuItem>
+                <MenuItem
+                  onClick={handleNavigation("/timetabling-UENF/cctable")}
+                >
+                  Grade de Horários
+                </MenuItem>
+                <MenuItem
+                  onClick={handleNavigation("/timetabling-UENF/turmas")}
+                >
+                  Turmas
+                </MenuItem>
+                <MenuItem
+                  onClick={handleNavigation("/timetabling-UENF/professores")}
+                >
+                  Professores
+                </MenuItem>
+                <MenuItem onClick={handleNavigation("/timetabling-UENF/salas")}>
+                  Salas
+                </MenuItem>
+                <MenuItem
+                  onClick={handleNavigation("/timetabling-UENF/disciplinas")}
+                >
+                  Disciplinas
+                </MenuItem>
+                <MenuItem
+                  onClick={handleNavigation("/timetabling-UENF/alunos")}
+                >
+                  Alunos
+                </MenuItem>
+
                 <Divider sx={{ my: 3 }} />
-                <MenuItem>
-                  <Button color="primary" variant="contained" fullWidth>
-                    Sign up
-                  </Button>
-                </MenuItem>
-                <MenuItem>
-                  <Button color="primary" variant="outlined" fullWidth>
-                    Sign in
-                  </Button>
-                </MenuItem>
               </Box>
             </Drawer>
           </Box>
