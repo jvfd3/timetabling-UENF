@@ -5,7 +5,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 
 const { routing, pageSelection } = configInfo;
 
-// import PageSelection from "./components/PageSelection/PageSelect";
+import PageSelection from "../../components/PageSelection/PageSelection.js"
 // Page imports
 /* Isso poderia ser trocado pro valor do options */
 
@@ -40,13 +40,13 @@ function MyRouting() {
   return (
     <div className={defaultClassNames.background}>
       <BrowserRouter basename="/" future={{ v7_startTransition: true }}>
-        {/* <PageSelection /> */}
-        <AppTheme>
+        <PageSelection />
+        {/* <AppTheme>
           <CssBaseline enableColorScheme />
           <AppAppBar />
-          {/* Container principal com espaçamento para o AppBar fixo */}
 
           <Box
+          // Container principal com espaçamento para o AppBar fixo
             component="main" // semanticamente é o conteúdo principal
             sx={{
               paddingTop: appBarFixedHeight,
@@ -55,7 +55,7 @@ function MyRouting() {
               // flexGrow: 1, // Se for um item flex para ocupar o espaço restante
               // minHeight: '100vh', // Para garantir que o conteúdo ocupe toda a altura da viewport
             }}
-          />
+          /> */}
           <Routes>
             <Route element={<Main />} index />
             <Route element={<Main />} path="/" />
@@ -71,7 +71,7 @@ function MyRouting() {
             <Route element={<Professors />} path={pathProfessors} />
             <Route element={<MultiClasses />} path={pathMultiClasses} />
           </Routes>
-        </AppTheme>
+        {/* </AppTheme> */}
         <ToastContainer {...configInfo.toast} />
       </BrowserRouter>
     </div>
