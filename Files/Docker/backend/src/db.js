@@ -1,15 +1,21 @@
-import mysql from "mysql2";
+import mysql from "mysql2/promise";
+import { config } from "dotenv";
 
-// Faz conexão com o banco de dados SQL
+// Connects with the SQL DB
+
+config(); // Load environment variables from .env
 
 const isLocal = true;
 
-const dbTeste = {
-  host: "localhost",
-  user: "root",
-  password: "root",
-  // password: "timetabling",
-  database: "OurClassDB",
+const dbMySQL = {
+  host: process.env.MYSQL_HOST || "localhost",
+  port: process.env.MYSQL_PORT ? parseInt(process.env.MYSQL_PORT, 10) : 3306,
+  user: process.env.MYSQL_USER || "root",
+  password: process.env.MYSQL_PASSWORD || "",
+  database: process.env.MYSQL_DATABASE_NAME || "OurClassDB",
+  waitForConnections: true, // if True, the pool queues requests when no connections are available
+  connectionLimit: 10, // Maximum number of connections in the pool
+  queueLimit: 0, // No limit for the number of queued requests
 };
 
 const dbAWS = {
@@ -20,17 +26,36 @@ const dbAWS = {
   database: "timetabling",
 };
 
-const dbToConnect = isLocal ? dbTeste : dbAWS;
+const dbToConnect = isLocal ? dbMySQL : dbAWS;
 
-const db = mysql.createConnection(dbToConnect);
+const pool = mysql.createPool(dbToConnect);
 
-db.connect((err) => {
-  if (err) throw err;
-  console.log(
-    "Connected to database",
-    isLocal ? "local" : "AWS",
-    dbToConnect.host
-  );
-});
+// Função para testar a conexão do pool na inicialização
+const testDbConnection = async () => {
+  console.log("Servidor Express rodando na porta 8800.");
+  let connection;
+  try {
+    connection = await pool.getConnection(); // Tenta obter uma conexão do pool
+    console.log(
+      `[DB] Conectado ao banco de dados '${dbToConnect.database}' em ${dbToConnect.host}:${dbToConnect.port} como usuário '${dbToConnect.user}'!`
+    );
+    connection.release(); // Libera a conexão de volta para o pool
+  } catch (error) {
+    console.error("[DB] Erro ao conectar ao pool de banco de dados:", error);
+    // Em um ambiente de produção, você pode querer encerrar o processo aqui
+    // process.exit(1);
+  }
+};
 
-export default db;
+// const db = mysql.createConnection(dbToConnect);
+
+// db.connect((err) => {
+//   if (err) throw err;
+//   console.log(
+//     "Connected to database",
+//     isLocal ? "local" : "AWS",
+//     dbToConnect.host
+//   );
+// });
+
+export { pool, testDbConnection };

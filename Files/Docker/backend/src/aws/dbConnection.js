@@ -1,50 +1,37 @@
-// const mysql = require("mysql2/promise");
-
-import mysql from "mysql2/promise";
+import { pool } from "../db.js";
 
 let local = "db.js>";
-const isDebugging = false;
-
-function getDbConfig() {
-  const dbTeste = {
-    host: "localhost",
-    user: "root",
-    password: "root",
-    // password: "timetabling",
-    database: "OurClassDB",
-  };
-  return dbTeste;
-}
-
-async function createDbConnection() {
-  local += "createDbConnection>";
-  try {
-    const dbConfig = getDbConfig();
-    isDebugging && console.log(local, dbConfig);
-    const connection = await mysql.createConnection(dbConfig);
-    isDebugging && console.log(connection);
-    return connection;
-  } catch (err) {
-    const error = new Error(local + err);
-    isDebugging && console.error(error);
-    throw error;
-  }
-}
+const isDebugging = true;
 
 async function dbExecute(query, values = null) {
   local += "dbExecute>";
+  let connection;
   try {
-    const dbConnection = await createDbConnection();
+    connection = await pool.getConnection(); // Obtém uma conexão do pool
     isDebugging && console.log(local, query, values);
-    isDebugging && console.log(local, dbConnection);
-    const queryResult = await dbConnection.execute(query, values);
-    isDebugging && console.log(local, queryResult);
-    await dbConnection.end();
-    return queryResult;
+    isDebugging && console.log(local, connection);
+    isDebugging &&
+      console.log(
+        local,
+        `Query: "${query}", Values: ${JSON.stringify(values)}`
+      );
+
+    // Usa connection.execute para prepared statements, que é mais seguro e performático
+    const [rows, fields] = await connection.execute(query, values);
+
+    isDebugging && console.log(local, `Query Result (rows):`, rows);
+    isDebugging && console.log(local, `Query Result (fields):`, fields);
+
+    return [rows, fields]; // Retorna tanto as linhas quanto os metadados dos campos
   } catch (err) {
-    const error = new Error(local + err);
-    isDebugging && console.error(error);
-    throw error;
+    isDebugging && console.error(local, `Erro ao executar query:`, err);
+    throw err; // Relança o erro para que a função chamadora possa tratá-lo
+  } finally {
+    if (connection) {
+      connection.release(); // IMPORTANTE: Libera a conexão de volta para o pool
+      isDebugging &&
+        console.log(local, "Conexão liberada de volta para o pool.");
+    }
   }
 }
 
@@ -52,9 +39,8 @@ async function checkExistance(checkQuery, idInList) {
   local += "checkExistance>";
   const errorMessage = `>Error while checking existance>`;
   try {
-    const queryResult = await dbExecute(checkQuery, idInList);
-    const rows = queryResult[0] ?? [];
-    return rows.length > 0;
+    const [rows, _] = await dbExecute(checkQuery, idInList);
+    return rows?.length > 0;
   } catch (error) {
     const message = local + errorMessage + checkQuery;
     isDebugging && console.error(message, error);
@@ -74,7 +60,7 @@ function getPayloadResponse(
     message: message ?? null,
     query: query ?? null,
     queryValues: queryValues ?? null,
-    queryResult: queryResult?.[0] ?? null,
+    queryResult: queryResult ?? null,
     error: error ?? null,
   };
   const payloadResponse = {
@@ -86,7 +72,7 @@ function getPayloadResponse(
     },
     body: JSON.stringify(myBody ?? null),
   };
-  isDebugging && console.log(payloadResponse);
+  isDebugging && console.log("[getPayloadResponse]", payloadResponse);
   return payloadResponse;
 }
 
@@ -177,8 +163,8 @@ async function defaultRead(query, queryValues, exists) {
     message,
     query,
     queryValues,
-    // queryResult,
-    small,
+    queryResult,
+    // small,
     localError,
     statusCode
   );
