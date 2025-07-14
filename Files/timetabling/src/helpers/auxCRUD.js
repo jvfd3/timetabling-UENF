@@ -4,13 +4,16 @@ import { getDefaultYearSemesterValues } from "./auxFunctions";
 import { readRoom } from "./CRUDFunctions/roomCRUD";
 import { readSubject } from "./CRUDFunctions/subjectCRUD";
 import { readProfessor } from "./CRUDFunctions/professorCRUD";
+import configInfo from "../config/configInfo";
+
+const isDebugging = configInfo.isDebugging;
 
 function getId(item) {
   const id =
     item?.id ?? item?.idHorario ?? item?.idClassTime ?? item?.idTurma ?? null;
-  // if (id === null) {
-  // console.log("No id found:", item);
-  // }
+  if (id === null) {
+    isDebugging && console.log("No id found:", item);
+  }
   return id;
 }
 
@@ -100,30 +103,34 @@ function refreshShownItem(item, oldItems, newItems) {
 
   let showedItem = null;
 
-  // console.log("item", item);
-  // console.log("indexInNew", indexInNew, newItems);
-  // console.log("indexInOld", indexInOld);
+  // isDebugging && console.log("item", item);
+  // isDebugging && console.log("indexInNew", indexInNew, newItems);
+  // isDebugging && console.log("indexInOld", indexInOld, oldItems);
 
   if (indexInNew !== -1) {
     // READING
-    // console.log("keepCurrent");
+    // isDebugging && console.log("keepCurrent");
     // The current item is in the new list, so keep it
     showedItem = newItems[indexInNew] ?? null;
   } else if (indexInOld !== -1 && newItems.length > 0) {
     // DELETING
+    // isDebugging && console.log("keepLast|First|Middle");
     if (indexInOld >= newItems.length) {
-      // console.log("keepLast");
+      // isDebugging && console.log("keepLast");
       // The current item is above the new items limit, so keep the last
       showedItem = newItems[newItems.length - 1]; //Get Last item
     } else if (indexInOld === 0) {
-      // console.log("keepFirst");
+      // isDebugging && console.log("keepFirst");
       // The current item is below the new items limit, so keep the first
       showedItem = newItems[0]; //Get First item
     } else {
-      // console.log("keepMiddle");
+      // isDebugging && console.log("keepMiddle");
       // The current item is in the middle of the new items, so keep the previous
       showedItem = newItems[indexInOld - 1]; // Get Previous item
     }
+  } else {
+    // CREATING
+    // isDebugging && console.log("Doing Nothing?");
   }
 
   return showedItem;

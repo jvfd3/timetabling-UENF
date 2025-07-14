@@ -27,11 +27,12 @@ function convertToList(classTime) {
 }
 
 async function updateClassTime(event) {
-  isDebugging && console.log(local + ">{event: ", event, "}");
+  // isDebugging && console.log(local + ">{event: ", event, "}");
   // For some reason the event payload for Create is built different.
   const newItem = event?.newItem ?? JSON.parse(event?.body)?.newItem;
   isDebugging && console.log(local + ">{itemToUpdate: ", newItem, "}");
   return await updateItem(newItem);
+  isDebugging && console.log(local + ">{payload final: ", payload, "}");
 }
 
 async function updateItem(itemToUpdate) {

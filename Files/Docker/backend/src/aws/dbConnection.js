@@ -8,19 +8,19 @@ async function dbExecute(query, values = null) {
   let connection;
   try {
     connection = await pool.getConnection(); // Obtém uma conexão do pool
-    isDebugging && console.log(local, query, values);
-    isDebugging && console.log(local, connection);
-    isDebugging &&
-      console.log(
-        local,
-        `Query: "${query}", Values: ${JSON.stringify(values)}`
-      );
+    // isDebugging && console.log(local, query, values);
+    // isDebugging && console.log(local, connection);
+    // isDebugging &&
+    //   console.log(
+    //     local,
+    //     `Query: "${query}", Values: ${JSON.stringify(values)}`
+    //   );
 
     // Usa connection.execute para prepared statements, que é mais seguro e performático
     const [rows, fields] = await connection.execute(query, values);
 
     isDebugging && console.log(local, `Query Result (rows):`, rows);
-    isDebugging && console.log(local, `Query Result (fields):`, fields);
+    // isDebugging && console.log(local, `Query Result (fields):`, fields);
 
     // return [rows, fields]; // Retorna tanto as linhas quanto os metadados dos campos
     return rows; // Retorna tanto as linhas quanto os metadados dos campos
@@ -197,6 +197,7 @@ async function defaultUpdate(query, queryValues, exists) {
     try {
       queryResult = await dbExecute(query, queryValues);
       queryResult[1] = null; // remove excessive metadata
+      isDebugging && console.log(local, queryResult);
       message = successMessage;
       statusCode = 200;
       isDebugging && console.log(message, statusCode, queryResult);

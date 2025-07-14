@@ -21,7 +21,7 @@ function convertToList(student) {
 }
 
 async function createStudent(event) {
-  isDebugging && console.log(local + ">{event: ", event, "}");
+  // isDebugging && console.log(local + ">{event: ", event, "}");
   // For some reason the event payload for Create is built different.
   const newItem = event?.newItem ?? JSON.parse(event?.body)?.newItem;
   isDebugging && console.log(local + ">{newItem: ", newItem, "}");

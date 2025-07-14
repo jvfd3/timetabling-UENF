@@ -50,7 +50,7 @@ function readStudent({ students, setStudents, setStudent }) {
       return showedStudent;
     });
   }
-  isDebugging && console.log("Pré defaultDBRead");
+  // isDebugging && console.log("Pré defaultDBRead");
   defaultDBRead(itemName)
     .then(insertNewStudentsFromDB)
     .catch(defaultHandleError);
