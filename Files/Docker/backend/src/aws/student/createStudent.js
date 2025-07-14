@@ -20,7 +20,7 @@ function convertToList(student) {
   return values;
 }
 
-async function createStudent(event) {
+async function createStudent(req, res) {
   // isDebugging && console.log(local + ">{event: ", event, "}");
   // For some reason the event payload for Create is built different.
   const newItem = event?.newItem ?? JSON.parse(event?.body)?.newItem;

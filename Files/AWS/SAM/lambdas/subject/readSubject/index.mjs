@@ -5,7 +5,7 @@ const itemName = "Subject";
 let local = `aws>lambda>Read>${itemName}>handler`;
 const isDebugging = false;
 
-async function handler(event) {
+async function handler(req, res) {
   isDebugging && console.log(local + ">{event: ", event, "}");
 
   return await readItems();

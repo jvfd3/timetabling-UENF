@@ -5,7 +5,7 @@ let readItemsQuery = "SELECT * FROM alunos";
 let local = `aws>lambda>Read>${itemName}>handler`;
 const isDebugging = false;
 
-// async function readStudent(event) {
+// async function readStudent(req, res) {
 // isDebugging && console.log(local + ">{event: ", event, "}");
 // console.log("promessa que sai: ", promessa);
 // return promessa;

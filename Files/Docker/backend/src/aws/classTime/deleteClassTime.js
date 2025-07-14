@@ -6,7 +6,7 @@ const itemName = "ClassData";
 let local = `aws>lambda>Delete>${itemName}>handler`;
 const isDebugging = false;
 
-async function deleteClassTime(event) {
+async function deleteClassTime(req, res) {
   // isDebugging && console.log(local + ">{event: ", event, "}");
 
   const idToDelete = event.pathParameters.id;

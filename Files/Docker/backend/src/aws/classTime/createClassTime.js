@@ -25,7 +25,7 @@ function convertToList(classTime) {
   return values;
 }
 
-async function createClassTime(event) {
+async function createClassTime(req, res) {
   // isDebugging && console.log(local + ">{event: ", event, "}");
   // For some reason the event payload for Create is built different.
   const newItem = event?.newItem ?? JSON.parse(event?.body)?.newItem;

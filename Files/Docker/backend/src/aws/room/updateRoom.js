@@ -22,13 +22,14 @@ function convertToList(room) {
   return values;
 }
 
-async function updateRoom(event) {
+async function updateRoom(req, res) {
   // isDebugging && console.log(local + ">{event: ", event, "}");
   // For some reason the event payload for Create is built different.
-  const newItem = event?.newItem ?? JSON.parse(event?.body)?.newItem;
+  const newItem = req?.newItem ?? req?.body?.newItem;
   isDebugging && console.log(local + ">{itemToUpdate: ", newItem, "}");
-  return await updateItem(newItem);
+  const payload = await updateItem(newItem);
   isDebugging && console.log(local + ">{payload final: ", payload, "}");
+  res.status(payload.statusCode).json(payload.body);
 }
 
 async function updateItem(itemToUpdate) {

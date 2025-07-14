@@ -21,7 +21,7 @@ function convertToList(room) {
   return values;
 }
 
-async function createRoom(event) {
+async function createRoom(req, res) {
   // isDebugging && console.log(local + ">{event: ", event, "}");
   // For some reason the event payload for Create is built different.
   const newItem = event?.newItem ?? JSON.parse(event?.body)?.newItem;

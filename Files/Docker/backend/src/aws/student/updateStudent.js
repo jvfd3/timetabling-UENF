@@ -22,19 +22,20 @@ function convertToList(student) {
   return values;
 }
 
-async function updateStudent(event) {
+async function updateStudent(req, res) {
   isDebugging && console.log(local + ">{req: ", req, "}");
   // For some reason the event payload for Create is built different.
-  const newItem = event?.newItem ?? JSON.parse(event?.body)?.newItem;
+  const newItem = req?.newItem ?? req?.body?.newItem;
   isDebugging && console.log(local + ">{itemToUpdate: ", newItem, "}");
-  return await updateItem(newItem);
+  const payload = await updateItem(newItem);
   isDebugging && console.log(local + ">{payload final: ", payload, "}");
+  res.status(payload?.statusCode).json(payload?.body);
 }
 
 async function updateItem(itemToUpdate) {
   local += `>update${itemName}`;
   const itemList = convertToList(itemToUpdate);
-  const exists = await checkExistance(checkQuery, [itemToUpdate.id]);
+  const exists = await checkExistance(checkQuery, [itemToUpdate?.id]);
   return await defaultUpdate(updateItemQuery, itemList, exists);
 }
 
