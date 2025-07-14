@@ -101,7 +101,7 @@ function Rooms() {
   const defaultRooms = sqlDataFromJson.salas ?? [];
 
   const [rooms, setRooms] = useState(defaultRooms);
-  const [room, setRoom] = useState(null);
+  const [room, setRoom] = useState(defaultRooms?.[0]);
 
   const roomStates = { rooms, setRooms, room, setRoom };
   const noRoom = { title: pageTexts.noSelectedObject };

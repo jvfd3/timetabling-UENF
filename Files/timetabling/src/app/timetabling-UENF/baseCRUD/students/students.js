@@ -98,7 +98,7 @@ function Students() {
   const defaultStudents = sqlDataFromJson.students ?? [];
 
   const [students, setStudents] = useState(defaultStudents);
-  const [student, setStudent] = useState(null);
+  const [student, setStudent] = useState(defaultStudents?.[0]);
 
   const studentStates = { students, setStudents, student, setStudent };
   const noStudent = { title: pageTexts.noSelectedObject };

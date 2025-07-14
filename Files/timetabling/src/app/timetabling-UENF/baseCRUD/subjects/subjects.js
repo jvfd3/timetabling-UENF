@@ -106,7 +106,7 @@ function Subjects() {
   const defaultSubjects = sqlDataFromJson.subjects ?? [];
 
   const [subjects, setSubjects] = useState(defaultSubjects);
-  const [subject, setSubject] = useState(null);
+  const [subject, setSubject] = useState(defaultSubjects?.[0]);
 
   const subjectStates = { subjects, setSubjects, subject, setSubject };
   const noSubject = { title: pageTexts.noSelectedObject };
