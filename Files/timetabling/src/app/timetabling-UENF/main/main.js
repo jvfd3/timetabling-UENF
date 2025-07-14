@@ -47,12 +47,12 @@ function Shortcuts() {
 
 function Main() {
   return (
-    // <div className={defaultClassNames.containerCards}>
-    //   <Logo />
-    //   <Instructions />
-    //   <Shortcuts />
-    // </div>
-    <MarketingPage />
+    <div className={defaultClassNames.containerCards}>
+      <Logo />
+      <Instructions />
+      <Shortcuts />
+    </div>
+    // <MarketingPage />
   );
 }
 

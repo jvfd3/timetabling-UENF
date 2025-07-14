@@ -139,36 +139,11 @@ async function defaultRead(query, queryValues, exists) {
   }
   // console.log("pre saída BD");
 
-  const small = [
-    {
-      id: 1,
-      anoEntrada: 2014,
-      curso: "Ciência da Computação",
-      matricula: "00114110001",
-      nome: "Augusto Amaral Pereira",
-    },
-    {
-      id: 2,
-      anoEntrada: 2015,
-      curso: "Ciência da Computação",
-      matricula: "00115110002",
-      nome: "Mateus Nunes Schulz",
-    },
-    {
-      id: 3,
-      anoEntrada: 2015,
-      curso: "Ciência da Computação",
-      matricula: "00115110003",
-      nome: "Ralf Cruz Mateus",
-    },
-  ];
-
   const payload = getPayloadResponse(
     message,
     query,
     queryValues,
     queryResult,
-    // small,
     localError,
     statusCode
   );

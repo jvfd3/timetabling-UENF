@@ -33,9 +33,7 @@ function getItemFromListById(item, items) {
 }
 
 function getItemIndexInListById(item, oldArray) {
-  /*
-  traverse list of items, find item with same id, and return index of that item. If not found, returns -1.
-  */
+  // traverse list of items, find item with same id, and return index of that item. If not found, returns -1.
   const idItem = getId(item);
   const index = oldArray?.findIndex((iterItem) => {
     const idIterItem = getId(iterItem);
