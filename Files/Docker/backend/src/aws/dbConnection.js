@@ -156,10 +156,13 @@ async function defaultRead(query, queryValues, exists) {
 async function defaultUpdate(query, queryValues, exists) {
   const action = "UPDAT";
   const notFoundMessage =
-    local + `>Exists?>Not found item with id ${queryValues[4]}.`;
+    local +
+    `>Exists?>Not found item with id ${queryValues[queryValues?.length - 1]}.`;
   const successMessage =
     local +
-    `>Item ${action}ED successfully: Item with id ${queryValues[4]} now has the values: ${queryValues}.`;
+    `>Item ${action}ED successfully: Item with id ${
+      queryValues[queryValues?.length - 1]
+    } now has the values: ${queryValues}.`;
   const errorMessage = local + `>Error while ${action}ING`;
   local += `default ${action}E>`;
   let message = local;
@@ -171,8 +174,8 @@ async function defaultUpdate(query, queryValues, exists) {
   } else {
     try {
       queryResult = await dbExecute(query, queryValues);
-      queryResult[1] = null; // remove excessive metadata
       isDebugging && console.log(local, queryResult);
+      // queryResult[1] = null; // remove excessive metadata
       message = successMessage;
       statusCode = 200;
       isDebugging && console.log(message, statusCode, queryResult);
@@ -183,7 +186,8 @@ async function defaultUpdate(query, queryValues, exists) {
       isDebugging && console.error(message, statusCode, error);
     }
   }
-  return getPayloadResponse(
+
+  const payload = getPayloadResponse(
     message,
     query,
     queryValues,
@@ -191,6 +195,7 @@ async function defaultUpdate(query, queryValues, exists) {
     localError,
     statusCode
   );
+  return payload;
 }
 
 async function defaultDelete(query, queryValues, exists) {

@@ -49,7 +49,7 @@ function getAxios() {
   }
   async function updateTest(itemName = null, itemToSend = null) {
     testing(itemToSend, itemName, "updat");
-    const localUrl = url + itemName; // I may need to change this slash
+    const localUrl = url + itemName + "/" + getId(itemToSend); // I may need to change this slash
     isDebugging && console.log("localUrl", localUrl);
     const dataToSend = { newItem: itemToSend };
     return await axios.put(localUrl, dataToSend);
